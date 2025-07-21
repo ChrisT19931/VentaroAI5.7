@@ -74,7 +74,11 @@ export default function Home() {
                   Collection of 30 expertly crafted prompts to maximize your AI tool results.
                 </p>
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-bold">$49.99</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg font-bold text-red-600">$10.00</span>
+                    <span className="text-sm text-gray-500 line-through">$49.99</span>
+                    <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-semibold">SALE</span>
+                  </div>
                   <Link href="/products/prompts" className="btn-outline text-sm">
                     View Details
                   </Link>

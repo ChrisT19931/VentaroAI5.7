@@ -58,6 +58,10 @@ export default function FAQPage() {
         {
           question: 'Are my payment details secure?',
           answer: 'Absolutely. We use Stripe, a PCI-compliant payment processor, to handle all transactions. Your payment information is encrypted and never stored on our servers.'
+        },
+        {
+          question: 'Do you offer shipping?',
+          answer: 'No, we do not offer physical shipping as we are a 100% digital business. All products are delivered instantly via digital download after purchase.'
         }
       ]
     },
@@ -96,6 +100,15 @@ export default function FAQPage() {
         {
           question: 'What are the system requirements for your products?',
           answer: 'System requirements vary by product. Please check the individual product descriptions for specific requirements before making a purchase.'
+        }
+      ]
+    },
+    {
+      title: 'Special Offers',
+      faqs: [
+        {
+          question: 'Do you have any current promotions?',
+          answer: 'Yes! We currently have AI prompts on sale for just $10. These high-quality prompts are perfect for content creation, marketing, and creative projects.'
         }
       ]
     }
@@ -172,31 +185,31 @@ export default function FAQPage() {
           <div className="bg-white rounded-lg shadow-sm p-6 text-center">
             <div className="h-12 w-12 rounded-md bg-primary-100 flex items-center justify-center text-primary-600 mb-4 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Webinars & Events</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Special Offers</h3>
             <p className="text-gray-600 mb-4">
-              Join our live webinars to learn about new products and get expert tips.
+              Check out our current promotions and limited-time deals on premium digital products.
             </p>
-            <Link href="#" className="text-primary-600 hover:text-primary-500 font-medium">
-              See Upcoming Events
+            <Link href="/products" className="text-primary-600 hover:text-primary-500 font-medium">
+              View Current Deals
             </Link>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-6 text-center">
             <div className="h-12 w-12 rounded-md bg-primary-100 flex items-center justify-center text-primary-600 mb-4 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Community Forum</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Digital Delivery</h3>
             <p className="text-gray-600 mb-4">
-              Connect with other users, share ideas, and get help from our community.
+              Instant access to all products with secure digital delivery - no shipping required.
             </p>
-            <Link href="#" className="text-primary-600 hover:text-primary-500 font-medium">
-              Join the Discussion
-            </Link>
+            <span className="text-primary-600 font-medium">
+              100% Digital Business
+            </span>
           </div>
         </div>
       </div>
