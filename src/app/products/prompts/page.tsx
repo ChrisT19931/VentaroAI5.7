@@ -17,13 +17,53 @@ export default function PromptsProductPage() {
           {/* Product Image */}
           <div className="lg:w-1/2">
             <div className="glass-card p-8">
-              <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6">
-                <div className="text-center text-white">
-                  <div className="text-6xl mb-4">🚀</div>
+              <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
+                <div className="text-center text-white relative z-10">
+                  <div className="text-6xl mb-4 animate-rocket-launch">🚀</div>
                   <div className="text-xl font-bold">AI Prompts Collection</div>
                   <div className="text-sm opacity-80">30 Premium Prompts</div>
                 </div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-20 bg-gradient-to-t from-orange-500 to-transparent animate-rocket-trail"></div>
+                <div className="absolute inset-0 animate-stars">
+                  <div className="absolute top-10 left-10 w-1 h-1 bg-white rounded-full animate-twinkle"></div>
+                  <div className="absolute top-20 right-20 w-1 h-1 bg-white rounded-full animate-twinkle" style={{animationDelay: '1s'}}></div>
+                  <div className="absolute bottom-20 left-20 w-1 h-1 bg-white rounded-full animate-twinkle" style={{animationDelay: '2s'}}></div>
+                  <div className="absolute bottom-10 right-10 w-1 h-1 bg-white rounded-full animate-twinkle" style={{animationDelay: '0.5s'}}></div>
+                </div>
               </div>
+              <style jsx>{`
+                @keyframes rocket-launch {
+                  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+                  25% { transform: translateY(-10px) rotate(-5deg) scale(1.05); }
+                  50% { transform: translateY(-20px) rotate(0deg) scale(1.1); }
+                  75% { transform: translateY(-10px) rotate(5deg) scale(1.05); }
+                }
+                @keyframes rocket-trail {
+                  0%, 100% { height: 20px; opacity: 0.8; }
+                  50% { height: 40px; opacity: 1; }
+                }
+                @keyframes twinkle {
+                  0%, 100% { opacity: 0.3; transform: scale(1); }
+                  50% { opacity: 1; transform: scale(1.5); }
+                }
+                @keyframes stars {
+                  0%, 100% { transform: rotate(0deg); }
+                  50% { transform: rotate(2deg); }
+                }
+                .animate-rocket-launch {
+                  animation: rocket-launch 3s ease-in-out infinite;
+                  transform-style: preserve-3d;
+                }
+                .animate-rocket-trail {
+                  animation: rocket-trail 3s ease-in-out infinite;
+                }
+                .animate-twinkle {
+                  animation: twinkle 2s ease-in-out infinite;
+                }
+                .animate-stars {
+                  animation: stars 8s ease-in-out infinite;
+                }
+              `}</style>
               <div className="text-center">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <span className="text-3xl font-bold text-red-400">${product.price}</span>
@@ -51,7 +91,7 @@ export default function PromptsProductPage() {
                 <p className="text-lg leading-relaxed">
                   Get instant access to our battle-tested collection of 30 premium AI prompts that consistently 
                   produce professional-grade outputs. These aren't generic prompts – they're the exact formulas 
-                  we use to create $50K+ quality content.
+                  we use to create premium quality content.
                 </p>
 
                 <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">

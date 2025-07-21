@@ -111,7 +111,7 @@ export const sendOrderConfirmationEmail = async ({
         <p style="margin-top: 30px;">If you have any questions about your order, please contact our support team.</p>
         
         <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 12px;">
-          <p>© ${new Date().getFullYear()} AI Digital Product Store. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} Ventaro AI Digital Store. All rights reserved.</p>
         </div>
       </div>
     </div>

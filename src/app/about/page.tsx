@@ -19,10 +19,10 @@ export default function AboutPage() {
               />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              100% <span className="text-gradient">AI-Designed</span> Digital Products
+              About <span className="text-gradient">Ventaro AI Digital Store</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Crafted with ChatGPT, Cursor, and cutting-edge AI tools. We teach you the exact methods behind our $50K-quality designs.
+              Your destination for premium AI-powered digital products and innovative design solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/products" className="btn-primary btn-lg">
@@ -57,7 +57,7 @@ export default function AboutPage() {
                   Every product in our store is 100% designed using AI tools like <span className="text-white font-semibold">ChatGPT</span>, <span className="text-white font-semibold">Cursor</span>, and advanced AI design systems. We don't just use AI as a helper - it's our primary creative force.
                 </p>
                 <p className="text-gray-300">
-                  Founded in 2025, Ventaro AI represents the new generation of digital product creation where human creativity meets artificial intelligence to produce results that would traditionally cost $50,000+ to develop.
+                  Founded in 2025, Ventaro AI represents the new generation of digital product creation where human creativity meets artificial intelligence to produce premium results.
                 </p>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function AboutPage() {
                     <div className="text-gray-400">AI Designed</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">$50K</div>
+                    <div className="text-3xl font-bold text-gradient mb-2">Premium</div>
                     <div className="text-gray-400">Quality Standard</div>
                   </div>
                   <div className="text-center">
@@ -96,7 +96,7 @@ export default function AboutPage() {
               We Teach You <span className="text-gradient">How</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our focus isn't just selling products - it's teaching you the exact AI methods, prompts, and workflows we use to create $50K-quality designs.
+              Our focus isn't just selling products - it's teaching you the exact AI methods, prompts, and workflows we use to create premium-quality designs.
             </p>
           </div>
           
@@ -135,7 +135,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold text-white mb-4">1-on-1 Coaching</h3>
               <p className="text-gray-300 mb-6">
-                Personal coaching calls where we walk you through our entire AI design process, from concept to $50K-quality execution.
+                Personal coaching calls where we walk you through our entire AI design process, from concept to premium-quality execution.
               </p>
               <div className="text-gradient font-semibold">Book a Call →</div>
             </div>
@@ -188,7 +188,7 @@ export default function AboutPage() {
               Ready to Master <span className="text-gradient">AI Design</span>?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join the AI revolution. Learn the exact methods we use to create $50K-quality digital products with artificial intelligence.
+              Join the AI revolution. Learn the exact methods we use to create premium-quality digital products with artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/products" className="btn-primary btn-lg">

@@ -18,7 +18,7 @@ export default function TermsOfServicePage() {
           <div className="prose max-w-none">
             <h2 className="text-2xl font-bold text-white mb-4">Introduction</h2>
             <p className="mb-4 text-gray-300">
-              Welcome to Ventaro AI - Digital Store. These Terms & Conditions ("Terms") govern your access to and use of our website, AI-designed digital products, and services. By accessing or using our services, you agree to be bound by these Terms.
+              Welcome to Ventaro AI Digital Store. These Terms & Conditions ("Terms") govern your access to and use of our website, digital products, and services. By accessing or using our services, you agree to be bound by these Terms.
             </p>
             <p className="mb-4 text-gray-300">
               Please read these Terms carefully. If you do not agree with these Terms, you must not access or use our services.
@@ -144,10 +144,7 @@ export default function TermsOfServicePage() {
               If you have any questions about these Terms, please contact us at:
             </p>
             <p className="mb-4 text-gray-300">
-              Email: <a href="mailto:legal@ventaroai.com" className="text-gradient hover:text-white transition-colors">legal@ventaroai.com</a>
-            </p>
-            <p className="mb-4 text-gray-300">
-              Address: 123 AI Innovation Drive, Suite 2025, San Francisco, CA 94107, United States
+              Email: <a href="mailto:support@ventaroai.com" className="text-gradient hover:text-white transition-colors">support@ventaroai.com</a>
             </p>
           </div>
         </div>

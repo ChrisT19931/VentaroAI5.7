@@ -6,8 +6,8 @@ export default function FAQPage() {
       title: 'General Questions',
       faqs: [
         {
-          question: 'What is AI Digital Product Store?',
-          answer: 'AI Digital Product Store is an online marketplace specializing in high-quality digital products created with or powered by artificial intelligence. We offer a curated selection of digital assets, tools, templates, and resources for creators, businesses, and developers.'
+          question: 'What is Ventaro AI Digital Store?',
+          answer: 'Ventaro AI Digital Store is an online marketplace specializing in high-quality digital products created with or powered by artificial intelligence. We offer a curated selection of digital assets, tools, templates, and resources for creators, businesses, and developers.'
         },
         {
           question: 'Do I need to create an account to make a purchase?',
@@ -15,7 +15,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I contact customer support?',
-          answer: 'You can reach our customer support team through our Contact page or by emailing chris.t@ventarosales.com. We typically respond within 24 hours during business days.'
+          answer: 'You can reach our customer support team through our Contact page or by emailing support@ventaroai.com. We typically respond within 24 hours during business days.'
         }
       ]
     },
@@ -158,7 +158,7 @@ export default function FAQPage() {
               Contact Us
             </Link>
             <a 
-              href="mailto:chris.t@ventarosales.com" 
+              href="mailto:support@ventaroai.com" 
               className="btn-outline-white"
             >
               Email Support

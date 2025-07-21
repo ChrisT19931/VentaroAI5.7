@@ -28,10 +28,11 @@ async function setupAdmin() {
     console.log('🚀 Setting up admin user...');
     
     // Check if admin user already exists
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@ventaroai.com';
     const { data: existingAdmin, error: checkError } = await supabase
       .from('profiles')
       .select('*')
-      .eq('email', 'chris.t@ventarosales.com')
+      .eq('email', adminEmail)
       .eq('is_admin', true)
       .single();
     
@@ -46,17 +47,17 @@ async function setupAdmin() {
     const { data: updatedUser, error: updateError } = await supabase
       .from('profiles')
       .update({ is_admin: true })
-      .eq('email', 'chris.t@ventarosales.com')
+      .eq('email', adminEmail)
       .select()
       .single();
     
     if (updateError) {
       console.error('❌ Error updating user to admin:', updateError.message);
       console.log('\n📝 Manual steps:');
-      console.log('1. Sign up at your website with chris.t@ventarosales.com');
+      console.log(`1. Sign up at your website with ${adminEmail}`);
       console.log('2. Run this script again, or');
       console.log('3. Manually run this SQL in Supabase:');
-      console.log(`   UPDATE profiles SET is_admin = true WHERE email = 'chris.t@ventarosales.com';`);
+      console.log(`   UPDATE profiles SET is_admin = true WHERE email = '${adminEmail}';`);
       return;
     }
     
@@ -133,7 +134,7 @@ async function insertSampleProducts() {
 }
 
 async function main() {
-  console.log('🔧 Ventaro Digital Store Setup');
+  console.log('🔧 Ventaro AI Digital Store Setup');
   console.log('================================\n');
   
   await setupAdmin();
@@ -143,7 +144,7 @@ async function main() {
   console.log('\n📋 Next steps:');
   console.log('1. Start your dev server: npm run dev');
   console.log('2. Visit http://localhost:3001');
-  console.log('3. Login with chris.t@ventarosales.com');
+  console.log(`3. Login with ${process.env.ADMIN_EMAIL || 'admin@ventaroai.com'}`);
   console.log('4. Access admin panel at /admin');
 }
 

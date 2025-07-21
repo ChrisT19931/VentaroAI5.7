@@ -1,6 +1,6 @@
 {
-  "name": "ai-digital-product-store",
-  "version": "0.1.0",
+  "name": "ventaro-ai-digital-store",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -17,13 +17,33 @@ export default function EbookProductPage() {
           {/* Product Image */}
           <div className="lg:w-1/2">
             <div className="glass-card p-8">
-              <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6">
-                <div className="text-center text-white">
-                  <div className="text-6xl mb-4">📚</div>
+              <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
+                <div className="text-center text-white relative z-10">
+                  <div className="text-6xl mb-4 animate-book-flip">📚</div>
                   <div className="text-xl font-bold">Premium AI E-book</div>
                   <div className="text-sm opacity-80">Digital Download</div>
                 </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-page-turn"></div>
               </div>
+              <style jsx>{`
+                @keyframes book-flip {
+                  0%, 100% { transform: rotateY(0deg) scale(1); }
+                  25% { transform: rotateY(-15deg) scale(1.05); }
+                  50% { transform: rotateY(0deg) scale(1.1); }
+                  75% { transform: rotateY(15deg) scale(1.05); }
+                }
+                @keyframes page-turn {
+                  0%, 100% { transform: translateX(-100%) skewX(0deg); opacity: 0; }
+                  50% { transform: translateX(0%) skewX(-10deg); opacity: 0.3; }
+                }
+                .animate-book-flip {
+                  animation: book-flip 4s ease-in-out infinite;
+                  transform-style: preserve-3d;
+                }
+                .animate-page-turn {
+                  animation: page-turn 6s ease-in-out infinite;
+                }
+              `}</style>
               <div className="text-center">
                 <div className="text-3xl font-bold text-white mb-2">${product.price}</div>
                 <AddToCartButton product={product} />
@@ -58,7 +78,7 @@ export default function EbookProductPage() {
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span>Content creation systems that produce $50K+ quality outputs</span>
+                      <span>Content creation systems that produce premium quality outputs</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>

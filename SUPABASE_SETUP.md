@@ -224,16 +224,16 @@ CREATE POLICY "Admins can manage product files" ON storage.objects
 
 After setting up the database:
 
-1. **Sign up** for an account using `chris.t@ventarosales.com` on your website
+1. **Sign up** for an account using your admin email on your website
 2. Go to **Authentication** → **Users** in Supabase dashboard
-3. Find the user with email `chris.t@ventarosales.com`
+3. Find the user with your admin email
 4. Go to **SQL Editor** and run:
 
 ```sql
--- Make chris.t@ventarosales.com an admin
+-- Make your admin email an admin
 UPDATE profiles 
 SET is_admin = true 
-WHERE email = 'chris.t@ventarosales.com';
+WHERE email = 'your-admin-email@domain.com';
 ```
 
 ## 5. Insert Sample Products
@@ -271,7 +271,7 @@ INSERT INTO products (name, description, price, category, featured, is_active) V
 
 1. Restart your development server: `npm run dev`
 2. Visit `http://localhost:3001`
-3. Sign up with `chris.t@ventarosales.com`
+3. Sign up with your admin email
 4. After making the account admin (step 4), you should be able to access `/admin`
 
 ## 7. Configure Email Authentication (Optional)

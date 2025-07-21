@@ -10,7 +10,8 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="md:w-1/2 space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Premium AI Tools & Digital Products
+                Ventaro AI Digital Store
+                <span className="block">Premium Digital Products</span>
               </h1>
               <p className="text-xl opacity-90">
                 Enhance your workflow with our curated collection of high-quality AI tools and digital products.

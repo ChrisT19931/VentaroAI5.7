@@ -27,13 +27,17 @@ type Order = {
 
 type User = {
   id: string;
-  email: string;
+  email?: string;
   created_at: string;
-  last_sign_in_at: string | null;
-  user_metadata: {
+  last_sign_in_at?: string | null;
+  user_metadata?: {
     first_name?: string;
     last_name?: string;
   };
+  full_name?: string;
+  first_name?: string;
+  last_name?: string;
+  is_admin?: boolean;
 };
 
 export default function AdminPage() {
@@ -546,7 +550,7 @@ export default function AdminPage() {
                                 </div>
                               </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email || 'N/A'}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(user.created_at).toLocaleDateString()}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleDateString() : 'Never'}

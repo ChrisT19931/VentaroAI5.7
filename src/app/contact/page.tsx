@@ -70,8 +70,8 @@ export default function ContactPage() {
             <p className="text-gray-600 mb-4">
               For general inquiries and support, reach out to us via email.
             </p>
-            <a href="mailto:chris.t@ventarosales.com" className="text-primary-600 hover:text-primary-500 font-medium">
-              chris.t@ventarosales.com
+            <a href="mailto:support@ventaroai.com" className="text-primary-600 hover:text-primary-500 font-medium">
+              support@ventaroai.com
             </a>
           </div>
 

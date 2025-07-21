@@ -10,8 +10,8 @@ import { ToastProvider } from '@/context/ToastContext'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Ventaro AI - Digital Store',
-  description: '100% AI-designed digital products and coaching - E-books, AI prompts, and personalized coaching calls to teach you cutting-edge AI techniques',
+  title: 'Ventaro AI Digital Store - Premium Digital Products & Tools',
+  description: 'Discover premium AI-powered digital products, tools, and resources. From design templates to productivity tools, find everything you need to enhance your digital projects.',
 }
 
 export default function RootLayout({

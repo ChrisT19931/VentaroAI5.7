@@ -17,13 +17,61 @@ export default function CoachingProductPage() {
           {/* Product Image */}
           <div className="lg:w-1/2">
             <div className="glass-card p-8">
-              <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6">
-                <div className="text-center text-white">
-                  <div className="text-6xl mb-4">🎯</div>
+              <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
+                <div className="text-center text-white relative z-10">
+                  <div className="text-6xl mb-4 animate-target-focus">🎯</div>
                   <div className="text-xl font-bold">1-on-1 Coaching</div>
                   <div className="text-sm opacity-80">60 Minutes Session</div>
                 </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-32 h-32 border-2 border-white/20 rounded-full animate-target-ring-1"></div>
+                  <div className="absolute w-24 h-24 border-2 border-white/30 rounded-full animate-target-ring-2"></div>
+                  <div className="absolute w-16 h-16 border-2 border-white/40 rounded-full animate-target-ring-3"></div>
+                </div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-yellow-400 animate-coaching-arrow" style={{transformOrigin: 'bottom center'}}></div>
               </div>
+              <style jsx>{`
+                @keyframes target-focus {
+                  0%, 100% { transform: scale(1) rotateZ(0deg); }
+                  25% { transform: scale(1.05) rotateZ(-2deg); }
+                  50% { transform: scale(1.1) rotateZ(0deg); }
+                  75% { transform: scale(1.05) rotateZ(2deg); }
+                }
+                @keyframes target-ring-1 {
+                  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.2; }
+                  50% { transform: scale(1.1) rotate(180deg); opacity: 0.4; }
+                }
+                @keyframes target-ring-2 {
+                  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+                  50% { transform: scale(1.15) rotate(-180deg); opacity: 0.5; }
+                }
+                @keyframes target-ring-3 {
+                  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+                  50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+                }
+                @keyframes coaching-arrow {
+                  0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1); opacity: 0.8; }
+                  25% { transform: translateX(-50%) translateY(-50%) rotate(15deg) scale(1.1); opacity: 1; }
+                  50% { transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1.2); opacity: 1; }
+                  75% { transform: translateX(-50%) translateY(-50%) rotate(-15deg) scale(1.1); opacity: 1; }
+                }
+                .animate-target-focus {
+                  animation: target-focus 4s ease-in-out infinite;
+                  transform-style: preserve-3d;
+                }
+                .animate-target-ring-1 {
+                  animation: target-ring-1 6s linear infinite;
+                }
+                .animate-target-ring-2 {
+                  animation: target-ring-2 8s linear infinite;
+                }
+                .animate-target-ring-3 {
+                  animation: target-ring-3 10s linear infinite;
+                }
+                .animate-coaching-arrow {
+                  animation: coaching-arrow 3s ease-in-out infinite;
+                }
+              `}</style>
               <div className="text-center">
                 <div className="text-3xl font-bold text-white mb-4">${product.price}</div>
                 <AddToCartButton product={product} />
@@ -54,7 +102,7 @@ export default function CoachingProductPage() {
                       <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</div>
                       <div>
                         <h4 className="font-semibold text-white mb-1">Purchase & Schedule</h4>
-                        <p className="text-gray-300 text-sm">After purchase, email <strong className="text-blue-400">chris.t@ventarosales.com</strong> to schedule your session</p>
+                        <p className="text-gray-300 text-sm">After purchase, contact <strong className="text-blue-400">support@ventaroai.com</strong> to schedule your session</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -182,7 +230,7 @@ export default function CoachingProductPage() {
                   <h3 className="text-xl font-bold text-white mb-4">📧 Scheduling Instructions</h3>
                   <div className="space-y-3">
                     <p className="text-gray-300">
-                      <strong className="text-white">After purchase:</strong> Email <strong className="text-blue-400">chris.t@ventarosales.com</strong> with:
+                      <strong className="text-white">After purchase:</strong> Email <strong className="text-blue-400">support@ventaroai.com</strong> with:
                     </p>
                     <ul className="space-y-2 text-gray-300 ml-4">
                       <li>• Your order confirmation number</li>

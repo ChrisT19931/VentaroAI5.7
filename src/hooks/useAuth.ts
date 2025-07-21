@@ -16,6 +16,7 @@ type UserProfile = {
   full_name?: string;
   avatar_url?: string;
   role: 'user' | 'admin';
+  is_admin?: boolean;
   email?: string;
   created_at: string;
   updated_at: string;

@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose max-w-none">
             <h2 className="text-2xl font-bold text-white mb-4">Introduction</h2>
             <p className="mb-4 text-gray-300">
-              At Ventaro AI - Digital Store, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, purchase our AI-designed products, and subscribe to our services.
+              At Ventaro AI Digital Store, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, purchase our digital products, and subscribe to our services.
             </p>
             <p className="mb-4 text-gray-300">
               Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access the site.
@@ -132,10 +132,7 @@ export default function PrivacyPolicyPage() {
               If you have questions or concerns about this Privacy Policy, please contact us at:
             </p>
             <p className="mb-4 text-gray-300">
-              Email: <a href="mailto:privacy@ventaroai.com" className="text-gradient hover:text-white transition-colors">privacy@ventaroai.com</a>
-            </p>
-            <p className="mb-4 text-gray-300">
-              Address: 123 AI Innovation Drive, Suite 2025, San Francisco, CA 94107, United States
+              Email: <a href="mailto:support@ventaroai.com" className="text-gradient hover:text-white transition-colors">support@ventaroai.com</a>
             </p>
           </div>
         </div>
