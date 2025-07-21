@@ -47,7 +47,7 @@ export function useAuth() {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', userId)
+        .eq('id', userId)
         .single();
 
       if (error) {
@@ -79,7 +79,7 @@ export function useAuth() {
             session,
             isLoading: false,
             isAuthenticated: true,
-            isAdmin: profile?.role === 'admin',
+            isAdmin: profile?.is_admin === true,
           });
         } else {
           setAuthState({
@@ -116,7 +116,7 @@ export function useAuth() {
             session,
             isLoading: false,
             isAuthenticated: true,
-            isAdmin: profile?.role === 'admin',
+            isAdmin: profile?.is_admin === true,
           });
         } else {
           setAuthState({
@@ -180,10 +180,11 @@ export function useAuth() {
           .from('profiles')
           .insert([
             {
-              user_id: data.user.id,
-              full_name,
+              id: data.user.id,
+              first_name: full_name?.split(' ')[0] || null,
+              last_name: full_name?.split(' ').slice(1).join(' ') || null,
               email,
-              role: 'user', // Default role
+              is_admin: false, // Default to non-admin
             },
           ]);
 

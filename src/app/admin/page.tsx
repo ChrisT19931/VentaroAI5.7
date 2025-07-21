@@ -63,13 +63,13 @@ export default function AdminPage() {
       // Check if user has admin role
       const { data, error } = await supabase
         .from('profiles')
-        .select('role')
+        .select('is_admin')
         .eq('id', user?.id)
         .single();
 
       if (error) throw error;
 
-      if (data?.role === 'admin') {
+      if (data?.is_admin === true) {
         setIsAdmin(true);
         fetchDashboardData();
       } else {
