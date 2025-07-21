@@ -70,39 +70,39 @@ export default function ContactPage() {
             <p className="text-gray-600 mb-4">
               For general inquiries and support, reach out to us via email.
             </p>
-            <a href="mailto:support@aidigitalstore.com" className="text-primary-600 hover:text-primary-500 font-medium">
-              support@aidigitalstore.com
+            <a href="mailto:chris.t@ventarosales.com" className="text-primary-600 hover:text-primary-500 font-medium">
+              chris.t@ventarosales.com
             </a>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-6">
             <div className="h-12 w-12 rounded-md bg-primary-100 flex items-center justify-center text-primary-600 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Live Chat</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Response Time</h3>
             <p className="text-gray-600 mb-4">
-              Need immediate assistance? Chat with our support team during business hours.
+              We typically respond to all email inquiries within 24 hours during business days.
             </p>
-            <Link href="#" className="text-primary-600 hover:text-primary-500 font-medium">
-              Start a Chat
-            </Link>
+            <span className="text-primary-600 font-medium">
+              24 Hour Response
+            </span>
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-6">
             <div className="h-12 w-12 rounded-md bg-primary-100 flex items-center justify-center text-primary-600 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Call Us</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Dedicated Support</h3>
             <p className="text-gray-600 mb-4">
-              Prefer to speak with someone? Our customer service team is available Monday-Friday, 9am-5pm EST.
+              All support requests are handled personally by our team to ensure the best possible assistance.
             </p>
-            <a href="tel:+1-555-123-4567" className="text-primary-600 hover:text-primary-500 font-medium">
-              +1 (555) 123-4567
-            </a>
+            <span className="text-primary-600 font-medium">
+              Personal Attention
+            </span>
           </div>
         </div>
 

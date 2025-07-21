@@ -15,7 +15,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I contact customer support?',
-          answer: 'You can reach our customer support team through our Contact page, by emailing support@aidigitalstore.com, or by using the live chat feature available during business hours.'
+          answer: 'You can reach our customer support team through our Contact page or by emailing chris.t@ventarosales.com. We typically respond within 24 hours during business days.'
         }
       ]
     },
@@ -145,7 +145,7 @@ export default function FAQPage() {
               Contact Us
             </Link>
             <a 
-              href="mailto:support@aidigitalstore.com" 
+              href="mailto:chris.t@ventarosales.com" 
               className="btn-outline-white"
             >
               Email Support
