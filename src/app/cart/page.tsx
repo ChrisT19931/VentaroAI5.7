@@ -43,7 +43,10 @@ export default function CartPage() {
         const stripe = await getStripe();
         
         if (!stripe) {
-          throw new Error('Failed to initialize Stripe');
+          console.error('Stripe is not initialized - missing publishable key');
+          // Fallback to direct URL redirect when Stripe is not available
+          window.location.href = data.url;
+          return;
         }
         
         // Redirect to Stripe Checkout
