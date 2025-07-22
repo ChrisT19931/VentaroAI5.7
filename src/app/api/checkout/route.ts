@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@/lib/supabase';
-import { sendEmail } from '@/lib/sendgrid';
+import { sendEmail, sendOrderConfirmationEmail } from '@/lib/sendgrid';
 
 export async function POST(request: NextRequest) {
   try {
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     });
     
     // Create line items for Stripe checkout
-    const lineItems = productMetadata.map((product) => {
+    const lineItems = productMetadata.map((product: any) => {
       // Find the original product data to get the image_url
       const originalProduct = productsData.find((p) => p.id === product.id);
       
@@ -159,8 +159,8 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email with download links
     const downloadLinks = productMetadata
-      .filter(product => product.download_url)
-      .map(product => ({
+      .filter((product: any) => product.download_url)
+      .map((product: any) => ({
         productName: product.name,
         url: `${request.headers.get('origin')}${product.download_url}`
       }));

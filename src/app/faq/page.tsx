@@ -24,7 +24,7 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'What types of products do you offer?',
-          answer: 'We offer a wide range of AI-powered digital products including e-books, prompt collections, and coaching calls. All our products are carefully vetted for quality and usefulness.'
+          answer: 'We offer a wide range of AI-powered digital products including our AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions. All our products are carefully vetted for quality and usefulness.'
         },
         {
           question: 'Are there any usage restrictions?',
@@ -45,7 +45,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I download my purchased digital products?',
-          answer: 'After completing your purchase of digital products (e-books and prompt collections), you\'ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section. For coaching calls, we will be in touch to organize a suitable time.'
+          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025), you\'ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
         },
         {
           question: 'How long do I have access to my purchased digital products?',
@@ -53,7 +53,7 @@ export default function FAQPage() {
         },
         {
           question: 'What is the download process for digital products?',
-          answer: 'Our digital products (e-books and prompt collections) are available for immediate download after purchase. Simply click the download link in your confirmation email or access them from your account dashboard. Files are typically provided in PDF format for e-books and text format for prompts.'
+          answer: 'Our digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025) are available for immediate download after purchase. Simply click the download link in your confirmation email or access them from your account dashboard. Files are typically provided in PDF format for guides and text format for prompts.'
         },
         {
           question: 'Are my payment details secure?',
@@ -61,7 +61,7 @@ export default function FAQPage() {
         },
         {
           question: 'Do you offer shipping?',
-          answer: 'No, we do not offer physical shipping as we are a 100% digital business. All products are delivered instantly via digital download after purchase, except for coaching calls which are scheduled separately.'
+          answer: 'No, we do not offer physical shipping as we are a 100% digital business. All products are delivered instantly via digital download after purchase, except for AI Business Strategy Sessions which are scheduled separately.'
         }
       ]
     },
@@ -108,11 +108,11 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'Do you have any current promotions?',
-          answer: 'Yes! We currently have AI prompts on sale for just $10. These high-quality prompts are perfect for content creation, marketing, and creative projects.'
+          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just $10. These 30 premium AI prompts are perfect for content creation, marketing automation, and AI-powered business growth.'
         },
         {
-          question: 'What does the coaching call include?',
-          answer: 'Our premium coaching call includes a 30-minute personalized session with one of our AI experts, plus a comprehensive written report. For $500, you get tailored advice, custom workflow optimization, and specific prompt engineering techniques for your projects.'
+          question: 'What does the AI Business Strategy Session include?',
+          answer: 'Our AI Business Strategy Session includes a 60-minute personalized session with one of our AI experts, plus a comprehensive implementation report. For $497, you get tailored advice, custom workflow optimization, and specific AI strategies for your business projects.'
         }
       ]
     }

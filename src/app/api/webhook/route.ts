@@ -90,7 +90,7 @@ async function handleCheckoutSessionCompleted(session: any) {
 
     // Generate download URLs for digital products
     await Promise.all(
-      (orderItems || []).map(async (item) => {
+      (orderItems || []).map(async (item: any) => {
         if (item.products?.file_url) {
           // Update the order item with the download URL
           const { error: updateItemError } = await supabase
@@ -133,8 +133,8 @@ async function handleCheckoutSessionCompleted(session: any) {
     // Send order confirmation email
     if (userData?.email) {
       const downloadLinks = (updatedItems || [])
-        .filter(item => item.download_url)
-        .map(item => ({
+        .filter((item: any) => item.download_url)
+        .map((item: any) => ({
           productName: item.products?.name || 'Product',
           url: `${process.env.NEXT_PUBLIC_SITE_URL}${item.download_url}`
         }));
@@ -142,7 +142,7 @@ async function handleCheckoutSessionCompleted(session: any) {
       await sendOrderConfirmationEmail({
         email: userData.email,
         orderNumber: order_id,
-        orderItems: (updatedItems || []).map(item => ({
+        orderItems: (updatedItems || []).map((item: any) => ({
           name: item.products?.name || 'Product',
           quantity: item.quantity,
           price: item.price

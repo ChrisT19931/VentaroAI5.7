@@ -68,7 +68,7 @@ export default function AccountPage() {
 
           return {
             ...order,
-            items: (itemsData || []).map((item) => ({
+            items: (itemsData || []).map((item: any) => ({
               id: item.id,
               product_name: item.products?.name || 'Unknown Product',
               quantity: item.quantity,

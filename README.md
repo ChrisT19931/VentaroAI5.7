@@ -107,20 +107,20 @@ See [.env.local.example](./.env.local.example) for all required variables:
 
 ## 📋 Current Products
 
-1. **Premium AI E-book** - $99.99
-   - 200-page comprehensive guide
-   - Advanced ChatGPT techniques
-   - Business automation strategies
+1. **AI Tools Mastery Guide 2025** - $25.00 (50% OFF)
+   - 30-page guide with AI tools and AI prompts
+   - Learn ChatGPT, Claude, Grok, and Gemini
+   - Master AI agents and bots
 
-2. **30 Premium AI Prompts** - $10.00 (ON SALE)
-   - Battle-tested prompts
-   - Content creation, business strategy, creative projects
-   - Copy-paste ready with instructions
+2. **AI Prompts Arsenal 2025** - $10.00
+   - 30 premium AI prompts for making money online
+   - Proven ChatGPT and Claude prompts
+   - Copy-paste ready for immediate use
 
-3. **1-on-1 AI Mastery Coaching** - $300.00
-   - 60-minute personalized session
-   - Expert guidance and strategy
-   - Contact for scheduling
+3. **AI Business Strategy Session 2025** - $497.00
+   - 60-minute live video coaching session
+   - Master ChatGPT for business applications
+   - Learn Vercel deployment from scratch
 
 ## Deployment
 

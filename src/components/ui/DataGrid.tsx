@@ -647,7 +647,8 @@ export default function DataGrid<T extends Record<string, any>>(
       return value ? 'Yes' : 'No';
     }
     
-    if (value instanceof Date) {
+    // Check if value is a Date object
+    if (typeof value === 'object' && value !== null && 'toLocaleString' in value && typeof value.toLocaleString === 'function') {
       return value.toLocaleString();
     }
     

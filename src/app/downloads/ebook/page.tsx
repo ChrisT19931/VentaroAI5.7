@@ -47,8 +47,8 @@ export default function EbookDownloadPage() {
   const handleDownload = () => {
     // Create a download link for the PDF
     const link = document.createElement('a');
-    link.href = '/downloads/premium-ai-ebook.pdf';
-    link.download = 'Premium-AI-Ebook-Ventaro.pdf';
+    link.href = '/downloads/ai-tools-mastery-guide-2025.pdf';
+    link.download = 'AI-Tools-Mastery-Guide-2025-Ventaro.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -73,7 +73,7 @@ export default function EbookDownloadPage() {
             <div className="text-6xl mb-6">🔒</div>
             <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
             <p className="text-gray-300 mb-6">
-              You don't have access to this download. Please purchase the Premium AI E-book first.
+              You don't have access to this download. Please purchase the AI Tools Mastery Guide 2025 first.
             </p>
             <div className="space-y-4">
               <Link href="/products/ebook" className="btn-primary inline-block">
@@ -96,7 +96,7 @@ export default function EbookDownloadPage() {
         <div className="glass-card p-8">
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">📚</div>
-            <h1 className="text-3xl font-bold text-white mb-2">Premium AI E-book Download</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">AI Tools Mastery Guide 2025 Download</h1>
             <p className="text-gray-300">Thank you for your purchase! Your e-book is ready for download.</p>
           </div>
 

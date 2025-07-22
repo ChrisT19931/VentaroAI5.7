@@ -153,23 +153,23 @@ export default function Home() {
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-2 text-gray-900">
-                  AI Starter Pack
+                  AI Prompts Arsenal 2025
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Perfect for beginners. Essential AI prompts and basic tools to start your AI journey.
+                  30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for business growth.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">20+ Basic AI Prompts</span>
+                    <span className="text-sm text-gray-700">30 proven prompts for business</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Getting Started Guide</span>
+                    <span className="text-sm text-gray-700">Copy-paste ready for immediate use</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Email Support</span>
+                    <span className="text-sm text-gray-700">Works with ChatGPT and other AI tools</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -199,27 +199,27 @@ export default function Home() {
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-2 text-gray-900">
-                  AI Mastery Guide
+                  AI Tools Mastery Guide 2025
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Complete toolkit for serious AI entrepreneurs. Everything you need to build profitable AI businesses.
+                  30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">50+ Premium AI Prompts</span>
+                    <span className="text-sm text-gray-700">Learn ChatGPT, Claude, Grok, and Gemini</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">30-Page Mastery Guide</span>
+                    <span className="text-sm text-gray-700">Master AI agents and bots</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Video Tutorials</span>
+                    <span className="text-sm text-gray-700">30 practical sales lessons</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Priority Support</span>
+                    <span className="text-sm text-gray-700">Simple step-by-step instructions</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -247,27 +247,27 @@ export default function Home() {
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-2 text-gray-900">
-                  AI Business Coaching
+                  AI Business Strategy Session 2025
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  Elite 1-on-1 coaching for serious entrepreneurs ready to scale their AI business.
+                  60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">60-Min Strategy Session</span>
+                    <span className="text-sm text-gray-700">Live 60-minute video coaching session</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Custom AI Business Plan</span>
+                    <span className="text-sm text-gray-700">Master ChatGPT for business applications</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">All Previous Content</span>
+                    <span className="text-sm text-gray-700">Learn Vercel deployment from scratch</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span className="text-sm text-gray-700">Direct Access to Expert</span>
+                    <span className="text-sm text-gray-700">Comprehensive implementation report</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -315,7 +315,7 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Instant Access</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Instant Digital Delivery</h3>
               <p className="text-gray-600 leading-relaxed">
                 Get immediate access to your purchased products with our seamless, lightning-fast delivery system.
               </p>
@@ -327,9 +327,9 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Bank-Level Security</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Professional-Grade Content</h3>
               <p className="text-gray-600 leading-relaxed">
-                Your transactions are protected with military-grade encryption and industry-leading security protocols.
+                All our products feature high-quality, professional content created with the latest AI technologies.
               </p>
             </div>
             
@@ -339,7 +339,7 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Lifetime Ownership</h3>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Lifetime Access</h3>
               <p className="text-gray-600 leading-relaxed">
                 No subscriptions, no recurring fees. Pay once and own your digital products forever with unlimited access.
               </p>

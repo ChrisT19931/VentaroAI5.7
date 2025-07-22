@@ -76,7 +76,7 @@ export default function CheckoutSuccessPage() {
 
       // Generate download URLs for digital products
       const itemsWithDownloadUrls = await Promise.all(
-        (orderItems || []).map(async (item) => {
+        (orderItems || []).map(async (item: any) => {
           // If download URL already exists, use it
           if (item.download_url) {
             return item;

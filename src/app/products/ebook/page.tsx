@@ -7,8 +7,8 @@ import AddToCartButton from '@/components/AddToCartButton';
 export default function EbookProductPage() {
   const product = {
     id: 'ebook-premium-ai',
-    name: 'AI Tools Mastery Guide 2025: Make Money Online with AI Prompts',
-    price: 50.00,
+    name: 'AI Tools Mastery Guide 2025',
+    price: 25.00,
     image_url: '/images/premium-ai-ebook.jpg'
   };
 
@@ -22,13 +22,13 @@ export default function EbookProductPage() {
               <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
                 <div className="text-center text-white relative z-10">
                   <div className="text-6xl mb-4 animate-book-flip">📚</div>
-                  <div className="text-xl font-bold">Premium AI E-book</div>
-                  <div className="text-sm opacity-80">200-Page Comprehensive Guide</div>
+                  <div className="text-xl font-bold">AI Tools Mastery Guide 2025</div>
+                  <div className="text-sm opacity-80">30-Page Comprehensive Guide</div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-page-turn"></div>
                 <Image 
                   src="/images/ebook-cover.jpg" 
-                  alt="Premium AI E-book" 
+                  alt="AI Tools Mastery Guide 2025" 
                   fill 
                   className="object-cover opacity-20" 
                 />

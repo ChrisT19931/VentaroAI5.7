@@ -116,7 +116,7 @@ export default function AdminPage() {
 
         if (ordersError) throw ordersError;
         
-        setOrders((ordersData || []).map(order => ({
+        setOrders((ordersData || []).map((order: any) => ({
           ...order,
           user_email: order.profiles?.email || 'Unknown',
         })));

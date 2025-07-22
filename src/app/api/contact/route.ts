@@ -4,7 +4,7 @@ import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: Request) {
   try {
-    const { name, email, subject, message, recipient } = await request.json();
+    const { name, email, subject, message, recipient, product } = await request.json();
 
     // Validate required fields
   if (!name || !email || !subject || !message) {
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   }
   
   // Get product reference if available
-  const product = formData.product || 'Not specified';
+  const productRef = product || 'Not specified';
 
     // Send email notification to admin
     await sendEmail({
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Product Reference:</strong> ${product}</p>
+        <p><strong>Product Reference:</strong> ${productRef}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       name,
       email,
       subject,
-      product,
+      product: productRef,
       message,
       created_at: new Date().toISOString(),
     });

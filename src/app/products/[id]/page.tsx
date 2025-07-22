@@ -522,13 +522,6 @@ export default function ProductPage() {
             <p>
               {product.description}
             </p>
-            <h3>Key Benefits</h3>
-            <ul>
-              <li>Instant digital delivery after purchase</li>
-              <li>Professional-grade content and materials</li>
-              <li>Lifetime access to your purchased products</li>
-              <li>Compatible with all devices and platforms</li>
-            </ul>
             <h3>Purchase Information</h3>
             <p>
               All digital products are delivered immediately after successful payment. You'll receive download links via email and can access your purchases anytime through your account dashboard.
@@ -561,9 +554,9 @@ export default function ProductPage() {
 // Helper functions to get product file information
 function getProductFileName(productId: string): string {
   const fileMap: Record<string, string> = {
-    '1': 'elite-ai-mastery-guide.pdf',
-    '2': 'elite-prompt-arsenal.pdf',
-    '3': 'strategy-session-booking.pdf'
+    '1': 'ai-tools-mastery-guide-2025.pdf',
+    '2': 'ai-prompts-arsenal-2025.pdf',
+    '3': 'ai-business-strategy-session-2025.pdf'
   }
   return fileMap[productId] || 'product-download.pdf'
 }

@@ -282,25 +282,25 @@ WHERE email = 'your-admin-email@domain.com';
 -- Insert the three main products
 INSERT INTO products (name, description, price, category, featured, is_active) VALUES
 (
-  'Premium AI E-book: Master AI for Business Success',
-  'A comprehensive 200-page guide to mastering AI for business success. Learn advanced ChatGPT techniques, automation strategies, and practical implementations.',
-  99.99,
+  'AI Tools Mastery Guide 2025',
+  '30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
+  25.00,
   'E-book',
   true,
   true
 ),
 (
-  '30 Premium AI Prompts Collection',
-  'Battle-tested AI prompts for content creation, business strategy, and creative projects. Copy-paste ready with detailed instructions.',
+  'AI Prompts Arsenal 2025',
+  '30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
   10.00,
   'AI Prompts',
   true,
   true
 ),
 (
-  '1-on-1 AI Mastery Coaching Call',
-  'Personalized 60-minute coaching session to accelerate your AI journey. Get expert guidance tailored to your specific needs.',
-  300.00,
+  'AI Business Strategy Session 2025',
+  '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
+  497.00,
   'Coaching',
   true,
   true

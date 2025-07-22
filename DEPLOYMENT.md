@@ -78,7 +78,7 @@ Ensure your Stripe products match your Supabase products:
 ### Storage Setup
 1. Create buckets: `product-images`, `product-files`
 2. Upload your digital products:
-   - `/downloads/premium-ai-ebook.pdf`
+   - `/downloads/ai-tools-mastery-guide-2025.pdf`
    - `/downloads/ai-prompts-collection.pdf`
 3. Set appropriate permissions
 

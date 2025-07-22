@@ -227,9 +227,9 @@ export default function ContactPage() {
                         className="mt-1 input-field"
                       >
                         <option value="">Select a product (optional)</option>
-                        <option value="ebook">Premium AI E-book</option>
-                        <option value="prompts">30 Premium AI Prompts Collection</option>
-                        <option value="coaching">1-on-1 AI Mastery Coaching Call ($500) + Full Report</option>
+                        <option value="ebook">AI Tools Mastery Guide 2025</option>
+                <option value="prompts">AI Prompts Arsenal 2025</option>
+                <option value="coaching">AI Business Strategy Session 2025</option>
                       </select>
                     </div>
                   </div>

@@ -133,18 +133,18 @@ export default function AboutPage() {
               <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Image 
                   src="/images/ebook-icon.svg" 
-                  alt="AI Design Ebooks" 
+                  alt="AI Tools Mastery Guide" 
                   width={32} 
                   height={32} 
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">AI Tools & Strategy Ebooks</h3>
+              <h3 className="text-xl font-bold text-white mb-4">AI Tools Mastery Guide 2025</h3>
               <p className="text-gray-700 mb-6">
-                Comprehensive guides covering the latest AI tools, proven workflows, and step-by-step strategies for building successful AI-powered businesses.
+                Comprehensive 30-page guide covering the latest AI tools, proven workflows, and step-by-step strategies for building successful AI-powered businesses.
               </p>
               <Link href="/products/ebook" className="btn-primary text-sm inline-block">
-                Explore Ebooks →
+                Explore Guide →
               </Link>
             </div>
             
@@ -152,15 +152,15 @@ export default function AboutPage() {
               <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Image 
                   src="/images/prompts-icon.svg" 
-                  alt="Premium Prompts" 
+                  alt="AI Prompts Arsenal" 
                   width={32} 
                   height={32} 
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Premium AI Prompts</h3>
+              <h3 className="text-xl font-bold text-white mb-4">AI Prompts Arsenal 2025</h3>
               <p className="text-gray-700 mb-6">
-                Battle-tested prompt collections for content creation, marketing, design, and business automation. Professional-grade prompts that deliver results.
+                Battle-tested prompt collections for content creation, marketing automation, and AI-powered business growth. Professional-grade prompts that deliver results.
               </p>
               <Link href="/products/prompts" className="btn-primary text-sm inline-block">
                 Get Prompts →
@@ -171,18 +171,18 @@ export default function AboutPage() {
               <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Image 
                   src="/images/coaching-icon.svg" 
-                  alt="1-on-1 Coaching" 
+                  alt="AI Business Strategy Session" 
                   width={32} 
                   height={32} 
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">AI Business Coaching</h3>
+              <h3 className="text-xl font-bold text-white mb-4">AI Business Strategy Session 2025</h3>
               <p className="text-gray-700 mb-6">
-                Personalized one-on-one coaching sessions to accelerate your AI journey. Get expert guidance tailored to your specific goals and challenges.
+                Personalized 60-minute strategy sessions to accelerate your AI business journey. Get expert guidance and an implementation report tailored to your specific goals and challenges.
               </p>
               <Link href="/products/coaching" className="btn-primary text-sm inline-block">
-                Book Session →
+                Book Strategy Session →
               </Link>
             </div>
           </div>

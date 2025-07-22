@@ -88,25 +88,25 @@ async function insertSampleProducts() {
     
     const products = [
       {
-        name: 'Premium AI E-book: Master AI for Business Success',
-        description: 'A comprehensive 200-page guide to mastering AI for business success. Learn advanced ChatGPT techniques, automation strategies, and practical implementations.',
-        price: 99.99,
+        name: 'AI Tools Mastery Guide 2025',
+        description: '30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
+        price: 25.00,
         category: 'E-book',
         featured: true,
         is_active: true
       },
       {
-        name: '30 Premium AI Prompts Collection',
-        description: 'Battle-tested AI prompts for content creation, business strategy, and creative projects. Copy-paste ready with detailed instructions.',
+        name: 'AI Prompts Arsenal 2025',
+        description: '30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
         price: 10.00,
         category: 'AI Prompts',
         featured: true,
         is_active: true
       },
       {
-        name: '1-on-1 AI Mastery Coaching Call',
-        description: 'Personalized 60-minute coaching session to accelerate your AI journey. Get expert guidance tailored to your specific needs.',
-        price: 300.00,
+        name: 'AI Business Strategy Session 2025',
+        description: '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
+        price: 497.00,
         category: 'Coaching',
         featured: true,
         is_active: true

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { Session, User, AuthError } from '@supabase/supabase-js';
 
 type AuthState = {
@@ -32,7 +32,10 @@ type SignUpCredentials = SignInCredentials & {
 };
 
 export function useAuth() {
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     session: null,

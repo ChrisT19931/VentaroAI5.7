@@ -152,7 +152,7 @@ async function main() {
   
   // Check required files
   log('\n📁 Required Files:', 'bold');
-  allChecks &= checkFileExists('public/downloads/premium-ai-ebook.pdf', 'E-book PDF');
+  allChecks &= checkFileExists('public/downloads/ai-tools-mastery-guide-2025.pdf', 'E-book PDF');
   allChecks &= checkFileExists('public/downloads/ai-prompts-collection.pdf', 'AI Prompts PDF');
   allChecks &= checkFileExists('SUPABASE_SETUP.md', 'Supabase Setup Guide');
   allChecks &= checkFileExists('DEPLOYMENT.md', 'Deployment Guide');

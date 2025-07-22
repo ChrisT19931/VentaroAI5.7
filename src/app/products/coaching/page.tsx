@@ -18,8 +18,8 @@ type Product = {
 // Fallback product data
 const fallbackProduct = {
       id: 'coaching-call-1on1',
-      name: 'AI Business Coaching 2025 - Make Money Online with AI Tools & Prompts',
-      price: 500.00,
+      name: 'AI Business Strategy Session 2025',
+      price: 497.00,
       image_url: '/images/coaching-session.svg'
     };
 
@@ -63,8 +63,8 @@ export default function CoachingProductPage() {
               <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
                 <div className="text-center text-white relative z-10">
                   <div className="text-6xl mb-4 animate-target-focus">🎯</div>
-                  <div className="text-xl font-bold">1-on-1 Coaching</div>
-                  <div className="text-sm opacity-80">60 Minutes Session + Full Report</div>
+                  <div className="text-xl font-bold">AI Business Strategy Session 2025</div>
+                  <div className="text-sm opacity-80">60 Minutes Session + Implementation Report</div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-32 h-32 border-2 border-white/20 rounded-full animate-target-ring-1"></div>
@@ -74,7 +74,7 @@ export default function CoachingProductPage() {
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-yellow-400 animate-coaching-arrow" style={{transformOrigin: 'bottom center'}}></div>
                 <Image 
                   src="/images/coaching-session.svg" 
-                  alt="1-on-1 Coaching Session" 
+                  alt="AI Business Strategy Session 2025" 
                   fill 
                   className="object-contain opacity-20" 
                 />

@@ -196,6 +196,7 @@ export default function Accordion({
     const childId = child.props.id || `accordion-item-${index}`;
     
     return React.cloneElement(child, {
+      // @ts-ignore - We know these props are valid for AccordionItem
       id: childId,
       expanded: expandedItems.has(childId),
       onToggle: (expanded: boolean) => {

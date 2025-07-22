@@ -7,7 +7,7 @@ import AddToCartButton from '@/components/AddToCartButton';
 export default function PromptsProductPage() {
   const product = {
     id: 'ai-prompts-collection',
-    name: '30 Premium AI Prompts',
+    name: 'AI Prompts Arsenal 2025',
     price: 10.00,
     image_url: '/images/premium-ai-prompts.jpg'
   };
@@ -22,8 +22,8 @@ export default function PromptsProductPage() {
               <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
                 <div className="text-center text-white relative z-10">
                   <div className="text-6xl mb-4 animate-rocket-launch">🚀</div>
-                  <div className="text-xl font-bold">Premium AI Prompts</div>
-                  <div className="text-sm opacity-80">30 Expert-Crafted Prompts</div>
+                  <div className="text-xl font-bold">AI Prompts Arsenal 2025</div>
+                  <div className="text-sm opacity-80">30 Premium AI Prompts</div>
                 </div>
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-20 bg-gradient-to-t from-orange-500 to-transparent animate-rocket-trail"></div>
                 <div className="absolute inset-0 animate-stars">

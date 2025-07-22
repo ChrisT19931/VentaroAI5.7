@@ -21,6 +21,7 @@ type CartContextType = {
   clearCart: () => void;
   itemCount: number;
   total: number;
+  isInCart: (id: string) => boolean;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -93,11 +94,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems([]);
   };
 
+  const isInCart = (id: string) => {
+    return items.some(item => item.id === id);
+  };
+
   const value = {
     items,
     addItem,
     removeItem,
     updateQuantity,
+    isInCart,
     clearCart,
     itemCount,
     total,

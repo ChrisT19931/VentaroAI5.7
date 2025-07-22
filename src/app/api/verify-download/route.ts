@@ -12,13 +12,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createClient(request);
+    const supabase = await createClient();
 
     // Define product name patterns to match against
     const productPatterns = {
-      ebook: ['E-book', 'ebook', 'Premium AI E-book'],
-      prompts: ['AI Prompts', 'prompts', 'Prompts Collection'],
-      coaching: ['Coaching', 'coaching', 'AI Mastery Coaching']
+      ebook: ['E-book', 'ebook', 'AI Tools Mastery Guide 2025'],
+  prompts: ['AI Prompts', 'prompts', 'AI Prompts Arsenal 2025'],
+  coaching: ['Coaching', 'coaching', 'AI Business Strategy Session 2025']
     };
 
     const patterns = productPatterns[productType as keyof typeof productPatterns];
