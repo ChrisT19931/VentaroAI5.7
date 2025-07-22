@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { getStripe } from '@/lib/stripe-client';
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
@@ -38,8 +39,22 @@ export default function CartPage() {
       const data = await response.json();
 
       if (data.url) {
+        // Get Stripe instance
+        const stripe = await getStripe();
+        
+        if (!stripe) {
+          throw new Error('Failed to initialize Stripe');
+        }
+        
         // Redirect to Stripe Checkout
-        window.location.href = data.url;
+        const { error } = await stripe.redirectToCheckout({
+          sessionId: data.sessionId
+        });
+        
+        if (error) {
+          console.error('Stripe redirect error:', error);
+          setIsLoading(false);
+        }
       } else {
         console.error('Error creating checkout session:', data.error);
         setIsLoading(false);

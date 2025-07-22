@@ -176,7 +176,10 @@ export async function POST(request: NextRequest) {
       console.error('Failed to send confirmation email:', error);
     });
     
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ 
+      url: session.url,
+      sessionId: session.id 
+    });
   } catch (error: any) {
     console.error('Checkout error:', error);
     return NextResponse.json(
