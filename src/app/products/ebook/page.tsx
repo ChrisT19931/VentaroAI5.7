@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import AddToCartButton from '@/components/AddToCartButton';
@@ -7,7 +9,7 @@ export default function EbookProductPage() {
     id: 'ebook-premium-ai',
     name: 'Premium AI E-book: Master AI for Business Success',
     price: 50.00,
-    image_url: '/images/ebook-cover.jpg'
+    image_url: '/images/premium-ai-ebook.jpg'
   };
 
   return (
@@ -21,9 +23,15 @@ export default function EbookProductPage() {
                 <div className="text-center text-white relative z-10">
                   <div className="text-6xl mb-4 animate-book-flip">📚</div>
                   <div className="text-xl font-bold">Premium AI E-book</div>
-                  <div className="text-sm opacity-80">Digital Download</div>
+                  <div className="text-sm opacity-80">200-Page Comprehensive Guide</div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-page-turn"></div>
+                <Image 
+                  src="/images/ebook-cover.jpg" 
+                  alt="Premium AI E-book" 
+                  fill 
+                  className="object-cover opacity-20" 
+                />
               </div>
               <style jsx>{`
                 @keyframes book-flip {
@@ -92,61 +100,73 @@ export default function EbookProductPage() {
                 </div>
 
                 <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">📖 Book Contents</h3>
-                  <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+                  <h3 className="text-xl font-bold text-white mb-4">📖 Complete Chapter List</h3>
+                  <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-300">
                     <div>
                       <h4 className="font-semibold text-white mb-2">Part 1: AI Foundations</h4>
                       <ul className="space-y-1 text-xs">
-                        <li>• Understanding AI Capabilities</li>
-                        <li>• Choosing the Right AI Tools</li>
-                        <li>• Setting Up Your AI Workspace</li>
+                        <li>• Chapter 1: Understanding AI Capabilities & Limitations</li>
+                        <li>• Chapter 2: The AI Tool Landscape - What to Use When</li>
+                        <li>• Chapter 3: Setting Up Your AI Workspace for Maximum Efficiency</li>
+                        <li>• Chapter 4: AI Ethics & Best Practices for Business</li>
+                        <li>• Chapter 5: Cost Management Strategies for AI Tools</li>
                       </ul>
                     </div>
                     <div>
                       <h4 className="font-semibold text-white mb-2">Part 2: Advanced Strategies</h4>
                       <ul className="space-y-1 text-xs">
-                        <li>• Prompt Engineering Mastery</li>
-                        <li>• AI Workflow Automation</li>
-                        <li>• Quality Control Systems</li>
+                        <li>• Chapter 6: Prompt Engineering Mastery - From Basic to Advanced</li>
+                        <li>• Chapter 7: Creating Multi-Step AI Workflows</li>
+                        <li>• Chapter 8: Quality Control Systems for AI Outputs</li>
+                        <li>• Chapter 9: Combining Multiple AI Tools for Better Results</li>
+                        <li>• Chapter 10: Troubleshooting Common AI Issues</li>
                       </ul>
                     </div>
                     <div>
                       <h4 className="font-semibold text-white mb-2">Part 3: Business Applications</h4>
                       <ul className="space-y-1 text-xs">
-                        <li>• Marketing & Content Creation</li>
-                        <li>• Sales Process Optimization</li>
-                        <li>• Customer Service AI</li>
+                        <li>• Chapter 11: Content Creation & Marketing Automation</li>
+                        <li>• Chapter 12: Sales Process Optimization with AI</li>
+                        <li>• Chapter 13: Customer Service & Support AI Systems</li>
+                        <li>• Chapter 14: Product Development & Research Applications</li>
+                        <li>• Chapter 15: Financial Analysis & Forecasting with AI</li>
                       </ul>
                     </div>
                     <div>
                       <h4 className="font-semibold text-white mb-2">Part 4: Scaling & ROI</h4>
                       <ul className="space-y-1 text-xs">
-                        <li>• Measuring AI Performance</li>
-                        <li>• Team Training & Adoption</li>
-                        <li>• Future-Proofing Your Business</li>
+                        <li>• Chapter 16: Measuring AI Performance & ROI</li>
+                        <li>• Chapter 17: Team Training & Adoption Strategies</li>
+                        <li>• Chapter 18: Scaling AI Across Your Organization</li>
+                        <li>• Chapter 19: Future-Proofing Your Business with AI</li>
+                        <li>• Chapter 20: Case Studies: Real Business Success Stories</li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">🎁 Bonus Materials Included</h3>
+                  <h3 className="text-xl font-bold text-white mb-4">🎁 What You Get</h3>
                   <ul className="space-y-2 text-gray-300">
                     <li className="flex items-center gap-3">
                       <span className="text-yellow-400">⭐</span>
-                      <span>50+ Ready-to-Use AI Prompt Templates</span>
+                      <span><strong>200-Page Comprehensive PDF E-book</strong> - Professionally designed with actionable content</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-yellow-400">⭐</span>
-                      <span>AI Tools Comparison Spreadsheet</span>
+                      <span><strong>50+ Ready-to-Use AI Prompt Templates</strong> - Copy and paste to get immediate results</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-yellow-400">⭐</span>
-                      <span>Weekly AI Updates Newsletter (3 months free)</span>
+                      <span><strong>AI Tools Comparison Spreadsheet</strong> - Save hundreds of dollars by choosing the right tools</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-yellow-400">⭐</span>
-                      <span>Private Community Access</span>
+                      <span><strong>Weekly AI Updates Newsletter</strong> - Stay ahead of AI trends (3 months free)</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <span className="text-yellow-400">⭐</span>
+                      <span><strong>Private Community Access</strong> - Connect with other AI enthusiasts and get your questions answered</span>
                     </li>
                   </ul>
                 </div>

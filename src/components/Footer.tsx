@@ -58,7 +58,7 @@ export default function Footer() {
                 
               </li>
               <li>
-                <Link href="/refund" className="text-gray-400 hover:text-white">
+                <Link href="/terms#refund-policy" className="text-gray-400 hover:text-white">
                   Refund Policy
                 </Link>
               </li>

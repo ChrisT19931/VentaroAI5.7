@@ -18,7 +18,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose max-w-none">
             <h2 className="text-2xl font-bold text-white mb-4">Introduction</h2>
             <p className="mb-4 text-gray-300">
-              At Ventaro AI Digital Store, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, purchase our digital products, and subscribe to our services.
+              At Ventaro Digital Store, we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, purchase our digital products, and subscribe to our services.
             </p>
             <p className="mb-4 text-gray-300">
               Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access the site.
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
               <li>Personal identification information (name, email address, billing address)</li>
               <li>Account credentials (username, password)</li>
               <li>Payment information (processed securely through our payment processor)</li>
-              <li>Purchase history and AI product downloads</li>
+              <li>Purchase history and product downloads</li>
               <li>Email subscription preferences and engagement data</li>
               <li>Coaching call recordings and notes (with your consent)</li>
               <li>Communications you send to us</li>
@@ -52,20 +52,20 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">How We Use Your Information</h2>
             <p className="mb-4 text-gray-300">We use the information we collect to:</p>
             <ul className="list-disc pl-6 mb-4 text-gray-300">
-              <li>Process and fulfill your AI product orders</li>
+              <li>Process and fulfill your product orders</li>
               <li>Provide customer support and coaching services</li>
               <li>Send transactional emails (order confirmations, download links)</li>
-              <li>Send email communications about AI design tips, product updates, and exclusive offers</li>
+              <li>Send email communications about product updates and exclusive offers</li>
               <li>Deliver coaching calls and educational content</li>
-              <li>Improve our AI-designed products and methodologies</li>
-              <li>Analyze usage patterns to enhance our AI workflows</li>
+              <li>Improve our products and methodologies</li>
+              <li>Analyze usage patterns to enhance our services</li>
               <li>Detect and prevent fraud</li>
               <li>Comply with legal obligations</li>
             </ul>
             <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-4">
               <p className="text-blue-300 font-semibold mb-2">📧 Email Subscription</p>
               <p className="text-gray-300">
-                By creating an account or making a purchase, you automatically subscribe to our email system. We use your email to send product updates, AI design tutorials, exclusive offers, and educational content. You can unsubscribe at any time using the link in our emails.
+                By creating an account or making a purchase, you automatically subscribe to our email system. We use your email to send product updates, tutorials, exclusive offers, and educational content. You can unsubscribe at any time using the link in our emails.
               </p>
             </div>
 
@@ -74,13 +74,13 @@ export default function PrivacyPolicyPage() {
               We may share your information with:
             </p>
             <ul className="list-disc pl-6 mb-4 text-gray-300">
-              <li>Service providers (payment processors, email service providers, hosting services, AI tools)</li>
+              <li>Service providers (payment processors, email service providers, hosting services)</li>
               <li>Professional advisors (lawyers, accountants, insurers)</li>
               <li>Law enforcement or regulatory bodies when required by law</li>
               <li>Potential buyers in the event of a business sale or merger</li>
             </ul>
             <p className="mb-4 text-gray-300">
-              <strong className="text-white">We do not sell your personal information to third parties.</strong> We maintain strict confidentiality regarding our AI methodologies and your personal data.
+              <strong className="text-white">We do not sell your personal information to third parties.</strong> We maintain strict confidentiality regarding our methodologies and your personal data.
             </p>
 
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Cookies and Tracking Technologies</h2>
@@ -129,10 +129,7 @@ export default function PrivacyPolicyPage() {
 
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
             <p className="mb-4 text-gray-300">
-              If you have questions or concerns about this Privacy Policy, please contact us at:
-            </p>
-            <p className="mb-4 text-gray-300">
-              Email: <a href="mailto:support@ventaroai.com" className="text-gradient hover:text-white transition-colors">support@ventaroai.com</a>
+              If you have any questions about this Privacy Policy or our data practices, please contact us at <a href="mailto:chris.t@ventarosales.com" className="text-blue-400 hover:text-blue-300">chris.t@ventarosales.com</a>.
             </p>
           </div>
         </div>

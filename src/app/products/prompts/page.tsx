@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import AddToCartButton from '@/components/AddToCartButton';
@@ -5,9 +7,9 @@ import AddToCartButton from '@/components/AddToCartButton';
 export default function PromptsProductPage() {
   const product = {
     id: 'ai-prompts-collection',
-    name: '30 Premium AI Prompts Collection',
+    name: '30 Premium AI Prompts',
     price: 10.00,
-    image_url: '/images/prompts-collection.jpg'
+    image_url: '/images/premium-ai-prompts.jpg'
   };
 
   return (
@@ -20,8 +22,8 @@ export default function PromptsProductPage() {
               <div className="bg-gradient-accent rounded-lg h-96 flex items-center justify-center mb-6 relative overflow-hidden">
                 <div className="text-center text-white relative z-10">
                   <div className="text-6xl mb-4 animate-rocket-launch">🚀</div>
-                  <div className="text-xl font-bold">AI Prompts Collection</div>
-                  <div className="text-sm opacity-80">30 Premium Prompts</div>
+                  <div className="text-xl font-bold">Premium AI Prompts</div>
+                  <div className="text-sm opacity-80">30 Expert-Crafted Prompts</div>
                 </div>
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-20 bg-gradient-to-t from-orange-500 to-transparent animate-rocket-trail"></div>
                 <div className="absolute inset-0 animate-stars">
@@ -30,6 +32,12 @@ export default function PromptsProductPage() {
                   <div className="absolute bottom-20 left-20 w-1 h-1 bg-white rounded-full animate-twinkle" style={{animationDelay: '2s'}}></div>
                   <div className="absolute bottom-10 right-10 w-1 h-1 bg-white rounded-full animate-twinkle" style={{animationDelay: '0.5s'}}></div>
                 </div>
+                <Image 
+                  src="/images/prompts-collection.jpg" 
+                  alt="AI Prompts Collection" 
+                  fill 
+                  className="object-cover opacity-20" 
+                />
               </div>
               <style jsx>{`
                 @keyframes rocket-launch {
@@ -100,31 +108,46 @@ export default function PromptsProductPage() {
                     <div>
                       <h4 className="font-semibold text-green-400 mb-2">Content Creation (10 Prompts)</h4>
                       <ul className="space-y-1 text-sm text-gray-300">
-                        <li>• Blog post outlines that rank on Google</li>
-                        <li>• Social media content that goes viral</li>
-                        <li>• Email sequences that convert</li>
-                        <li>• Video scripts that engage</li>
-                        <li>• Product descriptions that sell</li>
+                        <li>• SEO-Optimized Blog Post Generator</li>
+                        <li>• Viral Social Media Post Framework</li>
+                        <li>• High-Converting Email Sequence Creator</li>
+                        <li>• Engaging Video Script Template</li>
+                        <li>• Persuasive Product Description Writer</li>
+                        <li>• Headline A/B Test Generator</li>
+                        <li>• Long-Form Content Outliner</li>
+                        <li>• Case Study Structure Builder</li>
+                        <li>• Newsletter Content Planner</li>
+                        <li>• Landing Page Copy Generator</li>
                       </ul>
                     </div>
                     <div>
                       <h4 className="font-semibold text-blue-400 mb-2">Business Strategy (10 Prompts)</h4>
                       <ul className="space-y-1 text-sm text-gray-300">
-                        <li>• Market research & competitor analysis</li>
-                        <li>• Business plan development</li>
-                        <li>• SWOT analysis frameworks</li>
-                        <li>• Customer persona creation</li>
-                        <li>• Pricing strategy optimization</li>
+                        <li>• Comprehensive Market Research Framework</li>
+                        <li>• Competitor Analysis Matrix Creator</li>
+                        <li>• Business Plan Development Assistant</li>
+                        <li>• Advanced SWOT Analysis Generator</li>
+                        <li>• Detailed Customer Persona Builder</li>
+                        <li>• Pricing Strategy Optimization Model</li>
+                        <li>• Go-to-Market Strategy Planner</li>
+                        <li>• KPI Dashboard Designer</li>
+                        <li>• Business Model Canvas Generator</li>
+                        <li>• Strategic Growth Roadmap Creator</li>
                       </ul>
                     </div>
                     <div>
                       <h4 className="font-semibold text-purple-400 mb-2">Creative Projects (10 Prompts)</h4>
                       <ul className="space-y-1 text-sm text-gray-300">
-                        <li>• Brand naming & tagline creation</li>
-                        <li>• Logo concept development</li>
-                        <li>• Website copy that converts</li>
-                        <li>• Ad copy that performs</li>
-                        <li>• Creative campaign ideas</li>
+                        <li>• Brand Name & Tagline Generator</li>
+                        <li>• Logo Concept Brief Developer</li>
+                        <li>• High-Converting Website Copy Creator</li>
+                        <li>• Performance-Driven Ad Copy Writer</li>
+                        <li>• Creative Campaign Concept Generator</li>
+                        <li>• Brand Voice Style Guide Creator</li>
+                        <li>• Visual Identity Mood Board Planner</li>
+                        <li>• Product Launch Campaign Designer</li>
+                        <li>• Social Media Content Calendar Builder</li>
+                        <li>• Brand Storytelling Framework</li>
                       </ul>
                     </div>
                   </div>
@@ -153,27 +176,31 @@ export default function PromptsProductPage() {
                 </div>
 
                 <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">🎁 Exclusive Bonuses</h3>
+                  <h3 className="text-xl font-bold text-white mb-4">🎁 What You Get</h3>
                   <ul className="space-y-2 text-gray-300">
                     <li className="flex items-center gap-3">
                       <span className="text-green-400">✓</span>
-                      <span>Prompt Customization Guide (normally $25)</span>
+                      <span><strong>30 Premium AI Prompts</strong> - Professionally formatted PDF with copy-paste ready prompts</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-green-400">✓</span>
-                      <span>AI Model Comparison Chart (normally $15)</span>
+                      <span><strong>Prompt Customization Guide</strong> - Learn to adapt prompts for your specific needs (normally $25)</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-green-400">✓</span>
-                      <span>Weekly Prompt Updates (3 months free)</span>
+                      <span><strong>AI Model Comparison Chart</strong> - Know which AI model works best for each prompt type (normally $15)</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-green-400">✓</span>
-                      <span>Private Telegram Group Access</span>
+                      <span><strong>Weekly Prompt Updates</strong> - Get new prompts as AI models evolve (3 months free)</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <span className="text-green-400">✓</span>
+                      <span><strong>Private Telegram Group Access</strong> - Connect with other prompt engineers and get your questions answered</span>
                     </li>
                   </ul>
                   <div className="mt-4 text-sm text-purple-300">
-                    <strong>Total Bonus Value: $65</strong> – Yours free with purchase!
+                    <strong>Total Value: $90+</strong> – Yours for just $10 for a limited time!
                   </div>
                 </div>
 

@@ -63,7 +63,7 @@ export const sendOrderConfirmationEmail = async ({
         `<tr>
           <td style="padding: 10px; border-bottom: 1px solid #eee;">${link.productName}</td>
           <td style="padding: 10px; border-bottom: 1px solid #eee;">
-            <a href="${link.url}" style="color: #0070f3; text-decoration: none;">Download</a>
+            <a href="${link.url}" style="color: #0070f3; text-decoration: none;">Access Product</a>
           </td>
         </tr>`
     )
@@ -95,13 +95,13 @@ export const sendOrderConfirmationEmail = async ({
           </tbody>
         </table>
         
-        <h2 style="margin-top: 30px;">Download Links</h2>
-        <p>Your purchased products are available for download below:</p>
+        <h2 style="margin-top: 30px;">Your Products</h2>
+        <p>Your purchased products are available below:</p>
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr>
               <th style="padding: 10px; text-align: left; border-bottom: 2px solid #eee;">Product</th>
-              <th style="padding: 10px; text-align: left; border-bottom: 2px solid #eee;">Download</th>
+              <th style="padding: 10px; text-align: left; border-bottom: 2px solid #eee;">Access</th>
             </tr>
           </thead>
           <tbody>
@@ -109,10 +109,10 @@ export const sendOrderConfirmationEmail = async ({
           </tbody>
         </table>
         
-        <p style="margin-top: 30px;">If you have any questions about your order, please contact our support team.</p>
+        <p style="margin-top: 30px;">If you have any questions about your order, please contact us at <a href="mailto:chris.t@ventarosales.com" style="color: #0070f3; text-decoration: none;">chris.t@ventarosales.com</a>.</p>
         
         <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 12px;">
-          <p>© ${new Date().getFullYear()} Ventaro AI Digital Store. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} Ventaro Digital Store. All rights reserved.</p>
         </div>
       </div>
     </div>
@@ -128,9 +128,9 @@ export const sendOrderConfirmationEmail = async ({
     ${orderItems.map((item) => `${item.name}: $${item.price.toFixed(2)}`).join('\n')}
     Total: $${total.toFixed(2)}
     
-    Your purchased products are available in your account dashboard.
+    Your purchased products are available through the links sent in this email.
     
-    If you have any questions about your order, please contact our support team.
+    If you have any questions about your order, please contact us at chris.t@ventarosales.com.
   `;
 
   return sendEmail({

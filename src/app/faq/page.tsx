@@ -28,7 +28,7 @@ export default function FAQPage() {
         },
         {
           question: 'Are there any usage restrictions?',
-          answer: 'Our digital products are for personal use. Please refer to the specific details included with each product for complete information.'
+          answer: 'Our digital products are for personal use only. Please refer to the specific details included with each product for complete information.'
         },
         {
           question: 'Do you offer customization services for your products?',
@@ -70,15 +70,15 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'Do you offer refunds?',
-          answer: 'Due to the digital nature of our products, we generally don\'t offer refunds once a product has been downloaded. However, we\'re committed to customer satisfaction and will address any issues on a case-by-case basis.'
+          answer: 'Due to the digital nature of our products, we do not offer refunds under any circumstances once a product has been purchased and delivered. Please review our Terms & Conditions page for our complete refund policy.'
         },
         {
           question: 'What if the product doesn\'t work as described?',
-          answer: 'If you encounter any issues with a product not functioning as described, please contact our support team within 7 days of purchase. We\'ll work with you to resolve the issue or provide a replacement.'
+          answer: 'If you encounter any issues with a product not functioning as described, please contact our support team. While we don\'t offer refunds, we\'ll work with you to resolve any technical issues or provide additional support.'
         },
         {
-          question: 'Can I get a refund if I purchased the wrong product?',
-          answer: 'If you haven\'t downloaded the product yet, we may be able to process a refund or exchange. Please contact our support team as soon as possible after your purchase.'
+          question: 'Where can I find your complete refund policy?',
+          answer: 'Our complete refund policy is available in the Terms & Conditions page under the Refund Policy section. All sales are final for digital products including e-books, prompts, and coaching services.'
         }
       ]
     },
@@ -109,6 +109,10 @@ export default function FAQPage() {
         {
           question: 'Do you have any current promotions?',
           answer: 'Yes! We currently have AI prompts on sale for just $10. These high-quality prompts are perfect for content creation, marketing, and creative projects.'
+        },
+        {
+          question: 'What does the coaching call include?',
+          answer: 'Our premium coaching call includes a 30-minute personalized session with one of our AI experts, plus a comprehensive written report. For $500, you get tailored advice, custom workflow optimization, and specific prompt engineering techniques for your projects.'
         }
       ]
     }

@@ -47,7 +47,7 @@ export default function EbookDownloadPage() {
   const handleDownload = () => {
     // Create a download link for the PDF
     const link = document.createElement('a');
-    link.href = '/downloads/premium-ai-ebook.pdf';
+    link.href = '/assets/downloads/premium-ai-ebook.pdf';
     link.download = 'Premium-AI-Ebook-Ventaro.pdf';
     document.body.appendChild(link);
     link.click();

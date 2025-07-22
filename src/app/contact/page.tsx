@@ -8,6 +8,7 @@ export default function ContactPage() {
     name: '',
     email: '',
     subject: '',
+    product: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,6 +50,7 @@ export default function ContactPage() {
         name: '',
         email: '',
         subject: '',
+        product: '',
         message: ''
       });
       setSubmitSuccess(true);
@@ -195,23 +197,41 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="mt-1 input-field"
-                    >
-                      <option value="">Please select a subject</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="support">Product Support</option>
-                      <option value="billing">Billing Question</option>
-                      <option value="partnership">Partnership Opportunity</option>
-                      <option value="other">Other</option>
-                    </select>
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
+                      <select
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 input-field"
+                      >
+                        <option value="">Please select a subject</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="support">Product Support</option>
+                        <option value="billing">Billing Question</option>
+                        <option value="enquiry">Product Enquiry</option>
+                        <option value="partnership">Partnership Opportunity</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="product" className="block text-sm font-medium text-gray-700">Product Reference</label>
+                      <select
+                        id="product"
+                        name="product"
+                        value={formData.product}
+                        onChange={handleChange}
+                        className="mt-1 input-field"
+                      >
+                        <option value="">Select a product (optional)</option>
+                        <option value="ebook">Premium AI E-book</option>
+                        <option value="prompts">30 Premium AI Prompts Collection</option>
+                        <option value="coaching">1-on-1 AI Mastery Coaching Call ($500) + Full Report</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div>
@@ -265,13 +285,13 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Do you offer refunds?</h3>
                   <p className="text-primary-100">
-                    Due to the digital nature of our products, we generally don't offer refunds. However, we're committed to customer satisfaction and will address any issues on a case-by-case basis.
+                    Due to the digital nature of our products, we do not offer refunds under any circumstances once a product has been purchased and delivered. Please review our Terms & Conditions page for our complete refund policy.
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Can I use your products for commercial projects?</h3>
+                  <h3 className="text-lg font-semibold mb-2">How can I get the most out of your products?</h3>
                   <p className="text-primary-100">
-                    Yes! All our products come with a commercial license, allowing you to use them in your business and client projects.
+                    We recommend reviewing all materials thoroughly and implementing the strategies gradually. For personalized guidance, consider booking a coaching call.
                   </p>
                 </div>
                 <div className="pt-4">

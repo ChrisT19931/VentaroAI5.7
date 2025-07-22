@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#000000" opacity="0.8" />
+  
+  <!-- Target/Goal Animation -->
+  <g transform="translate(400, 300)">
+    <!-- Outer rings -->
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.2" />
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.3" />
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.4" />
+    
+    <!-- Inner target -->
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#ffffff" stroke-width="5" opacity="0.6" />
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.8" />
+    <circle cx="0" cy="0" r="15" fill="#ffffff" opacity="1" />
+    
+    <!-- Target icon -->
+    <text x="0" y="15" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="#ffcc00">🎯</text>
+    
+    <!-- Directional arrows -->
+    <g stroke="#ffcc00" stroke-width="4" opacity="0.8">
+      <!-- Top arrow -->
+      <line x1="0" y1="-180" x2="0" y2="-80" />
+      <polygon points="-10,-100 0,-80 10,-100" fill="#ffcc00" />
+      
+      <!-- Right arrow -->
+      <line x1="180" y1="0" x2="80" y2="0" />
+      <polygon points="100,10 80,0 100,-10" fill="#ffcc00" />
+      
+      <!-- Bottom arrow -->
+      <line x1="0" y1="180" x2="0" y2="80" />
+      <polygon points="10,100 0,80 -10,100" fill="#ffcc00" />
+      
+      <!-- Left arrow -->
+      <line x1="-180" y1="0" x2="-80" y2="0" />
+      <polygon points="-100,-10 -80,0 -100,10" fill="#ffcc00" />
+    </g>
+  </g>
+  
+  <!-- Title -->
+  <g transform="translate(400, 500)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#ffffff">1-on-1 Coaching Session</text>
+    <text x="0" y="40" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#cccccc">Achieve your AI mastery goals</text>
+  </g>
+  
+  <!-- Decorative elements -->
+  <g opacity="0.3">
+    <!-- Circuit-like patterns -->
+    <path d="M50,50 L150,50 L150,150 L250,150 L250,50 L350,50" stroke="#4a6fa5" stroke-width="2" fill="none" />
+    <path d="M450,50 L550,50 L550,150 L650,150 L650,50 L750,50" stroke="#4a6fa5" stroke-width="2" fill="none" />
+    <path d="M50,550 L150,550 L150,450 L250,450 L250,550 L350,550" stroke="#4a6fa5" stroke-width="2" fill="none" />
+    <path d="M450,550 L550,550 L550,450 L650,450 L650,550 L750,550" stroke="#4a6fa5" stroke-width="2" fill="none" />
+    
+    <!-- Connection dots -->
+    <circle cx="50" cy="50" r="5" fill="#4a6fa5" />
+    <circle cx="150" cy="50" r="5" fill="#4a6fa5" />
+    <circle cx="150" cy="150" r="5" fill="#4a6fa5" />
+    <circle cx="250" cy="150" r="5" fill="#4a6fa5" />
+    <circle cx="250" cy="50" r="5" fill="#4a6fa5" />
+    <circle cx="350" cy="50" r="5" fill="#4a6fa5" />
+    
+    <circle cx="450" cy="50" r="5" fill="#4a6fa5" />
+    <circle cx="550" cy="50" r="5" fill="#4a6fa5" />
+    <circle cx="550" cy="150" r="5" fill="#4a6fa5" />
+    <circle cx="650" cy="150" r="5" fill="#4a6fa5" />
+    <circle cx="650" cy="50" r="5" fill="#4a6fa5" />
+    <circle cx="750" cy="50" r="5" fill="#4a6fa5" />
+    
+    <circle cx="50" cy="550" r="5" fill="#4a6fa5" />
+    <circle cx="150" cy="550" r="5" fill="#4a6fa5" />
+    <circle cx="150" cy="450" r="5" fill="#4a6fa5" />
+    <circle cx="250" cy="450" r="5" fill="#4a6fa5" />
+    <circle cx="250" cy="550" r="5" fill="#4a6fa5" />
+    <circle cx="350" cy="550" r="5" fill="#4a6fa5" />
+    
+    <circle cx="450" cy="550" r="5" fill="#4a6fa5" />
+    <circle cx="550" cy="550" r="5" fill="#4a6fa5" />
+    <circle cx="550" cy="450" r="5" fill="#4a6fa5" />
+    <circle cx="650" cy="450" r="5" fill="#4a6fa5" />
+    <circle cx="650" cy="550" r="5" fill="#4a6fa5" />
+    <circle cx="750" cy="550" r="5" fill="#4a6fa5" />
+  </g>
+</svg>

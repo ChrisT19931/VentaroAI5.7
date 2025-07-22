@@ -176,7 +176,7 @@ export default function CoachingProductPage() {
                       <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</div>
                       <div>
                         <h4 className="font-semibold text-white mb-1">Follow-Up Resources</h4>
-                        <p className="text-gray-300 text-sm">Receive session recording, custom prompts, and 30-day email support</p>
+                        <p className="text-gray-300 text-sm">Receive session recording, implementation report, and 30-day email support</p>
                       </div>
                     </div>
                   </div>
