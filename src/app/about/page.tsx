@@ -1,7 +1,22 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Ventaro AI Digital Store 2025 - Learn How to Make Money Online with AI Tools & AI Prompts',
+  description: 'Discover how to make money online with AI tools and AI prompts in 2025. Learn our proven strategies to make money with AI through premium digital products, coaching, and AI business solutions.',
+  keywords: 'about AI tools, AI prompts 2025, make money online with AI, AI business strategies, make money with AI, AI coaching, digital products, artificial intelligence business',
+  openGraph: {
+    title: 'About Ventaro AI Digital Store 2025 - AI Tools & Prompts for Online Income',
+    description: 'Learn how to make money online with AI tools and AI prompts. Discover our proven 2025 strategies for AI-powered business success.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Ventaro AI Digital Store 2025',
+    description: 'Learn to make money online with AI tools and AI prompts in 2025',
+  },
+};
 
 export default function AboutPage() {
   return (
@@ -21,10 +36,10 @@ export default function AboutPage() {
               />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              About <span className="text-gradient">Ventaro AI Digital Store</span>
+              About <span className="text-gradient">Ventaro AI Digital Store 2025</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Your destination for premium AI-powered digital products and innovative design solutions.
+              Your destination for premium AI tools, AI prompts, and digital products to make money online with artificial intelligence in 2025.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/products" className="btn-primary btn-lg">
@@ -40,26 +55,37 @@ export default function AboutPage() {
       </div>
 
       {/* Our Story Section */}
-      <div className="py-12 bg-black">
+      <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              The Future is <span className="text-gradient-accent">AI-Native</span>
+              Our <span className="text-gradient-accent">AI-First Approach</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Welcome to 2025 - where every pixel, every line of code, and every design decision is powered by artificial intelligence.
+              Founded in 2025, we represent the new generation of digital product creation where human creativity meets artificial intelligence.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="glass-card p-8">
-              <h3 className="text-2xl font-bold text-black mb-6">Our AI-First Approach</h3>
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center mr-4">
+                  <Image 
+                    src="/images/ai-brain-icon.svg" 
+                    alt="AI Brain" 
+                    width={24} 
+                    height={24} 
+                    className="object-contain" 
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900">100% AI-Designed Products</h3>
+              </div>
               <div className="space-y-4">
-                <p className="text-black">
-                  Every product in our store is 100% designed using AI tools like <span className="text-black font-semibold">ChatGPT</span>, <span className="text-black font-semibold">Cursor</span>, and advanced AI design systems. We don't just use AI as a helper - it's our primary creative force.
+                <p className="text-gray-700">
+                  Every product in our store is designed using cutting-edge AI tools like <span className="font-semibold text-gray-900">ChatGPT</span>, <span className="font-semibold text-gray-900">Cursor</span>, and advanced AI design systems.
                 </p>
-                <p className="text-black">
-                  Founded in 2025, Ventaro AI represents the new generation of digital product creation where human creativity meets artificial intelligence to produce premium results.
+                <p className="text-gray-700">
+                  We don't just use AI as a helper - it's our primary creative force, enabling us to produce premium results at scale.
                 </p>
               </div>
             </div>
@@ -73,15 +99,15 @@ export default function AboutPage() {
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-gradient mb-2">Premium</div>
-                    <div className="text-gray-400">Quality Standard</div>
+                    <div className="text-gray-400">Quality</div>
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-gradient mb-2">2025</div>
-                    <div className="text-gray-400">Future Design</div>
+                    <div className="text-gray-400">Future Ready</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">AI</div>
-                    <div className="text-gray-400">Teaching Focus</div>
+                    <div className="text-3xl font-bold text-gradient mb-2">Expert</div>
+                    <div className="text-gray-400">Teaching</div>
                   </div>
                 </div>
               </div>
@@ -91,78 +117,72 @@ export default function AboutPage() {
       </div>
 
       {/* What We Offer Section */}
-      <div className="py-12 bg-black">
+      <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              We Teach You <span className="text-gradient">How</span>
+              Our <span className="text-gradient">Premium Products</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our focus isn't just selling products - it's teaching you the exact AI methods, prompts, and workflows we use to create premium-quality designs.
+              Discover our collection of AI-powered digital products designed to help you master artificial intelligence and build profitable online businesses.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="card-premium group">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <Image 
-                    src="/images/ebook-cover.jpg" 
-                    alt="AI Design Ebooks" 
-                    fill 
-                    className="object-cover" 
-                  />
-                </div>
-                <div className="relative z-10 text-4xl">📚</div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Image 
+                  src="/images/ebook-icon.svg" 
+                  alt="AI Design Ebooks" 
+                  width={32} 
+                  height={32} 
+                  className="object-contain" 
+                />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">AI Design Ebooks</h3>
-              <p className="text-black mb-6">
-                Comprehensive guides revealing our exact ChatGPT prompts, Cursor workflows, and AI design methodologies that create premium results.
+              <h3 className="text-xl font-bold text-white mb-4">AI Tools & Strategy Ebooks</h3>
+              <p className="text-gray-700 mb-6">
+                Comprehensive guides covering the latest AI tools, proven workflows, and step-by-step strategies for building successful AI-powered businesses.
               </p>
               <Link href="/products/ebook" className="btn-primary text-sm inline-block">
-                Learn the Secrets →
+                Explore Ebooks →
               </Link>
             </div>
             
             <div className="card-premium group">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <Image 
-                    src="/images/prompts-collection.jpg" 
-                    alt="Premium Prompts" 
-                    fill 
-                    className="object-cover" 
-                  />
-                </div>
-                <div className="relative z-10 text-4xl">🚀</div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Image 
+                  src="/images/prompts-icon.svg" 
+                  alt="Premium Prompts" 
+                  width={32} 
+                  height={32} 
+                  className="object-contain" 
+                />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Premium Prompts</h3>
-              <p className="text-black mb-6">
-                Battle-tested prompt libraries for ChatGPT, Claude, and other AI tools that consistently produce professional-grade outputs.
+              <h3 className="text-xl font-bold text-white mb-4">Premium AI Prompts</h3>
+              <p className="text-gray-700 mb-6">
+                Battle-tested prompt collections for content creation, marketing, design, and business automation. Professional-grade prompts that deliver results.
               </p>
               <Link href="/products/prompts" className="btn-primary text-sm inline-block">
-                Get the Prompts →
+                Get Prompts →
               </Link>
             </div>
             
             <div className="card-premium group">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <Image 
-                    src="/images/coaching-session.jpg" 
-                    alt="1-on-1 Coaching" 
-                    fill 
-                    className="object-cover" 
-                  />
-                </div>
-                <div className="relative z-10 text-4xl">🎯</div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Image 
+                  src="/images/coaching-icon.svg" 
+                  alt="1-on-1 Coaching" 
+                  width={32} 
+                  height={32} 
+                  className="object-contain" 
+                />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">1-on-1 Coaching</h3>
-              <p className="text-black mb-6">
-                Personal coaching calls where we walk you through our entire AI design process, from concept to premium-quality execution.
+              <h3 className="text-xl font-bold text-white mb-4">AI Business Coaching</h3>
+              <p className="text-gray-700 mb-6">
+                Personalized one-on-one coaching sessions to accelerate your AI journey. Get expert guidance tailored to your specific goals and challenges.
               </p>
               <Link href="/products/coaching" className="btn-primary text-sm inline-block">
-                Book a Call →
+                Book Session →
               </Link>
             </div>
           </div>
@@ -170,62 +190,85 @@ export default function AboutPage() {
       </div>
 
       {/* AI Tools Section */}
-      <div className="py-12 bg-black">
+      <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Our <span className="text-gradient-accent">AI Tools</span>
+              Our <span className="text-gradient-accent">AI Toolkit</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              The cutting-edge tools and platforms we use to create every product in our store.
+              The cutting-edge AI platforms and tools we use to create every product in our digital store.
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="glass-card p-6 text-center group hover:scale-105 transition-all duration-300">
+              <div className="mb-4">
+                <svg className="h-10 w-10 mx-auto text-gradient-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4"/>
+                  <path d="M12 8h.01"/>
+                </svg>
+              </div>
               <h3 className="text-lg font-bold text-white mb-2">ChatGPT</h3>
               <p className="text-gray-400 text-sm">AI Conversations</p>
             </div>
-            <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+            <div className="glass-card p-6 text-center group hover:scale-105 transition-all duration-300">
+              <div className="mb-4">
+                <svg className="h-10 w-10 mx-auto text-gradient-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </div>
               <h3 className="text-lg font-bold text-white mb-2">Cursor</h3>
               <p className="text-gray-400 text-sm">AI Code Editor</p>
             </div>
-            <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+            <div className="glass-card p-6 text-center group hover:scale-105 transition-all duration-300">
+              <div className="mb-4">
+                <svg className="h-10 w-10 mx-auto text-gradient-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                  <path d="M2 2l7.586 7.586"/>
+                  <circle cx="11" cy="11" r="2"/>
+                </svg>
+              </div>
               <h3 className="text-lg font-bold text-white mb-2">Claude</h3>
               <p className="text-gray-400 text-sm">AI Assistant</p>
             </div>
-            <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-              <h3 className="text-lg font-bold text-white mb-2">Manus</h3>
-              <p className="text-gray-400 text-sm">AI Tool</p>
+            <div className="glass-card p-6 text-center group hover:scale-105 transition-all duration-300">
+              <div className="mb-4">
+                <svg className="h-10 w-10 mx-auto text-gradient-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">AI Design</h3>
+              <p className="text-gray-400 text-sm">Creative Tools</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="py-12 bg-black">
+      <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="glass-card p-8 text-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Ready to Master <span className="text-gradient">AI Design</span>?
+          <div className="glass-card p-8 md:p-12 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Ready to Start Your <span className="text-gradient">AI Journey</span>?
             </h2>
-            <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
-              Join the AI revolution. Learn the exact methods we use to create premium-quality digital products with artificial intelligence.
+            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+              Join the AI revolution and learn the exact methods we use to create premium digital products with artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/products" className="btn-primary btn-lg">
-                Browse All Products
+                Explore Products
               </Link>
               <Link href="/products/coaching" className="btn-outline btn-lg">
-                Book a Coaching Call
+                Get Coaching
               </Link>
             </div>
-            <div className="mt-8 text-gray-400 text-sm">
-              100% AI-Designed • Premium Quality • Teaching Focused
+            <div className="mt-8 text-gray-500 text-sm">
+              100% AI-Designed • Premium Quality • Expert Teaching
             </div>
           </div>
         </div>

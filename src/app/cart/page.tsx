@@ -29,7 +29,10 @@ export default function CartPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ 
+          cartItems: items,
+          userId: user.id 
+        }),
       });
 
       const data = await response.json();

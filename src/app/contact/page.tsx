@@ -69,7 +69,7 @@ export default function ContactPage() {
             Contact Us
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Have questions about our products or need assistance? We're here to help! Fill out the form below and our team will get back to you as soon as possible.
+            Have questions about our AI tools, AI prompts, or how to make money online with AI in 2025? We're here to help you succeed with artificial intelligence. Fill out the form below and our team will get back to you as soon as possible.
           </p>
         </div>
 

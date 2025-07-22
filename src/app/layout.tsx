@@ -10,8 +10,31 @@ import { ToastProvider } from '@/context/ToastContext'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Ventaro AI Digital Store - Premium Digital Products & Tools',
-  description: 'Discover premium AI-powered digital products, tools, and resources. From design templates to productivity tools, find everything you need to enhance your digital projects.',
+  title: 'Ventaro AI Digital Store 2025 - Premium AI Tools & AI Prompts to Make Money Online',
+  description: 'Discover premium AI tools, AI prompts, and digital products to make money with AI in 2025. Learn proven strategies to make money online using ChatGPT, Claude, and cutting-edge AI technologies.',
+  keywords: 'AI tools, AI prompts, make money online, make money with AI, 2025 AI strategies, ChatGPT prompts, AI business, digital products, online income, AI automation, artificial intelligence tools',
+  openGraph: {
+    title: 'Ventaro AI Digital Store 2025 - AI Tools & Prompts for Online Income',
+    description: 'Master AI tools and prompts to make money online in 2025. Premium digital products, coaching, and strategies for AI-powered business success.',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ventaro AI Digital Store 2025 - AI Tools & Prompts',
+    description: 'Learn to make money online with AI tools and prompts in 2025',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({

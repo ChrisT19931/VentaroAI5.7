@@ -47,8 +47,8 @@ export default function PromptsDownloadPage() {
   const handleDownload = () => {
     // Create a download link for the PDF
     const link = document.createElement('a');
-    link.href = '/downloads/premium-ai-prompts.pdf';
-    link.download = 'Premium-AI-Prompts-Ventaro.pdf';
+    link.href = '/downloads/ai-prompts-collection.pdf';
+    link.download = 'AI-Prompts-Collection-Ventaro.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

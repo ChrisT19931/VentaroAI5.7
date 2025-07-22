@@ -26,13 +26,13 @@ A full-stack e-commerce platform for selling AI digital products with one-time p
 - **Deployment**: Vercel (Next.js optimized)
 
 ## 🚀 Quick Start
-
 ### Prerequisites
 
 - Node.js 18+ and npm
 - [Supabase account](https://supabase.com)
 - [Stripe account](https://stripe.com)
-- [SendGrid account](https://sendgrid.com) (optional)
+- Email service: [SendGrid](https://sendgrid.com) OR [Resend](https://resend.com)
+- [Vercel account](https://vercel.com) for deployment
 
 ### Installation
 
@@ -80,6 +80,30 @@ Open [http://localhost:3001](http://localhost:3001) in your browser.
 - **Email**: Set during setup
 - **Password**: Set during signup
 - **Admin Panel**: `/admin` (accessible after setup)
+
+### 🚀 Deployment
+
+#### Pre-Deployment Check
+```bash
+# Validate configuration before deployment
+npm run check-config
+
+# Run full deployment check (config + build)
+npm run deploy-check
+```
+
+#### Deploy to Vercel
+1. Follow the complete [DEPLOYMENT.md](./DEPLOYMENT.md) guide
+2. Configure all environment variables in Vercel
+3. Set up Stripe webhooks with your production URL
+4. Test all functionality after deployment
+
+#### Required Environment Variables
+See [.env.local.example](./.env.local.example) for all required variables:
+- Supabase credentials
+- Stripe API keys and webhook secret
+- Email service API key (SendGrid or Resend)
+- Site URL for production
 
 ## 📋 Current Products
 

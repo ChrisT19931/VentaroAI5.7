@@ -23,8 +23,8 @@ type Product = {
 const fallbackProducts = {
   '1': {
     id: '1',
-    name: 'Elite AI Mastery Guide',
-    description: '30-page guide on how to use AI chatbots (ChatGPT, Claude, Grok, Gemini), agents, and bots with 30 sales lessons.',
+    name: 'AI Tools Mastery Guide 2025',
+    description: '30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
     price: 25.00,
     originalPrice: 50.00,
     image_url: '/images/products/elite-ai-mastery.svg',
@@ -66,8 +66,8 @@ const fallbackProducts = {
   },
   '2': {
     id: '2',
-    name: 'Elite Prompt Arsenal',
-    description: '30 simple AI prompts to help you build your online business and make money.',
+    name: 'AI Prompts Arsenal 2025',
+    description: '30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
     price: 10.00,
     image_url: '/images/products/elite-prompt-arsenal.svg',
     category: 'tools',
@@ -106,8 +106,8 @@ const fallbackProducts = {
   },
   '3': {
     id: '3',
-    name: 'Elite AI Strategy Session',
-    description: '60-minute live video coaching session: Master ChatGPT, deploy sites with Vercel, and get a comprehensive implementation report.',
+    name: 'AI Business Strategy Session 2025',
+    description: '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
     price: 497.00,
     image_url: '/images/products/elite-strategy-session.svg',
     category: 'services',

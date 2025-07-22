@@ -7,7 +7,7 @@ import AddToCartButton from '@/components/AddToCartButton';
 export default function EbookProductPage() {
   const product = {
     id: 'ebook-premium-ai',
-    name: 'Premium AI E-book: Master AI for Business Success',
+    name: 'AI Tools Mastery Guide 2025: Make Money Online with AI Prompts',
     price: 50.00,
     image_url: '/images/premium-ai-ebook.jpg'
   };
@@ -68,9 +68,9 @@ export default function EbookProductPage() {
               
               <div className="text-gray-300 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  Unlock the full potential of AI for your business with our comprehensive 200-page guide. 
-                  This isn't just another AI book – it's a complete blueprint for implementing AI strategies 
-                  that generate real results.
+                  Learn how to make money online with AI tools and AI prompts in 2025 with our comprehensive 200-page guide. 
+                  This isn't just another AI book – it's a complete blueprint for using AI tools and prompts to make money with AI 
+                  and build profitable online businesses.
                 </p>
 
                 <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-6">
@@ -78,23 +78,23 @@ export default function EbookProductPage() {
                   <ul className="space-y-3 text-gray-300">
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span>Advanced ChatGPT prompting techniques that save 10+ hours per week</span>
+                      <span>Advanced AI prompts and ChatGPT techniques to make money online in 2025</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span>AI automation workflows for marketing, sales, and operations</span>
+                      <span>AI tools automation workflows for profitable online businesses</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span>Content creation systems that produce premium quality outputs</span>
+                      <span>Content creation systems using AI tools to make money with AI</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span>AI tools integration strategies for maximum ROI</span>
+                      <span>AI tools integration strategies to maximize online income in 2025</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 mt-1">✓</span>
-                      <span>Real case studies from businesses earning 6-7 figures with AI</span>
+                      <span>Real case studies: How to make money online with AI tools and prompts</span>
                     </li>
                   </ul>
                 </div>

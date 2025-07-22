@@ -1,6 +1,23 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Premium AI Tools & AI Prompts 2025 - Make Money Online with AI Products',
+  description: 'Browse our collection of AI tools, AI prompts, and digital products to make money online in 2025. Discover proven strategies to make money with AI through ebooks, coaching, and premium AI resources.',
+  keywords: 'AI tools, AI prompts, make money online, AI products 2025, make money with AI, ChatGPT prompts, AI business tools, digital products, AI coaching, artificial intelligence tools',
+  openGraph: {
+    title: 'Premium AI Tools & AI Prompts 2025 - Digital Products for Online Income',
+    description: 'Discover AI tools, AI prompts, and digital products to make money online with artificial intelligence in 2025.',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Premium AI Tools & AI Prompts 2025',
+    description: 'Make money online with AI tools and prompts in 2025',
+  },
+};
 
 async function getProducts() {
   // Try to fetch from Supabase first
@@ -66,7 +83,10 @@ export default async function ProductsPage() {
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-6xl">
-        <h1 className="text-3xl font-bold mb-8">All Products</h1>
+        <h1 className="text-3xl font-bold mb-8">Premium AI Tools & AI Prompts 2025</h1>
+        <p className="text-lg text-gray-600 mb-8 max-w-3xl">
+          Discover our collection of AI tools, AI prompts, and digital products to make money online with artificial intelligence in 2025. Learn proven strategies to make money with AI.
+        </p>
         
         {/* Filter and Sort Controls */}
         <div className="flex flex-col md:flex-row justify-between mb-8">

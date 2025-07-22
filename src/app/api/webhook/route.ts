@@ -132,18 +132,23 @@ async function handleCheckoutSessionCompleted(session: any) {
 
     // Send order confirmation email
     if (userData?.email) {
+      const downloadLinks = (updatedItems || [])
+        .filter(item => item.download_url)
+        .map(item => ({
+          productName: item.products?.name || 'Product',
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}${item.download_url}`
+        }));
+
       await sendOrderConfirmationEmail({
-        to: userData.email,
-        name: `${userData.first_name || ''} ${userData.last_name || ''}`.trim() || userData.email,
-        orderId: order_id,
-        orderDate: new Date(order.created_at).toLocaleDateString(),
+        email: userData.email,
+        orderNumber: order_id,
         orderItems: (updatedItems || []).map(item => ({
           name: item.products?.name || 'Product',
           quantity: item.quantity,
-          price: item.price,
-          downloadUrl: item.download_url || null
+          price: item.price
         })),
-        total: order.total
+        total: order.total,
+        downloadLinks
       });
     }
 

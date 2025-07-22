@@ -72,6 +72,27 @@ CREATE TABLE order_items (
   download_count INTEGER DEFAULT 0,
   download_expiry TIMESTAMP WITH TIME ZONE
 );
+
+-- Create coaching_intakes table
+CREATE TABLE coaching_intakes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  user_id UUID REFERENCES auth.users(id) NOT NULL,
+  user_email TEXT NOT NULL,
+  project_type TEXT NOT NULL,
+  current_hosting TEXT,
+  tech_stack TEXT,
+  timeline TEXT NOT NULL,
+  specific_challenges TEXT NOT NULL,
+  preferred_times TEXT NOT NULL,
+  timezone TEXT NOT NULL,
+  additional_info TEXT,
+  status TEXT DEFAULT 'submitted',
+  scheduled_at TIMESTAMP WITH TIME ZONE,
+  session_notes TEXT,
+  admin_notes TEXT
+);
 ```
 
 ### Create Storage Buckets
@@ -91,6 +112,7 @@ ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE coaching_intakes ENABLE ROW LEVEL SECURITY;
 
 -- Profiles policies
 CREATE POLICY "Users can view own profile" ON profiles
@@ -154,6 +176,24 @@ CREATE POLICY "Users can create order items for own orders" ON order_items
   );
 
 CREATE POLICY "Admins can manage all order items" ON order_items
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM profiles 
+      WHERE id = auth.uid() AND is_admin = true
+    )
+  );
+
+-- Coaching intakes policies
+CREATE POLICY "Users can view own coaching intakes" ON coaching_intakes
+  FOR SELECT USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can create own coaching intakes" ON coaching_intakes
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can update own coaching intakes" ON coaching_intakes
+  FOR UPDATE USING (auth.uid() = user_id);
+
+CREATE POLICY "Admins can manage all coaching intakes" ON coaching_intakes
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 

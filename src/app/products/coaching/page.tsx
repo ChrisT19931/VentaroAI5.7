@@ -18,7 +18,7 @@ type Product = {
 // Fallback product data
 const fallbackProduct = {
       id: 'coaching-call-1on1',
-      name: '1-on-1 Website Deployment Coaching Call + Full Report',
+      name: 'AI Business Coaching 2025 - Make Money Online with AI Tools & Prompts',
       price: 500.00,
       image_url: '/images/coaching-session.svg'
     };
@@ -144,8 +144,8 @@ export default function CoachingProductPage() {
               
               <div className="text-gray-300 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  Get personalized, one-on-one guidance from our website deployment experts. This isn't a generic consultation – 
-                  it's a deep-dive session tailored specifically to your website needs and deployment goals.
+                  Get personalized, one-on-one guidance on how to make money online with AI tools and AI prompts in 2025. This isn't a generic consultation – 
+                  it's a deep-dive session tailored specifically to help you build profitable AI-powered businesses and make money with AI.
                 </p>
 
                 <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-6">
