@@ -1,0 +1,89 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="darkGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#312e81;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4338ca;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#818cf8;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glowEffect" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#darkGradient3)"/>
+  
+  <!-- Geometric patterns -->
+  <polygon points="0,150 80,100 80,200" fill="#312e81" opacity="0.4"/>
+  <polygon points="320,50 400,0 400,100" fill="#4338ca" opacity="0.3"/>
+  
+  <!-- Central strategy/consultation icon -->
+  <g transform="translate(150, 90)">
+    <!-- Main circle with glow -->
+    <circle cx="50" cy="50" r="60" fill="url(#glowEffect)"/>
+    <circle cx="50" cy="50" r="45" fill="#0f172a" stroke="url(#accentGradient3)" stroke-width="3" filter="url(#glow3)"/>
+    
+    <!-- Inner strategic elements -->
+    <g transform="translate(25, 25)">
+      <!-- Brain/strategy icon -->
+      <path d="M15 10 C20 5, 30 5, 35 10 C40 15, 40 25, 35 30 C30 35, 20 35, 15 30 C10 25, 10 15, 15 10 Z" fill="url(#accentGradient3)" opacity="0.8"/>
+      
+      <!-- Neural network lines -->
+      <line x1="10" y1="20" x2="20" y2="15" stroke="#818cf8" stroke-width="1.5" opacity="0.7"/>
+      <line x1="30" y1="15" x2="40" y2="20" stroke="#818cf8" stroke-width="1.5" opacity="0.7"/>
+      <line x1="15" y1="30" x2="25" y2="25" stroke="#818cf8" stroke-width="1.5" opacity="0.7"/>
+      <line x1="25" y1="25" x2="35" y2="30" stroke="#818cf8" stroke-width="1.5" opacity="0.7"/>
+      
+      <!-- Connection nodes -->
+      <circle cx="10" cy="20" r="2" fill="#6366f1"/>
+      <circle cx="40" cy="20" r="2" fill="#6366f1"/>
+      <circle cx="25" cy="35" r="2" fill="#6366f1"/>
+    </g>
+  </g>
+  
+  <!-- Orbiting elements -->
+  <g transform="translate(200, 140)">
+    <circle cx="0" cy="-80" r="4" fill="#6366f1" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" values="0;360" dur="8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <g transform="translate(200, 140)">
+    <circle cx="-70" cy="0" r="3" fill="#818cf8" opacity="0.6">
+      <animateTransform attributeName="transform" type="rotate" values="0;360" dur="12s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <g transform="translate(200, 140)">
+    <circle cx="70" cy="0" r="3" fill="#4f46e5" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" values="0;360" dur="10s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Strategic grid pattern -->
+  <g opacity="0.2">
+    <line x1="50" y1="50" x2="100" y2="50" stroke="#6366f1" stroke-width="1"/>
+    <line x1="300" y1="200" x2="350" y2="200" stroke="#6366f1" stroke-width="1"/>
+    <line x1="75" y1="25" x2="75" y2="75" stroke="#6366f1" stroke-width="1"/>
+    <line x1="325" y1="175" x2="325" y2="225" stroke="#6366f1" stroke-width="1"/>
+  </g>
+  
+  <!-- Abstract strategic elements -->
+  <polygon points="80,220 100,200 120,220 100,240" fill="#4f46e5" opacity="0.5"/>
+  <polygon points="320,80 340,60 360,80 340,100" fill="#6366f1" opacity="0.4"/>
+  
+  <!-- Title -->
+  <text x="200" y="250" text-anchor="middle" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="18" font-weight="bold">ELITE AI STRATEGY</text>
+  <text x="200" y="270" text-anchor="middle" fill="#94a3b8" font-family="Arial, sans-serif" font-size="12">Strategic Consultation</text>
+</svg>

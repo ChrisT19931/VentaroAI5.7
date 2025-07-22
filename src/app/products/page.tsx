@@ -24,10 +24,11 @@ async function getProducts() {
   return [
     {
       id: '1',
-      name: 'Premium AI E-book',
-      description: '200-page comprehensive guide with 50+ templates, tools comparison, and exclusive bonuses.',
-      price: 50.00,
-      image_url: '/images/products/product-1.svg',
+      name: 'Elite AI Mastery Guide',
+      description: '30-page guide on how to use AI chatbots (ChatGPT, Claude, Grok, Gemini), agents, and bots with 30 sales lessons.',
+      price: 25.00,
+      originalPrice: 50.00,
+      image_url: '/images/products/elite-ai-mastery.svg',
       category: 'courses',
       is_active: true,
       featured: true,
@@ -35,10 +36,10 @@ async function getProducts() {
     },
     {
       id: '2',
-      name: '30 Premium AI Prompts',
-      description: 'Professionally formatted PDF with 30 copy-paste ready prompts, customization guide, and weekly updates.',
+      name: 'Elite Prompt Arsenal',
+      description: '30 simple AI prompts to help you build your online business and make money.',
       price: 10.00,
-      image_url: '/images/products/product-2.svg',
+      image_url: '/images/products/elite-prompt-arsenal.svg',
       category: 'tools',
       is_active: true,
       featured: false,
@@ -46,13 +47,13 @@ async function getProducts() {
     },
     {
       id: '3',
-      name: '1-on-1 Coaching Call',
-      description: 'Personal 30-minute coaching session with full report to optimize your AI workflow.',
-      price: 500.00,
-      image_url: '/images/products/product-3.svg',
+      name: 'Elite AI Strategy Session',
+      description: 'Exclusive 60-minute strategic consultation with comprehensive implementation roadmap.',
+      price: 497.00,
+      image_url: '/images/products/elite-strategy-session.svg',
       category: 'services',
       is_active: true,
-      featured: true,
+      featured: false,
       created_at: new Date().toISOString()
     },
 
@@ -126,7 +127,12 @@ export default async function ProductsPage() {
                     {product.description}
                   </p>
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
+                    <div className="flex flex-col">
+                      <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
+                      )}
+                    </div>
                     <Link href={`/products/${product.id}`} className="btn-outline text-sm">
                       View Details
                     </Link>

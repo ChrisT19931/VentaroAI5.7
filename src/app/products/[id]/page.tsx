@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
+import ProtectedDownload from '@/components/ProtectedDownload';
 
 // Define the product type
 type Product = {
@@ -22,87 +23,131 @@ type Product = {
 const fallbackProducts = {
   '1': {
     id: '1',
-    name: 'Premium AI E-book',
-    description: 'Comprehensive guide to leveraging AI for your business and personal productivity.',
-    price: 50.00,
-    image_url: '/images/products/product-1.svg',
+    name: 'Elite AI Mastery Guide',
+    description: '30-page guide on how to use AI chatbots (ChatGPT, Claude, Grok, Gemini), agents, and bots with 30 sales lessons.',
+    price: 25.00,
+    originalPrice: 50.00,
+    image_url: '/images/products/elite-ai-mastery.svg',
     category: 'courses',
     is_active: true,
     featured: true,
     created_at: new Date().toISOString(),
+    benefits: [
+      'Learn ChatGPT, Claude, Grok, and Gemini',
+      'Master AI agents and bots',
+      '30 practical sales lessons',
+      'Simple step-by-step instructions',
+      'Ready-to-use techniques',
+      'Boost your sales with AI'
+    ],
     details: {
-      description: 'The Premium AI E-book is a comprehensive guide that teaches you how to leverage AI tools to enhance your business and personal productivity. From basic concepts to advanced techniques, this e-book covers everything you need to know to become proficient in using AI tools effectively.',
+      description: 'A practical 30-page guide teaching you how to use popular AI chatbots like ChatGPT, Claude, Grok, and Gemini. Learn to create and use AI agents and bots, plus get 30 powerful sales lessons to grow your business.',
       features: [
-        'Learn the fundamentals of AI-assisted workflows',
-        'Master prompt engineering for various tasks',
-        'Create stunning content with minimal effort',
-        'Optimize your productivity with AI tools',
-        'Access to exclusive strategies and techniques'
+        'Complete guide to ChatGPT, Claude, Grok, and Gemini',
+        'How to create and use AI agents',
+        'Bot creation and management',
+        '30 sales lessons for business growth',
+        'Practical examples and tutorials'
       ],
       includes: [
-        '200+ pages of actionable content',
-        'Downloadable PDF format',
-        'Practical examples',
-        'Regular updates',
-        'Bonus resources'
-      ]
+        '30-page comprehensive PDF guide',
+        'AI chatbot tutorials',
+        'Agent and bot creation guides',
+        '30 sales lessons',
+        'Quick reference sheets'
+      ],
+      pages: 30,
+      format: 'PDF',
+      language: 'English',
+      level: 'Beginner to Advanced',
+      downloadSize: '2.5 MB',
+      readingTime: '45 minutes'
     }
   },
   '2': {
     id: '2',
-    name: '30 Premium AI Prompts',
-    description: 'Collection of 30 expertly crafted prompts to maximize your AI tool results.',
+    name: 'Elite Prompt Arsenal',
+    description: '30 simple AI prompts to help you build your online business and make money.',
     price: 10.00,
-    image_url: '/images/products/product-2.svg',
+    image_url: '/images/products/elite-prompt-arsenal.svg',
     category: 'tools',
     is_active: true,
     featured: false,
     created_at: new Date().toISOString(),
+    benefits: [
+      '30 proven prompts for building online business',
+      'Copy-paste ready for immediate use',
+      'Works with ChatGPT and other AI tools',
+      'Organized by business type',
+      'Simple instructions included',
+      'Start making money today'
+    ],
     details: {
-      description: 'The 30 Premium AI Prompts is a carefully curated set of prompts designed to help you generate high-quality content using AI tools like ChatGPT, Claude, and more. Each prompt has been tested and refined to ensure optimal results.',
+      description: 'Get 30 simple AI prompts that help you build your online business and start making money. Each prompt is tested and ready to use - just copy, paste, and start earning.',
       features: [
-        '30 expertly crafted prompts',
-        'Categorized by use case and platform',
-        'Detailed instructions for each prompt',
-        'Proven to generate high-quality outputs',
-        'Optimized for various AI tools'
+        '30 business-focused prompts',
+        'Simple step-by-step instructions',
+        'Perfect for online business building',
+        'Money-making strategies included',
+        'Works with popular AI tools'
       ],
       includes: [
-        'Downloadable PDF format',
-        'Editable text file for easy copying',
-        'Usage guidelines and best practices',
-        'Examples of expected outputs',
-        'Tips for customization'
-      ]
+        'PDF with all 30 prompts',
+        'Copy-paste ready format',
+        'Business building guide',
+        'Quick start instructions'
+      ],
+      promptCount: 30,
+      format: 'PDF',
+      language: 'English',
+      compatibility: 'ChatGPT and other AI tools',
+      downloadSize: '1.2 MB'
     }
   },
   '3': {
     id: '3',
-    name: '1-on-1 Coaching Call',
-    description: 'Personal 30-minute coaching session with full report to optimize your AI workflow.',
-    price: 500.00,
-    image_url: '/images/products/product-3.svg',
+    name: 'Elite AI Strategy Session',
+    description: '60-minute live video coaching session: Master ChatGPT, deploy sites with Vercel, and get a comprehensive implementation report.',
+    price: 497.00,
+    image_url: '/images/products/elite-strategy-session.svg',
     category: 'services',
     is_active: true,
-    featured: true,
+    featured: false,
     created_at: new Date().toISOString(),
+    benefits: [
+      'Live 60-minute video coaching session',
+      'Master ChatGPT for business applications',
+      'Learn Vercel deployment from scratch',
+      'Complete site deployment walkthrough',
+      'Comprehensive implementation report included',
+      'Hands-on learning with real examples',
+      'Full package options available - email for custom quotes'
+    ],
     details: {
-      description: 'The 1-on-1 Coaching Call is a personalized session where we walk you through our entire AI design process, from concept to premium-quality execution. Get direct guidance tailored to your specific needs and projects.',
+      description: 'Join an exclusive 60-minute live video coaching session where you\'ll master ChatGPT usage and learn to deploy professional sites using Vercel. This hands-on session includes real-time guidance and a detailed implementation report.',
       features: [
-        'Personalized guidance from AI experts',
-        'Custom workflow optimization',
-        'Specific prompt engineering for your needs',
-        'Troubleshooting your current AI processes',
-        'Follow-up resources and recommendations'
+        'Live video coaching with expert instructor',
+        'Complete ChatGPT mastery training',
+        'Step-by-step Vercel deployment tutorial',
+        'Real-time site building and deployment',
+        'Advanced AI integration techniques',
+        'Professional development workflow setup'
       ],
       includes: [
-        '30-minute video call',
-        'Comprehensive written report',
-        'Screen sharing and demonstrations',
-        'Recording of the session',
-        'Custom action plan',
-        'Two weeks of email support'
-      ]
+        'Full 60-minute live video session',
+        'ChatGPT usage and optimization training',
+        'Complete Vercel deployment walkthrough',
+        'Hands-on site building experience',
+        'Comprehensive implementation report',
+        'Session recording for future reference',
+        'Email support for follow-up questions'
+      ],
+      duration: '60 minutes',
+      format: 'Live video session (Zoom/Teams)',
+      language: 'English',
+      deliverables: 'Implementation report + session recording',
+      followUp: 'Email support included',
+      note: 'Full package options available - email us for custom quotes and comprehensive solutions'
     }
   }
 };
@@ -253,16 +298,17 @@ export default function ProductPage() {
     <div className="bg-white min-h-screen py-12">
       <style jsx>{animationStyles}</style>
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
-          <div className="md:w-1/2">
-            <div className="bg-gradient-accent rounded-lg overflow-hidden h-96 relative">
+          <div className="relative">
+            <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 p-8">
               {product.image_url ? (
                 <Image 
                   src={product.image_url}
                   alt={product.name}
-                  fill
-                  className="object-contain opacity-70"
+                  width={600}
+                  height={600}
+                  className="w-full h-full object-contain"
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-gray-500">
@@ -309,50 +355,161 @@ export default function ProductPage() {
                 </div>
               )}
             </div>
+            
+            {/* Product Specs */}
+            {(product.details?.pages || product.details?.duration || product.details?.promptCount) && (
+              <div className="mt-6 bg-slate-50 rounded-lg p-4">
+                <h4 className="font-semibold text-slate-900 mb-3">Product Details</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  {product.details.pages && (
+                    <div>
+                      <span className="text-slate-600">Pages:</span>
+                      <span className="ml-2 font-medium">{product.details.pages}</span>
+                    </div>
+                  )}
+                  {product.details.format && (
+                    <div>
+                      <span className="text-slate-600">Format:</span>
+                      <span className="ml-2 font-medium">{product.details.format}</span>
+                    </div>
+                  )}
+                  {product.details.readingTime && (
+                    <div>
+                      <span className="text-slate-600">Reading Time:</span>
+                      <span className="ml-2 font-medium">{product.details.readingTime}</span>
+                    </div>
+                  )}
+                  {product.details.downloadSize && (
+                    <div>
+                      <span className="text-slate-600">File Size:</span>
+                      <span className="ml-2 font-medium">{product.details.downloadSize}</span>
+                    </div>
+                  )}
+                  {product.details.promptCount && (
+                    <div>
+                      <span className="text-slate-600">Prompts:</span>
+                      <span className="ml-2 font-medium">{product.details.promptCount}</span>
+                    </div>
+                  )}
+                  {product.details.duration && (
+                    <div>
+                      <span className="text-slate-600">Duration:</span>
+                      <span className="ml-2 font-medium">{product.details.duration}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-          
+
           {/* Product Details */}
-          <div className="md:w-1/2">
-            <div className="text-sm text-gray-500 mb-2 capitalize">{product.category || 'Uncategorized'}</div>
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <div className="text-2xl font-bold text-primary-600 mb-6">${product.price.toFixed(2)}</div>
-            
-            <div className="prose prose-lg mb-8">
-              <p>{product.description}</p>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="font-semibold mb-2">What You'll Get:</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Instant digital download after purchase
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Full access to the product files
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    One-time payment, no subscription
-                  </li>
-                </ul>
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-4xl font-bold text-slate-900 mb-4">{product.name}</h1>
+              <p className="text-xl text-slate-600 mb-6">{product.description}</p>
+              <div className="flex items-center gap-4 mb-8">
+                <span className="text-4xl font-bold text-slate-900">${product.price.toFixed(2)}</span>
+                <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">
+                  {product.category === 'services' ? 'Consultation' : 'Digital Download'}
+                </span>
               </div>
-              
+            </div>
+
+            {/* Key Benefits */}
+            {product.benefits && (
+              <div className="bg-indigo-50 rounded-lg p-6">
+                <h3 className="text-xl font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                  </svg>
+                  Key Benefits
+                </h3>
+                <ul className="space-y-3">
+                   {product.benefits.map((benefit: string, index: number) => (
+                     <li key={index} className="flex items-start gap-3">
+                       <svg className="h-5 w-5 text-indigo-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                       </svg>
+                       <span className="text-slate-700 font-medium">{benefit}</span>
+                     </li>
+                   ))}
+                 </ul>
+              </div>
+            )}
+
+            {/* Features */}
+            {product.details?.features && (
+              <div>
+                <h3 className="text-xl font-semibold text-slate-900 mb-4">What You'll Get:</h3>
+                <ul className="space-y-3">
+                   {product.details.features.map((feature: string, index: number) => (
+                     <li key={index} className="flex items-start gap-3">
+                       <svg className="h-6 w-6 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                       </svg>
+                       <span className="text-slate-700">{feature}</span>
+                     </li>
+                   ))}
+                 </ul>
+              </div>
+            )}
+
+            {/* Includes */}
+            {product.details?.includes && (
+              <div>
+                <h3 className="text-xl font-semibold text-slate-900 mb-4">Package Includes:</h3>
+                <ul className="space-y-3">
+                   {product.details.includes.map((item: string, index: number) => (
+                     <li key={index} className="flex items-start gap-3">
+                       <svg className="h-6 w-6 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                       </svg>
+                       <span className="text-slate-700">{item}</span>
+                     </li>
+                   ))}
+                 </ul>
+              </div>
+            )}
+
+            {/* CTA Button */}
+            <div className="bg-slate-900 rounded-lg p-6 text-center">
               <AddToCartButton product={product} />
-              
-              <div className="text-sm text-gray-500">
-                Secure payment processing by Stripe
+              <p className="text-slate-300 text-sm mt-4">Secure checkout • Instant download</p>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex items-center justify-center gap-6 pt-6 border-t border-slate-200">
+              <div className="flex items-center gap-2 text-slate-600">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span className="text-sm">Secure Payment</span>
+              </div>
+              <div className="flex items-center gap-2 text-slate-600">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-sm">{product.category === 'services' ? 'Quick Booking' : 'Instant Download'}</span>
+              </div>
+              <div className="flex items-center gap-2 text-slate-600">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-sm">Quality Products</span>
               </div>
             </div>
           </div>
+        </div>
+        
+        {/* Protected Download Section */}
+        <div className="mt-16">
+          <ProtectedDownload 
+            productId={product.id}
+            productName={product.name}
+            fileName={getProductFileName(product.id)}
+            fileSize={getProductFileSize(product.id)}
+            isPurchased={false} // In real app, this would check user's purchase status
+          />
         </div>
         
         {/* Additional Product Information */}
@@ -399,4 +556,23 @@ export default function ProductPage() {
       </div>
     </div>
   );
+}
+
+// Helper functions to get product file information
+function getProductFileName(productId: string): string {
+  const fileMap: Record<string, string> = {
+    '1': 'elite-ai-mastery-guide.pdf',
+    '2': 'elite-prompt-arsenal.pdf',
+    '3': 'strategy-session-booking.pdf'
+  }
+  return fileMap[productId] || 'product-download.pdf'
+}
+
+function getProductFileSize(productId: string): string {
+  const sizeMap: Record<string, string> = {
+    '1': '2.5 MB',
+    '2': '1.2 MB', 
+    '3': 'Booking Confirmation'
+  }
+  return sizeMap[productId] || '1.0 MB'
 }

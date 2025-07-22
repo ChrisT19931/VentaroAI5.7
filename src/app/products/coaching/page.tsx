@@ -303,8 +303,7 @@ export default function CoachingProductPage() {
 
                 <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-4">
                   <p className="text-gray-300 text-sm">
-                    <strong className="text-white">100% Satisfaction Guarantee:</strong> If you're not completely satisfied with your session, 
-                    we'll provide additional support until your website is successfully deployed and live.
+                    <strong className="text-white">Professional Support:</strong> We'll provide additional support to help ensure your website is successfully deployed and live.
                   </p>
                 </div>
               </div>
