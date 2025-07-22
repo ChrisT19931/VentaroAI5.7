@@ -43,7 +43,7 @@ export default function CartPage() {
         const stripe = await getStripe();
         
         if (!stripe) {
-          console.error('Stripe is not initialized - missing publishable key');
+          console.error('Stripe initialization failed - check NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY');
           // Fallback to direct URL redirect when Stripe is not available
           window.location.href = data.url;
           return;
@@ -55,11 +55,13 @@ export default function CartPage() {
         });
         
         if (error) {
-          console.error('Stripe redirect error:', error);
+          console.error('Stripe checkout redirect failed:', error);
+          alert('Payment redirect failed. Please try again.');
           setIsLoading(false);
         }
       } else {
-        console.error('Error creating checkout session:', data.error);
+        console.error('Checkout session creation failed:', data.error);
+        alert('Unable to create payment session. Please try again.');
         setIsLoading(false);
       }
     } catch (error) {

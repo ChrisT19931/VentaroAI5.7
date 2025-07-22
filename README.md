@@ -100,10 +100,18 @@ npm run deploy-check
 
 #### Required Environment Variables
 See [.env.local.example](./.env.local.example) for all required variables:
+
+**Critical for Stripe Payments:**
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Your Stripe publishable key (starts with pk_)
+- `STRIPE_SECRET_KEY` - Your Stripe secret key (starts with sk_)
+- `STRIPE_WEBHOOK_SECRET` - Your Stripe webhook secret (starts with whsec_)
+
+**Other Required:**
 - Supabase credentials
-- Stripe API keys and webhook secret
 - Email service API key (SendGrid or Resend)
 - Site URL for production
+
+📋 **Quick Setup Guide:** See [vercel-env-setup.md](./vercel-env-setup.md) for detailed Vercel deployment instructions.
 
 ## 📋 Current Products
 

@@ -224,39 +224,7 @@ export default function CoachingProductPage() {
                   </div>
                 </div>
 
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">🎁 What You Get</h3>
-                  <ul className="space-y-3 text-gray-300">
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">60-Minute Live Session:</strong> Interactive site deployment walkthrough with screen sharing</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">Session Recording:</strong> Full video with cursor movements and detailed explanations</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">Tech Stack Analysis:</strong> Detailed breakdown of required technologies for your site</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">Comprehensive Implementation Report:</strong> Step-by-step deployment guide with screenshots</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">Deployment Checklist:</strong> Complete pre and post-launch verification steps</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">30-Day Email Support:</strong> Post-deployment troubleshooting assistance</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-yellow-400 mt-1">⭐</span>
-                      <span><strong className="text-white">Hosting & Domain Resources:</strong> Personalized recommendations for your specific needs</span>
-                    </li>
-                  </ul>
-                </div>
+
 
                 <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-6">
                   <h3 className="text-xl font-bold text-white mb-4">👨‍💼 Meet Your Deployment Expert</h3>

@@ -2,9 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createClient } from '@/lib/supabase';
 import { sendEmail, sendOrderConfirmationEmail } from '@/lib/sendgrid';
+import { validateStripeEnvironment } from '@/lib/env-validation';
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate Stripe environment variables
+    const envValidation = validateStripeEnvironment();
+    if (!envValidation.isValid) {
+      console.error('Stripe environment validation failed:', envValidation.errors);
+      return NextResponse.json(
+        { error: 'Payment system configuration error' },
+        { status: 500 }
+      );
+    }
+
     const { cartItems, userId } = await request.json();
 
     if (!cartItems || !cartItems.length) {

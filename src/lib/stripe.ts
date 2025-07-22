@@ -1,11 +1,16 @@
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing environment variable STRIPE_SECRET_KEY');
+// Ensure Stripe secret key is available
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+if (!stripeSecretKey) {
+  throw new Error('STRIPE_SECRET_KEY environment variable is required');
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2023-10-16', // Use the latest API version
+// Initialize Stripe with explicit configuration for Vercel
+const stripe = new Stripe(stripeSecretKey, {
+  apiVersion: '2023-10-16',
+  typescript: true,
 });
 
 export default stripe;

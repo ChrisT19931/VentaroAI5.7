@@ -175,34 +175,7 @@ export default function PromptsProductPage() {
                   </ul>
                 </div>
 
-                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">🎁 What You Get</h3>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-3">
-                      <span className="text-green-400">✓</span>
-                      <span><strong>AI Prompts Arsenal 2025</strong> - Professionally formatted PDF with copy-paste ready prompts</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-green-400">✓</span>
-                      <span><strong>Prompt Customization Guide</strong> - Learn to adapt prompts for your specific needs (normally $25)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-green-400">✓</span>
-                      <span><strong>AI Model Comparison Chart</strong> - Know which AI model works best for each prompt type (normally $15)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-green-400">✓</span>
-                      <span><strong>Weekly Prompt Updates</strong> - Get new prompts as AI models evolve (3 months free)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-green-400">✓</span>
-                      <span><strong>Private Telegram Group Access</strong> - Connect with other prompt engineers and get your questions answered</span>
-                    </li>
-                  </ul>
-                  <div className="mt-4 text-sm text-purple-300">
-                    <strong>Total Value: $90+</strong> – Yours for just $10 for a limited time!
-                  </div>
-                </div>
+
 
                 <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-6">
                   <h3 className="text-xl font-bold text-white mb-4">🔥 Limited Time Offer</h3>

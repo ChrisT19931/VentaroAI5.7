@@ -3,13 +3,14 @@ import { stripe } from '@/lib/stripe';
 import { supabase } from '@/lib/supabase';
 import { sendOrderConfirmationEmail } from '@/lib/sendgrid';
 
-// This is your Stripe webhook secret for testing your endpoint locally.
+// Get Stripe webhook secret from environment
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 export async function POST(request: NextRequest) {
   try {
     if (!webhookSecret) {
-      throw new Error('Missing STRIPE_WEBHOOK_SECRET');
+      console.error('STRIPE_WEBHOOK_SECRET environment variable is required');
+      throw new Error('STRIPE_WEBHOOK_SECRET environment variable is required');
     }
 
     const body = await request.text();

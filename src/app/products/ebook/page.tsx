@@ -145,31 +145,7 @@ export default function EbookProductPage() {
                   </div>
                 </div>
 
-                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">🎁 What You Get</h3>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-3">
-                      <span className="text-yellow-400">⭐</span>
-                      <span><strong>200-Page Comprehensive PDF E-book</strong> - Professionally designed with actionable content</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-yellow-400">⭐</span>
-                      <span><strong>50+ Ready-to-Use AI Prompt Templates</strong> - Copy and paste to get immediate results</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-yellow-400">⭐</span>
-                      <span><strong>AI Tools Comparison Spreadsheet</strong> - Save hundreds of dollars by choosing the right tools</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-yellow-400">⭐</span>
-                      <span><strong>Weekly AI Updates Newsletter</strong> - Stay ahead of AI trends (3 months free)</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-yellow-400">⭐</span>
-                      <span><strong>Private Community Access</strong> - Connect with other AI enthusiasts and get your questions answered</span>
-                    </li>
-                  </ul>
-                </div>
+
 
                 <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
                   <p className="text-red-300 font-semibold mb-2">⚠️ Digital Product - Instant Access</p>
