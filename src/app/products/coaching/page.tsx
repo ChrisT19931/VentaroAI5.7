@@ -1,14 +1,34 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import AddToCartButton from '@/components/AddToCartButton';
+import { createClient } from '@/lib/supabase';
 
-export default function CoachingProductPage() {
-  const product = {
-    id: 'coaching-call-1on1',
-    name: '1-on-1 AI Mastery Coaching Call',
-    price: 300.00,
-    image_url: '/images/coaching-session.jpg'
-  };
+async function getCoachingProduct() {
+  const supabase = await createClient();
+  
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', 'coaching-call-1on1')
+    .eq('is_active', true)
+    .single();
+  
+  if (error || !data) {
+    console.error('Error fetching coaching product:', error);
+    // Fallback product if not found in database
+    return {
+      id: 'coaching-call-1on1',
+      name: '1-on-1 AI Mastery Coaching Call',
+      price: 300.00,
+      image_url: '/images/coaching-session.jpg'
+    };
+  }
+  
+  return data;
+}
+
+export default async function CoachingProductPage() {
+  const product = await getCoachingProduct();
 
   return (
     <div className="min-h-screen bg-black py-12">
@@ -73,7 +93,11 @@ export default function CoachingProductPage() {
                 }
               `}</style>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-4">${product.price}</div>
+                <div className="mb-4">
+                  <div className="text-lg text-gray-400 line-through mb-1">$400</div>
+                  <div className="text-3xl font-bold text-green-400 mb-2">${product.price}</div>
+                  <div className="text-sm text-green-400 font-medium">Save $100 - Limited Time!</div>
+                </div>
                 <AddToCartButton product={product} />
                 <div className="mt-4 text-sm text-gray-400">
                   After purchase, you'll receive scheduling instructions via email

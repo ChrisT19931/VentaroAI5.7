@@ -1,6 +1,9 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useAuth } from './AuthContext';
+import { toast } from 'react-hot-toast';
+import { createClient } from '@/lib/supabase/client';
 
 export type CartItem = {
   id: string;

@@ -28,9 +28,21 @@ export default function ContactPage() {
     setSubmitError(null);
 
     try {
-      // In a real implementation, you would send this data to your backend
-      // For now, we'll simulate a successful submission after a delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Send form data to the backend API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          recipient: 'chris.t@ventarosales.com' // Ensure emails go to this address
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message. Please try again.');
+      }
       
       // Reset form
       setFormData({
@@ -68,10 +80,10 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Email Us</h3>
             <p className="text-gray-600 mb-4">
-              For general inquiries and support, reach out to us via email.
+              For inquiries and support, reach out via email.
             </p>
-            <a href="mailto:support@ventaroai.com" className="text-primary-600 hover:text-primary-500 font-medium">
-              support@ventaroai.com
+            <a href="mailto:chris.t@ventarosales.com" className="text-primary-600 hover:text-primary-500 font-medium">
+              chris.t@ventarosales.com
             </a>
           </div>
 
@@ -96,9 +108,9 @@ export default function ContactPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Dedicated Support</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Personal Support</h3>
             <p className="text-gray-600 mb-4">
-              All support requests are handled personally by our team to ensure the best possible assistance.
+              All support requests are handled personally to ensure the best possible assistance.
             </p>
             <span className="text-primary-600 font-medium">
               Personal Attention
@@ -272,23 +284,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="mt-16 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Location</h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
-            Visit our headquarters in the heart of Silicon Valley.
-          </p>
-          <div className="bg-gray-200 rounded-lg h-96 mb-4">
-            {/* This would be replaced with an actual map component in a real implementation */}
-            <div className="h-full flex items-center justify-center">
-              <p className="text-gray-500">Map Placeholder</p>
-            </div>
-          </div>
-          <address className="not-italic text-gray-600">
-            123 Tech Boulevard, Suite 456<br />
-            San Francisco, CA 94107<br />
-            United States
-          </address>
-        </div>
+
       </div>
     </div>
   );

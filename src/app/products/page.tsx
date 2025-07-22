@@ -3,20 +3,60 @@ import Image from 'next/image';
 import { createClient } from '@/lib/supabase';
 
 async function getProducts() {
-  const supabase = createClient();
-  
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('is_active', true)
-    .order('created_at', { ascending: false });
-  
-  if (error) {
-    console.error('Error fetching products:', error);
-    return [];
+  // Try to fetch from Supabase first
+  try {
+    const supabase = await createClient();
+    
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('is_active', true)
+      .order('created_at', { ascending: false });
+    
+    if (!error && data && data.length > 0) {
+      return data;
+    }
+  } catch (e) {
+    console.error('Error connecting to Supabase:', e);
   }
   
-  return data || [];
+  // Fallback to mock data if Supabase fetch fails or returns empty
+  return [
+    {
+      id: '1',
+      name: 'Premium AI E-book',
+      description: 'Comprehensive guide to leveraging AI for your business and personal productivity.',
+      price: 50.00,
+      image_url: '/images/products/product-1.jpg',
+      category: 'courses',
+      is_active: true,
+      featured: true,
+      created_at: new Date().toISOString()
+    },
+    {
+      id: '2',
+      name: '30 Premium AI Prompts',
+      description: 'Collection of 30 expertly crafted prompts to maximize your AI tool results.',
+      price: 10.00,
+      image_url: '/images/products/product-2.jpg',
+      category: 'tools',
+      is_active: true,
+      featured: false,
+      created_at: new Date().toISOString()
+    },
+    {
+      id: '3',
+      name: '1-on-1 Coaching Call',
+      description: 'Personal 60-minute coaching session to optimize your AI workflow.',
+      price: 300.00,
+      image_url: '/images/products/product-3.jpg',
+      category: 'services',
+      is_active: true,
+      featured: true,
+      created_at: new Date().toISOString()
+    },
+
+  ];
 }
 
 export default async function ProductsPage() {

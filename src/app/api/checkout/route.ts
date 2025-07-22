@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: NextRequest) {
@@ -22,6 +22,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user email for Stripe customer
+    const supabase = await createClient();
+    
     const { data: userData, error: userError } = await supabase
       .from('profiles')
       .select('email')
@@ -100,7 +102,8 @@ export async function POST(request: NextRequest) {
     }, 0);
 
     // Create a new order in the database
-    const { data: orderData, error: orderError } = await supabase
+    const supabaseAdmin = await createClient();
+    const { data: orderData, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert([
         {
@@ -130,7 +133,7 @@ export async function POST(request: NextRequest) {
       };
     });
 
-    const { error: itemsError } = await supabase
+    const { error: itemsError } = await supabaseAdmin
       .from('order_items')
       .insert(orderItems);
 
@@ -166,7 +169,7 @@ export async function POST(request: NextRequest) {
     sendOrderConfirmationEmail({
       email: userData.email,
       orderNumber: orderData.id.slice(0, 8),
-      orderItems: items,
+      orderItems: productMetadata,
       total: orderTotal,
       downloadLinks
     }).catch(error => {

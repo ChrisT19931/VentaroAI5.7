@@ -20,23 +20,19 @@ export default function FAQPage() {
       ]
     },
     {
-      title: 'Products & Licensing',
+      title: 'Products & Usage',
       faqs: [
         {
           question: 'What types of products do you offer?',
-          answer: 'We offer a wide range of AI-powered digital products including design templates, code snippets, UI kits, productivity tools, creative assets, data analysis tools, and more. All our products are carefully vetted for quality and usefulness.'
-        },
-        {
-          question: 'Can I use your products for commercial projects?',
-          answer: 'Yes! All our products come with a commercial license, allowing you to use them in your business and client projects. However, you cannot resell or redistribute our products as-is.'
+          answer: 'We offer a wide range of AI-powered digital products including e-books, prompt collections, and coaching calls. All our products are carefully vetted for quality and usefulness.'
         },
         {
           question: 'Are there any usage restrictions?',
-          answer: 'While our products come with a commercial license, you cannot resell, redistribute, or make our products available for download to others. Please refer to the specific license details included with each product for complete information.'
+          answer: 'Our digital products are for personal use. Please refer to the specific details included with each product for complete information.'
         },
         {
           question: 'Do you offer customization services for your products?',
-          answer: 'We don\'t currently offer customization services for our standard products. However, we do have premium products that include customization options. Check the product description for details.'
+          answer: 'We don\'t currently offer customization services for our standard products. However, our coaching calls provide personalized guidance tailored to your specific needs.'
         }
       ]
     },
@@ -48,12 +44,16 @@ export default function FAQPage() {
           answer: 'We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and Apple Pay for secure and convenient transactions.'
         },
         {
-          question: 'How do I download my purchased products?',
-          answer: 'After completing your purchase, you\'ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section.'
+          question: 'How do I download my purchased digital products?',
+          answer: 'After completing your purchase of digital products (e-books and prompt collections), you\'ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section. For coaching calls, we will be in touch to organize a suitable time.'
         },
         {
-          question: 'How long do I have access to my purchased products?',
-          answer: 'You have lifetime access to all purchased products. You can download them as many times as you need from your account page.'
+          question: 'How long do I have access to my purchased digital products?',
+          answer: 'You have lifetime access to all purchased digital products. You can download them as many times as you need from your account page.'
+        },
+        {
+          question: 'What is the download process for digital products?',
+          answer: 'Our digital products (e-books and prompt collections) are available for immediate download after purchase. Simply click the download link in your confirmation email or access them from your account dashboard. Files are typically provided in PDF format for e-books and text format for prompts.'
         },
         {
           question: 'Are my payment details secure?',
@@ -61,7 +61,7 @@ export default function FAQPage() {
         },
         {
           question: 'Do you offer shipping?',
-          answer: 'No, we do not offer physical shipping as we are a 100% digital business. All products are delivered instantly via digital download after purchase.'
+          answer: 'No, we do not offer physical shipping as we are a 100% digital business. All products are delivered instantly via digital download after purchase, except for coaching calls which are scheduled separately.'
         }
       ]
     },

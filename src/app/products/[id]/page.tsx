@@ -4,21 +4,115 @@ import { createClient } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
 
 async function getProduct(id: string) {
-  const supabase = createClient();
-  
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('id', id)
-    .eq('is_active', true)
-    .single();
-  
-  if (error || !data) {
-    console.error('Error fetching product:', error);
-    return null;
+  // Try to fetch from Supabase first
+  try {
+    const supabase = await createClient();
+    
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', id)
+      .eq('is_active', true)
+      .single();
+    
+    if (!error && data) {
+      return data;
+    }
+  } catch (e) {
+    console.error('Error connecting to Supabase:', e);
   }
   
-  return data;
+  // Fallback to mock data if Supabase fetch fails
+  const mockProducts = [
+    {
+      id: '1',
+      name: 'Premium AI E-book',
+      description: 'Comprehensive guide to leveraging AI for your business and personal productivity.',
+      price: 50.00,
+      image_url: '/images/products/product-1.jpg',
+      category: 'courses',
+      is_active: true,
+      featured: true,
+      created_at: new Date().toISOString(),
+      details: {
+        description: 'The Premium AI E-book is a comprehensive guide that teaches you how to leverage AI tools to enhance your business and personal productivity. From basic concepts to advanced techniques, this e-book covers everything you need to know to become proficient in using AI tools effectively.',
+        features: [
+          'Learn the fundamentals of AI-assisted workflows',
+          'Master prompt engineering for various tasks',
+          'Create stunning content with minimal effort',
+          'Optimize your productivity with AI tools',
+          'Access to exclusive strategies and techniques'
+        ],
+        includes: [
+          '200+ pages of actionable content',
+          'Downloadable PDF format',
+          'Practical examples',
+          'Regular updates',
+          'Bonus resources'
+        ]
+      }
+    },
+    {
+      id: '2',
+      name: '30 Premium AI Prompts',
+      description: 'Collection of 30 expertly crafted prompts to maximize your AI tool results.',
+      price: 10.00,
+      image_url: '/images/products/product-2.jpg',
+      category: 'tools',
+      is_active: true,
+      featured: false,
+      created_at: new Date().toISOString(),
+      details: {
+        description: 'The 30 Premium AI Prompts is a carefully curated set of prompts designed to help you generate high-quality content using AI tools like ChatGPT, Claude, and more. Each prompt has been tested and refined to ensure optimal results.',
+        features: [
+          '30 expertly crafted prompts',
+          'Categorized by use case and platform',
+          'Detailed instructions for each prompt',
+          'Proven to generate high-quality outputs',
+          'Optimized for various AI tools'
+        ],
+        includes: [
+          'Downloadable PDF format',
+          'Editable text file for easy copying',
+          'Usage guidelines and best practices',
+          'Examples of expected outputs',
+          'Tips for customization'
+        ]
+      }
+    },
+    {
+      id: '3',
+      name: '1-on-1 Coaching Call',
+      description: 'Personal 60-minute coaching session to optimize your AI workflow.',
+      price: 300.00,
+      image_url: '/images/products/product-3.jpg',
+      category: 'services',
+      is_active: true,
+      featured: true,
+      created_at: new Date().toISOString(),
+      details: {
+        description: 'The 1-on-1 Coaching Call is a personalized session where we walk you through our entire AI design process, from concept to premium-quality execution. Get direct guidance tailored to your specific needs and projects.',
+        features: [
+          'Personalized guidance from AI experts',
+          'Custom workflow optimization',
+          'Specific prompt engineering for your needs',
+          'Troubleshooting your current AI processes',
+          'Follow-up resources and recommendations'
+        ],
+        includes: [
+          '60-minute video call',
+          'Screen sharing and demonstrations',
+          'Recording of the session',
+          'Custom action plan',
+          'Two weeks of email support'
+        ]
+      }
+    },
+
+  ];
+  
+  const product = mockProducts.find(p => p.id === id);
+  return product || null;
 }
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
@@ -112,16 +206,17 @@ export default async function ProductPage({ params }: { params: { id: string } }
             <p>
               {product.description}
             </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            <h3>Features</h3>
+            <h3>Key Benefits</h3>
             <ul>
-              <li>Feature 1: Lorem ipsum dolor sit amet</li>
-              <li>Feature 2: Consectetur adipiscing elit</li>
-              <li>Feature 3: Sed do eiusmod tempor incididunt</li>
-              <li>Feature 4: Ut labore et dolore magna aliqua</li>
+              <li>Instant digital delivery after purchase</li>
+              <li>Professional-grade content and materials</li>
+              <li>Lifetime access to your purchased products</li>
+              <li>Compatible with all devices and platforms</li>
             </ul>
+            <h3>Purchase Information</h3>
+            <p>
+              All digital products are delivered immediately after successful payment. You'll receive download links via email and can access your purchases anytime through your account dashboard.
+            </p>
           </div>
         </div>
       </div>

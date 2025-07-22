@@ -1,9 +1,9 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { Session, User } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabase/client';
 
 type AuthContextType = {
   user: User | null;
@@ -29,6 +29,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
+    const supabase = createClient();
+    
     const setData = async () => {
       const {
         data: { session },
@@ -60,6 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signUp = async (email: string, password: string, metadata?: { [key: string]: any }) => {
+    const supabase = createClient();
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -72,6 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signIn = async (email: string, password: string) => {
+    const supabase = createClient();
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -81,6 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
+    const supabase = createClient();
     await supabase.auth.signOut();
     router.push('/');
   };

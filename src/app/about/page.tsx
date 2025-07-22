@@ -7,7 +7,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-dark">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90"></div>
-        <div className="relative container mx-auto px-4 py-24 md:py-32">
+        <div className="relative container mx-auto px-4 py-16 md:py-24">
           <div className="text-center max-w-4xl mx-auto">
             <div className="mb-8">
               <Image 
@@ -38,9 +38,9 @@ export default function AboutPage() {
       </div>
 
       {/* Our Story Section */}
-      <div className="section-padding bg-gray-900">
+      <div className="py-12 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
               The Future is <span className="text-gradient-accent">AI-Native</span>
             </h2>
@@ -51,12 +51,12 @@ export default function AboutPage() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div className="glass-card p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Our AI-First Approach</h3>
+              <h3 className="text-2xl font-bold text-black mb-6">Our AI-First Approach</h3>
               <div className="space-y-4">
-                <p className="text-gray-300">
-                  Every product in our store is 100% designed using AI tools like <span className="text-white font-semibold">ChatGPT</span>, <span className="text-white font-semibold">Cursor</span>, and advanced AI design systems. We don't just use AI as a helper - it's our primary creative force.
+                <p className="text-black">
+                  Every product in our store is 100% designed using AI tools like <span className="text-black font-semibold">ChatGPT</span>, <span className="text-black font-semibold">Cursor</span>, and advanced AI design systems. We don't just use AI as a helper - it's our primary creative force.
                 </p>
-                <p className="text-gray-300">
+                <p className="text-black">
                   Founded in 2025, Ventaro AI represents the new generation of digital product creation where human creativity meets artificial intelligence to produce premium results.
                 </p>
               </div>
@@ -89,9 +89,9 @@ export default function AboutPage() {
       </div>
 
       {/* What We Offer Section */}
-      <div className="section-padding bg-black">
+      <div className="py-12 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
               We Teach You <span className="text-gradient">How</span>
             </h2>
@@ -108,10 +108,12 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-white mb-4">AI Design Ebooks</h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-black mb-6">
                 Comprehensive guides revealing our exact ChatGPT prompts, Cursor workflows, and AI design methodologies that create premium results.
               </p>
-              <div className="text-gradient font-semibold">Learn the Secrets →</div>
+              <Link href="/products/ebook" className="btn-primary text-sm inline-block">
+                Learn the Secrets →
+              </Link>
             </div>
             
             <div className="card-premium group">
@@ -121,10 +123,12 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-white mb-4">Premium Prompts</h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-black mb-6">
                 Battle-tested prompt libraries for ChatGPT, Claude, and other AI tools that consistently produce professional-grade outputs.
               </p>
-              <div className="text-gradient font-semibold">Get the Prompts →</div>
+              <Link href="/products/prompts" className="btn-primary text-sm inline-block">
+                Get the Prompts →
+              </Link>
             </div>
             
             <div className="card-premium group">
@@ -134,21 +138,23 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-white mb-4">1-on-1 Coaching</h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-black mb-6">
                 Personal coaching calls where we walk you through our entire AI design process, from concept to premium-quality execution.
               </p>
-              <div className="text-gradient font-semibold">Book a Call →</div>
+              <Link href="/products/coaching" className="btn-primary text-sm inline-block">
+                Book a Call →
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
       {/* AI Tools Section */}
-      <div className="section-padding bg-gray-900">
+      <div className="py-12 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Our <span className="text-gradient-accent">AI Arsenal</span>
+              Our <span className="text-gradient-accent">AI Tools</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               The cutting-edge tools and platforms we use to create every product in our store.
@@ -157,37 +163,37 @@ export default function AboutPage() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🤖</div>
+              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
               <h3 className="text-lg font-bold text-white mb-2">ChatGPT</h3>
               <p className="text-gray-400 text-sm">AI Conversations</p>
             </div>
             <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">⚡</div>
+              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
               <h3 className="text-lg font-bold text-white mb-2">Cursor</h3>
               <p className="text-gray-400 text-sm">AI Code Editor</p>
             </div>
             <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🎨</div>
-              <h3 className="text-lg font-bold text-white mb-2">Midjourney</h3>
-              <p className="text-gray-400 text-sm">AI Design</p>
-            </div>
-            <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
-              <div className="text-4xl mb-4">🧠</div>
+              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
               <h3 className="text-lg font-bold text-white mb-2">Claude</h3>
               <p className="text-gray-400 text-sm">AI Assistant</p>
+            </div>
+            <div className="glass-card p-6 text-center group hover:scale-105 transition-transform duration-300">
+              <div className="mb-4"><svg className="h-10 w-10 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+              <h3 className="text-lg font-bold text-white mb-2">Manus</h3>
+              <p className="text-gray-400 text-sm">AI Tool</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="section-padding bg-black">
+      <div className="py-12 bg-black">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="glass-card p-12 text-center">
+          <div className="glass-card p-8 text-center">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Ready to Master <span className="text-gradient">AI Design</span>?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-black mb-8 max-w-2xl mx-auto">
               Join the AI revolution. Learn the exact methods we use to create premium-quality digital products with artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -199,7 +205,7 @@ export default function AboutPage() {
               </Link>
             </div>
             <div className="mt-8 text-gray-400 text-sm">
-              🚀 100% AI-Designed • 💎 Premium Quality • 🎯 Teaching Focused
+              100% AI-Designed • Premium Quality • Teaching Focused
             </div>
           </div>
         </div>

@@ -427,7 +427,13 @@ export default function AdminPage() {
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">
                                 <div className="h-10 w-10 flex-shrink-0">
-                                  <img className="h-10 w-10 rounded-md object-cover" src={product.image_url || '/images/placeholder.png'} alt={product.name} />
+                                  <div className="h-10 w-10 rounded-md bg-gray-200 flex items-center justify-center">
+                  {product.image_url ? (
+                    <img className="h-10 w-10 rounded-md object-cover" src={product.image_url} alt={product.name} />
+                  ) : (
+                    <span className="text-gray-500 text-xs">📦</span>
+                  )}
+                </div>
                                 </div>
                                 <div className="ml-4">
                                   <div className="text-sm font-medium text-gray-900">{product.name}</div>
@@ -550,7 +556,7 @@ export default function AdminPage() {
                                 </div>
                               </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email || 'N/A'}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{(user as any).email || 'N/A'}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(user.created_at).toLocaleDateString()}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleDateString() : 'Never'}

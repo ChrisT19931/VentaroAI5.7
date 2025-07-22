@@ -8,17 +8,18 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 type EmailData = {
   to: string;
+  from?: string;
   subject: string;
-  text: string;
+  text?: string;
   html: string;
 };
 
-export const sendEmail = async ({ to, subject, text, html }: EmailData) => {
+export const sendEmail = async ({ to, from, subject, text, html }: EmailData) => {
   const msg = {
     to,
-    from: process.env.EMAIL_FROM || 'noreply@example.com',
+    from: from || process.env.EMAIL_FROM || 'noreply@ventarosales.com',
     subject,
-    text,
+    text: text || '',
     html,
   };
 

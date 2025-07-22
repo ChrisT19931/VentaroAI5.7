@@ -6,7 +6,7 @@ export default function EbookProductPage() {
   const product = {
     id: 'ebook-premium-ai',
     name: 'Premium AI E-book: Master AI for Business Success',
-    price: 99.99,
+    price: 50.00,
     image_url: '/images/ebook-cover.jpg'
   };
 
