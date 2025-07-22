@@ -4,17 +4,17 @@ import { createClient } from '@/lib/supabase';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Premium AI Tools & AI Prompts 2025 - Make Money Online with AI Products',
-  description: 'Browse our collection of AI tools, AI prompts, and digital products to make money online in 2025. Discover proven strategies to make money with AI through ebooks, coaching, and premium AI resources.',
+  title: 'AI Tools Mastery Guide & AI Prompts Arsenal 2025 - Make Money Online with AI Products',
+  description: 'Browse our collection of AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online in 2025. Discover proven strategies to make money with AI.',
   keywords: 'AI tools, AI prompts, make money online, AI products 2025, make money with AI, ChatGPT prompts, AI business tools, digital products, AI coaching, artificial intelligence tools',
   openGraph: {
-    title: 'Premium AI Tools & AI Prompts 2025 - Digital Products for Online Income',
-    description: 'Discover AI tools, AI prompts, and digital products to make money online with artificial intelligence in 2025.',
+    title: 'AI Tools Mastery Guide & AI Prompts Arsenal 2025 - Digital Products for Online Income',
+    description: 'Discover AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Premium AI Tools & AI Prompts 2025',
+    title: 'AI Tools Mastery Guide & AI Prompts Arsenal 2025',
     description: 'Make money online with AI tools and prompts in 2025',
   },
 };
@@ -45,7 +45,7 @@ async function getProducts() {
       description: '30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
       price: 25.00,
       originalPrice: 50.00,
-      image_url: '/images/products/elite-ai-mastery.svg',
+      image_url: '/images/products/ai-tools-mastery-guide.svg',
       category: 'courses',
       is_active: true,
       featured: true,
@@ -54,9 +54,9 @@ async function getProducts() {
     {
       id: '2',
       name: 'AI Prompts Arsenal 2025',
-      description: '30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
+      description: '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
       price: 10.00,
-      image_url: '/images/products/elite-prompt-arsenal.svg',
+      image_url: '/images/products/ai-prompts-arsenal.svg',
       category: 'tools',
       is_active: true,
       featured: false,
@@ -67,7 +67,7 @@ async function getProducts() {
       name: 'AI Business Strategy Session 2025',
       description: '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
       price: 497.00,
-      image_url: '/images/products/elite-strategy-session.svg',
+      image_url: '/images/products/ai-business-strategy-session.svg',
       category: 'services',
       is_active: true,
       featured: false,
@@ -83,9 +83,9 @@ export default async function ProductsPage() {
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-6xl">
-        <h1 className="text-3xl font-bold mb-8">Premium AI Tools & AI Prompts 2025</h1>
+        <h1 className="text-3xl font-bold mb-8">AI Tools Mastery Guide & AI Prompts Arsenal 2025</h1>
         <p className="text-lg text-gray-600 mb-8 max-w-3xl">
-          Discover our collection of AI tools, AI prompts, and digital products to make money online with artificial intelligence in 2025. Learn proven strategies to make money with AI.
+          Discover our collection of AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025. Learn proven strategies to make money with AI.
         </p>
         
         {/* Filter and Sort Controls */}

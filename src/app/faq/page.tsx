@@ -108,7 +108,7 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'Do you have any current promotions?',
-          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just $10. These 30 premium AI prompts are perfect for content creation, marketing automation, and AI-powered business growth.'
+          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just $10. These 30 professional AI prompts are perfect for content creation, marketing automation, and AI-powered business growth.'
         },
         {
           question: 'What does the AI Business Strategy Session include?',
@@ -194,7 +194,7 @@ export default function FAQPage() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Special Offers</h3>
             <p className="text-gray-600 mb-4">
-              Check out our current promotions and limited-time deals on premium digital products.
+              Check out our current promotions and limited-time deals on our high-quality digital products.
             </p>
             <Link href="/products" className="text-primary-600 hover:text-primary-500 font-medium">
               View Current Deals

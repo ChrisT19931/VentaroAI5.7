@@ -291,7 +291,7 @@ INSERT INTO products (name, description, price, category, featured, is_active) V
 ),
 (
   'AI Prompts Arsenal 2025',
-  '30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
+  '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
   10.00,
   'AI Prompts',
   true,

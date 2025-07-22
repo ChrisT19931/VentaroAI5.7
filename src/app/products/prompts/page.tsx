@@ -9,7 +9,7 @@ export default function PromptsProductPage() {
     id: 'ai-prompts-collection',
     name: 'AI Prompts Arsenal 2025',
     price: 10.00,
-    image_url: '/images/premium-ai-prompts.jpg'
+    image_url: '/images/ai-prompts-arsenal.jpg'
   };
 
   return (
@@ -23,7 +23,7 @@ export default function PromptsProductPage() {
                 <div className="text-center text-white relative z-10">
                   <div className="text-6xl mb-4 animate-rocket-launch">🚀</div>
                   <div className="text-xl font-bold">AI Prompts Arsenal 2025</div>
-                  <div className="text-sm opacity-80">30 Premium AI Prompts</div>
+                  <div className="text-sm opacity-80">AI Prompts Arsenal 2025</div>
                 </div>
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2 h-20 bg-gradient-to-t from-orange-500 to-transparent animate-rocket-trail"></div>
                 <div className="absolute inset-0 animate-stars">
@@ -97,9 +97,9 @@ export default function PromptsProductPage() {
               
               <div className="text-gray-300 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  Get instant access to our battle-tested collection of 30 premium AI prompts that consistently 
+                  Get instant access to our battle-tested collection of professional AI prompts that consistently 
                   produce professional-grade outputs. These aren't generic prompts – they're the exact formulas 
-                  we use to create premium quality content.
+                  we use to create professional quality content.
                 </p>
 
                 <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
@@ -180,7 +180,7 @@ export default function PromptsProductPage() {
                   <ul className="space-y-2 text-gray-300">
                     <li className="flex items-center gap-3">
                       <span className="text-green-400">✓</span>
-                      <span><strong>30 Premium AI Prompts</strong> - Professionally formatted PDF with copy-paste ready prompts</span>
+                      <span><strong>AI Prompts Arsenal 2025</strong> - Professionally formatted PDF with copy-paste ready prompts</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <span className="text-green-400">✓</span>

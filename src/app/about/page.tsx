@@ -39,7 +39,7 @@ export default function AboutPage() {
               About <span className="text-gradient">Ventaro AI Digital Store 2025</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Your destination for premium AI tools, AI prompts, and digital products to make money online with artificial intelligence in 2025.
+              Your destination for AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/products" className="btn-primary btn-lg">
@@ -85,7 +85,7 @@ export default function AboutPage() {
                   Every product in our store is designed using cutting-edge AI tools like <span className="font-semibold text-gray-900">ChatGPT</span>, <span className="font-semibold text-gray-900">Cursor</span>, and advanced AI design systems.
                 </p>
                 <p className="text-gray-700">
-                  We don't just use AI as a helper - it's our primary creative force, enabling us to produce premium results at scale.
+                  We don't just use AI as a helper - it's our primary creative force, enabling us to produce professional results at scale.
                 </p>
               </div>
             </div>
@@ -98,8 +98,8 @@ export default function AboutPage() {
                     <div className="text-gray-400">AI Designed</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-gradient mb-2">Premium</div>
-                    <div className="text-gray-400">Quality</div>
+                    <div className="text-3xl font-bold text-gradient mb-2">Quality</div>
+                    <div className="text-gray-400">Excellence</div>
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-gradient mb-2">2025</div>
@@ -121,11 +121,11 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Our <span className="text-gradient">Premium Products</span>
+              Our <span className="text-gradient">Digital Products</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Discover our collection of AI-powered digital products designed to help you master artificial intelligence and build profitable online businesses.
-            </p>
+                Discover our collection of AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions designed to help you master artificial intelligence and build profitable online businesses.
+              </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -257,7 +257,7 @@ export default function AboutPage() {
               Ready to Start Your <span className="text-gradient">AI Journey</span>?
             </h2>
             <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-              Join the AI revolution and learn the exact methods we use to create premium digital products with artificial intelligence.
+              Join the AI revolution and learn the exact methods we use to create high-quality digital products with artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/products" className="btn-primary btn-lg">
@@ -268,7 +268,7 @@ export default function AboutPage() {
               </Link>
             </div>
             <div className="mt-8 text-gray-500 text-sm">
-              100% AI-Designed • Premium Quality • Expert Teaching
+              100% AI-Designed • Professional Quality • Expert Teaching
             </div>
           </div>
         </div>

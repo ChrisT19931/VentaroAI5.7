@@ -113,7 +113,7 @@ See [.env.local.example](./.env.local.example) for all required variables:
    - Master AI agents and bots
 
 2. **AI Prompts Arsenal 2025** - $10.00
-   - 30 premium AI prompts for making money online
+   - 30 professional AI prompts for making money online
    - Proven ChatGPT and Claude prompts
    - Copy-paste ready for immediate use
 

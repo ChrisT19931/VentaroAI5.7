@@ -97,7 +97,7 @@ async function insertSampleProducts() {
       },
       {
         name: 'AI Prompts Arsenal 2025',
-        description: '30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
+        description: '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
         price: 10.00,
         category: 'AI Prompts',
         featured: true,

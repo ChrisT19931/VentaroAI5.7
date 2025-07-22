@@ -69,7 +69,7 @@ export default function Home() {
                 {/* Elite Description */}
                 <div className="space-y-6 max-w-2xl">
                   <p className="text-xl md:text-2xl text-gray-300 leading-relaxed font-light">
-                    Master premium AI tools and AI prompts to build profitable online businesses in 2025. Learn proven strategies to make money with AI using ChatGPT, Claude, and cutting-edge technologies.
+                    Master AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to build profitable online businesses in 2025. Learn proven strategies to make money with AI using ChatGPT, Claude, and cutting-edge technologies.
                   </p>
                   <div className="p-6 bg-gradient-to-r from-gray-800/40 to-slate-700/40 rounded-2xl border border-white/20 backdrop-blur-md">
                     <p className="text-lg font-semibold text-white">
@@ -156,7 +156,7 @@ export default function Home() {
                   AI Prompts Arsenal 2025
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  30 premium AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for business growth.
+                  30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for business growth.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
@@ -301,10 +301,10 @@ export default function Home() {
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">
-              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Elite</span>
+              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Ventaro</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experience the pinnacle of digital excellence with our premium AI-powered solutions.
+              Experience the pinnacle of digital excellence with our high-quality AI-powered solutions.
             </p>
           </div>
           

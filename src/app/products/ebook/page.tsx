@@ -6,10 +6,10 @@ import AddToCartButton from '@/components/AddToCartButton';
 
 export default function EbookProductPage() {
   const product = {
-    id: 'ebook-premium-ai',
+    id: 'ebook-ai-tools-mastery',
     name: 'AI Tools Mastery Guide 2025',
     price: 25.00,
-    image_url: '/images/premium-ai-ebook.jpg'
+    image_url: '/images/ai-tools-mastery-guide.jpg'
   };
 
   return (
