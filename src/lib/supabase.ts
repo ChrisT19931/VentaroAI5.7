@@ -15,12 +15,22 @@ function validateSupabaseConfig() {
     throw new Error('Missing environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY. Please configure this in your Vercel environment variables.');
   }
   
-  // Check for placeholder values
+  // Check for placeholder values (warn during build, throw during runtime)
   if (supabaseUrl === 'https://supabase.co' || supabaseUrl.includes('placeholder')) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL.');
+    const message = 'NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL.';
+    if (typeof window !== 'undefined') {
+      throw new Error(message);
+    } else {
+      console.warn(message);
+    }
   }
   if (supabaseAnonKey.includes('EXAMPLE') || supabaseAnonKey.includes('placeholder')) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key.');
+    const message = 'NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key.';
+    if (typeof window !== 'undefined') {
+      throw new Error(message);
+    } else {
+      console.warn(message);
+    }
   }
 }
 
