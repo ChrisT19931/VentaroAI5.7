@@ -42,8 +42,8 @@ export default function AddToCartButton({ product }: { product: Product }) {
     
     setTimeout(() => {
       setIsAdding(false);
-      // Go directly to checkout/payment page
-      router.push('/checkout');
+      // Go to cart page
+      router.push('/cart');
     }, 500);
   };
 
@@ -57,8 +57,8 @@ export default function AddToCartButton({ product }: { product: Product }) {
     };
     
     addItem(cartItem);
-    // Go directly to checkout/payment page instead of cart
-    router.push('/checkout');
+    // Go directly to cart page for checkout
+    router.push('/cart');
   };
 
   return (

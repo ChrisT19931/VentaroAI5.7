@@ -38,7 +38,7 @@ export default function ProtectedDownload({
       // 3. Track download for analytics
       
       const link = document.createElement('a')
-      link.href = `/products/${fileName}`
+      link.href = `/downloads/${fileName}`
       link.download = fileName
       document.body.appendChild(link)
       link.click()
