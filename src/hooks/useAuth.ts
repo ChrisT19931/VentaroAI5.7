@@ -41,11 +41,13 @@ export function useAuth() {
   }
   
   if (supabaseUrl === 'https://supabase.co' || supabaseUrl.includes('placeholder')) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL in Vercel environment variables.');
+    const message = 'NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL in Vercel environment variables.';
+    console.warn(message);
   }
   
   if (supabaseAnonKey.includes('EXAMPLE') || supabaseAnonKey.includes('placeholder')) {
-    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key in Vercel environment variables.');
+    const message = 'NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key in Vercel environment variables.';
+    console.warn(message);
   }
   
   const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
