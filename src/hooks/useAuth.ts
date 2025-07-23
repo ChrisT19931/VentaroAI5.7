@@ -32,10 +32,23 @@ type SignUpCredentials = SignInCredentials & {
 };
 
 export function useAuth() {
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  // Validate environment variables
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Missing Supabase environment variables. Please configure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your Vercel environment variables.');
+  }
+  
+  if (supabaseUrl === 'https://supabase.co' || supabaseUrl.includes('placeholder')) {
+    throw new Error('NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL in Vercel environment variables.');
+  }
+  
+  if (supabaseAnonKey.includes('EXAMPLE') || supabaseAnonKey.includes('placeholder')) {
+    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key in Vercel environment variables.');
+  }
+  
+  const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     session: null,

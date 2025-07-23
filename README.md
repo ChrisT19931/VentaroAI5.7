@@ -2,6 +2,20 @@
 
 A full-stack e-commerce platform for selling AI digital products with one-time payments. Features a modern dark theme design and comprehensive admin panel.
 
+## 🚨 IMPORTANT: Environment Variables Setup
+
+**If you're seeing "Invalid API key" errors**, you need to configure your environment variables properly:
+
+1. **For Vercel Deployment**: Follow the [**VERCEL_SETUP_GUIDE.md**](./VERCEL_SETUP_GUIDE.md) for step-by-step instructions
+2. **For Local Development**: Copy `.env.local.example` to `.env.local` and fill in your actual credentials
+
+**Quick Fix for Authentication Issues:**
+- Replace placeholder values in your environment variables with real Supabase credentials
+- Ensure all required variables are set in your Vercel dashboard
+- Redeploy your application after updating environment variables
+
+📋 **Need Help?** See the [Troubleshooting](#-troubleshooting) section below.
+
 ## 🚀 Features
 
 - **Modern Landing Page** with featured products and dark theme
@@ -198,6 +212,69 @@ src/
 ├── lib/               # External service configurations
 ├── types/             # TypeScript type definitions
 └── utils/             # Utility functions
+```
+
+## 🐛 Troubleshooting
+
+### Authentication Issues
+
+**"Invalid API key" Error:**
+- Check that `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set correctly
+- Ensure no placeholder values (like `https://supabase.co` or `EXAMPLE_KEY`) remain
+- Verify environment variables are configured in Vercel dashboard
+- Redeploy after updating environment variables
+
+**"Missing environment variable" Error:**
+- Double-check variable names are spelled correctly (case-sensitive)
+- Ensure variables are set for all environments (Production, Preview, Development)
+- For Vercel: Go to Settings → Environment Variables
+
+**User Registration/Login Not Working:**
+- Verify Supabase project is active and accessible
+- Check Supabase Auth settings and email templates
+- Ensure redirect URLs are configured correctly
+- Follow the complete [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) guide
+
+### Payment Issues
+
+**Stripe Checkout Not Working:**
+- Verify `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY` are correct
+- Check that keys are for the right environment (test vs live)
+- Ensure webhook endpoint is configured: `https://your-app.vercel.app/api/webhook`
+- Verify `STRIPE_WEBHOOK_SECRET` matches your Stripe webhook
+
+### Deployment Issues
+
+**Build Failures:**
+- Run `npm run build` locally to check for errors
+- Ensure all dependencies are installed
+- Check for TypeScript errors
+
+**Environment Variables Not Working:**
+- Variables must be set in Vercel dashboard, not just in code
+- Redeploy after adding/updating environment variables
+- Check variable names match exactly (case-sensitive)
+
+### Getting Help
+
+1. **Check the logs**: Vercel Function logs for detailed error messages
+2. **Verify setup**: Use the [VERCEL_SETUP_GUIDE.md](./VERCEL_SETUP_GUIDE.md) checklist
+3. **Contact support**: chris.t@ventarosales.com
+
+### Quick Fixes
+
+```bash
+# Check if environment variables are loaded
+npm run check-config
+
+# Rebuild and test locally
+npm run build
+npm run start
+
+# Reset and redeploy
+git add .
+git commit -m "Fix environment variables"
+git push origin main
 ```
 
 ## License
