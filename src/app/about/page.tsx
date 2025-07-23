@@ -35,17 +35,17 @@ export default function AboutPage() {
                 className="mx-auto mb-6"
               />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight glow-text">
               About <span className="text-gradient">Ventaro AI Digital Store 2025</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
               Your destination for AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products" className="btn-primary btn-lg">
+              <Link href="/products" className="neon-button btn-lg">
                 Explore AI Products
               </Link>
-              <Link href="/products/ebook" className="btn-outline btn-lg">
+              <Link href="/products/ebook" className="neon-button btn-lg">
                 Learn Our Methods
               </Link>
             </div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
       <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 glow-text">
               Our <span className="text-gradient-accent">AI-First Approach</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -67,9 +67,9 @@ export default function AboutPage() {
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="glass-card p-8">
+            <div className="glass-panel p-8">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center mr-4 animate-pulse">
                   <Image 
                     src="/images/ai-brain-icon.svg" 
                     alt="AI Brain" 
@@ -78,13 +78,13 @@ export default function AboutPage() {
                     className="object-contain" 
                   />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">100% AI-Designed Products</h3>
+                <h3 className="text-2xl font-bold text-white glow-text">100% AI-Designed Products</h3>
               </div>
               <div className="space-y-4">
-                <p className="text-gray-700">
-                  Every product in our store is designed using cutting-edge AI tools like <span className="font-semibold text-gray-900">ChatGPT</span>, <span className="font-semibold text-gray-900">Cursor</span>, and advanced AI design systems.
+                <p className="text-gray-300">
+                  Every product in our store is designed using cutting-edge AI tools like <span className="font-semibold text-blue-400">ChatGPT</span>, <span className="font-semibold text-blue-400">Cursor</span>, and advanced AI design systems.
                 </p>
-                <p className="text-gray-700">
+                <p className="text-gray-300">
                   We don&apos;t just use AI as a helper - it&apos;s our primary creative force, enabling us to produce professional results at scale.
                 </p>
               </div>
@@ -120,7 +120,7 @@ export default function AboutPage() {
       <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 glow-text">
               Our <span className="text-gradient">Digital Products</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -129,8 +129,8 @@ export default function AboutPage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card-premium group">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="glass-panel group hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 animate-pulse">
                 <Image 
                   src="/images/ebook-icon.svg" 
                   alt="AI Tools Mastery Guide" 
@@ -139,17 +139,17 @@ export default function AboutPage() {
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">AI Tools Mastery Guide 2025</h3>
-              <p className="text-gray-700 mb-6">
+              <h3 className="text-xl font-bold text-white mb-4 glow-text">AI Tools Mastery Guide 2025</h3>
+              <p className="text-gray-300 mb-6">
                 Comprehensive 30-page guide covering the latest AI tools, proven workflows, and step-by-step strategies for building successful AI-powered businesses.
               </p>
-              <Link href="/products/ebook" className="btn-primary text-sm inline-block">
+              <Link href="/products/ebook" className="neon-button text-sm inline-block">
                 Explore Guide →
               </Link>
             </div>
             
-            <div className="card-premium group">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="glass-panel group hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 animate-pulse">
                 <Image 
                   src="/images/prompts-icon.svg" 
                   alt="AI Prompts Arsenal" 
@@ -158,17 +158,17 @@ export default function AboutPage() {
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">AI Prompts Arsenal 2025</h3>
-              <p className="text-gray-700 mb-6">
+              <h3 className="text-xl font-bold text-white mb-4 glow-text">AI Prompts Arsenal 2025</h3>
+              <p className="text-gray-300 mb-6">
                 Battle-tested prompt collections for content creation, marketing automation, and AI-powered business growth. Professional-grade prompts that deliver results.
               </p>
-              <Link href="/products/prompts" className="btn-primary text-sm inline-block">
+              <Link href="/products/prompts" className="neon-button text-sm inline-block">
                 Get Prompts →
               </Link>
             </div>
             
-            <div className="card-premium group">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="glass-panel group hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-accent flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 animate-pulse">
                 <Image 
                   src="/images/coaching-icon.svg" 
                   alt="AI Business Strategy Session" 
@@ -177,11 +177,11 @@ export default function AboutPage() {
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">AI Business Strategy Session 2025</h3>
-              <p className="text-gray-700 mb-6">
+              <h3 className="text-xl font-bold text-white mb-4 glow-text">AI Business Strategy Session 2025</h3>
+              <p className="text-gray-300 mb-6">
                 Personalized 60-minute strategy sessions to accelerate your AI business journey. Get expert guidance and an implementation report tailored to your specific goals and challenges.
               </p>
-              <Link href="/products/coaching" className="btn-primary text-sm inline-block">
+              <Link href="/products/coaching" className="neon-button text-sm inline-block">
                 Book Strategy Session →
               </Link>
             </div>
@@ -193,7 +193,7 @@ export default function AboutPage() {
       <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 glow-text">
               Our <span className="text-gradient-accent">AI Toolkit</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">

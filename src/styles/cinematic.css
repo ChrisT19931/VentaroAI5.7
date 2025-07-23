@@ -1,0 +1,258 @@
+/* Cinematic UI Styles */
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(96, 165, 250, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Neon Button */
+.neon-button {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  background-size: 200% 200%;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.neon-button:hover::before {
+  left: 100%;
+}
+
+.neon-button:hover {
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.5),
+    0 0 40px rgba(139, 92, 246, 0.3),
+    0 0 60px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Particle Field Animation */
+.particle-field {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(96, 165, 250, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(96, 165, 250, 0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(139, 92, 246, 0.4), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(96, 165, 250, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: particleFloat 20s linear infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-200px, -100px, 0);
+  }
+}
+
+/* 3D Product Card */
+.product-card-3d {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.product-card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(96, 165, 250, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(96, 165, 250, 0.6);
+}
+
+/* HUD Style Elements */
+.hud-element {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  border-radius: 8px;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hud-element::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  animation: scanLine 2s linear infinite;
+}
+
+@keyframes scanLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Cinematic Modal */
+.cinematic-modal {
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  border-radius: 20px;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 50px rgba(96, 165, 250, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Glowing Text */
+.glow-text {
+  text-shadow: 
+    0 0 10px rgba(96, 165, 250, 0.5),
+    0 0 20px rgba(96, 165, 250, 0.3),
+    0 0 30px rgba(96, 165, 250, 0.2);
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 
+      0 0 10px rgba(96, 165, 250, 0.5),
+      0 0 20px rgba(96, 165, 250, 0.3),
+      0 0 30px rgba(96, 165, 250, 0.2);
+  }
+  to {
+    text-shadow: 
+      0 0 15px rgba(96, 165, 250, 0.8),
+      0 0 25px rgba(96, 165, 250, 0.5),
+      0 0 35px rgba(96, 165, 250, 0.3);
+  }
+}
+
+/* Success Animation */
+.success-vault {
+  animation: vaultOpen 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes vaultOpen {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(-90deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .glass-panel {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .neon-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .product-card-3d:hover {
+    transform: translateZ(10px);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-panel {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #ffffff;
+  }
+  
+  .neon-button {
+    background: #3b82f6;
+    border: 2px solid #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .particle-field,
+  .neon-button,
+  .glow-text {
+    animation: none;
+  }
+  
+  .product-card-3d:hover {
+    transform: none;
+  }
+}

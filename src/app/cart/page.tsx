@@ -7,39 +7,32 @@ import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { getStripe } from '@/lib/stripe-client';
 import { useToastContext } from '@/context/ToastContext';
+import dynamic from 'next/dynamic';
+
+const CheckoutModal = dynamic(() => import('@/components/3d/CheckoutModal'), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"><div className="text-white">Loading...</div></div>
+});
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart();
   const toast = useToastContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
   const router = useRouter();
 
-  const validateEmail = (email: string) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
-
   const handleCheckout = async () => {
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address');
-      return;
-    }
-    
-    setEmailError('');
     setIsLoading(true);
     
     try {
-      // Create checkout session with guest email
+      // Create checkout session without email requirement
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          cartItems: items,
-          guestEmail: email 
+          cartItems: items
         }),
       });
       
@@ -224,44 +217,17 @@ export default function CartPage() {
               
               <div className="mt-6 space-y-4">
                 <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-                  <h3 className="font-medium text-blue-800">Checkout</h3>
-                  <p className="text-sm text-blue-700 mt-1">Enter your email to continue with checkout. You'll receive your download links via email.</p>
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="your@email.com"
-                  />
-                  {emailError && (
-                    <p className="mt-1 text-sm text-red-600">{emailError}</p>
-                  )}
+                  <h3 className="font-medium text-blue-800">Instant Checkout</h3>
+                  <p className="text-sm text-blue-700 mt-1">Complete your purchase and get instant access to your digital products.</p>
                 </div>
                 
                 <div className="flex flex-col space-y-2">
                   <button
-                    onClick={handleCheckout}
+                    onClick={() => setShowCheckoutModal(true)}
                     disabled={isLoading}
                     className="w-full btn-primary py-3 flex items-center justify-center"
                   >
-                    {isLoading ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing...
-                      </>
-                    ) : (
-                      'Proceed to Checkout'
-                    )}
+                    Buy Now - Instant Access
                   </button>
                 </div>
               </div>
@@ -281,6 +247,16 @@ export default function CartPage() {
           </div>
         </div>
       </div>
+      
+      {/* Checkout Modal */}
+      {showCheckoutModal && (
+        <CheckoutModal
+          items={items}
+          total={total}
+          onClose={() => setShowCheckoutModal(false)}
+          onCheckout={handleCheckout}
+        />
+      )}
     </div>
   );
 }

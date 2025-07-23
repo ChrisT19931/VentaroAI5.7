@@ -50,9 +50,6 @@ export default function CheckoutSuccessPage() {
         .single();
 
       if (orderError) throw orderError;
-      
-      // Get the guest email from the order
-      const guestEmail = order.guest_email;
 
       // Fetch order items with product details
       const { data: orderItems, error: itemsError } = await supabase
@@ -71,18 +68,18 @@ export default function CheckoutSuccessPage() {
       // Generate download URLs for digital products with secure access tokens
       const itemsWithDownloadUrls = await Promise.all(
         (orderItems || []).map(async (item: any) => {
-          // Generate a secure token for download access
+          // Generate a secure token for download access using session and order data
           const productId = item.products?.id;
-          const token = Buffer.from(`${orderId}-${productId}-${guestEmail}`).toString('base64');
+          const token = Buffer.from(`${sessionId}-${orderId}-${productId}`).toString('base64');
           
           // Determine the download URL based on product type
           let downloadUrl = '';
           if (item.products?.name.includes('E-book') || item.products?.name.includes('AI Tools Mastery')) {
-            downloadUrl = `/downloads/1?email=${encodeURIComponent(guestEmail)}&token=${encodeURIComponent(token)}`;
+            downloadUrl = `/downloads/1?session_id=${encodeURIComponent(sessionId)}&token=${encodeURIComponent(token)}`;
           } else if (item.products?.name.includes('AI Prompts') || item.products?.name.includes('Prompts Arsenal')) {
-            downloadUrl = `/downloads/2?email=${encodeURIComponent(guestEmail)}&token=${encodeURIComponent(token)}`;
+            downloadUrl = `/downloads/2?session_id=${encodeURIComponent(sessionId)}&token=${encodeURIComponent(token)}`;
           } else if (item.products?.name.includes('Coaching') || item.products?.name.includes('Strategy Session')) {
-            downloadUrl = `/downloads/3?email=${encodeURIComponent(guestEmail)}&token=${encodeURIComponent(token)}`;
+            downloadUrl = `/downloads/3?session_id=${encodeURIComponent(sessionId)}&token=${encodeURIComponent(token)}`;
           }
           
           // Update the order item with the download URL
@@ -248,7 +245,7 @@ export default function CheckoutSuccessPage() {
                         Your digital products (E-book and AI Prompts) are available for immediate download using the links above. For coaching calls, you can schedule your session using the link provided.
                       </p>
                       <p className="mt-2">
-                        We've also sent a confirmation email with these download links to the email address you provided during checkout.
+                        Save this page or bookmark your download links for future access to your purchased content.
                       </p>
                     </div>
                   </div>

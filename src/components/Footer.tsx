@@ -1,19 +1,61 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage(null);
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitMessage({ type: 'success', text: data.message || 'Successfully subscribed!' });
+        setEmail('');
+      } else {
+        setSubmitMessage({ type: 'error', text: data.error || 'Failed to subscribe. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitMessage({ type: 'error', text: 'Something went wrong. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 max-w-6xl py-12">
+    <footer className="bg-black text-white relative overflow-hidden">
+      {/* Cinematic background effects */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-gray-900/50 to-transparent"></div>
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-10 w-32 h-32 border border-blue-500/30 rotate-45 animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-24 h-24 border border-purple-500/30 rotate-12 animate-pulse delay-1000"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 max-w-6xl py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">Ventaro AI</h3>
+            <h3 className="text-xl font-bold text-white glow-text">Ventaro AI</h3>
             <p className="text-white">
               AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions designed to enhance your workflow.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/in/christ111/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <a href="https://www.linkedin.com/in/christ111/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20">
                 <span className="sr-only">LinkedIn</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -22,64 +64,70 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white relative">
+              Quick Links
+              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white">
+                <Link href="/" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-gray-400 hover:text-white">
+                <Link href="/products" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white">
+                <Link href="/about" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white">
+                <Link href="/contact" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
                   Contact
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Customer Service</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white relative">
+              Customer Service
+              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/faq" className="text-gray-400 hover:text-white">
+                <Link href="/faq" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
                   FAQ
                 </Link>
               </li>
               <li>
-                
-              </li>
-              <li>
-                <Link href="/terms#refund-policy" className="text-gray-400 hover:text-white">
+                <Link href="/terms#refund-policy" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
                   Refund Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-400 hover:text-white">
+                <Link href="/terms" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-white">
+                <Link href="/privacy" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
                   Privacy Policy
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Newsletter</h3>
+            <h3 className="text-lg font-semibold mb-4 text-white relative">
+              Newsletter
+              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500"></div>
+            </h3>
             <p className="text-gray-400 mb-4">
               Subscribe to our newsletter for the latest updates and offers.
             </p>
-            <form className="space-y-2">
+            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <div>
                 <label htmlFor="email" className="sr-only">Email address</label>
                 <input
@@ -87,21 +135,33 @@ export default function Footer() {
                   name="email"
                   type="email"
                   required
-                  className="w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSubmitting}
+                  className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm text-white placeholder-gray-400 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 disabled:opacity-50"
                   placeholder="Your email"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                Subscribe
+                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
               </button>
+              {submitMessage && (
+                <p className={`text-sm mt-2 ${
+                  submitMessage.type === 'success' ? 'text-green-400' : 'text-red-400'
+                }`}>
+                  {submitMessage.text}
+                </p>
+              )}
             </form>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">&copy; {currentYear} <span className="text-white">Ventaro AI</span> Digital Store. All rights reserved.</p>
+        <div className="border-t border-white/10 mt-8 pt-8 text-center relative">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+          <p className="text-gray-400">&copy; {currentYear} <span className="text-white glow-text">Ventaro AI</span> Digital Store. All rights reserved.</p>
         </div>
       </div>
     </footer>

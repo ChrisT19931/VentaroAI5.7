@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { cartItems, guestEmail } = await request.json();
+    const { cartItems } = await request.json();
 
     if (!cartItems || !cartItems.length) {
       return NextResponse.json(
@@ -25,16 +25,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    if (!guestEmail) {
-      return NextResponse.json(
-        { error: 'Email is required for checkout' },
-        { status: 400 }
-      );
-    }
-
-    // Initialize variables for user data
-    const userEmail = guestEmail;
     let orderId: string;
     const supabase = await createClient();
 
@@ -115,7 +105,6 @@ export async function POST(request: NextRequest) {
           user_id: guestId,
           status: 'pending',
           total: orderTotal,
-          guest_email: userEmail,
         },
       ])
       .select()
@@ -152,7 +141,6 @@ export async function POST(request: NextRequest) {
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
-      customer_email: userEmail,
       line_items: lineItems,
       mode: 'payment',
       success_url: `${request.headers.get('origin')}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
@@ -161,29 +149,10 @@ export async function POST(request: NextRequest) {
         order_id: orderData.id,
         user_id: guestId,
         is_guest: 'true',
-        guest_email: userEmail,
       },
     });
 
-    // Send confirmation email with download links
-    const downloadLinks = productMetadata
-      .filter((product: any) => product.download_url)
-      .map((product: any) => ({
-        productName: product.name,
-        url: `${request.headers.get('origin')}${product.download_url}`
-      }));
-    
-    // Send email asynchronously (don't await to avoid delaying response)
-    sendOrderConfirmationEmail({
-      email: userEmail,
-      orderNumber: orderData.id.slice(0, 8),
-      orderItems: productMetadata,
-      total: orderTotal,
-      downloadLinks,
-      isGuest: true
-    }).catch(error => {
-      console.error('Failed to send confirmation email:', error);
-    });
+    // No email sending - instant access via Stripe payment completion
     
     return NextResponse.json({ 
       url: session.url,

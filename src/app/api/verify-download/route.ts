@@ -1,22 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
 
-// Verify token for guest users
-const verifyToken = (token: string, guestEmail: string, productType: string): boolean => {
+// Verify token for guest users using session and order data
+const verifyToken = (token: string, sessionId: string, orderId: string, productId: string): boolean => {
   try {
     // Decode the token
     const decodedToken = Buffer.from(token, 'base64').toString('utf-8');
     
-    // Token format: orderId-productId-email
-    const [orderId, productId, tokenEmail] = decodedToken.split('-');
+    // Token format: sessionId-orderId-productId
+    const [tokenSessionId, tokenOrderId, tokenProductId] = decodedToken.split('-');
     
-    // Verify the email matches
-    if (tokenEmail !== guestEmail) {
+    // Verify all components match
+    if (tokenSessionId !== sessionId || tokenOrderId !== orderId || tokenProductId !== productId) {
       return false;
     }
-    
-    // In a production environment, you would want to verify the orderId and productId
-    // by querying the database to ensure they match
     
     return true;
   } catch (error) {
@@ -27,9 +24,9 @@ const verifyToken = (token: string, guestEmail: string, productType: string): bo
 
 export async function POST(request: NextRequest) {
   try {
-      const { productId, productType, guestEmail, orderToken } = await request.json();
+      const { productId, productType, sessionId, orderToken, orderId } = await request.json();
 
-      if (!guestEmail || !orderToken || !productType) {
+      if (!sessionId || !orderToken || !productType || !orderId || !productId) {
         return NextResponse.json(
           { error: 'Missing required parameters' },
           { status: 400 }
@@ -37,7 +34,7 @@ export async function POST(request: NextRequest) {
       }
       
       // Verify the token for guest access
-      const isValidToken = verifyToken(orderToken, guestEmail, productType);
+      const isValidToken = verifyToken(orderToken, sessionId, orderId, productId);
       
       if (!isValidToken) {
         return NextResponse.json({ hasAccess: false });
@@ -62,7 +59,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if user has any completed orders containing the specified product type
+    // Check if the specific order exists and is completed
     let query = supabase
       .from('orders')
       .select(`
@@ -77,7 +74,7 @@ export async function POST(request: NextRequest) {
         )
       `)
       .eq('status', 'completed')
-      .eq('guest_email', guestEmail);
+      .eq('id', orderId);
     
     const { data: orders, error: ordersError } = await query;
 

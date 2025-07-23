@@ -20,8 +20,8 @@ export default function DynamicDownloadPage() {
     fileSize: ''
   });
   
-  // Get email and token from URL parameters
-  const email = searchParams.get('email');
+  // Get session_id and token from URL parameters
+  const sessionId = searchParams.get('session_id');
   const token = searchParams.get('token');
 
   useEffect(() => {
@@ -31,23 +31,29 @@ export default function DynamicDownloadPage() {
         return;
       }
 
-      // If no email or token, redirect to product page to purchase
-      if (!email || !token) {
+      // If no session_id or token, redirect to product page to purchase
+      if (!sessionId || !token) {
         router.push(`/products/${params.id}`);
         return;
       }
 
       try {
-        // Check if user has purchased the product using email and token
+        // Extract orderId from token for verification
+        const decodedToken = Buffer.from(token, 'base64').toString('utf-8');
+        const [tokenSessionId, orderId, productId] = decodedToken.split('-');
+        const productIdString = Array.isArray(params.id) ? params.id[0] : params.id;
+        
+        // Check if user has purchased the product using session and token
         const response = await fetch('/api/verify-download', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            guestEmail: email,
+            sessionId: sessionId,
             orderToken: token,
-            productId: params.id,
+            orderId: orderId,
+            productId: productIdString,
             productType: 'any' // Check any product type
           })
         });
@@ -56,7 +62,7 @@ export default function DynamicDownloadPage() {
         
         if (data.hasAccess) {
           // Get product info based on ID
-          setProductInfo(getProductInfo(params.id));
+          setProductInfo(getProductInfo(productIdString));
           setHasAccess(true);
         } else {
           setHasAccess(false);
@@ -71,7 +77,7 @@ export default function DynamicDownloadPage() {
     };
 
     verifyAccess();
-  }, [email, token, router, params.id]);
+  }, [sessionId, token, router, params.id]);
 
   const handleDownload = () => {
     if (!hasAccess) {
@@ -120,13 +126,14 @@ export default function DynamicDownloadPage() {
 
   // Render appropriate download component based on product ID
   const renderDownloadComponent = () => {
-    switch(params.id) {
+    const productIdString = Array.isArray(params.id) ? params.id[0] : params.id;
+    switch(productIdString) {
       case '1':
         return <DownloadEbook productInfo={productInfo} handleDownload={handleDownload} />;
       case '2':
         return <DownloadPrompts productInfo={productInfo} handleDownload={handleDownload} />;
       case '3':
-        return <DownloadCoaching productInfo={productInfo} email={email} />;
+        return <DownloadCoaching productInfo={productInfo} />;
       default:
         return null;
     }
@@ -137,7 +144,7 @@ export default function DynamicDownloadPage() {
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-white">Verifying access...</p>
+          <p className="text-white glow-text">Verifying access...</p>
         </div>
       </div>
     );
@@ -147,18 +154,18 @@ export default function DynamicDownloadPage() {
     return (
       <div className="min-h-screen bg-black py-12">
         <div className="container mx-auto px-4 max-w-2xl text-center">
-          <div className="glass-card p-8">
-            <div className="text-6xl mb-6">🔒</div>
-            <h1 className="text-3xl font-bold text-white mb-4">Access Denied</h1>
+          <div className="glass-panel p-8">
+            <div className="text-6xl mb-6 animate-pulse">🔒</div>
+            <h1 className="text-3xl font-bold text-white mb-4 glow-text">Access Denied</h1>
             <p className="text-gray-300 mb-6">
               You don&apos;t have access to this download. Please purchase the product first.
             </p>
             <div className="space-y-4">
-              <Link href={`/products/${params.id}`} className="btn-primary inline-block">
+              <Link href={`/products/${Array.isArray(params.id) ? params.id[0] : params.id}`} className="neon-button inline-block">
                 Purchase Product
               </Link>
               <br />
-              <Link href="/" className="text-blue-400 hover:text-blue-300">
+              <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors duration-300">
                 Return to Home
               </Link>
             </div>
@@ -171,27 +178,39 @@ export default function DynamicDownloadPage() {
   return (
     <div className="min-h-screen bg-black py-12">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="glass-card p-8">
+        <div className="glass-panel p-8">
           <div className="text-center mb-8">
-            <div className="text-6xl mb-4">📚</div>
-            <h1 className="text-3xl font-bold text-white mb-2">{productInfo.name} Download</h1>
+            <div className="text-6xl mb-4 animate-bounce">📚</div>
+            <h1 className="text-3xl font-bold text-white mb-2 glow-text">{productInfo.name} Download</h1>
             <p className="text-gray-300">Thank you for your purchase! Your content is ready for download.</p>
           </div>
 
           {renderDownloadComponent()}
 
-          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6 mt-8">
-            <h3 className="text-lg font-bold text-white mb-3">📋 Important Notes</h3>
+          <div className="glass-panel border border-blue-500/30 rounded-lg p-6 mt-8">
+            <h3 className="text-lg font-bold text-white mb-3 glow-text">📋 Important Notes</h3>
             <ul className="space-y-2 text-gray-300 text-sm">
-              <li>• This download link is valid for the email used during purchase only</li>
-              <li>• You can re-download this file anytime using the link in your confirmation email</li>
-              <li>• For technical support, contact support@ventaroai.com</li>
-              <li>• File format: PDF (compatible with all devices)</li>
+              <li className="flex items-center gap-2">
+                <span className="text-blue-400 animate-pulse">•</span>
+                This download link is valid for your purchase session only
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-blue-400 animate-pulse">•</span>
+                Save this page or bookmark the link for future access
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-blue-400 animate-pulse">•</span>
+                For technical support, contact support@ventaroai.com
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-blue-400 animate-pulse">•</span>
+                File format: PDF (compatible with all devices)
+              </li>
             </ul>
           </div>
 
           <div className="text-center mt-8">
-            <Link href="/products" className="text-blue-400 hover:text-blue-300">
+            <Link href="/products" className="text-blue-400 hover:text-blue-300 transition-colors duration-300 glow-text">
               Browse More Products
             </Link>
           </div>

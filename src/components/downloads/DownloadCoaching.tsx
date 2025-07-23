@@ -6,10 +6,9 @@ interface DownloadCoachingProps {
     fileName: string;
     fileSize: string;
   };
-  email?: string;
 }
 
-const DownloadCoaching: React.FC<DownloadCoachingProps> = ({ productInfo, email }) => {
+const DownloadCoaching: React.FC<DownloadCoachingProps> = ({ productInfo }) => {
   return (
     <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 mb-8">
       <h2 className="text-xl font-bold text-white mb-4">🚀 Your Coaching Session</h2>
@@ -27,7 +26,7 @@ const DownloadCoaching: React.FC<DownloadCoachingProps> = ({ productInfo, email 
         <div className="bg-green-900/30 p-4 rounded-lg mb-4">
           <h3 className="text-white font-medium mb-2">Booking Details</h3>
           <p className="text-gray-300 text-sm mb-1">• Session: 60-minute AI Business Strategy Session</p>
-          <p className="text-gray-300 text-sm mb-1">• Email: {email || 'Your purchase email'}</p>
+          <p className="text-gray-300 text-sm mb-1">• Purchased: Confirmed</p>
           <p className="text-gray-300 text-sm">• Status: <span className="text-green-400 font-medium">Confirmed</span></p>
         </div>
         
