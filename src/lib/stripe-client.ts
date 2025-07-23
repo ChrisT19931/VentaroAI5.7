@@ -10,16 +10,30 @@ let stripePromise: ReturnType<typeof loadStripe> | null = null;
 
 export const getStripe = () => {
   if (!stripePromise) {
-    if (!stripePublishableKey) {
-      console.error('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY environment variable is required');
+    // Check if key is missing or is a placeholder
+    if (!stripePublishableKey || 
+        stripePublishableKey === 'pk_test_placeholder' || 
+        stripePublishableKey.includes('placeholder')) {
+      console.warn('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY not configured or is a placeholder - payment features will not work');
       return null;
     }
     
-    stripePromise = loadStripe(stripePublishableKey);
+    try {
+      stripePromise = loadStripe(stripePublishableKey);
+    } catch (error) {
+      console.error('Failed to initialize Stripe client:', error);
+      return null;
+    }
   }
   
   return stripePromise;
 };
 
-// Export the key for debugging purposes
-export const getStripePublishableKey = () => stripePublishableKey;
+// Export the key for debugging purposes (with safety check)
+export const getStripePublishableKey = () => {
+  if (stripePublishableKey === 'pk_test_placeholder' || 
+      (stripePublishableKey && stripePublishableKey.includes('placeholder'))) {
+    return 'PLACEHOLDER_KEY';
+  }
+  return stripePublishableKey;
+};
