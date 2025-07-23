@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { cartItems, userId, guestEmail } = await request.json();
+    const { cartItems, guestEmail } = await request.json();
 
     if (!cartItems || !cartItems.length) {
       return NextResponse.json(
@@ -26,39 +26,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Initialize variables for user data
-    let userEmail: string;
-    let orderId: string;
-    let isGuestCheckout = false;
-    const supabase = await createClient();
-    
-    // Handle guest checkout vs. authenticated user
-    if (userId) {
-      // Get user email for Stripe customer
-      const { data: userData, error: userError } = await supabase
-        .from('profiles')
-        .select('email')
-        .eq('id', userId)
-        .single();
-
-      if (userError || !userData) {
-        return NextResponse.json(
-          { error: 'User not found' },
-          { status: 404 }
-        );
-      }
-      
-      userEmail = userData.email;
-    } else if (guestEmail) {
-      // Guest checkout with email
-      userEmail = guestEmail;
-      isGuestCheckout = true;
-    } else {
+    if (!guestEmail) {
       return NextResponse.json(
-        { error: 'Either userId or guestEmail is required' },
+        { error: 'Email is required for checkout' },
         { status: 400 }
       );
     }
+
+    // Initialize variables for user data
+    const userEmail = guestEmail;
+    let orderId: string;
+    const supabase = await createClient();
 
     // Fetch product details from database to ensure price integrity
     const productIds = cartItems.map((item: any) => item.id);
@@ -127,17 +105,17 @@ export async function POST(request: NextRequest) {
     // Create a new order in the database
     const supabaseAdmin = await createClient();
     
-    // For guest checkout, create a temporary user ID
-    const effectiveUserId = isGuestCheckout ? `guest_${uuidv4()}` : userId;
+    // Create a guest ID for the order
+    const guestId = `guest_${uuidv4()}`;
     
     const { data: orderData, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert([
         {
-          user_id: effectiveUserId,
+          user_id: guestId,
           status: 'pending',
           total: orderTotal,
-          guest_email: isGuestCheckout ? userEmail : null,
+          guest_email: userEmail,
         },
       ])
       .select()
@@ -177,13 +155,13 @@ export async function POST(request: NextRequest) {
       customer_email: userEmail,
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${request.headers.get('origin')}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}${isGuestCheckout ? '&guest=true' : ''}`,
+      success_url: `${request.headers.get('origin')}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
       cancel_url: `${request.headers.get('origin')}/cart?canceled=true`,
       metadata: {
         order_id: orderData.id,
-        user_id: effectiveUserId,
-        is_guest: isGuestCheckout ? 'true' : 'false',
-        guest_email: isGuestCheckout ? userEmail : null,
+        user_id: guestId,
+        is_guest: 'true',
+        guest_email: userEmail,
       },
     });
 
@@ -202,7 +180,7 @@ export async function POST(request: NextRequest) {
       orderItems: productMetadata,
       total: orderTotal,
       downloadLinks,
-      isGuest: isGuestCheckout
+      isGuest: true
     }).catch(error => {
       console.error('Failed to send confirmation email:', error);
     });

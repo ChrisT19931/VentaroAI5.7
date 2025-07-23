@@ -27,22 +27,20 @@ const verifyToken = (token: string, guestEmail: string, productType: string): bo
 
 export async function POST(request: NextRequest) {
   try {
-      const { userId, productType, guestEmail, orderToken } = await request.json();
+      const { productId, productType, guestEmail, orderToken } = await request.json();
 
-      if ((!userId && !guestEmail) || !productType) {
+      if (!guestEmail || !orderToken || !productType) {
         return NextResponse.json(
           { error: 'Missing required parameters' },
           { status: 400 }
         );
       }
       
-      // For guest users, verify the token if provided
-      if (guestEmail && orderToken) {
-        const isValidToken = verifyToken(orderToken, guestEmail, productType);
-        
-        if (!isValidToken) {
-          return NextResponse.json({ hasAccess: false });
-        }
+      // Verify the token for guest access
+      const isValidToken = verifyToken(orderToken, guestEmail, productType);
+      
+      if (!isValidToken) {
+        return NextResponse.json({ hasAccess: false });
       }
 
     const supabase = await createClient();
@@ -50,8 +48,9 @@ export async function POST(request: NextRequest) {
     // Define product name patterns to match against
     const productPatterns = {
       ebook: ['E-book', 'ebook', 'AI Tools Mastery Guide 2025'],
-  prompts: ['AI Prompts', 'prompts', 'AI Prompts Arsenal 2025'],
-  coaching: ['Coaching', 'coaching', 'AI Business Strategy Session 2025']
+      prompts: ['AI Prompts', 'prompts', 'AI Prompts Arsenal 2025'],
+      coaching: ['Coaching', 'coaching', 'AI Business Strategy Session 2025'],
+      any: ['E-book', 'ebook', 'AI Tools Mastery Guide 2025', 'AI Prompts', 'prompts', 'AI Prompts Arsenal 2025', 'Coaching', 'coaching', 'AI Business Strategy Session 2025']
     };
 
     const patterns = productPatterns[productType as keyof typeof productPatterns];
@@ -77,14 +76,8 @@ export async function POST(request: NextRequest) {
           )
         )
       `)
-      .eq('status', 'completed');
-      
-    // Filter by user_id or guest_email depending on what was provided
-    if (userId) {
-      query = query.eq('user_id', userId);
-    } else if (guestEmail) {
-      query = query.eq('guest_email', guestEmail);
-    }
+      .eq('status', 'completed')
+      .eq('guest_email', guestEmail);
     
     const { data: orders, error: ordersError } = await query;
 

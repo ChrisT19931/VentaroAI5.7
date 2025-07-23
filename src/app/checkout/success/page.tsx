@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { supabase } from '@/lib/supabase';
 
@@ -11,7 +10,6 @@ export default function CheckoutSuccessPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useAuth();
   const { clearCart } = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -25,17 +23,12 @@ export default function CheckoutSuccessPage() {
       return;
     }
 
-    if (!user) {
-      router.push('/login');
-      return;
-    }
-
     // Clear the cart after successful checkout
     clearCart();
     
     // Fetch order details
     fetchOrderDetails();
-  }, [sessionId, orderId, user, router, clearCart]);
+  }, [sessionId, orderId, router, clearCart]);
 
   const fetchOrderDetails = async () => {
     try {
@@ -45,8 +38,7 @@ export default function CheckoutSuccessPage() {
       const { error: updateError } = await supabase
         .from('orders')
         .update({ status: 'completed' })
-        .eq('id', orderId)
-        .eq('user_id', user?.id);
+        .eq('id', orderId);
 
       if (updateError) throw updateError;
 
@@ -55,10 +47,12 @@ export default function CheckoutSuccessPage() {
         .from('orders')
         .select('*')
         .eq('id', orderId)
-        .eq('user_id', user?.id)
         .single();
 
       if (orderError) throw orderError;
+      
+      // Get the guest email from the order
+      const guestEmail = order.guest_email;
 
       // Fetch order items with product details
       const { data: orderItems, error: itemsError } = await supabase
@@ -74,25 +68,29 @@ export default function CheckoutSuccessPage() {
 
       if (itemsError) throw itemsError;
 
-      // Generate download URLs for digital products
+      // Generate download URLs for digital products with secure access tokens
       const itemsWithDownloadUrls = await Promise.all(
         (orderItems || []).map(async (item: any) => {
-          // If download URL already exists, use it
-          if (item.download_url) {
-            return item;
+          // Generate a secure token for download access
+          const productId = item.products?.id;
+          const token = Buffer.from(`${orderId}-${productId}-${guestEmail}`).toString('base64');
+          
+          // Determine the download URL based on product type
+          let downloadUrl = '';
+          if (item.products?.name.includes('E-book') || item.products?.name.includes('AI Tools Mastery')) {
+            downloadUrl = `/downloads/1?email=${encodeURIComponent(guestEmail)}&token=${encodeURIComponent(token)}`;
+          } else if (item.products?.name.includes('AI Prompts') || item.products?.name.includes('Prompts Arsenal')) {
+            downloadUrl = `/downloads/2?email=${encodeURIComponent(guestEmail)}&token=${encodeURIComponent(token)}`;
+          } else if (item.products?.name.includes('Coaching') || item.products?.name.includes('Strategy Session')) {
+            downloadUrl = `/downloads/3?email=${encodeURIComponent(guestEmail)}&token=${encodeURIComponent(token)}`;
           }
-
-          // Generate a download URL for the product file
-          if (item.products?.file_url) {
-            // Create a signed URL that expires in 7 days (604800 seconds)
-            const fileUrl = item.products.file_url;
-            const fileName = fileUrl.split('/').pop() || 'product-file';
-            
-            // Update the order item with the download URL
+          
+          // Update the order item with the download URL
+          if (downloadUrl) {
             const { error: updateItemError } = await supabase
               .from('order_items')
               .update({ 
-                download_url: item.products.file_url 
+                download_url: downloadUrl 
               })
               .eq('id', item.id);
 
@@ -102,7 +100,7 @@ export default function CheckoutSuccessPage() {
 
             return {
               ...item,
-              download_url: item.products.file_url
+              download_url: downloadUrl
             };
           }
 
@@ -247,10 +245,10 @@ export default function CheckoutSuccessPage() {
                     <h3 className="text-sm font-medium text-blue-800">Your Purchase Information</h3>
                     <div className="mt-2 text-sm text-blue-700">
                       <p>
-                        Your digital products (E-book and AI Prompts) are available for immediate download using the links above. For coaching calls, you&apos;ll receive an email with scheduling instructions within 24 hours.
+                        Your digital products (E-book and AI Prompts) are available for immediate download using the links above. For coaching calls, you can schedule your session using the link provided.
                       </p>
                       <p className="mt-2">
-                        All purchase information and download links are also accessible from your account page at any time.
+                        We've also sent a confirmation email with these download links to the email address you provided during checkout.
                       </p>
                     </div>
                   </div>
@@ -261,8 +259,8 @@ export default function CheckoutSuccessPage() {
                 <Link href="/products" className="btn-outline">
                   Continue Shopping
                 </Link>
-                <Link href="/account" className="btn-primary">
-                  View My Account
+                <Link href="/" className="btn-primary">
+                  Return to Home
                 </Link>
               </div>
             </div>

@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { AuthProvider } from '@/context/AuthContext'
 import { CartProvider } from '@/context/CartContext'
 import { ToastProvider } from '@/context/ToastContext'
 
@@ -45,17 +44,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans`}>
-        <AuthProvider>
-          <CartProvider>
-            <ToastProvider>
-              <Navbar />
-              <main>
-                {children}
-              </main>
-              <Footer />
-            </ToastProvider>
-          </CartProvider>
-        </AuthProvider>
+        <CartProvider>
+          <ToastProvider>
+            <Navbar />
+            <main>
+              {children}
+            </main>
+            <Footer />
+          </ToastProvider>
+        </CartProvider>
       </body>
     </html>
   )

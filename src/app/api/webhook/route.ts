@@ -58,13 +58,11 @@ export async function POST(request: NextRequest) {
 
 async function handleCheckoutSessionCompleted(session: any) {
   try {
-    const { order_id, user_id, is_guest, guest_email } = session.metadata;
+    const { order_id, user_id, guest_email } = session.metadata;
 
-    if (!order_id || !user_id) {
-      throw new Error('Missing order_id or user_id in session metadata');
+    if (!order_id || !guest_email) {
+      throw new Error('Missing order_id or guest_email in session metadata');
     }
-    
-    const isGuestCheckout = is_guest === 'true';
 
     // Update order status to completed
     const { error: updateError } = await supabase
@@ -116,35 +114,7 @@ async function handleCheckoutSessionCompleted(session: any) {
     );
 
     // Get user email for sending confirmation
-    let userEmail: string;
-    let firstName: string | null = null;
-    let lastName: string | null = null;
-    
-    if (isGuestCheckout && guest_email) {
-      // For guest checkout, use the email from metadata
-      userEmail = guest_email;
-    } else {
-      // For registered users, get email from profiles
-      const { data: userData, error: userError } = await supabase
-        .from('profiles')
-        .select('email, first_name, last_name')
-        .eq('id', user_id)
-        .single();
-
-      if (userError) {
-        console.error('Error fetching user data:', userError);
-        // If we can't get the user data but have a guest email, use that as fallback
-        if (guest_email) {
-          userEmail = guest_email;
-        } else {
-          throw userError;
-        }
-      } else {
-        userEmail = userData.email;
-        firstName = userData.first_name;
-        lastName = userData.last_name;
-      }
-    }
+    const userEmail = guest_email;
 
     // Fetch updated order items with download URLs
     const { data: updatedItems, error: updatedItemsError } = await supabase
@@ -167,15 +137,12 @@ async function handleCheckoutSessionCompleted(session: any) {
         .map((item: any) => {
           let url = `${process.env.NEXT_PUBLIC_SITE_URL}${item.download_url}`;
           
-          // Add email and token parameters for guest users
-          if (isGuestCheckout && guest_email) {
-            // Create a simple token based on order ID and product ID
-            // In a production environment, you might want to use a more secure token generation method
-            const token = Buffer.from(`${order_id}-${item.products?.id}-${guest_email}`).toString('base64');
-            
-            // Add the parameters to the URL
-            url = `${url}?email=${encodeURIComponent(guest_email)}&token=${encodeURIComponent(token)}`;
-          }
+          // Create a simple token based on order ID and product ID
+          // In a production environment, you might want to use a more secure token generation method
+          const token = Buffer.from(`${order_id}-${item.products?.id}-${guest_email}`).toString('base64');
+          
+          // Add the parameters to the URL
+          url = `${url}?email=${encodeURIComponent(guest_email)}&token=${encodeURIComponent(token)}`;
           
           return {
             productName: item.products?.name || 'Product',
@@ -193,7 +160,7 @@ async function handleCheckoutSessionCompleted(session: any) {
         })),
         total: order.total,
         downloadLinks,
-        isGuest: isGuestCheckout
+        isGuest: true
       });
     }
 

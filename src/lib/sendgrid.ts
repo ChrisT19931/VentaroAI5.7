@@ -92,11 +92,7 @@ export const sendOrderConfirmationEmail = async ({
       <div style="padding: 20px; border: 1px solid #eee; border-top: none;">
         <p>Thank you for your purchase!</p>
         <p>Order Number: <strong>${orderNumber}</strong></p>
-        ${isGuest ? `
-        <div style="margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-left: 4px solid #0070f3;">
-          <p><strong>Guest Checkout:</strong> You completed this purchase as a guest. If you'd like to create an account to easily access your downloads in the future, you can <a href="${process.env.NEXT_PUBLIC_SITE_URL}/signup" style="color: #0070f3; text-decoration: none;">sign up here</a>.</p>
-        </div>
-        ` : ''}
+
         
         <h2 style="margin-top: 20px;">Order Summary</h2>
         <table style="width: 100%; border-collapse: collapse;">

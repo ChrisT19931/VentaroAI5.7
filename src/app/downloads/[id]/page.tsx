@@ -1,16 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
-import { useToastContext } from '@/context/ToastContext';
+import { toast } from 'react-hot-toast';
+import DownloadPrompts from '@/components/downloads/DownloadPrompts';
+import DownloadEbook from '@/components/downloads/DownloadEbook';
+import DownloadCoaching from '@/components/downloads/DownloadCoaching';
 
 export default function DynamicDownloadPage() {
-  const { user } = useAuth();
   const router = useRouter();
   const params = useParams();
-  const toast = useToastContext();
+  const searchParams = useSearchParams();
   const [isVerifying, setIsVerifying] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
   const [productInfo, setProductInfo] = useState({
@@ -18,6 +19,10 @@ export default function DynamicDownloadPage() {
     fileName: '',
     fileSize: ''
   });
+  
+  // Get email and token from URL parameters
+  const email = searchParams.get('email');
+  const token = searchParams.get('token');
 
   useEffect(() => {
     const verifyAccess = async () => {
@@ -26,21 +31,22 @@ export default function DynamicDownloadPage() {
         return;
       }
 
-      // If no user, redirect to login
-      if (!user) {
-        router.push(`/login?redirect=/downloads/${params.id}`);
+      // If no email or token, redirect to product page to purchase
+      if (!email || !token) {
+        router.push(`/products/${params.id}`);
         return;
       }
 
       try {
-        // Check if user has purchased the product
+        // Check if user has purchased the product using email and token
         const response = await fetch('/api/verify-download', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userId: user?.id,
+            guestEmail: email,
+            orderToken: token,
             productId: params.id,
             productType: 'any' // Check any product type
           })
@@ -65,7 +71,7 @@ export default function DynamicDownloadPage() {
     };
 
     verifyAccess();
-  }, [user, router, params.id]);
+  }, [email, token, router, params.id]);
 
   const handleDownload = () => {
     if (!hasAccess) {
@@ -86,8 +92,8 @@ export default function DynamicDownloadPage() {
   };
 
   // Helper function to get product info based on ID
-  const getProductInfo = (id) => {
-    const productMap = {
+  const getProductInfo = (id: string) => {
+    const productMap: Record<string, { name: string; fileName: string; fileSize: string }> = {
       '1': {
         name: 'AI Tools Mastery Guide 2025',
         fileName: 'ai-tools-mastery-guide-2025.pdf',
@@ -110,6 +116,20 @@ export default function DynamicDownloadPage() {
       fileName: 'unknown.pdf',
       fileSize: 'Unknown'
     };
+  };
+
+  // Render appropriate download component based on product ID
+  const renderDownloadComponent = () => {
+    switch(params.id) {
+      case '1':
+        return <DownloadEbook productInfo={productInfo} handleDownload={handleDownload} />;
+      case '2':
+        return <DownloadPrompts productInfo={productInfo} handleDownload={handleDownload} />;
+      case '3':
+        return <DownloadCoaching productInfo={productInfo} email={email} />;
+      default:
+        return null;
+    }
   };
 
   if (isVerifying) {
@@ -138,8 +158,8 @@ export default function DynamicDownloadPage() {
                 Purchase Product
               </Link>
               <br />
-              <Link href="/account" className="text-blue-400 hover:text-blue-300">
-                Check My Purchases
+              <Link href="/" className="text-blue-400 hover:text-blue-300">
+                Return to Home
               </Link>
             </div>
           </div>
@@ -158,41 +178,19 @@ export default function DynamicDownloadPage() {
             <p className="text-gray-300">Thank you for your purchase! Your content is ready for download.</p>
           </div>
 
-          <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-6 mb-8">
-            <h2 className="text-xl font-bold text-white mb-4">📖 Your Purchase</h2>
-            <div className="bg-white/10 rounded-lg p-4 border border-blue-500/20">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <p className="font-medium text-white">{productInfo.name}</p>
-                  <p className="text-sm text-gray-300">{productInfo.fileSize}</p>
-                </div>
-                <svg className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <button 
-                onClick={handleDownload}
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-              >
-                Download Now
-              </button>
-            </div>
-          </div>
+          {renderDownloadComponent()}
 
-          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6">
+          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6 mt-8">
             <h3 className="text-lg font-bold text-white mb-3">📋 Important Notes</h3>
             <ul className="space-y-2 text-gray-300 text-sm">
-              <li>• This download link is valid for your account only</li>
-              <li>• You can re-download this file anytime from your account dashboard</li>
+              <li>• This download link is valid for the email used during purchase only</li>
+              <li>• You can re-download this file anytime using the link in your confirmation email</li>
               <li>• For technical support, contact support@ventaroai.com</li>
               <li>• File format: PDF (compatible with all devices)</li>
             </ul>
           </div>
 
           <div className="text-center mt-8">
-            <Link href="/account" className="text-blue-400 hover:text-blue-300 mr-6">
-              ← Back to My Account
-            </Link>
             <Link href="/products" className="text-blue-400 hover:text-blue-300">
               Browse More Products
             </Link>
