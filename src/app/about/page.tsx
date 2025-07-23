@@ -85,7 +85,7 @@ export default function AboutPage() {
                   Every product in our store is designed using cutting-edge AI tools like <span className="font-semibold text-gray-900">ChatGPT</span>, <span className="font-semibold text-gray-900">Cursor</span>, and advanced AI design systems.
                 </p>
                 <p className="text-gray-700">
-                  We don't just use AI as a helper - it's our primary creative force, enabling us to produce professional results at scale.
+                  We don&apos;t just use AI as a helper - it&apos;s our primary creative force, enabling us to produce professional results at scale.
                 </p>
               </div>
             </div>

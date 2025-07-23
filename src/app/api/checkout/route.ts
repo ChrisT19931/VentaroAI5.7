@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // Create product metadata and line items for Stripe checkout
     const productMetadata = cartItems.map((item: any) => {
-      const product = productsData.find((p) => p.id === item.id);
+      const product = productsData.find((p: any) => p.id === item.id);
       
       if (!product) {
         throw new Error(`Product not found: ${item.id}`);
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
     // Create line items for Stripe checkout
     const lineItems = productMetadata.map((product: any) => {
       // Find the original product data to get the image_url
-      const originalProduct = productsData.find((p) => p.id === product.id);
+      const originalProduct = productsData.find((p: any) => p.id === product.id);
       
       return {
         price_data: {
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
 
     // Calculate order total
     const orderTotal = cartItems.reduce((total: number, item: any) => {
-      const product = productsData.find((p) => p.id === item.id);
+      const product = productsData.find((p: any) => p.id === item.id);
       return total + (product ? product.price * item.quantity : 0);
     }, 0);
 
@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
 
     // Insert order items
     const orderItems = cartItems.map((item: any) => {
-      const product = productsData.find((p) => p.id === item.id);
+      const product = productsData.find((p: any) => p.id === item.id);
       return {
         order_id: orderData.id,
         product_id: item.id,

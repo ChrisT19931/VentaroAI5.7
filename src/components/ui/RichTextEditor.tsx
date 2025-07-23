@@ -90,7 +90,22 @@ type RichTextEditorProps = {
 };
 
 // Default toolbar options
-const DEFAULT_TOOLBAR_OPTIONS = [
+const DEFAULT_TOOLBAR_OPTIONS: Array<
+  | 'bold'
+  | 'italic'
+  | 'underline'
+  | 'strike'
+  | 'heading'
+  | 'link'
+  | 'bulletList'
+  | 'numberedList'
+  | 'alignLeft'
+  | 'alignCenter'
+  | 'alignRight'
+  | 'indent'
+  | 'outdent'
+  | 'clear'
+> = [
   'bold',
   'italic',
   'underline',
@@ -149,7 +164,7 @@ export default function RichTextEditor({
   const execCommand = (command: string, value: string | null = null) => {
     if (disabled) return;
     
-    document.execCommand(command, false, value);
+    document.execCommand(command, false, value || undefined);
     handleContentChange();
     editorRef.current?.focus();
   };

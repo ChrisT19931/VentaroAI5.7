@@ -321,7 +321,7 @@ export function RadioGroup({
   const enhancedChildren = React.Children.map(children, child => {
     if (!React.isValidElement(child)) return child;
     
-    return React.cloneElement(child, {
+    return React.cloneElement(child as React.ReactElement<any>, {
       name,
       checked: child.props.value === currentValue,
       onChange: (checked: boolean) => {

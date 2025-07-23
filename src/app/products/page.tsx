@@ -117,7 +117,7 @@ export default async function ProductsPage() {
         {/* Products Grid */}
         {products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
+            {products.map((product: any) => (
               <div key={product.id} className="card group hover:shadow-xl transition-shadow duration-300">
                 <div className="h-48 bg-gray-200 relative overflow-hidden">
                   {product.image_url ? (

@@ -1,10 +1,18 @@
 import sgMail from '@sendgrid/mail';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error('Missing environment variable SENDGRID_API_KEY');
-}
+// Initialize SendGrid with build-time safety
+const initializeSendGrid = () => {
+  const apiKey = process.env.SENDGRID_API_KEY;
+  if (!apiKey) {
+    console.warn('SENDGRID_API_KEY not configured - email features will not work');
+    return false;
+  }
+  
+  sgMail.setApiKey(apiKey);
+  return true;
+};
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const isConfigured = initializeSendGrid();
 
 type EmailData = {
   to: string;
@@ -15,6 +23,11 @@ type EmailData = {
 };
 
 export const sendEmail = async ({ to, from, subject, text, html }: EmailData) => {
+  if (!isConfigured) {
+    console.warn('SendGrid not configured - skipping email send');
+    return { success: false, error: 'SendGrid not configured' };
+  }
+
   const msg = {
     to,
     from: from || process.env.EMAIL_FROM || 'noreply@ventarosales.com',

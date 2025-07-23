@@ -2,7 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Create Resend client with fallback for build time
+const getResendClient = () => {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn('RESEND_API_KEY not configured - email features will not work');
+    return null;
+  }
+  return new Resend(apiKey);
+};
+
+const resend = getResendClient();
 
 export async function POST(request: NextRequest) {
   try {
@@ -60,7 +70,8 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to customer
     try {
-      await resend.emails.send({
+      if (resend) {
+        await resend.emails.send({
         from: 'Ventaro AI <noreply@ventaroai.com>',
         to: [userEmail],
         subject: 'Coaching Session Intake Form Received - Next Steps',
@@ -119,7 +130,8 @@ export async function POST(request: NextRequest) {
             </div>
           </div>
         `
-      });
+        });
+      }
     } catch (emailError) {
       console.error('Error sending confirmation email:', emailError);
       // Don't fail the request if email fails
@@ -127,7 +139,8 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to admin
     try {
-      await resend.emails.send({
+      if (resend) {
+        await resend.emails.send({
         from: 'Ventaro AI <noreply@ventaroai.com>',
         to: ['chris.t@ventarosales.com'],
         subject: `New Coaching Intake Form - ${projectType} (${timeline})`,
@@ -172,7 +185,8 @@ export async function POST(request: NextRequest) {
             </div>
           </div>
         `
-      });
+        });
+      }
     } catch (adminEmailError) {
       console.error('Error sending admin notification:', adminEmailError);
       // Don't fail the request if admin email fails

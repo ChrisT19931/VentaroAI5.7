@@ -247,7 +247,7 @@ export default function CheckoutSuccessPage() {
                     <h3 className="text-sm font-medium text-blue-800">Your Purchase Information</h3>
                     <div className="mt-2 text-sm text-blue-700">
                       <p>
-                        Your digital products (E-book and AI Prompts) are available for immediate download using the links above. For coaching calls, you'll receive an email with scheduling instructions within 24 hours.
+                        Your digital products (E-book and AI Prompts) are available for immediate download using the links above. For coaching calls, you&apos;ll receive an email with scheduling instructions within 24 hours.
                       </p>
                       <p className="mt-2">
                         All purchase information and download links are also accessible from your account page at any time.

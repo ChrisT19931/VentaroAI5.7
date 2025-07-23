@@ -69,7 +69,7 @@ export default function EbookProductPage() {
               <div className="text-gray-300 space-y-6">
                 <p className="text-lg leading-relaxed">
                   Learn how to make money online with AI tools and AI prompts in 2025 with our comprehensive 200-page guide. 
-                  This isn't just another AI book – it's a complete blueprint for using AI tools and prompts to make money with AI 
+                  This isn&apos;t just another AI book – it&apos;s a complete blueprint for using AI tools and prompts to make money with AI 
                   and build profitable online businesses.
                 </p>
 
@@ -150,7 +150,7 @@ export default function EbookProductPage() {
                 <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
                   <p className="text-red-300 font-semibold mb-2">⚠️ Digital Product - Instant Access</p>
                   <p className="text-gray-300 text-sm">
-                    This is a digital download. You'll receive immediate access to the PDF e-book and all bonus materials after purchase. No physical shipping required.
+                    This is a digital download. You&apos;ll receive immediate access to the PDF e-book and all bonus materials after purchase. No physical shipping required.
                   </p>
                 </div>
               </div>

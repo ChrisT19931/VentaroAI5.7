@@ -1,17 +1,21 @@
 import Stripe from 'stripe';
 
-// Ensure Stripe secret key is available
+// Get Stripe secret key with fallback for build time
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
-if (!stripeSecretKey) {
-  throw new Error('STRIPE_SECRET_KEY environment variable is required');
-}
-
-// Initialize Stripe with explicit configuration for Vercel
-const stripe = new Stripe(stripeSecretKey, {
-  apiVersion: '2023-10-16',
-  typescript: true,
-});
+// Initialize Stripe with build-time safety
+const stripe = (() => {
+  if (!stripeSecretKey) {
+    console.warn('STRIPE_SECRET_KEY not configured - payment features will not work');
+    // Return a mock for build time
+    return null as any;
+  }
+  
+  return new Stripe(stripeSecretKey, {
+    apiVersion: '2023-10-16',
+    typescript: true,
+  });
+})();
 
 export default stripe;
 export { stripe };

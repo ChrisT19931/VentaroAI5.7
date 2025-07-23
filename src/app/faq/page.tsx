@@ -32,7 +32,7 @@ export default function FAQPage() {
         },
         {
           question: 'Do you offer customization services for your products?',
-          answer: 'We don\'t currently offer customization services for our standard products. However, our coaching calls provide personalized guidance tailored to your specific needs.'
+          answer: 'We don&apos;t currently offer customization services for our standard products. However, our coaching calls provide personalized guidance tailored to your specific needs.'
         }
       ]
     },
@@ -45,7 +45,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I download my purchased digital products?',
-          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025), you\'ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
+          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025), you&apos;ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
         },
         {
           question: 'How long do I have access to my purchased digital products?',
@@ -74,7 +74,7 @@ export default function FAQPage() {
         },
         {
           question: 'What if the product doesn\'t work as described?',
-          answer: 'If you encounter any issues with a product not functioning as described, please contact our support team. While we don\'t offer refunds, we\'ll work with you to resolve any technical issues or provide additional support.'
+          answer: 'If you encounter any issues with a product not functioning as described, please contact our support team. While we don&apos;t offer refunds, we&apos;ll work with you to resolve any technical issues or provide additional support.'
         },
         {
           question: 'Where can I find your complete refund policy?',
@@ -91,11 +91,11 @@ export default function FAQPage() {
         },
         {
           question: 'What if I lose my download files?',
-          answer: 'Don\'t worry! You can re-download your purchased products at any time by logging into your account and visiting the "My Downloads" section.'
+          answer: 'Don&apos;t worry! You can re-download your purchased products at any time by logging into your account and visiting the "My Downloads" section.'
         },
         {
           question: 'Do you offer product updates?',
-          answer: 'Yes, for products that receive updates, you\'ll have access to the latest versions at no additional cost. You\'ll be notified by email when significant updates are available.'
+          answer: 'Yes, for products that receive updates, you&apos;ll have access to the latest versions at no additional cost. You&apos;ll be notified by email when significant updates are available.'
         },
         {
           question: 'What are the system requirements for your products?',
@@ -127,7 +127,7 @@ export default function FAQPage() {
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Find answers to common questions about our products, purchasing process, and policies.
-            Can't find what you're looking for? <Link href="/contact" className="text-primary-600 hover:text-primary-500 font-medium">Contact our support team</Link>.
+            Can&apos;t find what you&apos;re looking for? <Link href="/contact" className="text-primary-600 hover:text-primary-500 font-medium">Contact our support team</Link>.
           </p>
         </div>
 

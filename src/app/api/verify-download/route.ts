@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if any order contains a product matching the requested type
-    const hasAccess = orders?.some(order => 
+    const hasAccess = orders?.some((order: any) => 
       order.order_items?.some((item: any) => 
         patterns.some(pattern => 
           item.products?.name?.includes(pattern)

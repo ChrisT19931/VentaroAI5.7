@@ -140,6 +140,82 @@ export interface Database {
           is_admin?: boolean
         }
       }
+      coaching_intakes: {
+        Row: {
+          id: string
+          created_at: string
+          user_id: string
+          user_email: string
+          project_type: string
+          current_hosting: string | null
+          tech_stack: string | null
+          timeline: string
+          specific_challenges: string
+          preferred_times: string
+          timezone: string
+          additional_info: string | null
+          status: string
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          user_id: string
+          user_email: string
+          project_type: string
+          current_hosting?: string | null
+          tech_stack?: string | null
+          timeline: string
+          specific_challenges: string
+          preferred_times: string
+          timezone: string
+          additional_info?: string | null
+          status?: string
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          user_id?: string
+          user_email?: string
+          project_type?: string
+          current_hosting?: string | null
+          tech_stack?: string | null
+          timeline?: string
+          specific_challenges?: string
+          preferred_times?: string
+          timezone?: string
+          additional_info?: string | null
+          status?: string
+        }
+      }
+      contact_submissions: {
+        Row: {
+          id: string
+          created_at: string
+          name: string
+          email: string
+          subject: string
+          product: string | null
+          message: string
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          name: string
+          email: string
+          subject: string
+          product?: string | null
+          message: string
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          name?: string
+          email?: string
+          subject?: string
+          product?: string | null
+          message?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

@@ -52,7 +52,7 @@ export default function AccountPage() {
 
       // Fetch order items for each order
       const ordersWithItems = await Promise.all(
-        (ordersData || []).map(async (order) => {
+        (ordersData || []).map(async (order: any) => {
           const { data: itemsData, error: itemsError } = await supabase
             .from('order_items')
             .select(`
@@ -294,7 +294,7 @@ export default function AccountPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                       </svg>
                       <h3 className="mt-2 text-sm font-medium text-gray-900">No orders found</h3>
-                      <p className="mt-1 text-sm text-gray-500">You haven't placed any orders yet.</p>
+                      <p className="mt-1 text-sm text-gray-500">You haven&apos;t placed any orders yet.</p>
                       <div className="mt-6">
                         <Link href="/products" className="btn-primary">
                           Browse Products
@@ -348,7 +348,7 @@ export default function AccountPage() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
                           <h3 className="mt-2 text-sm font-medium text-gray-900">No downloads available</h3>
-                          <p className="mt-1 text-sm text-gray-500">You don't have any downloadable products yet.</p>
+                          <p className="mt-1 text-sm text-gray-500">You don&apos;t have any downloadable products yet.</p>
                           <div className="mt-6">
                             <Link href="/products" className="btn-primary">
                               Browse Products

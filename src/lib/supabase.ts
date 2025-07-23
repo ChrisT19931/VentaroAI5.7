@@ -42,5 +42,18 @@ export const supabase = (() => {
 })();
 
 // Create a Supabase client with the service role key for admin operations
-export const supabaseAdmin = (supabaseUrl: string, supabaseKey: string) =>
+export const createAdminClient = (supabaseUrl: string, supabaseKey: string) =>
   createSupabaseClient<Database>(supabaseUrl, supabaseKey);
+
+// Create admin client instance
+export const supabaseAdmin = (() => {
+  const adminUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const adminKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+  
+  if (!adminUrl || !adminKey) {
+    console.warn('Supabase admin not configured - admin features may not work');
+    return null as any;
+  }
+  
+  return createSupabaseClient<Database>(adminUrl, adminKey);
+})();
