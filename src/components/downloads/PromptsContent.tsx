@@ -1,19 +1,26 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import { useToastContext } from '@/context/ToastContext';
 
 export default function PromptsContent() {
   const { user } = useAuth();
   const router = useRouter();
+  const toast = useToastContext();
   const [isVerifying, setIsVerifying] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
 
+  const searchParams = useSearchParams();
+  const guestEmail = searchParams.get('email');
+  const orderToken = searchParams.get('token');
+
   useEffect(() => {
     const verifyAccess = async () => {
-      if (!user) {
+      // If no user and no guest email, redirect to login
+      if (!user && !guestEmail) {
         router.push('/login?redirect=/downloads/prompts');
         return;
       }
@@ -26,8 +33,10 @@ export default function PromptsContent() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userId: user.id,
-            productType: 'prompts'
+            userId: user?.id,
+            guestEmail: guestEmail,
+            productType: 'prompts',
+            orderToken: orderToken
           })
         });
 
@@ -35,6 +44,7 @@ export default function PromptsContent() {
         setHasAccess(data.hasAccess);
       } catch (error) {
         console.error('Error verifying access:', error);
+        toast.error('Error verifying access. Please try again.');
         setHasAccess(false);
       } finally {
         setIsVerifying(false);
@@ -42,7 +52,7 @@ export default function PromptsContent() {
     };
 
     verifyAccess();
-  }, [user, router]);
+  }, [user, router, guestEmail, orderToken]);
 
   const handleDownload = () => {
     // Create a download link for the PDF
@@ -52,6 +62,9 @@ export default function PromptsContent() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    // Show success toast
+    toast.success('Your download has started!');
   };
 
   if (isVerifying) {

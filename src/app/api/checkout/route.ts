@@ -3,6 +3,7 @@ import { stripe } from '@/lib/stripe';
 import { createClient } from '@/lib/supabase';
 import { sendEmail, sendOrderConfirmationEmail } from '@/lib/sendgrid';
 import { validateStripeEnvironment } from '@/lib/env-validation';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,7 +17,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { cartItems, userId } = await request.json();
+    const { cartItems, userId, guestEmail } = await request.json();
 
     if (!cartItems || !cartItems.length) {
       return NextResponse.json(
@@ -25,26 +26,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!userId) {
-      return NextResponse.json(
-        { error: 'User not authenticated' },
-        { status: 401 }
-      );
-    }
-
-    // Get user email for Stripe customer
+    // Initialize variables for user data
+    let userEmail: string;
+    let orderId: string;
+    let isGuestCheckout = false;
     const supabase = await createClient();
     
-    const { data: userData, error: userError } = await supabase
-      .from('profiles')
-      .select('email')
-      .eq('id', userId)
-      .single();
+    // Handle guest checkout vs. authenticated user
+    if (userId) {
+      // Get user email for Stripe customer
+      const { data: userData, error: userError } = await supabase
+        .from('profiles')
+        .select('email')
+        .eq('id', userId)
+        .single();
 
-    if (userError || !userData) {
+      if (userError || !userData) {
+        return NextResponse.json(
+          { error: 'User not found' },
+          { status: 404 }
+        );
+      }
+      
+      userEmail = userData.email;
+    } else if (guestEmail) {
+      // Guest checkout with email
+      userEmail = guestEmail;
+      isGuestCheckout = true;
+    } else {
       return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
+        { error: 'Either userId or guestEmail is required' },
+        { status: 400 }
       );
     }
 
@@ -114,13 +126,18 @@ export async function POST(request: NextRequest) {
 
     // Create a new order in the database
     const supabaseAdmin = await createClient();
+    
+    // For guest checkout, create a temporary user ID
+    const effectiveUserId = isGuestCheckout ? `guest_${uuidv4()}` : userId;
+    
     const { data: orderData, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert([
         {
-          user_id: userId,
+          user_id: effectiveUserId,
           status: 'pending',
           total: orderTotal,
+          guest_email: isGuestCheckout ? userEmail : null,
         },
       ])
       .select()
@@ -157,14 +174,16 @@ export async function POST(request: NextRequest) {
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
-      customer_email: userData.email,
+      customer_email: userEmail,
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${request.headers.get('origin')}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}`,
+      success_url: `${request.headers.get('origin')}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}${isGuestCheckout ? '&guest=true' : ''}`,
       cancel_url: `${request.headers.get('origin')}/cart?canceled=true`,
       metadata: {
         order_id: orderData.id,
-        user_id: userId,
+        user_id: effectiveUserId,
+        is_guest: isGuestCheckout ? 'true' : 'false',
+        guest_email: isGuestCheckout ? userEmail : null,
       },
     });
 
@@ -178,11 +197,12 @@ export async function POST(request: NextRequest) {
     
     // Send email asynchronously (don't await to avoid delaying response)
     sendOrderConfirmationEmail({
-      email: userData.email,
+      email: userEmail,
       orderNumber: orderData.id.slice(0, 8),
       orderItems: productMetadata,
       total: orderTotal,
-      downloadLinks
+      downloadLinks,
+      isGuest: isGuestCheckout
     }).catch(error => {
       console.error('Failed to send confirmation email:', error);
     });

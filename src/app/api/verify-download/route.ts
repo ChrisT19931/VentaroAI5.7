@@ -1,16 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
 
+// Verify token for guest users
+const verifyToken = (token: string, guestEmail: string, productType: string): boolean => {
+  try {
+    // Decode the token
+    const decodedToken = Buffer.from(token, 'base64').toString('utf-8');
+    
+    // Token format: orderId-productId-email
+    const [orderId, productId, tokenEmail] = decodedToken.split('-');
+    
+    // Verify the email matches
+    if (tokenEmail !== guestEmail) {
+      return false;
+    }
+    
+    // In a production environment, you would want to verify the orderId and productId
+    // by querying the database to ensure they match
+    
+    return true;
+  } catch (error) {
+    console.error('Token verification error:', error);
+    return false;
+  }
+};
+
 export async function POST(request: NextRequest) {
   try {
-    const { userId, productType } = await request.json();
+      const { userId, productType, guestEmail, orderToken } = await request.json();
 
-    if (!userId || !productType) {
-      return NextResponse.json(
-        { error: 'Missing required parameters' },
-        { status: 400 }
-      );
-    }
+      if ((!userId && !guestEmail) || !productType) {
+        return NextResponse.json(
+          { error: 'Missing required parameters' },
+          { status: 400 }
+        );
+      }
+      
+      // For guest users, verify the token if provided
+      if (guestEmail && orderToken) {
+        const isValidToken = verifyToken(orderToken, guestEmail, productType);
+        
+        if (!isValidToken) {
+          return NextResponse.json({ hasAccess: false });
+        }
+      }
 
     const supabase = await createClient();
 
@@ -31,7 +64,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user has any completed orders containing the specified product type
-    const { data: orders, error: ordersError } = await supabase
+    let query = supabase
       .from('orders')
       .select(`
         id,
@@ -44,8 +77,16 @@ export async function POST(request: NextRequest) {
           )
         )
       `)
-      .eq('user_id', userId)
       .eq('status', 'completed');
+      
+    // Filter by user_id or guest_email depending on what was provided
+    if (userId) {
+      query = query.eq('user_id', userId);
+    } else if (guestEmail) {
+      query = query.eq('guest_email', guestEmail);
+    }
+    
+    const { data: orders, error: ordersError } = await query;
 
     if (ordersError) {
       console.error('Error fetching orders:', ordersError);

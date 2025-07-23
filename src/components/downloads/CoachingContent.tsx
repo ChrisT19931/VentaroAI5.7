@@ -1,14 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import toast from 'react-hot-toast';
+import { useToastContext } from '@/context/ToastContext';
 
 export default function CoachingContent() {
   const { user } = useAuth();
   const router = useRouter();
+  const toast = useToastContext();
+  const searchParams = useSearchParams();
+  const guestEmail = searchParams.get('email');
+  const orderToken = searchParams.get('token');
   const [isVerifying, setIsVerifying] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,7 +30,8 @@ export default function CoachingContent() {
 
   useEffect(() => {
     const verifyAccess = async () => {
-      if (!user) {
+      // If no user and no guest email, redirect to login
+      if (!user && !guestEmail) {
         router.push('/login?redirect=/downloads/coaching');
         return;
       }
@@ -39,8 +44,10 @@ export default function CoachingContent() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userId: user.id,
-            productType: 'coaching'
+            userId: user?.id,
+            guestEmail: guestEmail,
+            productType: 'coaching',
+            orderToken: orderToken
           })
         });
 
@@ -55,7 +62,7 @@ export default function CoachingContent() {
     };
 
     verifyAccess();
-  }, [user, router]);
+  }, [user, router, guestEmail, orderToken]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -77,7 +84,7 @@ export default function CoachingContent() {
         },
         body: JSON.stringify({
           userId: user?.id,
-          userEmail: user?.email,
+          userEmail: user?.email || guestEmail,
           ...formData
         })
       });
