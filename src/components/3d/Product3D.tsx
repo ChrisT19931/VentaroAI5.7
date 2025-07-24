@@ -132,46 +132,13 @@ function ProductParticles() {
   );
 }
 
-// HUD-style feature display
-function FeatureHUD({ features }: { features: string[] }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8, delay: 0.3 }}
-      className="absolute left-8 top-1/2 transform -translate-y-1/2 space-y-4 z-10"
-    >
-      {features.map((feature, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-          className="hud-element"
-        >
-          <div className="flex items-center space-x-3">
-            <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-            <span className="text-white text-sm font-medium">{feature}</span>
-          </div>
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-}
+// Removed FeatureHUD component as features are already stated in product descriptions
 
 // Main Product 3D Component
 export default function Product3D({ product, onAddToCart }: Product3DProps) {
   const [isHovered, setIsHovered] = useState(false);
   
-  const features = React.useMemo(() => {
-    if (product.name.includes('E-book')) {
-      return ['Comprehensive Guide', 'Expert Insights', 'Actionable Strategies', 'Instant Download'];
-    } else if (product.name.includes('Prompts')) {
-      return ['200+ AI Prompts', 'Ready to Use', 'Boost Productivity', 'Copy & Paste'];
-    } else {
-      return ['1-on-1 Session', 'Expert Guidance', 'Personalized Strategy', 'Video Call'];
-    }
-  }, [product.name]);
+  // Removed hardcoded features as they're already stated in product descriptions
 
   return (
     <div className="relative h-96 w-full bg-gradient-to-br from-black via-gray-900 to-black rounded-2xl overflow-hidden">
@@ -197,31 +164,9 @@ export default function Product3D({ product, onAddToCart }: Product3DProps) {
         <ProductParticles />
       </Canvas>
       
-      {/* Feature HUD */}
-      <FeatureHUD features={features} />
+      {/* Feature HUD component has been removed as features are already stated in product descriptions */}
       
-      {/* Product Info Overlay */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute bottom-8 right-8 glass-panel p-6 max-w-sm"
-      >
-        <h3 className="text-xl font-bold text-white mb-2">{product.name}</h3>
-        <p className="text-gray-300 text-sm mb-4 line-clamp-3">{product.description}</p>
-        
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-yellow-400">${product.price}</span>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={onAddToCart}
-            className="neon-button px-6 py-2 text-sm"
-          >
-            Add to Cart
-          </motion.button>
-        </div>
-      </motion.div>
+
       
       {/* Ambient glow effect */}
       <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-purple-900/20 pointer-events-none"></div>

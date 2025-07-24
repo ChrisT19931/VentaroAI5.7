@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { CartProvider } from '@/context/CartContext'
 import { ToastProvider } from '@/context/ToastContext'
+import { AuthProvider } from '@/context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -44,15 +45,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans`}>
-        <CartProvider>
-          <ToastProvider>
-            <Navbar />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </ToastProvider>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <ToastProvider>
+              <Navbar />
+              <main>
+                {children}
+              </main>
+              <Footer />
+            </ToastProvider>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   )

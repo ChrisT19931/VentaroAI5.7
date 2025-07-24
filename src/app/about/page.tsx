@@ -45,7 +45,7 @@ export default function AboutPage() {
               <Link href="/products" className="neon-button btn-lg">
                 Explore AI Products
               </Link>
-              <Link href="/products/ebook" className="neon-button btn-lg">
+              <Link href="/products/1" className="neon-button btn-lg">
                 Learn Our Methods
               </Link>
             </div>
@@ -143,7 +143,7 @@ export default function AboutPage() {
               <p className="text-gray-300 mb-6">
                 Comprehensive 30-page guide covering the latest AI tools, proven workflows, and step-by-step strategies for building successful AI-powered businesses.
               </p>
-              <Link href="/products/ebook" className="neon-button text-sm inline-block">
+              <Link href="/products/1" className="neon-button text-sm inline-block">
                 Explore Guide →
               </Link>
             </div>
@@ -162,7 +162,7 @@ export default function AboutPage() {
               <p className="text-gray-300 mb-6">
                 Battle-tested prompt collections for content creation, marketing automation, and AI-powered business growth. Professional-grade prompts that deliver results.
               </p>
-              <Link href="/products/prompts" className="neon-button text-sm inline-block">
+              <Link href="/products/2" className="neon-button text-sm inline-block">
                 Get Prompts →
               </Link>
             </div>
@@ -181,7 +181,7 @@ export default function AboutPage() {
               <p className="text-gray-300 mb-6">
                 Personalized 60-minute strategy sessions to accelerate your AI business journey. Get expert guidance and an implementation report tailored to your specific goals and challenges.
               </p>
-              <Link href="/products/coaching" className="neon-button text-sm inline-block">
+              <Link href="/products/3" className="neon-button text-sm inline-block">
                 Book Strategy Session →
               </Link>
             </div>
@@ -263,7 +263,7 @@ export default function AboutPage() {
               <Link href="/products" className="btn-primary btn-lg">
                 Explore Products
               </Link>
-              <Link href="/products/coaching" className="btn-outline btn-lg">
+              <Link href="/products/3" className="btn-outline btn-lg">
                 Get Coaching
               </Link>
             </div>

@@ -125,9 +125,9 @@ export default function CoachingContent() {
               You don&apos;t have access to this coaching session. Please purchase the 1-on-1 Coaching Call first.
             </p>
             <div className="space-y-4">
-              <Link href="/products/coaching" className="btn-primary inline-block">
-                Purchase Coaching Call
-              </Link>
+              <Link href="/products/3" className="btn-primary inline-block">
+              Purchase Coaching Call
+            </Link>
               <br />
               <Link href="/account" className="text-blue-400 hover:text-blue-300">
                 Check My Purchases

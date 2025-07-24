@@ -44,12 +44,12 @@ export default function TermsOfServicePage() {
               Please read these Terms carefully. If you do not agree with these Terms, you must not access or use our services.
             </p>
 
-            <h2 className="text-2xl font-bold text-black mt-8 mb-4">Account Registration & Email Subscription</h2>
+            <h2 className="text-2xl font-bold text-black mt-8 mb-4">Product Access & Payment</h2>
             <p className="mb-4 text-gray-800">
-              To access certain features of our services, you may need to register for an account. You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate, current, and complete.
+              Access to our digital products is granted through secure payment processing via Stripe. Upon successful payment, you will receive immediate access to your purchased digital products. No account registration is required for product access.
             </p>
             <p className="mb-4 text-gray-800">
-              <strong className="text-black">Email Subscription:</strong> By creating an account or making a purchase, you automatically subscribe to our email system. This includes product updates, AI design tips, exclusive offers, and educational content related to our AI-powered digital products. You may unsubscribe at any time using the link provided in our emails.
+              <strong className="text-black">Payment Authentication:</strong> We use Stripe's secure payment system to authenticate purchases and grant access to digital products. Your payment information is processed securely and we do not store any payment details on our servers.
             </p>
             <p className="mb-4 text-gray-800">
               You are responsible for safeguarding your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.

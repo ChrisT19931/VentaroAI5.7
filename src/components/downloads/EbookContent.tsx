@@ -89,9 +89,9 @@ export default function EbookContent() {
               You don&apos;t have access to this download. Please purchase the AI Tools Mastery Guide 2025 first.
             </p>
             <div className="space-y-4">
-              <Link href="/products/ebook" className="btn-primary inline-block">
-                Purchase E-book
-              </Link>
+              <Link href="/products/1" className="btn-primary inline-block">
+              Purchase E-book
+            </Link>
               <br />
               <Link href="/account" className="text-blue-400 hover:text-blue-300">
                 Check My Purchases

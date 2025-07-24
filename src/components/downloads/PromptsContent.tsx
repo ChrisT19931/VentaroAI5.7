@@ -89,9 +89,9 @@ export default function PromptsContent() {
               You don&apos;t have access to this download. Please purchase the AI Prompts Collection first.
             </p>
             <div className="space-y-4">
-              <Link href="/products/prompts" className="btn-primary inline-block">
-                Purchase AI Prompts
-              </Link>
+              <Link href="/products/2" className="btn-primary inline-block">
+              Purchase AI Prompts
+            </Link>
               <br />
               <Link href="/account" className="text-blue-400 hover:text-blue-300">
                 Check My Purchases

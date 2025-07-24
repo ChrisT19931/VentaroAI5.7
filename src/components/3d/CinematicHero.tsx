@@ -49,24 +49,31 @@ function FloatingParticles() {
   );
 }
 
-// Animated 3D logo with zoom effect
+// Animated 3D logo with dramatic zoom effect
 function AnimatedLogo() {
   const logoRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
     if (logoRef.current) {
-      // Dramatic zoom-in effect from space
+      // More dramatic zoom-in effect from deep space
       const time = state.clock.elapsedTime;
-      const zoomProgress = Math.min(time / 8, 1); // 8 seconds zoom duration
+      const zoomProgress = Math.min(time / 4, 1); // Faster 4 seconds zoom duration
       
-      // Start far away and zoom in
-      logoRef.current.position.z = THREE.MathUtils.lerp(-50, 0, zoomProgress);
-      logoRef.current.scale.setScalar(THREE.MathUtils.lerp(0.1, 1, zoomProgress));
+      // Start much further away and zoom in dramatically
+      logoRef.current.position.z = THREE.MathUtils.lerp(-100, 0, 
+        THREE.MathUtils.smoothstep(0, 1, zoomProgress));
+      logoRef.current.scale.setScalar(THREE.MathUtils.lerp(0.05, 1.2, 
+        THREE.MathUtils.smoothstep(0, 1, zoomProgress)));
       
-      // Gentle rotation and floating after zoom
-      if (zoomProgress >= 1) {
+      // Add rotation during zoom for more dynamic effect
+      if (zoomProgress < 1) {
+        logoRef.current.rotation.z = (1 - zoomProgress) * Math.PI * 2;
+        logoRef.current.rotation.y = (1 - zoomProgress) * Math.PI;
+      } else {
+        // Gentle floating and rotation after zoom completes
         logoRef.current.rotation.y = Math.sin(time * 0.5) * 0.1;
         logoRef.current.position.y = Math.sin(time * 0.8) * 0.1;
+        logoRef.current.scale.setScalar(1 + Math.sin(time * 0.6) * 0.05); // Breathing effect
       }
     }
   });
@@ -148,11 +155,24 @@ function Scene() {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
   
   useFrame((state) => {
-    // Dynamic camera movement for cinematic effect
+    // Enhanced dynamic camera movement for cinematic effect
     if (state.camera) {
       const time = state.clock.elapsedTime;
-      state.camera.position.x = Math.sin(time * 0.1) * 2;
-      state.camera.position.y = Math.cos(time * 0.15) * 1;
+      const zoomProgress = Math.min(time / 4, 1);
+      
+      if (zoomProgress < 1) {
+        // During zoom: camera follows the logo zoom with slight shake
+        const shake = (1 - zoomProgress) * 0.5;
+        state.camera.position.x = (Math.random() - 0.5) * shake;
+        state.camera.position.y = (Math.random() - 0.5) * shake;
+        state.camera.position.z = THREE.MathUtils.lerp(20, 12, zoomProgress);
+      } else {
+        // After zoom: gentle orbital movement
+        state.camera.position.x = Math.sin(time * 0.1) * 2;
+        state.camera.position.y = Math.cos(time * 0.15) * 1;
+        state.camera.position.z = 12 + Math.sin(time * 0.2) * 0.5;
+      }
+      
       state.camera.lookAt(0, 0, 0);
     }
   });

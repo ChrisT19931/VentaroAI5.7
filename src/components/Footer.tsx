@@ -5,38 +5,6 @@ import { useState } from 'react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage(null);
-
-    try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage({ type: 'success', text: data.message || 'Successfully subscribed!' });
-        setEmail('');
-      } else {
-        setSubmitMessage({ type: 'error', text: data.error || 'Failed to subscribe. Please try again.' });
-      }
-    } catch (error) {
-      setSubmitMessage({ type: 'error', text: 'Something went wrong. Please try again.' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
   
   return (
     <footer className="bg-black text-white relative overflow-hidden">
@@ -121,42 +89,26 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white relative">
-              Newsletter
+              AI Products
               <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500"></div>
             </h3>
-            <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter for the latest updates and offers.
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
-              <div>
-                <label htmlFor="email" className="sr-only">Email address</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={isSubmitting}
-                  className="w-full px-3 py-2 bg-white/10 backdrop-blur-sm text-white placeholder-gray-400 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 disabled:opacity-50"
-                  placeholder="Your email"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-              >
-                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
-              </button>
-              {submitMessage && (
-                <p className={`text-sm mt-2 ${
-                  submitMessage.type === 'success' ? 'text-green-400' : 'text-red-400'
-                }`}>
-                  {submitMessage.text}
-                </p>
-              )}
-            </form>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/products/2" className="text-gray-400 hover:text-pink-400 transition-all duration-300 hover:translate-x-2">
+                  AI Prompts Arsenal
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/1" className="text-gray-400 hover:text-pink-400 transition-all duration-300 hover:translate-x-2">
+                  AI Tools Mastery Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/3" className="text-gray-400 hover:text-pink-400 transition-all duration-300 hover:translate-x-2">
+                  AI Business Strategy
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="border-t border-white/10 mt-8 pt-8 text-center relative">

@@ -1,14 +1,14 @@
 'use client';
 
 import { createContext, useContext, ReactNode } from 'react';
-import { useToast } from '@/hooks/useToast';
+import { useToast as useToastHook } from '@/hooks/useToast';
 
-type ToastContextType = ReturnType<typeof useToast>['toast'];
+type ToastContextType = ReturnType<typeof useToastHook>['toast'];
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const { toast, ToastProvider: ToastComponentProvider } = useToast();
+  const { toast, ToastProvider: ToastComponentProvider } = useToastHook();
 
   return (
     <ToastContext.Provider value={toast}>
@@ -28,3 +28,6 @@ export function useToastContext() {
   
   return context;
 }
+
+// Export useToast for backward compatibility
+export const useToast = useToastContext;
