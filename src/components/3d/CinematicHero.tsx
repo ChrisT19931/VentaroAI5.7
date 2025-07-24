@@ -6,6 +6,7 @@ import { Text, Float, Environment, Sparkles, OrbitControls } from '@react-three/
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import * as THREE from 'three';
+import '@/styles/cinematic.css';
 import System, {
   Emitter,
   Rate,
@@ -533,7 +534,7 @@ function GlassmorphismOverlay() {
               animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} // Faster animation
             >
-              AI-Powered
+              Unlock Your
             </motion.span>
             <br />
             <motion.span 
@@ -541,7 +542,7 @@ function GlassmorphismOverlay() {
               animate={{ opacity: [0.9, 1, 0.9] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }} // Faster animation
             >
-              Digital Products
+              AI Potential
             </motion.span>
           </h1>
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
@@ -586,7 +587,7 @@ function GlassmorphismOverlay() {
 // Main cinematic hero component
 export default function CinematicHero() {
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black">
+    <div className="relative h-screen w-full overflow-hidden bg-black cinematic-hero">
       {/* 3D Canvas Background with cinematic camera */}
       <Canvas
         camera={{ position: [0, 0, 12], fov: 60 }}
