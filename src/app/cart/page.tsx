@@ -1,71 +1,61 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/hooks/useCart';
+import { toast } from 'react-hot-toast';
 import { getStripe } from '@/lib/stripe-client';
-import { useToastContext } from '@/context/ToastContext';
-import dynamic from 'next/dynamic';
-
-const CheckoutModal = dynamic(() => import('@/components/3d/CheckoutModal'), {
-  ssr: false,
-  loading: () => <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"><div className="text-white">Loading...</div></div>
-});
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, total, clearCart } = useCart();
-  const toast = useToastContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
   const router = useRouter();
+  const { cart, removeItem, updateItemQuantity, clearCart } = useCart();
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Extract items and total from cart
+  const { items, total } = cart;
 
   const handleCheckout = async () => {
-    setIsLoading(true);
-    
+    if (items.length === 0) {
+      toast.error('Your cart is empty');
+      return;
+    }
+
     try {
-      // Create checkout session without email requirement
+      setIsLoading(true);
+      
+      // Call the checkout API to create a Stripe session
       const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          cartItems: items
-        }),
+        body: JSON.stringify({ items }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Network response was not ok');
+      }
+
+      const { sessionId } = await response.json();
+
+      // Redirect to Stripe Checkout
+      const stripe = await getStripe();
+      if (!stripe) {
+        throw new Error('Failed to initialize Stripe');
+      }
       
-      const data = await response.json();
-      
-      if (data.url) {
-        // Get Stripe instance
-        const stripe = await getStripe();
-        
-        if (!stripe) {
-          console.error('Stripe initialization failed - check NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY');
-          // Fallback to direct URL redirect when Stripe is not available
-          window.location.href = data.url;
-          return;
-        }
-        
-        // Redirect to Stripe Checkout
-        const { error } = await stripe.redirectToCheckout({
-          sessionId: data.sessionId
-        });
-        
-        if (error) {
-          console.error('Stripe checkout redirect failed:', error);
-          toast.error('Payment processing failed. Please try again later.');
-          setIsLoading(false);
-        }
-      } else {
-        console.error('Checkout session creation failed:', data.error);
-        toast.error('Unable to create payment session. Please try again.');
-        setIsLoading(false);
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+
+      if (error) {
+        toast.error(error.message || 'Payment processing failed');
       }
     } catch (error) {
       console.error('Error during checkout:', error);
+      toast.error(error instanceof Error ? error.message : 'There was a problem with checkout. Please try again.');
+    } finally {
       setIsLoading(false);
     }
   };
@@ -103,13 +93,13 @@ export default function CartPage() {
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
               <div className="p-6">
                 <div className="flow-root">
-                  <ul className="-my-6 divide-y divide-gray-200">
-                    {items.map((item) => (
-                      <li key={item.id} className="py-6 flex">
+                    <ul className="-my-6 divide-y divide-gray-200">
+                      {items.map((item) => (
+                        <li key={item.id} className="py-6 flex">
                         <div className="flex-shrink-0 w-24 h-24 rounded-md overflow-hidden border border-gray-200 bg-gray-100 relative">
-                          {item.image_url ? (
+                          {item.image ? (
                             <Image
-                              src={item.image_url}
+                              src={item.image}
                               alt={item.name}
                               fill
                               className="object-cover"
@@ -136,7 +126,7 @@ export default function CartPage() {
                           <div className="flex-1 flex items-end justify-between text-sm">
                             <div className="flex items-center">
                               <button
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
                                 className="text-gray-500 hover:text-gray-700"
                               >
                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,7 +135,7 @@ export default function CartPage() {
                               </button>
                               <span className="mx-2 text-gray-700">{item.quantity}</span>
                               <button
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
                                 className="text-gray-500 hover:text-gray-700"
                               >
                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -217,17 +207,27 @@ export default function CartPage() {
               
               <div className="mt-6 space-y-4">
                 <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-                  <h3 className="font-medium text-blue-800">Instant Checkout</h3>
-                  <p className="text-sm text-blue-700 mt-1">Complete your purchase and get instant access to your digital products.</p>
+                  <h3 className="font-medium text-blue-800">Stripe Checkout</h3>
+                  <p className="text-sm text-blue-700 mt-1">Complete your purchase securely with Stripe and get instant access to your digital products.</p>
                 </div>
                 
                 <div className="flex flex-col space-y-2">
                   <button
-                    onClick={() => setShowCheckoutModal(true)}
+                    onClick={handleCheckout}
                     disabled={isLoading}
                     className="w-full btn-primary py-3 flex items-center justify-center"
                   >
-                    Buy Now - Instant Access
+                    {isLoading ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Processing...
+                      </>
+                    ) : (
+                      'Checkout with Stripe'
+                    )}
                   </button>
                 </div>
               </div>
@@ -247,16 +247,6 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-      
-      {/* Checkout Modal */}
-      {showCheckoutModal && (
-        <CheckoutModal
-          items={items}
-          total={total}
-          onClose={() => setShowCheckoutModal(false)}
-          onCheckout={handleCheckout}
-        />
-      )}
     </div>
   );
 }

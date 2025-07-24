@@ -17,14 +17,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { cartItems } = await request.json();
+    const { items } = await request.json();
 
-    if (!cartItems || !cartItems.length) {
+    if (!items || !items.length) {
       return NextResponse.json(
         { error: 'No items in cart' },
         { status: 400 }
       );
     }
+    
+    const cartItems = items; // For compatibility with the rest of the code
     let orderId: string;
     const supabase = await createClient();
 

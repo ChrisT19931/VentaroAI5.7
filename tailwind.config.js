@@ -38,7 +38,23 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [],
+  safelist: [
+    'animate-fade-in-up',
+    'animate-gradient-x',
+    'animate-spin-slow',
+    'animate-float',
+    'animate-float-delayed',
+    'delay-200',
+    'delay-300',
+    'delay-500',
+    'delay-700',
+    'delay-1000',
+  ],
 }

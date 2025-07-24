@@ -54,9 +54,9 @@ export default function ProductCard({
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl ${className}`}>
+    <div className={`glass-panel rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl ${className}`}>
       <Link href={productUrl} className="block relative">
-        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+        <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-gray-900 to-black">
           {image_url ? (
             <Image
               src={image_url}
@@ -66,27 +66,27 @@ export default function ProductCard({
               className="object-contain transition-transform duration-300 hover:scale-105"
             />
           ) : (
-            <div className="flex items-center justify-center h-full bg-gray-200">
+            <div className="flex items-center justify-center h-full bg-gradient-to-br from-gray-900 to-black">
               <span className="text-gray-400">No image</span>
             </div>
           )}
           
           {productType && (
-            <span className={`absolute top-2 left-2 text-xs font-medium px-2 py-1 rounded-full ${productType === 'digital' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'}`}>
+            <span className={`absolute top-2 left-2 text-xs font-medium px-2 py-1 rounded-full ${productType === 'digital' ? 'bg-blue-500/80 text-white' : 'bg-green-500/80 text-white'}`}>
               {productType === 'digital' ? 'Digital' : 'Physical'}
             </span>
           )}
         </div>
         
         <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-800 mb-1 line-clamp-1">{name}</h3>
+          <h3 className="text-lg font-semibold text-white mb-1 line-clamp-1">{name}</h3>
           
           {description && (
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">{description}</p>
+            <p className="text-gray-300 text-sm mb-3 line-clamp-2">{description}</p>
           )}
           
           <div className="flex justify-between items-center">
-            <span className="text-lg font-bold text-primary-600">{formatPrice(price)}</span>
+            <span className="text-lg font-bold text-blue-400">{formatPrice(price)}</span>
           </div>
         </div>
       </Link>
@@ -96,18 +96,17 @@ export default function ProductCard({
           <button
             onClick={handleAddToCart}
             disabled={alreadyInCart || isAdding}
-            className={`w-full py-2 px-4 rounded-md transition-colors ${alreadyInCart
-              ? 'bg-green-500 text-white cursor-default'
+            className={`w-full py-2 px-4 rounded-md transition-all duration-300 ${alreadyInCart
+              ? 'bg-green-500 text-white cursor-default shadow-lg shadow-green-500/20'
               : isAdding
-                ? 'bg-primary-300 text-white cursor-wait'
-                : 'bg-primary-600 hover:bg-primary-700 text-white'
-            }`}
+                ? 'bg-blue-400 text-white cursor-wait shadow-lg shadow-blue-400/20'
+                : 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/20 hover:shadow-blue-700/30 hover:scale-[1.02]'}`}
           >
             {alreadyInCart
-              ? 'Added to Cart'
+              ? 'Added to cart'
               : isAdding
                 ? 'Adding...'
-                : 'Add to Cart'
+                : 'Add to cart'
             }
           </button>
         </div>
