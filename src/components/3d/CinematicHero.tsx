@@ -78,12 +78,12 @@ const AnimatedLogo = () => {
     if (logoRef.current) {
       const time = state.clock.elapsedTime;
       
-      if (time < 5) { // During the 5-second intro animation
+      if (time < 1) { // During the 1-second intro animation (reduced from 2 seconds)
         // Calculate progress through the intro
-        const progress = time / 5;
+        const progress = time / 1; // Faster progress calculation
         
         // Smooth entrance from distance without shaking
-        logoRef.current.position.z = THREE.MathUtils.lerp(30, 0, Math.min(1, progress * 1.2));
+        logoRef.current.position.z = THREE.MathUtils.lerp(30, 0, Math.min(1, progress * 2.0)); // Faster approach
         
         // Very subtle movement for elegance, not shaking
         logoRef.current.position.x = Math.sin(time * 0.8) * 0.2;
@@ -93,10 +93,10 @@ const AnimatedLogo = () => {
         logoRef.current.rotation.y = Math.sin(time * 0.5) * 0.2;
         
         // Smooth scaling without variation
-        const scaleBase = THREE.MathUtils.lerp(0.5, 1.0, Math.min(1, progress * 1.5));
+        const scaleBase = THREE.MathUtils.lerp(0.5, 1.0, Math.min(1, progress * 3.0)); // Faster scaling
         logoRef.current.scale.setScalar(scaleBase);
       } else {
-        // After 5 seconds, stabilize logo
+        // After 1 second, stabilize logo
         if (introPhase) {
           setIntroPhase(false);
         }
@@ -360,9 +360,9 @@ function BackgroundStars() {
       const time = state.clock.elapsedTime;
       const positions = starsRef.current.geometry.attributes.position.array as Float32Array;
       
-      if (time < 5) {
+      if (time < 2) { // Reduced from 5 seconds to 2 seconds
         // During intro phase: gentle star movement without streaking/shaking
-        const progress = time / 5;
+        const progress = time / 2; // Adjusted progress calculation
         
         for (let i = 0; i < 5000; i++) {
           const i3 = i * 3;
@@ -393,7 +393,7 @@ function BackgroundStars() {
         starsRef.current.rotation.x = Math.sin(time * 0.3) * 0.05;
       } else {
         // After intro phase: stars return to normal positions with gentle rotation
-        const returnProgress = Math.min((time - 5) / 2, 1); // 2 second return
+        const returnProgress = Math.min((time - 2) / 1, 1); // 1 second return (reduced from 2 seconds)
         
         if (returnProgress < 1) {
           // Gradually return stars to their original positions
@@ -457,16 +457,16 @@ function Scene() {
     if (state.camera) {
       const time = state.clock.elapsedTime;
       
-      if (time < 5) {
+      if (time < 2) { // During intro phase: reduced from 5 seconds to 2 seconds
         // During intro phase: smooth camera movement without shaking
-        const progress = time / 5;
+        const progress = time / 2;
         
         // Subtle, professional camera movement
         const smoothX = Math.sin(time * 0.3) * 0.2;
         const smoothY = Math.cos(time * 0.2) * 0.1;
         
         // Gentle forward motion - camera starts back and moves forward
-        const zPosition = THREE.MathUtils.lerp(20, 15, Math.min(1, progress));
+        const zPosition = THREE.MathUtils.lerp(20, 15, Math.min(1, progress * 1.5)); // Faster approach
         
         // Apply camera movement
         state.camera.position.x = smoothX;
@@ -517,21 +517,21 @@ function GlassmorphismOverlay() {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.5, delay: 0.5 }}
+      transition={{ duration: 0.5, delay: 0.1 }} // Faster transition
       className="absolute inset-0 flex items-center justify-center pointer-events-none"
     >
       <div className="text-center z-10 pointer-events-auto">
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="glass-panel p-8 mb-8 max-w-2xl mx-auto"
-        >
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }} // Faster transition
+            className="glass-panel p-8 mb-8 max-w-2xl mx-auto"
+          >
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             <motion.span 
               className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent"
               animate={{ opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} // Faster animation
             >
               AI-Powered
             </motion.span>
@@ -539,7 +539,7 @@ function GlassmorphismOverlay() {
             <motion.span 
               className="text-white"
               animate={{ opacity: [0.9, 1, 0.9] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }} // Faster animation
             >
               Digital Products
             </motion.span>
@@ -552,7 +552,7 @@ function GlassmorphismOverlay() {
             initial={{ scale: 0.95 }}
             animate={{ scale: 1.02 }}
             transition={{ 
-              duration: 3,
+              duration: 2, // Faster animation
               repeat: Infinity,
               repeatType: "reverse",
               ease: "easeInOut"

@@ -39,14 +39,22 @@ export default function CartPage() {
         throw new Error(errorData.message || 'Network response was not ok');
       }
 
-      const { sessionId } = await response.json();
+      const { sessionId, url } = await response.json();
 
+      // If we have a direct URL from Stripe, use it (preferred method)
+      if (url) {
+        window.location.href = url;
+        return;
+      }
+      
+      // Fallback to redirectToCheckout if URL is not provided
       // Redirect to Stripe Checkout
       const stripe = await getStripe();
       if (!stripe) {
-        throw new Error('Failed to initialize Stripe');
+        throw new Error('Failed to initialize Stripe - check your Stripe publishable key');
       }
       
+      // Fallback to redirectToCheckout if URL is not provided
       const { error } = await stripe.redirectToCheckout({ sessionId });
 
       if (error) {

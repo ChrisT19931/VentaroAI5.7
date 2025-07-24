@@ -124,13 +124,13 @@ function SuccessAnimation() {
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+      transition={{ duration: 0.5, type: "spring", bounce: 0.3 }} // Faster animation
       className="absolute inset-0 flex items-center justify-center z-20"
     >
       <div className="text-center">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} // Faster rotation
           className="w-24 h-24 mx-auto mb-6 border-4 border-green-400 border-t-transparent rounded-full"
         />
         <h2 className="text-3xl font-bold text-white mb-2">Payment Successful!</h2>
@@ -157,7 +157,7 @@ export default function CheckoutModal({
       setShowSuccess(true);
       setTimeout(() => {
         setVaultOpen(true);
-      }, 1000);
+      }, 500); // Reduced from 1000ms to 500ms
     } catch (error) {
       console.error('Checkout failed:', error);
       setIsProcessing(false);
@@ -169,6 +169,7 @@ export default function CheckoutModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }} // Faster transition
       className="fixed inset-0 z-50 flex items-center justify-center"
     >
           {/* Backdrop with blur */}
@@ -176,6 +177,7 @@ export default function CheckoutModal({
             initial={{ backdropFilter: "blur(0px)" }}
             animate={{ backdropFilter: "blur(20px)" }}
             exit={{ backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.3 }} // Faster blur transition
             className="absolute inset-0 bg-black/60"
             onClick={onClose}
           />
@@ -185,7 +187,7 @@ export default function CheckoutModal({
             initial={{ scale: 0.8, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 50 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300, duration: 0.4 }} // Faster spring animation
             className="relative w-full max-w-4xl h-[600px] mx-4"
           >
             {/* Glass panel */}
@@ -243,6 +245,7 @@ export default function CheckoutModal({
                     <motion.h2
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }} // Faster animation
                       className="text-3xl font-bold text-white mb-6 text-center"
                     >
                       Complete Your Purchase
@@ -252,7 +255,7 @@ export default function CheckoutModal({
                     <motion.div
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 }}
+                      transition={{ delay: 0.1, duration: 0.3 }} // Faster animation with less delay
                       className="space-y-4 mb-8"
                     >
                       {items.map((item, index) => (
@@ -260,7 +263,7 @@ export default function CheckoutModal({
                           key={item.id}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.3 + index * 0.1 }}
+                          transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }} // Faster animation with less delay
                           className="flex items-center justify-between p-4 bg-white/5 rounded-lg backdrop-blur-sm"
                         >
                           <div>
@@ -277,7 +280,7 @@ export default function CheckoutModal({
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
+                    transition={{ delay: 0.2, duration: 0.3 }} // Faster animation with less delay
                     className="border-t border-white/20 pt-6"
                   >
                     <div className="flex items-center justify-between mb-6">

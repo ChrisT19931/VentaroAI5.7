@@ -24,15 +24,15 @@ function ProductCard3D({ product, isHovered }: { product: any; isHovered: boolea
   
   useFrame((state) => {
     if (meshRef.current && groupRef.current) {
-      // Slow rotation
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.3;
+      // Slow rotation - made slightly faster
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.4;
       
-      // Floating animation
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.1;
+      // Floating animation - made slightly faster
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 1.0) * 0.1;
       
-      // Scale on hover
+      // Scale on hover - made more responsive
       const targetScale = isHovered ? 1.1 : 1;
-      groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.15);
     }
   });
 
@@ -137,39 +137,46 @@ function ProductParticles() {
 // Main Product 3D Component
 export default function Product3D({ product, onAddToCart }: Product3DProps) {
   const [isHovered, setIsHovered] = useState(false);
-  
-  // Removed hardcoded features as they're already stated in product descriptions
 
   return (
-    <div className="relative h-96 w-full bg-gradient-to-br from-black via-gray-900 to-black rounded-2xl overflow-hidden">
-      {/* 3D Canvas */}
+    <div className="relative h-[400px] w-full overflow-hidden rounded-xl glass-panel">
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 50 }}
+        camera={{ position: [0, 0, 5], fov: 50 }}
         className="absolute inset-0"
+        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 2]}
+      >
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[5, 5, 5]} intensity={1.5} color="#60a5fa" />
+        <pointLight position={[-5, -5, -5]} color="#8b5cf6" intensity={0.8} />
+        <ProductCard3D product={product} isHovered={isHovered} />
+        <ProductParticles />
+        <Environment preset="city" />
+      </Canvas>
+
+      {/* Interactive overlay */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }} // Faster animation
+        className="absolute inset-0 flex items-center justify-center"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Using a simple background color instead of Environment to avoid compatibility issues */}
-        <color attach="background" args={['#000']} />
-        <ambientLight intensity={0.3} />
-        <directionalLight
-          position={[5, 5, 5]}
-          intensity={1}
-          color="#60a5fa"
-          castShadow
-        />
-        <pointLight position={[-5, -5, 5]} color="#8b5cf6" intensity={0.5} />
-        
-        <ProductCard3D product={product} isHovered={isHovered} />
-        <ProductParticles />
-      </Canvas>
-      
-      {/* Feature HUD component has been removed as features are already stated in product descriptions */}
-      
-
-      
-      {/* Ambient glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-purple-900/20 pointer-events-none"></div>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ duration: 0.2 }} // Faster animation
+          className="absolute bottom-6 left-0 right-0 mx-auto w-48"
+        >
+          <button
+            onClick={onAddToCart}
+            className="neon-button w-full py-3 text-sm font-semibold"
+          >
+            Add to Cart
+          </button>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

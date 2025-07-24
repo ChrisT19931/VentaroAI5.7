@@ -15,10 +15,12 @@ export const getStripe = () => {
         stripePublishableKey === 'pk_test_placeholder' || 
         stripePublishableKey.includes('placeholder')) {
       console.warn('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY not configured or is a placeholder - payment features will not work');
+      console.log('Current key:', stripePublishableKey ? 'Key exists but may be invalid' : 'Key is undefined');
       return null;
     }
     
     try {
+      console.log('Initializing Stripe with key:', stripePublishableKey.substring(0, 8) + '...');
       stripePromise = loadStripe(stripePublishableKey);
     } catch (error) {
       console.error('Failed to initialize Stripe client:', error);

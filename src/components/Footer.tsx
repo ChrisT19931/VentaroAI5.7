@@ -3,117 +3,116 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  
+// Animated border component with optimized animation timing
+function AnimatedBorder() {
   return (
-    <footer className="bg-black text-white relative overflow-hidden">
-      {/* Cinematic background effects */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-gray-900/50 to-transparent"></div>
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-blue-500/30 rotate-45 animate-pulse"></div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 border border-purple-500/30 rotate-12 animate-pulse delay-1000"></div>
-      </div>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Top border */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent animate-gradientX" style={{ animationDuration: '2s' }}></div>
       
-      <div className="container mx-auto px-4 max-w-6xl py-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white glow-text">Ventaro AI</h3>
-            <p className="text-white">
-              AI-Powered Digital Products designed to transform your business and enhance your workflow.
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent animate-gradientX" style={{ animationDuration: '2s', animationDirection: 'reverse' }}></div>
+    </div>
+  );
+}
+
+export default function Footer() {
+  return (
+    <footer className="relative bg-black/80 backdrop-blur-sm border-t border-gray-800 mt-20">
+      <AnimatedBorder />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          {/* Ventaro AI */}
+          <div className="col-span-1 md:col-span-1">
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+              <span className="text-blue-400 mr-2">Ventaro</span> AI
+            </h3>
+            <p className="text-gray-400 mb-4 text-sm">
+              Pioneering the future of digital products with cutting-edge AI technology.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/in/christ111/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20">
-                <span className="sr-only">LinkedIn</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-            </div>
+            <a 
+              href="https://www.linkedin.com/company/ventaro-ai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 transition-colors duration-200 inline-flex items-center"
+            >
+              <span className="mr-2">Follow us on LinkedIn</span>
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
           </div>
+          
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white relative">
-              Quick Links
-              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-            </h3>
+            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/products" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:translate-x-2">
-                  Contact
-                </Link>
-              </li>
+              {[
+                { name: 'Home', href: '/' },
+                { name: 'Products', href: '/products' },
+                { name: 'About Us', href: '/about' },
+                { name: 'Contact', href: '/contact' },
+              ].map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href} 
+                    className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
+          
+          {/* Customer Service */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white relative">
-              Customer Service
-              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-            </h3>
+            <h3 className="text-lg font-semibold text-white mb-4">Customer Service</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/faq" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms#refund-policy" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
-                  Refund Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-purple-400 transition-all duration-300 hover:translate-x-2">
-                  Privacy Policy
-                </Link>
-              </li>
+              {[
+                { name: 'FAQ', href: '/faq' },
+                { name: 'Shipping Policy', href: '/shipping' },
+                { name: 'Return Policy', href: '/returns' },
+                { name: 'Privacy Policy', href: '/privacy' },
+              ].map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href} 
+                    className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
+          
+          {/* AI Products */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-white relative">
-              AI Products
-              <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500"></div>
-            </h3>
+            <h3 className="text-lg font-semibold text-white mb-4">AI Products</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/products/2" className="text-gray-400 hover:text-pink-400 transition-all duration-300 hover:translate-x-2">
-                  AI Prompts Arsenal
-                </Link>
-              </li>
-              <li>
-                <Link href="/products/1" className="text-gray-400 hover:text-pink-400 transition-all duration-300 hover:translate-x-2">
-                  AI Tools Mastery Guide
-                </Link>
-              </li>
-              <li>
-                <Link href="/products/3" className="text-gray-400 hover:text-pink-400 transition-all duration-300 hover:translate-x-2">
-                  AI Business Strategy
-                </Link>
-              </li>
+              {[
+                { name: 'AI Design Tools', href: '/products/category/design' },
+                { name: 'AI Content Creation', href: '/products/category/content' },
+                { name: 'AI Data Analysis', href: '/products/category/data' },
+                { name: 'AI Development', href: '/products/category/development' },
+              ].map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href} 
+                    className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
-        <div className="border-t border-white/10 mt-8 pt-8 text-center relative">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
-          <p className="text-gray-400">&copy; {currentYear} <span className="text-white glow-text">Ventaro AI</span> Digital Store. All rights reserved.</p>
+        
+        <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+          <p>© {new Date().getFullYear()} Ventaro AI. All rights reserved.</p>
         </div>
       </div>
     </footer>
