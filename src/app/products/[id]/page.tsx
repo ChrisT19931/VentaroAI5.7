@@ -332,7 +332,8 @@ export default function ProductPage() {
             <Product3D 
               product={{
                 ...product,
-                image_url: product.image_url || '/placeholder-product.jpg'
+                image_url: product.image_url || '/placeholder-product.jpg',
+                description: product.description || 'No description available'
               }} 
               onAddToCart={handleAddToCart} 
             />

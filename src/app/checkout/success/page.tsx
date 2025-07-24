@@ -74,12 +74,13 @@ export default function CheckoutSuccessPage() {
           
           // Determine the download URL based on product type
           let downloadUrl = '';
+          const safeSessionId = sessionId || '';
           if (item.products?.name.includes('E-book') || item.products?.name.includes('AI Tools Mastery')) {
-            downloadUrl = `/downloads/1?session_id=${encodeURIComponent(sessionId)}&token=${encodeURIComponent(token)}`;
+            downloadUrl = `/downloads/1?session_id=${encodeURIComponent(safeSessionId)}&token=${encodeURIComponent(token)}`;
           } else if (item.products?.name.includes('AI Prompts') || item.products?.name.includes('Prompts Arsenal')) {
-            downloadUrl = `/downloads/2?session_id=${encodeURIComponent(sessionId)}&token=${encodeURIComponent(token)}`;
+            downloadUrl = `/downloads/2?session_id=${encodeURIComponent(safeSessionId)}&token=${encodeURIComponent(token)}`;
           } else if (item.products?.name.includes('Coaching') || item.products?.name.includes('Strategy Session')) {
-            downloadUrl = `/downloads/3?session_id=${encodeURIComponent(sessionId)}&token=${encodeURIComponent(token)}`;
+            downloadUrl = `/downloads/3?session_id=${encodeURIComponent(safeSessionId)}&token=${encodeURIComponent(token)}`;
           }
           
           // Update the order item with the download URL

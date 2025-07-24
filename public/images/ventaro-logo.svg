@@ -20,6 +20,6 @@
   <!-- VENTARO Text -->
   <g transform="translate(55, 15)">
     <text x="0" y="20" font-family="Inter, sans-serif" font-size="24" font-weight="800" fill="url(#logoGradient)">VENTARO</text>
-    <text x="0" y="35" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6b7280" letter-spacing="2px">AI DIGITAL STORE</text>
+    <text x="0" y="35" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6b7280" letter-spacing="2px">AI DIGITAL PRODUCTS</text>
   </g>
 </svg>

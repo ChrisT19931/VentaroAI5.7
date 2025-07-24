@@ -20,7 +20,7 @@ type Product = {
 export default function ProductForm({ params }: { params: { id: string } }) {
   const { id } = params;
   const isNewProduct = id === 'new';
-  const { user, isLoading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

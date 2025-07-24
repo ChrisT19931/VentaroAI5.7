@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-white glow-text">Ventaro AI</h3>
             <p className="text-white">
-              AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions designed to enhance your workflow.
+              AI-Powered Digital Products designed to transform your business and enhance your workflow.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.linkedin.com/in/christ111/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20">

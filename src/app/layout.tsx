@@ -10,18 +10,18 @@ import { AuthProvider } from '@/context/AuthContext'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Ventaro AI Digital Store 2025 - AI Tools Mastery Guide & AI Prompts Arsenal to Make Money Online',
+  title: 'AI-Powered Digital Products - Transform Your Business with AI Tools',
   description: 'Discover AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money with AI in 2025. Learn proven strategies to make money online using ChatGPT, Claude, and cutting-edge AI technologies.',
   keywords: 'AI tools, AI prompts, make money online, make money with AI, 2025 AI strategies, ChatGPT prompts, AI business, digital products, online income, AI automation, artificial intelligence tools',
   openGraph: {
-    title: 'Ventaro AI Digital Store 2025 - AI Tools & Prompts for Online Income',
+    title: 'AI-Powered Digital Products - Transform Your Business with AI Tools',
     description: 'Master AI tools and prompts to make money online in 2025. AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions for AI-powered business success.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ventaro AI Digital Store 2025 - AI Tools & Prompts',
+    title: 'AI-Powered Digital Products - Transform Your Business with AI Tools',
     description: 'Learn to make money online with AI tools and prompts in 2025',
   },
   robots: {
