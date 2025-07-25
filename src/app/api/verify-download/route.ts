@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabase';
+import { getSignedUrl, fileExists } from '@/utils/storage';
 
 // Verify token for guest users using session and order data
 const verifyToken = (token: string, sessionId: string, orderId: string, productId: string): boolean => {
@@ -21,6 +23,124 @@ const verifyToken = (token: string, sessionId: string, orderId: string, productI
     return false;
   }
 };
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const path = searchParams.get('path');
+    const token = searchParams.get('token');
+    const email = searchParams.get('email');
+    const sessionId = searchParams.get('session_id');
+    const orderId = searchParams.get('order_id');
+    
+    if (!path) {
+      return NextResponse.json(
+        { error: 'Missing path parameter' },
+        { status: 400 }
+      );
+    }
+    
+    // Determine which bucket to use based on path
+    const bucket = 'product-files';
+    
+    // If token is provided, verify it
+    if (token) {
+      try {
+        // Decode the token
+        const decodedToken = Buffer.from(token, 'base64').toString('utf-8');
+        
+        // Token format can vary based on where it was generated
+        // It could be: sessionId-orderId-productId or orderId-productId-email
+        const tokenParts = decodedToken.split('-');
+        
+        // Verify the token has the expected format
+        if (tokenParts.length < 2) {
+          return NextResponse.json(
+            { error: 'Invalid token format' },
+            { status: 403 }
+          );
+        }
+        
+        // Extract token components
+        const tokenOrderId = tokenParts[0];
+        
+        // If orderId is provided in the URL, verify it matches the token
+        if (orderId && tokenOrderId !== orderId) {
+          return NextResponse.json(
+            { error: 'Invalid token for this order' },
+            { status: 403 }
+          );
+        }
+        
+        // Verify the order exists and is completed
+        const supabase = await createClient();
+        const { data: order, error: orderError } = await supabase
+          .from('orders')
+          .select('id, status')
+          .eq('id', tokenOrderId)
+          .eq('status', 'completed')
+          .single();
+        
+        if (orderError || !order) {
+          console.error('Error verifying order:', orderError);
+          return NextResponse.json(
+            { error: 'Invalid or expired download link' },
+            { status: 403 }
+          );
+        }
+      } catch (tokenError) {
+        console.error('Token verification error:', tokenError);
+        return NextResponse.json(
+          { error: 'Invalid download token' },
+          { status: 403 }
+        );
+      }
+    }
+    
+    // Check if the file exists in the public directory first
+     const publicFilePath = `${process.cwd()}/public/downloads/${path}`;
+     const fs = require('fs');
+     
+     if (fs.existsSync(publicFilePath)) {
+       // For files in the public directory, redirect to the public URL
+       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
+       // Remove trailing slash from site URL if it exists
+       const baseUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+       return NextResponse.redirect(`${baseUrl}/downloads/${path}`);
+     }
+    
+    // If not in public directory, try to get from Supabase Storage
+    try {
+      // Check if file exists in Supabase Storage
+      const exists = await fileExists(path, bucket);
+      
+      if (!exists) {
+        return NextResponse.json(
+          { error: 'File not found' },
+          { status: 404 }
+        );
+      }
+      
+      // Generate a signed URL with a short expiration time (24 hours)
+      const signedUrl = await getSignedUrl(path, bucket, 86400); // 24 hours
+      
+      // Redirect to the signed URL
+      return NextResponse.redirect(signedUrl);
+    } catch (error) {
+      console.error('Error generating signed URL:', error);
+      return NextResponse.json(
+        { error: 'File not found or access denied' },
+        { status: 404 }
+      );
+    }
+  } catch (error) {
+    console.error('Download error:', error);
+    return NextResponse.json(
+      { error: 'Failed to process download request' },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
