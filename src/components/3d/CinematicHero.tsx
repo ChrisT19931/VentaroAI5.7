@@ -521,30 +521,30 @@ function GlassmorphismOverlay() {
     >
       <div className="text-center z-10 pointer-events-auto">
         <div
-            className="glass-panel p-8 mb-8 max-w-2xl mx-auto w-[90%] md:w-auto"
-            style={{ opacity: 1 }}
+            className="glass-panel p-5 mb-4 max-w-lg mx-auto w-[75%] md:w-auto shadow-xl border border-blue-500/20"
+            style={{ opacity: 0.95 }}
           >
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-10 leading-tight tracking-tight">
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent font-black" style={{textShadow: '0 0 10px rgba(96, 165, 250, 0.5)'}}>
-              100% AI-Generated
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
+            <span className="bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 bg-clip-text text-transparent font-black" style={{textShadow: '0 0 10px rgba(96, 165, 250, 0.5)'}}>
+              AI Tools That Make Money
             </span>
             <br />
             <span className="text-white glow-text font-black" style={{textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'}}>
-              Premium Digital Products & AI Tools
+              Build Your Online Business Fast
             </span>
           </h1>
-          <p className="text-base md:text-xl text-gray-100 mb-8 md:mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
-            Discover our exclusive collection of high-quality digital products, AI tools, and premium assets designed to elevate your projects and boost your productivity.
+          <p className="text-sm md:text-base text-gray-100 mb-4 md:mb-6 leading-relaxed max-w-lg mx-auto font-medium">
+            100% AI-generated resources to help you launch profitable online businesses. Learn how we built this entire site with AI and how you can do the same.
           </p>
           
-          <div className="space-y-4" style={{ transform: 'scale(1)' }}>
-            <Link href="/products" className="neon-button px-8 md:px-12 py-4 md:py-5 text-base md:text-lg font-bold rounded-lg flex items-center justify-center mx-auto" style={{ minWidth: '200px', maxWidth: '90%' }}>
+          <div className="space-y-3" style={{ transform: 'scale(0.95)' }}>
+            <Link href="/products" className="neon-button px-6 md:px-10 py-3 md:py-4 text-sm md:text-base font-bold rounded-lg flex items-center justify-center mx-auto" style={{ minWidth: '180px', maxWidth: '85%' }}>
               Explore Products
               <svg className="ml-2 md:ml-3 w-5 md:w-6 h-5 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
-            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-sm text-gray-200 mt-6 md:mt-8 px-2">
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-xs text-gray-200 mt-4 md:mt-6 px-2">
               <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
                 <div className="w-3 h-3 bg-green-400 rounded-full mr-2.5 animate-pulse"></div>
                 Instant Access

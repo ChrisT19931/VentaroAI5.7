@@ -29,6 +29,7 @@ type Product = {
   category?: string;
   is_featured?: boolean;
   is_active?: boolean;
+  productType: 'digital' | 'physical'; // Required by AddToCartButton
   [key: string]: any;
 };
 // Fallback products data
@@ -43,6 +44,7 @@ const fallbackProducts = {
     category: 'courses',
     is_active: true,
     featured: true,
+    product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
       'Learn ChatGPT, Claude, Grok, and Gemini',
@@ -85,6 +87,7 @@ const fallbackProducts = {
     category: 'tools',
     is_active: true,
     featured: false,
+    product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
       '30 proven prompts for building online business',
@@ -125,6 +128,7 @@ const fallbackProducts = {
     category: 'services',
     is_active: true,
     featured: false,
+    product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
       'Live 60-minute video coaching session',
@@ -197,7 +201,11 @@ export default function ProductPage() {
           .single();
         
         if (!error && data) {
-          setProduct(data);
+          // Ensure productType is set (required by AddToCartButton)
+          setProduct({
+            ...data,
+            productType: ((data.product_type as 'digital' | 'physical') || 'digital') as 'digital' | 'physical'
+          });
           setLoading(false);
           return;
         }
@@ -207,7 +215,8 @@ export default function ProductPage() {
           const fallbackProduct = fallbackProducts[id as keyof typeof fallbackProducts];
           setProduct({
             ...fallbackProduct,
-            description: fallbackProduct.description || ''
+            description: fallbackProduct.description || '',
+            productType: ((fallbackProduct.product_type as 'digital' | 'physical') || 'digital') as 'digital' | 'physical'
           });
         } else {
           // Product not found
@@ -220,7 +229,8 @@ export default function ProductPage() {
           const fallbackProduct = fallbackProducts[id as keyof typeof fallbackProducts];
           setProduct({
             ...fallbackProduct,
-            description: fallbackProduct.description || ''
+            description: fallbackProduct.description || '',
+            productType: ((fallbackProduct.product_type as 'digital' | 'physical') || 'digital') as 'digital' | 'physical'
           });
         }
       } finally {

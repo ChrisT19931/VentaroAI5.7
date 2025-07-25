@@ -25,9 +25,9 @@ export async function GET(request: NextRequest) {
         });
         
         // Try to make a simple API call that doesn't require config.retrieve
-        const apiVersion = await stripe.apiVersion;
+        // Get API version from the options we passed in
         stripeInitStatus = 'success';
-        stripeVersion = apiVersion || 'unknown';
+        stripeVersion = '2023-10-16'; // Use the version we specified in the options
       } catch (error: any) {
         stripeInitStatus = `failed: ${error.message}`;
       }
