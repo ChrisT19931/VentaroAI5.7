@@ -515,51 +515,29 @@ function Scene() {
 // Glassmorphism UI overlay
 function GlassmorphismOverlay() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }} // Faster transition
-      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+    <div
+      className="absolute inset-0 flex items-center justify-center pointer-events-none z-50"
+      style={{ pointerEvents: 'none' }}
     >
       <div className="text-center z-10 pointer-events-auto">
-        <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }} // Faster transition
+        <div
             className="glass-panel p-8 mb-8 max-w-2xl mx-auto w-[90%] md:w-auto"
+            style={{ opacity: 1 }}
           >
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-10 leading-tight tracking-tight">
-            <motion.span 
-              className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent"
-              animate={{ opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
+            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent font-black" style={{textShadow: '0 0 10px rgba(96, 165, 250, 0.5)'}}>
               100% AI-Generated
-            </motion.span>
+            </span>
             <br />
-            <motion.span 
-              className="text-white glow-text"
-              animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.02, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-            >
+            <span className="text-white glow-text font-black" style={{textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'}}>
               Premium Digital Products & AI Tools
-            </motion.span>
+            </span>
           </h1>
           <p className="text-base md:text-xl text-gray-100 mb-8 md:mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
             Discover our exclusive collection of high-quality digital products, AI tools, and premium assets designed to elevate your projects and boost your productivity.
           </p>
           
-          <motion.div
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1.02 }}
-            transition={{ 
-              duration: 2, // Faster animation
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }}
-            className="space-y-4"
-          >
+          <div className="space-y-4" style={{ transform: 'scale(1)' }}>
             <Link href="/products" className="neon-button px-8 md:px-12 py-4 md:py-5 text-base md:text-lg font-bold rounded-lg flex items-center justify-center mx-auto" style={{ minWidth: '200px', maxWidth: '90%' }}>
               Explore Products
               <svg className="ml-2 md:ml-3 w-5 md:w-6 h-5 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -580,10 +558,10 @@ function GlassmorphismOverlay() {
                 Secure Payment
               </span>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

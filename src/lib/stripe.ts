@@ -2,11 +2,12 @@ import Stripe from 'stripe';
 
 // Get Stripe secret key with fallback for build time
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-console.log('Stripe initialization - STRIPE_SECRET_KEY:', stripeSecretKey ? 'exists' : 'missing');
+console.log('Stripe initialization - STRIPE_SECRET_KEY:', stripeSecretKey ? 'exists and configured' : 'missing');
 
 // Initialize Stripe with build-time safety
 const stripe = (() => {
   console.log('Initializing Stripe with key status:', stripeSecretKey ? 'Key exists' : 'Key is missing');
+  
   // Check if key is missing or is a placeholder - allow live keys
   if (!stripeSecretKey || 
       stripeSecretKey === 'sk_test_placeholder' || 
@@ -41,8 +42,7 @@ const stripe = (() => {
         // Test the key with a simple operation first
         const testStripe = new Stripe(stripeSecretKey, {
           apiVersion: '2023-10-16',
-          typescript: true,
-          defaultCurrency: 'aud'
+          typescript: true
         });
         
         // If we get here, the key is valid
@@ -56,8 +56,7 @@ const stripe = (() => {
     // For test keys or if we're not sure
     return new Stripe(stripeSecretKey, {
       apiVersion: '2023-10-16',
-      typescript: true,
-      defaultCurrency: 'aud'
+      typescript: true
     });
   } catch (error) {
     console.error('Failed to initialize Stripe:', error);
