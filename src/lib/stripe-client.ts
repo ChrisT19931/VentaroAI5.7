@@ -4,16 +4,17 @@ import { loadStripe } from '@stripe/stripe-js';
 
 // Get Stripe publishable key from environment
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+console.log('Client-side Stripe initialization - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:', stripePublishableKey ? 'exists' : 'missing');
 
 // Initialize Stripe promise
 let stripePromise: ReturnType<typeof loadStripe> | null = null;
 
 export const getStripe = () => {
   if (!stripePromise) {
-    // Check if key is missing or is a placeholder
+    // Check if key is missing or is a placeholder - allow live keys
     if (!stripePublishableKey || 
         stripePublishableKey === 'pk_test_placeholder' || 
-        stripePublishableKey.includes('placeholder')) {
+        (stripePublishableKey.includes('placeholder') && !stripePublishableKey.startsWith('pk_live_'))) {
       console.warn('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY not configured or is a placeholder - payment features will not work');
       console.log('Current key:', stripePublishableKey ? 'Key exists but may be invalid' : 'Key is undefined');
       return null;

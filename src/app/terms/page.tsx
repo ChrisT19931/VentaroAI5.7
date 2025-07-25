@@ -70,7 +70,7 @@ export default function TermsOfServicePage() {
               </p>
               <ul className="list-disc pl-6 mt-2 text-gray-800">
                 <li>Digital downloads (ebooks, guides, design files)</li>
-                <li>Coaching calls and consultations ($500 for a 60-minute session with full report)</li>
+                <li>Coaching calls and consultations (A$500 for a 60-minute session with full report)</li>
                 <li>Training materials and courses</li>
                 <li>Any other digital products or services</li>
               </ul>

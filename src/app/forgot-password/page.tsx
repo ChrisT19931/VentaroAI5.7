@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import { useToastContext } from '@/context/ToastContext';
+import { toast } from 'react-hot-toast';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const toast = useToastContext();
+  // Using react-hot-toast directly
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

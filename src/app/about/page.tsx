@@ -99,7 +99,7 @@ export default function AboutPage() {
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-gradient mb-2">Quality</div>
-                    <div className="text-gray-400">Excellence</div>
+                    <div className="text-gray-400"></div>
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-gradient mb-2">2025</div>

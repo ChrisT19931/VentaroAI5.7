@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import { useToastContext } from '@/context/ToastContext';
+import { toast } from 'react-hot-toast';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirectTo') || '/';
-  const toast = useToastContext();
+  // Using react-hot-toast directly
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

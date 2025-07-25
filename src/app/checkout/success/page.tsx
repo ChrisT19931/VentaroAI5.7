@@ -4,20 +4,22 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
-import { supabase } from '@/lib/supabase';
+import { toast } from 'react-hot-toast';
 
 export default function CheckoutSuccessPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [downloadLinks, setDownloadLinks] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { clearCart } = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const orderId = searchParams.get('order_id');
+  const isGuest = searchParams.get('guest') === 'true';
 
   useEffect(() => {
-    if (!sessionId || !orderId) {
+    if (!sessionId) {
       setError('Invalid checkout session');
       setIsLoading(false);
       return;
@@ -26,93 +28,39 @@ export default function CheckoutSuccessPage() {
     // Clear the cart after successful checkout
     clearCart();
     
-    // Fetch order details
-    fetchOrderDetails();
+    // Verify payment and get download links
+    verifyPaymentAndGetDownloads();
   }, [sessionId, orderId, router, clearCart]);
 
-  const fetchOrderDetails = async () => {
+  const verifyPaymentAndGetDownloads = async () => {
     try {
       setIsLoading(true);
-
-      // Update order status to completed
-      const { error: updateError } = await supabase
-        .from('orders')
-        .update({ status: 'completed' })
-        .eq('id', orderId);
-
-      if (updateError) throw updateError;
-
-      // Fetch order with items
-      const { data: order, error: orderError } = await supabase
-        .from('orders')
-        .select('*')
-        .eq('id', orderId)
-        .single();
-
-      if (orderError) throw orderError;
-
-      // Fetch order items with product details
-      const { data: orderItems, error: itemsError } = await supabase
-        .from('order_items')
-        .select(`
-          id,
-          quantity,
-          price,
-          download_url,
-          products (id, name, image_url, file_url)
-        `)
-        .eq('order_id', orderId);
-
-      if (itemsError) throw itemsError;
-
-      // Generate download URLs for digital products with secure access tokens
-      const itemsWithDownloadUrls = await Promise.all(
-        (orderItems || []).map(async (item: any) => {
-          // Generate a secure token for download access using session and order data
-          const productId = item.products?.id;
-          const token = Buffer.from(`${sessionId}-${orderId}-${productId}`).toString('base64');
-          
-          // Determine the download URL based on product type
-          let downloadUrl = '';
-          const safeSessionId = sessionId || '';
-          if (item.products?.name.includes('E-book') || item.products?.name.includes('AI Tools Mastery')) {
-            downloadUrl = `/downloads/1?session_id=${encodeURIComponent(safeSessionId)}&token=${encodeURIComponent(token)}`;
-          } else if (item.products?.name.includes('AI Prompts') || item.products?.name.includes('Prompts Arsenal')) {
-            downloadUrl = `/downloads/2?session_id=${encodeURIComponent(safeSessionId)}&token=${encodeURIComponent(token)}`;
-          } else if (item.products?.name.includes('Coaching') || item.products?.name.includes('Strategy Session')) {
-            downloadUrl = `/downloads/3?session_id=${encodeURIComponent(safeSessionId)}&token=${encodeURIComponent(token)}`;
-          }
-          
-          // Update the order item with the download URL
-          if (downloadUrl) {
-            const { error: updateItemError } = await supabase
-              .from('order_items')
-              .update({ 
-                download_url: downloadUrl 
-              })
-              .eq('id', item.id);
-
-            if (updateItemError) {
-              console.error('Error updating download URL:', updateItemError);
-            }
-
-            return {
-              ...item,
-              download_url: downloadUrl
-            };
-          }
-
-          return item;
-        })
-      );
-
-      setOrderDetails({
-        ...order,
-        items: itemsWithDownloadUrls
+      
+      // Verify the Stripe session and get order details
+      const response = await fetch('/api/verify-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          session_id: sessionId,
+          order_id: orderId 
+        }),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to verify payment');
+      }
+
+      setOrderDetails(data.order);
+      setDownloadLinks(data.downloadLinks || []);
+      
     } catch (error: any) {
-      console.error('Error fetching order details:', error);
-      setError('Failed to load order details');
+      console.error('Error verifying payment:', error);
+      setError(error.message || 'Failed to verify payment');
+      toast.error('Failed to verify payment. Please contact support.');
     } finally {
       setIsLoading(false);
     }
@@ -120,14 +68,10 @@ export default function CheckoutSuccessPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="flex justify-center">
-            <svg className="animate-spin h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white text-xl">Verifying your payment...</p>
         </div>
       </div>
     );
@@ -135,21 +79,21 @@ export default function CheckoutSuccessPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <div className="text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h1 className="mt-4 text-2xl font-bold text-gray-900">Something went wrong</h1>
-              <p className="mt-2 text-gray-600">{error}</p>
-              <div className="mt-6">
-                <Link href="/" className="btn-primary">
-                  Return to Home
-                </Link>
-              </div>
-            </div>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto">
+          <div className="text-red-400 text-6xl mb-4">⚠️</div>
+          <h1 className="text-3xl font-bold text-white mb-4">Payment Verification Failed</h1>
+          <p className="text-gray-300 mb-8">{error}</p>
+          <div className="space-y-4">
+            <button 
+              onClick={() => window.location.reload()} 
+              className="btn-primary w-full"
+            >
+              Try Again
+            </button>
+            <Link href="/contact" className="btn-secondary w-full">
+              Contact Support
+            </Link>
           </div>
         </div>
       </div>
@@ -157,110 +101,107 @@ export default function CheckoutSuccessPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4 max-w-3xl">
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <div className="p-8 border-b border-gray-200">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h1 className="text-3xl font-bold text-gray-900">Thank you for your purchase!</h1>
-              <p className="mt-2 text-lg text-gray-600">Your order has been successfully processed.</p>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          {/* Success Header */}
+          <div className="text-center mb-12">
+            <div className="text-green-400 text-6xl mb-4">✅</div>
+            <h1 className="text-4xl font-bold text-white mb-4">Payment Successful!</h1>
+            <p className="text-xl text-gray-300">Thank you for your purchase. Your digital products are ready for download.</p>
           </div>
 
-          <div className="p-8">
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-            <div className="border border-gray-200 rounded-md overflow-hidden">
-              <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                <div>
-                  <span className="text-sm text-gray-500">Order number</span>
-                  <p className="text-sm font-medium">{orderDetails?.id.slice(0, 8)}</p>
+          {/* Order Summary */}
+          {orderDetails && (
+            <div className="glass-panel rounded-lg p-8 mb-8">
+              <h2 className="text-2xl font-bold text-white mb-6">Order Summary</h2>
+              
+              <div className="space-y-4">
+                <div className="flex justify-between items-center border-b border-gray-600 pb-4">
+                  <span className="text-gray-300">Order ID:</span>
+                  <span className="text-white font-mono">{orderDetails.id}</span>
                 </div>
-                <div>
-                  <span className="text-sm text-gray-500">Date</span>
-                  <p className="text-sm font-medium">
-                    {orderDetails?.created_at && new Date(orderDetails.created_at).toLocaleDateString()}
-                  </p>
+                
+                <div className="flex justify-between items-center border-b border-gray-600 pb-4">
+                  <span className="text-gray-300">Total:</span>
+                  <span className="text-white font-bold text-xl">A${orderDetails.total?.toFixed(2) || '0.00'} AUD</span>
                 </div>
-                <div>
-                  <span className="text-sm text-gray-500">Total</span>
-                  <p className="text-sm font-medium">${orderDetails?.total.toFixed(2)}</p>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Status:</span>
+                  <span className="text-green-400 font-semibold">Completed</span>
                 </div>
-              </div>
-
-              <div className="p-4">
-                <h3 className="text-lg font-medium mb-2">Items</h3>
-                <ul className="divide-y divide-gray-200">
-                  {orderDetails?.items.map((item: any) => (
-                    <li key={item.id} className="py-4 flex justify-between">
-                      <div className="flex items-center">
-                        {item.products?.image_url && (
-                          <img 
-                            src={item.products.image_url} 
-                            alt={item.products.name} 
-                            className="h-16 w-16 object-cover rounded-md mr-4"
-                          />
-                        )}
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{item.products?.name}</p>
-                          <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-sm font-medium text-gray-900">
-                          ${item.price.toFixed(2)}
-                        </span>
-                        {item.download_url && (
-                          <a
-                            href={item.download_url}
-                            className="text-primary-600 hover:text-primary-500 text-sm font-medium mt-2"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Download
-                          </a>
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
+          )}
 
-            <div className="mt-8 space-y-4">
-              <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-blue-800">Your Purchase Information</h3>
-                    <div className="mt-2 text-sm text-blue-700">
-                      <p>
-                        Your digital products (E-book and AI Prompts) are available for immediate download using the links above. For coaching calls, you can schedule your session using the link provided.
-                      </p>
-                      <p className="mt-2">
-                        Save this page or bookmark your download links for future access to your purchased content.
-                      </p>
+          {/* Download Links */}
+          {downloadLinks && downloadLinks.length > 0 && (
+            <div className="glass-panel rounded-lg p-8 mb-8">
+              <h2 className="text-2xl font-bold text-white mb-6">Your Downloads</h2>
+              
+              <div className="space-y-4">
+                {downloadLinks.map((item: any, index: number) => (
+                  <div key={index} className="flex items-center justify-between p-6 bg-gray-800/50 rounded-lg border border-gray-600">
+                    <div className="flex items-center space-x-4">
+                      {item.image_url && (
+                        <img 
+                          src={item.image_url} 
+                          alt={item.name || 'Product'}
+                          className="w-16 h-16 object-cover rounded-lg"
+                        />
+                      )}
+                      <div>
+                          <h3 className="text-white font-semibold text-lg">{item.name || 'Digital Product'}</h3>
+                          <p className="text-gray-400">Quantity: {item.quantity}</p>
+                          <p className="text-green-400 font-semibold">A${item.price?.toFixed(2)} AUD</p>
+                        </div>
                     </div>
+                    
+                    {item.download_url && (
+                      <a
+                        href={item.download_url}
+                        className="btn-primary flex items-center space-x-2 px-6 py-3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span>Download Now</span>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6 p-4 bg-blue-900/30 rounded-lg border border-blue-700">
+                <div className="flex items-start space-x-3">
+                  <svg className="w-6 h-6 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div>
+                    <p className="text-blue-200 text-sm font-semibold mb-1">Important Information:</p>
+                    <ul className="text-blue-200 text-sm space-y-1">
+                      <li>• Your download links are secure and will remain active</li>
+                      <li>• Save these links for future access to your purchases</li>
+                      <li>• If you have any issues, please contact our support team</li>
+                    </ul>
                   </div>
                 </div>
               </div>
+            </div>
+          )}
 
-              <div className="flex justify-between">
-                <Link href="/products" className="btn-outline">
-                  Continue Shopping
-                </Link>
-                <Link href="/" className="btn-primary">
-                  Return to Home
-                </Link>
-              </div>
+          {/* Actions */}
+          <div className="text-center space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/products" className="btn-primary px-8 py-3">
+                Continue Shopping
+              </Link>
+              <Link href="/" className="btn-secondary px-8 py-3">
+                Back to Home
+              </Link>
             </div>
           </div>
         </div>

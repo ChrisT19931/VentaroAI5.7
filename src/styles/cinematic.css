@@ -2,43 +2,48 @@
 
 /* Glassmorphism Panel */
 .cinematic-hero .glass-panel {
-  background: rgba(15, 23, 42, 0.6) !important;
-  border: 1px solid rgba(59, 130, 246, 0.2) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border-radius: 15px !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36), 0 0 10px 0 rgba(59, 130, 246, 0.1) !important;
-  transition: all 0.3s ease !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5), 0 0 20px 0 rgba(59, 130, 246, 0.3) !important;
+  transition: all 0.4s ease !important;
+  padding: 3rem !important;
 }
 
 .cinematic-hero .glass-panel:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(96, 165, 250, 0.3) !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(96, 165, 250, 0.6) !important;
   box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(96, 165, 250, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(96, 165, 250, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-7px) !important;
 }
 
 /* Neon Button */
 .neon-button {
   background: linear-gradient(45deg, #3b82f6, #8b5cf6);
   color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px 28px;
+  font-weight: 700;
   letter-spacing: 0.5px;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  display: inline-block;
+  text-align: center;
 }
 
 .neon-button:hover {
-  box-shadow: 0 0 25px rgba(59, 130, 246, 0.7);
-  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+  transform: translateY(-3px) scale(1.03);
   background: linear-gradient(45deg, #2563eb, #7c3aed);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .neon-button::before {
@@ -182,24 +187,24 @@
 /* Glowing Text */
 .glow-text {
   text-shadow: 
-    0 0 10px rgba(96, 165, 250, 0.5),
-    0 0 20px rgba(96, 165, 250, 0.3),
-    0 0 30px rgba(96, 165, 250, 0.2);
+    0 0 10px rgba(96, 165, 250, 0.7),
+    0 0 20px rgba(96, 165, 250, 0.5),
+    0 0 30px rgba(96, 165, 250, 0.3);
   animation: textGlow 2s ease-in-out infinite alternate;
 }
 
 @keyframes textGlow {
   from {
     text-shadow: 
-      0 0 10px rgba(96, 165, 250, 0.5),
-      0 0 20px rgba(96, 165, 250, 0.3),
-      0 0 30px rgba(96, 165, 250, 0.2);
+      0 0 10px rgba(96, 165, 250, 0.7),
+      0 0 20px rgba(96, 165, 250, 0.5),
+      0 0 30px rgba(96, 165, 250, 0.3);
   }
   to {
     text-shadow: 
-      0 0 15px rgba(96, 165, 250, 0.8),
-      0 0 25px rgba(96, 165, 250, 0.5),
-      0 0 35px rgba(96, 165, 250, 0.3);
+      0 0 15px rgba(96, 165, 250, 1),
+      0 0 25px rgba(96, 165, 250, 0.7),
+      0 0 35px rgba(96, 165, 250, 0.5);
   }
 }
 
@@ -225,18 +230,67 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .glass-panel {
+  .cinematic-hero .glass-panel {
     margin: 1rem;
-    padding: 1.5rem;
+    padding: 1.5rem !important;
+    max-width: 90% !important;
   }
   
   .neon-button {
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
+    min-width: 200px !important;
   }
   
   .product-card-3d:hover {
     transform: translateZ(10px);
+  }
+  
+  .cinematic-hero h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .cinematic-hero p {
+    font-size: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cinematic-hero {
+    height: 100svh !important; /* Use small viewport height for better mobile experience */
+  }
+  
+  .cinematic-hero .glass-panel {
+    padding: 1.25rem !important;
+    margin: 0.5rem;
+  }
+  
+  .cinematic-hero h1 {
+    font-size: 2rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .cinematic-hero p {
+    font-size: 0.9rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .neon-button {
+    min-width: 180px !important;
+    font-size: 0.85rem;
+  }
+  
+  .cinematic-hero .flex.gap-4 span {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+  
+  .cinematic-hero .flex.gap-4 span div {
+    width: 0.5rem !important;
+    height: 0.5rem !important;
+    margin-right: 0.5rem !important;
   }
 }
 

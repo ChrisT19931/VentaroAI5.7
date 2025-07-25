@@ -4,8 +4,8 @@
  * @param currency The currency code (default: 'USD')
  * @returns Formatted price string
  */
-export function formatPrice(price: number, currency: string = 'USD'): string {
-  const formatter = new Intl.NumberFormat('en-US', {
+export function formatPrice(price: number, currency: string = 'AUD'): string {
+  const formatter = new Intl.NumberFormat('en-AU', {
     style: 'currency',
     currency,
     minimumFractionDigits: 2,

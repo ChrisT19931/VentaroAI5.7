@@ -526,27 +526,27 @@ function GlassmorphismOverlay() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }} // Faster transition
-            className="glass-panel p-8 mb-8 max-w-2xl mx-auto"
+            className="glass-panel p-8 mb-8 max-w-2xl mx-auto w-[90%] md:w-auto"
           >
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-10 leading-tight tracking-tight">
             <motion.span 
               className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent"
               animate={{ opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }} // Faster animation
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              Unlock Your
+              100% AI-Generated
             </motion.span>
             <br />
             <motion.span 
-              className="text-white"
-              animate={{ opacity: [0.9, 1, 0.9] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }} // Faster animation
+              className="text-white glow-text"
+              animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.02, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
             >
-              AI Potential
+              Premium Digital Products & AI Tools
             </motion.span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Transform your business with cutting-edge AI tools, expert prompts, and personalized coaching sessions.
+          <p className="text-base md:text-xl text-gray-100 mb-8 md:mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
+            Discover our exclusive collection of high-quality digital products, AI tools, and premium assets designed to elevate your projects and boost your productivity.
           </p>
           
           <motion.div
@@ -560,20 +560,23 @@ function GlassmorphismOverlay() {
             }}
             className="space-y-4"
           >
-            <Link href="/products" className="neon-button px-8 py-4 text-lg font-semibold">
+            <Link href="/products" className="neon-button px-8 md:px-12 py-4 md:py-5 text-base md:text-lg font-bold rounded-lg flex items-center justify-center mx-auto" style={{ minWidth: '200px', maxWidth: '90%' }}>
               Explore Products
+              <svg className="ml-2 md:ml-3 w-5 md:w-6 h-5 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </Link>
-            <div className="flex items-center justify-center space-x-6 text-sm text-gray-400">
-              <span className="flex items-center">
-                <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-sm text-gray-200 mt-6 md:mt-8 px-2">
+              <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
+                <div className="w-3 h-3 bg-green-400 rounded-full mr-2.5 animate-pulse"></div>
                 Instant Access
               </span>
-              <span className="flex items-center">
-                <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
+              <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
+                <div className="w-3 h-3 bg-blue-400 rounded-full mr-2.5 animate-pulse"></div>
                 No Email Required
               </span>
-              <span className="flex items-center">
-                <div className="w-2 h-2 bg-purple-400 rounded-full mr-2 animate-pulse"></div>
+              <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
+                <div className="w-3 h-3 bg-purple-400 rounded-full mr-2.5 animate-pulse"></div>
                 Secure Payment
               </span>
             </div>
@@ -602,6 +605,7 @@ export default function CinematicHero() {
         performance={{ min: 0.5 }}
       >
         <Scene />
+        <Environment preset="night" background={false} />
       </Canvas>
       
       {/* Glassmorphism UI Overlay */}

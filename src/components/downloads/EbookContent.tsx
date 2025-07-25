@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { useToastContext } from '@/context/ToastContext';
+import { toast } from 'react-hot-toast';
 
 export default function EbookContent() {
   const { user } = useAuth();
   const router = useRouter();
-  const toast = useToastContext();
+  // Using react-hot-toast directly
   const [isVerifying, setIsVerifying] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
 

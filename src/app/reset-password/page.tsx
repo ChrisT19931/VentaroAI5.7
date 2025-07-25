@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import { useToastContext } from '@/context/ToastContext';
+import { toast } from 'react-hot-toast';
 import { validatePassword } from '@/utils/validation';
 
 export default function ResetPasswordPage() {
@@ -13,7 +13,7 @@ export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
-  const toast = useToastContext();
+  // Using react-hot-toast directly
 
   useEffect(() => {
     // Check if we have a hash in the URL (from the password reset email)

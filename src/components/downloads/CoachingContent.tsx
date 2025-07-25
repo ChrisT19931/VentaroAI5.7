@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { useToastContext } from '@/context/ToastContext';
+import toast from 'react-hot-toast';
 
 export default function CoachingContent() {
   const { user } = useAuth();
   const router = useRouter();
-  const toast = useToastContext();
+
   const searchParams = useSearchParams();
   const guestEmail = searchParams.get('email');
   const orderToken = searchParams.get('token');
@@ -285,10 +285,10 @@ export default function CoachingContent() {
                   className="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-blue-500 focus:outline-none"
                 >
                   <option value="">Select budget range</option>
-                  <option value="under-1k">Under $1,000</option>
-                  <option value="1k-5k">$1,000 - $5,000</option>
-                  <option value="5k-10k">$5,000 - $10,000</option>
-                  <option value="10k-plus">$10,000+</option>
+                  <option value="under-1k">Under A$1,000</option>
+                <option value="1k-5k">A$1,000 - A$5,000</option>
+                <option value="5k-10k">A$5,000 - A$10,000</option>
+                <option value="10k-plus">A$10,000+</option>
                   <option value="not-sure">Not sure yet</option>
                 </select>
               </div>

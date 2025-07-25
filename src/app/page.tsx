@@ -2,22 +2,12 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
-
-// Dynamically import the 3D component to avoid SSR issues
-const CinematicHero = dynamic(() => import('../components/3d/CinematicHero'), {
-  ssr: false,
-  loading: () => (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-800 flex items-center justify-center">
-      <div className="text-white text-xl animate-pulse">Loading cinematic experience...</div>
-    </div>
-  )
-});
+import CinematicHero from '../components/3d/CinematicHero'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-black">
-      {/* Cinematic Hero Section */}
+      {/* Hero Section */}
       <div className="relative">
         <CinematicHero />
       </div>
@@ -76,7 +66,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <div className="text-4xl font-black text-white glow-text mb-2">$10</div>
+                  <div className="text-4xl font-black text-white glow-text mb-2">A$10</div>
                   <div className="text-sm text-gray-400">One-time payment</div>
                 </div>
                 <Link href="/products/2" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-green-500/30">
@@ -128,8 +118,8 @@ export default function Home() {
                 </div>
                 <div className="text-center mb-6">
                   <div className="flex items-center justify-center space-x-2 mb-2">
-                    <span className="text-4xl font-black text-white glow-text">$25</span>
-                    <span className="text-xl text-gray-500 line-through">$50</span>
+                    <span className="text-4xl font-black text-white glow-text">A$25</span>
+                <span className="text-xl text-gray-500 line-through">A$50</span>
                   </div>
                   <div className="text-sm text-green-400 font-semibold animate-pulse" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
                 </div>
@@ -176,7 +166,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <div className="text-4xl font-black text-white glow-text mb-2">$497</div>
+                  <div className="text-4xl font-black text-white glow-text mb-2">A$497</div>
                   <div className="text-sm text-gray-400">One-time investment</div>
                 </div>
                 <Link href="/products/3" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/30">
@@ -210,7 +200,7 @@ export default function Home() {
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Ventaro</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Experience the pinnacle of digital excellence with our high-quality AI-powered solutions.
+              Experience the pinnacle of digital with our high-quality AI-powered solutions.
             </p>
           </div>
           
@@ -272,18 +262,14 @@ export default function Home() {
               <span className="font-bold text-white">Everything here was created with AI - and so can your success.</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link href="/products" className="group relative inline-flex items-center px-12 py-5 bg-gradient-to-r from-white to-gray-100 text-black font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/30 overflow-hidden">
-                <span className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative z-10">Start Your Journey</span>
-                <svg className="ml-4 w-6 h-6 transform group-hover:translate-x-3 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-              <div className="flex items-center space-x-3 text-gray-300">
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" style={{animationDuration: '2s'}}></div>
-                <span className="font-semibold">100% AI-Generated Excellence</span>
-              </div>
-            </div>
+  <Link href="/products" className="group relative inline-flex items-center px-12 py-5 bg-gradient-to-r from-white to-gray-100 text-black font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/30 overflow-hidden">
+    <span className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+    <span className="relative z-10">Start Your Journey</span>
+    <svg className="ml-4 w-6 h-6 transform group-hover:translate-x-3 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </Link>
+</div>
           </div>
         </div>
       </section>

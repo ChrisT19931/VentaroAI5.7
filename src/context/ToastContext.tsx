@@ -1,33 +1,35 @@
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
-import { useToast as useToastHook } from '@/hooks/useToast';
-
-type ToastContextType = ReturnType<typeof useToastHook>['toast'];
-
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
+import { ReactNode } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const { toast, ToastProvider: ToastComponentProvider } = useToastHook();
-
   return (
-    <ToastContext.Provider value={toast}>
-      <ToastComponentProvider>
-        {children}
-      </ToastComponentProvider>
-    </ToastContext.Provider>
+    <>
+      {children}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#1f2937',
+            color: '#f9fafb',
+            border: '1px solid #374151',
+          },
+          success: {
+            iconTheme: {
+              primary: '#10b981',
+              secondary: '#f9fafb',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#f9fafb',
+            },
+          },
+        }}
+      />
+    </>
   );
 }
-
-export function useToastContext() {
-  const context = useContext(ToastContext);
-  
-  if (context === undefined) {
-    throw new Error('useToastContext must be used within a ToastProvider');
-  }
-  
-  return context;
-}
-
-// Export useToast for backward compatibility
-export const useToast = useToastContext;

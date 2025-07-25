@@ -1,6 +1,6 @@
-# Ventaro AI Digital Store
+# AI-Powered Digital Store
 
-A full-stack e-commerce platform for selling AI digital products with one-time payments. Features a modern dark theme design and comprehensive admin panel.
+A modern eCommerce platform built with Next.js 14, Stripe, and Supabase for selling digital products with secure download functionality.
 
 ## 🚨 IMPORTANT: Environment Variables Setup
 
@@ -129,17 +129,17 @@ See [.env.local.example](./.env.local.example) for all required variables:
 
 ## 📋 Current Products
 
-1. **AI Tools Mastery Guide 2025** - $25.00 (50% OFF)
+1. **AI Tools Mastery Guide 2025** - A$25.00 (50% OFF)
    - 30-page guide with AI tools and AI prompts
    - Learn ChatGPT, Claude, Grok, and Gemini
    - Master AI agents and bots
 
-2. **AI Prompts Arsenal 2025** - $10.00
+2. **AI Prompts Arsenal 2025** - A$10.00
    - 30 professional AI prompts for making money online
    - Proven ChatGPT and Claude prompts
    - Copy-paste ready for immediate use
 
-3. **AI Business Strategy Session 2025** - $497.00
+3. **AI Business Strategy Session 2025** - A$497.00
    - 60-minute live video coaching session
    - Master ChatGPT for business applications
    - Learn Vercel deployment from scratch

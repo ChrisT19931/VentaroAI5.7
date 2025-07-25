@@ -108,11 +108,11 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'Do you have any current promotions?',
-          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just $10. These 30 professional AI prompts are perfect for content creation, marketing automation, and AI-powered business growth.'
+          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just A$10. These 30 professional AI prompts are perfect for content creation, marketing automation, and AI-powered business growth.'
         },
         {
           question: 'What does the AI Business Strategy Session include?',
-          answer: 'Our AI Business Strategy Session includes a 60-minute personalized session with one of our AI experts, plus a comprehensive implementation report. For $497, you get tailored advice, custom workflow optimization, and specific AI strategies for your business projects.'
+          answer: 'Our AI Business Strategy Session includes a 60-minute personalized session with one of our AI experts, plus a comprehensive implementation report. For A$497, you get tailored advice, custom workflow optimization, and specific AI strategies for your business projects.'
         }
       ]
     }

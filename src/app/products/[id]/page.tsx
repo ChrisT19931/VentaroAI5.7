@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
+import BuyNowButton from '@/components/BuyNowButton';
 import ProtectedDownload from '@/components/ProtectedDownload';
 import dynamic from 'next/dynamic';
 
@@ -390,7 +391,7 @@ export default function ProductPage() {
               <h1 className="text-4xl font-bold text-white mb-4 glow-text">{product.name}</h1>
               <p className="text-xl text-gray-300 mb-6">{product.description}</p>
               <div className="flex items-center gap-4 mb-8">
-                <span className="text-4xl font-bold text-white glow-text">${product.price.toFixed(2)}</span>
+                <span className="text-4xl font-bold text-white glow-text">A${product.price.toFixed(2)} AUD</span>
                 <span className="px-3 py-1 bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-full text-sm font-medium shadow-lg">
                   {product.category === 'services' ? 'Consultation' : 'Digital Download'}
                 </span>
@@ -455,8 +456,11 @@ export default function ProductPage() {
 
             {/* CTA Button */}
             <div className="glass-panel rounded-lg p-6 text-center">
-              <AddToCartButton product={product} />
+              <BuyNowButton product={product} />
               <p className="text-gray-300 text-sm mt-4">Secure checkout • Instant download</p>
+              <div className="mt-4 pt-4 border-t border-gray-600">
+                <AddToCartButton product={product} />
+              </div>
             </div>
 
             {/* Trust Indicators */}

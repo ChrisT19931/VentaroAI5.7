@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCart, CartItem } from '@/context/CartContext';
+import { useCart } from '@/hooks/useCart';
 
 type Product = {
   id: string;
   name: string;
   price: number;
   image_url?: string | null;
+  productType: 'digital' | 'physical';
 };
 
 export default function AddToCartButton({ product }: { product: Product }) {
@@ -30,15 +31,13 @@ export default function AddToCartButton({ product }: { product: Product }) {
   const handleAddToCart = () => {
     setIsAdding(true);
     
-    const cartItem: CartItem = {
+    addItem({
       id: product.id,
       name: product.name,
       price: product.price,
-      quantity,
-      image_url: product.image_url,
-    };
-    
-    addItem(cartItem);
+      image: product.image_url || undefined,
+      productType: product.productType || 'digital',
+    }, quantity);
     
     setTimeout(() => {
       setIsAdding(false);
@@ -48,15 +47,14 @@ export default function AddToCartButton({ product }: { product: Product }) {
   };
 
   const handleBuyNow = () => {
-    const cartItem: CartItem = {
+    addItem({
       id: product.id,
       name: product.name,
       price: product.price,
-      quantity,
-      image_url: product.image_url,
-    };
+      image: product.image_url || undefined,
+      productType: product.productType || 'digital',
+    }, quantity);
     
-    addItem(cartItem);
     // Go directly to cart page for checkout
     router.push('/cart');
   };
@@ -89,7 +87,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
         <button
           onClick={handleAddToCart}
           disabled={isAdding}
-          className={`btn-primary flex-1 flex items-center justify-center ${isAdding ? 'opacity-75' : ''}`}
+          className="btn-primary flex-1 flex items-center justify-center py-3 px-4 rounded-lg"
         >
           {isAdding ? (
             <>
@@ -105,7 +103,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
         </button>
         <button
           onClick={handleBuyNow}
-          className="btn-secondary flex-1"
+          className="btn-secondary flex-1 py-3 px-4 rounded-lg"
         >
           Buy Now
         </button>

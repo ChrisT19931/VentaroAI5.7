@@ -81,7 +81,7 @@ export default function CartPage() {
             </div>
             <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
             <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any products to your cart yet.</p>
-            <Link href="/products" className="btn-primary">
+            <Link href="/products" className="btn-primary py-3 px-6 rounded-lg inline-block">
               Browse Products
             </Link>
           </div>
@@ -127,15 +127,15 @@ export default function CartPage() {
                                   {item.name}
                                 </Link>
                               </h3>
-                              <p className="ml-4">${(item.price * item.quantity).toFixed(2)}</p>
+                              <p className="ml-4">A${(item.price * item.quantity).toFixed(2)} AUD</p>
                             </div>
-                            <p className="mt-1 text-sm text-gray-500">${item.price.toFixed(2)} each</p>
+                            <p className="mt-1 text-sm text-gray-500">A${item.price.toFixed(2)} AUD each</p>
                           </div>
                           <div className="flex-1 flex items-end justify-between text-sm">
                             <div className="flex items-center">
                               <button
                                 onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
-                                className="text-gray-500 hover:text-gray-700"
+                                className="text-gray-500 hover:text-gray-700 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100"
                               >
                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
@@ -144,7 +144,7 @@ export default function CartPage() {
                               <span className="mx-2 text-gray-700">{item.quantity}</span>
                               <button
                                 onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
-                                className="text-gray-500 hover:text-gray-700"
+                                className="text-gray-500 hover:text-gray-700 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-100"
                               >
                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -198,17 +198,17 @@ export default function CartPage() {
                 <dl className="-my-4 text-sm divide-y divide-gray-200">
                   <div className="py-4 flex items-center justify-between">
                     <dt className="text-gray-600">Subtotal</dt>
-                    <dd className="font-medium text-gray-900">${total.toFixed(2)}</dd>
+                    <dd className="font-medium text-gray-900">A${total.toFixed(2)} AUD</dd>
                   </div>
                   
                   <div className="py-4 flex items-center justify-between">
                     <dt className="text-gray-600">Tax</dt>
-                    <dd className="font-medium text-gray-900">$0.00</dd>
+                    <dd className="font-medium text-gray-900">A$0.00 AUD</dd>
                   </div>
                   
                   <div className="py-4 flex items-center justify-between">
                     <dt className="text-base font-medium text-gray-900">Order total</dt>
-                    <dd className="text-base font-medium text-gray-900">${total.toFixed(2)}</dd>
+                    <dd className="text-base font-medium text-gray-900">A${total.toFixed(2)} AUD</dd>
                   </div>
                 </dl>
               </div>
@@ -223,7 +223,7 @@ export default function CartPage() {
                   <button
                     onClick={handleCheckout}
                     disabled={isLoading}
-                    className="w-full btn-primary py-3 flex items-center justify-center"
+                    className="w-full btn-primary py-3 px-6 rounded-lg flex items-center justify-center"
                   >
                     {isLoading ? (
                       <>
@@ -245,7 +245,7 @@ export default function CartPage() {
                 <button
                   type="button"
                   onClick={() => router.push('/products')}
-                  className="font-medium text-primary-600 hover:text-primary-500"
+                  className="font-medium text-primary-600 hover:text-primary-500 mt-2 inline-block"
                 >
                   Continue Shopping
                   <span aria-hidden="true"> &rarr;</span>

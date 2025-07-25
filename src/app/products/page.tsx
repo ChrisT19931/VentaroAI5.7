@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase';
+import BuyNowButton from '@/components/BuyNowButton';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -146,16 +147,27 @@ export default async function ProductsPage() {
                   <p className="text-gray-600 mb-4 line-clamp-2">
                     {product.description}
                   </p>
-                  <div className="flex justify-between items-center">
-                    <div className="flex flex-col">
-                      <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
-                      {product.originalPrice && (
-                        <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
-                      )}
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-col">
+                        <span className="text-lg font-bold">A${product.price.toFixed(2)}</span>
+                        {product.originalPrice && (
+                          <span className="text-sm text-gray-500 line-through">A${product.originalPrice.toFixed(2)}</span>
+                        )}
+                      </div>
+                      <Link href={`/products/${product.id}`} className="btn-outline text-sm">
+                        View Details
+                      </Link>
                     </div>
-                    <Link href={`/products/${product.id}`} className="btn-outline text-sm">
-                      View Details
-                    </Link>
+                    <BuyNowButton 
+                      product={{
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image_url: product.image_url
+                      }} 
+                      className="text-sm py-2"
+                    />
                   </div>
                 </div>
               </div>
