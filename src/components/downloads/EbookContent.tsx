@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
+import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import { toast } from 'react-hot-toast';
 
 export default function EbookContent() {
-  const { user } = useAuth();
+  const { user } = useSimpleAuth();
   const router = useRouter();
   // Using react-hot-toast directly
   const [isVerifying, setIsVerifying] = useState(true);
@@ -93,7 +93,7 @@ export default function EbookContent() {
               Purchase E-book
             </Link>
               <br />
-              <Link href="/account" className="text-blue-400 hover:text-blue-300">
+              <Link href="/my-account" className="text-blue-400 hover:text-blue-300">
                 Check My Purchases
               </Link>
             </div>
@@ -155,7 +155,7 @@ export default function EbookContent() {
           </div>
 
           <div className="text-center mt-8">
-            <Link href="/account" className="text-blue-400 hover:text-blue-300 mr-6">
+            <Link href="/my-account" className="text-blue-400 hover:text-blue-300 mr-6">
               ← Back to My Account
             </Link>
             <Link href="/products" className="text-blue-400 hover:text-blue-300">

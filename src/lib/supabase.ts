@@ -27,7 +27,14 @@ function validateSupabaseConfig() {
 // Create a server-side client creator function
 export const createClient = async () => {
   validateSupabaseConfig();
-  return createSupabaseClient<Database>(supabaseUrl!, supabaseAnonKey!);
+  return createSupabaseClient<Database>(supabaseUrl!, supabaseAnonKey!, {
+    auth: {
+      storageKey: 'ventaro-store-auth-token',
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    }
+  });
 };
 
 // Create a single supabase client for the browser
@@ -36,7 +43,14 @@ export const supabase = (() => {
   if (typeof window !== 'undefined') {
     try {
       validateSupabaseConfig();
-      return createSupabaseClient<Database>(supabaseUrl!, supabaseAnonKey!);
+      return createSupabaseClient<Database>(supabaseUrl!, supabaseAnonKey!, {
+        auth: {
+          storageKey: 'ventaro-store-auth-token',
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true
+        }
+      });
     } catch (error) {
       console.error('Supabase configuration error:', error);
       // Return null to prevent app crash, but log the error
@@ -46,7 +60,14 @@ export const supabase = (() => {
   
   // Server-side: only create client if env vars are available
   if (supabaseUrl && supabaseAnonKey) {
-    return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey);
+    return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        storageKey: 'ventaro-store-auth-token',
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true
+      }
+    });
   }
   
   return null as any;

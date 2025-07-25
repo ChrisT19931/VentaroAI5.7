@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
 import BuyNowButton from '@/components/BuyNowButton';
-import ProtectedDownload from '@/components/ProtectedDownload';
+
 import dynamic from 'next/dynamic';
 
 // Dynamically import the 3D component to avoid SSR issues
@@ -122,8 +122,8 @@ const fallbackProducts = {
   '3': {
     id: '3',
     name: 'AI Business Strategy Session 2025',
-    description: '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
-    price: 497.00,
+    description: '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🚀 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
+    price: 500.00,
     image_url: '/images/products/ai-business-strategy-session.svg',
     category: 'services',
     is_active: true,
@@ -132,26 +132,26 @@ const fallbackProducts = {
     created_at: new Date().toISOString(),
     benefits: [
       'Live 60-minute video coaching session',
-      'Master ChatGPT for business applications',
-      'Learn Vercel deployment from scratch',
-      'Complete site deployment walkthrough',
+      'Understand your specific business goals',
+      'Learn step-by-step online store creation',
+      'Complete website deployment walkthrough',
+      'Master e-commerce setup and configuration',
       'Comprehensive implementation report included',
-      'Hands-on learning with real examples',
-      'Full package options available - email for custom quotes'
+      'Start-to-finish guidance with real examples'
     ],
     details: {
-      description: 'Join an exclusive 60-minute live video coaching session where you\'ll master ChatGPT usage and learn to deploy professional sites using Vercel. This hands-on session includes real-time guidance and a detailed implementation report.',
+      description: 'Join an exclusive 60-minute live video coaching session where you\'ll learn to build and deploy your own online store/website from start to finish. This hands-on session includes goal assessment, step-by-step guidance, and a detailed implementation report.',
       features: [
         'Live video coaching with expert instructor',
-        'Complete ChatGPT mastery training',
-        'Step-by-step Vercel deployment tutorial',
-        'Real-time site building and deployment',
-        'Advanced AI integration techniques',
+        'Goal assessment and business planning',
+        'Step-by-step online store creation tutorial',
+        'Real-time website building and deployment',
+        'E-commerce setup and configuration',
         'Professional development workflow setup'
       ],
       includes: [
         'Full 60-minute live video session',
-        'ChatGPT usage and optimization training',
+        'Personal goal assessment and planning',
         'Complete Vercel deployment walkthrough',
         'Hands-on site building experience',
         'Comprehensive implementation report',
@@ -342,7 +342,9 @@ export default function ProductPage() {
           <div className="relative">
             <Product3D 
               product={{
-                ...product,
+                id: product.id,
+                name: product.name,
+                price: product.price,
                 image_url: product.image_url || '/placeholder-product.jpg',
                 description: product.description || 'No description available'
               }} 
@@ -352,7 +354,7 @@ export default function ProductPage() {
             {/* Product Specs */}
             {(product.details?.pages || product.details?.duration || product.details?.promptCount) && (
               <div className="mt-6 glass-panel rounded-lg p-4">
-                <h4 className="font-semibold text-white mb-3 glow-text">Product Details</h4>
+                <h4 className="font-semibold text-white mb-3 glow-text">Specifications</h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   {product.details.pages && (
                     <div>
@@ -430,39 +432,7 @@ export default function ProductPage() {
               </div>
             )}
 
-            {/* Features */}
-            {product.details?.features && (
-              <div className="glass-panel rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-white mb-4 glow-text">What You'll Get:</h3>
-                <ul className="space-y-3">
-                   {product.details.features.map((feature: string, index: number) => (
-                     <li key={index} className="flex items-start gap-3">
-                       <svg className="h-6 w-6 text-emerald-400 flex-shrink-0 mt-0.5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                       </svg>
-                       <span className="text-gray-300">{feature}</span>
-                     </li>
-                   ))}
-                 </ul>
-              </div>
-            )}
 
-            {/* Includes */}
-            {product.details?.includes && (
-              <div className="glass-panel rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-white mb-4 glow-text">Package Includes:</h3>
-                <ul className="space-y-3">
-                   {product.details.includes.map((item: string, index: number) => (
-                     <li key={index} className="flex items-start gap-3">
-                       <svg className="h-6 w-6 text-amber-400 flex-shrink-0 mt-0.5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                       </svg>
-                       <span className="text-gray-300">{item}</span>
-                     </li>
-                   ))}
-                 </ul>
-              </div>
-            )}
 
             {/* CTA Button */}
             <div className="glass-panel rounded-lg p-6 text-center">
@@ -497,71 +467,8 @@ export default function ProductPage() {
           </div>
         </div>
         
-        {/* Protected Download Section */}
-        <div className="mt-16">
-          <ProtectedDownload 
-            productId={product.id}
-            productName={product.name}
-            fileName={getProductFileName(product.id)}
-            fileSize={getProductFileSize(product.id)}
-            isPurchased={false} // In real app, this would check user's purchase status
-          />
-        </div>
-        
-        {/* Additional Product Information */}
-        <div className="mt-16">
-          <div className="border-b border-gray-700">
-            <h2 className="text-2xl font-bold mb-4 text-white glow-text">Product Details</h2>
-          </div>
-          
-          <div className="py-8 prose prose-lg max-w-none">
-            <p className="text-gray-300">
-              {product.description}
-            </p>
-            <h3 className="text-white glow-text">Purchase Information</h3>
-            <p className="text-gray-300">
-              All digital products are delivered immediately after successful payment. You'll receive download links via email and can access your purchases anytime through your account dashboard.
-            </p>
-            
-            <div className="glass-panel border border-blue-500/30 rounded-md p-4 mt-6">
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div className="ml-3">
-                  <h3 className="text-sm font-medium text-blue-400 glow-text">Access After Purchase</h3>
-                  <div className="mt-2 text-sm text-gray-300">
-                    <p>
-                      Your digital products (E-book and AI Prompts) will be available for immediate download after purchase. For coaching calls, you'll receive an email with scheduling instructions within 24 hours.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   );
-}
-
-// Helper functions to get product file information
-function getProductFileName(productId: string): string {
-  const fileMap: Record<string, string> = {
-    '1': 'ai-tools-mastery-guide-2025.pdf',
-    '2': 'ai-prompts-arsenal-2025.pdf',
-    '3': 'ai-business-strategy-session-2025.pdf'
-  }
-  return fileMap[productId] || 'product-download.pdf'
-}
-
-function getProductFileSize(productId: string): string {
-  const sizeMap: Record<string, string> = {
-    '1': '2.5 MB',
-    '2': '1.2 MB', 
-    '3': 'Booking Confirmation'
-  }
-  return sizeMap[productId] || '1.0 MB'
 }

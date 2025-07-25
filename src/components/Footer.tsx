@@ -32,7 +32,7 @@ export default function Footer() {
               Pioneering the future of digital products with cutting-edge AI technology.
             </p>
             <a 
-              href="https://www.linkedin.com/company/ventaro-ai" 
+              href="https://www.linkedin.com/in/christ111" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 transition-colors duration-200 inline-flex items-center"
@@ -93,10 +93,10 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-white mb-4">AI Products</h3>
             <ul className="space-y-2">
               {[
-                { name: 'AI Design Tools', href: '/products/category/design' },
-                { name: 'AI Content Creation', href: '/products/category/content' },
-                { name: 'AI Data Analysis', href: '/products/category/data' },
-                { name: 'AI Development', href: '/products/category/development' },
+                { name: 'AI Tools Mastery Guide 2025', href: '/products/1' },
+                { name: 'AI Prompts Arsenal 2025', href: '/products/2' },
+                { name: 'AI Business Strategy Session 2025', href: '/products/3' },
+                { name: 'All Products', href: '/products' },
               ].map((link) => (
                 <li key={link.name}>
                   <a 

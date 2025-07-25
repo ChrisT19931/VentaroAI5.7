@@ -166,8 +166,11 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <div className="text-4xl font-black text-white glow-text mb-2">A$497</div>
-                  <div className="text-sm text-gray-400">One-time investment</div>
+                  <div className="flex items-center justify-center space-x-2 mb-2">
+                    <span className="text-4xl font-black text-white glow-text">A$500</span>
+                    <span className="text-xl text-gray-500 line-through">A$3000</span>
+                  </div>
+                  <div className="text-sm text-green-400 font-semibold animate-pulse" style={{animationDuration: '2s'}}>🚀 LAUNCH OFFER - 83% OFF</div>
                 </div>
                 <Link href="/products/3" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-transform duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/30">
                   Go Pro
@@ -186,6 +189,273 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Custom Website Creation Section */}
+      <section className="py-24 bg-gradient-to-br from-black via-blue-950/20 to-purple-950/20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-40 h-40 border border-blue-500/30 rotate-12 animate-pulse" style={{animationDuration: '3s'}}></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 border border-purple-500/30 rotate-45 animate-pulse delay-700" style={{animationDuration: '3s'}}></div>
+        </div>
+        
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 glow-text">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Custom Website Creation</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Need a fully custom website solution? Our expert team creates professional, high-converting websites tailored to your specific business needs.
+            </p>
+          </div>
+          
+          <div className="max-w-5xl mx-auto">
+            <div className="glass-panel rounded-3xl shadow-2xl border border-blue-500/30 overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-8 text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-4xl font-black text-white mb-4 glow-text">Full Custom Site Creation</h3>
+                <div className="text-center mb-6">
+                  <div className="text-2xl font-bold text-white mb-2">Starting from $1,000+</div>
+                  <div className="text-sm text-blue-400 font-medium">Professional Custom Development - Quote Based</div>
+                </div>
+              </div>
+              
+              <div className="p-8">
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h4 className="text-2xl font-bold text-white mb-4 glow-text">What's Included:</h4>
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Custom design & development</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Responsive mobile optimization</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">SEO-friendly architecture</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Content management system</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Payment processing integration</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Social media integration</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Analytics & tracking setup</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">SSL certificate & security</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Email marketing integration</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Live chat & support tools</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Performance optimization</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                          <span className="text-gray-300">Launch support & training</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="glass-panel p-8 rounded-2xl border border-blue-500/30">
+                    <h4 className="text-2xl font-bold text-white mb-6 glow-text flex items-center">
+                      <svg className="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Quick Inquiry Form
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-white font-semibold mb-2 flex items-center">
+                          <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                          Project Type *
+                        </label>
+                        <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm">
+                          <option value="">Select project type</option>
+                          <option value="business-website">Business Website</option>
+                          <option value="e-commerce">E-commerce Store</option>
+                          <option value="portfolio">Portfolio/Personal</option>
+                          <option value="blog">Blog/Content Site</option>
+                          <option value="web-app">Web Application</option>
+                          <option value="saas">SaaS Platform</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-white font-semibold mb-2 flex items-center">
+                          <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                          Budget Range *
+                        </label>
+                        <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
+                          <option value="">Select budget range</option>
+                          <option value="1k-3k">$1,000 - $3,000</option>
+                          <option value="3k-5k">$3,000 - $5,000</option>
+                          <option value="5k-10k">$5,000 - $10,000</option>
+                          <option value="10k-20k">$10,000 - $20,000</option>
+                          <option value="20k-plus">$20,000+</option>
+                          <option value="discuss">Let's discuss</option>
+                        </select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-white font-semibold mb-2 flex items-center">
+                          <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                          Timeline *
+                        </label>
+                        <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-green-400/30 rounded-xl text-white focus:border-green-400 focus:ring-2 focus:ring-green-400/20 focus:outline-none transition-all duration-300 hover:border-green-300 backdrop-blur-sm">
+                          <option value="">Select timeline</option>
+                          <option value="rush">Rush (1-3 days)</option>
+                          <option value="standard">Standard (1-2 weeks)</option>
+                          <option value="extended">Extended (2-4 weeks)</option>
+                          <option value="flexible">Flexible timeline</option>
+                        </select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-white font-semibold mb-2 flex items-center">
+                          <span className="w-2 h-2 bg-pink-400 rounded-full mr-2"></span>
+                          Contact Email *
+                        </label>
+                        <input 
+                          type="email"
+                          placeholder="your@email.com"
+                          className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-pink-400/30 rounded-xl text-white focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all duration-300 hover:border-pink-300 placeholder-gray-400 backdrop-blur-sm"
+                        />
+                      </div>
+                      
+                      <div className="md:col-span-2">
+                        <label className="block text-white font-semibold mb-2 flex items-center">
+                          <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>
+                          Phone (Optional)
+                        </label>
+                        <input 
+                          type="tel"
+                          placeholder="Your phone number"
+                          className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-cyan-400/30 rounded-xl text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all duration-300 hover:border-cyan-300 placeholder-gray-400 backdrop-blur-sm"
+                        />
+                      </div>
+                      
+                      <div className="md:col-span-2">
+                        <label className="block text-white font-semibold mb-2 flex items-center">
+                          <span className="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                          Special Requirements
+                        </label>
+                        <textarea 
+                          rows={4}
+                          placeholder="Tell us about specific features, integrations, or requirements for your project..."
+                          className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-yellow-400/30 rounded-xl text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 focus:outline-none transition-all duration-300 hover:border-yellow-300 placeholder-gray-400 backdrop-blur-sm resize-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-2xl p-8 mb-8 glass-panel">
+                  <h4 className="text-xl font-bold text-white mb-4 flex items-center glow-text">
+                    <svg className="w-6 h-6 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    Next Steps
+                  </h4>
+                  <p className="text-gray-300 mb-4">
+                    After submitting your inquiry, our expert team will:
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-white font-bold text-sm">1</span>
+                      </div>
+                      <div>
+                        <h5 className="text-white font-semibold mb-1">Quick Review</h5>
+                        <p className="text-gray-300 text-sm">Review your requirements within 24 hours</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-white font-bold text-sm">2</span>
+                      </div>
+                      <div>
+                        <h5 className="text-white font-semibold mb-1">Detailed Proposal</h5>
+                        <p className="text-gray-300 text-sm">Send comprehensive proposal and timeline</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-white font-bold text-sm">3</span>
+                      </div>
+                      <div>
+                        <h5 className="text-white font-semibold mb-1">Consultation Call</h5>
+                        <p className="text-gray-300 text-sm">Schedule a call to discuss your vision</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-white font-bold text-sm">4</span>
+                      </div>
+                      <div>
+                        <h5 className="text-white font-semibold mb-1">Custom Quote</h5>
+                        <p className="text-gray-300 text-sm">Receive tailored pricing for your project</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-400/20">
+                    <p className="text-blue-400 font-semibold flex items-center">
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      Direct Contact: <strong>chris.t@ventarosales.com</strong>
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <button className="group relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold text-lg px-16 py-5 rounded-2xl transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-blue-500/30 border border-blue-400/30 hover:border-blue-300 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transform hover:-translate-y-1 overflow-hidden">
+                    <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span className="relative z-10 flex items-center justify-center">
+                      <svg className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      Submit Inquiry
+                      <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </button>
+                  <p className="text-gray-400 text-sm mt-4">
+                    Or contact us directly at <span className="text-blue-400 font-semibold hover:text-blue-300 transition-colors cursor-pointer">chris.t@ventarosales.com</span>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

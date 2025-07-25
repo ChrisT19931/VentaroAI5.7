@@ -512,7 +512,7 @@ function Scene() {
   );
 }
 
-// Glassmorphism UI overlay
+// Elite Glassmorphism UI overlay with professional typography
 function GlassmorphismOverlay() {
   return (
     <div
@@ -521,41 +521,95 @@ function GlassmorphismOverlay() {
     >
       <div className="text-center z-10 pointer-events-auto">
         <div
-            className="glass-panel p-5 mb-4 max-w-lg mx-auto w-[75%] md:w-auto shadow-xl border border-blue-500/20"
-            style={{ opacity: 0.95 }}
+            className="backdrop-blur-xl bg-black/30 border border-white/10 rounded-3xl p-8 mb-6 max-w-4xl mx-auto w-[90%] md:w-auto shadow-2xl"
+            style={{ 
+              opacity: 0.98,
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            }}
           >
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
-            <span className="bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 bg-clip-text text-transparent font-black" style={{textShadow: '0 0 10px rgba(96, 165, 250, 0.5)'}}>
-              AI Tools That Make Money
+          <h1 className="text-4xl md:text-7xl font-black text-white mb-6 leading-[0.9] tracking-tight transform transition-all duration-1000 hover:scale-105">
+            <span 
+              className="block bg-gradient-to-r from-blue-300 via-white to-purple-300 bg-clip-text text-transparent font-black animate-pulse"
+              style={{
+                textShadow: '0 0 30px rgba(96, 165, 250, 0.8), 0 0 60px rgba(139, 92, 246, 0.6), 0 0 2px rgba(96, 165, 250, 1)',
+                WebkitTextStroke: '1px rgba(96, 165, 250, 0.3)',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '-0.05em'
+              }}
+            >
+              AI TOOLS THAT
             </span>
-            <br />
-            <span className="text-white glow-text font-black" style={{textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'}}>
+            <span 
+              className="block bg-gradient-to-r from-purple-300 via-white to-blue-300 bg-clip-text text-transparent font-black mt-2"
+              style={{
+                textShadow: '0 0 40px rgba(139, 92, 246, 0.9), 0 0 80px rgba(96, 165, 250, 0.7), 0 0 2px rgba(139, 92, 246, 1)',
+                WebkitTextStroke: '1px rgba(139, 92, 246, 0.4)',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 900,
+                letterSpacing: '-0.05em'
+              }}
+            >
+              MAKE MONEY
+            </span>
+            <span 
+              className="block text-white font-black mt-4 text-2xl md:text-4xl opacity-90"
+              style={{
+                textShadow: '0 0 20px rgba(96, 165, 250, 0.8), 0 0 40px rgba(139, 92, 246, 0.6), 0 0 1px rgba(96, 165, 250, 0.9)',
+                WebkitTextStroke: '0.5px rgba(96, 165, 250, 0.2)',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontWeight: 800,
+                letterSpacing: '-0.02em'
+              }}
+            >
               Build Your Online Business Fast
             </span>
           </h1>
-          <p className="text-sm md:text-base text-gray-100 mb-4 md:mb-6 leading-relaxed max-w-lg mx-auto font-medium">
-            100% AI-generated resources to help you launch profitable online businesses. Learn how we built this entire site with AI and how you can do the same.
+          <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90"
+             style={{
+               textShadow: '0 0 10px rgba(96, 165, 250, 0.3), 0 0 20px rgba(139, 92, 246, 0.2)'
+             }}>
+            100% AI-generated resources to help you launch profitable online businesses. 
+            <span className="text-white font-semibold"
+                  style={{
+                    textShadow: '0 0 15px rgba(96, 165, 250, 0.6), 0 0 30px rgba(139, 92, 246, 0.4)',
+                    WebkitTextStroke: '0.3px rgba(96, 165, 250, 0.2)'
+                  }}>Learn how we built this entire site with AI</span> and how you can do the same.
           </p>
           
-          <div className="space-y-3" style={{ transform: 'scale(0.95)' }}>
-            <Link href="/products" className="neon-button px-6 md:px-10 py-3 md:py-4 text-sm md:text-base font-bold rounded-lg flex items-center justify-center mx-auto" style={{ minWidth: '180px', maxWidth: '85%' }}>
-              Explore Products
-              <svg className="ml-2 md:ml-3 w-5 md:w-6 h-5 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+          <div className="space-y-6">
+            <Link 
+              href="/products" 
+              className="group relative inline-flex items-center justify-center px-12 py-5 text-lg font-black text-black bg-white rounded-2xl transition-all duration-500 transform hover:scale-110 hover:bg-gray-100 shadow-2xl overflow-hidden"
+              style={{ 
+                minWidth: '280px',
+                boxShadow: '0 20px 40px rgba(255, 255, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2)',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                letterSpacing: '-0.02em'
+              }}
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-white via-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+              <span className="relative z-10 flex items-center">
+                EXPLORE PRODUCTS
+                <svg className="ml-4 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </Link>
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 text-xs text-gray-200 mt-4 md:mt-6 px-2">
-              <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
-                <div className="w-3 h-3 bg-green-400 rounded-full mr-2.5 animate-pulse"></div>
-                Instant Access
+            
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 mt-8">
+              <span className="flex items-center bg-black/60 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10 shadow-lg">
+                <div className="w-3 h-3 bg-white rounded-full mr-3 animate-pulse shadow-lg"></div>
+                <span className="font-semibold text-white">Instant Access</span>
               </span>
-              <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
-                <div className="w-3 h-3 bg-blue-400 rounded-full mr-2.5 animate-pulse"></div>
-                No Email Required
+              <span className="flex items-center bg-black/60 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10 shadow-lg">
+                <div className="w-3 h-3 bg-white rounded-full mr-3 animate-pulse shadow-lg"></div>
+                <span className="font-semibold text-white">No Email Required</span>
               </span>
-              <span className="flex items-center bg-black/40 px-4 py-2 rounded-full shadow-lg">
-                <div className="w-3 h-3 bg-purple-400 rounded-full mr-2.5 animate-pulse"></div>
-                Secure Payment
+              <span className="flex items-center bg-black/60 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10 shadow-lg">
+                <div className="w-3 h-3 bg-white rounded-full mr-3 animate-pulse shadow-lg"></div>
+                <span className="font-semibold text-white">Secure Payment</span>
               </span>
             </div>
           </div>

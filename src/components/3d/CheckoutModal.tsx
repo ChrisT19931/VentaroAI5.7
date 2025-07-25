@@ -288,12 +288,53 @@ export default function CheckoutModal({
                       <span className="text-3xl font-bold text-yellow-400">${total.toFixed(2)}</span>
                     </div>
                     
+                    {/* Payment Method Logos */}
+                    <div className="mb-6 p-4 bg-white/5 rounded-lg backdrop-blur-sm">
+                      <h4 className="text-white text-sm font-medium mb-3 text-center">Secure Payment Methods</h4>
+                      <div className="flex items-center justify-center space-x-4 mb-3">
+                        {/* Stripe Logo */}
+                        <div className="bg-white/10 px-3 py-2 rounded-lg border border-white/20">
+                          <svg className="h-4 w-auto" viewBox="0 0 60 25" fill="none">
+                            <path d="M59.5 12.5c0-6.9-5.6-12.5-12.5-12.5S34.5 5.6 34.5 12.5 40.1 25 47 25s12.5-5.6 12.5-12.5z" fill="#635bff"/>
+                            <path d="M47 7.5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z" fill="white"/>
+                            <text x="2" y="18" fontSize="12" fill="#635bff" fontWeight="bold">stripe</text>
+                          </svg>
+                        </div>
+                        
+                        {/* Visa Logo */}
+                        <div className="bg-white/10 px-3 py-2 rounded-lg border border-white/20">
+                          <svg className="h-4 w-auto" viewBox="0 0 78 25" fill="none">
+                            <path d="M35.5 2L30.5 23h-5L20.5 2h5l2.5 16L31 2h4.5zM40 2v21h-4V2h4zM53 9c-2 0-3 1-3 2s1 2 3 2 3-1 3-2-1-2-3-2zM60 2l-4 21h-4l4-21h4z" fill="#1a1f71"/>
+                            <text x="2" y="18" fontSize="12" fill="#1a1f71" fontWeight="bold">VISA</text>
+                          </svg>
+                        </div>
+                        
+                        {/* Mastercard Logo */}
+                        <div className="bg-white/10 px-3 py-2 rounded-lg border border-white/20">
+                          <svg className="h-4 w-auto" viewBox="0 0 48 30" fill="none">
+                            <circle cx="15" cy="15" r="12" fill="#eb001b"/>
+                            <circle cx="33" cy="15" r="12" fill="#f79e1b"/>
+                            <path d="M24 6c2.5 2 4 5 4 9s-1.5 7-4 9c-2.5-2-4-5-4-9s1.5-7 4-9z" fill="#ff5f00"/>
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      <div className="text-xs text-gray-400 text-center">
+                        <div className="flex items-center justify-center space-x-1">
+                          <svg className="h-3 w-3 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          <span>SSL Encrypted • PCI Compliant • 256-bit Security</span>
+                        </div>
+                      </div>
+                    </div>
+                    
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleCheckout}
                       disabled={isProcessing}
-                      className="w-full neon-button py-4 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full neon-button py-4 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"
                     >
                       {isProcessing ? (
                         <div className="flex items-center justify-center space-x-2">
@@ -301,12 +342,15 @@ export default function CheckoutModal({
                           <span>Processing Payment...</span>
                         </div>
                       ) : (
-                        'Pay Now - Instant Access'
+                        <span className="flex items-center justify-center space-x-2">
+                          <span>🔒</span>
+                          <span>Secure Checkout - ${total.toFixed(2)}</span>
+                        </span>
                       )}
                     </motion.button>
                     
                     <p className="text-center text-gray-400 text-sm mt-4">
-                      Secure payment powered by Stripe • Instant download after payment
+                      Powered by Stripe • Instant download after payment • 30-day money-back guarantee
                     </p>
                   </motion.div>
                 </div>

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useCart } from '@/hooks/useCart';
 import { toast } from 'react-hot-toast';
 import { getStripe } from '@/lib/stripe-client';
+import Button from '@/components/ui/Button';
 
 export default function CartPage() {
   const router = useRouter();
@@ -81,9 +82,13 @@ export default function CartPage() {
             </div>
             <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
             <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any products to your cart yet.</p>
-            <Link href="/products" className="btn-primary py-3 px-6 rounded-lg inline-block">
+            <Button
+              href="/products"
+              variant="success"
+              size="lg"
+            >
               Browse Products
-            </Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -214,42 +219,75 @@ export default function CartPage() {
               </div>
               
               <div className="mt-6 space-y-4">
-                <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-                  <h3 className="font-medium text-blue-800">Stripe Checkout</h3>
-                  <p className="text-sm text-blue-700 mt-1">Complete your purchase securely with Stripe and get instant access to your digital products.</p>
+                <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
+                  <h3 className="font-semibold text-gray-800 mb-2">Secure Payment</h3>
+                  <p className="text-sm text-gray-600 mb-3">Complete your purchase securely and get instant access to your digital products.</p>
+                  
+                  {/* Payment Method Logos */}
+                  <div className="flex items-center justify-center space-x-4 mb-4">
+                    {/* Stripe Logo */}
+                    <div className="bg-white px-4 py-3 rounded-lg shadow-sm border">
+                      <svg className="h-6 w-auto" viewBox="0 0 60 25" fill="none">
+                        <path d="M59.5 12.5c0-6.9-5.6-12.5-12.5-12.5S34.5 5.6 34.5 12.5 40.1 25 47 25s12.5-5.6 12.5-12.5z" fill="#635bff"/>
+                        <path d="M47 7.5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z" fill="white"/>
+                        <text x="2" y="18" fontSize="12" fill="#635bff" fontWeight="bold">stripe</text>
+                      </svg>
+                    </div>
+                    
+                    {/* Visa Logo */}
+                    <div className="bg-white px-4 py-3 rounded-lg shadow-sm border">
+                      <svg className="h-6 w-auto" viewBox="0 0 78 25" fill="none">
+                        <path d="M35.5 2L30.5 23h-5L20.5 2h5l2.5 16L31 2h4.5zM40 2v21h-4V2h4zM53 9c-2 0-3 1-3 2s1 2 3 2 3-1 3-2-1-2-3-2zM60 2l-4 21h-4l4-21h4z" fill="#1a1f71"/>
+                        <text x="2" y="18" fontSize="12" fill="#1a1f71" fontWeight="bold">VISA</text>
+                      </svg>
+                    </div>
+                    
+                    {/* Mastercard Logo */}
+                    <div className="bg-white px-4 py-3 rounded-lg shadow-sm border">
+                      <svg className="h-6 w-auto" viewBox="0 0 48 30" fill="none">
+                        <circle cx="15" cy="15" r="12" fill="#eb001b"/>
+                        <circle cx="33" cy="15" r="12" fill="#f79e1b"/>
+                        <path d="M24 6c2.5 2 4 5 4 9s-1.5 7-4 9c-2.5-2-4-5-4-9s1.5-7 4-9z" fill="#ff5f00"/>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  <div className="text-xs text-gray-500 text-center">
+                    <div className="flex items-center justify-center space-x-1">
+                      <svg className="h-3 w-3 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>SSL Encrypted • PCI Compliant • 256-bit Security</span>
+                    </div>
+                  </div>
                 </div>
                 
                 <div className="flex flex-col space-y-2">
-                  <button
+                  <Button
                     onClick={handleCheckout}
                     disabled={isLoading}
-                    className="w-full btn-primary py-3 px-6 rounded-lg flex items-center justify-center"
+                    isLoading={isLoading}
+                    loadingText="Processing..."
+                    variant="success"
+                    size="lg"
+                    fullWidth
+                    className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition hover:scale-105"
                   >
-                    {isLoading ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing...
-                      </>
-                    ) : (
-                      'Checkout with Stripe'
-                    )}
-                  </button>
+                    🔒 Secure Checkout - A${total.toFixed(2)} AUD
+                  </Button>
                 </div>
               </div>
               
               <div className="mt-6 text-center text-sm text-gray-500">
                 <p>or</p>
-                <button
-                  type="button"
+                <Button
+                  variant="ghost"
                   onClick={() => router.push('/products')}
-                  className="font-medium text-primary-600 hover:text-primary-500 mt-2 inline-block"
+                  className="text-green-600 hover:text-green-700 mt-2"
                 >
                   Continue Shopping
                   <span aria-hidden="true"> &rarr;</span>
-                </button>
+                </Button>
               </div>
             </div>
           </div>

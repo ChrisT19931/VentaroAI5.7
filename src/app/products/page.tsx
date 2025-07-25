@@ -66,8 +66,9 @@ async function getProducts() {
     {
       id: '3',
       name: 'AI Business Strategy Session 2025',
-      description: '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
-      price: 497.00,
+      description: '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🚀 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
+      price: 500.00,
+      originalPrice: 3000.00,
       image_url: '/images/products/ai-business-strategy-session.svg',
       category: 'services',
       is_active: true,

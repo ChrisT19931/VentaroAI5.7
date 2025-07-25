@@ -44,11 +44,21 @@ INSERT INTO products (name, description, price, image_url, category, featured, i
 ),
 (
   'AI Business Strategy Session 2025',
-  '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
+  '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report.',
   497.00,
   '/images/products/ai-business-strategy-session.svg',
   'Coaching',
   true,
   true,
   'digital'
+),
+(
+  'Custom Web Design Service',
+  'Premium custom web design and development service ($1000-$10000+). Complete professional website solution tailored to your business needs. Contact us for a personalized quote.',
+  1000.00,
+  '/images/products/custom-web-design.svg',
+  'Custom Service',
+  true,
+  true,
+  'service'
 );

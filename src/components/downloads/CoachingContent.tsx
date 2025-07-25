@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
+import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import toast from 'react-hot-toast';
 
 export default function CoachingContent() {
-  const { user } = useAuth();
+  const { user } = useSimpleAuth();
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -129,7 +129,7 @@ export default function CoachingContent() {
               Purchase Coaching Call
             </Link>
               <br />
-              <Link href="/account" className="text-blue-400 hover:text-blue-300">
+              <Link href="/my-account" className="text-blue-400 hover:text-blue-300">
                 Check My Purchases
               </Link>
             </div>
@@ -187,7 +187,7 @@ export default function CoachingContent() {
             </div>
 
             <div className="text-center">
-              <Link href="/account" className="text-blue-400 hover:text-blue-300 mr-6">
+              <Link href="/my-account" className="text-blue-400 hover:text-blue-300 mr-6">
                 ← Back to My Account
               </Link>
               <Link href="/products" className="text-blue-400 hover:text-blue-300">
@@ -352,7 +352,7 @@ export default function CoachingContent() {
           </form>
 
           <div className="text-center mt-8">
-            <Link href="/account" className="text-blue-400 hover:text-blue-300 mr-6">
+            <Link href="/my-account" className="text-blue-400 hover:text-blue-300 mr-6">
               ← Back to My Account
             </Link>
             <Link href="/products" className="text-blue-400 hover:text-blue-300">

@@ -1,10 +1,9 @@
-import { createServerClient } from '@supabase/ssr';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // Define protected routes that require authentication
 const protectedRoutes = [
-  '/account',
+  '/my-account',
   '/checkout',
   '/checkout/success',
 ];
@@ -15,105 +14,44 @@ const adminRoutes = [
 ];
 
 export async function middleware(req: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: req.headers,
-    },
-  });
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return req.cookies.get(name)?.value;
-        },
-        set(name: string, value: string, options: any) {
-          req.cookies.set({
-            name,
-            value,
-            ...options,
-          });
-          response = NextResponse.next({
-            request: {
-              headers: req.headers,
-            },
-          });
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          });
-        },
-        remove(name: string, options: any) {
-          req.cookies.set({
-            name,
-            value: '',
-            ...options,
-          });
-          response = NextResponse.next({
-            request: {
-              headers: req.headers,
-            },
-          });
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          });
-        },
-      },
-    }
-  );
-  
-  // Get the current path
   const path = req.nextUrl.pathname;
+  console.log('Simple middleware executing for path:', path);
+
+  // Check for simple auth cookie
+  const authCookie = req.cookies.get('ventaro-auth');
+  const isAuthenticated = authCookie?.value === 'true';
   
-  // Check if session exists
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  
+  console.log('Auth cookie present:', isAuthenticated);
+
   // Handle protected routes
-  if (protectedRoutes.some(route => path.startsWith(route)) && !session) {
-    // Redirect to login if trying to access protected route without session
-    const redirectUrl = new URL('/login', req.url);
-    // Add the original URL as a query parameter to redirect after login
-    redirectUrl.searchParams.set('redirectTo', path);
-    return NextResponse.redirect(redirectUrl);
+  if (protectedRoutes.some(route => path.startsWith(route))) {
+    if (!isAuthenticated) {
+      console.log('Redirecting from protected route to login:', path);
+      const redirectUrl = new URL('/login', req.url);
+      redirectUrl.searchParams.set('redirectTo', path);
+      return NextResponse.redirect(redirectUrl);
+    } else {
+      console.log('User accessing protected route:', path);
+    }
   }
-  
-  // Handle admin routes
+
+  // Handle admin routes (for now, just check if authenticated)
   if (adminRoutes.some(route => path.startsWith(route))) {
-    if (!session) {
-      // Redirect to login if no session
+    if (!isAuthenticated) {
+      console.log('Redirecting from admin route to login:', path);
       const redirectUrl = new URL('/login', req.url);
       redirectUrl.searchParams.set('redirectTo', path);
       return NextResponse.redirect(redirectUrl);
     }
-    
-    // Check if user has admin role
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', session.user.id)
-      .single();
-    
-    if (!profile || profile.role !== 'admin') {
-      // Redirect to home if user is not an admin
-      return NextResponse.redirect(new URL('/', req.url));
-    }
   }
-  
+
   // Handle login/signup routes when user is already logged in
-  if ((path === '/login' || path === '/signup') && session) {
-    // Get the redirectTo query parameter or default to home
-    const redirectTo = req.nextUrl.searchParams.get('redirectTo') || '/';
-    return NextResponse.redirect(new URL(redirectTo, req.url));
+  if ((path === '/login' || path === '/signup') && isAuthenticated) {
+    console.log('User already logged in, redirecting from', path, 'to /my-account');
+    return NextResponse.redirect(new URL('/my-account', req.url));
   }
-  
-  return response;
+
+  return NextResponse.next();
 }
 
 // Configure the middleware to run on specific paths

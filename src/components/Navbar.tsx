@@ -4,10 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { items } = useCart();
+  const { user } = useSimpleAuth();
 
   return (
     <nav className="glass-panel backdrop-blur-md z-50 sticky top-0">
@@ -39,6 +41,14 @@ export default function Navbar() {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
+            {user && (
+              <Link href="/my-account" className="flex items-center px-4 py-2 text-white bg-blue-600/80 hover:bg-blue-600 rounded-lg transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span className="text-sm font-medium">My Account</span>
+              </Link>
+            )}
             <Link href="/cart" className="relative p-3 text-gray-300 hover:text-white hover:bg-blue-600/20 rounded-xl transition-colors duration-200 group hover:shadow-lg hover:shadow-blue-500/20">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -49,8 +59,20 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
+            {!user && (
+              <Link href="/login" className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
+                Login
+              </Link>
+            )}
           </div>
           <div className="flex items-center md:hidden space-x-3">
+            {user && (
+              <Link href="/my-account" className="p-2 text-gray-300 hover:text-white hover:bg-blue-600/20 rounded-xl transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </Link>
+            )}
             <Link href="/cart" className="relative p-2 text-gray-300 hover:text-white transition-colors duration-200">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -104,6 +126,19 @@ export default function Navbar() {
           <Link href="/contact" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
             Contact
           </Link>
+          {user && (
+            <Link href="/my-account" className="flex items-center px-4 py-3 rounded-xl text-base font-medium bg-blue-600/80 text-white hover:bg-blue-600 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              My Account
+            </Link>
+          )}
+          {!user && (
+            <Link href="/login" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

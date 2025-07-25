@@ -49,7 +49,7 @@ export default function FAQPage() {
         },
         {
           question: 'How long do I have access to my purchased digital products?',
-          answer: 'You have lifetime access to all purchased digital products. You can download them as many times as you need from your account page.'
+          answer: 'You have lifetime access to all purchased digital products. You can download them as many times as you need from your my-account page.'
         },
         {
           question: 'What is the download process for digital products?',

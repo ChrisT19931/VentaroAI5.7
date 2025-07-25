@@ -273,7 +273,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold mb-2">How do I download my purchased products?</h3>
                   <p className="text-primary-100">
-                    After completing your purchase, you'll receive an email with download instructions. You can also access your downloads from your account page.
+                    After completing your purchase, you'll receive an email with download instructions. You can also access your downloads from your my-account page.
                   </p>
                 </div>
                 <div>
