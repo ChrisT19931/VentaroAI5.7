@@ -8,7 +8,8 @@ import { createClient } from '@/lib/supabase/client';
 import toast from 'react-hot-toast';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
-import PurchaseForm from '@/components/PurchaseForm';
+import { simpleAuth } from '@/lib/auth-simple';
+
 import { Buffer } from 'buffer';
 
 export default function MyAccountPage() {
@@ -18,6 +19,7 @@ export default function MyAccountPage() {
   const [allProducts, setAllProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('purchases'); // Default to purchases tab
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const fetchUserOrders = useCallback(async () => {
     if (!user?.id) {
@@ -189,6 +191,15 @@ export default function MyAccountPage() {
     if (user) {
       console.log('User authenticated, fetching orders for:', user.id);
       fetchUserOrders();
+      
+      // Check admin status - temporary email-based check until profiles table is set up
+      const checkAdminStatus = async () => {
+        // Temporary admin check for specific email
+        const isAdminUser = user.email === 'chris.t@ventarosales.com';
+        setIsAdmin(isAdminUser);
+        console.log('Admin status for', user.email, ':', isAdminUser);
+      };
+      checkAdminStatus();
     }
   }, [user, isAuthenticated, authLoading, router, fetchUserOrders]);
 
@@ -214,13 +225,64 @@ export default function MyAccountPage() {
 
   // Helper function to check if user owns a product
   const isProductOwned = (productId: string) => {
+    // Admin users have access to all products
+    if (isAdmin) {
+      return true;
+    }
+    
     return orders.some(order => 
       order.order_items?.some((item: any) => item.product_id === productId)
     );
   };
 
+  // Get content viewing URL based on product type
+  const getContentViewUrl = (productId: string, productName: string, isAdmin: boolean = false) => {
+    const adminParam = isAdmin ? '?admin=true' : '';
+    
+    // Map product IDs to their content viewing pages
+    if (productId === '1' || productName.toLowerCase().includes('mastery guide') || productName.toLowerCase().includes('ebook')) {
+      return `/downloads/ebook${adminParam}`;
+    }
+    if (productId === '2' || productName.toLowerCase().includes('prompts') || productName.toLowerCase().includes('arsenal')) {
+      return `/downloads/prompts${adminParam}`;
+    }
+    if (productId === '3' || productName.toLowerCase().includes('coaching') || productName.toLowerCase().includes('strategy session')) {
+      return `/downloads/coaching${adminParam}`;
+    }
+    // Default fallback to download page
+    return `/downloads/${productId}${adminParam}`;
+  };
+
+  // Get admin content URL based on product type (legacy support)
+  const getAdminContentUrl = (productId: string, productName: string) => {
+    return getContentViewUrl(productId, productName, true);
+  };
+
   // Get purchase details for a product
   const getPurchaseDetails = (productId: string) => {
+    // For admin users, return admin access details if no actual purchase exists
+    if (isAdmin) {
+      for (const order of orders) {
+        const item = order.order_items?.find((item: any) => item.product_id === productId);
+        if (item) {
+          return {
+            orderId: order.id,
+            purchaseDate: order.created_at,
+            downloadUrl: item.download_url,
+            price: item.price
+          };
+        }
+      }
+      // Return admin access details if no purchase found
+      return {
+        orderId: 'admin-access',
+        purchaseDate: new Date().toISOString(),
+        downloadUrl: null,
+        price: 0,
+        isAdminAccess: true
+      };
+    }
+    
     for (const order of orders) {
       const item = order.order_items?.find((item: any) => item.product_id === productId);
       if (item) {
@@ -275,9 +337,22 @@ export default function MyAccountPage() {
           </div>
           
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6 border border-gray-700">
-            <h2 className="text-xl font-semibold text-white mb-4">Account Information</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-white">Account Information</h2>
+              {isAdmin && (
+                <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  Admin
+                </div>
+              )}
+            </div>
             <p className="text-gray-300"><span className="text-gray-400">Email:</span> {user?.email}</p>
             <p className="text-gray-300 mt-2"><span className="text-gray-400">Member since:</span> {user?.created_at ? formatDate(user.created_at) : 'N/A'}</p>
+            {isAdmin && (
+              <p className="text-purple-300 mt-2"><span className="text-gray-400">Access Level:</span> Full Product Access</p>
+            )}
           </div>
         </div>
 
@@ -484,7 +559,7 @@ export default function MyAccountPage() {
                               
                               {owned && purchaseDetails && (
                                 <span className="text-xs text-green-400">
-                                  Purchased {formatDate(purchaseDetails.purchaseDate)}
+                                  {purchaseDetails.isAdminAccess ? 'Admin Access' : `Purchased ${formatDate(purchaseDetails.purchaseDate)}`}
                                 </span>
                               )}
                             </div>
@@ -493,14 +568,26 @@ export default function MyAccountPage() {
                             <div className="flex items-center gap-3">
                               {owned ? (
                                 <>
-                                  {purchaseDetails?.downloadUrl ? (
-                                    <Button 
-                                      href={`/downloads/${product.id}?session_id=${purchaseDetails.orderId}&token=${Buffer.from(`${purchaseDetails.orderId}-${purchaseDetails.orderId}-${product.id}`).toString('base64')}`}
-                                      variant="success"
-                                      size="sm"
-                                    >
-                                      Download
-                                    </Button>
+                                  {(purchaseDetails?.downloadUrl || purchaseDetails?.isAdminAccess) ? (
+                                    <>
+                                      {/* View Content Button */}
+                                      <Button 
+                                        href={getContentViewUrl(product.id, product.name, purchaseDetails?.isAdminAccess)}
+                                        variant="primary"
+                                        size="sm"
+                                      >
+                                        📖 View Content
+                                      </Button>
+                                      
+                                      {/* Download Button */}
+                                      <Button 
+                                        href={`/downloads?product=${product.id}${purchaseDetails?.isAdminAccess ? '&admin=true' : ''}`}
+                                        variant="outline"
+                                        size="sm"
+                                      >
+                                        📥 Download
+                                      </Button>
+                                    </>
                                   ) : (
                                     <Button
                                       variant="ghost"
@@ -508,7 +595,7 @@ export default function MyAccountPage() {
                                       disabled
                                       className="bg-gray-700 text-gray-300"
                                     >
-                                      No Download
+                                      No Access
                                     </Button>
                                   )}
                                   
@@ -547,11 +634,7 @@ export default function MyAccountPage() {
               )}
             </div>
 
-            {/* Purchase Form for Testing */}
-            <div className="border-t border-gray-700 pt-8 mt-8">
-              <h3 className="text-xl font-semibold text-white mb-4">Test Purchase Flow</h3>
-              <PurchaseForm />
-            </div>
+
           </div>
         )}
 

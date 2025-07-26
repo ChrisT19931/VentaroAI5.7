@@ -24,6 +24,72 @@ const verifyToken = (token: string, sessionId: string, orderId: string, productI
   }
 };
 
+// Helper function to verify product access for GET requests
+async function verifyProductAccess(productType: string, sessionId: string, token: string, orderId: string) {
+  try {
+    const supabase = await createClient();
+    
+    // Define product name patterns to match against
+    const productPatterns = {
+      ebook: ['E-book', 'ebook', 'AI Tools Mastery Guide 2025'],
+      prompts: ['AI Prompts', 'prompts', 'AI Prompts Arsenal 2025'],
+      coaching: ['Coaching', 'coaching', 'AI Business Strategy Session 2025'],
+      any: ['E-book', 'ebook', 'AI Tools Mastery Guide 2025', 'AI Prompts', 'prompts', 'AI Prompts Arsenal 2025', 'Coaching', 'coaching', 'AI Business Strategy Session 2025']
+    };
+
+    const patterns = productPatterns[productType as keyof typeof productPatterns];
+    
+    if (!patterns) {
+      return NextResponse.json(
+        { error: 'Invalid product type' },
+        { status: 400 }
+      );
+    }
+
+    // Check if the specific order exists and is completed
+    const { data: orders, error: ordersError } = await supabase
+      .from('orders')
+      .select(`
+        id,
+        status,
+        order_items!inner (
+          id,
+          products!inner (
+            id,
+            name
+          )
+        )
+      `)
+      .eq('status', 'completed')
+      .eq('id', orderId);
+
+    if (ordersError) {
+      console.error('Error fetching orders:', ordersError);
+      return NextResponse.json(
+        { error: 'Failed to verify access' },
+        { status: 500 }
+      );
+    }
+
+    // Check if any order contains a product matching the requested type
+    const hasAccess = orders?.some((order: any) => 
+      order.order_items?.some((item: any) => 
+        patterns.some(pattern => 
+          item.products?.name?.includes(pattern)
+        )
+      )
+    ) || false;
+
+    return NextResponse.json({ hasAccess });
+  } catch (error) {
+    console.error('Verify product access error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -32,6 +98,71 @@ export async function GET(request: NextRequest) {
     const email = searchParams.get('email');
     const sessionId = searchParams.get('session_id');
     const orderId = searchParams.get('order_id');
+    const productType = searchParams.get('productType');
+    const isAdmin = searchParams.get('admin') === 'true';
+    
+    // If productType is provided, this is an access verification request
+    if (productType && sessionId && token && orderId) {
+      return await verifyProductAccess(productType, sessionId, token, orderId);
+    }
+    
+    // Handle admin access
+    if (isAdmin) {
+      const supabase = await createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('is_admin')
+          .eq('id', user.id)
+          .single();
+          
+        if (profile?.is_admin) {
+          // For admin users, allow direct access to files
+          if (!path) {
+            return NextResponse.json(
+              { error: 'Missing path parameter' },
+              { status: 400 }
+            );
+          }
+          
+          // Check if file exists in public directory first
+          const publicFilePath = `${process.cwd()}/public/downloads/${path}`;
+          const fs = require('fs');
+          
+          if (fs.existsSync(publicFilePath)) {
+            const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
+            const baseUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+            return NextResponse.redirect(`${baseUrl}/downloads/${path}`);
+          }
+          
+          // If not in public, try Supabase Storage
+          try {
+            const bucket = 'product-files';
+            const exists = await fileExists(path, bucket);
+            
+            if (!exists) {
+              return NextResponse.json(
+                { error: 'File not found' },
+                { status: 404 }
+              );
+            }
+            
+            const signedUrl = await getSignedUrl(path, bucket, 86400);
+            return NextResponse.redirect(signedUrl);
+          } catch (error) {
+            console.error('Error generating signed URL:', error);
+            return NextResponse.json(
+              { error: 'File not found or access denied' },
+              { status: 404 }
+            );
+          }
+        }
+      }
+      
+      return NextResponse.json({ error: 'Admin access denied' }, { status: 403 });
+    }
     
     if (!path) {
       return NextResponse.json(
@@ -144,8 +275,25 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-      const { productId, productType, sessionId, orderToken, orderId } = await request.json();
+      const { userId, productId, productType, sessionId, orderToken, orderId, guestEmail } = await request.json();
 
+      const supabase = await createClient();
+
+      // Check if user is authenticated and is admin
+      if (userId) {
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('is_admin')
+          .eq('id', userId)
+          .single();
+
+        if (!profileError && profile?.is_admin === true) {
+          // Admin users have access to all downloads
+          return NextResponse.json({ hasAccess: true });
+        }
+      }
+
+      // For guest users, verify required parameters
       if (!sessionId || !orderToken || !productType || !orderId || !productId) {
         return NextResponse.json(
           { error: 'Missing required parameters' },
@@ -159,8 +307,6 @@ export async function POST(request: NextRequest) {
       if (!isValidToken) {
         return NextResponse.json({ hasAccess: false });
       }
-
-    const supabase = await createClient();
 
     // Define product name patterns to match against
     const productPatterns = {

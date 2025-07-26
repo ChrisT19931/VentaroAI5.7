@@ -57,7 +57,7 @@ function MatrixCodeEffect({ product, isHovered }: { product: any; isHovered: boo
         
         {/* Matrix Code Streams */}
         {[...Array(8)].map((_, i) => (
-          <group key={i} ref={el => codeLines.current[i] = el!}>
+          <group key={i} ref={el => { if (el) codeLines.current[i] = el; }}>
             {[...Array(12)].map((_, j) => (
               <Text
                 key={j}
@@ -156,7 +156,7 @@ function MatrixPromptsEffect({ product, isHovered }: { product: any; isHovered: 
         
         {/* Prompt Code Lines */}
         {[...Array(10)].map((_, i) => (
-          <group key={i} ref={el => promptLines.current[i] = el!}>
+          <group key={i} ref={el => { if (el) promptLines.current[i] = el; }}>
             {[...Array(6)].map((_, j) => (
               <Text
                 key={j}
@@ -196,7 +196,7 @@ function MatrixPromptsEffect({ product, isHovered }: { product: any; isHovered: 
           anchorY="middle"
           font="/fonts/inter-bold.woff"
         >
-          >
+          {product.name}
         </Text>
         
         {/* Price Display */}

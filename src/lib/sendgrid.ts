@@ -1,6 +1,22 @@
 import sgMail from '@sendgrid/mail';
 
-// Initialize SendGrid with build-time safety
+// Enhanced SendGrid configuration
+const sendGridConfig = {
+  timeout: 30000, // 30 seconds timeout
+  retries: 3,
+  retryDelay: 1000, // 1 second base delay
+};
+
+// Email delivery health monitoring
+let emailHealth = {
+  lastCheck: 0,
+  isHealthy: true,
+  consecutiveFailures: 0,
+  totalSent: 0,
+  totalFailed: 0,
+};
+
+// Initialize SendGrid with build-time safety and enhanced configuration
 const initializeSendGrid = () => {
   const apiKey = process.env.SENDGRID_API_KEY;
   if (!apiKey) {
@@ -9,10 +25,67 @@ const initializeSendGrid = () => {
   }
   
   sgMail.setApiKey(apiKey);
+  
+  // Set global request timeout
+  sgMail.setTimeout(sendGridConfig.timeout);
+  
   return true;
 };
 
 const isConfigured = initializeSendGrid();
+
+// Enhanced SendGrid health check
+export async function checkSendGridHealth(): Promise<boolean> {
+  if (!isConfigured) return false;
+  
+  const now = Date.now();
+  
+  // Only check health every 5 minutes to avoid excessive requests
+  if (now - emailHealth.lastCheck < 300000 && emailHealth.isHealthy) {
+    return emailHealth.isHealthy;
+  }
+  
+  try {
+    // Simple health check - try to send a test email to validate configuration
+    // We'll use a dry run approach by checking if we can create a valid message
+    const testMsg = {
+      to: 'test@example.com',
+      from: process.env.EMAIL_FROM || 'noreply@ventarosales.com',
+      subject: 'Health Check',
+      text: 'Test',
+      mailSettings: {
+        sandboxMode: {
+          enable: true, // This ensures no actual email is sent
+        },
+      },
+    };
+    
+    await sgMail.send(testMsg);
+    
+    emailHealth.isHealthy = true;
+    emailHealth.consecutiveFailures = 0;
+    emailHealth.lastCheck = now;
+    
+    return emailHealth.isHealthy;
+  } catch (error) {
+    emailHealth.consecutiveFailures++;
+    emailHealth.isHealthy = emailHealth.consecutiveFailures < 3;
+    emailHealth.lastCheck = now;
+    
+    console.warn(`SendGrid health check failed (${emailHealth.consecutiveFailures}/3):`, error);
+    return emailHealth.isHealthy;
+  }
+}
+
+// Get email delivery statistics
+export function getEmailStats() {
+  return {
+    ...emailHealth,
+    successRate: emailHealth.totalSent > 0 ? 
+      ((emailHealth.totalSent - emailHealth.totalFailed) / emailHealth.totalSent * 100).toFixed(2) + '%' : 
+      'N/A'
+  };
+}
 
 type EmailData = {
   to: string;
@@ -25,6 +98,7 @@ type EmailData = {
 export const sendEmail = async ({ to, from, subject, text, html }: EmailData) => {
   if (!isConfigured) {
     console.warn('SendGrid not configured - skipping email send');
+    emailHealth.totalFailed++;
     return { success: false, error: 'SendGrid not configured' };
   }
 
@@ -34,15 +108,77 @@ export const sendEmail = async ({ to, from, subject, text, html }: EmailData) =>
     subject,
     text: text || '',
     html,
+    trackingSettings: {
+      clickTracking: {
+        enable: true,
+        enableText: false,
+      },
+      openTracking: {
+        enable: true,
+      },
+    },
+    mailSettings: {
+      sandboxMode: {
+        enable: false,
+      },
+    },
   };
 
-  try {
-    await sgMail.send(msg);
-    return { success: true };
-  } catch (error) {
-    console.error('SendGrid error:', error);
-    return { success: false, error };
+  // Retry logic with exponential backoff
+  for (let attempt = 1; attempt <= sendGridConfig.retries; attempt++) {
+    try {
+      await sgMail.send(msg);
+      emailHealth.totalSent++;
+      
+      // Reset consecutive failures on success
+      if (emailHealth.consecutiveFailures > 0) {
+        emailHealth.consecutiveFailures = 0;
+        emailHealth.isHealthy = true;
+      }
+      
+      return { success: true };
+    } catch (error: any) {
+      console.error(`SendGrid error (attempt ${attempt}/${sendGridConfig.retries}):`, error);
+      
+      // If this is the last attempt, record the failure
+      if (attempt === sendGridConfig.retries) {
+        emailHealth.totalFailed++;
+        emailHealth.consecutiveFailures++;
+        
+        if (emailHealth.consecutiveFailures >= 3) {
+          emailHealth.isHealthy = false;
+        }
+        
+        return { success: false, error };
+      }
+      
+      // Wait before retrying (exponential backoff)
+      await new Promise(resolve => 
+        setTimeout(resolve, sendGridConfig.retryDelay * Math.pow(2, attempt - 1))
+      );
+    }
   }
+  
+  // This should never be reached, but just in case
+  emailHealth.totalFailed++;
+  return { success: false, error: 'Max retries exceeded' };
+};
+
+// Enhanced email sending with validation
+export const sendEmailWithValidation = async (emailData: EmailData) => {
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(emailData.to)) {
+    return { success: false, error: 'Invalid email format' };
+  }
+  
+  // Check SendGrid health before sending
+  const isHealthy = await checkSendGridHealth();
+  if (!isHealthy) {
+    console.warn('SendGrid health check failed, but attempting to send anyway');
+  }
+  
+  return sendEmail(emailData);
 };
 
 export const sendOrderConfirmationEmail = async ({

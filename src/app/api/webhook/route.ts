@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { supabase } from '@/lib/supabase';
-import { sendOrderConfirmationEmail } from '@/lib/sendgrid';
+import { sendOrderConfirmationEmail, sendEmailWithValidation } from '@/lib/sendgrid';
+import { optimizedDatabaseQuery, optimizedEmailSend } from '@/lib/system-optimizer';
 
 // Get Stripe webhook secret from environment
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -68,11 +69,14 @@ async function handleCheckoutSessionCompleted(session: any) {
     let orderItems = [];
     
     try {
-      // Update order status to completed
-      const { error: updateError } = await supabase
-        .from('orders')
-        .update({ status: 'completed' })
-        .eq('id', order_id);
+      // Update order status to completed with optimization
+      const updateError = await optimizedDatabaseQuery(async () => {
+        const { error } = await supabase
+          .from('orders')
+          .update({ status: 'completed' })
+          .eq('id', order_id);
+        return error;
+      }, `order-update-${order_id}`);
 
       if (updateError) {
         if (updateError.code === '42P01') {
@@ -89,12 +93,15 @@ async function handleCheckoutSessionCompleted(session: any) {
           throw updateError;
         }
       } else {
-        // Fetch order with items
-        const { data, error: orderError } = await supabase
-          .from('orders')
-          .select('*')
-          .eq('id', order_id)
-          .single();
+        // Fetch order with items using optimization
+        const { data, error: orderError } = await optimizedDatabaseQuery(async () => {
+          const result = await supabase
+            .from('orders')
+            .select('*')
+            .eq('id', order_id)
+            .single();
+          return result;
+        }, `order-fetch-${order_id}`);
 
         if (orderError) {
           if (orderError.code === '42P01') {
@@ -115,16 +122,19 @@ async function handleCheckoutSessionCompleted(session: any) {
         }
       }
 
-      // Fetch order items with product details
-      const { data: items, error: itemsError } = await supabase
-        .from('order_items')
-        .select(`
-          id,
-          quantity,
-          price,
-          products (id, name, file_url)
-        `)
-        .eq('order_id', order_id);
+      // Fetch order items with product details using optimization
+      const { data: items, error: itemsError } = await optimizedDatabaseQuery(async () => {
+        const result = await supabase
+          .from('order_items')
+          .select(`
+            id,
+            quantity,
+            price,
+            products (id, name, file_url)
+          `)
+          .eq('order_id', order_id);
+        return result;
+      }, `order-items-${order_id}`);
 
       if (itemsError) {
         if (itemsError.code === '42P01') {
@@ -247,38 +257,49 @@ async function handleCheckoutSessionCompleted(session: any) {
       updatedItems = orderItems;
     }
 
-    // Send order confirmation email
+    // Send order confirmation email with enhanced validation
     if (userEmail) {
-      // Generate download links with tokens for guest users
-      const downloadLinks = (updatedItems || []).filter((item: any) => item.download_url)
-        .map((item: any) => {
-          let url = `${process.env.NEXT_PUBLIC_SITE_URL}${item.download_url}`;
-          
-          // Create a simple token based on order ID and product ID
-          // In a production environment, you might want to use a more secure token generation method
-          const token = Buffer.from(`${order_id}-${item.products?.id}-${guest_email}`).toString('base64');
-          
-          // Add the parameters to the URL
-          url = `${url}?email=${encodeURIComponent(guest_email)}&token=${encodeURIComponent(token)}`;
-          
-          return {
-            productName: item.products?.name || 'Product',
-            url
-          };
-        });
+      try {
+        // Generate download links with tokens for guest users
+        const downloadLinks = (updatedItems || []).filter((item: any) => item.download_url)
+          .map((item: any) => {
+            let url = `${process.env.NEXT_PUBLIC_SITE_URL}${item.download_url}`;
+            
+            // Create a simple token based on order ID and product ID
+            // In a production environment, you might want to use a more secure token generation method
+            const token = Buffer.from(`${order_id}-${item.products?.id}-${guest_email}`).toString('base64');
+            
+            // Add the parameters to the URL
+            url = `${url}?email=${encodeURIComponent(guest_email)}&token=${encodeURIComponent(token)}`;
+            
+            return {
+              productName: item.products?.name || 'Product',
+              url
+            };
+          });
 
-      await sendOrderConfirmationEmail({
-        email: userEmail,
-        orderNumber: order_id,
-        orderItems: (updatedItems || []).map((item: any) => ({
-          name: item.products?.name || 'Product',
-          quantity: item.quantity,
-          price: item.price
-        })),
-        total: order.total,
-        downloadLinks,
-        isGuest: true
-      });
+        const emailResult = await optimizedEmailSend({
+           email: userEmail,
+           orderNumber: order_id,
+           orderItems: (updatedItems || []).map((item: any) => ({
+             name: item.products?.name || 'Product',
+             quantity: item.quantity,
+             price: item.price
+           })),
+           total: order.total,
+           downloadLinks,
+           isGuest: true
+         });
+        
+        if (emailResult.success) {
+          console.log('Order confirmation email sent successfully');
+        } else {
+          console.error('Failed to send order confirmation email:', emailResult.error);
+          // Could implement fallback notification system here
+        }
+      } catch (emailError) {
+        console.error('Failed to send order confirmation email:', emailError);
+      }
     }
 
     console.log(`Order ${order_id} processed successfully`);

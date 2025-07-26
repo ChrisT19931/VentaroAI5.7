@@ -4,10 +4,11 @@ import Stripe from 'stripe';
 
 // Get Stripe secret key for debugging
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-import { createClient } from '@/lib/supabase';
+import { createClient, executeQuery, createClientWithRetry } from '@/lib/supabase';
 import { sendEmail, sendOrderConfirmationEmail } from '@/lib/sendgrid';
 import { validateStripeEnvironment } from '@/lib/env-validation';
 import { v4 as uuidv4 } from 'uuid';
+import { optimizedDatabaseQuery, optimizedApiCall } from '@/lib/system-optimizer';
 
 // Mock products for when database is not available
 const mockProducts = [
@@ -74,35 +75,31 @@ export async function POST(request: NextRequest) {
     const cartItems = items; // For compatibility with the rest of the code
     const supabase = await createClient();
 
-    // Fetch product details from database to ensure price integrity
+    // Fetch product details from database with optimization
     const productIds = cartItems.map((item: any) => item.id);
     
-    let productsData;
-    try {
-      const { data, error } = await supabase
+    const productsData = await optimizedDatabaseQuery(async () => {
+      const productQuery = supabase
         .from('products')
         .select('id, name, price, image_url')
         .in('id', productIds);
+      
+      const { data, error } = await productQuery;
       
       if (error) {
         // If database table doesn't exist, use mock data
         if (error.code === '42P01') {
           console.log('⚠️ Database table not found, using mock data for checkout');
-          productsData = mockProducts.filter(product => productIds.includes(product.id));
+          return mockProducts.filter(product => productIds.includes(product.id));
         } else {
           throw error;
         }
-      } else {
-        productsData = data;
       }
-    } catch (error) {
-      console.error('Error fetching products for checkout:', error);
-      // Fallback to mock data
-      console.log('⚠️ Error fetching products, using mock data for checkout');
-      productsData = mockProducts.filter(product => productIds.includes(product.id));
-    }
+      
+      return data || mockProducts.filter(product => productIds.includes(product.id));
+    }, `products-${productIds.join('-')}`);
     
-    if (!productsData || productsData.length === 0) {
+    if (!Array.isArray(productsData) || productsData.length === 0) {
       return NextResponse.json(
         { error: 'Failed to fetch product details' },
         { status: 500 }
@@ -173,18 +170,16 @@ export async function POST(request: NextRequest) {
       return total + (product ? product.price * item.quantity : 0);
     }, 0);
 
-    // Create a new order in the database
+    // Create a new order in the database with optimization
     const supabaseAdmin = await createClient();
     
     // Create a guest ID for the order
     const guestId = `guest_${uuidv4()}`;
     const orderId = uuidv4();
     
-    let orderData;
-    
-    try {
+    const orderData: any = await optimizedDatabaseQuery(async () => {
       // Try to create order in database
-      const { data, error } = await supabaseAdmin
+      const orderQuery = supabaseAdmin
         .from('orders')
         .insert([
           {
@@ -196,11 +191,13 @@ export async function POST(request: NextRequest) {
         .select()
         .single();
       
+      const { data, error } = await orderQuery;
+      
       if (error) {
         // If database table doesn't exist, use mock order
         if (error.code === '42P01') {
           console.log('⚠️ Orders table not found, using mock order');
-          orderData = {
+          return {
             id: orderId,
             user_id: guestId,
             status: 'pending',
@@ -210,55 +207,57 @@ export async function POST(request: NextRequest) {
         } else {
           throw error;
         }
-      } else {
-        orderData = data;
       }
-    } catch (error) {
-      console.error('Error creating order:', error);
-      // Fallback to mock order
-      console.log('⚠️ Error creating order, using mock order');
-      orderData = {
+      
+      return data || {
         id: orderId,
         user_id: guestId,
         status: 'pending',
         total: orderTotal,
         created_at: new Date().toISOString()
       };
-    }
+    }, `order-${guestId}`);
     
-    if (!orderData) {
+    if (!orderData || typeof orderData !== 'object') {
       return NextResponse.json(
         { error: 'Failed to create order' },
         { status: 500 }
       );
     }
 
-    // Create order items
+    // Create order items with enhanced error handling
     const orderItems = cartItems.map((item: any) => {
       const product = productsData.find((p: any) => p.id === item.id);
       return {
         order_id: orderData.id,
         product_id: item.id,
         quantity: item.quantity,
-        price: product ? product.price : 0,
+        price: product?.price || 9.99,
       };
     });
 
-    try {
-      // Try to insert order items in database
-      const { error } = await supabaseAdmin
+    // Create order items with optimization
+    await optimizedDatabaseQuery(async () => {
+      const itemsQuery = supabaseAdmin
         .from('order_items')
         .insert(orderItems);
       
-      if (error && error.code !== '42P01') {
-        console.error('Error inserting order items:', error);
+      const { error } = await itemsQuery;
+      
+      if (error) {
+        // If database table doesn't exist, log and continue
+        if (error.code === '42P01') {
+          console.log('⚠️ Order items table not found, continuing with checkout');
+          return orderItems;
+        } else {
+          throw error;
+        }
       }
-    } catch (error) {
-      console.log('⚠️ Error inserting order items, continuing with checkout');
-      // Continue with checkout even if order items insertion fails
-    }
+      
+      return orderItems;
+    }, `order-items-${orderData.id}`);
 
-    // Create Stripe checkout session
+    // Create Stripe checkout session with optimization
     // Ensure we have a valid origin with a scheme, or use a default
     const origin = request.headers.get('origin') || 'http://localhost:3001';
     console.log('Creating Stripe checkout session with origin:', origin);
@@ -269,33 +268,34 @@ export async function POST(request: NextRequest) {
     }
     console.log('Line items for checkout:', JSON.stringify(lineItems));
     
-    let session;
-    try {
-      session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: lineItems,
-        mode: 'payment',
-        success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
-        cancel_url: `${origin}/products`,
-        metadata: {
-          order_id: orderData.id,
-          user_id: guestId,
-          is_guest: 'true',
+    const session = await optimizedApiCall(async () => {
+      try {
+        return await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: lineItems,
+          mode: 'payment',
+          success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
+          cancel_url: `${origin}/products`,
+          metadata: {
+            order_id: orderData.id,
+            user_id: guestId,
+            is_guest: 'true',
+            currency: 'aud',
+          },
+          allow_promotion_codes: true,
+          billing_address_collection: 'auto',
           currency: 'aud',
-        },
-        allow_promotion_codes: true,
-        billing_address_collection: 'auto',
-        currency: 'aud',
-      });
-    } catch (error) {
-      console.error('Error creating Stripe checkout session:', error);
-      // Fallback to mock session if Stripe fails
-      session = {
-        url: 'https://example.com/mock-checkout',
-        id: 'mock_session_id'
-      };
-      console.log('Using mock checkout session due to Stripe error');
-    }
+        });
+      } catch (error) {
+        console.error('Error creating Stripe checkout session:', error);
+        // Fallback to mock session if Stripe fails
+        console.log('Using mock checkout session due to Stripe error');
+        return {
+          url: 'https://example.com/mock-checkout',
+          id: 'mock_session_id'
+        };
+      }
+    }, `stripe-session-${Date.now()}`, 300000); // Cache for 5 minutes
 
     // No email sending - instant access via Stripe payment completion
     

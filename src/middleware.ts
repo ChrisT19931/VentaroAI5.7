@@ -21,7 +21,14 @@ export async function middleware(req: NextRequest) {
   const authCookie = req.cookies.get('ventaro-auth');
   const isAuthenticated = authCookie?.value === 'true';
   
+  // Log all cookies for debugging
+  console.log('All cookies:', Object.fromEntries(req.cookies.getAll().map(c => [c.name, c.value])));
   console.log('Auth cookie present:', isAuthenticated);
+  
+  // Check for Supabase auth cookies
+  const supabaseAccessToken = req.cookies.get('sb-access-token');
+  const supabaseRefreshToken = req.cookies.get('sb-refresh-token');
+  console.log('Supabase cookies present:', !!supabaseAccessToken, !!supabaseRefreshToken);
 
   // Handle protected routes
   if (protectedRoutes.some(route => path.startsWith(route))) {

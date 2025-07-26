@@ -112,22 +112,22 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 glass-panel mt-2 rounded-lg mx-2">
-          <Link href="/" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+        <div className="px-4 pt-4 pb-4 space-y-2 glass-panel mt-2 rounded-lg mx-4 mb-4">
+          <Link href="/" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             Home
           </Link>
-          <Link href="/products" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
+          <Link href="/products" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             Products
           </Link>
-          <Link href="/about" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
+          <Link href="/about" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             About
           </Link>
-          <Link href="/contact" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
+          <Link href="/contact" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             Contact
           </Link>
           {user && (
-            <Link href="/my-account" className="flex items-center px-4 py-3 rounded-xl text-base font-medium bg-blue-600/80 text-white hover:bg-blue-600 transition-all duration-300">
+            <Link href="/my-account" className="flex items-center px-4 py-3 rounded-xl text-base font-medium bg-blue-600/90 text-white hover:bg-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
@@ -135,7 +135,7 @@ export default function Navbar() {
             </Link>
           )}
           {!user && (
-            <Link href="/login" className="block px-4 py-3 rounded-xl text-base font-medium text-white/80 hover:text-white hover:bg-blue-600/20 transition-colors duration-200">
+            <Link href="/login" className="block px-4 py-3 rounded-xl text-base font-medium bg-blue-600/90 text-white hover:bg-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 text-center">
               Login
             </Link>
           )}

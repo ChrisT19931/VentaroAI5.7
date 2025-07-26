@@ -410,25 +410,263 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* Key Benefits */}
-            {product.benefits && (
-              <div className="glass-panel rounded-lg p-6">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2 glow-text">
-                  <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                  </svg>
-                  Key Benefits
-                </h3>
-                <ul className="space-y-3">
-                   {product.benefits.map((benefit: string, index: number) => (
-                     <li key={index} className="flex items-start gap-3">
-                       <svg className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                       </svg>
-                       <span className="text-gray-300 font-medium">{benefit}</span>
-                     </li>
-                   ))}
-                 </ul>
+            {/* Complete Ebook Content */}
+            {product.id === '1' && (
+              <div className="space-y-8">
+                {/* Table of Contents */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-2xl font-semibold text-white mb-6 flex items-center gap-2 glow-text">
+                    <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    📚 AI Tools Mastery Guide 2025 - Complete Content
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Part I: Foundation</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">1.</span>
+                          <span>Introduction to AI Sales Revolution</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">2.</span>
+                          <span>Understanding AI Tools Landscape</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">3.</span>
+                          <span>Setting Up Your AI Toolkit</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Part II: Core AI Platforms</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">4.</span>
+                          <span>ChatGPT Mastery for Sales</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">5.</span>
+                          <span>Claude: Advanced Reasoning</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">6.</span>
+                          <span>Grok: Real-time Intelligence</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">7.</span>
+                          <span>Gemini: Multimodal Power</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Part III: Advanced Strategies</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">8.</span>
+                          <span>AI Agents & Automation</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">9.</span>
+                          <span>Custom Bot Development</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">10.</span>
+                          <span>Integration Workflows</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Part IV: Revenue Generation</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">11.</span>
+                          <span>30 Proven Sales Strategies</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">12.</span>
+                          <span>Revenue Optimization</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">13.</span>
+                          <span>Scaling Your AI Business</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chapter 1 Preview */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 1: Introduction to AI Sales Revolution</h3>
+                  <div className="prose prose-invert max-w-none">
+                    <p className="text-gray-300 mb-4">
+                      The landscape of sales and business development has undergone a seismic shift with the advent of artificial intelligence. What once required teams of researchers, writers, and analysts can now be accomplished by a single individual armed with the right AI tools and knowledge.
+                    </p>
+                    <p className="text-gray-300 mb-4">
+                      This guide represents the culmination of extensive research and real-world application of AI tools in sales environments. You'll discover how to leverage ChatGPT, Claude, Grok, and Gemini to create compelling sales materials, automate customer interactions, and generate revenue streams that were previously impossible for individual entrepreneurs.
+                    </p>
+                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
+                    <ul className="space-y-2 text-gray-300 mb-4">
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400">•</span>
+                        <span>How to identify the right AI tool for each sales task</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400">•</span>
+                        <span>Prompt engineering techniques that deliver consistent results</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400">•</span>
+                        <span>Building automated sales funnels with AI assistance</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400">•</span>
+                        <span>Creating personalized customer experiences at scale</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Chapter 4 Preview - ChatGPT Mastery */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 4: ChatGPT Mastery for Sales</h3>
+                  <div className="prose prose-invert max-w-none">
+                    <p className="text-gray-300 mb-4">
+                      ChatGPT has become the cornerstone of AI-powered sales operations. This chapter provides you with battle-tested prompts and strategies that have generated millions in revenue for businesses worldwide.
+                    </p>
+                    
+                    <h4 className="text-lg font-semibold text-white mb-3">Essential ChatGPT Sales Prompts:</h4>
+                    
+                    <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
+                      <h5 className="text-white font-semibold mb-2">1. Cold Email Generator</h5>
+                      <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
+                        "Write a compelling cold email for [PROSPECT NAME] at [COMPANY]. Their pain point is [SPECIFIC CHALLENGE]. Our solution offers [KEY BENEFIT]. Include: attention-grabbing subject line, personalized opening, value proposition, social proof, and clear CTA. Tone: professional yet conversational. Length: 150-200 words."
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
+                      <h5 className="text-white font-semibold mb-2">2. Sales Page Creator</h5>
+                      <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
+                        "Create a high-converting sales page for [PRODUCT/SERVICE]. Target audience: [CUSTOMER PROFILE]. Include: compelling headline, problem identification, solution presentation, benefits vs features, social proof, objection handling, urgency elements, and strong CTA. Structure with psychological triggers and persuasive copywriting techniques."
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
+                      <h5 className="text-white font-semibold mb-2">3. Follow-up Sequence</h5>
+                      <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
+                        "Design a 7-email follow-up sequence for prospects who didn't respond to initial outreach. Each email should: provide unique value, address different objections, include social proof, maintain relationship focus, and have clear next steps. Vary tone from helpful to urgent while staying professional."
+                      </div>
+                    </div>
+                    
+                    <p className="text-gray-300 mb-4">
+                      <strong>Pro Tip:</strong> Always customize these prompts with specific details about your industry, target audience, and unique value proposition. The more context you provide, the better ChatGPT's output will be.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Chapter 11 Preview - 30 Sales Strategies */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 11: 30 Proven Sales Strategies</h3>
+                  <div className="prose prose-invert max-w-none">
+                    <p className="text-gray-300 mb-4">
+                      This chapter contains the most valuable collection of AI-powered sales strategies, each tested and proven to generate results. Here are the first 10 strategies:
+                    </p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
+                        <h5 className="text-white font-semibold mb-2">1. AI-Powered Prospect Research</h5>
+                        <p className="text-gray-300 text-sm">Use AI to analyze prospect's digital footprint, recent company news, and pain points before outreach.</p>
+                      </div>
+                      
+                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
+                        <h5 className="text-white font-semibold mb-2">2. Dynamic Pricing Optimization</h5>
+                        <p className="text-gray-300 text-sm">Leverage AI to adjust pricing based on market conditions, competitor analysis, and customer behavior.</p>
+                      </div>
+                      
+                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
+                        <h5 className="text-white font-semibold mb-2">3. Automated Objection Handling</h5>
+                        <p className="text-gray-300 text-sm">Create AI responses for common objections that feel personal and address specific concerns.</p>
+                      </div>
+                      
+                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
+                        <h5 className="text-white font-semibold mb-2">4. Predictive Lead Scoring</h5>
+                        <p className="text-gray-300 text-sm">Use AI to score leads based on behavior patterns and likelihood to convert.</p>
+                      </div>
+                      
+                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
+                        <h5 className="text-white font-semibold mb-2">5. Content Personalization Engine</h5>
+                        <p className="text-gray-300 text-sm">Generate personalized content for each prospect based on their industry and role.</p>
+                      </div>
+                      
+                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
+                        <h5 className="text-white font-semibold mb-2">6. Social Media Sales Automation</h5>
+                        <p className="text-gray-300 text-sm">Automate social selling activities while maintaining authentic engagement.</p>
+                      </div>
+                    </div>
+                    
+                    <p className="text-gray-300 mt-4">
+                      <em>And 24 more strategies covering advanced automation, revenue optimization, customer retention, and scaling techniques...</em>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bonus Materials */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">🎁 Bonus Materials Included</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-3">Templates & Scripts</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>50+ Ready-to-use AI prompts</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>Email templates for every scenario</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>Sales page frameworks</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>Objection handling scripts</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-3">Tools & Resources</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>AI tool comparison matrix</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>ROI calculation worksheets</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>Implementation checklists</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400">✓</span>
+                          <span>Case study examples</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 

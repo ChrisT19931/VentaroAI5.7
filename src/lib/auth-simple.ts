@@ -24,7 +24,7 @@ export class SimpleAuth {
 
   private async initializeAuth() {
     try {
-      const supabase = await createClient();
+      const supabase = createClient();
       
       // Get current session
       const { data: { session }, error } = await supabase.auth.getSession();
@@ -52,7 +52,7 @@ export class SimpleAuth {
 
   async signIn(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     try {
-      const supabase = await createClient();
+      const supabase = createClient();
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
@@ -75,7 +75,7 @@ export class SimpleAuth {
 
   async signUp(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     try {
-      const supabase = await createClient();
+      const supabase = createClient();
       const { data, error } = await supabase.auth.signUp({
         email,
         password
@@ -97,7 +97,7 @@ export class SimpleAuth {
   }
 
   async signOut(): Promise<void> {
-    const supabase = await createClient();
+    const supabase = createClient();
     await supabase.auth.signOut();
     this.clearUser();
   }
@@ -153,7 +153,7 @@ export class SimpleAuth {
     if (!this.user) return false;
     
     try {
-      const supabase = await createClient();
+      const supabase = createClient();
       const { data: profile } = await supabase
         .from('profiles')
         .select('is_admin')

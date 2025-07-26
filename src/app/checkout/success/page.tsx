@@ -106,9 +106,13 @@ export default function CheckoutSuccessPage() {
         <div className="max-w-4xl mx-auto">
           {/* Success Header */}
           <div className="text-center mb-12">
-            <div className="text-green-400 text-6xl mb-4">✅</div>
-            <h1 className="text-4xl font-bold text-white mb-4">Payment Successful!</h1>
-            <p className="text-xl text-gray-300">Thank you for your purchase. Your digital products are ready for download.</p>
+            <div className="text-green-400 text-6xl mb-4">🎉</div>
+            <h1 className="text-4xl font-bold text-white mb-4">Welcome to Ventaro Nation!</h1>
+            <p className="text-xl text-gray-300 mb-4">Congratulations! You've just joined an exclusive community of AI entrepreneurs.</p>
+            <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">🔥 VIP Access Unlocked!</h2>
+              <p className="text-purple-100">You now have access to exclusive content, bonus materials, and our private community.</p>
+            </div>
           </div>
 
           {/* Order Summary */}
@@ -193,10 +197,26 @@ export default function CheckoutSuccessPage() {
             </div>
           )}
 
+          {/* VIP Portal Access */}
+          <div className="glass-panel rounded-lg p-8 mb-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">🚀 Enter Your VIP Portal</h2>
+              <p className="text-gray-300 mb-6">Access exclusive content, bonus materials, affiliate opportunities, and join our private community.</p>
+              <Link 
+                href={`/vip-portal?session_id=${sessionId}&order_id=${orderId}&guest=${isGuest}`}
+                className="btn-primary text-xl px-12 py-4 inline-flex items-center space-x-3"
+              >
+                <span>🔓</span>
+                <span>Enter VIP Portal</span>
+                <span>→</span>
+              </Link>
+            </div>
+          </div>
+
           {/* Actions */}
           <div className="text-center space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products" className="btn-primary px-8 py-3">
+              <Link href="/products" className="btn-secondary px-8 py-3">
                 Continue Shopping
               </Link>
               <Link href="/" className="btn-secondary px-8 py-3">

@@ -20,53 +20,10 @@ export default function AccountPage() {
 
 
 
-  useEffect(() => {
-    console.log('Account page useEffect - Auth state:', { loading, user: user?.id });
-    
-    // Redirect if not authenticated
-    if (!loading && !isAuthenticated) {
-      console.log('User not authenticated, redirecting to login');
-      router.push('/login');
-      return;
-    }
-
-    if (user) {
-      console.log('User authenticated, fetching orders for:', user.id);
-      fetchUserOrders();
-      checkAdminStatus();
-    }
-  }, [user, loading, isAuthenticated, router, fetchUserOrders]);
-  
-  const checkAdminStatus = async () => {
-    try {
-      const supabase = createClient();
-      const { data: profile, error } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('id', user?.id)
-        .single();
-      
-      if (error) {
-        console.error('Error checking admin status:', error);
-        return;
-      }
-      
-      setIsAdmin(profile?.is_admin === true);
-      console.log('Admin status:', profile?.is_admin);
-      
-      // If user is admin, add admin tab
-      if (profile?.is_admin === true) {
-        console.log('User is admin, showing admin tab');
-      }
-    } catch (error) {
-      console.error('Error checking admin status:', error);
-    }
-  };
-
   const fetchUserOrders = useCallback(async () => {
     try {
       setIsLoading(true);
-      const supabase = createClient();
+      const supabase = await createClient();
       
       console.log('Fetching orders for user:', user?.id);
       
@@ -166,6 +123,49 @@ export default function AccountPage() {
       setIsLoading(false);
     }
   }, [user?.id]);
+
+  const checkAdminStatus = async () => {
+    try {
+      const supabase = await createClient();
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('is_admin')
+        .eq('id', user?.id)
+        .single();
+      
+      if (error) {
+        console.error('Error checking admin status:', error);
+        return;
+      }
+      
+      setIsAdmin(profile?.is_admin === true);
+      console.log('Admin status:', profile?.is_admin);
+      
+      // If user is admin, add admin tab
+      if (profile?.is_admin === true) {
+        console.log('User is admin, showing admin tab');
+      }
+    } catch (error) {
+      console.error('Error checking admin status:', error);
+    }
+  };
+
+  useEffect(() => {
+    console.log('Account page useEffect - Auth state:', { loading, user: user?.id });
+    
+    // Redirect if not authenticated
+    if (!loading && !isAuthenticated) {
+      console.log('User not authenticated, redirecting to login');
+      router.push('/login');
+      return;
+    }
+
+    if (user) {
+      console.log('User authenticated, fetching orders for:', user.id);
+      fetchUserOrders();
+      checkAdminStatus();
+    }
+  }, [user, loading, isAuthenticated, router, fetchUserOrders]);
 
   const handleSignOut = async () => {
     try {
