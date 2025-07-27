@@ -10,6 +10,12 @@ import { SimpleAuthProvider } from '@/contexts/SimpleAuthContext'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
+
 export const metadata: Metadata = {
   title: 'AI-Powered Digital Products - Transform Your Business with AI Tools',
   description: 'Discover AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money with AI in 2025. Learn proven strategies to make money online using ChatGPT, Claude, and cutting-edge AI technologies.',
@@ -45,6 +51,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+      </head>
       <body className={`${inter.variable} font-sans`}>
         <SimpleAuthProvider>
           <CartProvider>

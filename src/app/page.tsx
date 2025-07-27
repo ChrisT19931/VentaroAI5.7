@@ -67,20 +67,20 @@ export default function Home() {
                   AI Prompts Arsenal 2025
                 </h3>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for business growth.
+                  30 professional AI prompts across multiple business categories. Expertly crafted for content creation, marketing, SEO, business automation, e-commerce, and personal branding.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-300">30 proven prompts for business</span>
+                    <span className="text-sm text-gray-300">Business, marketing & SEO prompts</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Copy-paste ready for immediate use</span>
+                    <span className="text-sm text-gray-300">Creative & e-commerce templates</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Works with ChatGPT and other AI tools</span>
+                    <span className="text-sm text-gray-300">Personal branding & networking tools</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -114,24 +114,24 @@ export default function Home() {
                   AI Tools Mastery Guide 2025
                 </h3>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies.
+                  Complete 30-lesson guide to making money with AI in 2025. Each lesson focuses on a specific AI tool or business strategy with clear action steps and practical implementation examples.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-gray-300">Learn ChatGPT, Claude, Grok, and Gemini</span>
+                    <span className="text-sm text-gray-300">Master advanced AI platform techniques</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Master AI agents and bots</span>
+                    <span className="text-sm text-gray-300">Build profitable AI-powered businesses</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">30 practical sales lessons</span>
+                    <span className="text-sm text-gray-300">Step-by-step implementation guides</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Simple step-by-step instructions</span>
+                    <span className="text-sm text-gray-300">Complete 30/90/365-day roadmap</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -238,20 +238,7 @@ export default function Home() {
             <p className="text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-8">
               Transform your vision into a <span className="text-purple-400 font-bold">high-converting digital masterpiece</span>. Our elite development team crafts bespoke websites that don't just look stunning—they <span className="text-blue-400 font-bold">drive results and maximize ROI</span>.
             </p>
-            <div className="flex justify-center items-center space-x-8 text-sm text-gray-400">
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                <span>500+ Successful Projects</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
-                <span>98% Client Satisfaction</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-purple-500 rounded-full mr-2 animate-pulse"></div>
-                <span>Average 300% ROI Increase</span>
-              </div>
-            </div>
+
           </div>
           
 
@@ -270,18 +257,10 @@ export default function Home() {
                     </div>
                   </div>
                   <h3 className="text-5xl font-black text-white mb-6 glow-text">Ready to Dominate Your Market?</h3>
-                  <p className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
-                    Get a <span className="text-purple-400 font-bold">FREE consultation</span> and discover how our elite development team can transform your business with a <span className="text-blue-400 font-bold">high-converting custom website</span> that drives real results.
+                  <p className="text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-8">
+                    Get a <span className="text-purple-400 font-bold">FREE consultation</span> and discover how we can transform your business with a <span className="text-blue-400 font-bold">high-converting custom website</span> that drives real results.
                   </p>
                   <div className="flex justify-center items-center space-x-12 text-sm text-gray-400 mb-8">
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                      <span className="font-semibold">FREE Strategy Session</span>
-                    </div>
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
-                      <span className="font-semibold">Custom Quote in 24hrs</span>
-                    </div>
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-purple-500 rounded-full mr-2 animate-pulse"></div>
                       <span className="font-semibold">No Obligation</span>
@@ -426,22 +405,8 @@ export default function Home() {
                       <div className="text-center pt-8">
                         <div className="mb-8">
                           <p className="text-xl text-gray-300 mb-4">
-                            🎯 <span className="text-purple-400 font-bold">Ready to transform your business?</span> Our elite team is standing by to create your digital masterpiece.
+                            🎯 <span className="text-purple-400 font-bold">Ready to transform your business?</span> We are standing by to create your digital masterpiece.
                           </p>
-                          <div className="flex justify-center items-center space-x-8 text-sm text-gray-400 mb-6">
-                            <div className="flex items-center">
-                              <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                              <span>FREE 30-min strategy call</span>
-                            </div>
-                            <div className="flex items-center">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
-                              <span>Custom proposal in 24hrs</span>
-                            </div>
-                            <div className="flex items-center">
-                              <div className="w-2 h-2 bg-purple-500 rounded-full mr-2 animate-pulse"></div>
-                              <span>100% satisfaction guarantee</span>
-                            </div>
-                          </div>
                         </div>
                         
                         <button 
@@ -456,7 +421,7 @@ export default function Home() {
                         </button>
                         
                         <p className="text-sm text-gray-500 mt-6 max-w-2xl mx-auto">
-                          By submitting this form, you agree to receive communication from our elite development team. We respect your privacy and will never share your information. You can unsubscribe at any time.
+                          We respect your privacy and will never share your information.
                         </p>
                       </div>
                     </div>
@@ -524,6 +489,7 @@ export default function Home() {
         </div>
       </section>
 
+      
       {/* Elite Call to Action */}
       <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-slate-800 text-white relative overflow-hidden">
         {/* Background Elements */}

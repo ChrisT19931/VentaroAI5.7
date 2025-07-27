@@ -7,24 +7,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import * as THREE from 'three';
 import '@/styles/cinematic.css';
-import System, {
-  Emitter,
-  Rate,
-  Span,
-  Position,
-  Mass,
-  Radius,
-  Life,
-  PointZone,
-  SphereZone,
-  Vector3D,
-  Alpha,
-  Scale,
-  Color,
-  Force,
-  SpriteRenderer,
-  RadialVelocity
-} from 'three-nebula';
+// Removed three-nebula import to fix runtime errors
 
 // Floating particles component
 function FloatingParticles() {
@@ -52,9 +35,7 @@ function FloatingParticles() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={1000}
-          array={particles}
-          itemSize={3}
+          args={[particles, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
@@ -141,167 +122,68 @@ const AnimatedLogo = () => {
   );
 };
 
-// Advanced cosmic particle system using three-nebula
-function CosmicParticleSystem() {
-  const systemRef = useRef<any>(null);
-  const { scene } = useThree();
-
-  useEffect(() => {
-    if (!scene) return;
-
-    // Create the advanced particle system
-    const system = new System(THREE);
-    const renderer = new SpriteRenderer(scene, THREE);
-
-    // Stellar nursery emitter - creates realistic star birth regions
-    const stellarNursery = new Emitter();
-    stellarNursery
-      .setRate(new Rate(new Span(30, 60), new Span(0.1, 0.3)))
-      .setInitializers([
-        new Position(new SphereZone(0, 0, 0, 25)),
-        new Mass(1),
-        new Radius(0.1, 0.5),
-        new Life(15, 30),
-        new RadialVelocity(2, new Vector3D(0, 1, 0), 360)
-      ])
-      .setBehaviours([
-        new Alpha(0.9, 0.1),
-        new Scale(0.3, 1.8),
-        new Color(
-          new THREE.Color('#ffffff'),
-          new THREE.Color('#87ceeb'),
-          new THREE.Color('#ffd700'),
-          new THREE.Color('#ff6b6b')
-        ),
-        new Force(0, 0.02, 0)
-      ]);
-
-    // Nebula gas clouds emitter
-    const nebulaGas = new Emitter();
-    nebulaGas
-      .setRate(new Rate(new Span(40, 80), new Span(0.05, 0.15)))
-      .setInitializers([
-        new Position(new SphereZone(0, 0, 0, 35)),
-        new Mass(0.8),
-        new Radius(0.8, 3.0),
-        new Life(25, 50),
-        new RadialVelocity(0.1, new Vector3D(0, 1, 0), 360)
-      ])
-      .setBehaviours([
-        new Alpha(0.4, 0.0),
-        new Scale(1.5, 6.0),
-        new Color(
-          new THREE.Color('#ff1493'), // Deep pink (H-alpha)
-          new THREE.Color('#00ced1'), // Dark turquoise (OIII)
-          new THREE.Color('#9370db'), // Medium purple
-          new THREE.Color('#ff69b4')  // Hot pink
-        ),
-        new Force(0.05, 0.05, 0.05)
-      ]);
-
-    // Cosmic dust and distant galaxies
-    const cosmicDust = new Emitter();
-    cosmicDust
-      .setRate(new Rate(new Span(100, 200), new Span(0.2, 0.6)))
-      .setInitializers([
-        new Position(new SphereZone(0, 0, 0, 50)),
-        new Mass(0.3),
-        new Radius(0.02, 0.15),
-        new Life(30, 60),
-        new RadialVelocity(0.05, new Vector3D(0, 1, 0), 360)
-      ])
-      .setBehaviours([
-        new Alpha(0.6, 0.0),
-        new Scale(0.1, 0.8),
-        new Color(
-          new THREE.Color('#f0f8ff'), // Alice blue
-          new THREE.Color('#e6e6fa'), // Lavender
-          new THREE.Color('#fffacd')  // Lemon chiffon
-        )
-      ]);
-
-    // Quasar jets and high-energy phenomena
-    const quasarJets = new Emitter();
-    quasarJets
-      .setRate(new Rate(new Span(15, 30), new Span(0.08, 0.2)))
-      .setInitializers([
-        new Position(new PointZone(0, 0, 0)),
-        new Mass(2),
-        new Radius(0.3, 1.2),
-        new Life(20, 40),
-        new RadialVelocity(8, new Vector3D(0, 1, 0), 45)
-      ])
-      .setBehaviours([
-        new Alpha(1.0, 0.2),
-        new Scale(0.5, 2.5),
-        new Color(
-          new THREE.Color('#00bfff'), // Deep sky blue
-          new THREE.Color('#1e90ff'), // Dodger blue
-          new THREE.Color('#ffffff')  // White
-        ),
-        new Force(0, 0.1, 0)
-      ]);
-
-    // Supernova remnants
-    const supernovaRemnants = new Emitter();
-    supernovaRemnants
-      .setRate(new Rate(new Span(20, 40), new Span(0.03, 0.1)))
-      .setInitializers([
-        new Position(new SphereZone(0, 0, 0, 30)),
-        new Mass(1.5),
-        new Radius(0.5, 2.5),
-        new Life(35, 70),
-        new RadialVelocity(12, new Vector3D(0, 0, 1), 180)
-      ])
-      .setBehaviours([
-        new Alpha(0.8, 0.0),
-        new Scale(2.0, 8.0),
-        new Color(
-          new THREE.Color('#ff4500'), // Orange red
-          new THREE.Color('#ff6347'), // Tomato
-          new THREE.Color('#ffd700'), // Gold
-          new THREE.Color('#ff1493')  // Deep pink
-        ),
-        new Force(0.02, 0.02, 0.02)
-      ]);
-
-    // Add all emitters to the system
-    system
-      .addEmitter(stellarNursery)
-      .addEmitter(nebulaGas)
-      .addEmitter(cosmicDust)
-      .addEmitter(quasarJets)
-      .addEmitter(supernovaRemnants)
-      .addRenderer(renderer);
-
-    // Start the particle system with required hooks
-    system.emit({
-      onStart: () => {
-        console.log('Particle system started');
-      },
-      onUpdate: () => {
-        // Optional update callback
-      },
-      onEnd: () => {
-        console.log('Particle system ended');
+// Simplified particle system to replace three-nebula
+function SimpleParticleSystem() {
+  const particlesRef = useRef<THREE.Points>(null);
+  
+  const particles = useMemo(() => {
+    const positions = new Float32Array(2000 * 3);
+    const colors = new Float32Array(2000 * 3);
+    
+    for (let i = 0; i < 2000; i++) {
+      // Random spherical distribution
+      const radius = 15 + Math.random() * 25;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      
+      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = radius * Math.cos(phi);
+      
+      // Colorful particles
+      const colorType = Math.random();
+      if (colorType < 0.3) {
+        colors[i * 3] = 0.4; colors[i * 3 + 1] = 0.6; colors[i * 3 + 2] = 1.0; // Blue
+      } else if (colorType < 0.6) {
+        colors[i * 3] = 0.5; colors[i * 3 + 1] = 0.3; colors[i * 3 + 2] = 0.9; // Purple
+      } else {
+        colors[i * 3] = 1.0; colors[i * 3 + 1] = 0.4; colors[i * 3 + 2] = 0.6; // Pink
       }
-    });
-    systemRef.current = system;
+    }
+    
+    return { positions, colors };
+  }, []);
 
-    return () => {
-      if (systemRef.current) {
-        systemRef.current.destroy();
-      }
-    };
-  }, [scene]);
-
-  useFrame((state, delta) => {
-    if (systemRef.current) {
-      systemRef.current.update(delta);
+  useFrame((state) => {
+    if (particlesRef.current) {
+      const time = state.clock.elapsedTime;
+      particlesRef.current.rotation.y = time * 0.02;
+      particlesRef.current.rotation.x = Math.sin(time * 0.1) * 0.1;
     }
   });
 
-  return null;
+  return (
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[particles.positions, 3]}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          args={[particles.colors, 3]}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.05}
+        transparent
+        opacity={0.8}
+        sizeAttenuation
+        vertexColors
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
 }
 
 // Enhanced background stars for depth
@@ -424,15 +306,11 @@ function BackgroundStars() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={5000}
-          array={starField.positions}
-          itemSize={3}
+          args={[starField.positions, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          count={5000}
-          array={starField.colors}
-          itemSize={3}
+          args={[starField.colors, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
@@ -502,7 +380,7 @@ function Scene() {
       <pointLight position={[15, 5, 10]} color="#ec4899" intensity={0.6} />
       
       {/* Space elements */}
-      <CosmicParticleSystem />
+      <SimpleParticleSystem />
       <BackgroundStars />
       <AnimatedLogo />
       <FloatingParticles />
@@ -621,24 +499,32 @@ function GlassmorphismOverlay() {
 
 // Main cinematic hero component
 export default function CinematicHero() {
+  const [canvasError, setCanvasError] = useState(false);
+
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black cinematic-hero">
-      {/* 3D Canvas Background with cinematic camera */}
-      <Canvas
-        camera={{ position: [0, 0, 12], fov: 60 }}
-        className="absolute inset-0"
-        gl={{ 
-          antialias: true, 
-          alpha: true, 
-          powerPreference: "high-performance",
-          preserveDrawingBuffer: false
-        }}
-        dpr={[1, 2]}
-        performance={{ min: 0.5 }}
-      >
-        <Scene />
-        <Environment preset="night" background={false} />
-      </Canvas>
+      {/* Fallback background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+      
+      {/* 3D Canvas Background with error handling */}
+      {!canvasError && (
+        <Canvas
+          camera={{ position: [0, 0, 12], fov: 60 }}
+          className="absolute inset-0"
+          gl={{ 
+            antialias: true, 
+            alpha: true, 
+            powerPreference: "high-performance",
+            preserveDrawingBuffer: false
+          }}
+          dpr={[1, 2]}
+          performance={{ min: 0.5 }}
+          onError={() => setCanvasError(true)}
+        >
+          <Scene />
+          <Environment preset="night" background={false} />
+        </Canvas>
+      )}
       
       {/* Glassmorphism UI Overlay */}
       <GlassmorphismOverlay />

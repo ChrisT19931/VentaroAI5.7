@@ -37,7 +37,7 @@ const fallbackProducts = {
   '1': {
     id: '1',
     name: 'AI Tools Mastery Guide 2025',
-    description: '30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
+    description: 'Learn how to make money with AI in 2025. This comprehensive guide covers 30 essential AI tools and proven business models for generating income with artificial intelligence.',
     price: 25.00,
     originalPrice: 50.00,
     image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -47,28 +47,30 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      'Learn ChatGPT, Claude, Grok, and Gemini',
-      'Master AI agents and bots',
-      '30 practical sales lessons',
-      'Simple step-by-step instructions',
-      'Ready-to-use techniques',
-      'Boost your sales with AI'
+      'Master key AI tools (ChatGPT, Claude, Gemini, Grok, Midjourney)',
+      'Step-by-step content creation & business service guides',
+      'Pricing strategies with real income examples',
+      '30/90-day implementation roadmap',
+      'Client acquisition systems that generate consistent leads',
+      'Practical implementation examples'
     ],
     details: {
-      description: 'A practical 30-page guide teaching you how to use popular AI chatbots like ChatGPT, Claude, Grok, and Gemini. Learn to create and use AI agents and bots, plus get 30 powerful sales lessons to grow your business.',
+      description: 'A comprehensive 30-lesson guide teaching you how to leverage AI tools to build profitable online businesses. Each lesson is focused on a specific AI tool or business strategy with clear action steps. Master advanced techniques for ChatGPT, Claude, Grok, and Gemini, create AI-powered services, and implement proven business models that generate real income.',
       features: [
-        'Complete guide to ChatGPT, Claude, Grok, and Gemini',
-        'How to create and use AI agents',
-        'Bot creation and management',
-        '30 sales lessons for business growth',
-        'Practical examples and tutorials'
+        'The AI Revolution in 2025 overview',
+        'Why AI is the Ultimate Money-Making Tool',
+        'ChatGPT 4.0, Claude 3.5, Google Gemini Pro mastery',
+        'Visual AI tools like Midjourney',
+        'AI-powered business model blueprints',
+        'Client acquisition frameworks'
       ],
       includes: [
-        '30-page comprehensive PDF guide',
-        'AI chatbot tutorials',
-        'Agent and bot creation guides',
-        '30 sales lessons',
-        'Quick reference sheets'
+        '30 comprehensive lessons (1 page each)',
+        'Quick action steps for each lesson',
+        'Business model frameworks',
+        'Income acceleration strategies',
+        'Practical implementation examples',
+        'Implementation roadmaps (30-day, 90-day)'
       ],
       pages: 30,
       format: 'PDF',
@@ -81,7 +83,7 @@ const fallbackProducts = {
   '2': {
     id: '2',
     name: 'AI Prompts Arsenal 2025',
-    description: '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
+    description: '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing, SEO, business automation, e-commerce, and personal branding.',
     price: 10.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
     category: 'tools',
@@ -92,30 +94,31 @@ const fallbackProducts = {
     benefits: [
       '30 proven prompts for building online business',
       'Copy-paste ready for immediate use',
-      'Works with ChatGPT and other AI tools',
-      'Organized by business type',
+      'Works with ChatGPT, Claude, and other AI tools',
+      'Organized by business category',
       'Simple instructions included',
-      'Start making money today'
+      'Start implementing immediately'
     ],
     details: {
-      description: 'Get 30 simple AI prompts that help you build your online business and start making money. Each prompt is tested and ready to use - just copy, paste, and start earning.',
+      description: 'Get 30 expertly crafted AI prompts that help you build your online business across multiple categories. Each prompt is tested and ready to use - just copy, paste, and start implementing your AI-powered business strategy.',
       features: [
-        '30 business-focused prompts',
-        'Simple step-by-step instructions',
-        'Perfect for online business building',
-        'Money-making strategies included',
-        'Works with popular AI tools'
+        'Content creation prompts for blogs, social media, and marketing',
+        'SEO and visibility enhancement prompts',
+        'Business automation workflow prompts',
+        'E-commerce and product description generators',
+        'Personal branding and networking prompts'
       ],
       includes: [
-        'PDF with all 30 prompts',
+        'PDF with all 30 categorized prompts',
         'Copy-paste ready format',
-        'Business building guide',
-        'Quick start instructions'
+        'Usage instructions for each prompt',
+        'Implementation suggestions',
+        'Compatible with all major AI platforms'
       ],
       promptCount: 30,
       format: 'PDF',
       language: 'English',
-      compatibility: 'ChatGPT and other AI tools',
+      compatibility: 'ChatGPT, Claude, Gemini, and other AI tools',
       downloadSize: '1.2 MB'
     }
   },
@@ -424,41 +427,45 @@ export default function ProductPage() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Part I: Foundation</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 1: Introduction to AI Money-Making</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">1.</span>
-                          <span>Introduction to AI Sales Revolution</span>
+                          <span>The AI Revolution in 2025</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">2.</span>
-                          <span>Understanding AI Tools Landscape</span>
+                          <span>Why AI is the Ultimate Money-Making Tool</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">3.</span>
-                          <span>Setting Up Your AI Toolkit</span>
+                          <span>Success Stories and Case Studies</span>
                         </li>
                       </ul>
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Part II: Core AI Platforms</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 2: Essential AI Tools Overview</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">4.</span>
-                          <span>ChatGPT Mastery for Sales</span>
+                          <span>ChatGPT 4.0 and Advanced Features</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">5.</span>
-                          <span>Claude: Advanced Reasoning</span>
+                          <span>Claude 3.5 Sonnet for Business</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">6.</span>
-                          <span>Grok: Real-time Intelligence</span>
+                          <span>Google Gemini Pro for Analytics</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">7.</span>
-                          <span>Gemini: Multimodal Power</span>
+                          <span>Grok for Real-Time Insights</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">8.</span>
+                          <span>Visual AI Tools (Midjourney, DALL-E, Runway)</span>
                         </li>
                       </ul>
                     </div>
@@ -466,37 +473,69 @@ export default function ProductPage() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Part III: Advanced Strategies</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 3-5: Content & Business Services</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">8.</span>
-                          <span>AI Agents & Automation</span>
-                        </li>
-                        <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">9.</span>
-                          <span>Custom Bot Development</span>
+                          <span>Blog Writing with AI (Step-by-Step)</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">10.</span>
-                          <span>Integration Workflows</span>
+                          <span>Social Media Content Automation</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">11.</span>
+                          <span>YouTube Script Generation</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">12.</span>
+                          <span>Email Marketing Sequences</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">13.</span>
+                          <span>Freelance Writing Services</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">14.</span>
+                          <span>Social Media Management</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">15.</span>
+                          <span>Virtual Assistant Services</span>
                         </li>
                       </ul>
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Part IV: Revenue Generation</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 6-8: Advanced Strategies</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">11.</span>
-                          <span>30 Proven Sales Strategies</span>
+                          <span className="text-blue-400 font-bold">16.</span>
+                          <span>AI-Generated Product Descriptions</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">12.</span>
-                          <span>Revenue Optimization</span>
+                          <span className="text-blue-400 font-bold">17.</span>
+                          <span>Automated Customer Service</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">13.</span>
-                          <span>Scaling Your AI Business</span>
+                          <span className="text-blue-400 font-bold">18.</span>
+                          <span>AI-Powered Trading and Investments</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">19.</span>
+                          <span>Creating and Selling AI Tools</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">20.</span>
+                          <span>Building AI-Enhanced SaaS Products</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">21.</span>
+                          <span>Automation Workflows</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">22.</span>
+                          <span>30-Day Quick Start Plan</span>
                         </li>
                       </ul>
                     </div>
@@ -505,31 +544,31 @@ export default function ProductPage() {
 
                 {/* Chapter 1 Preview */}
                 <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 1: Introduction to AI Sales Revolution</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 1: Introduction to AI Money-Making</h3>
                   <div className="prose prose-invert max-w-none">
                     <p className="text-gray-300 mb-4">
-                      The landscape of sales and business development has undergone a seismic shift with the advent of artificial intelligence. What once required teams of researchers, writers, and analysts can now be accomplished by a single individual armed with the right AI tools and knowledge.
+                      The landscape of business and income generation has undergone a seismic shift with the advent of artificial intelligence. What once required teams of specialists can now be accomplished by a single individual armed with the right AI tools and knowledge.
                     </p>
                     <p className="text-gray-300 mb-4">
-                      This guide represents the culmination of extensive research and real-world application of AI tools in sales environments. You'll discover how to leverage ChatGPT, Claude, Grok, and Gemini to create compelling sales materials, automate customer interactions, and generate revenue streams that were previously impossible for individual entrepreneurs.
+                      This guide represents the culmination of extensive research and real-world application of AI tools for making money online. You'll discover how to leverage ChatGPT, Claude, Grok, and Gemini to create valuable content, automate business processes, and generate revenue streams that were previously impossible for individual entrepreneurs.
                     </p>
                     <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
                     <ul className="space-y-2 text-gray-300 mb-4">
                       <li className="flex items-start gap-2">
                         <span className="text-blue-400">•</span>
-                        <span>How to identify the right AI tool for each sales task</span>
+                        <span>How to identify the right AI tool for each money-making opportunity</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-blue-400">•</span>
-                        <span>Prompt engineering techniques that deliver consistent results</span>
+                        <span>Prompt engineering techniques that deliver profitable results</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-blue-400">•</span>
-                        <span>Building automated sales funnels with AI assistance</span>
+                        <span>Building automated income streams with AI assistance</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-blue-400">•</span>
-                        <span>Creating personalized customer experiences at scale</span>
+                        <span>Creating valuable digital products and services at scale</span>
                       </li>
                     </ul>
                   </div>
@@ -537,83 +576,83 @@ export default function ProductPage() {
 
                 {/* Chapter 4 Preview - ChatGPT Mastery */}
                 <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 4: ChatGPT Mastery for Sales</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 4: ChatGPT 4.0 and Advanced Features</h3>
                   <div className="prose prose-invert max-w-none">
                     <p className="text-gray-300 mb-4">
-                      ChatGPT has become the cornerstone of AI-powered sales operations. This chapter provides you with battle-tested prompts and strategies that have generated millions in revenue for businesses worldwide.
+                      ChatGPT has become the cornerstone of AI-powered money-making opportunities. This chapter provides you with battle-tested prompts and strategies that have generated significant income for entrepreneurs worldwide.
                     </p>
                     
-                    <h4 className="text-lg font-semibold text-white mb-3">Essential ChatGPT Sales Prompts:</h4>
+                    <h4 className="text-lg font-semibold text-white mb-3">Essential ChatGPT Money-Making Prompts:</h4>
                     
                     <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
-                      <h5 className="text-white font-semibold mb-2">1. Cold Email Generator</h5>
+                      <h5 className="text-white font-semibold mb-2">1. Content Creation Generator</h5>
                       <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
-                        "Write a compelling cold email for [PROSPECT NAME] at [COMPANY]. Their pain point is [SPECIFIC CHALLENGE]. Our solution offers [KEY BENEFIT]. Include: attention-grabbing subject line, personalized opening, value proposition, social proof, and clear CTA. Tone: professional yet conversational. Length: 150-200 words."
+                        "Write a comprehensive blog post about [TOPIC] for [TARGET AUDIENCE]. Focus on [KEY BENEFIT]. Include: attention-grabbing headline, introduction with hook, 5 main sections with subheadings, actionable tips, FAQ section, and conclusion with call-to-action. Optimize for SEO with [PRIMARY KEYWORD]. Length: 1500-2000 words."
                       </div>
                     </div>
                     
                     <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
-                      <h5 className="text-white font-semibold mb-2">2. Sales Page Creator</h5>
+                      <h5 className="text-white font-semibold mb-2">2. Digital Product Creator</h5>
                       <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
-                        "Create a high-converting sales page for [PRODUCT/SERVICE]. Target audience: [CUSTOMER PROFILE]. Include: compelling headline, problem identification, solution presentation, benefits vs features, social proof, objection handling, urgency elements, and strong CTA. Structure with psychological triggers and persuasive copywriting techniques."
+                        "Create a detailed outline for a [PRODUCT TYPE] about [TOPIC]. Target audience: [CUSTOMER PROFILE]. Include: compelling title, 10-15 main chapters/sections, 3-5 subsections per chapter, key learning outcomes, unique selling points, and pricing strategy. Focus on solving [SPECIFIC PROBLEM] and delivering [PRIMARY BENEFIT]."
                       </div>
                     </div>
                     
                     <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
-                      <h5 className="text-white font-semibold mb-2">3. Follow-up Sequence</h5>
+                      <h5 className="text-white font-semibold mb-2">3. Service Offering Framework</h5>
                       <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
-                        "Design a 7-email follow-up sequence for prospects who didn't respond to initial outreach. Each email should: provide unique value, address different objections, include social proof, maintain relationship focus, and have clear next steps. Vary tone from helpful to urgent while staying professional."
+                        "Design a complete service offering for [SERVICE TYPE]. Include: 3 tiered packages with specific deliverables, pricing strategy, service description, client benefits, process workflow, delivery timeline, and FAQs. Target [IDEAL CLIENT] with pain points of [CLIENT CHALLENGES]. Position as premium solution with [UNIQUE ADVANTAGE]."
                       </div>
                     </div>
                     
                     <p className="text-gray-300 mb-4">
-                      <strong>Pro Tip:</strong> Always customize these prompts with specific details about your industry, target audience, and unique value proposition. The more context you provide, the better ChatGPT's output will be.
+                      <strong>Pro Tip:</strong> Always customize these prompts with specific details about your niche, target audience, and unique value proposition. The more context you provide, the better ChatGPT's output will be for generating income.
                     </p>
                   </div>
                 </div>
 
-                {/* Chapter 11 Preview - 30 Sales Strategies */}
+                {/* Chapter 11 Preview - 30 Money-Making Strategies */}
                 <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 11: 30 Proven Sales Strategies</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 11: 30 Proven Money-Making Strategies</h3>
                   <div className="prose prose-invert max-w-none">
                     <p className="text-gray-300 mb-4">
-                      This chapter contains the most valuable collection of AI-powered sales strategies, each tested and proven to generate results. Here are the first 10 strategies:
+                      This chapter contains the most valuable collection of AI-powered income strategies, each tested and proven to generate real results. Here are the first 10 strategies:
                     </p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">1. AI-Powered Prospect Research</h5>
-                        <p className="text-gray-300 text-sm">Use AI to analyze prospect's digital footprint, recent company news, and pain points before outreach.</p>
+                        <h5 className="text-white font-semibold mb-2">1. AI-Powered Niche Research</h5>
+                        <p className="text-gray-300 text-sm">Use AI to identify profitable niches with high demand and low competition for digital products.</p>
                       </div>
                       
                       <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">2. Dynamic Pricing Optimization</h5>
-                        <p className="text-gray-300 text-sm">Leverage AI to adjust pricing based on market conditions, competitor analysis, and customer behavior.</p>
+                        <h5 className="text-white font-semibold mb-2">2. Automated Content Creation</h5>
+                        <p className="text-gray-300 text-sm">Leverage AI to generate blog posts, social media content, and videos that attract organic traffic.</p>
                       </div>
                       
                       <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">3. Automated Objection Handling</h5>
-                        <p className="text-gray-300 text-sm">Create AI responses for common objections that feel personal and address specific concerns.</p>
+                        <h5 className="text-white font-semibold mb-2">3. Digital Product Development</h5>
+                        <p className="text-gray-300 text-sm">Create ebooks, guides, and templates with AI that solve specific problems for targeted audiences.</p>
                       </div>
                       
                       <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">4. Predictive Lead Scoring</h5>
-                        <p className="text-gray-300 text-sm">Use AI to score leads based on behavior patterns and likelihood to convert.</p>
+                        <h5 className="text-white font-semibold mb-2">4. Freelance Service Packaging</h5>
+                        <p className="text-gray-300 text-sm">Use AI to develop and deliver high-value freelance services with minimal time investment.</p>
                       </div>
                       
                       <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">5. Content Personalization Engine</h5>
-                        <p className="text-gray-300 text-sm">Generate personalized content for each prospect based on their industry and role.</p>
+                        <h5 className="text-white font-semibold mb-2">5. Affiliate Marketing Optimization</h5>
+                        <p className="text-gray-300 text-sm">Generate personalized product reviews and comparisons that drive affiliate commissions.</p>
                       </div>
                       
                       <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">6. Social Media Sales Automation</h5>
-                        <p className="text-gray-300 text-sm">Automate social selling activities while maintaining authentic engagement.</p>
+                        <h5 className="text-white font-semibold mb-2">6. AI-Powered Online Courses</h5>
+                        <p className="text-gray-300 text-sm">Create and sell comprehensive online courses with AI-generated content and materials.</p>
                       </div>
                     </div>
                     
                     <p className="text-gray-300 mt-4">
-                      <em>And 24 more strategies covering advanced automation, revenue optimization, customer retention, and scaling techniques...</em>
+                      <em>And 24 more strategies covering passive income streams, service businesses, digital product creation, and scaling techniques...</em>
                     </p>
                   </div>
                 </div>

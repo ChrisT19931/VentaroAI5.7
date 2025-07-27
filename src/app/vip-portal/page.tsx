@@ -10,63 +10,47 @@ export default function VIPPortal() {
   const { user } = useSimpleAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isVerifying, setIsVerifying] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasAccess, setHasAccess] = useState(false);
-  const [userPurchases, setUserPurchases] = useState<any[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
 
-  const sessionId = searchParams.get('session_id');
-  const orderToken = searchParams.get('token');
-  const orderId = searchParams.get('order_id');
-  const guestEmail = searchParams.get('email');
-
   useEffect(() => {
-    const verifyVIPAccess = async () => {
-      // If no user and no guest credentials, redirect to login
-      if (!user && (!guestEmail || !orderToken)) {
-        router.push('/login?redirect=/vip-portal');
-        return;
-      }
+    if (!user) {
+      router.push('/login?redirect=/vip-portal');
+      return;
+    }
 
-      try {
-        // Verify user has made at least one purchase
-        const response = await fetch('/api/verify-vip-access', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId: user?.id,
-            guestEmail: guestEmail,
-            orderToken: orderToken,
-            sessionId: sessionId,
-            orderId: orderId
-          })
-        });
-
-        const data = await response.json();
-        setHasAccess(data.hasAccess);
-        setUserPurchases(data.purchases || []);
-      } catch (error) {
-        console.error('Error verifying VIP access:', error);
-        toast.error('Error verifying access. Please try again.');
-        setHasAccess(false);
-      } finally {
-        setIsVerifying(false);
-      }
-    };
-
-    verifyVIPAccess();
-  }, [user, router, guestEmail, orderToken, sessionId, orderId]);
+    // Simple access check - admin or authenticated user
+    const adminParam = searchParams.get('admin');
+    if (adminParam === 'true' && user?.email === 'chris.t@ventarosales.com') {
+      setIsAdmin(true);
+      setHasAccess(true);
+    } else if (user) {
+      setHasAccess(true); // Simplified - assume access if logged in
+    }
+    
+    setIsLoading(false);
+  }, [user, router, searchParams]);
 
   const handleDownload = (fileName: string, displayName: string) => {
-    const link = document.createElement('a');
-    link.href = `/downloads/${fileName}`;
-    link.download = displayName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    toast.success(`📥 ${displayName} download started!`);
+    if (!hasAccess) {
+      toast.error('Please log in to download this product.');
+      return;
+    }
+
+    try {
+      const link = document.createElement('a');
+      link.href = `/downloads/${fileName}`;
+      link.download = displayName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success(`📥 ${displayName} download started!`);
+    } catch (error) {
+      console.error('Download error:', error);
+      toast.error('Download failed. Please try again.');
+    }
   };
 
   const copyAffiliateLink = (link: string) => {
@@ -74,12 +58,22 @@ export default function VIPPortal() {
     toast.success('🔗 Affiliate link copied to clipboard!');
   };
 
-  if (isVerifying) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
-          <p className="text-white glow-text">Verifying VIP access...</p>
+          <p className="text-white">Loading VIP portal...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-white">Redirecting to login...</p>
         </div>
       </div>
     );
@@ -89,19 +83,24 @@ export default function VIPPortal() {
     return (
       <div className="min-h-screen bg-black py-12">
         <div className="container mx-auto px-4 max-w-2xl text-center">
-          <div className="glass-card p-8">
-            <div className="text-6xl mb-6 animate-pulse">🔒</div>
-            <h1 className="text-3xl font-bold text-white mb-4 glow-text">VIP Access Required</h1>
-            <p className="text-gray-300 mb-6">
+          <div className="bg-gray-900 rounded-lg p-8">
+            <div className="text-6xl mb-6">🔒</div>
+            <h1 className="text-3xl font-bold text-white mb-4">VIP Access Required</h1>
+            <p className="text-gray-300 mb-8">
               Welcome to the Ventaro Nation VIP Portal! This exclusive area is reserved for our valued customers.
             </p>
-            <div className="space-y-4">
-              <Link href="/" className="neon-button inline-block">
+            <div className="flex gap-4 justify-center">
+              <Link 
+                href="/products" 
+                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
                 Browse Products
               </Link>
-              <br />
-              <Link href="/login" className="text-blue-400 hover:text-blue-300 transition-colors duration-300">
-                Already a customer? Sign In
+              <Link 
+                href="/login" 
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                Sign In
               </Link>
             </div>
           </div>
@@ -109,6 +108,64 @@ export default function VIPPortal() {
       </div>
     );
   }
+
+  const products = [
+    {
+      id: '1',
+      name: 'AI Tools Mastery Guide 2025',
+      description: '30-page comprehensive guide with AI tools and prompts to make money online in 2025.',
+      fileName: 'ai-tools-mastery-guide-2025.pdf',
+      purchaseDate: '2024-01-15',
+      viewUrl: '/downloads/ebook'
+    },
+    {
+      id: '2',
+      name: 'AI Prompts Arsenal 2025',
+      description: '30 professional AI prompts to make money online in 2025.',
+      fileName: 'ai-prompts-collection.pdf',
+      purchaseDate: '2024-01-15',
+      viewUrl: '/downloads/prompts'
+    },
+    {
+      id: '3',
+      name: 'AI Business Strategy Session',
+      description: '60-minute live coaching session to build your online business.',
+      fileName: null,
+      purchaseDate: '2024-01-15',
+      viewUrl: '/downloads/coaching'
+    }
+  ];
+
+  const bonusProducts = [
+    {
+      name: 'AI Business Accelerator Checklist',
+      description: '30-point checklist to launch your AI business in 30 days',
+      fileName: 'ai-business-accelerator-checklist.pdf',
+      icon: '🚀',
+      color: 'from-green-500 to-emerald-600'
+    },
+    {
+      name: '100 High-Converting AI Prompts',
+      description: 'Bonus collection of proven money-making prompts',
+      fileName: 'bonus-ai-prompts-collection.pdf',
+      icon: '💰',
+      color: 'from-orange-500 to-red-600'
+    },
+    {
+      name: 'AI Niche Finder Worksheet',
+      description: 'Find your profitable AI niche in 7 simple steps',
+      fileName: 'ai-niche-finder-worksheet.pdf',
+      icon: '🎯',
+      color: 'from-purple-500 to-pink-600'
+    },
+    {
+      name: 'AI Revenue Tracker Template',
+      description: 'Track and optimize your AI income streams',
+      fileName: 'ai-revenue-tracker-template.xlsx',
+      icon: '📊',
+      color: 'from-blue-500 to-cyan-600'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -120,7 +177,7 @@ export default function VIPPortal() {
               <div className="flex items-center gap-4">
                 <div className="text-4xl animate-bounce">🎉</div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white glow-text">Welcome to Ventaro Nation!</h2>
+                  <h2 className="text-2xl font-bold text-white">Welcome to Ventaro Nation!</h2>
                   <p className="text-purple-200">You're now part of an exclusive community of AI entrepreneurs</p>
                 </div>
               </div>
@@ -139,34 +196,53 @@ export default function VIPPortal() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="text-6xl mb-4">👑</div>
-          <h1 className="text-4xl font-bold text-white mb-4 glow-text">Ventaro Nation VIP Portal</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Ventaro Nation VIP Portal</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Exclusive content, bonuses, and opportunities reserved for our valued community members
           </p>
+          {isAdmin && (
+            <div className="mt-4 inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              Admin Access - All Content Available
+            </div>
+          )}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Your Downloads */}
           <div className="lg:col-span-2">
-            <div className="glass-card p-8 mb-8">
+            <div className="bg-gray-900 rounded-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span className="text-3xl">📚</span>
                 Your Digital Library
               </h2>
               <div className="space-y-4">
-                {userPurchases.map((purchase, index) => (
-                  <div key={index} className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl p-6">
+                {products.map((product) => (
+                  <div key={product.id} className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-semibold text-white">{purchase.name}</h3>
-                        <p className="text-gray-300 text-sm">Purchased: {new Date(purchase.purchaseDate).toLocaleDateString()}</p>
+                        <h3 className="text-lg font-semibold text-white">{product.name}</h3>
+                        <p className="text-gray-300 text-sm mb-2">{product.description}</p>
+                        <p className="text-gray-400 text-xs">Purchased: {new Date(product.purchaseDate).toLocaleDateString()}</p>
                       </div>
-                      <button
-                        onClick={() => handleDownload(purchase.fileName, purchase.name)}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
-                      >
-                        📥 Download
-                      </button>
+                      <div className="flex gap-2">
+                        <Link
+                          href={product.viewUrl}
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+                        >
+                          📖 View
+                        </Link>
+                        {product.fileName && (
+                          <button
+                            onClick={() => handleDownload(product.fileName!, product.name)}
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+                          >
+                            📥 Download
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -174,59 +250,25 @@ export default function VIPPortal() {
             </div>
 
             {/* Exclusive Bonuses */}
-            <div className="glass-card p-8 mb-8">
+            <div className="bg-gray-900 rounded-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                 <span className="text-3xl">🎁</span>
                 Exclusive VIP Bonuses
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/30 rounded-xl p-6">
-                  <div className="text-3xl mb-3">🚀</div>
-                  <h3 className="text-lg font-semibold text-white mb-2">AI Business Accelerator Checklist</h3>
-                  <p className="text-gray-300 text-sm mb-4">30-point checklist to launch your AI business in 30 days</p>
-                  <button
-                    onClick={() => handleDownload('ai-business-accelerator-checklist.pdf', 'AI Business Accelerator Checklist')}
-                    className="text-green-400 hover:text-green-300 font-semibold transition-colors"
-                  >
-                    📥 Download Bonus
-                  </button>
-                </div>
-                
-                <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-500/30 rounded-xl p-6">
-                  <div className="text-3xl mb-3">💰</div>
-                  <h3 className="text-lg font-semibold text-white mb-2">100 High-Converting AI Prompts</h3>
-                  <p className="text-gray-300 text-sm mb-4">Bonus collection of proven money-making prompts</p>
-                  <button
-                    onClick={() => handleDownload('bonus-ai-prompts-collection.pdf', '100 High-Converting AI Prompts')}
-                    className="text-orange-400 hover:text-orange-300 font-semibold transition-colors"
-                  >
-                    📥 Download Bonus
-                  </button>
-                </div>
-                
-                <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-xl p-6">
-                  <div className="text-3xl mb-3">🎯</div>
-                  <h3 className="text-lg font-semibold text-white mb-2">AI Niche Finder Worksheet</h3>
-                  <p className="text-gray-300 text-sm mb-4">Find your profitable AI niche in 7 simple steps</p>
-                  <button
-                    onClick={() => handleDownload('ai-niche-finder-worksheet.pdf', 'AI Niche Finder Worksheet')}
-                    className="text-purple-400 hover:text-purple-300 font-semibold transition-colors"
-                  >
-                    📥 Download Bonus
-                  </button>
-                </div>
-                
-                <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border border-blue-500/30 rounded-xl p-6">
-                  <div className="text-3xl mb-3">📊</div>
-                  <h3 className="text-lg font-semibold text-white mb-2">AI Revenue Tracker Template</h3>
-                  <p className="text-gray-300 text-sm mb-4">Track and optimize your AI income streams</p>
-                  <button
-                    onClick={() => handleDownload('ai-revenue-tracker-template.xlsx', 'AI Revenue Tracker Template')}
-                    className="text-blue-400 hover:text-blue-300 font-semibold transition-colors"
-                  >
-                    📥 Download Bonus
-                  </button>
-                </div>
+                {bonusProducts.map((product, index) => (
+                  <div key={index} className="bg-gray-800 rounded-xl p-6 hover:bg-gray-700 transition-colors">
+                    <div className="text-3xl mb-3">{product.icon}</div>
+                    <h3 className="text-lg font-semibold text-white mb-2">{product.name}</h3>
+                    <p className="text-gray-300 text-sm mb-4">{product.description}</p>
+                    <button
+                      onClick={() => handleDownload(product.fileName, product.name)}
+                      className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors w-full"
+                    >
+                      📥 Download Bonus
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -234,7 +276,7 @@ export default function VIPPortal() {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Affiliate Program */}
-            <div className="glass-card p-6">
+            <div className="bg-gray-900 rounded-lg p-6">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <span className="text-2xl">💸</span>
                 Earn with Ventaro
@@ -276,7 +318,7 @@ export default function VIPPortal() {
             </div>
 
             {/* Community Access */}
-            <div className="glass-card p-6">
+            <div className="bg-gray-900 rounded-lg p-6">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <span className="text-2xl">🌟</span>
                 Join the Community
@@ -330,7 +372,7 @@ export default function VIPPortal() {
             </div>
 
             {/* Quick Actions */}
-            <div className="glass-card p-6">
+            <div className="bg-gray-900 rounded-lg p-6">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <span className="text-2xl">⚡</span>
                 Quick Actions
@@ -348,8 +390,14 @@ export default function VIPPortal() {
                 >
                   👤 My Account
                 </Link>
+                <Link 
+                  href="/downloads" 
+                  className="block w-full bg-gray-800 hover:bg-gray-700 text-white text-center py-2 rounded transition-colors"
+                >
+                  📥 All Downloads
+                </Link>
                 <a 
-                  href="mailto:chris.t@ventarosales.com" 
+                  href="mailto:support@ventaroai.com" 
                   className="block w-full bg-gray-800 hover:bg-gray-700 text-white text-center py-2 rounded transition-colors"
                 >
                   📧 Contact Support

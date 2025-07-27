@@ -6,6 +6,9 @@
 import { Metadata } from 'next';
 import StorageManagerComponent from '@/components/StorageManager';
 
+// Force dynamic rendering to avoid prerendering issues with client components using useAuth
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Storage Manager | Ventaro Digital Store',
   description: 'Comprehensive management interface for all Supabase storage buckets including emails, attachments, profiles, documents, and more.',

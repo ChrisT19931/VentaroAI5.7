@@ -70,8 +70,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public folder
-     * - downloads folder
+     * - downloads folder and files
      */
-    '/((?!_next/static|_next/image|favicon.ico|downloads|.*\.svg).*)',
+    '/((?!_next/static|_next/image|favicon.ico|public|downloads|.*\.svg|.*\.pdf).*)',
   ],
 };

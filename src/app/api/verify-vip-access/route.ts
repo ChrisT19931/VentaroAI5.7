@@ -49,9 +49,9 @@ export async function GET(request: NextRequest) {
         detectSessionInUrl: false,
       },
       global: {
-        headers: {
-          Authorization: sbAccessToken?.value ? `Bearer ${sbAccessToken.value}` : undefined,
-        },
+        headers: sbAccessToken?.value ? {
+          Authorization: `Bearer ${sbAccessToken.value}`,
+        } : {},
       },
     });
     
@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
           } else {
             // Check if any admin user matches our expected admin email
             const adminEmail = 'chris.t@ventarosales.com';
-            const adminUser = adminUsers?.users?.find(u => 
+            const adminUser = adminUsers?.users?.find((u: any) => 
               u.email === adminEmail && u.user_metadata?.is_admin === true
             );
             
@@ -203,28 +203,9 @@ export async function POST(request: NextRequest) {
     const { userId, guestEmail, orderToken, sessionId, orderId } = await request.json();
     
     const cookieStore = cookies();
-    const supabase = createServerClient(
+    const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        auth: {
-          storageKey: 'ventaro-store-auth-token',
-          autoRefreshToken: true,
-          persistSession: true,
-          detectSessionInUrl: true
-        },
-        cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value;
-          },
-          set(name: string, value: string, options: any) {
-            cookieStore.set({ name, value, ...options });
-          },
-          remove(name: string, options: any) {
-            cookieStore.set({ name, value: '', ...options });
-          },
-        },
-      }
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
     let hasAccess = false;
     let purchasedProducts: any[] = [];

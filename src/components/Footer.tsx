@@ -72,8 +72,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { name: 'FAQ', href: '/faq' },
-                { name: 'Shipping Policy', href: '/shipping' },
-                { name: 'Return Policy', href: '/returns' },
+                { name: 'Terms & Conditions', href: '/terms' },
+                { name: 'Refund Policy', href: '/terms#refund-policy' },
                 { name: 'Privacy Policy', href: '/privacy' },
               ].map((link) => (
                 <li key={link.name}>

@@ -91,13 +91,13 @@ export async function getLatestEmailFiles(): Promise<EmailFileMetadata[]> {
 
     // Filter and sort email files, take latest 10
     const emailFiles = files
-      .filter(file => file.name.startsWith('email-') && file.name.endsWith('.json'))
-      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      .filter((file: any) => file.name.startsWith('email-') && file.name.endsWith('.json'))
+      .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
       .slice(0, 10);
 
     // Generate download URLs for each file
     const emailFileMetadata: EmailFileMetadata[] = await Promise.all(
-      emailFiles.map(async (file) => {
+      emailFiles.map(async (file: any) => {
         const { data: urlData } = supabaseAdmin.storage
           .from('emails')
           .getPublicUrl(file.name);
@@ -253,7 +253,7 @@ export async function getUserEmailAttachments(userId: string): Promise<EmailFile
 
     // Generate download URLs for each attachment
     const attachmentMetadata: EmailFileMetadata[] = await Promise.all(
-      files.map(async (file) => {
+      files.map(async (file: any) => {
         const { data: urlData } = supabaseAdmin.storage
           .from('email-attachments')
           .getPublicUrl(`${userId}/${file.name}`);
