@@ -56,7 +56,7 @@ export default function StorageManagerPage() {
               </div>
               
               <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
-                <div className="text-2xl mb-2">🚀</div>
+                <div className="text-2xl mb-2">⚡</div>
                 <h3 className="font-semibold text-orange-900 dark:text-orange-300">Auto Router</h3>
                 <p className="text-sm text-orange-700 dark:text-orange-400">
                   Intelligent file routing to correct buckets
@@ -131,7 +131,7 @@ export default function StorageManagerPage() {
               </div>
               
               <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg">
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">🚀 Smart Features</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">⚡ Smart Features</h3>
                 <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   <li><strong>Auto Router:</strong> Intelligent file routing</li>
                   <li><strong>Naming:</strong> Timestamp-based conventions</li>

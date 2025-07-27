@@ -94,7 +94,7 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
       const data = await response.json();
       
       if (data.success) {
-        toast.success('🎉 Booking request submitted! Check your email for confirmation.');
+        toast.success('🔥 Booking request submitted! Check your email for confirmation.');
         
         // Reset form
         setSelectedDate('');

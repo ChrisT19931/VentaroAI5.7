@@ -95,7 +95,7 @@ async function sendWelcomeEmail(email: string, name: string) {
           <li>🤖 Access cutting-edge AI tools and guides</li>
           <li>📚 Download premium digital products</li>
           <li>💡 Get exclusive AI prompts and strategies</li>
-          <li>🚀 Transform your business with AI</li>
+          <li>🔥 Transform your business with AI</li>
         </ul>
         
         <p>Ready to explore our AI-powered products?</p>

@@ -188,7 +188,7 @@ export default function Home() {
                     <span className="text-4xl font-black text-white glow-text">A$500</span>
                     <span className="text-xl text-gray-500 line-through">A$3000</span>
                   </div>
-                  <div className="text-sm text-green-400 font-semibold animate-pulse" style={{animationDuration: '2s'}}>🚀 LAUNCH OFFER - 83% OFF</div>
+                  <div className="text-sm text-green-400 font-semibold animate-pulse" style={{animationDuration: '2s'}}>🔥 LAUNCH OFFER - 83% OFF</div>
                 </div>
                 <Link href="/products/3" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/40">
                   Go Pro
@@ -236,7 +236,7 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Website Creation</span>
             </h2>
             <p className="text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-8">
-              Transform your vision into a <span className="text-purple-400 font-bold">high-converting digital masterpiece</span>. Our elite development team crafts bespoke websites that don't just look stunning—they <span className="text-blue-400 font-bold">drive results and maximize ROI</span>.
+              Transform your vision into a <span className="text-purple-400 font-bold">high-converting digital masterpiece</span>. I craft bespoke websites that don't just look stunning—they <span className="text-blue-400 font-bold">drive results and maximize ROI</span>.
             </p>
 
           </div>
@@ -337,7 +337,7 @@ export default function Home() {
                             <option value="business-website">🏢 Professional Business Website ($1,500+)</option>
                             <option value="e-commerce">🛒 E-commerce Platform ($3,500+)</option>
                             <option value="web-app">⚡ Custom Web Application ($7,500+)</option>
-                            <option value="saas">🚀 SaaS Platform ($15,000+)</option>
+                            <option value="saas">⚡ SaaS Platform ($15,000+)</option>
                             <option value="enterprise">🏆 Enterprise Solution ($25,000+)</option>
                             <option value="other">💡 Custom Solution (Let's Discuss)</option>
                           </select>
@@ -353,7 +353,7 @@ export default function Home() {
                             <option value="1k-3k">💰 $1,500 - $3,000 (Professional)</option>
                             <option value="3k-7k">💎 $3,000 - $7,500 (Enterprise)</option>
                             <option value="7k-15k">🏆 $7,500 - $15,000 (Elite)</option>
-                            <option value="15k-30k">🚀 $15,000 - $30,000 (Premium)</option>
+                            <option value="15k-30k">⚡ $15,000 - $30,000 (Premium)</option>
                             <option value="30k-plus">👑 $30,000+ (Luxury)</option>
                             <option value="discuss">🤝 Let's Discuss My Vision</option>
                           </select>
@@ -414,7 +414,7 @@ export default function Home() {
                           className="group relative inline-flex items-center px-16 py-6 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 text-white text-xl font-black rounded-2xl shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden border-2 border-purple-400/30"
                         >
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                          <span className="relative z-10 mr-4">🚀 GET MY FREE CONSULTATION</span>
+                          <span className="relative z-10 mr-4">🔥 GET MY FREE CONSULTATION</span>
                           <svg className="relative z-10 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                           </svg>

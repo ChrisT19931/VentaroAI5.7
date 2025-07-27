@@ -7,17 +7,7 @@ import { createClient } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
 import BuyNowButton from '@/components/BuyNowButton';
 
-import dynamic from 'next/dynamic';
 
-// Dynamically import the 3D component to avoid SSR issues
-const Product3D = dynamic(() => import('@/components/3d/Product3D'), {
-  ssr: false,
-  loading: () => (
-    <div className="h-96 bg-gradient-to-br from-black via-gray-900 to-black rounded-2xl flex items-center justify-center">
-      <div className="text-white text-lg">Loading 3D experience...</div>
-    </div>
-  )
-});
 
 // Define the product type
 type Product = {
@@ -37,7 +27,7 @@ const fallbackProducts = {
   '1': {
     id: '1',
     name: 'AI Tools Mastery Guide 2025',
-    description: 'Learn how to make money with AI in 2025. This comprehensive guide covers 30 essential AI tools and proven business models for generating income with artificial intelligence.',
+    description: '30 powerful lessons to help you build a profitable online business using AI tools like ChatGPT, Gemini, Claude, and Trae/Cursor. Master the art of AI-powered entrepreneurship with step-by-step implementation guides.',
     price: 25.00,
     originalPrice: 50.00,
     image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -47,30 +37,30 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      'Master key AI tools (ChatGPT, Claude, Gemini, Grok, Midjourney)',
-      'Step-by-step content creation & business service guides',
-      'Pricing strategies with real income examples',
-      '30/90-day implementation roadmap',
-      'Client acquisition systems that generate consistent leads',
-      'Practical implementation examples'
+      'Master ChatGPT, Gemini, Claude & Trae/Cursor for business',
+      '30 actionable lessons for online business building',
+      'AI-powered content creation and automation strategies',
+      'Proven business models and revenue generation tactics',
+      'Step-by-step implementation guides with real examples',
+      'Transform AI tools into profitable business opportunities'
     ],
     details: {
-      description: 'A comprehensive 30-lesson guide teaching you how to leverage AI tools to build profitable online businesses. Each lesson is focused on a specific AI tool or business strategy with clear action steps. Master advanced techniques for ChatGPT, Claude, Grok, and Gemini, create AI-powered services, and implement proven business models that generate real income.',
+      description: 'Transform your entrepreneurial dreams into reality with 30 comprehensive lessons designed to help you build a thriving online business using cutting-edge AI tools. From ChatGPT and Gemini to Claude and Trae/Cursor, master the tools that are revolutionizing how businesses operate and generate revenue.',
       features: [
-        'The AI Revolution in 2025 overview',
-        'Why AI is the Ultimate Money-Making Tool',
-        'ChatGPT 4.0, Claude 3.5, Google Gemini Pro mastery',
-        'Visual AI tools like Midjourney',
-        'AI-powered business model blueprints',
-        'Client acquisition frameworks'
+        'ChatGPT mastery for content creation and customer service',
+        'Gemini integration for data analysis and insights',
+        'Claude utilization for advanced writing and research',
+        'Trae/Cursor for automated coding and development',
+        'AI-powered marketing and sales strategies',
+        'Business automation and workflow optimization'
       ],
       includes: [
-        '30 comprehensive lessons (1 page each)',
-        'Quick action steps for each lesson',
-        'Business model frameworks',
-        'Income acceleration strategies',
-        'Practical implementation examples',
-        'Implementation roadmaps (30-day, 90-day)'
+        '30 comprehensive business-building lessons',
+        'AI tool mastery guides for each platform',
+        'Ready-to-use prompts and templates',
+        'Business model frameworks and strategies',
+        'Revenue generation tactics and case studies',
+        'Implementation roadmaps and action plans'
       ],
       pages: 30,
       format: 'PDF',
@@ -125,7 +115,7 @@ const fallbackProducts = {
   '3': {
     id: '3',
     name: 'AI Business Strategy Session 2025',
-    description: '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🚀 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
+    description: '60-minute screen-recorded Google Meet session where I guide you step-by-step through building, deploying, and launching your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🔥 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
     price: 500.00,
     image_url: '/images/products/ai-business-strategy-session.svg',
     category: 'services',
@@ -134,37 +124,37 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      'Live 60-minute video coaching session',
-      'Understand your specific business goals',
-      'Learn step-by-step online store creation',
-      'Complete website deployment walkthrough',
-      'Master e-commerce setup and configuration',
-      'Comprehensive implementation report included',
-      'Start-to-finish guidance with real examples'
+      '60-minute screen-recorded Google Meet session',
+      'Personal step-by-step guidance and mentoring',
+      'Complete online store/website building tutorial',
+      'Live deployment and launch walkthrough',
+      'Real-time problem solving and implementation',
+      'Detailed implementation report included',
+      'Start-to-finish guidance with practical examples'
     ],
     details: {
-      description: 'Join an exclusive 60-minute live video coaching session where you\'ll learn to build and deploy your own online store/website from start to finish. This hands-on session includes goal assessment, step-by-step guidance, and a detailed implementation report.',
+      description: 'Join a personalized 60-minute screen-recorded Google Meet session where I will guide you step-by-step through the entire process of building, deploying, and launching your own online store/website. This comprehensive session includes hands-on guidance and a detailed implementation report.',
       features: [
-        'Live video coaching with expert instructor',
-        'Goal assessment and business planning',
-        'Step-by-step online store creation tutorial',
-        'Real-time website building and deployment',
-        'E-commerce setup and configuration',
-        'Professional development workflow setup'
+        'Screen-recorded Google Meet session with expert guidance',
+        'Step-by-step website/online store building tutorial',
+        'Live deployment and launch demonstration',
+        'Real-time troubleshooting and problem solving',
+        'Complete development workflow walkthrough',
+        'Professional implementation strategies'
       ],
       includes: [
-        'Full 60-minute live video session',
-        'Personal goal assessment and planning',
-        'Complete Vercel deployment walkthrough',
-        'Hands-on site building experience',
-        'Comprehensive implementation report',
+        'Full 60-minute screen-recorded Google Meet session',
+        'Step-by-step building and deployment guidance',
+        'Complete walkthrough from start to finish',
+        'Live demonstration of best practices',
+        'Comprehensive detailed implementation report',
         'Session recording for future reference',
-        'Email support for follow-up questions'
+        'Follow-up email support for questions'
       ],
       duration: '60 minutes',
-      format: 'Live video session (Zoom/Teams)',
+      format: 'Screen-recorded Google Meet session',
       language: 'English',
-      deliverables: 'Implementation report + session recording',
+      deliverables: 'Detailed implementation report + session recording',
       followUp: 'Email support included',
       note: 'Full package options available - email us for custom quotes and comprehensive solutions'
     }
@@ -341,63 +331,165 @@ export default function ProductPage() {
       <style jsx>{animationStyles}</style>
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* 3D Product Showcase */}
+          {/* Blurred Lesson Preview */}
           <div className="relative">
-            <Product3D 
-              product={{
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image_url: product.image_url || '/placeholder-product.jpg',
-                description: product.description || 'No description available'
-              }} 
-              onAddToCart={handleAddToCart} 
-            />
+            {/* Ambient lighting effects */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-3xl blur-3xl animate-pulse"></div>
+            <div className="absolute top-4 left-4 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl animate-twinkle"></div>
+            <div className="absolute bottom-4 right-4 w-24 h-24 bg-purple-400/20 rounded-full blur-2xl animate-twinkle" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-emerald-400/10 rounded-full blur-3xl animate-twinkle" style={{animationDelay: '2s'}}></div>
             
-            {/* Product Specs */}
-            {(product.details?.pages || product.details?.duration || product.details?.promptCount) && (
-              <div className="mt-6 glass-panel rounded-lg p-4">
-                <h4 className="font-semibold text-white mb-3 glow-text">Specifications</h4>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  {product.details.pages && (
-                    <div>
-                      <span className="text-gray-300">Pages:</span>
-                      <span className="ml-2 font-medium text-white">{product.details.pages}</span>
-                    </div>
-                  )}
-                  {product.details.format && (
-                    <div>
-                      <span className="text-gray-300">Format:</span>
-                      <span className="ml-2 font-medium text-white">{product.details.format}</span>
-                    </div>
-                  )}
-                  {product.details.readingTime && (
-                    <div>
-                      <span className="text-gray-300">Reading Time:</span>
-                      <span className="ml-2 font-medium text-white">{product.details.readingTime}</span>
-                    </div>
-                  )}
-                  {product.details.downloadSize && (
-                    <div>
-                      <span className="text-gray-300">File Size:</span>
-                      <span className="ml-2 font-medium text-white">{product.details.downloadSize}</span>
-                    </div>
-                  )}
-                  {product.details.promptCount && (
-                    <div>
-                      <span className="text-gray-300">Prompts:</span>
-                      <span className="ml-2 font-medium text-white">{product.details.promptCount}</span>
-                    </div>
-                  )}
-                  {product.details.duration && (
-                    <div>
-                      <span className="text-gray-300">Duration:</span>
-                      <span className="ml-2 font-medium text-white">{product.details.duration}</span>
-                    </div>
-                  )}
+            {/* Preview Container */}
+            <div className="relative z-10 rounded-3xl bg-gradient-to-br from-gray-900/90 via-black/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 shadow-2xl overflow-hidden">
+              {/* Preview Header */}
+              {product.id === '1' && (
+                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-center">
+                  <h3 className="text-white font-bold text-lg">📖 Inside Preview</h3>
+                  <p className="text-blue-100 text-sm">AI Tools Mastery Guide 2025</p>
                 </div>
+              )}
+              {product.id === '2' && (
+                <div className="bg-gradient-to-r from-green-600 to-blue-600 p-4 text-center">
+                  <h3 className="text-white font-bold text-lg">🎯 Prompts Preview</h3>
+                  <p className="text-green-100 text-sm">AI Prompts Arsenal 2025</p>
+                </div>
+              )}
+              {product.id === '3' && (
+                <div className="bg-gradient-to-r from-orange-600 to-red-600 p-4 text-center">
+                  <h3 className="text-white font-bold text-lg">🎬 Session Preview</h3>
+                  <p className="text-orange-100 text-sm">AI Business Strategy Session 2025</p>
+                </div>
+              )}
+              
+              {/* Blurred Content Preview */}
+              <div className="p-6 h-96 overflow-hidden relative">
+                {/* AI Tools Mastery Guide Preview */}
+                {product.id === '1' && (
+                  <div className="filter blur-sm select-none pointer-events-none">
+                    <h4 className="text-xl font-bold text-white mb-4">Lesson 1: ChatGPT Setup for Business Success</h4>
+                    <div className="space-y-3 text-gray-300">
+                      <p>Welcome to your journey of building a profitable online business using AI tools. In this comprehensive lesson, you'll learn how to set up ChatGPT for maximum business impact.</p>
+                      <h5 className="font-semibold text-white">What You'll Learn:</h5>
+                      <ul className="list-disc list-inside space-y-1 text-sm">
+                        <li>Setting up ChatGPT Plus vs Free - which is right for your business</li>
+                        <li>Creating custom instructions for consistent business outputs</li>
+                        <li>Essential prompt templates for content creation</li>
+                        <li>Integrating ChatGPT into your daily workflow</li>
+                        <li>Advanced features and plugins for business automation</li>
+                      </ul>
+                      <div className="mt-4 p-3 bg-blue-900/30 rounded-lg">
+                        <h6 className="font-semibold text-blue-300">Pro Tip:</h6>
+                        <p className="text-sm">Always start with clear, specific prompts. The quality of your output depends on the quality of your input.</p>
+                      </div>
+                      <h5 className="font-semibold text-white mt-4">Step-by-Step Implementation:</h5>
+                      <div className="space-y-2 text-sm">
+                        <p><strong>Step 1:</strong> Create your ChatGPT account and choose the right plan</p>
+                        <p><strong>Step 2:</strong> Set up custom instructions for your business niche</p>
+                        <p><strong>Step 3:</strong> Test and refine your prompt templates</p>
+                        <p><strong>Step 4:</strong> Integrate with your existing tools and workflows</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* AI Prompts Arsenal Preview */}
+                 {product.id === '2' && (
+                   <div className="filter blur-sm select-none pointer-events-none">
+                     <h4 className="text-xl font-bold text-white mb-4">Prompt #1: Blog Post Generator for Any Niche</h4>
+                     <div className="space-y-3 text-gray-300">
+                       <div className="bg-green-900/20 p-4 rounded-lg border border-green-500/30">
+                         <h5 className="font-semibold text-green-400 mb-2">📝 Copy-Paste Ready Prompt:</h5>
+                         <p className="text-sm font-mono bg-gray-800/50 p-3 rounded border-l-4 border-green-400">
+                           "Act as an expert content writer and SEO specialist. Create a comprehensive blog post about [TOPIC] for [TARGET AUDIENCE]. The blog post should be [WORD COUNT] words and include:
+                         </p>
+                       </div>
+                       <h5 className="font-semibold text-white">What This Prompt Generates:</h5>
+                       <ul className="list-disc list-inside space-y-1 text-sm">
+                         <li>SEO-optimized blog posts for any niche or industry</li>
+                         <li>Engaging headlines that capture reader attention</li>
+                         <li>Well-structured content with proper subheadings</li>
+                         <li>Actionable tips and practical advice</li>
+                         <li>Compelling calls-to-action that drive conversions</li>
+                       </ul>
+                       <div className="mt-4 p-3 bg-green-900/30 rounded-lg">
+                         <h6 className="font-semibold text-green-300">Usage Instructions:</h6>
+                         <p className="text-sm">Replace [TOPIC], [TARGET AUDIENCE], and [WORD COUNT] with your specific requirements. Works with ChatGPT, Claude, Gemini, and other AI tools.</p>
+                       </div>
+                       <h5 className="font-semibold text-white mt-4">More Prompts Include:</h5>
+                       <div className="space-y-1 text-sm">
+                         <p><strong>Prompt #2:</strong> Social Media Content Calendar Creator</p>
+                         <p><strong>Prompt #3:</strong> Email Newsletter Template Builder</p>
+                         <p><strong>Prompt #4:</strong> YouTube Video Script Writer</p>
+                         <p className="text-green-400">...and 26 more professional prompts!</p>
+                       </div>
+                     </div>
+                   </div>
+                 )}
+                 
+                 {/* AI Business Strategy Session Preview */}
+                 {product.id === '3' && (
+                   <div className="filter blur-sm select-none pointer-events-none">
+                     <h4 className="text-xl font-bold text-white mb-4">Session Sample: "Building Your E-commerce Store"</h4>
+                     <div className="space-y-3 text-gray-300">
+                       <div className="bg-orange-900/20 p-4 rounded-lg border border-orange-500/30">
+                         <h5 className="font-semibold text-orange-400 mb-2">🎬 Live Screen Recording Sample:</h5>
+                         <p className="text-sm bg-gray-800/50 p-3 rounded border-l-4 border-orange-400">
+                           "Welcome to your personalized session! Today we'll build your complete online store from scratch. Let me share my screen and we'll start with setting up your development environment..."
+                         </p>
+                       </div>
+                       <h5 className="font-semibold text-white">What You'll Experience:</h5>
+                       <ul className="list-disc list-inside space-y-1 text-sm">
+                         <li>Real-time screen recording of complete build process</li>
+                         <li>Step-by-step guidance with personal explanations</li>
+                         <li>Live problem-solving and troubleshooting</li>
+                         <li>Professional deployment and launch demonstration</li>
+                         <li>Interactive Q&A throughout the session</li>
+                       </ul>
+                       <div className="mt-4 p-3 bg-orange-900/30 rounded-lg">
+                         <h6 className="font-semibold text-orange-300">Session Format:</h6>
+                         <p className="text-sm">60-minute Google Meet session with screen recording. You'll receive the recording plus a detailed implementation report with all code and instructions.</p>
+                       </div>
+                       <h5 className="font-semibold text-white mt-4">Session Outcomes:</h5>
+                       <div className="space-y-1 text-sm">
+                         <p><strong>✓ Live Website:</strong> Fully functional online store</p>
+                         <p><strong>✓ Complete Code:</strong> All source files and documentation</p>
+                         <p><strong>✓ Deployment:</strong> Professional hosting setup</p>
+                         <p className="text-orange-400">...plus ongoing email support!</p>
+                       </div>
+                     </div>
+                   </div>
+                 )}
+                
+                {/* Unlock overlay */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
+                   <div className="text-center">
+                     {product.id === '1' && (
+                       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
+                         🔓 Unlock All 30 Lessons
+                       </div>
+                     )}
+                     {product.id === '2' && (
+                       <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
+                         🔓 Unlock All 30 Prompts
+                       </div>
+                     )}
+                     {product.id === '3' && (
+                       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
+                         🔓 Book Your Session Now
+                       </div>
+                     )}
+                     <p className="text-gray-300 text-sm mt-2">
+                       {product.id === '1' ? 'Get instant access to the complete guide' : 
+                        product.id === '2' ? 'Get instant access to all professional prompts' : 
+                        'Get personalized guidance and implementation'}
+                     </p>
+                   </div>
+                 </div>
               </div>
-            )}
+              
+              {/* Interactive glow border */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
           </div>
 
           {/* Product Details */}
@@ -422,50 +514,82 @@ export default function ProductPage() {
                     <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
-                    📚 AI Tools Mastery Guide 2025 - Complete Content
+                    🔥 30 Lessons to Build Your AI-Powered Online Business
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 1: Introduction to AI Money-Making</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">ChatGPT Business Mastery (Lessons 1-8)</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">1.</span>
-                          <span>The AI Revolution in 2025</span>
+                          <span>ChatGPT Setup for Business Success</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">2.</span>
-                          <span>Why AI is the Ultimate Money-Making Tool</span>
+                          <span>Content Creation with ChatGPT</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">3.</span>
-                          <span>Success Stories and Case Studies</span>
+                          <span>ChatGPT for Customer Service Automation</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">4.</span>
+                          <span>Email Marketing with ChatGPT</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">5.</span>
+                          <span>Social Media Strategy & Content</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">6.</span>
+                          <span>Product Descriptions & Sales Copy</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">7.</span>
+                          <span>Blog Writing & SEO Optimization</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">8.</span>
+                          <span>ChatGPT Business Automation</span>
                         </li>
                       </ul>
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 2: Essential AI Tools Overview</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Gemini & Claude Integration (Lessons 9-16)</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">4.</span>
-                          <span>ChatGPT 4.0 and Advanced Features</span>
+                          <span className="text-blue-400 font-bold">9.</span>
+                          <span>Gemini for Data Analysis & Insights</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">5.</span>
-                          <span>Claude 3.5 Sonnet for Business</span>
+                          <span className="text-blue-400 font-bold">10.</span>
+                          <span>Market Research with Gemini</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">6.</span>
-                          <span>Google Gemini Pro for Analytics</span>
+                          <span className="text-blue-400 font-bold">11.</span>
+                          <span>Claude for Advanced Writing Projects</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">7.</span>
-                          <span>Grok for Real-Time Insights</span>
+                          <span className="text-blue-400 font-bold">12.</span>
+                          <span>Research & Documentation with Claude</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">8.</span>
-                          <span>Visual AI Tools (Midjourney, DALL-E, Runway)</span>
+                          <span className="text-blue-400 font-bold">13.</span>
+                          <span>Combining AI Tools for Maximum Impact</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">14.</span>
+                          <span>AI-Powered Business Planning</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">15.</span>
+                          <span>Competitive Analysis with AI</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">16.</span>
+                          <span>AI Content Strategy Development</span>
                         </li>
                       </ul>
                     </div>
@@ -473,243 +597,396 @@ export default function ProductPage() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 3-5: Content & Business Services</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Trae/Cursor Development (Lessons 17-24)</h4>
                       <ul className="space-y-2 text-gray-300">
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">9.</span>
-                          <span>Blog Writing with AI (Step-by-Step)</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">10.</span>
-                          <span>Social Media Content Automation</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">11.</span>
-                          <span>YouTube Script Generation</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">12.</span>
-                          <span>Email Marketing Sequences</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">13.</span>
-                          <span>Freelance Writing Services</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">14.</span>
-                          <span>Social Media Management</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">15.</span>
-                          <span>Virtual Assistant Services</span>
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Chapter 6-8: Advanced Strategies</h4>
-                      <ul className="space-y-2 text-gray-300">
-                        <li className="flex items-start gap-2">
-                          <span className="text-blue-400 font-bold">16.</span>
-                          <span>AI-Generated Product Descriptions</span>
-                        </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">17.</span>
-                          <span>Automated Customer Service</span>
+                          <span>Introduction to Trae/Cursor for Business</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">18.</span>
-                          <span>AI-Powered Trading and Investments</span>
+                          <span>Building Landing Pages with AI</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">19.</span>
-                          <span>Creating and Selling AI Tools</span>
+                          <span>E-commerce Store Development</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">20.</span>
-                          <span>Building AI-Enhanced SaaS Products</span>
+                          <span>Automated Code Generation</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">21.</span>
-                          <span>Automation Workflows</span>
+                          <span>API Integration & Automation</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-blue-400 font-bold">22.</span>
-                          <span>30-Day Quick Start Plan</span>
+                          <span>Database Management with AI</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">23.</span>
+                          <span>Mobile App Development Basics</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">24.</span>
+                          <span>Deployment & Maintenance</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Business Launch & Scale (Lessons 25-30)</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">25.</span>
+                          <span>AI-Powered Marketing Campaigns</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">26.</span>
+                          <span>Customer Acquisition Strategies</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">27.</span>
+                          <span>Revenue Optimization with AI</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">28.</span>
+                          <span>Scaling Your AI Business</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">29.</span>
+                          <span>Building AI-Powered Teams</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 font-bold">30.</span>
+                          <span>Future-Proofing Your Business</span>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
-                {/* Chapter 1 Preview */}
-                <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 1: Introduction to AI Money-Making</h3>
-                  <div className="prose prose-invert max-w-none">
-                    <p className="text-gray-300 mb-4">
-                      The landscape of business and income generation has undergone a seismic shift with the advent of artificial intelligence. What once required teams of specialists can now be accomplished by a single individual armed with the right AI tools and knowledge.
-                    </p>
-                    <p className="text-gray-300 mb-4">
-                      This guide represents the culmination of extensive research and real-world application of AI tools for making money online. You'll discover how to leverage ChatGPT, Claude, Grok, and Gemini to create valuable content, automate business processes, and generate revenue streams that were previously impossible for individual entrepreneurs.
-                    </p>
-                    <h4 className="text-lg font-semibold text-white mb-3">What You'll Learn:</h4>
-                    <ul className="space-y-2 text-gray-300 mb-4">
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-400">•</span>
-                        <span>How to identify the right AI tool for each money-making opportunity</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-400">•</span>
-                        <span>Prompt engineering techniques that deliver profitable results</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-400">•</span>
-                        <span>Building automated income streams with AI assistance</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-400">•</span>
-                        <span>Creating valuable digital products and services at scale</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
 
-                {/* Chapter 4 Preview - ChatGPT Mastery */}
-                <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 4: ChatGPT 4.0 and Advanced Features</h3>
-                  <div className="prose prose-invert max-w-none">
-                    <p className="text-gray-300 mb-4">
-                      ChatGPT has become the cornerstone of AI-powered money-making opportunities. This chapter provides you with battle-tested prompts and strategies that have generated significant income for entrepreneurs worldwide.
-                    </p>
-                    
-                    <h4 className="text-lg font-semibold text-white mb-3">Essential ChatGPT Money-Making Prompts:</h4>
-                    
-                    <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
-                      <h5 className="text-white font-semibold mb-2">1. Content Creation Generator</h5>
-                      <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
-                        "Write a comprehensive blog post about [TOPIC] for [TARGET AUDIENCE]. Focus on [KEY BENEFIT]. Include: attention-grabbing headline, introduction with hook, 5 main sections with subheadings, actionable tips, FAQ section, and conclusion with call-to-action. Optimize for SEO with [PRIMARY KEYWORD]. Length: 1500-2000 words."
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
-                      <h5 className="text-white font-semibold mb-2">2. Digital Product Creator</h5>
-                      <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
-                        "Create a detailed outline for a [PRODUCT TYPE] about [TOPIC]. Target audience: [CUSTOMER PROFILE]. Include: compelling title, 10-15 main chapters/sections, 3-5 subsections per chapter, key learning outcomes, unique selling points, and pricing strategy. Focus on solving [SPECIFIC PROBLEM] and delivering [PRIMARY BENEFIT]."
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4 mb-4">
-                      <h5 className="text-white font-semibold mb-2">3. Service Offering Framework</h5>
-                      <div className="bg-black/50 rounded p-3 text-sm text-gray-300 font-mono">
-                        "Design a complete service offering for [SERVICE TYPE]. Include: 3 tiered packages with specific deliverables, pricing strategy, service description, client benefits, process workflow, delivery timeline, and FAQs. Target [IDEAL CLIENT] with pain points of [CLIENT CHALLENGES]. Position as premium solution with [UNIQUE ADVANTAGE]."
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-300 mb-4">
-                      <strong>Pro Tip:</strong> Always customize these prompts with specific details about your niche, target audience, and unique value proposition. The more context you provide, the better ChatGPT's output will be for generating income.
-                    </p>
-                  </div>
-                </div>
+              </div>
+            )}
 
-                {/* Chapter 11 Preview - 30 Money-Making Strategies */}
+            {/* AI Prompts Arsenal Content */}
+            {product.id === '2' && (
+              <div className="space-y-8">
+                {/* Prompts Preview */}
                 <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">Chapter 11: 30 Proven Money-Making Strategies</h3>
-                  <div className="prose prose-invert max-w-none">
-                    <p className="text-gray-300 mb-4">
-                      This chapter contains the most valuable collection of AI-powered income strategies, each tested and proven to generate real results. Here are the first 10 strategies:
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">1. AI-Powered Niche Research</h5>
-                        <p className="text-gray-300 text-sm">Use AI to identify profitable niches with high demand and low competition for digital products.</p>
-                      </div>
-                      
-                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">2. Automated Content Creation</h5>
-                        <p className="text-gray-300 text-sm">Leverage AI to generate blog posts, social media content, and videos that attract organic traffic.</p>
-                      </div>
-                      
-                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">3. Digital Product Development</h5>
-                        <p className="text-gray-300 text-sm">Create ebooks, guides, and templates with AI that solve specific problems for targeted audiences.</p>
-                      </div>
-                      
-                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">4. Freelance Service Packaging</h5>
-                        <p className="text-gray-300 text-sm">Use AI to develop and deliver high-value freelance services with minimal time investment.</p>
-                      </div>
-                      
-                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">5. Affiliate Marketing Optimization</h5>
-                        <p className="text-gray-300 text-sm">Generate personalized product reviews and comparisons that drive affiliate commissions.</p>
-                      </div>
-                      
-                      <div className="bg-gray-900/50 border border-gray-600 rounded-lg p-4">
-                        <h5 className="text-white font-semibold mb-2">6. AI-Powered Online Courses</h5>
-                        <p className="text-gray-300 text-sm">Create and sell comprehensive online courses with AI-generated content and materials.</p>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-300 mt-4">
-                      <em>And 24 more strategies covering passive income streams, service businesses, digital product creation, and scaling techniques...</em>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bonus Materials */}
-                <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 glow-text">🎁 Bonus Materials Included</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-6 flex items-center gap-2 glow-text">
+                    <svg className="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    💯 30 Professional AI Prompts for Business Success
+                  </h3>
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-3">Templates & Scripts</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Content Creation Prompts (1-8)</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>50+ Ready-to-use AI prompts</span>
+                          <span className="text-green-400 font-bold">1.</span>
+                          <span>Blog Post Generator for Any Niche</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>Email templates for every scenario</span>
+                          <span className="text-green-400 font-bold">2.</span>
+                          <span>Social Media Content Calendar Creator</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>Sales page frameworks</span>
+                          <span className="text-green-400 font-bold">3.</span>
+                          <span>Email Newsletter Template Builder</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>Objection handling scripts</span>
+                          <span className="text-green-400 font-bold">4.</span>
+                          <span>YouTube Video Script Writer</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">5.</span>
+                          <span>Instagram Caption & Hashtag Generator</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">6.</span>
+                          <span>LinkedIn Professional Post Creator</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">7.</span>
+                          <span>Podcast Episode Outline Generator</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">8.</span>
+                          <span>Website Copy & Landing Page Writer</span>
                         </li>
                       </ul>
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-3">Tools & Resources</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Marketing & SEO Prompts (9-16)</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>AI tool comparison matrix</span>
+                          <span className="text-green-400 font-bold">9.</span>
+                          <span>SEO Keyword Research & Strategy</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>ROI calculation worksheets</span>
+                          <span className="text-green-400 font-bold">10.</span>
+                          <span>Google Ads Campaign Creator</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>Implementation checklists</span>
+                          <span className="text-green-400 font-bold">11.</span>
+                          <span>Facebook & Instagram Ad Copy Writer</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <span className="text-green-400">✓</span>
-                          <span>Case study examples</span>
+                          <span className="text-green-400 font-bold">12.</span>
+                          <span>Email Marketing Sequence Builder</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">13.</span>
+                          <span>Sales Funnel Strategy Designer</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">14.</span>
+                          <span>Competitor Analysis & Research Tool</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">15.</span>
+                          <span>Brand Voice & Messaging Developer</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">16.</span>
+                          <span>Customer Persona & Avatar Creator</span>
                         </li>
                       </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Business Automation Prompts (17-24)</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">17.</span>
+                          <span>Customer Service Chatbot Responses</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">18.</span>
+                          <span>Business Process Documentation</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">19.</span>
+                          <span>Meeting Summary & Action Items</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">20.</span>
+                          <span>Project Management & Task Planning</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">21.</span>
+                          <span>Invoice & Contract Template Generator</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">22.</span>
+                          <span>Employee Training Material Creator</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">23.</span>
+                          <span>Financial Report & Analysis Tool</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">24.</span>
+                          <span>Workflow Optimization Analyzer</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">E-commerce & Personal Branding (25-30)</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">25.</span>
+                          <span>Product Description & Feature Writer</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">26.</span>
+                          <span>Amazon Listing Optimization Tool</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">27.</span>
+                          <span>Personal Brand Story Developer</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">28.</span>
+                          <span>Professional Bio & About Page Writer</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">29.</span>
+                          <span>Networking & Outreach Message Creator</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 font-bold">30.</span>
+                          <span>Business Pitch & Proposal Generator</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Prompts Preview Sample */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                    <span className="text-2xl">📋</span>
+                    Sample Prompt Preview
+                  </h3>
+                  <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-600">
+                    <div className="filter blur-sm select-none pointer-events-none">
+                      <h4 className="text-green-400 font-bold mb-2">Prompt #1: Blog Post Generator for Any Niche</h4>
+                      <div className="text-gray-300 text-sm space-y-2">
+                        <p><strong>Prompt:</strong> "Act as an expert content writer and SEO specialist. Create a comprehensive blog post about [TOPIC] for [TARGET AUDIENCE]. The blog post should be [WORD COUNT] words and include:</p>
+                        <ul className="list-disc list-inside ml-4 space-y-1">
+                          <li>An attention-grabbing headline</li>
+                          <li>An engaging introduction that hooks the reader</li>
+                          <li>5-7 main sections with subheadings</li>
+                          <li>Actionable tips and practical advice</li>
+                          <li>A compelling conclusion with a call-to-action</li>
+                        </ul>
+                        <p>Make sure to optimize for SEO with relevant keywords and maintain a [TONE] tone throughout..."</p>
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-4">
+                      <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg">
+                        🔓 Unlock All 30 Prompts
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             )}
 
+            {/* AI Business Strategy Session Content */}
+            {product.id === '3' && (
+              <div className="space-y-8">
+                {/* Session Overview */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-2xl font-semibold text-white mb-6 flex items-center gap-2 glow-text">
+                    <svg className="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    🎯 60-Minute Screen-Recorded Google Meet Session
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">Session Structure & Timeline</h4>
+                      <ul className="space-y-3 text-gray-300">
+                        <li className="flex items-start gap-3">
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">0-10 min</span>
+                          <span>Introduction & Goal Assessment</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">10-25 min</span>
+                          <span>Website/Store Planning & Setup</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">25-45 min</span>
+                          <span>Live Building & Development</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">45-55 min</span>
+                          <span>Deployment & Launch Process</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">55-60 min</span>
+                          <span>Q&A & Next Steps Planning</span>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-lg font-semibold text-white mb-4">What You'll Learn & Build</h4>
+                      <ul className="space-y-2 text-gray-300">
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>Complete website/online store from scratch</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>Professional deployment on Vercel/Netlify</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>Payment integration & e-commerce setup</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>SEO optimization & performance tuning</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>Domain setup & custom branding</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>Analytics & tracking implementation</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-orange-400 font-bold">✓</span>
+                          <span>Maintenance & scaling strategies</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
 
+                {/* Session Preview */}
+                <div className="glass-panel rounded-lg p-6">
+                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                    <span className="text-2xl">🎬</span>
+                    Session Preview & Deliverables
+                  </h3>
+                  <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600 relative overflow-hidden">
+                    <div className="filter blur-sm select-none pointer-events-none">
+                      <h4 className="text-orange-400 font-bold mb-3">Sample Session Walkthrough:</h4>
+                      <div className="text-gray-300 text-sm space-y-3">
+                        <div className="bg-orange-900/20 p-3 rounded border-l-4 border-orange-400">
+                          <p><strong>"Let's start by understanding your business goals..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Goal assessment and target audience identification</p>
+                        </div>
+                        <div className="bg-blue-900/20 p-3 rounded border-l-4 border-blue-400">
+                          <p><strong>"Now I'll show you how to set up your development environment..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Live screen recording of complete setup process</p>
+                        </div>
+                        <div className="bg-green-900/20 p-3 rounded border-l-4 border-green-400">
+                          <p><strong>"Watch as we build your homepage step-by-step..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Real-time coding and implementation</p>
+                        </div>
+                        <div className="bg-purple-900/20 p-3 rounded border-l-4 border-purple-400">
+                          <p><strong>"Finally, let's deploy your site and make it live..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Complete deployment and launch process</p>
+                        </div>
+                        <div className="mt-4 p-3 bg-gray-700/30 rounded">
+                          <h5 className="font-semibold text-white mb-2">📋 Detailed Implementation Report Includes:</h5>
+                          <ul className="text-xs space-y-1">
+                            <li>• Complete code repository with documentation</li>
+                            <li>• Step-by-step deployment instructions</li>
+                            <li>• Recommended tools and resources list</li>
+                            <li>• Performance optimization checklist</li>
+                            <li>• Future enhancement roadmap</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
+                      <div className="text-center">
+                        <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
+                          🔓 Book Your Session Now
+                        </div>
+                        <p className="text-gray-300 text-sm mt-2">Get personalized guidance and implementation</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* CTA Button */}
             <div className="glass-panel rounded-lg p-6 text-center">

@@ -11,7 +11,7 @@ interface DownloadCoachingProps {
 const DownloadCoaching: React.FC<DownloadCoachingProps> = ({ productInfo }) => {
   return (
     <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 mb-8">
-      <h2 className="text-xl font-bold text-white mb-4">🚀 Your Coaching Session</h2>
+      <h2 className="text-xl font-bold text-white mb-4">🎯 Your Coaching Session</h2>
       <div className="bg-white/10 rounded-lg p-4 border border-green-500/20">
         <div className="flex items-center justify-between mb-3">
           <div>

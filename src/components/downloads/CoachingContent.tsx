@@ -27,7 +27,7 @@ export default function CoachingContent() {
   }, [user, isAdmin]);
 
   const handleBookingComplete = (bookingId: string) => {
-    toast.success('🎉 Booking request submitted successfully!');
+    toast.success('🔥 Booking request submitted successfully!');
     // Could add additional logic here if needed
   };
 

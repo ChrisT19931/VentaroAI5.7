@@ -66,7 +66,7 @@ const LessonPreview: React.FC = () => {
           
           {/* Section 3: Advanced Applications */}
           <div className="glass-panel rounded-xl p-4 sm:p-6 border border-red-500/30 hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-2">
-            <div className="text-red-400 text-4xl mb-3 sm:mb-4">🚀</div>
+            <div className="text-red-400 text-4xl mb-3 sm:mb-4">🔥</div>
             <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">Advanced Applications</h3>
             <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">High-value AI implementation strategies</p>
             <ul className="space-y-1 sm:space-y-2 text-sm text-gray-400">

@@ -172,11 +172,11 @@ export async function PATCH(request: NextRequest) {
 
         switch (status) {
           case 'confirmed':
-            emailSubject = 'Coaching Session Confirmed! 🎉';
+            emailSubject = 'Coaching Session Confirmed! 🔥';
             emailContent = `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
                 <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                  <h1 style="color: #333; text-align: center; margin-bottom: 30px;">🎉 Your Coaching Session is Confirmed!</h1>
+                  <h1 style="color: #333; text-align: center; margin-bottom: 30px;">🔥 Your Coaching Session is Confirmed!</h1>
                   
                   <p style="color: #666; font-size: 16px; line-height: 1.6;">Hi ${booking.user_name},</p>
                   

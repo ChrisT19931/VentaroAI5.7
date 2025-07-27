@@ -249,7 +249,7 @@ const StorageManagerComponent: React.FC = () => {
     { id: 'documents', name: 'Documents', icon: '📄' },
     { id: 'settings', name: 'Settings', icon: '⚙️' },
     { id: 'drafts', name: 'Drafts', icon: '📝' },
-    { id: 'auto-router', name: 'Auto Router', icon: '🚀' },
+    { id: 'auto-router', name: 'Auto Router', icon: '⚡' },
     { id: 'stats', name: 'Statistics', icon: '📊' }
   ];
 
@@ -638,7 +638,7 @@ const StorageManagerComponent: React.FC = () => {
           {activeTab === 'auto-router' && (
             <div className="space-y-6">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                🚀 Auto Router
+                ⚡ Auto Router
               </h2>
               <p className="text-gray-600 dark:text-gray-400">
                 Automatically route files to the correct bucket based on type and context.

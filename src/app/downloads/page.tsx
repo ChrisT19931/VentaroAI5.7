@@ -51,7 +51,7 @@ export default function DownloadsPage() {
       link.click();
       document.body.removeChild(link);
       
-      toast.success(`🎉 ${displayName} download started!`);
+      toast.success(`🔥 ${displayName} download started!`);
     } catch (error) {
       console.error('Download error:', error);
       toast.error('Download failed. Please try again.');
@@ -81,7 +81,7 @@ export default function DownloadsPage() {
       name: 'AI Prompts Arsenal 2025',
       description: '30 professional AI prompts to make money online in 2025.',
       fileName: 'ai-prompts-collection.pdf',
-      icon: '🚀',
+      icon: '🔥',
       color: 'from-green-500 to-blue-500',
       viewUrl: '/downloads/prompts'
     },
@@ -248,7 +248,7 @@ export default function DownloadsPage() {
 
         {/* Bonus Products */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6">🎁 Bonus Materials</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">💎 Bonus Materials</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {bonusProducts.map((product) => {
               const isDownloading = downloadingItems.has(product.id);

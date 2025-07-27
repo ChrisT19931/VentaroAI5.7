@@ -43,7 +43,7 @@ async function getProducts() {
     {
       id: '1',
       name: 'AI Tools Mastery Guide 2025',
-      description: '30-page guide with AI tools and step-by-step implementation guides to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
+      description: '30 powerful lessons to help you build a profitable online business using AI tools like ChatGPT, Gemini, Claude, and Trae/Cursor. Master the art of AI-powered entrepreneurship with step-by-step implementation guides.',
       price: 25.00,
       originalPrice: 50.00,
       image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -66,7 +66,7 @@ async function getProducts() {
     {
       id: '3',
       name: 'AI Business Strategy Session 2025',
-      description: '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🚀 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
+      description: '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🔥 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
       price: 500.00,
       originalPrice: 3000.00,
       image_url: '/images/products/ai-business-strategy-session.svg',

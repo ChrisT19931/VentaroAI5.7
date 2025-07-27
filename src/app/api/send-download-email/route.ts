@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #000; color: #fff;">
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
-          <h1 style="margin: 0; font-size: 28px; font-weight: bold;">🎉 Your Download is Ready!</h1>
+          <h1 style="margin: 0; font-size: 28px; font-weight: bold;">🔥 Your Download is Ready!</h1>
           <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">AI Tools Mastery Guide 2025</p>
         </div>
         
@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
     `;
 
     const text = `
-      🎉 Your AI Tools Mastery Guide 2025 is Ready!
+      🔥 Your AI Tools Mastery Guide 2025 is Ready!
       
       Thank you for your purchase! Your 30-page guide to making money online with AI is now available for download.
       
@@ -167,7 +167,7 @@ export async function POST(request: NextRequest) {
     // Send the email
     const result = await sendEmail({
       to: email,
-      subject: '🎉 Your AI Tools Mastery Guide 2025 is Ready for Download!',
+      subject: '🔥 Your AI Tools Mastery Guide 2025 is Ready for Download!',
       text,
       html,
     });

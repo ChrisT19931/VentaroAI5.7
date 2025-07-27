@@ -141,7 +141,7 @@ export default function VIPPortal() {
       name: 'AI Business Accelerator Checklist',
       description: '30-point checklist to launch your AI business in 30 days',
       fileName: 'ai-business-accelerator-checklist.pdf',
-      icon: '🚀',
+      icon: '🔥',
       color: 'from-green-500 to-emerald-600'
     },
     {
@@ -175,7 +175,7 @@ export default function VIPPortal() {
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="text-4xl animate-bounce">🎉</div>
+                <div className="text-4xl animate-bounce">🔥</div>
                 <div>
                   <h2 className="text-2xl font-bold text-white">Welcome to Ventaro Nation!</h2>
                   <p className="text-purple-200">You're now part of an exclusive community of AI entrepreneurs</p>
@@ -252,7 +252,7 @@ export default function VIPPortal() {
             {/* Exclusive Bonuses */}
             <div className="bg-gray-900 rounded-lg p-8 mb-8">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="text-3xl">🎁</span>
+                <span className="text-3xl">💎</span>
                 Exclusive VIP Bonuses
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
@@ -320,7 +320,7 @@ export default function VIPPortal() {
             {/* Community Access */}
             <div className="bg-gray-900 rounded-lg p-6">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">🌟</span>
+                <span className="text-2xl">💎</span>
                 Join the Community
               </h3>
               <div className="space-y-4">
@@ -346,7 +346,7 @@ export default function VIPPortal() {
                   className="block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white p-4 rounded-lg transition-all duration-300 transform hover:scale-105"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">🎮</span>
+                    <span className="text-2xl">🎯</span>
                     <div>
                       <div className="font-semibold">Discord Community</div>
                       <div className="text-sm opacity-90">Live discussions & support</div>

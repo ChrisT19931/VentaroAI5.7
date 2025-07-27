@@ -106,7 +106,7 @@ export default function CheckoutSuccessPage() {
         <div className="max-w-4xl mx-auto">
           {/* Success Header */}
           <div className="text-center mb-12">
-            <div className="text-green-400 text-6xl mb-4">🎉</div>
+            <div className="text-green-400 text-6xl mb-4">🔥</div>
             <h1 className="text-4xl font-bold text-white mb-4">Welcome to Ventaro Nation!</h1>
             <p className="text-xl text-gray-300 mb-4">Congratulations! You've just joined an exclusive community of AI entrepreneurs.</p>
             <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 mb-6">
@@ -200,7 +200,7 @@ export default function CheckoutSuccessPage() {
           {/* VIP Portal Access */}
           <div className="glass-panel rounded-lg p-8 mb-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">🚀 Enter Your VIP Portal</h2>
+              <h2 className="text-3xl font-bold text-white mb-4">💎 Enter Your VIP Portal</h2>
               <p className="text-gray-300 mb-6">Access exclusive content, bonus materials, affiliate opportunities, and join our private community.</p>
               <Link 
                 href={`/vip-portal?session_id=${sessionId}&order_id=${orderId}&guest=${isGuest}`}

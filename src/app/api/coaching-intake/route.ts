@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
             <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-              <h1 style="color: #333; text-align: center; margin-bottom: 30px;">🎯 Coaching Session Confirmed!</h1>
+              <h1 style="color: #333; text-align: center; margin-bottom: 30px;">Coaching Session Confirmed!</h1>
               
               <p style="color: #666; font-size: 16px; line-height: 1.6;">Hi there,</p>
               
@@ -146,7 +146,7 @@ export async function POST(request: NextRequest) {
         subject: `New Coaching Intake Form - ${projectType} (${timeline})`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #333;">🎯 New Coaching Session Intake</h1>
+            <h1 style="color: #333;">New Coaching Session Intake</h1>
             
             <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3>Customer Information:</h3>
