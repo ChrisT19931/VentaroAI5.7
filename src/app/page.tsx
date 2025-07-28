@@ -2,9 +2,68 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
 import CinematicHero from '../components/3d/CinematicHero'
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    timeline: '',
+    currentWebsite: '',
+    projectVision: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/consultation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitMessage('🎉 Thank you! Your consultation request has been submitted successfully. Check your email for confirmation.');
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          company: '',
+          projectType: '',
+          budget: '',
+          timeline: '',
+          currentWebsite: '',
+          projectVision: ''
+        });
+      } else {
+        setSubmitMessage(`❌ Error: ${result.error || 'Failed to submit consultation request. Please try again.'}`);
+      }
+    } catch (error) {
+      console.error('Consultation form error:', error);
+      setSubmitMessage('❌ Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <main className="min-h-screen bg-black">
       {/* Hero Section */}
@@ -272,7 +331,7 @@ export default function Home() {
               {/* Elite Inquiry Form */}
               <div className="p-12">
                 <div className="max-w-5xl mx-auto">
-                  <form className="space-y-8">
+                  <form className="space-y-8" onSubmit={handleSubmit}>
                     {/* Personal Information Section */}
                     <div className="grid lg:grid-cols-2 gap-8">
                       <div className="space-y-6">
@@ -283,7 +342,11 @@ export default function Home() {
                           </label>
                           <input 
                             type="text"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleInputChange}
                             placeholder="Enter your full name"
+                            required
                             className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-purple-500/30 rounded-2xl text-white text-lg focus:border-purple-400 focus:ring-4 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
                           />
                         </div>
@@ -295,7 +358,11 @@ export default function Home() {
                           </label>
                           <input 
                             type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
                             placeholder="your.business@email.com"
+                            required
                             className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-blue-500/30 rounded-2xl text-white text-lg focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
                           />
                         </div>
@@ -307,7 +374,11 @@ export default function Home() {
                           </label>
                           <input 
                             type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
                             placeholder="+1 (555) 123-4567"
+                            required
                             className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-green-500/30 rounded-2xl text-white text-lg focus:border-green-400 focus:ring-4 focus:ring-green-400/20 focus:outline-none transition-all duration-300 hover:border-green-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
                           />
                         </div>
@@ -319,6 +390,9 @@ export default function Home() {
                           </label>
                           <input 
                             type="text"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleInputChange}
                             placeholder="Your company name"
                             className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-pink-500/30 rounded-2xl text-white text-lg focus:border-pink-400 focus:ring-4 focus:ring-pink-400/20 focus:outline-none transition-all duration-300 hover:border-pink-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
                           />
@@ -332,7 +406,12 @@ export default function Home() {
                             <span className="w-3 h-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mr-3 animate-pulse"></span>
                             Project Type *
                           </label>
-                          <select className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-cyan-500/30 rounded-2xl text-white text-lg focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20 focus:outline-none transition-all duration-300 hover:border-cyan-300 backdrop-blur-sm shadow-lg">
+                          <select 
+                            name="projectType"
+                            value={formData.projectType}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-cyan-500/30 rounded-2xl text-white text-lg focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20 focus:outline-none transition-all duration-300 hover:border-cyan-300 backdrop-blur-sm shadow-lg">
                             <option value="">Select your project type</option>
                             <option value="business-website">🏢 Professional Business Website ($1,500+)</option>
                             <option value="e-commerce">🛒 E-commerce Platform ($3,500+)</option>
@@ -348,7 +427,12 @@ export default function Home() {
                             <span className="w-3 h-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mr-3 animate-pulse"></span>
                             Investment Budget *
                           </label>
-                          <select className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-yellow-500/30 rounded-2xl text-white text-lg focus:border-yellow-400 focus:ring-4 focus:ring-yellow-400/20 focus:outline-none transition-all duration-300 hover:border-yellow-300 backdrop-blur-sm shadow-lg">
+                          <select 
+                            name="budget"
+                            value={formData.budget}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-yellow-500/30 rounded-2xl text-white text-lg focus:border-yellow-400 focus:ring-4 focus:ring-yellow-400/20 focus:outline-none transition-all duration-300 hover:border-yellow-300 backdrop-blur-sm shadow-lg">
                             <option value="">Select your investment range</option>
                             <option value="1k-3k">💰 $1,500 - $3,000 (Professional)</option>
                             <option value="3k-7k">💎 $3,000 - $7,500 (Enterprise)</option>
@@ -364,7 +448,12 @@ export default function Home() {
                             <span className="w-3 h-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mr-3 animate-pulse"></span>
                             Project Timeline *
                           </label>
-                          <select className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-red-500/30 rounded-2xl text-white text-lg focus:border-red-400 focus:ring-4 focus:ring-red-400/20 focus:outline-none transition-all duration-300 hover:border-red-300 backdrop-blur-sm shadow-lg">
+                          <select 
+                            name="timeline"
+                            value={formData.timeline}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-red-500/30 rounded-2xl text-white text-lg focus:border-red-400 focus:ring-4 focus:ring-red-400/20 focus:outline-none transition-all duration-300 hover:border-red-300 backdrop-blur-sm shadow-lg">
                             <option value="">When do you need this completed?</option>
                             <option value="rush">⚡ Rush Delivery (1-2 weeks) +50% fee</option>
                             <option value="standard">🎯 Standard Timeline (2-4 weeks)</option>
@@ -380,6 +469,9 @@ export default function Home() {
                           </label>
                           <input 
                             type="url"
+                            name="currentWebsite"
+                            value={formData.currentWebsite}
+                            onChange={handleInputChange}
                             placeholder="https://your-current-website.com (if any)"
                             className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-indigo-500/30 rounded-2xl text-white text-lg focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 focus:outline-none transition-all duration-300 hover:border-indigo-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
                           />
@@ -396,7 +488,11 @@ export default function Home() {
                         </label>
                         <textarea 
                           rows={6}
+                          name="projectVision"
+                          value={formData.projectVision}
+                          onChange={handleInputChange}
                           placeholder="Tell us about your project goals, target audience, key features you need, and what success looks like for your business. The more details you provide, the better we can tailor our proposal to exceed your expectations."
+                          required
                           className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-purple-500/30 rounded-2xl text-white text-lg focus:border-purple-400 focus:ring-4 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 placeholder-gray-400 backdrop-blur-sm shadow-lg resize-none"
                         ></textarea>
                       </div>
@@ -411,14 +507,25 @@ export default function Home() {
                         
                         <button 
                           type="submit"
-                          className="group relative inline-flex items-center px-16 py-6 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 text-white text-xl font-black rounded-2xl shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden border-2 border-purple-400/30"
+                          disabled={isSubmitting}
+                          className={`group relative inline-flex items-center px-16 py-6 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 text-white text-xl font-black rounded-2xl shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden border-2 border-purple-400/30 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
                         >
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                          <span className="relative z-10 mr-4">🔥 GET MY FREE CONSULTATION</span>
-                          <svg className="relative z-10 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
+                          <span className="relative z-10 mr-4">
+                            {isSubmitting ? '⏳ SUBMITTING...' : '🔥 GET MY FREE CONSULTATION'}
+                          </span>
+                          {!isSubmitting && (
+                            <svg className="relative z-10 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          )}
                         </button>
+                        
+                        {submitMessage && (
+                          <div className={`mt-6 p-4 rounded-xl text-center font-semibold ${submitMessage.includes('🎉') ? 'bg-green-500/20 text-green-300 border border-green-500/30' : 'bg-red-500/20 text-red-300 border border-red-500/30'}`}>
+                            {submitMessage}
+                          </div>
+                        )}
                         
                         <p className="text-sm text-gray-500 mt-6 max-w-2xl mx-auto">
                           We respect your privacy and will never share your information.

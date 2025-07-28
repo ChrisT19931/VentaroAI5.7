@@ -1,18 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase';
-import { Resend } from 'resend';
-
-// Create Resend client with fallback for build time
-const getResendClient = () => {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.warn('RESEND_API_KEY not configured - email features will not work');
-    return null;
-  }
-  return new Resend(apiKey);
-};
-
-const resend = getResendClient();
+import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: NextRequest) {
   try {
@@ -82,11 +70,10 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to customer
     try {
-      if (resend) {
-        await resend.emails.send({
-          from: 'Ventaro AI <noreply@ventaroai.com>',
-          to: [userEmail],
-          subject: 'Coaching Session Booking Confirmation - Pending Approval',
+      await sendEmail({
+        to: userEmail,
+        from: 'noreply@ventarosales.com',
+        subject: 'Coaching Session Booking Confirmation - Pending Approval',
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
               <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
@@ -143,18 +130,16 @@ export async function POST(request: NextRequest) {
             </div>
           `
         });
-      }
     } catch (emailError) {
       console.error('Error sending confirmation email:', emailError);
     }
 
     // Send notification email to admin
     try {
-      if (resend) {
-        await resend.emails.send({
-          from: 'Ventaro AI <noreply@ventaroai.com>',
-          to: ['chris.t@ventarosales.com'],
-          subject: `New Coaching Booking Request - ${new Date(selectedDate).toLocaleDateString()} at ${selectedTime}`,
+      await sendEmail({
+        to: 'chris.t@ventarosales.com',
+        from: 'noreply@ventarosales.com',
+        subject: `New Coaching Booking Request - ${new Date(selectedDate).toLocaleDateString()} at ${selectedTime}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <h1 style="color: #333;">📅 New Coaching Session Booking</h1>
@@ -195,7 +180,6 @@ export async function POST(request: NextRequest) {
             </div>
           `
         });
-      }
     } catch (adminEmailError) {
       console.error('Error sending admin notification:', adminEmailError);
     }

@@ -244,7 +244,7 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
         <ul className="text-blue-200 text-sm space-y-1">
           <li>• Duration: 60 minutes</li>
           <li>• Type: AI Business Strategy Session</li>
-          <li>• Platform: Zoom (link will be provided)</li>
+          <li>• Platform: Google Meet (link will be provided)</li>
           <li>• Recording: Session will be recorded for your reference</li>
         </ul>
       </div>

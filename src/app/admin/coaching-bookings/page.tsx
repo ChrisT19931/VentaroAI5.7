@@ -250,7 +250,7 @@ export default function CoachingBookingsAdmin() {
                   type="url"
                   value={meetingLink}
                   onChange={(e) => setMeetingLink(e.target.value)}
-                  placeholder="https://zoom.us/j/..."
+                  placeholder="https://meet.google.com/..."
                   className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>

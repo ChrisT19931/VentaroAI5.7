@@ -116,13 +116,13 @@ export default function CoachingContent() {
             <div className="text-center">
               <div className="bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl mx-auto mb-4">💻</div>
               <h3 className="text-white font-semibold mb-2">Format</h3>
-              <p className="text-gray-300">Video call via Zoom with screen sharing</p>
+              <p className="text-gray-300">Video call via Google Meet with screen sharing</p>
             </div>
             
             <div className="text-center">
               <div className="bg-purple-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl mx-auto mb-4">📋</div>
               <h3 className="text-white font-semibold mb-2">Follow-up</h3>
-              <p className="text-gray-300">Action plan and resources sent after session</p>
+              <p className="text-gray-300">Follow up email with report</p>
             </div>
           </div>
         </div>
