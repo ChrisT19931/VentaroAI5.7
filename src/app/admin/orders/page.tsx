@@ -9,8 +9,8 @@ import Spinner from '@/components/Spinner';
 export default function OrdersAdmin() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [orders, setOrders] = useState([]);
-  const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [user, setUser] = useState<any>(null);
   
   // Set isAdmin to true for all users to make admin dashboard accessible to everyone
   const [isAdmin, setIsAdmin] = useState(true);
@@ -56,13 +56,19 @@ export default function OrdersAdmin() {
     }
   };
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  const getStatusBadge = (status) => {
-    const statusMap = {
+  const getStatusBadge = (status: string) => {
+    const statusMap: Record<string, { bg: string; text: string }> = {
       'completed': { bg: 'bg-green-100', text: 'text-green-800' },
       'processing': { bg: 'bg-blue-100', text: 'text-blue-800' },
       'failed': { bg: 'bg-red-100', text: 'text-red-800' },

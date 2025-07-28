@@ -10,8 +10,8 @@ import Image from 'next/image';
 export default function ProductsAdmin() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [user, setUser] = useState(null);
+  const [products, setProducts] = useState<any[]>([]);
+  const [user, setUser] = useState<any>(null);
   
   // Set isAdmin to true for all users to make admin dashboard accessible to everyone
   const [isAdmin, setIsAdmin] = useState(true);
@@ -53,7 +53,7 @@ export default function ProductsAdmin() {
     }
   };
 
-  const handleToggleActive = async (productId, currentStatus) => {
+  const handleToggleActive = async (productId: string, currentStatus: boolean) => {
     try {
       const supabase = await createClient();
       

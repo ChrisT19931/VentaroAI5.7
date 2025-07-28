@@ -42,7 +42,7 @@ export default function DownloadsPage() {
           
           // Extract product IDs from purchases
           const hasCompletedPurchase = userPurchases.some(
-            (purchase) => purchase.status === 'completed'
+            (purchase: { status: string }) => purchase.status === 'completed'
           );
           
           setHasAccess(hasCompletedPurchase);

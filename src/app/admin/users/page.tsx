@@ -9,8 +9,8 @@ import Spinner from '@/components/Spinner';
 export default function UsersAdmin() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState([]);
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState<any[]>([]);
+  const [user, setUser] = useState<any>(null);
   
   // Set isAdmin to true for all users to make admin dashboard accessible to everyone
   const [isAdmin, setIsAdmin] = useState(true);
@@ -53,13 +53,13 @@ export default function UsersAdmin() {
     }
   };
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string | null) => {
     if (!dateString) return 'N/A';
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  const handleToggleAdmin = async (userId, currentRole) => {
+  const handleToggleAdmin = async (userId: string, currentRole: string) => {
     try {
       const supabase = await createClient();
       

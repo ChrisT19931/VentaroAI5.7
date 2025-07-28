@@ -9,7 +9,7 @@ import Spinner from '@/components/Spinner';
 export default function AdminDashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   
   // Set isAdmin to true for all users to make admin dashboard accessible to everyone
   const [isAdmin, setIsAdmin] = useState(true);

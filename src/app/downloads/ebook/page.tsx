@@ -2,6 +2,7 @@
 
 import dynamicImport from 'next/dynamic';
 import { useState, useEffect } from 'react';
+import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 
 // Force this page to be client-side only
 export const dynamic = 'force-dynamic';
@@ -19,6 +20,7 @@ const EbookContentComponent = dynamicImport(() => import('@/components/downloads
 });
 
 export default function EbookDownloadPage() {
+  const { user } = useSimpleAuth();
   // Check if user is admin
   const isAdmin = user?.email === 'chris.t@ventarosales.com';
   
