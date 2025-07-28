@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { simpleAuth } from '@/lib/auth-simple';
@@ -14,8 +14,18 @@ export default function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirectTo') || '/';
+  const confirmed = searchParams.get('confirmed');
   // Using react-hot-toast directly
+
+  useEffect(() => {
+    if (confirmed === 'true') {
+      toast.success('Email confirmed successfully! You can now log in to your account.');
+      // Remove the confirmed parameter from URL
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete('confirmed');
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+  }, [confirmed]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,9 +37,11 @@ export default function LoginPage() {
     
     try {
       setIsLoading(true);
+      console.log('Login form submitted');
       
       if (isRegistering) {
         // Handle registration
+        console.log('Handling registration');
         const response = await fetch('/api/auth/register', {
           method: 'POST',
           headers: {
@@ -53,7 +65,6 @@ export default function LoginPage() {
       } else {
         // Handle login
         console.log('Attempting login with email:', email);
-        console.log('Redirect destination after login:', redirectTo);
         
         const result = await simpleAuth.signIn(email, password);
         
@@ -61,13 +72,14 @@ export default function LoginPage() {
           throw new Error(result.error || 'Login failed');
         }
         
-        console.log('Login successful, redirecting to:', redirectTo);
+        console.log('Login successful, redirecting to My Account');
         toast.success('Login successful!');
         
-        // Small delay to ensure cookie is set
+        // Longer delay to ensure cookie is properly set and processed
+        // This helps prevent flashing issues during navigation
         setTimeout(() => {
           router.push('/my-account');
-        }, 100);
+        }, 500);
       }
     } catch (error: any) {
       toast.error(error.message || 'Failed to login. Please try again.');

@@ -41,7 +41,7 @@ CREATE POLICY "Admins can manage all bookings" ON coaching_bookings
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 

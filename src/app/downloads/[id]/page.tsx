@@ -35,15 +35,51 @@ export default function DynamicDownloadPage() {
     // Set product info
     setProductInfo(getProductInfo(productIdString));
     
-    // Simple access check - admin or authenticated user
-    if (isAdmin && user?.email === 'chris.t@ventarosales.com') {
-      setHasAccess(true);
-    } else if (user) {
-      setHasAccess(true); // Simplified - assume access if logged in
+    // Check if user is authenticated
+    if (!user) {
+      router.push('/login');
+      return;
     }
     
-    setIsLoading(false);
-  }, [user, params.id, router, isAdmin]);
+    // Admin check
+    const isRealAdmin = user?.email === 'chris.t@ventarosales.com';
+    
+    // Fetch user's purchases to determine access to this specific product
+    const fetchUserPurchases = async () => {
+      // Admin always has access
+      if (isRealAdmin) {
+        setHasAccess(true);
+        setIsLoading(false);
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/purchases/confirm?userId=${user.id}`);
+        
+        if (response.ok) {
+          const data = await response.json();
+          const userPurchases = data.purchases || [];
+          
+          // Check if user has purchased this specific product
+          const hasProductAccess = userPurchases.some(
+            (purchase: any) => purchase.product_id === productIdString && purchase.status === 'completed'
+          );
+          
+          setHasAccess(hasProductAccess);
+        } else {
+          console.error('Failed to fetch user purchases');
+          setHasAccess(false);
+        }
+      } catch (error) {
+        console.error('Error fetching user purchases:', error);
+        setHasAccess(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchUserPurchases();
+  }, [user, params.id, router]);
 
   const handleDownload = () => {
     if (!hasAccess) {

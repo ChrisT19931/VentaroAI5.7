@@ -1,92 +1,111 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSimpleAuth, useDebugAuthState, debugAuthStateGlobal } from '@/contexts/SimpleAuthContext';
 import { createClient } from '@/lib/supabase/client';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
 
 export default function MyAccountPage() {
-  const { user, signOut, isAuthenticated, isLoading: authLoading } = useSimpleAuth();
+  const { user, signOut, isAuthenticated, isLoading: authLoading, stableAuthState } = useSimpleAuth();
   const router = useRouter();
-  const [ownedProducts, setOwnedProducts] = useState<any[]>([]);
+  const [ownedProducts, setOwnedProducts] = useState<Array<{id: string; name: string; description: string; image_url: string; viewUrl: string; owned: boolean;}>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/login');
-      return;
+  const debugAuth = useDebugAuthState();
+
+  // Define callback functions before they are used in useEffect
+  const checkAdminStatus = useCallback(async () => {
+    console.log('checkAdminStatus called');
+    
+    try {
+      // Only set admin status for chris.t@ventarosales.com
+      if (user?.email === 'chris.t@ventarosales.com') {
+        console.log('Setting admin status for admin user');
+        setIsAdmin(true);
+      } else {
+        console.log('User is not admin');
+        setIsAdmin(false);
+      }
+    } catch (error) {
+      console.error('Error checking admin status:', error);
+      setIsAdmin(false);
     }
+  }, [user?.email]);
 
-    if (user) {
-      checkAdminStatus();
-      fetchOwnedProducts();
-    }
-  }, [user, isAuthenticated, authLoading, router]);
-
-  const checkAdminStatus = () => {
-    const isAdminUser = user?.email === 'chris.t@ventarosales.com';
-    setIsAdmin(isAdminUser);
-  };
-
-  const fetchOwnedProducts = async () => {
-    if (!user?.id) {
-      setIsLoading(false);
-      return;
-    }
-
+  const fetchOwnedProducts = useCallback(async () => {
+    console.log('fetchOwnedProducts called');
+    
     try {
       setIsLoading(true);
-      const supabase = createClient();
+      console.log('Fetching products for user');
       
-      // Get all products
+      // Define all available products
       const allProducts = [
         {
           id: '1',
           name: 'AI Tools Mastery Guide 2025',
           description: '30-page guide with AI tools and AI prompts to make money online in 2025.',
           image_url: '/images/products/ai-tools-mastery-guide.svg',
-          viewUrl: '/downloads/ebook'
+          viewUrl: '/downloads/ebook',
+          owned: false // Default to not owned
         },
         {
           id: '2', 
           name: 'AI Prompts Arsenal 2025',
           description: '30 professional AI prompts to make money online in 2025.',
           image_url: '/images/products/ai-prompts-arsenal.svg',
-          viewUrl: '/downloads/prompts'
+          viewUrl: '/downloads/prompts',
+          owned: false // Default to not owned
         },
         {
           id: '3',
           name: 'AI Business Strategy Session 2025', 
           description: '60-minute live coaching session to build your online business.',
           image_url: '/images/products/ai-business-strategy-session.svg',
-          viewUrl: '/downloads/coaching'
+          viewUrl: '/downloads/coaching',
+          owned: false // Default to not owned
         }
       ];
-
-      if (isAdmin) {
-        // Admin sees all products
-        setOwnedProducts(allProducts);
+      
+      // If user is admin (chris.t@ventarosales.com), set all products as owned
+      if (isAdmin && user?.email === 'chris.t@ventarosales.com') {
+        console.log('Admin user, showing all products as owned');
+        setOwnedProducts(allProducts.map(product => ({ ...product, owned: true })));
+        return;
+      }
+      
+      // For non-admin users, fetch their purchases to determine which products they own
+      if (user?.id) {
+        try {
+          const response = await fetch(`/api/purchases/confirm?userId=${user.id}`);
+          
+          if (response.ok) {
+            const data = await response.json();
+            const userPurchases = data.purchases || [];
+            
+            // Mark products as owned based on user's purchases
+            const productsWithOwnership = allProducts.map(product => ({
+              ...product,
+              owned: userPurchases.some((purchase: any) => 
+                purchase.product_id === product.id && purchase.status === 'completed'
+              )
+            }));
+            
+            console.log('Setting products with ownership status', productsWithOwnership);
+            setOwnedProducts(productsWithOwnership);
+          } else {
+            console.error('Failed to fetch user purchases');
+            setOwnedProducts(allProducts); // Fallback to all products not owned
+          }
+        } catch (error) {
+          console.error('Error fetching user purchases:', error);
+          setOwnedProducts(allProducts); // Fallback to all products not owned
+        }
       } else {
-        // Check which products user owns
-        const { data: orders } = await supabase
-          .from('orders')
-          .select(`
-            order_items(product_id)
-          `)
-          .eq('user_id', user.id);
-
-        const ownedProductIds = new Set();
-        orders?.forEach(order => {
-          order.order_items?.forEach((item: any) => {
-            ownedProductIds.add(item.product_id);
-          });
-        });
-
-        const owned = allProducts.filter(product => ownedProductIds.has(product.id));
-        setOwnedProducts(owned);
+        setOwnedProducts(allProducts); // Fallback to all products not owned
       }
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -94,22 +113,68 @@ export default function MyAccountPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    console.log('Auth state changed:', { authLoading, isAuthenticated, user: user?.email, stableAuthState });
+    debugAuth(); // Use hook-based debug helper
+    debugAuthStateGlobal(); // Use global debug helper
+    
+    // Only redirect if we're sure the user is not authenticated after loading completes
+    if (!authLoading && stableAuthState && !isAuthenticated) {
+      console.log('User not authenticated, redirecting to login');
+      router.push('/login');
+      return;
+    }
+
+    // Only proceed with data fetching if we have a user object and stable auth state
+    if (!authLoading && stableAuthState && isAuthenticated && user) {
+      console.log('User authenticated:', user?.email);
+      checkAdminStatus().then(() => {
+        fetchOwnedProducts();
+      });
+    } else if (!authLoading && stableAuthState && isAuthenticated && !user) {
+      console.log('User object is null but isAuthenticated is true - possible auth state mismatch');
+      // Wait a moment and try again if we have this inconsistent state
+      const timer = setTimeout(() => {
+        if (isAuthenticated && !user) {
+          console.log('Still in inconsistent state, forcing refresh');
+          window.location.reload();
+        }
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [user, isAuthenticated, authLoading, stableAuthState, router, checkAdminStatus, fetchOwnedProducts]);
+
+  // Functions are now properly defined at the top of the component
 
   const handleSignOut = async () => {
     await signOut();
     router.push('/');
   };
 
-  if (authLoading) {
+  // Show loading state while authentication is being determined or while fetching products
+  // We need a more stable loading state to prevent flashing
+  const [showLoading, setShowLoading] = useState(true);
+  
+  useEffect(() => {
+    // Only set loading to false when we're sure authentication is complete AND products are loaded
+    if (!authLoading && stableAuthState && !isLoading) {
+      setShowLoading(false);
+    }
+  }, [authLoading, stableAuthState, isLoading]);
+  
+  // Always show loading screen until we're 100% sure everything is ready
+  if (showLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
-        <Spinner size="lg" color="primary" text="Loading..." />
+        <Spinner size="lg" color="primary" text="Loading your account..." />
       </div>
     );
   }
 
-  if (!isAuthenticated || !user) {
+  // Only show redirect message if we're sure the user is not authenticated
+  if (!authLoading && (!isAuthenticated || !user)) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center">
         <p className="text-white">Redirecting to login...</p>
@@ -125,7 +190,7 @@ export default function MyAccountPage() {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">My Account</h1>
-              <p className="text-gray-300">{user.email}</p>
+              <p className="text-gray-300">{user?.email || 'No email available'}</p>
               {isAdmin && (
                 <div className="mt-2 inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,8 +217,8 @@ export default function MyAccountPage() {
           ) : ownedProducts.length === 0 ? (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📦</div>
-              <h3 className="text-xl font-semibold text-white mb-2">No Products Yet</h3>
-              <p className="text-gray-400 mb-6">You haven't purchased any products yet.</p>
+              <h3 className="text-xl font-semibold text-white mb-2">No Products Available</h3>
+              <p className="text-gray-400 mb-6">There are no products available at this time.</p>
               <Button href="/products" variant="primary" size="md">
                 Browse Products
               </Button>
@@ -186,32 +251,70 @@ export default function MyAccountPage() {
                       <p className="text-gray-300 mb-4">{product.description}</p>
                       
                       <div className="flex items-center gap-3">
-                        <Button 
-                          href={`${product.viewUrl}${isAdmin ? '?admin=true' : ''}`}
-                          variant="primary" 
-                          size="md"
-                        >
-                          📖 View Content
-                        </Button>
-                        
-                        <Button 
-                          href={`/downloads?product=${product.id}${isAdmin ? '&admin=true' : ''}`}
-                          variant="outline" 
-                          size="md"
-                        >
-                          📥 Download
-                        </Button>
+                        {product.owned || isAdmin ? (
+                          <>
+                            <Button 
+                              href={`${product.viewUrl}${isAdmin ? '?admin=true' : ''}`}
+                              variant="primary" 
+                              size="md"
+                            >
+                              📖 View Content
+                            </Button>
+                            
+                            <Button 
+                              href={`/downloads?product=${product.id}${isAdmin ? '&admin=true' : ''}`}
+                              variant="outline" 
+                              size="md"
+                            >
+                              📥 Download
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button 
+                              href={`/products/${product.id}`}
+                              variant="primary" 
+                              size="md"
+                            >
+                              🛒 Purchase
+                            </Button>
+                            
+                            <Button 
+                              href={`/products/${product.id}`}
+                              variant="outline" 
+                              size="md"
+                            >
+                              👁️ View Details
+                            </Button>
+                          </>
+                        )}
                       </div>
                     </div>
                     
                     {/* Status Badge */}
                     <div className="flex-shrink-0">
-                      <div className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {isAdmin ? 'Admin' : 'Owned'}
-                      </div>
+                      {isAdmin ? (
+                        <div className="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                          Admin
+                        </div>
+                      ) : product.owned ? (
+                        <div className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Owned
+                        </div>
+                      ) : (
+                        <div className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                          Locked
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

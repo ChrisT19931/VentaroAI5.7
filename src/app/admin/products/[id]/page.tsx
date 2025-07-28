@@ -63,24 +63,11 @@ export default function ProductForm({ params }: { params: { id: string } }) {
 
   const checkAdminStatus = async () => {
     try {
-      // Check if user has admin role
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('id', user?.id)
-        .single();
-
-      if (error) throw error;
-
-      if (data?.is_admin === true) {
-        setIsAdmin(true);
-      } else {
-        // Not an admin, redirect to home
-        router.push('/');
-      }
+      // Check if user is admin
+      const isAdmin = user?.email === 'chris.t@ventarosales.com';
+      setIsAdmin(isAdmin);
     } catch (error) {
       console.error('Error checking admin status:', error);
-      router.push('/');
     }
   };
 

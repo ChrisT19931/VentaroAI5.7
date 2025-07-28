@@ -354,7 +354,7 @@ export default function Home() {
                         <div>
                           <label className="block text-white font-bold mb-3 flex items-center text-lg">
                             <span className="w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mr-3 animate-pulse"></span>
-                            Business Email *
+                            Email *
                           </label>
                           <input 
                             type="email"
@@ -413,11 +413,11 @@ export default function Home() {
                             required
                             className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-cyan-500/30 rounded-2xl text-white text-lg focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20 focus:outline-none transition-all duration-300 hover:border-cyan-300 backdrop-blur-sm shadow-lg">
                             <option value="">Select your project type</option>
-                            <option value="business-website">🏢 Professional Business Website ($1,500+)</option>
-                            <option value="e-commerce">🛒 E-commerce Platform ($3,500+)</option>
-                            <option value="web-app">⚡ Custom Web Application ($7,500+)</option>
-                            <option value="saas">⚡ SaaS Platform ($15,000+)</option>
-                            <option value="enterprise">🏆 Enterprise Solution ($25,000+)</option>
+                            <option value="business-website">🏢 Professional Business Website</option>
+                            <option value="e-commerce">🛒 E-commerce Platform</option>
+                            <option value="web-app">⚡ Custom Web Application</option>
+                            <option value="saas">⚡ SaaS Platform</option>
+                            <option value="enterprise">🏆 Enterprise Solution</option>
                             <option value="other">💡 Custom Solution (Let's Discuss)</option>
                           </select>
                         </div>
@@ -462,20 +462,7 @@ export default function Home() {
                           </select>
                         </div>
                         
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mr-3 animate-pulse"></span>
-                            Current Website
-                          </label>
-                          <input 
-                            type="url"
-                            name="currentWebsite"
-                            value={formData.currentWebsite}
-                            onChange={handleInputChange}
-                            placeholder="https://your-current-website.com (if any)"
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-indigo-500/30 rounded-2xl text-white text-lg focus:border-indigo-400 focus:ring-4 focus:ring-indigo-400/20 focus:outline-none transition-all duration-300 hover:border-indigo-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
-                          />
-                        </div>
+
                       </div>
                     </div>
                     

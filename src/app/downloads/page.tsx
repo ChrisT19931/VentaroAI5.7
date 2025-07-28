@@ -22,16 +22,43 @@ export default function DownloadsPage() {
       return;
     }
 
-    // Simple access check - admin or authenticated user
+    // Check if user is admin
     const adminParam = searchParams.get('admin');
     if (adminParam === 'true' && user?.email === 'chris.t@ventarosales.com') {
       setIsAdmin(true);
       setHasAccess(true);
-    } else if (user) {
-      setHasAccess(true); // Simplified - assume access if logged in
+      setIsLoading(false);
+      return;
     }
     
-    setIsLoading(false);
+    // For non-admin users, verify purchases
+    const fetchUserPurchases = async () => {
+      try {
+        const response = await fetch(`/api/purchases/confirm?userId=${user.id}`);
+        
+        if (response.ok) {
+          const data = await response.json();
+          const userPurchases = data.purchases || [];
+          
+          // Extract product IDs from purchases
+          const hasCompletedPurchase = userPurchases.some(
+            (purchase) => purchase.status === 'completed'
+          );
+          
+          setHasAccess(hasCompletedPurchase);
+        } else {
+          console.error('Failed to fetch user purchases');
+          setHasAccess(false);
+        }
+      } catch (error) {
+        console.error('Error fetching user purchases:', error);
+        setHasAccess(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchUserPurchases();
   }, [user, router, searchParams]);
 
   const handleDownload = async (fileName: string, displayName: string, productId: string) => {

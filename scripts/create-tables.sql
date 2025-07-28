@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS profiles (
   first_name TEXT,
   last_name TEXT,
   email TEXT NOT NULL,
-  is_admin BOOLEAN DEFAULT FALSE
+  user_role TEXT DEFAULT 'user' CHECK (user_role IN ('admin', 'user'))
 );
 
 -- Create products table
@@ -28,9 +28,12 @@ CREATE TABLE IF NOT EXISTS products (
 
 -- Create orders table
 CREATE TABLE IF NOT EXISTS orders (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  order_id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   user_id TEXT NOT NULL,
+  email TEXT NOT NULL,
+  product_name TEXT NOT NULL,
+  product_price DECIMAL(10,2) NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending',
   total DECIMAL(10,2) NOT NULL,
   payment_intent_id TEXT,
@@ -41,7 +44,7 @@ CREATE TABLE IF NOT EXISTS orders (
 CREATE TABLE IF NOT EXISTS order_items (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  order_id UUID REFERENCES orders(id) NOT NULL,
+  order_id UUID REFERENCES orders(order_id) NOT NULL,
   product_id UUID REFERENCES products(id) NOT NULL,
   quantity INTEGER NOT NULL DEFAULT 1,
   price DECIMAL(10,2) NOT NULL,
@@ -86,7 +89,7 @@ CREATE POLICY "Admins can manage products" ON products
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -109,7 +112,7 @@ CREATE POLICY "Users can view own order items" ON order_items
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM orders 
-      WHERE orders.id = order_items.order_id 
+      WHERE orders.order_id = order_items.order_id 
       AND orders.user_id = auth.uid()::text
     )
   );
@@ -118,7 +121,7 @@ CREATE POLICY "Users can create order items for own orders" ON order_items
   FOR INSERT WITH CHECK (
     EXISTS (
       SELECT 1 FROM orders 
-      WHERE orders.id = order_items.order_id 
+      WHERE orders.order_id = order_items.order_id 
       AND orders.user_id = auth.uid()::text
     )
   );

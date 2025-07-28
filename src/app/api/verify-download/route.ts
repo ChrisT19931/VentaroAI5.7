@@ -283,11 +283,11 @@ export async function POST(request: NextRequest) {
       if (userId) {
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
-          .select('is_admin')
+          .select('user_role')
           .eq('id', userId)
           .single();
 
-        if (!profileError && profile?.is_admin === true) {
+        if (!profileError && profile?.user_role === 'admin') {
           // Admin users have access to all downloads
           return NextResponse.json({ hasAccess: true });
         }

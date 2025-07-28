@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/utils/format';
 import { useState } from 'react';
+import UpsellModal from '@/components/UpsellModal';
 
 type ProductCardProps = {
   id: string;
@@ -31,7 +32,17 @@ export default function ProductCard({
 }: ProductCardProps) {
   const { addItem, isInCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
+  const [showUpsellModal, setShowUpsellModal] = useState(false);
   const alreadyInCart = isInCart(id);
+  
+  // E-book upsell product details
+  const ebookUpsellProduct = {
+    id: 'ai-tools-mastery-guide-2025',
+    name: 'AI Tools Mastery Guide 2025',
+    price: 25.00,
+    description: 'Comprehensive guide to mastering AI tools for business and personal productivity.',
+    image_url: '/images/products/ai-tools-mastery-guide.jpg'
+  };
 
   const productUrl = slug ? `/products/${slug}` : `/products/${id}`;
   
@@ -50,7 +61,19 @@ export default function ProductCard({
     
     setTimeout(() => {
       setIsAdding(false);
+      
+      // Show upsell modal if the user added the AI Prompts product
+      if (id === 'ai-prompts-arsenal-2025' || name.toLowerCase().includes('prompt')) {
+        // Check if the e-book is not already in the cart
+        if (!isInCart(ebookUpsellProduct.id)) {
+          setShowUpsellModal(true);
+        }
+      }
     }, 800); // Reduced from 1500ms to 800ms for faster feedback
+  };
+  
+  const handleCloseUpsellModal = () => {
+    setShowUpsellModal(false);
   };
 
   return (
@@ -111,6 +134,15 @@ export default function ProductCard({
           </button>
         </div>
       )}
+      
+      {/* Upsell Modal */}
+      <UpsellModal
+        isOpen={showUpsellModal}
+        onClose={handleCloseUpsellModal}
+        triggerProductId={id}
+        upsellProductId={ebookUpsellProduct.id}
+        upsellProduct={ebookUpsellProduct}
+      />
     </div>
   );
 }

@@ -32,7 +32,7 @@ CREATE TABLE profiles (
   first_name TEXT,
   last_name TEXT,
   email TEXT NOT NULL,
-  is_admin BOOLEAN DEFAULT FALSE
+  user_role TEXT DEFAULT 'user'
 );
 
 -- Create products table
@@ -125,7 +125,7 @@ CREATE POLICY "Admins can view all profiles" ON profiles
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -137,7 +137,7 @@ CREATE POLICY "Admins can manage products" ON products
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -152,7 +152,7 @@ CREATE POLICY "Admins can view all orders" ON orders
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -179,7 +179,7 @@ CREATE POLICY "Admins can manage all order items" ON order_items
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -197,7 +197,7 @@ CREATE POLICY "Admins can manage all coaching intakes" ON coaching_intakes
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 ```
@@ -214,7 +214,7 @@ CREATE POLICY "Admins can upload product images" ON storage.objects
     bucket_id = 'product-images' AND
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -223,7 +223,7 @@ CREATE POLICY "Admins can update product images" ON storage.objects
     bucket_id = 'product-images' AND
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -232,7 +232,7 @@ CREATE POLICY "Admins can delete product images" ON storage.objects
     bucket_id = 'product-images' AND
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 
@@ -255,7 +255,7 @@ CREATE POLICY "Admins can manage product files" ON storage.objects
     bucket_id = 'product-files' AND
     EXISTS (
       SELECT 1 FROM profiles 
-      WHERE id = auth.uid() AND is_admin = true
+      WHERE id = auth.uid() AND user_role = 'admin'
     )
   );
 ```
@@ -272,7 +272,7 @@ After setting up the database:
 ```sql
 -- Make your admin email an admin
 UPDATE profiles 
-SET is_admin = true 
+SET user_role = 'admin' 
 WHERE email = 'your-admin-email@domain.com';
 ```
 
@@ -324,7 +324,7 @@ In Supabase dashboard:
 ## Troubleshooting
 
 - **Products not loading**: Check that your Supabase URL and keys are correct
-- **Admin access denied**: Ensure the user has `is_admin = true` in the profiles table
+- **Admin access denied**: Ensure the user has `user_role = 'admin'` in the profiles table
 - **Database errors**: Check that all tables and policies are created correctly
 - **File uploads failing**: Verify storage buckets and policies are set up
 

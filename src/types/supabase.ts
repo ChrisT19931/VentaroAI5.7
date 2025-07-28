@@ -119,7 +119,7 @@ export interface Database {
           first_name: string | null
           last_name: string | null
           email: string
-          is_admin: boolean
+          user_role: string
         }
         Insert: {
           id: string
@@ -128,7 +128,7 @@ export interface Database {
           first_name?: string | null
           last_name?: string | null
           email: string
-          is_admin?: boolean
+          user_role?: string
         }
         Update: {
           id?: string
@@ -137,7 +137,7 @@ export interface Database {
           first_name?: string | null
           last_name?: string | null
           email?: string
-          is_admin?: boolean
+          user_role?: string
         }
       }
       coaching_intakes: {

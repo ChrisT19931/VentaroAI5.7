@@ -22,34 +22,49 @@ export async function middleware(req: NextRequest) {
   const isAuthenticated = authCookie?.value === 'true';
   
   // Log all cookies for debugging
-  console.log('All cookies:', Object.fromEntries(req.cookies.getAll().map(c => [c.name, c.value])));
+  const allCookies = Object.fromEntries(req.cookies.getAll().map(c => [c.name, c.value]));
+  console.log('All cookies:', allCookies);
   console.log('Auth cookie present:', isAuthenticated);
+  console.log('Auth cookie details:', authCookie ? JSON.stringify(authCookie) : 'null');
   
-  // Check for Supabase auth cookies
+  // Add a longer delay to ensure cookie processing is complete
+  // This can help prevent flashing issues during authentication checks
+  await new Promise(resolve => setTimeout(resolve, 100));
+  
+  // Check for Supabase auth cookies - but don't rely on them for authentication
+  // This is just for debugging purposes
   const supabaseAccessToken = req.cookies.get('sb-access-token');
   const supabaseRefreshToken = req.cookies.get('sb-refresh-token');
   console.log('Supabase cookies present:', !!supabaseAccessToken, !!supabaseRefreshToken);
+  
+  // We'll only use the ventaro-auth cookie for authentication decisions
+  // This simplifies the auth flow and prevents flashing issues
 
   // Handle protected routes
   if (protectedRoutes.some(route => path.startsWith(route))) {
     if (!isAuthenticated) {
       console.log('Redirecting from protected route to login:', path);
       const redirectUrl = new URL('/login', req.url);
-      redirectUrl.searchParams.set('redirectTo', path);
       return NextResponse.redirect(redirectUrl);
     } else {
       console.log('User accessing protected route:', path);
     }
   }
 
-  // Handle admin routes (for now, just check if authenticated)
-  if (adminRoutes.some(route => path.startsWith(route))) {
-    if (!isAuthenticated) {
-      console.log('Redirecting from admin route to login:', path);
-      const redirectUrl = new URL('/login', req.url);
-      redirectUrl.searchParams.set('redirectTo', path);
-      return NextResponse.redirect(redirectUrl);
-    }
+  // Allow all authenticated users to access admin routes
+if (adminRoutes.some(route => path.startsWith(route))) {
+  if (!isAuthenticated) {
+    console.log('Redirecting from admin route to login:', path);
+    const redirectUrl = new URL('/login', req.url);
+    return NextResponse.redirect(redirectUrl);
+  }
+  console.log('User accessing admin route:', path);
+}
+
+  // Allow access to clear-auth route regardless of authentication status
+  if (path === '/clear-auth') {
+    console.log('Allowing access to clear-auth route');
+    return NextResponse.next();
   }
 
   // Handle login/signup routes when user is already logged in

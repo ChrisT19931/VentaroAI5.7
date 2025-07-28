@@ -7,11 +7,19 @@ const protectedRoutes = [
   '/my-account',
   '/checkout',
   '/checkout/success',
+  '/downloads',
 ];
 
 // Define admin-only routes
 const adminRoutes = [
   '/admin',
+];
+
+// Define product routes that require purchase verification
+const productRoutes = [
+  '/downloads/ebook',
+  '/downloads/prompts',
+  '/downloads/coaching',
 ];
 
 export async function middleware(req: NextRequest) {
@@ -98,8 +106,6 @@ export async function middleware(req: NextRequest) {
       console.log('Redirecting from protected route to login:', path);
       // Redirect to login if trying to access protected route without session
       const redirectUrl = new URL('/login', req.url);
-      // Add the original URL as a query parameter to redirect after login
-      redirectUrl.searchParams.set('redirectTo', path);
       return NextResponse.redirect(redirectUrl);
     } else {
       console.log('User accessing protected route:', path, 'User:', activeSession.user.email);
@@ -112,23 +118,38 @@ export async function middleware(req: NextRequest) {
       console.log('Redirecting from admin route to login:', path);
       // Redirect to login if no session
       const redirectUrl = new URL('/login', req.url);
-      redirectUrl.searchParams.set('redirectTo', path);
       return NextResponse.redirect(redirectUrl);
     }
     
-    // Check if user has admin status
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('is_admin')
-      .eq('id', activeSession.user.id)
-      .single();
-    
-    console.log('Admin check for user:', activeSession.user.email, 'Result:', profile?.is_admin);
-    
-    if (!profile || profile.is_admin !== true) {
-      // Redirect to home if user is not an admin
+    // Only allow admin user to access admin routes
+    if (activeSession.user.email !== 'chris.t@ventarosales.com') {
+      console.log('Non-admin user attempting to access admin route:', path, 'User:', activeSession.user.email);
+      // Redirect to home page
       return NextResponse.redirect(new URL('/', req.url));
     }
+    
+    console.log('Admin user accessing admin route:', path, 'User:', activeSession.user.email);
+  }
+  
+  // Handle product routes that require purchase verification
+  if (productRoutes.some(route => path.startsWith(route))) {
+    if (!activeSession) {
+      console.log('Redirecting from product route to login:', path);
+      // Redirect to login if no session
+      const redirectUrl = new URL('/login', req.url);
+      return NextResponse.redirect(redirectUrl);
+    }
+    
+    // Admin can access all product routes
+    if (activeSession.user.email === 'chris.t@ventarosales.com') {
+      console.log('Admin user accessing product route:', path, 'User:', activeSession.user.email);
+      return response;
+    }
+    
+    // For non-admin users, redirect to my-account page
+    // The actual purchase verification will happen in the product page components
+    console.log('User accessing product route:', path, 'User:', activeSession.user.email);
+    // We'll let the request through, but the product pages will verify purchase status
   }
   
   // Handle login/signup routes when user is already logged in

@@ -196,99 +196,69 @@ export default function CartPage() {
           
           {/* Order Summary */}
           <div className="lg:w-1/3">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">Order Summary</h2>
-              
-              <div className="flow-root">
-                <dl className="-my-4 text-sm divide-y divide-gray-200">
-                  <div className="py-4 flex items-center justify-between">
-                    <dt className="text-gray-600">Subtotal</dt>
-                    <dd className="font-medium text-gray-900">A${total.toFixed(2)} AUD</dd>
-                  </div>
-                  
-                  <div className="py-4 flex items-center justify-between">
-                    <dt className="text-gray-600">Tax</dt>
-                    <dd className="font-medium text-gray-900">A$0.00 AUD</dd>
-                  </div>
-                  
-                  <div className="py-4 flex items-center justify-between">
-                    <dt className="text-base font-medium text-gray-900">Order total</dt>
-                    <dd className="text-base font-medium text-gray-900">A${total.toFixed(2)} AUD</dd>
-                  </div>
-                </dl>
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+              <div className="p-6 border-b border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
               </div>
               
-              <div className="mt-6 space-y-4">
-                <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg">
-                  <h3 className="font-semibold text-gray-800 mb-2">Secure Payment</h3>
-                  <p className="text-sm text-gray-600 mb-3">Complete your purchase securely and get instant access to your digital products.</p>
-                  
-                  {/* Payment Method Logos */}
-                  <div className="flex items-center justify-center space-x-4 mb-4">
-                    {/* Stripe Logo */}
-                    <div className="bg-white px-4 py-3 rounded-lg shadow-sm border">
-                      <svg className="h-6 w-auto" viewBox="0 0 60 25" fill="none">
-                        <path d="M59.5 12.5c0-6.9-5.6-12.5-12.5-12.5S34.5 5.6 34.5 12.5 40.1 25 47 25s12.5-5.6 12.5-12.5z" fill="#635bff"/>
-                        <path d="M47 7.5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z" fill="white"/>
-                        <text x="2" y="18" fontSize="12" fill="#635bff" fontWeight="bold">stripe</text>
-                      </svg>
-                    </div>
-                    
-                    {/* Visa Logo */}
-                    <div className="bg-white px-4 py-3 rounded-lg shadow-sm border">
-                      <svg className="h-6 w-auto" viewBox="0 0 78 25" fill="none">
-                        <path d="M35.5 2L30.5 23h-5L20.5 2h5l2.5 16L31 2h4.5zM40 2v21h-4V2h4zM53 9c-2 0-3 1-3 2s1 2 3 2 3-1 3-2-1-2-3-2zM60 2l-4 21h-4l4-21h4z" fill="#1a1f71"/>
-                        <text x="2" y="18" fontSize="12" fill="#1a1f71" fontWeight="bold">VISA</text>
-                      </svg>
-                    </div>
-                    
-                    {/* Mastercard Logo */}
-                    <div className="bg-white px-4 py-3 rounded-lg shadow-sm border">
-                      <svg className="h-6 w-auto" viewBox="0 0 48 30" fill="none">
-                        <circle cx="15" cy="15" r="12" fill="#eb001b"/>
-                        <circle cx="33" cy="15" r="12" fill="#f79e1b"/>
-                        <path d="M24 6c2.5 2 4 5 4 9s-1.5 7-4 9c-2.5-2-4-5-4-9s1.5-7 4-9z" fill="#ff5f00"/>
-                      </svg>
-                    </div>
+              <div className="p-6">
+                <div className="space-y-4">
+                  <div className="flex justify-between text-base">
+                    <span className="text-gray-600">Subtotal</span>
+                    <span className="text-gray-900 font-medium">A${total.toFixed(2)} AUD</span>
                   </div>
                   
-                  <div className="text-xs text-gray-500 text-center">
-                    <div className="flex items-center justify-center space-x-1">
-                      <svg className="h-3 w-3 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span>SSL Encrypted • PCI Compliant • 256-bit Security</span>
+                  <div className="flex justify-between text-base">
+                    <span className="text-gray-600">Shipping</span>
+                    <span className="text-gray-900 font-medium">Free</span>
+                  </div>
+                  
+                  <div className="flex justify-between text-base">
+                    <span className="text-gray-600">Tax</span>
+                    <span className="text-gray-900 font-medium">A$0.00 AUD</span>
+                  </div>
+                  
+                  <div className="border-t border-gray-200 pt-4">
+                    <div className="flex justify-between text-lg font-semibold">
+                      <span className="text-gray-900">Total</span>
+                      <span className="text-gray-900">A${total.toFixed(2)} AUD</span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex flex-col space-y-2">
-                  <Button
+                <div className="mt-8">
+                  <button
                     onClick={handleCheckout}
                     disabled={isLoading}
-                    isLoading={isLoading}
-                    loadingText="Processing..."
-                    variant="success"
-                    size="lg"
-                    fullWidth
-                    className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition hover:scale-105"
+                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
                   >
-                    🔒 Secure Checkout - A${total.toFixed(2)} AUD
-                  </Button>
+                    {isLoading ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Processing...
+                      </div>
+                    ) : (
+                      'Proceed to Checkout'
+                    )}
+                  </button>
+                  
+                  <div className="mt-4 text-center">
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                      <svg className="h-4 w-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Secure checkout powered by Stripe</span>
+                    </div>
+                  </div>
+                  
+
                 </div>
               </div>
               
-              <div className="mt-6 text-center text-sm text-gray-500">
-                <p>or</p>
-                <Button
-                  variant="ghost"
-                  onClick={() => router.push('/products')}
-                  className="text-green-600 hover:text-green-700 mt-2"
-                >
-                  Continue Shopping
-                  <span aria-hidden="true"> &rarr;</span>
-                </Button>
-              </div>
+
             </div>
           </div>
         </div>

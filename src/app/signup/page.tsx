@@ -14,7 +14,6 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get('redirectTo') || '/';
   // Using react-hot-toast directly
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -44,7 +43,7 @@ export default function SignupPage() {
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${window.location.origin}/auth/callback?type=signup`,
         },
       });
       
@@ -52,8 +51,11 @@ export default function SignupPage() {
         throw error;
       }
       
-      toast.success('Signup successful! Please check your email to verify your account.');
-      router.push('/login');
+      toast.success('Signup successful! Please check your email and click the confirmation link to verify your account.');
+      // Don't redirect immediately, let user check email first
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
     } catch (error: any) {
       toast.error(error.message || 'Failed to sign up. Please try again.');
     } finally {

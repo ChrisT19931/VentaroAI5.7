@@ -483,10 +483,6 @@ function GlassmorphismOverlay() {
               </span>
               <span className="flex items-center bg-black/60 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10 shadow-lg">
                 <div className="w-3 h-3 bg-white rounded-full mr-3 animate-pulse shadow-lg"></div>
-                <span className="font-semibold text-white">No Email Required</span>
-              </span>
-              <span className="flex items-center bg-black/60 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10 shadow-lg">
-                <div className="w-3 h-3 bg-white rounded-full mr-3 animate-pulse shadow-lg"></div>
                 <span className="font-semibold text-white">Secure Payment</span>
               </span>
             </div>

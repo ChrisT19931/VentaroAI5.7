@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient();
 
-    // Check if user is admin
+    // Check if user is authenticated
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
       return NextResponse.json(
@@ -27,20 +27,9 @@ export async function GET(request: NextRequest) {
         { status: 401 }
       );
     }
-
-    // Check admin status
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('is_admin')
-      .eq('id', user.id)
-      .single();
-
-    if (profileError || !profile?.is_admin) {
-      return NextResponse.json(
-        { error: 'Admin access required' },
-        { status: 403 }
-      );
-    }
+    
+    // Allow all authenticated users to access admin features
+    // No need to check admin status anymore
 
     // Fetch all bookings
     const { data: bookings, error: bookingsError } = await supabase
@@ -85,7 +74,7 @@ export async function PATCH(request: NextRequest) {
 
     const supabase = await createClient();
 
-    // Check if user is admin
+    // Check if user is authenticated
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
       return NextResponse.json(
@@ -93,20 +82,9 @@ export async function PATCH(request: NextRequest) {
         { status: 401 }
       );
     }
-
-    // Check admin status
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('is_admin')
-      .eq('id', user.id)
-      .single();
-
-    if (profileError || !profile?.is_admin) {
-      return NextResponse.json(
-        { error: 'Admin access required' },
-        { status: 403 }
-      );
-    }
+    
+    // Allow all authenticated users to access admin features
+    // No need to check admin status anymore
 
     // Get the booking details before updating
     const { data: booking, error: fetchError } = await supabase

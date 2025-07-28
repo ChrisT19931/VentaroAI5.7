@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   first_name TEXT,
   last_name TEXT,
   email TEXT NOT NULL,
-  is_admin BOOLEAN DEFAULT FALSE
+  user_role TEXT DEFAULT 'user' CHECK (user_role IN ('admin', 'user'))
 );
 
 -- Enable Row Level Security
@@ -32,7 +32,7 @@ CREATE POLICY "Users can insert own profile"
   WITH CHECK (auth.uid() = id);
 
 -- Insert the admin user
-INSERT INTO public.profiles (id, email, is_admin, created_at, updated_at)
-VALUES ('67eb6090-0146-4263-b0f1-a7f54b60e870', 'chris.t@ventarosales.com', true, NOW(), NOW())
+INSERT INTO public.profiles (id, email, user_role, created_at, updated_at)
+VALUES ('67eb6090-0146-4263-b0f1-a7f54b60e870', 'chris.t@ventarosales.com', 'admin', NOW(), NOW())
 ON CONFLICT (id) 
-DO UPDATE SET is_admin = true, updated_at = NOW();
+DO UPDATE SET user_role = 'admin', updated_at = NOW();

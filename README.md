@@ -182,7 +182,7 @@ EMAIL_FROM=support@ventaroai.com
 ### Admin Authentication Fix
 
 This version includes fixes for admin authentication:
-- ✅ Uses `is_admin` boolean field (not `role`)
+- ✅ Uses `user_role` text field with 'admin' and 'user' values
 - ✅ Proper profile creation with correct schema
 - ✅ Fixed user ID mapping in database queries
 - ✅ Automated setup script for admin user creation

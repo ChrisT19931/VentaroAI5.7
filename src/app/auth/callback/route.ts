@@ -30,13 +30,21 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url);
   const code = searchParams.get('code');
-  const next = searchParams.get('next') || '/';
+  const next = searchParams.get('next');
+  const type = searchParams.get('type');
 
   if (code) {
     // Exchange the auth code for a session
-    await supabase.auth.exchangeCodeForSession(code);
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    
+    if (!error) {
+      // If this is an email confirmation (signup), redirect to confirmation page
+      if (type === 'signup' || (!next && !type)) {
+        return NextResponse.redirect(new URL('/auth/confirmed', req.url));
+      }
+    }
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(new URL(next, req.url));
+  return NextResponse.redirect(new URL('/my-account', req.url));
 }

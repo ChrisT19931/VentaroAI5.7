@@ -1,30 +1,242 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SystemDashboard from '@/components/SystemDashboard';
 import { useSystemOptimization } from '@/lib/client-optimizer';
 
 const SystemAdminPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'logs' | 'config'>('dashboard');
   const [logs, setLogs] = useState<string[]>([]);
+  const [isLoadingLogs, setIsLoadingLogs] = useState<boolean>(false);
   const optimization = useSystemOptimization();
 
-  const handleExportLogs = () => {
-    const logData = logs.join('\n');
-    const blob = new Blob([logData], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `system-logs-${new Date().toISOString().split('T')[0]}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  const handleExportLogs = async () => {
+    try {
+      setIsLoadingLogs(true);
+      
+      // Get filter values
+      const logLevelSelect = document.querySelector('select[name="logLevel"]') as HTMLSelectElement;
+      const serviceSelect = document.querySelector('select[name="service"]') as HTMLSelectElement;
+      const timeRangeSelect = document.querySelector('select[name="timeRange"]') as HTMLSelectElement;
+      
+      const logLevel = logLevelSelect?.value || 'all';
+      const service = serviceSelect?.value || 'all';
+      const timeRange = timeRangeSelect?.value || '24h';
+      
+      // Calculate date based on time range
+      let date = new Date().toISOString().split('T')[0]; // Default to today
+      
+      if (timeRange === '1h') {
+        // Keep today's date, but we'll filter by time in the API
+      } else if (timeRange === '24h') {
+        // Keep today's date
+      } else if (timeRange === '7d') {
+        // Set date to 7 days ago
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        date = sevenDaysAgo.toISOString().split('T')[0];
+      } else if (timeRange === '30d') {
+        // Set date to 30 days ago
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        date = thirtyDaysAgo.toISOString().split('T')[0];
+      }
+      
+      // Build query parameters
+      const params = new URLSearchParams();
+      if (logLevel !== 'all') params.append('level', logLevel.toLowerCase());
+      if (service !== 'all') params.append('service', service.toLowerCase());
+      params.append('date', date);
+      params.append('timeRange', timeRange);
+      
+      // Call the API
+      const response = await fetch(`/api/admin/logs/export?${params.toString()}`);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to export logs: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to export logs');
+      }
+      
+      // Format logs for download
+      const formattedLogs = data.logs.map((log: any) => {
+        const content = log.content;
+        return `[${content.timestamp}] [${content.level.toUpperCase()}] ${content.message}`;
+      }).join('\n');
+      
+      // Create download file
+      const blob = new Blob([formattedLogs], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `system-logs-${date}-${logLevel}-${service}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      // Update logs display
+      setLogs(formattedLogs.split('\n'));
+    } catch (error) {
+      console.error('Error exporting logs:', error);
+      alert(`Error exporting logs: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setIsLoadingLogs(false);
+    }
   };
 
-  const handleClearLogs = () => {
-    setLogs([]);
+  const handleClearLogs = async () => {
+    try {
+      setIsLoadingLogs(true);
+      
+      // Get filter values
+      const logLevelSelect = document.querySelector('select[name="logLevel"]') as HTMLSelectElement;
+      const serviceSelect = document.querySelector('select[name="service"]') as HTMLSelectElement;
+      const timeRangeSelect = document.querySelector('select[name="timeRange"]') as HTMLSelectElement;
+      
+      const logLevel = logLevelSelect?.value || 'all';
+      const service = serviceSelect?.value || 'all';
+      const timeRange = timeRangeSelect?.value || '24h';
+      
+      // Calculate date based on time range
+      let date = new Date().toISOString().split('T')[0]; // Default to today
+      
+      // Confirm with user
+      if (!confirm(`Are you sure you want to clear all ${logLevel} logs for ${service}?`)) {
+        setIsLoadingLogs(false);
+        return;
+      }
+      
+      // Call the API
+      const response = await fetch('/api/admin/logs/clear', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          date,
+          level: logLevel !== 'all' ? logLevel.toLowerCase() : undefined,
+          service: service !== 'all' ? service.toLowerCase() : undefined,
+          timeRange,
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to clear logs: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to clear logs');
+      }
+      
+      // Clear logs display
+      setLogs([`${data.message} at ${new Date().toLocaleTimeString()}`]);
+      
+      // Refresh logs after a short delay
+      setTimeout(() => fetchLogs(), 2000);
+    } catch (error) {
+      console.error('Error clearing logs:', error);
+      setLogs([`Error clearing logs: ${error instanceof Error ? error.message : 'Unknown error'}`]);
+    } finally {
+      setIsLoadingLogs(false);
+    }
   };
+
+  const fetchLogs = async () => {
+    try {
+      setIsLoadingLogs(true);
+      
+      // Get filter values
+      const logLevelSelect = document.querySelector('select[name="logLevel"]') as HTMLSelectElement;
+      const serviceSelect = document.querySelector('select[name="service"]') as HTMLSelectElement;
+      const timeRangeSelect = document.querySelector('select[name="timeRange"]') as HTMLSelectElement;
+      
+      const logLevel = logLevelSelect?.value || 'all';
+      const service = serviceSelect?.value || 'all';
+      const timeRange = timeRangeSelect?.value || '24h';
+      
+      // Calculate date based on time range
+      let date = new Date().toISOString().split('T')[0]; // Default to today
+      
+      if (timeRange === '1h') {
+        // Keep today's date, but we'll filter by time in the API
+      } else if (timeRange === '24h') {
+        // Keep today's date
+      } else if (timeRange === '7d') {
+        // Set date to 7 days ago
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        date = sevenDaysAgo.toISOString().split('T')[0];
+      } else if (timeRange === '30d') {
+        // Set date to 30 days ago
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        date = thirtyDaysAgo.toISOString().split('T')[0];
+      }
+      
+      // Build query parameters
+      const params = new URLSearchParams();
+      if (logLevel !== 'all') params.append('level', logLevel.toLowerCase());
+      if (service !== 'all') params.append('service', service.toLowerCase());
+      params.append('date', date);
+      
+      // Call the API
+      const response = await fetch(`/api/admin/logs/export?${params.toString()}`);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch logs: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to fetch logs');
+      }
+      
+      // Format logs for display
+      const formattedLogs = data.logs.map((log: any) => {
+        const content = log.content;
+        return `[${content.timestamp}] [${content.level.toUpperCase()}] ${content.message}`;
+      });
+      
+      setLogs(formattedLogs);
+    } catch (error) {
+      console.error('Error fetching logs:', error);
+      setLogs([`Error fetching logs: ${error instanceof Error ? error.message : 'Unknown error'}`]);
+    } finally {
+      setIsLoadingLogs(false);
+    }
+  };
+  
+  // Fetch logs when filters change
+  useEffect(() => {
+    const logLevelSelect = document.querySelector('select[name="logLevel"]') as HTMLSelectElement;
+    const serviceSelect = document.querySelector('select[name="service"]') as HTMLSelectElement;
+    const timeRangeSelect = document.querySelector('select[name="timeRange"]') as HTMLSelectElement;
+    
+    if (logLevelSelect && serviceSelect && timeRangeSelect) {
+      const handleFilterChange = () => fetchLogs();
+      
+      logLevelSelect.addEventListener('change', handleFilterChange);
+      serviceSelect.addEventListener('change', handleFilterChange);
+      timeRangeSelect.addEventListener('change', handleFilterChange);
+      
+      // Initial fetch
+      fetchLogs();
+      
+      return () => {
+        logLevelSelect.removeEventListener('change', handleFilterChange);
+        serviceSelect.removeEventListener('change', handleFilterChange);
+        timeRangeSelect.removeEventListener('change', handleFilterChange);
+      };
+    }
+  }, [activeTab]);
 
   const handleConfigUpdate = (key: string, value: any) => {
     optimization.updateConfig({ [key]: value });
@@ -105,15 +317,15 @@ const SystemAdminPage: React.FC = () => {
                 <div className="space-x-2">
                   <button
                     onClick={handleExportLogs}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-                    disabled={logs.length === 0}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={logs.length === 0 || isLoadingLogs}
                   >
-                    Export Logs
+                    {isLoadingLogs ? 'Loading...' : 'Export Logs'}
                   </button>
                   <button
                     onClick={handleClearLogs}
-                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
-                    disabled={logs.length === 0}
+                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={logs.length === 0 || isLoadingLogs}
                   >
                     Clear Logs
                   </button>
@@ -121,7 +333,15 @@ const SystemAdminPage: React.FC = () => {
               </div>
               
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm max-h-96 overflow-y-auto">
-                {logs.length > 0 ? (
+                {isLoadingLogs ? (
+                  <div className="text-gray-300 flex items-center justify-center py-4">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Loading logs...
+                  </div>
+                ) : logs.length > 0 ? (
                   logs.map((log, index) => (
                     <div key={index} className="mb-1">
                       {log}
@@ -141,7 +361,7 @@ const SystemAdminPage: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Log Level
                   </label>
-                  <select className="w-full border border-gray-300 rounded-md px-3 py-2">
+                  <select name="logLevel" className="w-full border border-gray-300 rounded-md px-3 py-2">
                     <option value="all">All Levels</option>
                     <option value="error">Error</option>
                     <option value="warn">Warning</option>
@@ -153,7 +373,7 @@ const SystemAdminPage: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Service
                   </label>
-                  <select className="w-full border border-gray-300 rounded-md px-3 py-2">
+                  <select name="service" className="w-full border border-gray-300 rounded-md px-3 py-2">
                     <option value="all">All Services</option>
                     <option value="supabase">Supabase</option>
                     <option value="stripe">Stripe</option>
@@ -165,7 +385,7 @@ const SystemAdminPage: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Time Range
                   </label>
-                  <select className="w-full border border-gray-300 rounded-md px-3 py-2">
+                  <select name="timeRange" className="w-full border border-gray-300 rounded-md px-3 py-2">
                     <option value="1h">Last Hour</option>
                     <option value="24h">Last 24 Hours</option>
                     <option value="7d">Last 7 Days</option>

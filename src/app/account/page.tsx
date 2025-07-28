@@ -129,7 +129,7 @@ export default function AccountPage() {
       const supabase = await createClient();
       const { data: profile, error } = await supabase
         .from('profiles')
-        .select('is_admin')
+        .select('user_role')
         .eq('id', user?.id)
         .single();
       
@@ -138,11 +138,11 @@ export default function AccountPage() {
         return;
       }
       
-      setIsAdmin(profile?.is_admin === true);
-      console.log('Admin status:', profile?.is_admin);
+      setIsAdmin(profile?.user_role === 'admin');
+      console.log('Admin status:', profile?.user_role);
       
       // If user is admin, add admin tab
-      if (profile?.is_admin === true) {
+      if (profile?.user_role === 'admin') {
         console.log('User is admin, showing admin tab');
       }
     } catch (error) {

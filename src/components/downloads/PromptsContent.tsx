@@ -6,25 +6,21 @@ import Link from 'next/link';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import { toast } from 'react-hot-toast';
 
-export default function PromptsContent() {
+interface PromptsContentProps {
+  hasAccess?: boolean;
+  isAdmin?: boolean;
+}
+
+export default function PromptsContent({ hasAccess = false, isAdmin = false }: PromptsContentProps) {
   const { user } = useSimpleAuth();
   const router = useRouter();
-  const [hasAccess, setHasAccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
 
-  const searchParams = useSearchParams();
-  const isAdmin = searchParams.get('admin') === 'true';
-
   useEffect(() => {
-    // Simple access check - admin or authenticated user
-    if (isAdmin && user?.email === 'chris.t@ventarosales.com') {
-      setHasAccess(true);
-    } else if (user) {
-      setHasAccess(true); // Simplified - assume access if logged in
-    }
+    // Just set loading to false after component mounts
     setIsLoading(false);
-  }, [user, isAdmin]);
+  }, []);
 
   const handleDownload = () => {
     if (!hasAccess) {

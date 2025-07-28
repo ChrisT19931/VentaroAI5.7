@@ -7,24 +7,20 @@ import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import { toast } from 'react-hot-toast';
 import CoachingCalendar from '@/components/CoachingCalendar';
 
-export default function CoachingContent() {
+interface CoachingContentProps {
+  hasAccess?: boolean;
+  isAdmin?: boolean;
+}
+
+export default function CoachingContent({ hasAccess = false, isAdmin = false }: CoachingContentProps) {
   const { user } = useSimpleAuth();
   const router = useRouter();
-  const [hasAccess, setHasAccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const searchParams = useSearchParams();
-  const isAdmin = searchParams.get('admin') === 'true';
-
   useEffect(() => {
-    // Simple access check - admin or authenticated user
-    if (isAdmin && user?.email === 'chris.t@ventarosales.com') {
-      setHasAccess(true);
-    } else if (user) {
-      setHasAccess(true); // Simplified - assume access if logged in
-    }
+    // Just set loading to false after component mounts
     setIsLoading(false);
-  }, [user, isAdmin]);
+  }, []);
 
   const handleBookingComplete = (bookingId: string) => {
     toast.success('🔥 Booking request submitted successfully!');
