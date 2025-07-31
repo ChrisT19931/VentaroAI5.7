@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
               </p>
               
               <div style="text-align: center; margin-top: 30px;">
-                <p style="color: #999; font-size: 14px;">Best regards,<br>Ventaro AI Team</p>
+                <p style="color: #999; font-size: 14px;">Kind Regards,<br>Ventaro AI</p>
               </div>
             </div>
           </div>

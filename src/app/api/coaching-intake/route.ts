@@ -106,8 +106,8 @@ export async function POST(request: NextRequest) {
               </p>
               
               <p style="color: #666; font-size: 16px; line-height: 1.6;">
-                Best regards,<br>
-                The Ventaro AI Team
+                Kind Regards,<br>
+                Ventaro AI
               </p>
               
               <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">

@@ -333,7 +333,7 @@ export const sendWelcomeEmail = async ({
         
         <p>We look forward to serving you!</p>
         
-        <p>Best regards,<br>The Ventaro Digital Store Team</p>
+        <p>Kind Regards,<br>Ventaro AI</p>
         
         <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 12px;">
           <p>© ${new Date().getFullYear()} Ventaro Digital Store. All rights reserved.</p>
@@ -361,8 +361,8 @@ export const sendWelcomeEmail = async ({
     
     We look forward to serving you!
     
-    Best regards,
-    The Ventaro Digital Store Team
+    Kind Regards,
+    Ventaro AI
   `;
 
   return sendEmail({

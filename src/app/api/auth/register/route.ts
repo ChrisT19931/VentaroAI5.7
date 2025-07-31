@@ -104,7 +104,7 @@ async function sendWelcomeEmail(email: string, name: string) {
         
         <p>If you have any questions, feel free to reach out to our support team.</p>
         
-        <p>Best regards,<br>The Ventaro Team</p>
+        <p>Kind Regards,<br>Ventaro AI</p>
       </div>
       <div class="footer">
         <p>© 2024 Ventaro. All rights reserved.</p>
@@ -128,8 +128,8 @@ async function sendWelcomeEmail(email: string, name: string) {
     
     Visit ${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'} to browse our products.
     
-    Best regards,
-    The Ventaro Team
+    Kind Regards,
+    Ventaro AI
   `;
 
   return sendEmail({

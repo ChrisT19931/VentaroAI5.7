@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
             <a href="mailto:chris.t@ventarosales.com" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Contact Us Directly</a>
           </div>
           
-          <p style="color: #555; line-height: 1.6;">Best regards,<br><strong>The Ventaro Team</strong></p>
+          <p style="color: #555; line-height: 1.6;">Kind Regards,<br><strong>Ventaro AI</strong></p>
         </div>
         
         <div style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;">

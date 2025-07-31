@@ -1,164 +1,87 @@
-'use client'
+'use client';
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
 import CinematicHero from '../components/3d/CinematicHero'
-import { useScrollAnimation, fadeInUpVariants, staggerContainer } from '../hooks/useScrollAnimation'
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    company: '',
-    projectType: '',
-    budget: '',
-    timeline: '',
-    currentWebsite: '',
-    projectVision: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
-
-  // Scroll animation hooks for each section
-  const heroAnimation = useScrollAnimation(0.1);
-  const pricingAnimation = useScrollAnimation(0.1);
-  const featuresAnimation = useScrollAnimation(0.1);
-  const testimonialsAnimation = useScrollAnimation(0.1);
-  const contactAnimation = useScrollAnimation(0.1);
-  const faqAnimation = useScrollAnimation(0.1);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
-    try {
-      const response = await fetch('/api/consultation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage('🎉 Thank you! Your consultation request has been submitted successfully. Check your email for confirmation.');
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          company: '',
-          projectType: '',
-          budget: '',
-          timeline: '',
-          currentWebsite: '',
-          projectVision: ''
-        });
-      } else {
-        setSubmitMessage(`❌ Error: ${result.error || 'Failed to submit consultation request. Please try again.'}`);
-      }
-    } catch (error) {
-      console.error('Consultation form error:', error);
-      setSubmitMessage('❌ Network error. Please check your connection and try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
   return (
     <main className="min-h-screen bg-black">
       {/* Hero Section */}
-      <div className="relative min-h-screen">
+      <div className="relative">
         <CinematicHero />
       </div>
 
       {/* Pricing Tiers Section */}
-      <motion.section 
-        ref={pricingAnimation.ref}
-        initial="hidden"
-        animate={pricingAnimation.isVisible ? "visible" : "hidden"}
-        variants={fadeInUpVariants}
-        className="py-24 bg-black relative overflow-hidden z-10">
-        {/* Cinematic Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-20 w-32 h-32 border border-blue-500/30 rotate-45 animate-pulse" style={{animationDuration: '2s'}}></div>
-          <div className="absolute bottom-20 right-20 w-24 h-24 border border-purple-500/30 rotate-12 animate-pulse delay-500" style={{animationDuration: '2s'}}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-blue-500/10 rounded-full animate-spin" style={{animationDuration: '15s'}}></div>
+      <section className="py-24 bg-gradient-to-br from-gray-950 via-black to-gray-950 relative overflow-hidden z-10">
+        {/* Professional Dark Background Elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950/90 via-black to-gray-950/90"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-slate-700/20 to-slate-900/20 rounded-2xl rotate-12 animate-pulse" style={{animationDuration: '3s'}}></div>
+          <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-slate-600/20 to-slate-800/20 rounded-xl rotate-45 animate-pulse delay-1000" style={{animationDuration: '3s'}}></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-slate-500/10 to-slate-700/10 rounded-full animate-pulse delay-500" style={{animationDuration: '4s'}}></div>
         </div>
         
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="text-center mb-24" id="products">
-            <h2 className="text-6xl md:text-7xl font-black text-white mb-8 glow-text leading-tight">
+          <div className="text-center mb-20">
+            <h2 className="text-6xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl">
               Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">AI Success Plan</span>
             </h2>
-            <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Start your AI journey with our carefully crafted tiers. From beginner-friendly tools to advanced business strategies.
             </p>
           </div>
           
-          <motion.div 
-            variants={staggerContainer}
-            initial="hidden"
-            animate={pricingAnimation.isVisible ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* LITE Plan */}
-            <motion.div 
-              variants={fadeInUpVariants}
-              className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border border-white/20">
+            <div className="group relative bg-gradient-to-br from-slate-900/80 to-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 overflow-hidden border border-slate-700/30">
               <div className="absolute top-4 left-4 z-20">
                 <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
                   LITE
                 </div>
               </div>
-              <div className="h-48 bg-gradient-to-br from-green-900/30 to-emerald-900/30 relative overflow-hidden flex items-center justify-center">
-                <div className="text-6xl font-black text-green-400 opacity-40 glow-text">L</div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                <div className="relative">
+                  <svg className="w-20 h-20 text-emerald-400 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-xl"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               </div>
               <div className="p-8">
-                <h3 className="text-3xl font-black mb-2 text-white glow-text">
+                <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
                   AI Prompts Arsenal 2025
                 </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  30 professional AI prompts across multiple business categories. Expertly crafted for content creation, marketing, SEO, business automation, e-commerce, and personal branding.
+                <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
+                  30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for business growth.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-300">Business, marketing & SEO prompts</span>
+                    <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">30 proven prompts for immediate business implementation</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Creative & e-commerce templates</span>
+                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Content creation prompts for blogs, social media, and marketing</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Personal branding & networking tools</span>
+                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Business planning and strategy prompts</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <div className="text-4xl font-black text-white glow-text mb-2">A$10</div>
-                  <div className="text-sm text-gray-400">One-time payment</div>
+                  <div className="text-5xl font-black text-white drop-shadow-lg mb-2">A$10</div>
+                  <div className="text-sm text-gray-300 font-medium">One-time payment</div>
                 </div>
-                <Link href="/products/2" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-green-500/40">
+                <Link href="/products/2" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white border border-emerald-500/30 hover:shadow-emerald-500/20">
                   Get Started
                 </Link>
               </div>
-            </motion.div>
+            </div>
             
             {/* ADVANCE Plan */}
-            <motion.div 
-              variants={fadeInUpVariants}
-              className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border-2 border-blue-500/40">
+            <div className="group relative bg-gradient-to-br from-slate-900/90 to-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 overflow-hidden border-2 border-slate-600/40">
               <div className="absolute top-4 left-4 z-20">
                 <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
                   ADVANCE
@@ -169,105 +92,110 @@ export default function Home() {
                   POPULAR
                 </div>
               </div>
-              <div className="h-48 bg-gradient-to-br from-blue-900/30 to-purple-900/30 relative overflow-hidden flex items-center justify-center">
-                <div className="text-6xl font-black text-blue-400 opacity-40 glow-text">A</div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                <div className="relative">
+                  <svg className="w-20 h-20 text-blue-400 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               </div>
               <div className="p-8">
-                <h3 className="text-3xl font-black mb-2 text-white glow-text">
+                <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
                   AI Tools Mastery Guide 2025
                 </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
-                  Complete 30-lesson guide to making money with AI in 2025. Each lesson focuses on a specific AI tool or business strategy with clear action steps and practical implementation examples.
+                <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
+                  30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm text-gray-300">Master advanced AI platform techniques</span>
+                    <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Comprehensive business-building knowledge foundation</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Build profitable AI-powered businesses</span>
+                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Detailed AI implementation strategies for online success</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Step-by-step implementation guides</span>
+                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Proven business models and revenue generation tactics</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Complete 30/90/365-day roadmap</span>
+                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Step-by-step implementation guides with real examples</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <div className="flex items-center justify-center space-x-2 mb-2">
-                    <span className="text-4xl font-black text-white glow-text">A$25</span>
-                <span className="text-xl text-gray-500 line-through">A$50</span>
+                  <div className="flex items-center justify-center space-x-3 mb-2">
+                    <span className="text-5xl font-black text-white drop-shadow-lg">A$25</span>
+                    <span className="text-2xl text-gray-400 line-through font-bold">A$50</span>
                   </div>
-                  <div className="text-sm text-green-400 font-semibold animate-pulse" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
+                  <div className="text-sm text-green-300 font-bold animate-pulse bg-green-500/20 px-3 py-1 rounded-full" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
                 </div>
-                <Link href="/products/1" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-500/40">
+                <Link href="/products/1" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white border border-blue-500/30 hover:shadow-blue-500/20">
                   Get Advanced
                 </Link>
               </div>
-            </motion.div>
+            </div>
             
             {/* PRO Plan */}
-            <motion.div 
-              variants={fadeInUpVariants}
-              className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border border-purple-500/40">
+            <div className="group relative bg-gradient-to-br from-slate-900/80 to-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 overflow-hidden border border-slate-700/30">
               <div className="absolute top-4 left-4 z-20">
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
                   PRO
                 </div>
               </div>
-              <div className="h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 relative overflow-hidden flex items-center justify-center">
-                <div className="text-6xl font-black text-purple-400 opacity-40 glow-text">P</div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                <div className="relative">
+                  <svg className="w-20 h-20 text-purple-400 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-xl"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
               </div>
               <div className="p-8">
-                <h3 className="text-3xl font-black mb-2 text-white glow-text">
+                <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
                   AI Business Strategy Session 2025
                 </h3>
-                <p className="text-gray-300 mb-6 leading-relaxed">
+                <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
                   60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span className="text-sm text-gray-300">Live 60-minute video coaching session</span>
+                    <div className="w-3 h-3 bg-purple-400 rounded-full shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Complete knowledge transfer for full business ownership</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Master ChatGPT for business applications</span>
+                    <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Custom website/business deployment from start to finish</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Learn Vercel deployment from scratch</span>
+                    <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Front-end and back-end mastery for total control</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-300">Comprehensive implementation report</span>
+                    <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-lg"></div>
+                    <span className="text-sm text-gray-100 font-medium">Edit and customize your site on the fly without dependencies</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
-                  <div className="flex items-center justify-center space-x-2 mb-2">
-                    <span className="text-4xl font-black text-white glow-text">A$500</span>
-                    <span className="text-xl text-gray-500 line-through">A$3000</span>
-                  </div>
-                  <div className="text-sm text-green-400 font-semibold animate-pulse" style={{animationDuration: '2s'}}>🔥 LAUNCH OFFER - 83% OFF</div>
+                  <div className="text-5xl font-black text-white drop-shadow-lg mb-2">A$500</div>
+                  <div className="text-sm text-gray-300 font-medium">One-time investment</div>
                 </div>
-                <Link href="/products/3" className="neon-button w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/40">
+                <Link href="/products/3" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white border border-purple-500/30 hover:shadow-purple-500/20">
                   Go Pro
                 </Link>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
           
           <div className="text-center mt-16">
-            <p className="text-lg text-gray-300 mb-8">
+            <p className="text-lg text-gray-200 mb-8 font-medium">
               Not sure which plan is right for you? <Link href="/contact" className="text-blue-400 hover:text-blue-300 font-semibold underline glow-text">Get in touch</Link> and we'll help you choose.
             </p>
-            <Link href="/products" className="neon-button group relative inline-flex items-center px-12 py-5 font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl overflow-hidden">
+            <Link href="/products" className="group relative inline-flex items-center px-12 py-5 font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl overflow-hidden bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white border border-slate-600/40 hover:shadow-slate-500/20">
               <span className="relative z-10">View All Products</span>
               <svg className="ml-4 w-6 h-6 transform group-hover:translate-x-3 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -275,289 +203,19 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </motion.section>
-
-      {/* Elite Custom Website Creation Section - FLAGSHIP OFFERING */}
-      <motion.section 
-        ref={featuresAnimation.ref}
-        initial="hidden"
-        animate={featuresAnimation.isVisible ? "visible" : "hidden"}
-        variants={fadeInUpVariants}
-        className="py-32 bg-gradient-to-br from-black via-purple-950/30 to-blue-950/30 relative overflow-hidden">
-        {/* Premium Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-purple-500/5 via-blue-500/10 to-pink-500/5"></div>
-          <div className="absolute top-20 left-20 w-64 h-64 border-2 border-purple-500/20 rotate-12 animate-pulse" style={{animationDuration: '4s'}}></div>
-          <div className="absolute bottom-20 right-20 w-48 h-48 border-2 border-blue-500/20 rotate-45 animate-pulse delay-1000" style={{animationDuration: '4s'}}></div>
-          <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-xl animate-float"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-xl animate-floatDelayed"></div>
-        </div>
-        
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          {/* Elite Header Section */}
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center justify-center px-6 py-3 mb-8 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-purple-500/30 rounded-full backdrop-blur-sm">
-              <svg className="w-6 h-6 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-              </svg>
-              <span className="text-purple-300 font-bold text-sm tracking-wider uppercase">FLAGSHIP PREMIUM SERVICE</span>
-            </div>
-            <h2 className="text-6xl md:text-8xl font-black text-white mb-8 glow-text leading-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400">Elite Custom</span><br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Website Creation</span>
-            </h2>
-            <p className="text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-8">
-              Transform your vision into a <span className="text-purple-400 font-bold">high-converting digital masterpiece</span>. I craft bespoke websites that don't just look stunning—they <span className="text-blue-400 font-bold">drive results and maximize ROI</span>.
-            </p>
-
-          </div>
-          
-
-
-          {/* Elite Inquiry Form Section */}
-          <div className="max-w-6xl mx-auto">
-            <div className="glass-panel rounded-3xl shadow-2xl border-2 border-purple-500/40 overflow-hidden backdrop-blur-xl">
-              <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 p-12 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10"></div>
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-600 rounded-3xl flex items-center justify-center shadow-lg shadow-purple-500/40">
-                      <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-5xl font-black text-white mb-6 glow-text">Ready to Dominate Your Market?</h3>
-                  <p className="text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-8">
-                    Get a <span className="text-purple-400 font-bold">FREE QUOTE</span> and discover how we can transform your business with a <span className="text-blue-400 font-bold">high-converting custom website</span> that drives real results.
-                  </p>
-                  <div className="flex justify-center items-center space-x-12 text-sm text-gray-400 mb-8">
-                    <div className="flex items-center">
-                      <div className="w-3 h-3 bg-purple-500 rounded-full mr-2 animate-pulse"></div>
-                      <span className="font-semibold">No Obligation</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Elite Inquiry Form */}
-              <div className="p-12">
-                <div className="max-w-5xl mx-auto">
-                  <form className="space-y-8" onSubmit={handleSubmit}>
-                    {/* Personal Information Section */}
-                    <div className="grid lg:grid-cols-2 gap-8">
-                      <div className="space-y-6">
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 animate-pulse"></span>
-                            Full Name *
-                          </label>
-                          <input 
-                            type="text"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleInputChange}
-                            placeholder="Enter your full name"
-                            required
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-purple-500/30 rounded-2xl text-white text-lg focus:border-purple-400 focus:ring-4 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mr-3 animate-pulse"></span>
-                            Email *
-                          </label>
-                          <input 
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="your.business@email.com"
-                            required
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-blue-500/30 rounded-2xl text-white text-lg focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mr-3 animate-pulse"></span>
-                            Phone Number *
-                          </label>
-                          <input 
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            placeholder="+1 (555) 123-4567"
-                            required
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-green-500/30 rounded-2xl text-white text-lg focus:border-green-400 focus:ring-4 focus:ring-green-400/20 focus:outline-none transition-all duration-300 hover:border-green-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
-                          />
-                        </div>
-                        
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mr-3 animate-pulse"></span>
-                            Company/Organization
-                          </label>
-                          <input 
-                            type="text"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleInputChange}
-                            placeholder="Your company name"
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-pink-500/30 rounded-2xl text-white text-lg focus:border-pink-400 focus:ring-4 focus:ring-pink-400/20 focus:outline-none transition-all duration-300 hover:border-pink-300 placeholder-gray-400 backdrop-blur-sm shadow-lg"
-                          />
-                        </div>
-                      </div>
-                      
-                      {/* Project Details Section */}
-                      <div className="space-y-6">
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mr-3 animate-pulse"></span>
-                            Project Type *
-                          </label>
-                          <select 
-                            name="projectType"
-                            value={formData.projectType}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-cyan-500/30 rounded-2xl text-white text-lg focus:border-cyan-400 focus:ring-4 focus:ring-cyan-400/20 focus:outline-none transition-all duration-300 hover:border-cyan-300 backdrop-blur-sm shadow-lg">
-                            <option value="">Select your project type</option>
-                            <option value="business-website">🏢 Professional Business Website</option>
-                            <option value="e-commerce">🛒 E-commerce Platform</option>
-                            <option value="web-app">⚡ Custom Web Application</option>
-                            <option value="saas">⚡ SaaS Platform</option>
-                            <option value="enterprise">🏆 Enterprise Solution</option>
-                            <option value="other">💡 Custom Solution (Let's Discuss)</option>
-                          </select>
-                        </div>
-                        
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mr-3 animate-pulse"></span>
-                            Investment Budget *
-                          </label>
-                          <select 
-                            name="budget"
-                            value={formData.budget}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-yellow-500/30 rounded-2xl text-white text-lg focus:border-yellow-400 focus:ring-4 focus:ring-yellow-400/20 focus:outline-none transition-all duration-300 hover:border-yellow-300 backdrop-blur-sm shadow-lg">
-                            <option value="">Select your investment range</option>
-                            <option value="1k-3k">💰 $1,500 - $3,000 (Professional)</option>
-                            <option value="3k-7k">💎 $3,000 - $7,500 (Enterprise)</option>
-                            <option value="7k-15k">🏆 $7,500 - $15,000 (Elite)</option>
-                            <option value="15k-30k">⚡ $15,000 - $30,000 (Premium)</option>
-                            <option value="30k-plus">👑 $30,000+ (Luxury)</option>
-                            <option value="discuss">🤝 Let's Discuss My Vision</option>
-                          </select>
-                        </div>
-                        
-                        <div>
-                          <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                            <span className="w-3 h-3 bg-gradient-to-r from-red-500 to-pink-500 rounded-full mr-3 animate-pulse"></span>
-                            Project Timeline *
-                          </label>
-                          <select 
-                            name="timeline"
-                            value={formData.timeline}
-                            onChange={handleInputChange}
-                            required
-                            className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-red-500/30 rounded-2xl text-white text-lg focus:border-red-400 focus:ring-4 focus:ring-red-400/20 focus:outline-none transition-all duration-300 hover:border-red-300 backdrop-blur-sm shadow-lg">
-                            <option value="">When do you need this completed?</option>
-                            <option value="rush">⚡ Rush Delivery (1-2 weeks) +50% fee</option>
-                            <option value="standard">🎯 Standard Timeline (2-4 weeks)</option>
-                            <option value="extended">📅 Extended Timeline (1-2 months)</option>
-                            <option value="flexible">🤝 Flexible (Quality over speed)</option>
-                          </select>
-                        </div>
-                        
-
-                      </div>
-                    </div>
-                    
-                    {/* Project Vision Section */}
-                    <div className="space-y-6">
-                      <div>
-                        <label className="block text-white font-bold mb-3 flex items-center text-lg">
-                          <span className="w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-3 animate-pulse"></span>
-                          Describe Your Vision *
-                        </label>
-                        <textarea 
-                          rows={6}
-                          name="projectVision"
-                          value={formData.projectVision}
-                          onChange={handleInputChange}
-                          placeholder="Tell us about your project goals, target audience, key features you need, and what success looks like for your business. The more details you provide, the better we can tailor our proposal to exceed your expectations."
-                          required
-                          className="w-full p-5 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-2 border-purple-500/30 rounded-2xl text-white text-lg focus:border-purple-400 focus:ring-4 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 placeholder-gray-400 backdrop-blur-sm shadow-lg resize-none"
-                        ></textarea>
-                      </div>
-                      
-                      {/* Premium CTA Section */}
-                      <div className="text-center pt-8">
-                        <div className="mb-8">
-                          <p className="text-xl text-gray-300 mb-4">
-                            🎯 <span className="text-purple-400 font-bold">Ready to transform your business?</span> We are standing by to create your digital masterpiece.
-                          </p>
-                        </div>
-                        
-                        <button 
-                          type="submit"
-                          disabled={isSubmitting}
-                          className={`group relative inline-flex items-center px-16 py-6 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 text-white text-xl font-black rounded-2xl shadow-2xl hover:shadow-purple-500/40 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 overflow-hidden border-2 border-purple-400/30 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                          <span className="relative z-10 mr-4">
-                            {isSubmitting ? '⏳ SUBMITTING...' : '🔥 GET MY FREE QUOTE'}
-                          </span>
-                          {!isSubmitting && (
-                            <svg className="relative z-10 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                          )}
-                        </button>
-                        
-                        {submitMessage && (
-                          <div className={`mt-6 p-4 rounded-xl text-center font-semibold ${submitMessage.includes('🎉') ? 'bg-green-500/20 text-green-300 border border-green-500/30' : 'bg-red-500/20 text-red-300 border border-red-500/30'}`}>
-                            {submitMessage}
-                          </div>
-                        )}
-                        
-                        <p className="text-sm text-gray-500 mt-6 max-w-2xl mx-auto">
-                          We respect your privacy and will never share your information.
-                        </p>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-
+      </section>
 
       {/* Elite Benefits Section */}
-      <motion.section 
-        id="why-choose-platforms"
-        ref={testimonialsAnimation.ref}
-        initial="hidden"
-        animate={testimonialsAnimation.isVisible ? "visible" : "hidden"}
-        variants={fadeInUpVariants}
-        className="py-24 bg-black relative overflow-hidden">
+      <section className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-purple-900/10"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black text-white mb-6 glow-text">
-              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Full-Stack Platforms</span>
+              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Ventaro</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Build scalable digital businesses with complete ownership, unlimited customization, and higher profit margins.
+              Experience the pinnacle of digital with our high-quality AI-powered solutions.
             </p>
           </div>
           
@@ -565,88 +223,260 @@ export default function Home() {
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">💯 Full Ownership & Control</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Instant Digital Delivery</h3>
               <p className="text-gray-300 leading-relaxed">
-                You own the UI, backend, logic, data, customer flow, SEO, and brand. You can edit anything any time without restrictions.
+                Get immediate access to your purchased products with our seamless, lightning-fast delivery system.
               </p>
             </div>
             
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-green-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🚀 Unlimited Customization</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Build any feature: chatbots, lead scoring, dashboards, login logic, upsells, dynamic pricing — whatever your imagination can create.
-              </p>
-            </div>
-            
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-purple-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">💸 Higher Profit Margins</h3>
-              <p className="text-gray-300 leading-relaxed">
-                No platform fees, no app charges, no transaction percentages. You just pay for hosting (Vercel, Supabase, etc.) — which can be nearly free if optimized.
-              </p>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🔐 Better Data Ownership</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Professional-Grade Content</h3>
               <p className="text-gray-300 leading-relaxed">
-                Your customers, emails, payments, and analytics stay yours. You're not trapped in a platform's ecosystem or terms and conditions.
-              </p>
-            </div>
-            
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-green-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🌍 Scalability & Automation</h3>
-              <p className="text-gray-300 leading-relaxed">
-                You can auto-connect APIs (Stripe, SendGrid, AI, etc.). Build once, deploy anywhere, scale without limits as your business grows.
+                All our products feature high-quality, professional content created with the latest AI technologies.
               </p>
             </div>
             
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-purple-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🧠 Real IP Creation</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Lifetime Access</h3>
               <p className="text-gray-300 leading-relaxed">
-                Your backend logic and AI integrations = actual proprietary tech. That builds long-term brand value, not just a store.
+                No subscriptions, no recurring fees. Pay once and own your digital products forever with unlimited access.
               </p>
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      
+      {/* Elite Custom Website Creation */}
+      <section id="elite-custom-website-creation" className="py-24 bg-black relative overflow-hidden">
+        {/* Premium Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-purple-900/10"></div>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="absolute top-20 right-20 w-32 h-32 border border-purple-500/20 rotate-45 animate-pulse" style={{animationDuration: '3s'}}></div>
+        <div className="absolute bottom-20 left-20 w-24 h-24 border border-blue-500/20 rotate-12 animate-pulse" style={{animationDuration: '4s'}}></div>
+        
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          {/* Elite Header Section */}
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1 bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-full text-xs font-semibold text-purple-300 mb-4 border border-purple-500/30 shadow-lg shadow-purple-500/10">
+              FLAGSHIP PREMIUM SERVICE
+            </span>
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 glow-text">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Elite Custom Website Creation</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Transform your vision into a high-converting digital masterpiece.
+            </p>
+          </div>
+          
+          {/* Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column - Content */}
+            <div>
+              <h3 className="text-3xl font-bold text-white mb-6 glow-text">Ready to Dominate Your Market?</h3>
+              <p className="text-gray-300 mb-8 leading-relaxed">
+                Get a FREE QUOTE and discover how we can transform your business with a high-converting custom website that drives real results.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span className="text-gray-300">FREE Strategy Session</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <span className="text-gray-300">Custom Quote in 24hrs</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                  <span className="text-gray-300">No Obligation</span>
+                </div>
+              </div>
+              
+              <div className="glass-panel rounded-3xl p-6 border border-blue-500/30 mb-8">
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white">Full Custom Site Creation</h4>
+                    <p className="text-gray-400"></p>
+                  </div>
+                </div>
+                <h5 className="text-lg font-semibold text-white mb-3">What's Included:</h5>
+                <ul className="space-y-2 text-gray-300">
+                  <li className="flex items-start space-x-2">
+                    <svg className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Custom design tailored to your brand</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <svg className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Responsive for all devices</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <svg className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>SEO optimization</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <svg className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Content creation</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            {/* Right Column - Form */}
+            <div className="glass-panel rounded-3xl p-8 border border-purple-500/30 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+              <form className="space-y-6">
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                    Full Name *
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="Enter your full name"
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                    Email *
+                  </label>
+                  <input 
+                    type="email" 
+                    placeholder="your.business@email.com"
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                    Phone Number *
+                  </label>
+                  <input 
+                    type="tel" 
+                    placeholder="+1 (555) 123-4567"
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                    Company/Organization
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="Your company name"
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                    Project Type *
+                  </label>
+                  <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm">
+                    <option value="">Select your project type</option>
+                    <option value="business-website">Professional Business Website</option>
+                    <option value="e-commerce">E-commerce Platform</option>
+                    <option value="portfolio">Portfolio/Personal</option>
+                    <option value="blog">Blog/Content Site</option>
+                    <option value="web-app">Web Application</option>
+                    <option value="saas">SaaS Platform</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                    Investment Budget *
+                  </label>
+                  <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
+                    <option value="">Select your investment range</option>
+                    <option value="1k-3k">$1,000 - $3,000</option>
+                    <option value="3k-5k">$3,000 - $5,000</option>
+                    <option value="5k-10k">$5,000 - $10,000</option>
+                    <option value="10k-20k">$10,000 - $20,000</option>
+                    <option value="20k-plus">$20,000+</option>
+                    <option value="discuss">Let's discuss</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                    Project Timeline *
+                  </label>
+                  <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
+                    <option value="">When do you need this completed?</option>
+                    <option value="asap">ASAP (1-2 weeks)</option>
+                    <option value="1-month">Within 1 month</option>
+                    <option value="2-3-months">2-3 months</option>
+                    <option value="3-6-months">3-6 months</option>
+                    <option value="flexible">Flexible timeline</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-white font-semibold mb-2 flex items-center">
+                    <span className="w-2 h-2 bg-pink-400 rounded-full mr-2"></span>
+                    Describe Your Vision *
+                  </label>
+                  <textarea 
+                    rows={5} 
+                    placeholder="Tell us about your project goals, target audience, key features you need, and what success looks like for your business. The more details you provide, the better we can tailor our proposal to exceed your expectations."
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-pink-400/30 rounded-xl text-white focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all duration-300 hover:border-pink-300 backdrop-blur-sm"
+                  ></textarea>
+                </div>
+                
+                <div className="text-center">
+                  <p className="text-gray-300 mb-6">
+                    <span className="text-blue-400">🎯</span> Ready to transform your business? We are standing by to create your digital masterpiece.
+                  </p>
+                  <button type="submit" className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30">
+                    🔥 GET MY FREE QUOTE
+                  </button>
+                  <p className="text-xs text-gray-400 mt-4">
+                    We respect your privacy and will never share your information.
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Elite Call to Action */}
-      <motion.section 
-        ref={contactAnimation.ref}
-        initial="hidden"
-        animate={contactAnimation.isVisible ? "visible" : "hidden"}
-        variants={fadeInUpVariants}
-        className="py-24 bg-gradient-to-br from-black via-gray-900 to-slate-800 text-white relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-slate-800 text-white relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 right-20 w-32 h-32 border border-white/20 rotate-45 animate-pulse" style={{animationDuration: '2s'}}></div>
@@ -659,8 +489,7 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x" style={{animationDuration: '3s'}}>Ready to Transform Your Future?</span>
             </h2>
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-12">
-              Join thousands of forward-thinking professionals who have already embraced the AI revolution. 
-              <span className="font-bold text-white">Everything here was created with AI - and so can your success.</span>
+              Join thousands of forward-thinking professionals who have already embraced the AI revolution.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
   <Link href="/products" className="group relative inline-flex items-center px-12 py-5 bg-gradient-to-r from-white to-gray-100 text-black font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/30 overflow-hidden">
@@ -673,7 +502,7 @@ export default function Home() {
 </div>
           </div>
         </div>
-      </motion.section>
+      </section>
     </main>
   )
 }

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
@@ -43,8 +43,7 @@ export async function POST(request: Request) {
         <p>Dear ${name},</p>
         <p>We have received your message regarding "${subject}" and will get back to you as soon as possible.</p>
         <p>Thank you for your interest in our services.</p>
-        <p>Best regards,</p>
-        <p>The Ventaro Sales Team</p>
+        <p>Kind Regards,<br>Ventaro AI</p>
       `,
     });
 

@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import BuyNowButton from '@/components/BuyNowButton';
+import StarBackground from '@/components/3d/StarBackground';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -82,10 +83,24 @@ export default async function ProductsPage() {
   const products = await getProducts();
   
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <h1 className="text-3xl font-bold mb-8 text-black">AI Business Solutions for Every Stage</h1>
-        <p className="text-lg text-gray-600 mb-8 max-w-3xl">
+    <div className="relative min-h-screen py-12 overflow-hidden">
+      {/* Star Background */}
+      {/* Choose your preferred background: */}
+      {/* Option 1: No background (clean black) */}
+      <StarBackground enabled={false} />
+      
+      {/* Option 2: Simple CSS stars */}
+      {/* <StarBackground simple={true} /> */}
+      
+      {/* Option 3: 3D stars (original) */}
+      {/* <StarBackground /> */}
+      
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-gray-900/80" />
+      
+      <div className="relative z-10 container mx-auto px-4 max-w-6xl">
+        <h1 className="text-3xl font-bold mb-8 text-white">AI Business Solutions for Every Stage</h1>
+        <p className="text-lg text-gray-200 mb-8 max-w-3xl">
           Explore our complete hierarchy of AI business solutions designed for every stage of your online business journey. From entry-level AI Prompts to comprehensive coaching and custom web development services, we have the perfect solution for your needs.
         </p>
         
@@ -118,65 +133,81 @@ export default async function ProductsPage() {
         {/* Products Grid */}
         {products.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product: any) => (
-              <div key={product.id} className="card group hover:shadow-xl transition-shadow duration-300">
-                <div className="h-48 bg-gray-200 relative overflow-hidden">
-                  {product.image_url ? (
-                    <Image 
-                      src={product.image_url}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                      Product Image
-                    </div>
-                  )}
+            {products.map((product: any, index: number) => {
+              const cardColors = [
+                { bg: 'from-slate-900/90 to-gray-900/90', accent: 'emerald', shadow: 'emerald-500/10' },
+                { bg: 'from-slate-900/90 to-gray-900/90', accent: 'blue', shadow: 'blue-500/10' },
+                { bg: 'from-slate-900/80 to-gray-900/80', accent: 'purple', shadow: 'purple-500/10' }
+              ];
+              const colors = cardColors[index % 3];
+              
+              return (
+                <div key={product.id} className={`group relative bg-gradient-to-br ${colors.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${colors.shadow} transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 overflow-hidden border-2 border-slate-600/40`}>
                   {product.featured && (
-                    <div className="absolute top-2 right-2 bg-primary-600 text-white text-xs font-bold px-2 py-1 rounded">
-                      Featured
+                    <div className="absolute top-4 right-4 z-20">
+                      <div className={`bg-gradient-to-r from-${colors.accent}-500 to-${colors.accent}-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse`} style={{animationDuration: '2s'}}>
+                        FEATURED
+                      </div>
                     </div>
                   )}
-                </div>
-                <div className="p-6">
-                  <div className="text-sm text-gray-500 mb-1 capitalize">{product.category || 'Uncategorized'}</div>
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary-600 transition-colors">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">
-                    {product.description}
-                  </p>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-col">
-                        <span className="text-lg font-bold">A${product.price.toFixed(2)}</span>
-                        {product.originalPrice && (
-                          <span className="text-sm text-gray-500 line-through">A${product.originalPrice.toFixed(2)}</span>
-                        )}
-                      </div>
-                      <Link href={`/products/${product.id}`} className="btn-outline text-sm">
-                        View Details
-                      </Link>
+                  <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                    <div className="relative">
+                      <svg className={`w-20 h-20 text-${colors.accent}-400 opacity-60`} fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                      </svg>
+                      <div className={`absolute inset-0 bg-${colors.accent}-400/20 rounded-full blur-xl`}></div>
                     </div>
-                    <BuyNowButton 
-                      product={{
-                        id: product.id,
-                        name: product.name,
-                        price: product.price,
-                        image_url: product.image_url
-                      }} 
-                      className="text-sm py-2"
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  </div>
+                  <div className="p-8">
+                    <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
+                      {product.description}
+                    </p>
+                    <div className="text-center mb-6">
+                      {product.originalPrice ? (
+                        <div>
+                          <div className="flex items-center justify-center space-x-3 mb-2">
+                            <span className="text-3xl font-black text-white drop-shadow-lg">A${product.price.toFixed(2)}</span>
+                            <span className="text-xl text-gray-400 line-through font-bold">A${product.originalPrice.toFixed(2)}</span>
+                          </div>
+                          <div className="text-sm text-green-300 font-bold animate-pulse bg-green-500/20 px-3 py-1 rounded-full" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="text-3xl font-black text-white drop-shadow-lg mb-2">A${product.price.toFixed(2)}</div>
+                          <div className="text-sm text-gray-300 font-medium">One-time payment</div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="space-y-3">
+                      <a 
+                        href={`/products/${product.id}`}
+                        className={`w-full block text-center py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white border border-gray-600/30 hover:shadow-gray-500/20`}
+                      >
+                        View Details
+                      </a>
+                      <BuyNowButton 
+                        product={{
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          image_url: product.image_url
+                        }} 
+                        className={`w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-${colors.accent}-600 to-${colors.accent}-700 hover:from-${colors.accent}-500 hover:to-${colors.accent}-600 text-white border border-${colors.accent}-500/30 hover:shadow-${colors.accent}-500/20`}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-12">
-            <h3 className="text-xl font-medium text-gray-600">No products found</h3>
-            <p className="text-gray-500 mt-2">Try adjusting your filters or check back later.</p>
+            <h3 className="text-xl font-medium text-white">No products found</h3>
+            <p className="text-gray-200 mt-2">Try adjusting your filters or check back later.</p>
           </div>
         )}
       </div>

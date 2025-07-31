@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Modal from '@/components/ui/Modal';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/utils/format';
+import CountdownTimer from '@/components/CountdownTimer';
 
 interface UpsellModalProps {
   isOpen: boolean;
@@ -70,6 +71,7 @@ export default function UpsellModal({
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Upgrade Your AI Arsenal!</h2>
           <p className="text-gray-300">Complete your collection with this perfect companion to your AI Prompts.</p>
+          <CountdownTimer variant="compact" className="mt-4" />
         </div>
 
         <div className="bg-gray-800/50 rounded-lg p-4 mb-6 border border-gray-700/50">

@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
 import BuyNowButton from '@/components/BuyNowButton';
+import CountdownTimer from '@/components/CountdownTimer';
 
 
 
@@ -26,6 +27,52 @@ type Product = {
 const fallbackProducts = {
   '1': {
     id: '1',
+    name: 'AI Business E-Book',
+    description: 'The essential knowledge foundation for building your online business. This comprehensive guide provides half of everything you need to know to create, launch and grow a successful AI-powered business with detailed strategies and implementation plans.',
+    price: 25.00,
+    originalPrice: 50.00,
+    image_url: '/images/products/ai-tools-mastery-guide.svg',
+    category: 'courses',
+    is_active: true,
+    featured: false,
+    product_type: 'digital',
+    created_at: new Date().toISOString(),
+    benefits: [
+      'Comprehensive business-building knowledge foundation',
+      'Detailed AI implementation strategies for online success',
+      'Proven business models and revenue generation tactics',
+      'Step-by-step implementation guides with real examples',
+      'Essential frameworks for sustainable business growth',
+      'The perfect middle step in your business journey'
+    ],
+    details: {
+      description: 'Build a solid foundation for your online business with this comprehensive e-book that provides half of everything you need to know to succeed. From business planning to AI implementation, this guide covers the essential knowledge required to create and grow a profitable online venture.',
+      features: [
+        'Business model selection and validation',
+        'AI tool integration for maximum efficiency',
+        'Marketing and customer acquisition strategies',
+        'Content creation and distribution frameworks',
+        'Revenue optimization techniques',
+        'Scalable business systems and processes'
+      ],
+      includes: [
+        'Comprehensive business-building guide',
+        'AI implementation strategies',
+        'Ready-to-use templates and frameworks',
+        'Business model analysis and selection tools',
+        'Revenue generation tactics and case studies',
+        'Implementation roadmaps and action plans'
+      ],
+      pages: 30,
+      format: 'PDF',
+      language: 'English',
+      level: 'Intermediate',
+      downloadSize: '2.5 MB',
+      readingTime: '45 minutes'
+    }
+  },
+  '2': {
+    id: '2',
     name: 'AI Prompts Starter Pack',
     description: 'Your entry point to AI-powered business success. 30 professionally crafted prompts to kickstart your online business journey with ready-to-use templates for content creation, marketing, customer service, and more.',
     price: 10.00,
@@ -67,36 +114,6 @@ const fallbackProducts = {
       downloadSize: '1.2 MB'
     }
   },
-  '2': {
-    id: '2',
-    name: 'AI Business E-Book',
-    description: 'The essential knowledge foundation for building your online business. This comprehensive guide provides half of everything you need to know to create, launch and grow a successful AI-powered business with detailed strategies and implementation plans.',
-    price: 25.00,
-    originalPrice: 50.00,
-    image_url: '/images/products/ai-tools-mastery-guide.svg',
-    category: 'courses',
-    is_active: true,
-    featured: false,
-    product_type: 'digital',
-    created_at: new Date().toISOString(),
-    benefits: [
-      'Comprehensive business-building knowledge foundation',
-      'Detailed AI implementation strategies for online success',
-      'Proven business models and revenue generation tactics',
-      'Step-by-step implementation guides with real examples',
-      'Essential frameworks for sustainable business growth',
-      'The perfect middle step in your business journey'
-    ],
-    details: {
-      description: 'Build a solid foundation for your online business with this comprehensive e-book that provides half of everything you need to know to succeed. From business planning to AI implementation, this guide covers the essential knowledge required to create and grow a profitable online venture.',
-      features: [
-        'Business model selection and validation',
-        'AI tool integration for maximum efficiency',
-        'Marketing and customer acquisition strategies',
-        'Content creation and distribution frameworks',
-        'Revenue optimization techniques',
-        'Scalable business systems and processes'
-      ],
       includes: [
         'Comprehensive business-building guide',
         'AI implementation strategies',
@@ -159,8 +176,7 @@ const fallbackProducts = {
       followUp: 'Email support included',
       note: 'This package provides complete knowledge transfer for full business ownership and independence.'
     }
-  },
-
+  }
 };
 
 export default function ProductPage() {
@@ -1011,6 +1027,9 @@ export default function ProductPage() {
             )}
 
 
+
+            {/* Countdown Timer */}
+            <CountdownTimer variant="product" className="mb-6" />
 
             {/* CTA Button */}
             <div className="glass-panel rounded-lg p-6 text-center">

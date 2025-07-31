@@ -7,6 +7,144 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import * as THREE from 'three';
 import '@/styles/cinematic.css';
+
+// Enhanced CSS animations for cinematic effects
+const tvEffectStyles = `
+  @keyframes tvStatic {
+    0% { transform: translateX(0) translateY(0); }
+    10% { transform: translateX(-1px) translateY(1px); }
+    20% { transform: translateX(1px) translateY(-1px); }
+    30% { transform: translateX(-1px) translateY(-1px); }
+    40% { transform: translateX(1px) translateY(1px); }
+    50% { transform: translateX(-1px) translateY(0); }
+    60% { transform: translateX(1px) translateY(-1px); }
+    70% { transform: translateX(-1px) translateY(1px); }
+    80% { transform: translateX(1px) translateY(0); }
+    90% { transform: translateX(-1px) translateY(-1px); }
+    100% { transform: translateX(0) translateY(0); }
+  }
+
+  @keyframes epicGlow {
+    0% { 
+      filter: brightness(1.4) contrast(1.3) saturate(1.2) drop-shadow(0 0 30px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 60px rgba(139, 92, 246, 0.6));
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(96, 165, 250, 0.7), 0 0 80px rgba(139, 92, 246, 0.5);
+    }
+    50% { 
+      filter: brightness(1.8) contrast(1.5) saturate(1.4) drop-shadow(0 0 50px rgba(96, 165, 250, 1)) drop-shadow(0 0 100px rgba(139, 92, 246, 0.8));
+      text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(96, 165, 250, 0.9), 0 0 120px rgba(139, 92, 246, 0.7);
+    }
+    100% { 
+      filter: brightness(1.4) contrast(1.3) saturate(1.2) drop-shadow(0 0 30px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 60px rgba(139, 92, 246, 0.6));
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(96, 165, 250, 0.7), 0 0 80px rgba(139, 92, 246, 0.5);
+    }
+  }
+
+  @keyframes holographicShift {
+    0% { 
+      background: linear-gradient(45deg, #60a5fa, #a855f7, #ec4899, #f59e0b, #10b981, #60a5fa);
+      background-size: 400% 400%;
+      background-position: 0% 50%;
+    }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes matrixRain {
+    0% { transform: translateY(-100vh); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+
+  @keyframes pulseWave {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes energyField {
+    0% { 
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.5), inset 0 0 20px rgba(139, 92, 246, 0.3);
+      border-color: rgba(96, 165, 250, 0.5);
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.8), inset 0 0 40px rgba(96, 165, 250, 0.5);
+      border-color: rgba(139, 92, 246, 0.8);
+    }
+    100% { 
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.5), inset 0 0 20px rgba(139, 92, 246, 0.3);
+      border-color: rgba(96, 165, 250, 0.5);
+    }
+  }
+
+  @keyframes quantumFloat {
+    0% { transform: translateY(0px) translateX(0px); }
+    25% { transform: translateY(-10px) translateX(5px); }
+    50% { transform: translateY(-5px) translateX(-3px); }
+    75% { transform: translateY(-15px) translateX(2px); }
+    100% { transform: translateY(0px) translateX(0px); }
+  }
+
+  @keyframes dimensionalShift {
+    0% { 
+      transform: scale(1);
+      filter: hue-rotate(0deg);
+    }
+    25% { 
+      transform: scale(1.05);
+      filter: hue-rotate(90deg);
+    }
+    50% { 
+      transform: scale(1.1);
+      filter: hue-rotate(180deg);
+    }
+    75% { 
+      transform: scale(1.05);
+      filter: hue-rotate(270deg);
+    }
+    100% { 
+      transform: scale(1);
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  @keyframes cosmicBreathing {
+    0% { 
+      transform: scale(1);
+      opacity: 0.8;
+      filter: brightness(1.2) contrast(1.1);
+    }
+    50% { 
+      transform: scale(1.15);
+      opacity: 1;
+      filter: brightness(1.5) contrast(1.3);
+    }
+    100% { 
+      transform: scale(1);
+      opacity: 0.8;
+      filter: brightness(1.2) contrast(1.1);
+    }
+  }
+
+  .particle-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, rgba(96, 165, 250, 0.8), transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(139, 92, 246, 0.6), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(236, 72, 153, 0.7), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(245, 158, 11, 0.5), transparent),
+      radial-gradient(2px 2px at 160px 30px, rgba(16, 185, 129, 0.6), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: matrixRain 8s linear infinite;
+  }
+
+`;
+
 // Removed three-nebula import to fix runtime errors
 
 // Floating particles component
@@ -127,12 +265,12 @@ function SimpleParticleSystem() {
   const particlesRef = useRef<THREE.Points>(null);
   
   const particles = useMemo(() => {
-    const positions = new Float32Array(2000 * 3);
-    const colors = new Float32Array(2000 * 3);
+    const positions = new Float32Array(500 * 3);
+    const colors = new Float32Array(500 * 3);
     
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < 500; i++) {
       // Random spherical distribution
-      const radius = 15 + Math.random() * 25;
+      const radius = 20 + Math.random() * 30;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
       
@@ -140,15 +278,10 @@ function SimpleParticleSystem() {
       positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = radius * Math.cos(phi);
       
-      // Colorful particles
-      const colorType = Math.random();
-      if (colorType < 0.3) {
-        colors[i * 3] = 0.4; colors[i * 3 + 1] = 0.6; colors[i * 3 + 2] = 1.0; // Blue
-      } else if (colorType < 0.6) {
-        colors[i * 3] = 0.5; colors[i * 3 + 1] = 0.3; colors[i * 3 + 2] = 0.9; // Purple
-      } else {
-        colors[i * 3] = 1.0; colors[i * 3 + 1] = 0.4; colors[i * 3 + 2] = 0.6; // Pink
-      }
+      // Subtle white particles only
+      colors[i * 3] = 0.8;
+      colors[i * 3 + 1] = 0.8;
+      colors[i * 3 + 2] = 0.9;
     }
     
     return { positions, colors };
@@ -186,118 +319,98 @@ function SimpleParticleSystem() {
   );
 }
 
-// Enhanced background stars for depth
+// Enhanced background stars with realistic complex movement
 function BackgroundStars() {
   const starsRef = useRef<THREE.Points>(null);
-  const starPositions = useRef<Float32Array>();
-  const originalPositions = useRef<Float32Array>();
+  const starData = useRef<{
+    originalPositions: Float32Array;
+    velocities: Float32Array;
+    phases: Float32Array;
+  } | null>(null);
   
   const starField = useMemo(() => {
-    const positions = new Float32Array(5000 * 3);
-    const colors = new Float32Array(5000 * 3);
-    const sizes = new Float32Array(5000);
+    const positions = new Float32Array(3000 * 3);
+    const colors = new Float32Array(3000 * 3);
+    const velocities = new Float32Array(3000 * 3);
+    const phases = new Float32Array(3000);
     
-    for (let i = 0; i < 5000; i++) {
-      // Spherical distribution
+    for (let i = 0; i < 3000; i++) {
+      // Random spherical distribution
+      const r = Math.random() * 400 + 100;
+      const theta = Math.acos(2 * Math.random() - 1);
       const phi = Math.random() * Math.PI * 2;
-      const costheta = Math.random() * 2 - 1;
-      const u = Math.random();
-      const theta = Math.acos(costheta);
-      const r = 200 + Math.random() * 300;
       
       positions[i * 3] = r * Math.sin(theta) * Math.cos(phi);
       positions[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.cos(theta);
       
-      // Realistic star colors based on temperature
-      const temp = Math.random();
-      if (temp < 0.3) {
-        // Red stars
-        colors[i * 3] = 1.0;
-        colors[i * 3 + 1] = 0.3 + Math.random() * 0.4;
-        colors[i * 3 + 2] = 0.2 + Math.random() * 0.3;
-      } else if (temp < 0.6) {
-        // Yellow-white stars
-        colors[i * 3] = 1.0;
-        colors[i * 3 + 1] = 0.8 + Math.random() * 0.2;
-        colors[i * 3 + 2] = 0.6 + Math.random() * 0.4;
-      } else {
-        // Blue-white stars
-        colors[i * 3] = 0.7 + Math.random() * 0.3;
-        colors[i * 3 + 1] = 0.8 + Math.random() * 0.2;
-        colors[i * 3 + 2] = 1.0;
-      }
+      // Random velocities for natural movement
+      velocities[i * 3] = (Math.random() - 0.5) * 0.01;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.01;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.005;
       
-      sizes[i] = 0.5 + Math.random() * 2.0;
+      // Random phase for twinkling
+      phases[i] = Math.random() * Math.PI * 2;
+      
+      // Varied star colors
+      const temp = Math.random();
+      const brightness = 0.5 + Math.random() * 0.5;
+      
+      if (temp < 0.7) {
+        // White stars
+        colors[i * 3] = brightness;
+        colors[i * 3 + 1] = brightness;
+        colors[i * 3 + 2] = brightness;
+      } else if (temp < 0.85) {
+        // Slightly blue stars
+        colors[i * 3] = brightness * 0.8;
+        colors[i * 3 + 1] = brightness * 0.9;
+        colors[i * 3 + 2] = brightness;
+      } else {
+        // Slightly yellow stars
+        colors[i * 3] = brightness;
+        colors[i * 3 + 1] = brightness * 0.9;
+        colors[i * 3 + 2] = brightness * 0.7;
+      }
     }
     
-    // Store original positions for reference
-     originalPositions.current = positions.slice();
-     starPositions.current = positions.slice();
+    starData.current = {
+      originalPositions: positions.slice(),
+      velocities,
+      phases
+    };
      
      return { positions, colors };
   }, []);
   
   useFrame((state) => {
-    if (starsRef.current && starPositions.current && originalPositions.current) {
+    if (starsRef.current && starData.current) {
       const time = state.clock.elapsedTime;
       const positions = starsRef.current.geometry.attributes.position.array as Float32Array;
+      const { originalPositions, velocities, phases } = starData.current;
       
-      if (time < 2) { // Reduced from 5 seconds to 2 seconds
-        // During intro phase: gentle star movement without streaking/shaking
-        const progress = time / 2; // Adjusted progress calculation
+      // Random twinkling movement only - no drift
+      for (let i = 0; i < 3000; i++) {
+        const i3 = i * 3;
+        const baseX = originalPositions[i3];
+        const baseY = originalPositions[i3 + 1];
+        const baseZ = originalPositions[i3 + 2];
         
-        for (let i = 0; i < 5000; i++) {
-          const i3 = i * 3;
-          const originalX = originalPositions.current[i3];
-          const originalY = originalPositions.current[i3 + 1];
-          const originalZ = originalPositions.current[i3 + 2];
-          
-          // Calculate distance from center for depth effect
-          const distance = Math.sqrt(originalX * originalX + originalY * originalY + originalZ * originalZ);
-          
-          // Subtle z-axis movement for gentle forward motion
-          const zOffset = Math.min(distance / 200, 1) * (1 - progress) * 10;
-          
-          // Very minimal lateral movement for professional look
-          const lateralSpeed = time * 0.2;
-          const lateralAmount = 0.5;
-          const xOffset = Math.sin(lateralSpeed + distance * 0.01) * lateralAmount;
-          const yOffset = Math.cos(lateralSpeed + distance * 0.01) * lateralAmount;
-          
-          // Update positions with subtle movement
-          positions[i3] = originalX + xOffset;
-          positions[i3 + 1] = originalY + yOffset;
-          positions[i3 + 2] = originalZ + zOffset;
-        }
+        // Only twinkling movement - stars stay in place
+        const twinkleX = Math.sin(time * 0.5 + phases[i]) * 0.3;
+        const twinkleY = Math.cos(time * 0.7 + phases[i]) * 0.3;
+        const twinkleZ = Math.sin(time * 0.3 + phases[i]) * 0.15;
         
-        // Add subtle rotation for elegant effect
-        starsRef.current.rotation.z = time * 0.02;
-        starsRef.current.rotation.x = Math.sin(time * 0.3) * 0.05;
-      } else {
-        // After intro phase: stars return to normal positions with gentle rotation
-        const returnProgress = Math.min((time - 2) / 1, 1); // 1 second return (reduced from 2 seconds)
-        
-        if (returnProgress < 1) {
-          // Gradually return stars to their original positions
-          for (let i = 0; i < 5000; i++) {
-            const i3 = i * 3;
-            const currentX = positions[i3];
-            const currentY = positions[i3 + 1];
-            const currentZ = positions[i3 + 2];
-            
-            positions[i3] = THREE.MathUtils.lerp(currentX, originalPositions.current[i3], returnProgress);
-            positions[i3 + 1] = THREE.MathUtils.lerp(currentY, originalPositions.current[i3 + 1], returnProgress);
-            positions[i3 + 2] = THREE.MathUtils.lerp(currentZ, originalPositions.current[i3 + 2], returnProgress);
-          }
-        } else {
-          // Normal slow rotation after stars have returned
-          starsRef.current.rotation.y = time * 0.02;
-          starsRef.current.rotation.x = Math.sin(time * 0.01) * 0.1;
-        }
+        positions[i3] = baseX + twinkleX;
+        positions[i3 + 1] = baseY + twinkleY;
+        positions[i3 + 2] = baseZ + twinkleZ;
       }
       
       starsRef.current.geometry.attributes.position.needsUpdate = true;
+      
+      // Gentle overall rotation
+      starsRef.current.rotation.y = time * 0.001;
+      starsRef.current.rotation.z = Math.sin(time * 0.02) * 0.01;
     }
   });
   
@@ -380,7 +493,6 @@ function Scene() {
       <pointLight position={[15, 5, 10]} color="#ec4899" intensity={0.6} />
       
       {/* Space elements */}
-      <SimpleParticleSystem />
       <BackgroundStars />
       <AnimatedLogo />
       <FloatingParticles />
@@ -405,59 +517,40 @@ function GlassmorphismOverlay() {
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
             }}
           >
-          <h1 className="text-4xl md:text-7xl font-black text-white mb-6 leading-[0.9] tracking-tight transform transition-all duration-1000 hover:scale-105">
-            <span 
-              className="block bg-gradient-to-r from-blue-300 via-white to-purple-300 bg-clip-text text-transparent font-black animate-pulse"
+          <div className="mb-6">
+            <h2 className="text-lg md:text-2xl font-semibold mb-6 text-center relative"
+                style={{
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: 600,
+                  color: '#e5e7eb',
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  position: 'relative',
+                  zIndex: 10
+                }}>
+              VENTARO AI
+            </h2>
+          </div>
+          <h1 className="text-2xl md:text-4xl font-bold text-white mb-8 leading-tight tracking-normal relative"
               style={{
-                textShadow: '0 0 30px rgba(96, 165, 250, 0.8), 0 0 60px rgba(139, 92, 246, 0.6), 0 0 2px rgba(96, 165, 250, 1)',
-                WebkitTextStroke: '1px rgba(96, 165, 250, 0.3)',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 900,
-                letterSpacing: '-0.05em'
-              }}
-            >
-              AI TOOLS THAT
-            </span>
-            <span 
-              className="block bg-gradient-to-r from-purple-300 via-white to-blue-300 bg-clip-text text-transparent font-black mt-2"
-              style={{
-                textShadow: '0 0 40px rgba(139, 92, 246, 0.9), 0 0 80px rgba(96, 165, 250, 0.7), 0 0 2px rgba(139, 92, 246, 1)',
-                WebkitTextStroke: '1px rgba(139, 92, 246, 0.4)',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 900,
-                letterSpacing: '-0.05em'
-              }}
-            >
-              MAKE MONEY
-            </span>
-            <span 
-              className="block text-white font-black mt-4 text-2xl md:text-4xl opacity-90"
-              style={{
-                textShadow: '0 0 20px rgba(96, 165, 250, 0.8), 0 0 40px rgba(139, 92, 246, 0.6), 0 0 1px rgba(96, 165, 250, 0.9)',
-                WebkitTextStroke: '0.5px rgba(96, 165, 250, 0.2)',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 800,
-                letterSpacing: '-0.02em'
-              }}
-            >
-              Build Your Online Business Fast
-            </span>
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontWeight: 700,
+                  color: '#ffffff',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
+                  letterSpacing: '0.02em',
+                  position: 'relative',
+                  zIndex: 10
+                }}>
+              BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90"
-             style={{
-               textShadow: '0 0 10px rgba(96, 165, 250, 0.3), 0 0 20px rgba(139, 92, 246, 0.2)'
-             }}>
-            100% AI-generated resources to help you launch profitable online businesses. 
-            <span className="text-white font-semibold"
-                  style={{
-                    textShadow: '0 0 15px rgba(96, 165, 250, 0.6), 0 0 30px rgba(139, 92, 246, 0.4)',
-                    WebkitTextStroke: '0.3px rgba(96, 165, 250, 0.2)'
-                  }}>Learn how we built this entire site with AI</span> and how you can do the same.
+          <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90">
+            This site was 100% built from scratch coded with AI, we can show you how to do it or do it for you.
           </p>
           
           <div className="space-y-6">
-            <Link 
-              href="/products" 
+            <a 
+              href="#elite-custom-website-creation" 
               className="group relative inline-flex items-center justify-center px-12 py-5 text-lg font-black text-black bg-white rounded-2xl transition-all duration-500 transform hover:scale-110 hover:bg-gray-100 shadow-2xl overflow-hidden"
               style={{ 
                 minWidth: '280px',
@@ -468,13 +561,19 @@ function GlassmorphismOverlay() {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-white via-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
               <span className="relative z-10 flex items-center">
-                EXPLORE PRODUCTS
+                GET CUSTOM WEBSITE
                 <svg className="ml-4 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            </Link>
+            </a>
+            
+            <div className="flex flex-col items-center space-y-4">
+              <Link href="/products" className="text-blue-400 hover:text-blue-300 transition-colors duration-300 text-lg">
+                Do it yourself - Explore products
+              </Link>
+            </div>
             
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 mt-8">
               <span className="flex items-center bg-black/60 backdrop-blur-sm px-5 py-3 rounded-full border border-white/10 shadow-lg">
@@ -497,10 +596,26 @@ function GlassmorphismOverlay() {
 export default function CinematicHero() {
   const [canvasError, setCanvasError] = useState(false);
 
+  // Inject TV effect animation styles
+  useEffect(() => {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = tvEffectStyles;
+    document.head.appendChild(styleElement);
+    
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black cinematic-hero">
-      {/* Fallback background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+      {/* Enhanced fallback background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-900/20 to-black opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/10 via-transparent to-pink-900/10"></div>
+      <div className="absolute inset-0" style={{
+        background: 'radial-gradient(circle at 30% 20%, rgba(96, 165, 250, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
+        animation: 'energyField 15s ease-in-out infinite'
+      }}></div>
       
       {/* 3D Canvas Background with error handling */}
       {!canvasError && (
@@ -525,10 +640,7 @@ export default function CinematicHero() {
       {/* Glassmorphism UI Overlay */}
       <GlassmorphismOverlay />
       
-      {/* Ambient particles overlay */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="particle-field"></div>
-      </div>
+
       
       {/* Gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60 pointer-events-none"></div>
