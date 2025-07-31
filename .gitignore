@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+node_modules/
+**/node_modules/
 
 # testing
 /coverage
@@ -11,9 +13,17 @@
 # next.js
 /.next/
 /out/
+.next/
+**/.next/
 
 # production
 /build
+
+# project specific
+fresh-digitalstore/.next/
+fresh-digitalstore/node_modules/
+fresh-digitalstore/**/.next/
+fresh-digitalstore/**/node_modules/
 
 # misc
 .DS_Store
@@ -33,3 +43,33 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backup files
+*.bak
+
+# downloads directory
+Downloads/
+
+# Large files
+*.pack
+*.node
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.pdf
+*.mp4
+*.mov
+*.avi
+*.webm
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+*.woff
+*.woff2
+*.ttf
+*.eot
