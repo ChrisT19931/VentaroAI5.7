@@ -2,6 +2,17 @@
 
 A modern eCommerce platform built with Next.js 14, Stripe, and Supabase for selling digital products with secure download functionality.
 
+## ⚠️ CRITICAL: UI PRESERVATION RULE
+
+**HARD RULE: THE CURRENT UI MUST BE PRESERVED AT ALL TIMES**
+
+This project has a strict UI preservation policy. The user interface must not be modified without explicit authorization. See [UI_PRESERVATION_RULE.md](./UI_PRESERVATION_RULE.md) for details.
+
+Tools to enforce this rule:
+- Git pre-commit hook to prevent UI file changes
+- UI backup in `ui-backup/` directory
+- Restoration script: `./restore-ui.sh`
+
 ## 🚨 IMPORTANT: Environment Variables Setup
 
 **If you're seeing "Invalid API key" errors**, you need to configure your environment variables properly:
@@ -102,7 +113,10 @@ Open [http://localhost:3001](http://localhost:3001) in your browser.
 # Validate configuration before deployment
 npm run check-config
 
-# Run full deployment check (config + build)
+# Verify environment variables for Vercel deployment
+npm run verify-env
+
+# Run full deployment check (config + verify-env + build)
 npm run deploy-check
 ```
 
@@ -190,11 +204,13 @@ This version includes fixes for admin authentication:
 ## 🎯 Available Scripts
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run setup    # Set up admin user and sample products
-npm run lint     # Run ESLint
+npm run dev         # Start development server
+npm run build       # Build for production
+npm run start       # Start production server
+npm run setup       # Set up admin user and sample products
+npm run check-config # Check if environment variables are loaded
+npm run verify-env  # Verify environment variables for Vercel deployment
+npm run lint        # Run ESLint
 ```
 
 ## 📁 Project Structure
@@ -266,6 +282,9 @@ src/
 ```bash
 # Check if environment variables are loaded
 npm run check-config
+
+# Verify environment variables are configured for Vercel
+npm run verify-env
 
 # Rebuild and test locally
 npm run build

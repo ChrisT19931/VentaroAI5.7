@@ -1,9 +1,11 @@
-'use client';
+'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import CinematicHero from '../components/3d/CinematicHero'
+import { useScrollAnimation, fadeInUpVariants, staggerContainer } from '../hooks/useScrollAnimation'
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -19,6 +21,14 @@ export default function Home() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+
+  // Scroll animation hooks for each section
+  const heroAnimation = useScrollAnimation(0.1);
+  const pricingAnimation = useScrollAnimation(0.1);
+  const featuresAnimation = useScrollAnimation(0.1);
+  const testimonialsAnimation = useScrollAnimation(0.1);
+  const contactAnimation = useScrollAnimation(0.1);
+  const faqAnimation = useScrollAnimation(0.1);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -69,28 +79,15 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative min-h-screen">
         <CinematicHero />
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          <div className="text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-fadeInUp leading-tight">
-              Digital Store
-            </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 mb-12 animate-fadeInUp leading-relaxed" style={{animationDelay: '0.2s'}}>
-              Premium digital products for modern entrepreneurs
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fadeInUp" style={{animationDelay: '0.4s'}}>
-              <Link href="#products" className="neon-button px-10 py-5 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-blue-500/40 text-lg">
-                Explore Products
-              </Link>
-              <Link href="/about" className="glass-panel px-10 py-5 rounded-xl font-bold transition-all duration-300 hover:scale-105 border border-white/20 hover:border-white/40 text-lg">
-                Learn More
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Pricing Tiers Section */}
-      <section className="py-24 bg-black relative overflow-hidden z-10">
+      <motion.section 
+        ref={pricingAnimation.ref}
+        initial="hidden"
+        animate={pricingAnimation.isVisible ? "visible" : "hidden"}
+        variants={fadeInUpVariants}
+        className="py-24 bg-black relative overflow-hidden z-10">
         {/* Cinematic Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
         <div className="absolute inset-0 opacity-20">
@@ -109,9 +106,15 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            animate={pricingAnimation.isVisible ? "visible" : "hidden"}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* LITE Plan */}
-            <div className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border border-white/20">
+            <motion.div 
+              variants={fadeInUpVariants}
+              className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border border-white/20">
               <div className="absolute top-4 left-4 z-20">
                 <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
                   LITE
@@ -150,10 +153,12 @@ export default function Home() {
                   Get Started
                 </Link>
               </div>
-            </div>
+            </motion.div>
             
             {/* ADVANCE Plan */}
-            <div className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border-2 border-blue-500/40">
+            <motion.div 
+              variants={fadeInUpVariants}
+              className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/30 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border-2 border-blue-500/40">
               <div className="absolute top-4 left-4 z-20">
                 <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
                   ADVANCE
@@ -204,10 +209,12 @@ export default function Home() {
                   Get Advanced
                 </Link>
               </div>
-            </div>
+            </motion.div>
             
             {/* PRO Plan */}
-            <div className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border border-purple-500/40">
+            <motion.div 
+              variants={fadeInUpVariants}
+              className="group relative glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 transform hover:-translate-y-3 hover:scale-[1.02] overflow-hidden border border-purple-500/40">
               <div className="absolute top-4 left-4 z-20">
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
                   PRO
@@ -253,8 +260,8 @@ export default function Home() {
                   Go Pro
                 </Link>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
           
           <div className="text-center mt-16">
             <p className="text-lg text-gray-300 mb-8">
@@ -268,10 +275,15 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Elite Custom Website Creation Section - FLAGSHIP OFFERING */}
-      <section className="py-32 bg-gradient-to-br from-black via-purple-950/30 to-blue-950/30 relative overflow-hidden">
+      <motion.section 
+        ref={featuresAnimation.ref}
+        initial="hidden"
+        animate={featuresAnimation.isVisible ? "visible" : "hidden"}
+        variants={fadeInUpVariants}
+        className="py-32 bg-gradient-to-br from-black via-purple-950/30 to-blue-950/30 relative overflow-hidden">
         {/* Premium Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-purple-500/5 via-blue-500/10 to-pink-500/5"></div>
@@ -317,7 +329,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-5xl font-black text-white mb-6 glow-text">Ready to Dominate Your Market?</h3>
                   <p className="text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-8">
-                    Get a <span className="text-purple-400 font-bold">FREE consultation</span> and discover how we can transform your business with a <span className="text-blue-400 font-bold">high-converting custom website</span> that drives real results.
+                    Get a <span className="text-purple-400 font-bold">FREE QUOTE</span> and discover how we can transform your business with a <span className="text-blue-400 font-bold">high-converting custom website</span> that drives real results.
                   </p>
                   <div className="flex justify-center items-center space-x-12 text-sm text-gray-400 mb-8">
                     <div className="flex items-center">
@@ -499,7 +511,7 @@ export default function Home() {
                         >
                           <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                           <span className="relative z-10 mr-4">
-                            {isSubmitting ? '⏳ SUBMITTING...' : '🔥 GET MY FREE CONSULTATION'}
+                            {isSubmitting ? '⏳ SUBMITTING...' : '🔥 GET MY FREE QUOTE'}
                           </span>
                           {!isSubmitting && (
                             <svg className="relative z-10 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -525,21 +537,27 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
 
 
       {/* Elite Benefits Section */}
-      <section className="py-24 bg-black relative overflow-hidden">
+      <motion.section 
+        id="why-choose-platforms"
+        ref={testimonialsAnimation.ref}
+        initial="hidden"
+        animate={testimonialsAnimation.isVisible ? "visible" : "hidden"}
+        variants={fadeInUpVariants}
+        className="py-24 bg-black relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-purple-900/10"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-black text-white mb-6 glow-text">
-              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Ventaro</span>
+              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Full-Stack Platforms</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Experience the pinnacle of digital with our high-quality AI-powered solutions.
+              Build scalable digital businesses with complete ownership, unlimited customization, and higher profit margins.
             </p>
           </div>
           
@@ -547,45 +565,88 @@ export default function Home() {
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Instant Digital Delivery</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">💯 Full Ownership & Control</h3>
               <p className="text-gray-300 leading-relaxed">
-                Get immediate access to your purchased products with our seamless, lightning-fast delivery system.
+                You own the UI, backend, logic, data, customer flow, SEO, and brand. You can edit anything any time without restrictions.
               </p>
             </div>
             
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-green-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Professional-Grade Content</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🚀 Unlimited Customization</h3>
               <p className="text-gray-300 leading-relaxed">
-                All our products feature high-quality, professional content created with the latest AI technologies.
+                Build any feature: chatbots, lead scoring, dashboards, login logic, upsells, dynamic pricing — whatever your imagination can create.
               </p>
             </div>
             
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-purple-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Lifetime Access</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">💸 Higher Profit Margins</h3>
               <p className="text-gray-300 leading-relaxed">
-                No subscriptions, no recurring fees. Pay once and own your digital products forever with unlimited access.
+                No platform fees, no app charges, no transaction percentages. You just pay for hosting (Vercel, Supabase, etc.) — which can be nearly free if optimized.
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🔐 Better Data Ownership</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Your customers, emails, payments, and analytics stay yours. You're not trapped in a platform's ecosystem or terms and conditions.
+              </p>
+            </div>
+            
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-green-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🌍 Scalability & Automation</h3>
+              <p className="text-gray-300 leading-relaxed">
+                You can auto-connect APIs (Stripe, SendGrid, AI, etc.). Build once, deploy anywhere, scale without limits as your business grows.
+              </p>
+            </div>
+            
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-purple-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">🧠 Real IP Creation</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Your backend logic and AI integrations = actual proprietary tech. That builds long-term brand value, not just a store.
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       
       {/* Elite Call to Action */}
-      <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-slate-800 text-white relative overflow-hidden">
+      <motion.section 
+        ref={contactAnimation.ref}
+        initial="hidden"
+        animate={contactAnimation.isVisible ? "visible" : "hidden"}
+        variants={fadeInUpVariants}
+        className="py-24 bg-gradient-to-br from-black via-gray-900 to-slate-800 text-white relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 right-20 w-32 h-32 border border-white/20 rotate-45 animate-pulse" style={{animationDuration: '2s'}}></div>
@@ -612,7 +673,7 @@ export default function Home() {
 </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   )
 }

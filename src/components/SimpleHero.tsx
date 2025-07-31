@@ -55,11 +55,11 @@ export default function SimpleHero() {
             className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent">
-              Unlock Your
+              Build Your Own
             </span>
             <br />
             <span className="text-white">
-              AI Potential
+              Full-Stack Platform
             </span>
           </motion.h1>
           
@@ -70,7 +70,7 @@ export default function SimpleHero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto"
           >
-            Transform your business with cutting-edge AI tools, expert prompts, and personalized coaching sessions.
+            Create scalable digital businesses with complete ownership, unlimited customization, and higher profit margins.
           </motion.p>
           
           {/* CTA Button */}
@@ -91,15 +91,15 @@ export default function SimpleHero() {
             <div className="flex items-center justify-center space-x-8 text-sm text-gray-400 mt-6">
               <span className="flex items-center">
                 <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                Instant Access
+                Better Data Ownership
               </span>
               <span className="flex items-center">
                 <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
-                No Email Required
+                Scalability & Automation
               </span>
               <span className="flex items-center">
                 <div className="w-2 h-2 bg-purple-400 rounded-full mr-2 animate-pulse"></div>
-                Secure Payment
+                Real IP Creation
               </span>
             </div>
           </motion.div>

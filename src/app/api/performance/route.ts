@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { performanceMonitor, getPerformanceReport, getPerformanceScore } from '@/lib/performance-monitor';
 import { checkSupabaseHealth, supabase } from '@/lib/supabase';
-import { checkStripeHealth, stripe } from '@/lib/stripe';
+import { checkStripeHealth, getStripeInstance } from '@/lib/stripe';
 import { checkSendGridHealth, getEmailStats } from '@/lib/sendgrid';
 
 export async function GET(request: NextRequest) {
@@ -16,7 +16,15 @@ export async function GET(request: NextRequest) {
     // Check service health for performance impact
     const [supabaseHealthy, stripeHealthy, sendGridHealthy] = await Promise.allSettled([
       checkSupabaseHealth(supabase),
-      checkStripeHealth(stripe),
+      (async () => {
+        try {
+          const stripe = await getStripeInstance();
+          return await checkStripeHealth(stripe);
+        } catch (error) {
+          console.error('Error checking Stripe health:', error);
+          return false;
+        }
+      })(),
       checkSendGridHealth(),
     ]);
     

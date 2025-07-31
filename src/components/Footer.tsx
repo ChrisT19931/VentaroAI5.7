@@ -2,6 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNewsletterSubscription } from '@/hooks/useNewsletterSubscription';
+import { Toaster } from 'react-hot-toast';
 
 // Animated border component with optimized animation timing
 function AnimatedBorder() {
@@ -17,8 +20,57 @@ function AnimatedBorder() {
 }
 
 export default function Footer() {
+  // Add Toaster for notifications
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { subscribed, setSubscribed, isLoaded } = useNewsletterSubscription();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast.error('Please enter your email address');
+      return;
+    }
+
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        setSubscribed(true);
+        toast.success('Thank you for subscribing to our newsletter!');
+        setEmail('');
+      } else {
+        throw new Error(data.message || 'Failed to subscribe');
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to subscribe. Please try again.');
+      console.error('Newsletter subscription error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer className="relative bg-black/80 backdrop-blur-sm border-t border-gray-800 mt-20">
+      <Toaster position="bottom-center" toastOptions={{ duration: 3000 }} />
       <AnimatedBorder />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -110,6 +162,49 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+
+        {/* Newsletter Subscription */}
+        {isLoaded && (
+          <div className="mt-12 pt-8 border-t border-gray-800">
+            <div className="max-w-md mx-auto">
+              <h3 className="text-xl font-bold text-white mb-4 text-center">
+                Subscribe to Our Newsletter
+              </h3>
+              <p className="text-gray-400 mb-6 text-center text-sm">
+                Stay updated with our latest AI tools, tutorials, and exclusive offers.
+              </p>
+              
+              {subscribed ? (
+                <div className="bg-blue-900/30 border border-blue-500 rounded-lg p-4 text-center">
+                  <p className="text-blue-300 font-medium">Thank you for subscribing!</p>
+                  <p className="text-gray-400 text-sm mt-2">You'll receive our next newsletter soon.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    className="flex-1 px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    disabled={isSubmitting}
+                  />
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                  </button>
+                </form>
+              )}
+              
+              <p className="text-gray-500 text-xs mt-4 text-center">
+                By subscribing, you agree to our <a href="/privacy" className="text-blue-400 hover:text-blue-300">Privacy Policy</a> and consent to receive updates from Ventaro AI.
+              </p>
+            </div>
+          </div>
+        )}
         
         <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
           <p>© {new Date().getFullYear()} Ventaro AI. All rights reserved.</p>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { supabaseAdmin } from '@/lib/supabase';
 import { getSignedUrl, fileExists } from '@/utils/storage';
 
@@ -27,7 +27,7 @@ const verifyToken = (token: string, sessionId: string, orderId: string, productI
 // Helper function to verify product access for GET requests
 async function verifyProductAccess(productType: string, sessionId: string, token: string, orderId: string) {
   try {
-    const supabase = await createClient();
+
     
     // Define product name patterns to match against
     const productPatterns = {
@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
     
     // Handle admin access
     if (isAdmin) {
-      const supabase = await createClient();
+
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
@@ -204,7 +204,7 @@ export async function GET(request: NextRequest) {
         }
         
         // Verify the order exists and is completed
-        const supabase = await createClient();
+
         const { data: order, error: orderError } = await supabase
           .from('orders')
           .select('id, status')
@@ -277,7 +277,7 @@ export async function POST(request: NextRequest) {
   try {
       const { userId, productId, productType, sessionId, orderToken, orderId, guestEmail } = await request.json();
 
-      const supabase = await createClient();
+      
 
       // Check if user is authenticated and is admin
       if (userId) {

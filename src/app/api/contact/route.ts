@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: Request) {
@@ -33,8 +33,23 @@ export async function POST(request: Request) {
       `,
     });
 
+    // Send thank you email to the client
+    await sendEmail({
+      to: email,
+      from: 'noreply@ventarosales.com',
+      subject: 'Thank you for contacting us',
+      html: `
+        <h2>Thank you for reaching out!</h2>
+        <p>Dear ${name},</p>
+        <p>We have received your message regarding "${subject}" and will get back to you as soon as possible.</p>
+        <p>Thank you for your interest in our services.</p>
+        <p>Best regards,</p>
+        <p>The Ventaro Sales Team</p>
+      `,
+    });
+
     // Optional: Store contact submission in database
-    const supabase = await createClient();
+
     await supabase.from('contact_submissions').insert({
       name,
       email,

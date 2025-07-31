@@ -1,13 +1,13 @@
 'use client';
 
-import dynamicImport from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 
-// Force this page to be client-side only
-export const dynamic = 'force-dynamic';
+// Set dynamic params
+export const dynamicParams = true;
 
-const PromptsContentComponent = dynamicImport(() => import('@/components/downloads/PromptsContent'), {
+const PromptsContentComponent = dynamic(() => import('@/components/downloads/PromptsContent'), {
   ssr: false,
   loading: () => (
     <div className="min-h-screen bg-black flex items-center justify-center">
@@ -49,9 +49,14 @@ export default function PromptsDownloadPage() {
           const data = await response.json();
           const userPurchases = data.purchases || [];
           
-          // Check if user has purchased this specific product (ID: 2 for prompts)
+          // Check if user has purchased this specific product (prompts, 2, or ai-prompts-arsenal-2025)
+          // Note: The purchases table doesn't have a status field, so we just check for the product_id
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => purchase.product_id === '2' && purchase.status === 'completed'
+            (purchase: any) => (
+              purchase.product_id === 'prompts' || 
+              purchase.product_id === '2' || 
+              purchase.product_id === 'ai-prompts-arsenal-2025'
+            )
           );
           
           setHasAccess(hasProductAccess);

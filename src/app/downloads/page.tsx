@@ -23,7 +23,7 @@ export default function DownloadsPage() {
     }
 
     // Check if user is admin
-    const adminParam = searchParams.get('admin');
+    const adminParam = searchParams?.get('admin');
     if (adminParam === 'true' && user?.email === 'chris.t@ventarosales.com') {
       setIsAdmin(true);
       setHasAccess(true);
@@ -40,10 +40,8 @@ export default function DownloadsPage() {
           const data = await response.json();
           const userPurchases = data.purchases || [];
           
-          // Extract product IDs from purchases
-          const hasCompletedPurchase = userPurchases.some(
-            (purchase: { status: string }) => purchase.status === 'completed'
-          );
+          // Check if user has any purchases (not checking status since the purchases table doesn't have a status field)
+          const hasCompletedPurchase = userPurchases.length > 0;
           
           setHasAccess(hasCompletedPurchase);
         } else {

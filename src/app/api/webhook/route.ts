@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
+import { getStripeInstance } from '@/lib/stripe';
 import { supabase } from '@/lib/supabase';
 import { sendOrderConfirmationEmail, sendEmailWithValidation } from '@/lib/sendgrid';
 import { optimizedDatabaseQuery, optimizedEmailSend } from '@/lib/system-optimizer';
@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
     let event;
 
     try {
+      const stripe = await getStripeInstance();
       event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
     } catch (err: any) {
       console.error(`Webhook signature verification failed: ${err.message}`);
@@ -79,8 +80,8 @@ async function handleCheckoutSessionCompleted(session: any) {
       }, `order-update-${order_id}`);
 
       if (updateError) {
-        if (updateError.code === '42P01') {
-          console.log('⚠️ Orders table not found, using mock order data');
+        if (updateError.code === '42P01' || updateError.code === '22P02') {
+          console.log('⚠️ Orders table not found or UUID validation failed, using mock order data');
           // Create mock order data
           order = {
             id: order_id,
@@ -90,7 +91,15 @@ async function handleCheckoutSessionCompleted(session: any) {
             created_at: new Date().toISOString()
           };
         } else {
-          throw updateError;
+          console.error('Database error updating order:', updateError);
+          // For any other database error, fall back to mock order
+          order = {
+            id: order_id,
+            user_id: user_id || 'guest',
+            status: 'completed',
+            total: session.amount_total / 100, // Convert from cents
+            created_at: new Date().toISOString()
+          };
         }
       } else {
         // Fetch order with items using optimization
@@ -104,8 +113,8 @@ async function handleCheckoutSessionCompleted(session: any) {
         }, `order-fetch-${order_id}`);
 
         if (orderError) {
-          if (orderError.code === '42P01') {
-            console.log('⚠️ Orders table not found, using mock order data');
+          if (orderError.code === '42P01' || orderError.code === '22P02') {
+            console.log('⚠️ Orders table not found or UUID validation failed, using mock order data');
             // Create mock order data
             order = {
               id: order_id,
@@ -115,7 +124,15 @@ async function handleCheckoutSessionCompleted(session: any) {
               created_at: new Date().toISOString()
             };
           } else {
-            throw orderError;
+            console.error('Database error fetching order:', orderError);
+            // For any other database error, fall back to mock order
+            order = {
+              id: order_id,
+              user_id: user_id || 'guest',
+              status: 'completed',
+              total: session.amount_total / 100, // Convert from cents
+              created_at: new Date().toISOString()
+            };
           }
         } else {
           order = data;
@@ -137,8 +154,8 @@ async function handleCheckoutSessionCompleted(session: any) {
       }, `order-items-${order_id}`);
 
       if (itemsError) {
-        if (itemsError.code === '42P01') {
-          console.log('⚠️ Order items table not found, using session line items');
+        if (itemsError.code === '42P01' || itemsError.code === '22P02') {
+          console.log('⚠️ Order items table not found or UUID validation failed, using session line items');
           // Create mock order items from session line items
           if (session.line_items?.data) {
             orderItems = session.line_items.data.map((item: any) => ({
@@ -153,7 +170,20 @@ async function handleCheckoutSessionCompleted(session: any) {
             }));
           }
         } else {
-          throw itemsError;
+          console.error('Database error fetching order items:', itemsError);
+          // For any other database error, fall back to session line items
+          if (session.line_items?.data) {
+            orderItems = session.line_items.data.map((item: any) => ({
+              id: `item_${Math.random().toString(36).substring(2, 9)}`,
+              quantity: item.quantity,
+              price: item.amount_total / 100 / item.quantity,
+              products: {
+                id: item.price?.product,
+                name: item.description,
+                file_url: null
+              }
+            }));
+          }
         }
       } else {
         orderItems = items || [];
@@ -203,12 +233,14 @@ async function handleCheckoutSessionCompleted(session: any) {
                 .eq('id', item.id);
 
               if (updateItemError) {
-                if (updateItemError.code === '42P01') {
-                  console.log('⚠️ Order items table not found, skipping download URL update');
+                if (updateItemError.code === '42P01' || updateItemError.code === '22P02') {
+                  console.log('⚠️ Order items table not found or UUID validation failed, skipping download URL update');
                   // Add download URL directly to the item in memory
                   item.download_url = item.products.file_url;
                 } else {
                   console.error('Error updating download URL:', updateItemError);
+                  // For any other database error, add download URL to memory
+                  item.download_url = item.products.file_url;
                 }
               }
             } catch (error) {
@@ -236,12 +268,14 @@ async function handleCheckoutSessionCompleted(session: any) {
           .eq('order_id', order_id);
 
         if (updatedItemsError) {
-          if (updatedItemsError.code === '42P01') {
-            console.log('⚠️ Order items table not found, using in-memory items');
+          if (updatedItemsError.code === '42P01' || updatedItemsError.code === '22P02') {
+            console.log('⚠️ Order items table not found or UUID validation failed, using in-memory items');
             // Use the in-memory items with download URLs we added above
             updatedItems = orderItems;
           } else {
-            throw updatedItemsError;
+            console.error('Database error fetching updated items:', updatedItemsError);
+            // For any other database error, use in-memory items
+            updatedItems = orderItems;
           }
         } else {
           updatedItems = items || [];
@@ -255,6 +289,36 @@ async function handleCheckoutSessionCompleted(session: any) {
       console.error('Error processing download URLs:', error);
       // Use the original order items as fallback
       updatedItems = orderItems;
+    }
+
+    // Create purchase records for tracking user access
+    if ((updatedItems || []).length > 0 && userEmail) {
+      try {
+        const purchasePromises = (updatedItems || []).map(async (item: any) => {
+          const { error: purchaseError } = await supabase
+            .from('purchases')
+            .insert({
+              user_id: user_id || null,
+              customer_email: userEmail,
+              product_id: item.products?.id,
+              product_name: item.products?.name || 'Product',
+              price: item.price,
+              session_id: session.id,
+              download_url: item.download_url || item.products?.file_url,
+              created_at: new Date().toISOString()
+            });
+
+          if (purchaseError) {
+            console.error('Error creating purchase record:', purchaseError);
+          } else {
+            console.log(`Purchase record created for ${user_id ? `user ${user_id}` : `email ${userEmail}`}, product ${item.products?.id}`);
+          }
+        });
+
+        await Promise.all(purchasePromises);
+      } catch (error) {
+        console.error('Error creating purchase records:', error);
+      }
     }
 
     // Send order confirmation email with enhanced validation

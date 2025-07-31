@@ -19,7 +19,7 @@ export async function uploadFile(
     const fileName = `${path}/${timestamp}-${Math.random().toString(36).substring(2, 15)}.${fileExtension}`;
     
     // Upload the file to Supabase Storage
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(bucket)
       .upload(fileName, file, {
         cacheControl: '3600',
@@ -31,7 +31,7 @@ export async function uploadFile(
     }
     
     // Get the public URL for the uploaded file
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(bucket)
       .getPublicUrl(data.path);
     
@@ -58,7 +58,7 @@ export async function deleteFile(url: string, bucket: string): Promise<boolean> 
     const path = pathWithBucket.replace(`/${bucket}/`, '');
     
     // Delete the file from Supabase Storage
-    const { error } = await supabaseAdmin.storage
+    const { error } = await supabaseAdmin().storage
       .from(bucket)
       .remove([path]);
     
@@ -86,7 +86,7 @@ export async function getSignedUrl(
   expiresIn: number = 3600
 ): Promise<string> {
   try {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(bucket)
       .createSignedUrl(path, expiresIn);
     
@@ -110,7 +110,7 @@ export async function getSignedUrl(
 export async function fileExists(path: string, bucket: string): Promise<boolean> {
   try {
     // List files with the given path as a prefix
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(bucket)
       .list(path.split('/').slice(0, -1).join('/'), {
         limit: 1,

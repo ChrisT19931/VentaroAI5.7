@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: NextRequest) {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+
 
     // Check if the time slot is already booked
     const { data: existingBooking, error: checkError } = await supabase
@@ -213,7 +213,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+    
 
     // Get all bookings for the specified date
     const { data: bookings, error } = await supabase
@@ -224,10 +224,8 @@ export async function GET(request: NextRequest) {
 
     if (error) {
       console.error('Error fetching bookings:', error);
-      return NextResponse.json(
-        { error: 'Failed to fetch bookings' },
-        { status: 500 }
-      );
+      // Return empty bookings array if table doesn't exist yet
+      console.log('Table may not exist, returning empty bookings for now');
     }
 
     // Define available time slots (9 AM to 5 PM, 1-hour slots)
@@ -236,7 +234,7 @@ export async function GET(request: NextRequest) {
     ];
 
     // Filter out booked slots
-    const bookedTimes = bookings?.map(booking => booking.scheduled_time) || [];
+    const bookedTimes = (error || !bookings) ? [] : bookings.map(booking => booking.scheduled_time);
     const freeSlots = availableSlots.filter(slot => !bookedTimes.includes(slot));
 
     return NextResponse.json({

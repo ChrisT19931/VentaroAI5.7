@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useRouter } from 'next/navigation';
 
 type Product = {
   id: string;
@@ -18,8 +20,19 @@ interface BuyNowButtonProps {
 
 export default function BuyNowButton({ product, className = '' }: BuyNowButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { isAuthenticated, user } = useSimpleAuth();
+  const router = useRouter();
 
   const handleBuyNow = async () => {
+    // Check if user is authenticated before proceeding with purchase
+    if (!isAuthenticated || !user) {
+      toast.error('Please sign up or log in to make a purchase');
+      // Pass current page as redirect parameter so user returns here after signup
+      const currentPath = window.location.pathname;
+      router.push(`/signup?redirect=${encodeURIComponent(currentPath)}`);
+      return;
+    }
+
     setIsLoading(true);
     
     try {

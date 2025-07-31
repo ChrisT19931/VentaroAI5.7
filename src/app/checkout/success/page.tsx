@@ -14,9 +14,9 @@ export default function CheckoutSuccessPage() {
   const { clearCart } = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const sessionId = searchParams.get('session_id');
-  const orderId = searchParams.get('order_id');
-  const isGuest = searchParams.get('guest') === 'true';
+  const sessionId = searchParams?.get('session_id') || null;
+  const orderId = searchParams?.get('order_id') || null;
+  const isGuest = searchParams?.get('guest') === 'true';
 
   useEffect(() => {
     if (!sessionId) {
@@ -106,12 +106,12 @@ export default function CheckoutSuccessPage() {
         <div className="max-w-4xl mx-auto">
           {/* Success Header */}
           <div className="text-center mb-12">
-            <div className="text-green-400 text-6xl mb-4">🔥</div>
-            <h1 className="text-4xl font-bold text-white mb-4">Welcome to Ventaro Nation!</h1>
-            <p className="text-xl text-gray-300 mb-4">Congratulations! You've just joined an exclusive community of AI entrepreneurs.</p>
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-6 mb-6">
-              <h2 className="text-2xl font-bold text-white mb-2">🔥 VIP Access Unlocked!</h2>
-              <p className="text-purple-100">You now have access to exclusive content, bonus materials, and our private community.</p>
+            <div className="text-green-400 text-6xl mb-4">✅</div>
+            <h1 className="text-4xl font-bold text-white mb-4">Thank You for Your Purchase!</h1>
+            <p className="text-xl text-gray-300 mb-4">Congratulations! Your order has been successfully processed.</p>
+            <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg p-6 mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">🎉 Order Complete!</h2>
+              <p className="text-green-100">You can now access your purchased content below.</p>
             </div>
           </div>
 
@@ -139,75 +139,19 @@ export default function CheckoutSuccessPage() {
             </div>
           )}
 
-          {/* Download Links */}
-          {downloadLinks && downloadLinks.length > 0 && (
-            <div className="glass-panel rounded-lg p-8 mb-8">
-              <h2 className="text-2xl font-bold text-white mb-6">Your Downloads</h2>
-              
-              <div className="space-y-4">
-                {downloadLinks.map((item: any, index: number) => (
-                  <div key={index} className="flex items-center justify-between p-6 bg-gray-800/50 rounded-lg border border-gray-600">
-                    <div className="flex items-center space-x-4">
-                      {item.image_url && (
-                        <img 
-                          src={item.image_url} 
-                          alt={item.name || 'Product'}
-                          className="w-16 h-16 object-cover rounded-lg"
-                        />
-                      )}
-                      <div>
-                          <h3 className="text-white font-semibold text-lg">{item.name || 'Digital Product'}</h3>
-                          <p className="text-gray-400">Quantity: {item.quantity}</p>
-                          <p className="text-green-400 font-semibold">A${item.price?.toFixed(2)} AUD</p>
-                        </div>
-                    </div>
-                    
-                    {item.download_url && (
-                      <a
-                        href={item.download_url}
-                        className="btn-primary flex items-center space-x-2 px-6 py-3"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <span>Download Now</span>
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-6 p-4 bg-blue-900/30 rounded-lg border border-blue-700">
-                <div className="flex items-start space-x-3">
-                  <svg className="w-6 h-6 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <div>
-                    <p className="text-blue-200 text-sm font-semibold mb-1">Important Information:</p>
-                    <ul className="text-blue-200 text-sm space-y-1">
-                      <li>• Your download links are secure and will remain active</li>
-                      <li>• Save these links for future access to your purchases</li>
-                      <li>• If you have any issues, please contact our support team</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
-          {/* VIP Portal Access */}
+
+          {/* Access Your Content */}
           <div className="glass-panel rounded-lg p-8 mb-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">💎 Enter Your VIP Portal</h2>
-              <p className="text-gray-300 mb-6">Access exclusive content, bonus materials, affiliate opportunities, and join our private community.</p>
+              <h2 className="text-3xl font-bold text-white mb-4">📚 Access Your Content</h2>
+              <p className="text-gray-300 mb-6">View and manage all your purchased products in your account.</p>
               <Link 
-                href={`/vip-portal?session_id=${sessionId}&order_id=${orderId}&guest=${isGuest}`}
+                href="/my-account"
                 className="btn-primary text-xl px-12 py-4 inline-flex items-center space-x-3"
               >
-                <span>🔓</span>
-                <span>Enter VIP Portal</span>
+                <span>📖</span>
+                <span>View Content</span>
                 <span>→</span>
               </Link>
             </div>

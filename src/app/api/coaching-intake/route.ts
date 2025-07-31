@@ -1,18 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
-import { Resend } from 'resend';
-
-// Create Resend client with fallback for build time
-const getResendClient = () => {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.warn('RESEND_API_KEY not configured - email features will not work');
-    return null;
-  }
-  return new Resend(apiKey);
-};
-
-const resend = getResendClient();
+import { supabase } from '@/lib/supabase';
+import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,7 +26,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+
 
     // Store the intake form data in the database
     const { data: intakeData, error: intakeError } = await supabase
@@ -70,10 +58,8 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to customer
     try {
-      if (resend) {
-        await resend.emails.send({
-        from: 'Ventaro AI <noreply@ventaroai.com>',
-        to: [userEmail],
+      await sendEmail({
+        to: userEmail,
         subject: 'Coaching Session Intake Form Received - Next Steps',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
@@ -131,7 +117,6 @@ export async function POST(request: NextRequest) {
           </div>
         `
         });
-      }
     } catch (emailError) {
       console.error('Error sending confirmation email:', emailError);
       // Don't fail the request if email fails
@@ -139,10 +124,8 @@ export async function POST(request: NextRequest) {
 
     // Send notification email to admin
     try {
-      if (resend) {
-        await resend.emails.send({
-        from: 'Ventaro AI <noreply@ventaroai.com>',
-        to: ['chris.t@ventarosales.com'],
+      await sendEmail({
+        to: 'chris.t@ventarosales.com',
         subject: `New Coaching Intake Form - ${projectType} (${timeline})`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -186,7 +169,6 @@ export async function POST(request: NextRequest) {
           </div>
         `
         });
-      }
     } catch (adminEmailError) {
       console.error('Error sending admin notification:', adminEmailError);
       // Don't fail the request if admin email fails

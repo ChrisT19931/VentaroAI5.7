@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import dynamic from 'next/dynamic';
+import LessonClientWrapper from '@/components/downloads/LessonClientWrapper';
 
 const lessons = [
   'the-ai-revolution-in-2025',
@@ -39,15 +39,11 @@ export default function LessonPage({ params }: { params: { lesson: string } }) {
   if (!lessons.includes(lesson)) {
     notFound();
   }
-  // Dynamically import lesson content component
-  const LessonComponent = dynamic(() => import(`@/components/downloads/lessons/${lesson}`), {
-    ssr: false,
-    loading: () => <div className="text-white">Loading lesson...</div>
-  });
+  // Use the client component wrapper for dynamic import
   return (
     <div className="min-h-screen bg-black py-8">
       <div className="container mx-auto px-4 max-w-4xl">
-        <LessonComponent />
+        <LessonClientWrapper lessonName={lesson} />
       </div>
     </div>
   );

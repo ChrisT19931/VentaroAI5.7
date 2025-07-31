@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import { toast } from 'react-hot-toast';
-import { createClient } from '@/lib/supabase/client';
 import { optimizedApiCall } from '@/lib/client-optimizer';
 
 export type CartItem = {

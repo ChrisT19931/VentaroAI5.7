@@ -75,8 +75,20 @@ async function checkSupabaseConnection() {
 
 async function checkStripeConnection() {
   try {
+    // Check if Stripe secret key exists and is not a placeholder
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    if (!stripeSecretKey || 
+        stripeSecretKey === 'sk_test_placeholder' || 
+        stripeSecretKey.includes('placeholder')) {
+      log(`✗ Stripe Connection: Invalid or missing secret key`, 'red');
+      return false;
+    }
+    
     const Stripe = require('stripe');
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: '2023-10-16',
+      timeout: 10000, // 10 second timeout for config check
+    });
     
     await stripe.products.list({ limit: 1 });
     log(`✓ Stripe Connection: Success`, 'green');

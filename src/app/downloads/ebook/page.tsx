@@ -1,13 +1,13 @@
 'use client';
 
-import dynamicImport from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 
 // Force this page to be client-side only
-export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
-const EbookContentComponent = dynamicImport(() => import('@/components/downloads/EbookContent'), {
+const EbookContentComponent = dynamic(() => import('@/components/downloads/EbookContent'), {
   ssr: false,
   loading: () => (
     <div className="min-h-screen bg-black flex items-center justify-center">
@@ -48,9 +48,14 @@ export default function EbookDownloadPage() {
           const data = await response.json();
           const userPurchases = data.purchases || [];
           
-          // Check if user has purchased this specific product (ID: 1 for ebook)
+          // Check if user has purchased this specific product (ebook, 1, or ai-tools-mastery-guide-2025)
+          // Note: The purchases table doesn't have a status field, so we just check for the product_id
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => purchase.product_id === '1' && purchase.status === 'completed'
+            (purchase: any) => (
+              purchase.product_id === 'ebook' || 
+              purchase.product_id === '1' || 
+              purchase.product_id === 'ai-tools-mastery-guide-2025'
+            )
           );
           
           setHasAccess(hasProductAccess);

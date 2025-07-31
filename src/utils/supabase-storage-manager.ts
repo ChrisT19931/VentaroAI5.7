@@ -79,7 +79,7 @@ export class EmailsStorage {
     const timestamp = emailData.timestamp || new Date().toISOString();
     const filename = customFilename || `email-${generateTimestamp()}.json`;
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, JSON.stringify(emailData, null, 2), {
         contentType: 'application/json',
@@ -93,7 +93,7 @@ export class EmailsStorage {
 
     if (error) throw new Error(`Email upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -104,7 +104,7 @@ export class EmailsStorage {
    * List user's email logs
    */
   static async listEmailLogs(userId: string, limit = 50) {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list('', {
         limit,
@@ -119,7 +119,7 @@ export class EmailsStorage {
    * Download email log content
    */
   static async downloadEmailLog(filename: string): Promise<EmailLog> {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .download(filename);
 
@@ -154,7 +154,7 @@ export class EmailAttachmentsStorage {
     const sanitizedName = sanitizeFilename(file.name);
     const filename = `${userId}/${timestamp}-${sanitizedName}`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, file, {
         metadata: {
@@ -166,7 +166,7 @@ export class EmailAttachmentsStorage {
 
     if (error) throw new Error(`Attachment upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -181,7 +181,7 @@ export class EmailAttachmentsStorage {
    * List user's attachments
    */
   static async listUserAttachments(userId: string) {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(userId, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -214,7 +214,7 @@ export class UserProfilesStorage {
 
     const filename = `${userId}/${type}-${generateTimestamp()}.${fileExt}`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, file, {
         metadata: { userId, imageType: type }
@@ -222,7 +222,7 @@ export class UserProfilesStorage {
 
     if (error) throw new Error(`Profile image upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -238,7 +238,7 @@ export class UserProfilesStorage {
   ): Promise<{ filename: string; url: string }> {
     const filename = `${userId}/profile-${generateTimestamp()}.json`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, JSON.stringify(profileData, null, 2), {
         contentType: 'application/json',
@@ -247,7 +247,7 @@ export class UserProfilesStorage {
 
     if (error) throw new Error(`Profile data upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -279,7 +279,7 @@ export class DocumentsStorage {
     const sanitizedName = customFilename || sanitizeFilename(file.name);
     const filename = `${userId}/documents/${category}/${generateTimestamp()}-${sanitizedName}`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, file, {
         metadata: {
@@ -291,7 +291,7 @@ export class DocumentsStorage {
 
     if (error) throw new Error(`Document upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -304,7 +304,7 @@ export class DocumentsStorage {
   static async listUserDocuments(userId: string, category?: string) {
     const path = category ? `${userId}/documents/${category}` : `${userId}/documents`;
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(path, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -330,7 +330,7 @@ export class LogsStorage {
     const date = new Date().toISOString().split('T')[0];
     const filename = `${date}/${logData.level}/${generateTimestamp()}-log.json`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, JSON.stringify(logData, null, 2), {
         contentType: 'application/json',
@@ -343,7 +343,7 @@ export class LogsStorage {
 
     if (error) throw new Error(`Log upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -356,7 +356,7 @@ export class LogsStorage {
   static async listLogs(date: string, level?: string) {
     const path = level ? `${date}/${level}` : date;
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(path, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -384,7 +384,7 @@ export class ProductsStorage {
     const sanitizedName = customFilename || sanitizeFilename(file.name);
     const filename = `products/${productId}/${type}/${generateTimestamp()}-${sanitizedName}`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, file, {
         metadata: {
@@ -396,7 +396,7 @@ export class ProductsStorage {
 
     if (error) throw new Error(`Product asset upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -409,7 +409,7 @@ export class ProductsStorage {
   static async listProductAssets(productId: string, type?: string) {
     const path = type ? `products/${productId}/${type}` : `products/${productId}`;
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(path, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -440,7 +440,7 @@ export class ChatExportsStorage {
       encrypted: false // Set to true if implementing encryption
     };
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, JSON.stringify(dataToStore, null, 2), {
         contentType: 'application/json',
@@ -453,7 +453,7 @@ export class ChatExportsStorage {
 
     if (error) throw new Error(`Chat export upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -464,7 +464,7 @@ export class ChatExportsStorage {
    * List user's chat exports
    */
   static async listUserChatExports(userId: string) {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(`${userId}/chats`, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -498,7 +498,7 @@ export class DraftsStorage {
     const contentType = type === 'json' ? 'application/json' : 'text/plain';
     const dataToUpload = type === 'json' ? JSON.stringify(JSON.parse(content), null, 2) : content;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, dataToUpload, {
         contentType,
@@ -512,7 +512,7 @@ export class DraftsStorage {
 
     if (error) throw new Error(`Draft upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -525,7 +525,7 @@ export class DraftsStorage {
   static async listUserDrafts(userId: string, category?: string) {
     const path = category ? `${userId}/drafts/${category}` : `${userId}/drafts`;
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(path, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -539,7 +539,7 @@ export class DraftsStorage {
    * Download draft content
    */
   static async downloadDraft(filename: string): Promise<string> {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .download(filename);
 
@@ -563,7 +563,7 @@ export class SettingsStorage {
   ): Promise<{ filename: string; url: string }> {
     const filename = `users/${userId}/settings-${generateTimestamp()}.json`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, JSON.stringify(settings, null, 2), {
         contentType: 'application/json',
@@ -572,7 +572,7 @@ export class SettingsStorage {
 
     if (error) throw new Error(`Settings upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -589,7 +589,7 @@ export class SettingsStorage {
   ): Promise<{ filename: string; url: string }> {
     const filename = `global/${settingName}.json`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, JSON.stringify(settings, null, 2), {
         contentType: 'application/json',
@@ -598,7 +598,7 @@ export class SettingsStorage {
 
     if (error) throw new Error(`Global settings upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -609,7 +609,7 @@ export class SettingsStorage {
    * Get latest user settings
    */
   static async getUserSettings(userId: string): Promise<UserSettings | null> {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(`users/${userId}`, {
         limit: 1,
@@ -619,7 +619,7 @@ export class SettingsStorage {
     if (error || !data || data.length === 0) return null;
 
     const latestFile = data[0];
-    const { data: fileData, error: downloadError } = await supabaseAdmin.storage
+    const { data: fileData, error: downloadError } = await supabaseAdmin().storage
       .from(this.bucketName)
       .download(`users/${userId}/${latestFile.name}`);
 
@@ -650,7 +650,7 @@ export class BackupsStorage {
     const contentType = format === 'json' ? 'application/json' : 'text/csv';
     const dataToUpload = format === 'json' ? JSON.stringify(data, null, 2) : data;
 
-    const { data: uploadData, error } = await supabaseAdmin.storage
+    const { data: uploadData, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, dataToUpload, {
         contentType,
@@ -664,7 +664,7 @@ export class BackupsStorage {
 
     if (error) throw new Error(`Backup upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -682,7 +682,7 @@ export class BackupsStorage {
       path = date;
     }
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(path, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -718,7 +718,7 @@ export class TermsPoliciesStorage {
     const sanitizedName = customFilename || sanitizeFilename(file.name);
     const filename = `${documentType}/${version}/${generateTimestamp()}-${sanitizedName}`;
 
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .upload(filename, file, {
         metadata: {
@@ -731,7 +731,7 @@ export class TermsPoliciesStorage {
 
     if (error) throw new Error(`Legal document upload failed: ${error.message}`);
     
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from(this.bucketName)
       .getPublicUrl(filename);
 
@@ -744,7 +744,7 @@ export class TermsPoliciesStorage {
   static async getLatestDocument(documentType: string, version?: string) {
     const path = version ? `${documentType}/${version}` : documentType;
     
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(path, {
         limit: 1,
@@ -759,7 +759,7 @@ export class TermsPoliciesStorage {
    * List all versions of a document type
    */
   static async listDocumentVersions(documentType: string) {
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from(this.bucketName)
       .list(documentType, {
         sortBy: { column: 'created_at', order: 'desc' }
@@ -844,7 +844,7 @@ export class StorageRouter {
 
     for (const bucket of buckets) {
       try {
-        const { data, error } = await supabaseAdmin.storage
+        const { data, error } = await supabaseAdmin().storage
           .from(bucket)
           .list('', { limit: 1000 });
 

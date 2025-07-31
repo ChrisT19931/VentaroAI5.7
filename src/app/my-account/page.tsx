@@ -6,13 +6,16 @@ import { useSimpleAuth, useDebugAuthState, debugAuthStateGlobal } from '@/contex
 import { createClient } from '@/lib/supabase/client';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
+import { checkProductOwnershipWithLogging } from '@/utils/productOwnership';
+import { Product, Purchase } from '@/types/product';
 
 export default function MyAccountPage() {
   const { user, signOut, isAuthenticated, isLoading: authLoading, stableAuthState } = useSimpleAuth();
   const router = useRouter();
-  const [ownedProducts, setOwnedProducts] = useState<Array<{id: string; name: string; description: string; image_url: string; viewUrl: string; owned: boolean;}>>([]);
+  const [ownedProducts, setOwnedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
   const debugAuth = useDebugAuthState();
 
@@ -35,8 +38,8 @@ export default function MyAccountPage() {
     }
   }, [user?.email]);
 
-  const fetchOwnedProducts = useCallback(async () => {
-    console.log('fetchOwnedProducts called');
+  const fetchOwnedProducts = useCallback(async (forceRefresh = false) => {
+    console.log('fetchOwnedProducts called', { forceRefresh, timestamp: new Date().toISOString() });
     
     try {
       setIsLoading(true);
@@ -78,24 +81,34 @@ export default function MyAccountPage() {
       }
       
       // For non-admin users, fetch their purchases to determine which products they own
-      if (user?.id) {
+      if (user?.id || user?.email) {
         try {
-          const response = await fetch(`/api/purchases/confirm?userId=${user.id}`);
+          // Build query parameters - include both userId and email for better purchase matching
+          const params = new URLSearchParams();
+          if (user.id) params.append('userId', user.id);
+          if (user.email) params.append('email', user.email);
+          
+          const response = await fetch(`/api/purchases/confirm?${params.toString()}`);
           
           if (response.ok) {
             const data = await response.json();
             const userPurchases = data.purchases || [];
             
-            // Mark products as owned based on user's purchases
-            const productsWithOwnership = allProducts.map(product => ({
-              ...product,
-              owned: userPurchases.some((purchase: any) => 
-                purchase.product_id === product.id && purchase.status === 'completed'
-              )
-            }));
+            console.log('User purchases found:', userPurchases);
+            
+            // Mark products as owned based on user's purchases using the new utility function
+            const productsWithOwnership = allProducts.map(product => {
+              const isOwned = userPurchases.some((purchase: Purchase) => {
+                const owns = checkProductOwnershipWithLogging(purchase, product.id, true);
+                return owns;
+              });
+              
+              return { ...product, owned: isOwned };
+            });
             
             console.log('Setting products with ownership status', productsWithOwnership);
             setOwnedProducts(productsWithOwnership);
+            setLastRefresh(new Date());
           } else {
             console.error('Failed to fetch user purchases');
             setOwnedProducts(allProducts); // Fallback to all products not owned
@@ -113,7 +126,7 @@ export default function MyAccountPage() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [isAdmin, user?.id, user?.email]);
 
   useEffect(() => {
     console.log('Auth state changed:', { authLoading, isAuthenticated, user: user?.email, stableAuthState });
@@ -133,6 +146,14 @@ export default function MyAccountPage() {
       checkAdminStatus().then(() => {
         fetchOwnedProducts();
       });
+      
+      // Set up auto-refresh every 30 seconds to check for new purchases
+      const refreshInterval = setInterval(() => {
+        console.log('Auto-refreshing product access...');
+        fetchOwnedProducts(true);
+      }, 30000);
+      
+      return () => clearInterval(refreshInterval);
     } else if (!authLoading && stableAuthState && isAuthenticated && !user) {
       console.log('User object is null but isAuthenticated is true - possible auth state mismatch');
       // Wait a moment and try again if we have this inconsistent state
@@ -191,6 +212,9 @@ export default function MyAccountPage() {
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">My Account</h1>
               <p className="text-gray-300">{user?.email || 'No email available'}</p>
+              <p className="text-gray-400 text-sm mt-1">
+                Last updated: {lastRefresh.toLocaleTimeString()}
+              </p>
               {isAdmin && (
                 <div className="mt-2 inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,9 +224,20 @@ export default function MyAccountPage() {
                 </div>
               )}
             </div>
-            <Button onClick={handleSignOut} variant="danger" size="md">
-              Sign Out
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button 
+                onClick={() => fetchOwnedProducts(true)}
+                variant="outline" 
+                size="md"
+                className="text-blue-400 border-blue-400 hover:bg-blue-400 hover:text-white"
+                disabled={isLoading}
+              >
+                {isLoading ? '🔄' : '🔄'} Refresh
+              </Button>
+              <Button onClick={handleSignOut} variant="danger" size="md">
+                Sign Out
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -257,16 +292,9 @@ export default function MyAccountPage() {
                               href={`${product.viewUrl}${isAdmin ? '?admin=true' : ''}`}
                               variant="primary" 
                               size="md"
+                              className="w-full"
                             >
                               📖 View Content
-                            </Button>
-                            
-                            <Button 
-                              href={`/downloads?product=${product.id}${isAdmin ? '&admin=true' : ''}`}
-                              variant="outline" 
-                              size="md"
-                            >
-                              📥 Download
                             </Button>
                           </>
                         ) : (

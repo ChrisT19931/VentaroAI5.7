@@ -2,6 +2,7 @@ import React from 'react';
 import { performanceMonitor, measureApiCall } from './performance-monitor';
 import { checkSupabaseHealth, executeQuery, createClientWithRetry } from './supabase';
 import { checkStripeHealth } from './stripe';
+import type { Stripe } from 'stripe';
 
 // System optimization configuration
 interface OptimizationConfig {
@@ -261,13 +262,20 @@ class SystemOptimizer {
 
   private async checkStripeHealth(): Promise<boolean> {
     try {
-      // Only run on server side
+      // Skip during build time or on client side
       if (typeof window !== 'undefined') return true;
+      if (process.env.VERCEL_BUILD === 'true') return true;
       if (!this.stripeKey) return false;
-      const Stripe = (await import('stripe')).default;
-      const stripe = new Stripe(this.stripeKey, { apiVersion: '2023-10-16' });
-      const { checkStripeHealth } = await import('./stripe');
-      return await checkStripeHealth(stripe);
+      
+      // Dynamically import and initialize Stripe only at runtime
+      try {
+        const { checkStripeHealth, getStripeInstance } = await import('./stripe');
+        const stripe = await getStripeInstance();
+        return await checkStripeHealth(stripe as Stripe);
+      } catch (importError) {
+        console.error('Failed to import Stripe modules:', importError);
+        return false;
+      }
     } catch (error) {
       console.error('Stripe health check failed:', error);
       return false;

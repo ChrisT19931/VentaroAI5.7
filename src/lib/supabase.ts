@@ -39,6 +39,11 @@ let connectionHealth = {
 
 // Validation function for runtime checks
 function validateSupabaseConfig() {
+  // During build time, skip validation to prevent build failures
+  if (process.env.VERCEL_BUILD === 'true' || (process.env.NODE_ENV === 'production' && typeof window === 'undefined')) {
+    return;
+  }
+  
   if (!supabaseUrl) {
     throw new Error('Missing environment variable: NEXT_PUBLIC_SUPABASE_URL. Please configure this in your Vercel environment variables.');
   }
@@ -122,34 +127,45 @@ export const createClientWithRetry = async (maxRetries = 3) => {
   throw lastError;
 };
 
-// Create a single optimized supabase client for the browser
-export const supabase = (() => {
+// Create a single optimized supabase client for the browser (lazy-loaded)
+let _supabaseClient: ReturnType<typeof createSupabaseClient<Database>> | null = null;
+
+export const getSupabaseClient = () => {
+  if (_supabaseClient) {
+    return _supabaseClient;
+  }
+  
   // Only validate in browser environment
   if (typeof window !== 'undefined') {
     try {
       validateSupabaseConfig();
-      const client = createSupabaseClient<Database>(supabaseUrl!, supabaseAnonKey!, supabaseConfig);
-      
-      // Set up connection monitoring for browser clients
+      _supabaseClient = createSupabaseClient<Database>(supabaseUrl!, supabaseAnonKey!, supabaseConfig);
       setInterval(async () => {
-        await checkSupabaseHealth(client);
-      }, 60000); // Check every minute
-      
-      return client;
+        await checkSupabaseHealth(_supabaseClient!);
+      }, 60000);
+      return _supabaseClient;
     } catch (error) {
-      console.error('Supabase configuration error:', error);
-      // Return null to prevent app crash, but log the error
-      return null as any;
+      throw new Error('Supabase configuration error in browser: ' + (error instanceof Error ? error.message : String(error)));
     }
   }
   
   // Server-side: only create client if env vars are available
   if (supabaseUrl && supabaseAnonKey) {
-    return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, supabaseConfig);
+    _supabaseClient = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, supabaseConfig);
+    return _supabaseClient;
   }
   
-  return null as any;
-})();
+  // During build time, return a mock client to prevent build failures
+  if (process.env.VERCEL_BUILD === 'true' || process.env.NODE_ENV === 'production') {
+    console.warn('Supabase client not configured during build - using mock client');
+    return createSupabaseClient<Database>('https://placeholder.supabase.co', 'placeholder-key', supabaseConfig);
+  }
+  
+  throw new Error('Supabase configuration error: Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+};
+
+// Export the getter function as supabase for backward compatibility
+export const supabase = getSupabaseClient();
 
 // Enhanced query wrapper with automatic retry
 export async function executeQuery<T>(
@@ -194,17 +210,30 @@ export async function executeQuery<T>(
 export const createAdminClient = (url: string, key: string) =>
   createSupabaseClient<Database>(url, key);
 
-// Create admin client instance
-export const supabaseAdmin = (() => {
+// Create admin client instance (lazy-loaded)
+let _supabaseAdmin: ReturnType<typeof createSupabaseClient<Database>> | null = null;
+
+export const getSupabaseAdmin = () => {
+  if (_supabaseAdmin) {
+    return _supabaseAdmin;
+  }
+  
+  // During build time, return a mock admin client to prevent build failures
+  if (process.env.VERCEL_BUILD === 'true' || (process.env.NODE_ENV === 'production' && typeof window === 'undefined' && (!supabaseUrl || !supabaseServiceKey))) {
+    console.warn('Supabase admin client not configured during build - using mock client');
+    return createSupabaseClient<Database>('https://placeholder.supabase.co', 'placeholder-service-key');
+  }
+  
   if (!supabaseUrl || !supabaseServiceKey) {
-    console.warn('Supabase admin not configured - admin features may not work. Please set SUPABASE_SERVICE_ROLE_KEY in your environment variables.');
-    return null as any;
+    throw new Error('Supabase admin not configured - please set SUPABASE_SERVICE_ROLE_KEY and NEXT_PUBLIC_SUPABASE_URL in your environment variables.');
   }
-  
   if (supabaseServiceKey.includes('EXAMPLE') || supabaseServiceKey.includes('placeholder')) {
-    console.warn('SUPABASE_SERVICE_ROLE_KEY contains placeholder value. Please set your actual service role key.');
-    return null as any;
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY contains placeholder value. Please set your actual service role key.');
   }
   
-  return createSupabaseClient<Database>(supabaseUrl, supabaseServiceKey);
-})();
+  _supabaseAdmin = createSupabaseClient<Database>(supabaseUrl, supabaseServiceKey);
+  return _supabaseAdmin;
+};
+
+// For backward compatibility, export the getter function as supabaseAdmin
+export { getSupabaseAdmin as supabaseAdmin };

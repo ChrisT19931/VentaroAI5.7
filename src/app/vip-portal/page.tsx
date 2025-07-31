@@ -22,7 +22,7 @@ export default function VIPPortal() {
     }
 
     // Simple access check - admin or authenticated user
-    const adminParam = searchParams.get('admin');
+    const adminParam = searchParams?.get('admin');
     if (adminParam === 'true' && user?.email === 'chris.t@ventarosales.com') {
       setIsAdmin(true);
       setHasAccess(true);

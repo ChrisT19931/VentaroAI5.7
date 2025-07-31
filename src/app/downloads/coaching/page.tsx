@@ -1,13 +1,13 @@
 'use client';
 
-import dynamicImport from 'next/dynamic';
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 
-// Force this page to be client-side only
-export const dynamic = 'force-dynamic';
+// Set dynamic params
+export const dynamicParams = true;
 
-const CoachingContentComponent = dynamicImport(() => import('@/components/downloads/CoachingContent'), {
+const CoachingContentComponent = dynamic(() => import('@/components/downloads/CoachingContent'), {
   ssr: false,
   loading: () => (
     <div className="min-h-screen bg-black flex items-center justify-center">
@@ -50,8 +50,9 @@ export default function CoachingDownloadPage() {
           const userPurchases = data.purchases || [];
           
           // Check if user has purchased this specific product (ID: 3 for coaching)
+          // Note: The purchases table doesn't have a status field, so we just check for the product_id
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => purchase.product_id === '3' && purchase.status === 'completed'
+            (purchase: any) => purchase.product_id === '3' || purchase.product_id === 'ai-business-strategy-session-2025'
           );
           
           setHasAccess(hasProductAccess);

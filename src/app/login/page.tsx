@@ -14,18 +14,10 @@ export default function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const confirmed = searchParams.get('confirmed');
+  const confirmed = searchParams?.get('confirmed');
   // Using react-hot-toast directly
 
-  useEffect(() => {
-    if (confirmed === 'true') {
-      toast.success('Email confirmed successfully! You can now log in to your account.');
-      // Remove the confirmed parameter from URL
-      const newUrl = new URL(window.location.href);
-      newUrl.searchParams.delete('confirmed');
-      window.history.replaceState({}, '', newUrl.toString());
-    }
-  }, [confirmed]);
+  // Removed email confirmation logic since email verification is disabled
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +45,7 @@ export default function LoginPage() {
         const data = await response.json();
 
         if (response.ok) {
-          toast.success('Registration successful! Please check your email to confirm your account.');
+          toast.success('Registration successful! You can now log in to your account.');
           setIsRegistering(false);
           // Clear form
           setEmail('');

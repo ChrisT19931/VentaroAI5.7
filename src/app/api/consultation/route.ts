@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: Request) {
@@ -131,7 +131,6 @@ export async function POST(request: Request) {
     ]);
 
     // Store consultation request in database
-    const supabase = await createClient();
     await supabase.from('consultation_requests').insert({
       full_name: fullName,
       email,

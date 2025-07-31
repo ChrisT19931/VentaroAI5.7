@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { createClient } from '@/lib/supabase/client';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
-  typescript: true,
-});
+// Import Stripe type only, not the actual module
+import type { Stripe } from 'stripe';
+import { supabase } from '@/lib/supabase';
+import { getStripeInstance } from '@/lib/stripe';
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,6 +16,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify the Stripe session
+    const stripe = await getStripeInstance();
     const session = await stripe.checkout.sessions.retrieve(session_id);
 
     if (session.payment_status !== 'paid') {
@@ -32,7 +30,7 @@ export async function POST(request: NextRequest) {
     let orderDetails: any = null;
     let downloadLinks: any[] = [];
 
-    const supabase = createClient();
+
 
     try {
       // Try to get order from database first
@@ -85,6 +83,39 @@ export async function POST(request: NextRequest) {
             .from('orders')
             .update({ status: 'completed' })
             .eq('id', order_id);
+
+          // Create purchase records for each item to unlock products in user account
+          const purchasePromises = order.order_items.map(async (item: any) => {
+            const product = item.products;
+            if (product) {
+              const { error: purchaseError } = await supabase
+                .from('purchases')
+                .upsert({
+                  user_id: order.user_id,
+                  product_id: product.id,
+                  product_name: product.name,
+                  amount: item.price,
+                  currency: 'USD',
+                  status: 'completed',
+                  order_number: order.order_number || order.id,
+                  payment_intent_id: session.payment_intent,
+                  created_at: new Date().toISOString()
+                }, {
+                  onConflict: 'user_id,product_id,order_number'
+                });
+
+              if (purchaseError) {
+                console.error('Error creating purchase record:', purchaseError);
+              }
+            }
+          });
+
+          try {
+            await Promise.all(purchasePromises);
+            console.log('Purchase records created successfully');
+          } catch (purchaseError) {
+            console.error('Failed to create some purchase records:', purchaseError);
+          }
         }
       }
     } catch (dbError) {
@@ -127,6 +158,46 @@ export async function POST(request: NextRequest) {
           download_url: downloadUrl
         };
       });
+
+      // Create purchase records for fallback scenario (when using session metadata)
+      if (session.customer_details?.email) {
+        const purchasePromises = lineItems.data.map(async (item: any) => {
+          const product = item.price.product;
+          if (product) {
+            try {
+              const { error: purchaseError } = await supabase
+                .from('purchases')
+                .upsert({
+                  user_id: session.metadata?.user_id || null,
+                  product_id: product.id,
+                  product_name: product.name,
+                  amount: (item.amount_total || 0) / 100,
+                  currency: 'USD',
+                  status: 'completed',
+                  order_number: orderDetails.id,
+                  payment_intent_id: session.payment_intent,
+                  customer_email: session.customer_details.email,
+                  created_at: new Date().toISOString()
+                }, {
+                  onConflict: 'product_id,order_number,customer_email'
+                });
+
+              if (purchaseError) {
+                console.error('Error creating fallback purchase record:', purchaseError);
+              }
+            } catch (error) {
+              console.error('Failed to create fallback purchase record:', error);
+            }
+          }
+        });
+
+        try {
+          await Promise.all(purchasePromises);
+          console.log('Fallback purchase records created successfully');
+        } catch (purchaseError) {
+          console.error('Failed to create some fallback purchase records:', purchaseError);
+        }
+      }
     }
 
     return NextResponse.json({

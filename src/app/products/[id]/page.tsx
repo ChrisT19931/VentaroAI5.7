@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import AddToCartButton from '@/components/AddToCartButton';
 import BuyNowButton from '@/components/BuyNowButton';
 
@@ -26,75 +26,30 @@ type Product = {
 const fallbackProducts = {
   '1': {
     id: '1',
-    name: 'AI Tools Mastery Guide 2025',
-    description: '30 powerful lessons to help you build a profitable online business using AI tools like ChatGPT, Gemini, Claude, and Trae/Cursor. Master the art of AI-powered entrepreneurship with step-by-step implementation guides.',
-    price: 25.00,
-    originalPrice: 50.00,
-    image_url: '/images/products/ai-tools-mastery-guide.svg',
-    category: 'courses',
+    name: 'AI Prompts Starter Pack',
+    description: 'Your entry point to AI-powered business success. 30 professionally crafted prompts to kickstart your online business journey with ready-to-use templates for content creation, marketing, customer service, and more.',
+    price: 10.00,
+    originalPrice: 25.00,
+    image_url: '/images/products/ai-prompts-arsenal.svg',
+    category: 'tools',
     is_active: true,
     featured: true,
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      'Master ChatGPT, Gemini, Claude & Trae/Cursor for business',
-      '30 actionable lessons for online business building',
-      'AI-powered content creation and automation strategies',
-      'Proven business models and revenue generation tactics',
-      'Step-by-step implementation guides with real examples',
-      'Transform AI tools into profitable business opportunities'
-    ],
-    details: {
-      description: 'Transform your entrepreneurial dreams into reality with 30 comprehensive lessons designed to help you build a thriving online business using cutting-edge AI tools. From ChatGPT and Gemini to Claude and Trae/Cursor, master the tools that are revolutionizing how businesses operate and generate revenue.',
-      features: [
-        'ChatGPT mastery for content creation and customer service',
-        'Gemini integration for data analysis and insights',
-        'Claude utilization for advanced writing and research',
-        'Trae/Cursor for automated coding and development',
-        'AI-powered marketing and sales strategies',
-        'Business automation and workflow optimization'
-      ],
-      includes: [
-        '30 comprehensive business-building lessons',
-        'AI tool mastery guides for each platform',
-        'Ready-to-use prompts and templates',
-        'Business model frameworks and strategies',
-        'Revenue generation tactics and case studies',
-        'Implementation roadmaps and action plans'
-      ],
-      pages: 30,
-      format: 'PDF',
-      language: 'English',
-      level: 'Beginner to Advanced',
-      downloadSize: '2.5 MB',
-      readingTime: '45 minutes'
-    }
-  },
-  '2': {
-    id: '2',
-    name: 'AI Prompts Arsenal 2025',
-    description: '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing, SEO, business automation, e-commerce, and personal branding.',
-    price: 10.00,
-    image_url: '/images/products/ai-prompts-arsenal.svg',
-    category: 'tools',
-    is_active: true,
-    featured: false,
-    product_type: 'digital',
-    created_at: new Date().toISOString(),
-    benefits: [
-      '30 proven prompts for building online business',
-      'Copy-paste ready for immediate use',
+      '30 proven prompts for immediate business implementation',
+      'Copy-paste ready for instant results',
       'Works with ChatGPT, Claude, and other AI tools',
-      'Organized by business category',
-      'Simple instructions included',
-      'Start implementing immediately'
+      'Organized by business function for easy navigation',
+      'Simple instructions for maximum effectiveness',
+      'Perfect starting point for your AI business journey'
     ],
     details: {
-      description: 'Get 30 expertly crafted AI prompts that help you build your online business across multiple categories. Each prompt is tested and ready to use - just copy, paste, and start implementing your AI-powered business strategy.',
+      description: 'Begin your AI business journey with our carefully curated collection of 30 professional prompts designed to help you implement AI solutions immediately. Each prompt is tested and optimized for business results - simply copy, paste, and watch your productivity soar.',
       features: [
         'Content creation prompts for blogs, social media, and marketing',
-        'SEO and visibility enhancement prompts',
-        'Business automation workflow prompts',
+        'Customer service automation templates',
+        'Business planning and strategy prompts',
         'E-commerce and product description generators',
         'Personal branding and networking prompts'
       ],
@@ -112,10 +67,56 @@ const fallbackProducts = {
       downloadSize: '1.2 MB'
     }
   },
+  '2': {
+    id: '2',
+    name: 'AI Business E-Book',
+    description: 'The essential knowledge foundation for building your online business. This comprehensive guide provides half of everything you need to know to create, launch and grow a successful AI-powered business with detailed strategies and implementation plans.',
+    price: 25.00,
+    originalPrice: 50.00,
+    image_url: '/images/products/ai-tools-mastery-guide.svg',
+    category: 'courses',
+    is_active: true,
+    featured: false,
+    product_type: 'digital',
+    created_at: new Date().toISOString(),
+    benefits: [
+      'Comprehensive business-building knowledge foundation',
+      'Detailed AI implementation strategies for online success',
+      'Proven business models and revenue generation tactics',
+      'Step-by-step implementation guides with real examples',
+      'Essential frameworks for sustainable business growth',
+      'The perfect middle step in your business journey'
+    ],
+    details: {
+      description: 'Build a solid foundation for your online business with this comprehensive e-book that provides half of everything you need to know to succeed. From business planning to AI implementation, this guide covers the essential knowledge required to create and grow a profitable online venture.',
+      features: [
+        'Business model selection and validation',
+        'AI tool integration for maximum efficiency',
+        'Marketing and customer acquisition strategies',
+        'Content creation and distribution frameworks',
+        'Revenue optimization techniques',
+        'Scalable business systems and processes'
+      ],
+      includes: [
+        'Comprehensive business-building guide',
+        'AI implementation strategies',
+        'Ready-to-use templates and frameworks',
+        'Business model analysis and selection tools',
+        'Revenue generation tactics and case studies',
+        'Implementation roadmaps and action plans'
+      ],
+      pages: 30,
+      format: 'PDF',
+      language: 'English',
+      level: 'Intermediate',
+      downloadSize: '2.5 MB',
+      readingTime: '45 minutes'
+    }
+  },
   '3': {
     id: '3',
-    name: 'AI Business Strategy Session 2025',
-    description: '60-minute screen-recorded Google Meet session where I guide you step-by-step through building, deploying, and launching your own online store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🔥 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
+    name: 'Complete Business Deployment Coaching',
+    description: 'The ultimate solution for entrepreneurs who want complete knowledge and guidance to deploy a custom-built website or online business from start to finish. Take full ownership of your front-end and back-end with the ability to edit and customize on the fly.',
     price: 500.00,
     image_url: '/images/products/ai-business-strategy-session.svg',
     category: 'services',
@@ -124,41 +125,42 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      '60-minute screen-recorded Google Meet session',
-      'Personal step-by-step guidance and mentoring',
-      'Complete online store/website building tutorial',
-      'Live deployment and launch walkthrough',
-      'Real-time problem solving and implementation',
-      'Detailed implementation report included',
-      'Start-to-finish guidance with practical examples'
+      'Complete knowledge transfer for full business ownership',
+      'Custom website/business deployment from start to finish',
+      'Front-end and back-end mastery for total control',
+      'Edit and customize your site on the fly without dependencies',
+      'Personalized coaching tailored to your specific business',
+      'Comprehensive implementation support and guidance',
+      'Long-term independence and self-sufficiency'
     ],
     details: {
-      description: 'Join a personalized 60-minute screen-recorded Google Meet session where I will guide you step-by-step through the entire process of building, deploying, and launching your own online store/website. This comprehensive session includes hands-on guidance and a detailed implementation report.',
+      description: 'Take complete control of your online business with our comprehensive coaching program. Learn everything you need to deploy, manage, and customize your own website or online store from start to finish. This personalized coaching experience provides all the knowledge and skills required for true business ownership and independence.',
       features: [
-        'Screen-recorded Google Meet session with expert guidance',
-        'Step-by-step website/online store building tutorial',
-        'Live deployment and launch demonstration',
-        'Real-time troubleshooting and problem solving',
-        'Complete development workflow walkthrough',
-        'Professional implementation strategies'
+        'Personalized 1-on-1 coaching sessions',
+        'Complete front-end and back-end development training',
+        'Custom website/business deployment walkthrough',
+        'Technical independence and self-sufficiency',
+        'On-the-fly editing and customization capabilities',
+        'Long-term business management strategies'
       ],
       includes: [
-        'Full 60-minute screen-recorded Google Meet session',
-        'Step-by-step building and deployment guidance',
-        'Complete walkthrough from start to finish',
-        'Live demonstration of best practices',
-        'Comprehensive detailed implementation report',
+        'Multiple coaching sessions with screen recordings',
+        'Comprehensive development and deployment guidance',
+        'Complete technical knowledge transfer',
+        'Custom implementation based on your business needs',
+        'Detailed documentation and reference materials',
         'Session recording for future reference',
         'Follow-up email support for questions'
       ],
-      duration: '60 minutes',
-      format: 'Screen-recorded Google Meet session',
+      duration: 'Multiple sessions',
+      format: 'Screen-recorded Google Meet sessions',
       language: 'English',
-      deliverables: 'Detailed implementation report + session recording',
+      deliverables: 'Technical documentation, Implementation guides, Session recordings',
       followUp: 'Email support included',
-      note: 'Full package options available - email us for custom quotes and comprehensive solutions'
+      note: 'This package provides complete knowledge transfer for full business ownership and independence.'
     }
-  }
+  },
+
 };
 
 export default function ProductPage() {
@@ -178,14 +180,12 @@ export default function ProductPage() {
   
   useEffect(() => {
     async function fetchProduct() {
-      if (!params.id) return;
+      if (!params?.id) return;
       
-      const id = Array.isArray(params.id) ? params.id[0] : params.id;
+      const id = Array.isArray(params?.id) ? params?.id[0] : params?.id;
       
       try {
         // Try to fetch from Supabase first
-        const supabase = await createClient();
-        
         const { data, error } = await supabase
           .from('products')
           .select('*')
@@ -232,7 +232,7 @@ export default function ProductPage() {
     }
     
     fetchProduct();
-  }, [params.id, router]);
+  }, [params?.id, router]);
   
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
@@ -292,6 +292,16 @@ export default function ProductPage() {
       50% { transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1.2); opacity: 1; }
       75% { transform: translateX(-50%) translateY(-50%) rotate(-15deg) scale(1.1); opacity: 1; }
     }
+    @keyframes web-build {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+      25% { transform: translateY(-5px) scale(1.05); opacity: 0.9; }
+      50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
+      75% { transform: translateY(-5px) scale(1.05); opacity: 0.9; }
+    }
+    @keyframes code-pulse {
+      0%, 100% { box-shadow: 0 0 5px rgba(147, 51, 234, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.8); }
+    }
     .animate-book-flip {
       animation: book-flip 4s ease-in-out infinite;
       transform-style: preserve-3d;
@@ -301,6 +311,12 @@ export default function ProductPage() {
     }
     .animate-rocket-launch {
       animation: rocket-launch 4s ease-in-out infinite;
+    }
+    .animate-web-build {
+      animation: web-build 4s ease-in-out infinite;
+    }
+    .animate-code-pulse {
+      animation: code-pulse 3s ease-in-out infinite;
     }
     .animate-rocket-trail {
       animation: rocket-trail 2s ease-in-out infinite;
@@ -328,7 +344,7 @@ export default function ProductPage() {
   
   return (
     <div className="bg-black min-h-screen py-12">
-      <style jsx>{animationStyles}</style>
+      <style dangerouslySetInnerHTML={{__html: animationStyles}} />
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Blurred Lesson Preview */}
@@ -345,21 +361,22 @@ export default function ProductPage() {
               {product.id === '1' && (
                 <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-center">
                   <h3 className="text-white font-bold text-lg">📖 Inside Preview</h3>
-                  <p className="text-blue-100 text-sm">AI Tools Mastery Guide 2025</p>
+                  <p className="text-blue-100 text-sm">AI Business E-Book</p>
                 </div>
               )}
               {product.id === '2' && (
                 <div className="bg-gradient-to-r from-green-600 to-blue-600 p-4 text-center">
                   <h3 className="text-white font-bold text-lg">🎯 Prompts Preview</h3>
-                  <p className="text-green-100 text-sm">AI Prompts Arsenal 2025</p>
+                  <p className="text-green-100 text-sm">AI Prompts Starter Pack</p>
                 </div>
               )}
               {product.id === '3' && (
                 <div className="bg-gradient-to-r from-orange-600 to-red-600 p-4 text-center">
-                  <h3 className="text-white font-bold text-lg">🎬 Session Preview</h3>
-                  <p className="text-orange-100 text-sm">AI Business Strategy Session 2025</p>
+                  <h3 className="text-white font-bold text-lg">🎬 Program Preview</h3>
+                  <p className="text-orange-100 text-sm">Complete Business Deployment Coaching</p>
                 </div>
               )}
+
               
               {/* Blurred Content Preview */}
               <div className="p-6 h-96 overflow-hidden relative">
@@ -434,31 +451,34 @@ export default function ProductPage() {
                        <div className="bg-orange-900/20 p-4 rounded-lg border border-orange-500/30">
                          <h5 className="font-semibold text-orange-400 mb-2">🎬 Live Screen Recording Sample:</h5>
                          <p className="text-sm bg-gray-800/50 p-3 rounded border-l-4 border-orange-400">
-                           "Welcome to your personalized session! Today we'll build your complete online store from scratch. Let me share my screen and we'll start with setting up your development environment..."
+                           "Welcome to your personalized coaching program! Over these sessions, we'll build your complete online business from scratch and transfer all the knowledge you need to maintain and customize it independently..."
                          </p>
                        </div>
                        <h5 className="font-semibold text-white">What You'll Experience:</h5>
                        <ul className="list-disc list-inside space-y-1 text-sm">
-                         <li>Real-time screen recording of complete build process</li>
-                         <li>Step-by-step guidance with personal explanations</li>
-                         <li>Live problem-solving and troubleshooting</li>
-                         <li>Professional deployment and launch demonstration</li>
-                         <li>Interactive Q&A throughout the session</li>
+                         <li>Comprehensive knowledge transfer for complete ownership</li>
+                         <li>Step-by-step guidance with detailed explanations</li>
+                         <li>Front-end and back-end development mastery</li>
+                         <li>Professional deployment and customization techniques</li>
+                         <li>Interactive Q&A throughout multiple sessions</li>
                        </ul>
                        <div className="mt-4 p-3 bg-orange-900/30 rounded-lg">
-                         <h6 className="font-semibold text-orange-300">Session Format:</h6>
-                         <p className="text-sm">60-minute Google Meet session with screen recording. You'll receive the recording plus a detailed implementation report with all code and instructions.</p>
+                         <h6 className="font-semibold text-orange-300">Program Format:</h6>
+                         <p className="text-sm">Multiple screen-recorded sessions with comprehensive technical documentation and implementation guides for complete business independence.</p>
                        </div>
-                       <h5 className="font-semibold text-white mt-4">Session Outcomes:</h5>
+                       <h5 className="font-semibold text-white mt-4">Program Outcomes:</h5>
                        <div className="space-y-1 text-sm">
-                         <p><strong>✓ Live Website:</strong> Fully functional online store</p>
-                         <p><strong>✓ Complete Code:</strong> All source files and documentation</p>
-                         <p><strong>✓ Deployment:</strong> Professional hosting setup</p>
-                         <p className="text-orange-400">...plus ongoing email support!</p>
+                         <p><strong>✓ Complete Knowledge:</strong> Full technical understanding</p>
+                         <p><strong>✓ Independence:</strong> Edit and customize on your own</p>
+                         <p><strong>✓ Ownership:</strong> Total control of your online business</p>
+                         <p className="text-orange-400">...the path to complete business self-sufficiency!</p>
                        </div>
                      </div>
                    </div>
                  )}
+                 
+
+
                 
                 {/* Unlock overlay */}
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
@@ -475,13 +495,15 @@ export default function ProductPage() {
                      )}
                      {product.id === '3' && (
                        <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                         🔓 Book Your Session Now
+                         🔓 Book Your Coaching Program
                        </div>
                      )}
+
                      <p className="text-gray-300 text-sm mt-2">
                        {product.id === '1' ? 'Get instant access to the complete guide' : 
                         product.id === '2' ? 'Get instant access to all professional prompts' : 
-                        'Get personalized guidance and implementation'}
+                        product.id === '3' ? 'Get complete business deployment knowledge' :
+                        ''}
                      </p>
                    </div>
                  </div>
@@ -871,66 +893,66 @@ export default function ProductPage() {
                     <svg className="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
-                    🎯 60-Minute Screen-Recorded Google Meet Session
+                    🎯 Comprehensive Business Deployment Program
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Session Structure & Timeline</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">Program Structure & Timeline</h4>
                       <ul className="space-y-3 text-gray-300">
                         <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">0-10 min</span>
-                          <span>Introduction & Goal Assessment</span>
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 1</span>
+                          <span>Business Assessment & Strategy Planning</span>
                         </li>
                         <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">10-25 min</span>
-                          <span>Website/Store Planning & Setup</span>
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 2</span>
+                          <span>Technical Setup & Infrastructure</span>
                         </li>
                         <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">25-45 min</span>
-                          <span>Live Building & Development</span>
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 3</span>
+                          <span>Development & Implementation</span>
                         </li>
                         <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">45-55 min</span>
-                          <span>Deployment & Launch Process</span>
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 4</span>
+                          <span>Deployment & Launch Preparation</span>
                         </li>
                         <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">55-60 min</span>
-                          <span>Q&A & Next Steps Planning</span>
+                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Follow-up</span>
+                          <span>Post-Launch Support & Optimization</span>
                         </li>
                       </ul>
                     </div>
                     
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">What You'll Learn & Build</h4>
+                      <h4 className="text-lg font-semibold text-white mb-4">What You'll Receive</h4>
                       <ul className="space-y-2 text-gray-300">
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>Complete website/online store from scratch</span>
+                          <span>Multiple screen-recorded coaching sessions</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>Professional deployment on Vercel/Netlify</span>
+                          <span>Comprehensive knowledge transfer</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>Payment integration & e-commerce setup</span>
+                          <span>Custom implementation roadmap</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>SEO optimization & performance tuning</span>
+                          <span>Technical setup assistance</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>Domain setup & custom branding</span>
+                          <span>Deployment guidance & support</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>Analytics & tracking implementation</span>
+                          <span>30 days of email support</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <span className="text-orange-400 font-bold">✓</span>
-                          <span>Maintenance & scaling strategies</span>
+                          <span>Business growth strategy consultation</span>
                         </li>
                       </ul>
                     </div>
@@ -941,36 +963,36 @@ export default function ProductPage() {
                 <div className="glass-panel rounded-lg p-6">
                   <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                     <span className="text-2xl">🎬</span>
-                    Session Preview & Deliverables
+                    Program Preview & Deliverables
                   </h3>
                   <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600 relative overflow-hidden">
                     <div className="filter blur-sm select-none pointer-events-none">
-                      <h4 className="text-orange-400 font-bold mb-3">Sample Session Walkthrough:</h4>
+                      <h4 className="text-orange-400 font-bold mb-3">Sample Program Walkthrough:</h4>
                       <div className="text-gray-300 text-sm space-y-3">
                         <div className="bg-orange-900/20 p-3 rounded border-l-4 border-orange-400">
                           <p><strong>"Let's start by understanding your business goals..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Goal assessment and target audience identification</p>
+                          <p className="text-xs mt-1 text-gray-400">• Comprehensive business assessment and strategy planning</p>
                         </div>
                         <div className="bg-blue-900/20 p-3 rounded border-l-4 border-blue-400">
-                          <p><strong>"Now I'll show you how to set up your development environment..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Live screen recording of complete setup process</p>
+                          <p><strong>"Now I'll guide you through setting up your development environment..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Step-by-step technical infrastructure setup</p>
                         </div>
                         <div className="bg-green-900/20 p-3 rounded border-l-4 border-green-400">
-                          <p><strong>"Watch as we build your homepage step-by-step..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Real-time coding and implementation</p>
+                          <p><strong>"Let's implement your business solution together..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Hands-on development and implementation guidance</p>
                         </div>
                         <div className="bg-purple-900/20 p-3 rounded border-l-4 border-purple-400">
-                          <p><strong>"Finally, let's deploy your site and make it live..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Complete deployment and launch process</p>
+                          <p><strong>"Finally, we'll deploy your solution and prepare for launch..."</strong></p>
+                          <p className="text-xs mt-1 text-gray-400">• Complete deployment and launch preparation</p>
                         </div>
                         <div className="mt-4 p-3 bg-gray-700/30 rounded">
-                          <h5 className="font-semibold text-white mb-2">📋 Detailed Implementation Report Includes:</h5>
+                          <h5 className="font-semibold text-white mb-2">📋 Comprehensive Program Includes:</h5>
                           <ul className="text-xs space-y-1">
-                            <li>• Complete code repository with documentation</li>
-                            <li>• Step-by-step deployment instructions</li>
-                            <li>• Recommended tools and resources list</li>
-                            <li>• Performance optimization checklist</li>
-                            <li>• Future enhancement roadmap</li>
+                            <li>• Personalized coaching and implementation support</li>
+                            <li>• Complete technical documentation</li>
+                            <li>• Business growth strategy roadmap</li>
+                            <li>• Performance optimization recommendations</li>
+                            <li>• Future enhancement planning</li>
                           </ul>
                         </div>
                       </div>
@@ -978,15 +1000,17 @@ export default function ProductPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
                       <div className="text-center">
                         <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                          🔓 Book Your Session Now
+                          🔓 Book Your Coaching Program
                         </div>
-                        <p className="text-gray-300 text-sm mt-2">Get personalized guidance and implementation</p>
+                        <p className="text-gray-300 text-sm mt-2">Get personalized guidance and implementation support</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             )}
+
+
 
             {/* CTA Button */}
             <div className="glass-panel rounded-lg p-6 text-center">

@@ -1,6 +1,6 @@
 'use client';
 
-import { createClient } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { User } from '@supabase/supabase-js';
 
 // Supabase authentication helper with real authentication
@@ -25,7 +25,6 @@ export class SimpleAuth {
   private async initializeAuth() {
     try {
       console.log('SimpleAuth: Initializing auth');
-      const supabase = createClient();
       
       // Set loading state
       this.isLoading = true;
@@ -66,7 +65,6 @@ export class SimpleAuth {
   async signIn(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     console.log('SimpleAuth: Attempting sign in for:', email);
     try {
-      const supabase = createClient();
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
@@ -93,7 +91,6 @@ export class SimpleAuth {
 
   async signUp(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     try {
-      const supabase = createClient();
       const { data, error } = await supabase.auth.signUp({
         email,
         password
@@ -115,7 +112,6 @@ export class SimpleAuth {
   }
 
   async signOut(): Promise<void> {
-    const supabase = createClient();
     await supabase.auth.signOut();
     this.clearUser();
   }
@@ -196,7 +192,6 @@ export class SimpleAuth {
     if (!this.user) return false;
     
     try {
-      const supabase = createClient();
       const { data: profile } = await supabase
         .from('profiles')
         .select('user_role')

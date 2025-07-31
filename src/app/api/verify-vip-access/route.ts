@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
       try {
         const { supabaseAdmin } = await import('@/lib/supabase');
         if (supabaseAdmin) {
-          const { data: adminUsers, error: adminError } = await supabaseAdmin.auth.admin.listUsers();
+          const { data: adminUsers, error: adminError } = await supabaseAdmin().auth.admin.listUsers();
           
           if (adminError) {
             console.error('Error fetching admin users:', adminError);

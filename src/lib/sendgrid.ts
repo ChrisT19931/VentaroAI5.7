@@ -1,5 +1,3 @@
-import sgMail from '@sendgrid/mail';
-
 // Enhanced SendGrid configuration
 const sendGridConfig = {
   timeout: 30000, // 30 seconds timeout
@@ -17,37 +15,39 @@ let emailHealth = {
 };
 
 // Initialize SendGrid with build-time safety and enhanced configuration
-const initializeSendGrid = () => {
-  const apiKey = process.env.SENDGRID_API_KEY;
-  if (!apiKey) {
-    console.warn('SENDGRID_API_KEY not configured - email features will not work');
+let sgMail: typeof import('@sendgrid/mail') | null = null;
+let isConfigured = false;
+
+const initializeSendGrid = async () => {
+  if (sgMail) return isConfigured;
+  try {
+    sgMail = (await import('@sendgrid/mail')).default;
+    const apiKey = process.env.SENDGRID_API_KEY;
+    if (!apiKey) {
+      console.warn('SENDGRID_API_KEY not configured - email features will not work');
+      isConfigured = false;
+      return false;
+    }
+    sgMail.setApiKey(apiKey);
+    sgMail.setTimeout(sendGridConfig.timeout);
+    isConfigured = true;
+    return true;
+  } catch (err) {
+    console.error('Failed to import @sendgrid/mail:', err);
+    isConfigured = false;
     return false;
   }
-  
-  sgMail.setApiKey(apiKey);
-  
-  // Set global request timeout
-  sgMail.setTimeout(sendGridConfig.timeout);
-  
-  return true;
 };
-
-const isConfigured = initializeSendGrid();
 
 // Enhanced SendGrid health check
 export async function checkSendGridHealth(): Promise<boolean> {
-  if (!isConfigured) return false;
-  
+  await initializeSendGrid();
+  if (!isConfigured || !sgMail) return false;
   const now = Date.now();
-  
-  // Only check health every 5 minutes to avoid excessive requests
   if (now - emailHealth.lastCheck < 300000 && emailHealth.isHealthy) {
     return emailHealth.isHealthy;
   }
-  
   try {
-    // Simple health check - try to send a test email to validate configuration
-    // We'll use a dry run approach by checking if we can create a valid message
     const testMsg = {
       to: 'test@example.com',
       from: process.env.EMAIL_FROM || 'noreply@ventarosales.com',
@@ -55,23 +55,19 @@ export async function checkSendGridHealth(): Promise<boolean> {
       text: 'Test',
       mailSettings: {
         sandboxMode: {
-          enable: true, // This ensures no actual email is sent
+          enable: true,
         },
       },
     };
-    
     await sgMail.send(testMsg);
-    
     emailHealth.isHealthy = true;
     emailHealth.consecutiveFailures = 0;
     emailHealth.lastCheck = now;
-    
     return emailHealth.isHealthy;
   } catch (error) {
     emailHealth.consecutiveFailures++;
     emailHealth.isHealthy = emailHealth.consecutiveFailures < 3;
     emailHealth.lastCheck = now;
-    
     console.warn(`SendGrid health check failed (${emailHealth.consecutiveFailures}/3):`, error);
     return emailHealth.isHealthy;
   }
@@ -96,7 +92,8 @@ type EmailData = {
 };
 
 export const sendEmail = async ({ to, from, subject, text, html }: EmailData) => {
-  if (!isConfigured) {
+  await initializeSendGrid();
+  if (!isConfigured || !sgMail) {
     console.warn('SendGrid not configured - skipping email send');
     emailHealth.totalFailed++;
     return { success: false, error: 'SendGrid not configured' };
@@ -288,6 +285,89 @@ export const sendOrderConfirmationEmail = async ({
   return sendEmail({
     to: email,
     subject: `Order Confirmation #${orderNumber}`,
+    text,
+    html,
+  });
+};
+
+/**
+ * Send a welcome email to newly registered users
+ * @param email The user's email address
+ * @param firstName Optional first name of the user
+ * @returns Promise with the result of the email sending operation
+ */
+export const sendWelcomeEmail = async ({
+  email,
+  firstName = '',
+}: {
+  email: string;
+  firstName?: string;
+}) => {
+  const greeting = firstName ? `Hi ${firstName},` : 'Hi there,';
+  
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <div style="background-color: #0070f3; padding: 20px; color: white; text-align: center;">
+        <h1 style="margin: 0;">Welcome to Ventaro Digital Store!</h1>
+      </div>
+      <div style="padding: 20px; border: 1px solid #eee; border-top: none;">
+        <p>${greeting}</p>
+        <p>Thank you for creating an account with us. We're excited to have you join our community!</p>
+        
+        <p>With your new account, you can:</p>
+        <ul style="padding-left: 20px;">
+          <li>Purchase digital products</li>
+          <li>Access your downloads anytime</li>
+          <li>Track your order history</li>
+          <li>Receive exclusive offers and updates</li>
+        </ul>
+        
+        <div style="margin: 30px 0; text-align: center;">
+          <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventarosales.com'}/my-account" 
+             style="background-color: #0070f3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">
+            Visit Your Account
+          </a>
+        </div>
+        
+        <p>If you have any questions or need assistance, please don't hesitate to contact our support team at <a href="mailto:chris.t@ventarosales.com" style="color: #0070f3; text-decoration: none;">chris.t@ventarosales.com</a>.</p>
+        
+        <p>We look forward to serving you!</p>
+        
+        <p>Best regards,<br>The Ventaro Digital Store Team</p>
+        
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 12px;">
+          <p>© ${new Date().getFullYear()} Ventaro Digital Store. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const text = `
+    Welcome to Ventaro Digital Store!
+    
+    ${greeting}
+    
+    Thank you for creating an account with us. We're excited to have you join our community!
+    
+    With your new account, you can:
+    - Purchase digital products
+    - Access your downloads anytime
+    - Track your order history
+    - Receive exclusive offers and updates
+    
+    Visit your account: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventarosales.com'}/my-account
+    
+    If you have any questions or need assistance, please don't hesitate to contact our support team at chris.t@ventarosales.com.
+    
+    We look forward to serving you!
+    
+    Best regards,
+    The Ventaro Digital Store Team
+  `;
+
+  return sendEmail({
+    to: email,
+    subject: 'Welcome to Ventaro Digital Store!',
     text,
     html,
   });

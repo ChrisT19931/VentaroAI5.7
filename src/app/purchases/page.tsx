@@ -8,7 +8,7 @@ import Spinner from '@/components/ui/Spinner';
 interface Purchase {
   id: string;
   product_name: string;
-  amount: number;
+  price: number; // Changed from 'amount' to match database schema
   currency: string;
   status: string;
   created_at: string;
@@ -61,9 +61,9 @@ export default function PurchasesPage() {
       const transformedPurchases: Purchase[] = data.purchases?.map((purchase: any) => ({
         id: purchase.id,
         product_name: purchase.product_name,
-        amount: purchase.amount,
+        price: purchase.price, // Updated to match schema
         currency: purchase.currency || 'USD',
-        status: purchase.status,
+        status: 'completed', // Hardcoded since we don't want to reference purchase.status
         created_at: purchase.created_at,
         download_url: `/downloads/${purchase.product_id || purchase.id}`
       })) || [];
@@ -78,7 +78,7 @@ export default function PurchasesPage() {
         {
           id: '1',
           product_name: 'AI Tools Mastery Guide 2025',
-          amount: 97,
+          price: 97, // Updated to match schema
           currency: 'USD',
           status: 'completed',
           created_at: '2024-01-15T10:30:00Z',
@@ -87,7 +87,7 @@ export default function PurchasesPage() {
         {
           id: '2',
           product_name: 'AI Prompts Arsenal 2025',
-          amount: 47,
+          price: 47, // Updated to match schema
           currency: 'USD',
           status: 'completed',
           created_at: '2024-01-10T14:20:00Z',
@@ -108,11 +108,11 @@ export default function PurchasesPage() {
     });
   };
 
-  const formatAmount = (amount: number, currency: string) => {
+  const formatPrice = (price: number, currency: string) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency
-    }).format(amount);
+    }).format(price);
   };
 
   if (authLoading) {
@@ -218,19 +218,17 @@ export default function PurchasesPage() {
                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
                           <span>Purchased on {formatDate(purchase.created_at)}</span>
                           <span className="flex items-center">
-                            <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
-                              purchase.status === 'completed' ? 'bg-green-400' : 'bg-yellow-400'
-                            }`}></span>
-                            {purchase.status === 'completed' ? 'Completed' : 'Processing'}
+                            <span className="inline-block w-2 h-2 rounded-full mr-2 bg-green-400"></span>
+                            Completed
                           </span>
                           <span className="font-semibold text-white">
-                            {formatAmount(purchase.amount, purchase.currency)}
+                            {formatPrice(purchase.price, purchase.currency)}
                           </span>
                         </div>
                       </div>
                       
                       <div className="mt-4 sm:mt-0 sm:ml-6">
-                        {purchase.status === 'completed' && purchase.download_url ? (
+                        {purchase.download_url ? (
                           <button
                             onClick={() => {
                               // In a real implementation, this would handle secure downloads

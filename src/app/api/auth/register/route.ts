@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
 
 export async function POST(request: NextRequest) {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create Supabase client
-    const supabase = await createClient();
+
 
     // Sign up the user
     const { data, error } = await supabase.auth.signUp({
@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
       options: {
         data: {
           name: name || email.split('@')[0],
+          email_confirm: false, // Disable email verification
         },
       },
     });
@@ -44,7 +45,7 @@ export async function POST(request: NextRequest) {
       }
 
       return NextResponse.json({
-        message: 'Registration successful! Please check your email to confirm your account.',
+        message: 'Registration successful! You can now log in to your account.',
         user: {
           id: data.user.id,
           email: data.user.email,
@@ -92,10 +93,10 @@ async function sendWelcomeEmail(email: string, name: string) {
         
         <p>With your new account, you can:</p>
         <ul>
-          <li>🤖 Access cutting-edge AI tools and guides</li>
-          <li>📚 Download premium digital products</li>
-          <li>💡 Get exclusive AI prompts and strategies</li>
-          <li>🔥 Transform your business with AI</li>
+          <li>Access cutting-edge AI tools and guides</li>
+          <li>Download premium digital products</li>
+          <li>Get exclusive AI prompts and strategies</li>
+          <li>Transform your business with AI</li>
         </ul>
         
         <p>Ready to explore our AI-powered products?</p>

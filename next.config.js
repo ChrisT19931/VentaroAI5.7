@@ -12,11 +12,19 @@ const nextConfig = {
   },
   // Add Supabase storage domain when available
   experimental: {
-    missingSuspenseWithCSRBailout: true,
     optimizePackageImports: ['react-hot-toast'],
   },
+  // Environment variables configuration for Vercel
+  env: {
+    // Ensure these are available during build time
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  },
   // Improve chunk loading to prevent ChunkLoadError
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, webpack }) => {
     // Optimize chunk size and loading
     config.optimization.splitChunks = {
       chunks: 'all',
@@ -32,11 +40,19 @@ const nextConfig = {
         react: {
           name: 'react',
           chunks: 'all',
-          test: /[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types)[\\/]/,
+          test: /[\/]node_modules[\/](react|react-dom|scheduler|prop-types)[\/]/,
           priority: 20,
         },
       },
     };
+    
+    // Handle environment variables during build
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.VERCEL_BUILD': JSON.stringify(process.env.VERCEL || 'false'),
+      })
+    );
+    
     return config;
   },
   // Skip static generation for downloads pages
@@ -47,6 +63,12 @@ const nextConfig = {
   eslint: {
     // Only run ESLint on local development, not during builds
     ignoreDuringBuilds: true,
+  },
+  // TypeScript configuration for build optimization
+  typescript: {
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors during Vercel deployment
+    ignoreBuildErrors: false,
   },
 }
 

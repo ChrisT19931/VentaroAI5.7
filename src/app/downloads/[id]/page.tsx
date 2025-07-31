@@ -22,10 +22,10 @@ export default function DynamicDownloadPage() {
     fileSize: ''
   });
   
-  const isAdmin = searchParams.get('admin') === 'true';
+  const isAdmin = searchParams?.get('admin') === 'true';
 
   useEffect(() => {
-    if (!params.id) {
+    if (!params?.id) {
       router.push('/not-found');
       return;
     }
@@ -61,8 +61,13 @@ export default function DynamicDownloadPage() {
           const userPurchases = data.purchases || [];
           
           // Check if user has purchased this specific product
+          // Note: The purchases table doesn't have a status field, so we just check for the product_id
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => purchase.product_id === productIdString && purchase.status === 'completed'
+            (purchase: any) => purchase.product_id === productIdString ||
+              // Also check for slug-based product IDs
+              (productIdString === '1' && purchase.product_id === 'ai-tools-mastery-guide-2025') ||
+              (productIdString === '2' && purchase.product_id === 'ai-prompts-arsenal-2025') ||
+              (productIdString === '3' && purchase.product_id === 'ai-business-strategy-session-2025')
           );
           
           setHasAccess(hasProductAccess);
@@ -79,7 +84,7 @@ export default function DynamicDownloadPage() {
     };
     
     fetchUserPurchases();
-  }, [user, params.id, router]);
+  }, [user, params?.id, router]);
 
   const handleDownload = () => {
     if (!hasAccess) {
@@ -128,7 +133,7 @@ export default function DynamicDownloadPage() {
 
   // Render appropriate download component based on product ID
   const renderDownloadComponent = () => {
-    const productIdString = Array.isArray(params.id) ? params.id[0] : params.id;
+    const productIdString = Array.isArray(params?.id) ? params?.id[0] : params?.id;
     switch(productIdString) {
       case '1':
         return <DownloadEbook productInfo={productInfo} handleDownload={handleDownload} />;
@@ -188,7 +193,7 @@ export default function DynamicDownloadPage() {
                 Log In
               </Link>
               <Link 
-                href={`/products/${Array.isArray(params.id) ? params.id[0] : params.id}`} 
+                href={`/products/${Array.isArray(params?.id) ? params?.id[0] : params?.id}`} 
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Purchase

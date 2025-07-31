@@ -47,7 +47,7 @@ export async function uploadEmailLog(emailLog: EmailLog): Promise<string> {
     });
 
     // Upload to 'emails' bucket
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from('emails')
       .upload(filename, emailFile, {
         cacheControl: '3600',
@@ -74,7 +74,7 @@ export async function uploadEmailLog(emailLog: EmailLog): Promise<string> {
 export async function getLatestEmailFiles(): Promise<EmailFileMetadata[]> {
   try {
     // List all files in the emails bucket
-    const { data: files, error } = await supabaseAdmin.storage
+    const { data: files, error } = await supabaseAdmin().storage
       .from('emails')
       .list('', {
         limit: 100, // Get more files to sort properly
@@ -98,7 +98,7 @@ export async function getLatestEmailFiles(): Promise<EmailFileMetadata[]> {
     // Generate download URLs for each file
     const emailFileMetadata: EmailFileMetadata[] = await Promise.all(
       emailFiles.map(async (file: any) => {
-        const { data: urlData } = supabaseAdmin.storage
+        const { data: urlData } = supabaseAdmin().storage
           .from('emails')
           .getPublicUrl(file.name);
 
@@ -132,7 +132,7 @@ export async function getEmailLog(filename: string): Promise<EmailLog> {
     }
 
     // Download the file from Supabase Storage
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from('emails')
       .download(filename);
 
@@ -203,7 +203,7 @@ export async function uploadEmailAttachment(
     const attachmentPath = `${userId}/${timestamp}-${sanitizedFileName}`;
 
     // Upload to 'email-attachments' bucket
-    const { data, error } = await supabaseAdmin.storage
+    const { data, error } = await supabaseAdmin().storage
       .from('email-attachments')
       .upload(attachmentPath, file, {
         cacheControl: '3600',
@@ -215,7 +215,7 @@ export async function uploadEmailAttachment(
     }
 
     // Get the public URL for the uploaded attachment
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabaseAdmin().storage
       .from('email-attachments')
       .getPublicUrl(data.path);
 
@@ -236,7 +236,7 @@ export async function uploadEmailAttachment(
 export async function getUserEmailAttachments(userId: string): Promise<EmailFileMetadata[]> {
   try {
     // List files in the user's folder
-    const { data: files, error } = await supabaseAdmin.storage
+    const { data: files, error } = await supabaseAdmin().storage
       .from('email-attachments')
       .list(userId, {
         limit: 100,
@@ -254,7 +254,7 @@ export async function getUserEmailAttachments(userId: string): Promise<EmailFile
     // Generate download URLs for each attachment
     const attachmentMetadata: EmailFileMetadata[] = await Promise.all(
       files.map(async (file: any) => {
-        const { data: urlData } = supabaseAdmin.storage
+        const { data: urlData } = supabaseAdmin().storage
           .from('email-attachments')
           .getPublicUrl(`${userId}/${file.name}`);
 
@@ -282,7 +282,7 @@ export async function getUserEmailAttachments(userId: string): Promise<EmailFile
  */
 export async function deleteEmailLog(filename: string): Promise<boolean> {
   try {
-    const { error } = await supabaseAdmin.storage
+    const { error } = await supabaseAdmin().storage
       .from('emails')
       .remove([filename]);
 

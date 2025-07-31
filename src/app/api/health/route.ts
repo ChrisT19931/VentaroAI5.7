@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkSupabaseHealth, supabase } from '@/lib/supabase';
-import { checkStripeHealth, stripe } from '@/lib/stripe';
+import { checkStripeHealth, getStripeInstance } from '@/lib/stripe';
 import { checkSendGridHealth, getEmailStats } from '@/lib/sendgrid';
 import { getSystemHealth, getOptimizationStatus } from '@/lib/system-optimizer';
 import { performanceMonitor } from '@/lib/performance-monitor';
@@ -12,7 +12,15 @@ export async function GET(request: NextRequest) {
     // Check all service health in parallel for faster response
     const [supabaseHealthy, stripeHealthy, sendGridHealthy] = await Promise.allSettled([
       checkSupabaseHealth(supabase),
-      checkStripeHealth(stripe),
+      (async () => {
+        try {
+          const stripe = await getStripeInstance();
+          return await checkStripeHealth(stripe);
+        } catch (error) {
+          console.error('Error checking Stripe health:', error);
+          return false;
+        }
+      })(),
       checkSendGridHealth(),
     ]);
     

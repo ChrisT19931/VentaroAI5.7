@@ -1,23 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase';
-import { Resend } from 'resend';
-
-// Create Resend client with fallback for build time
-const getResendClient = () => {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.warn('RESEND_API_KEY not configured - email features will not work');
-    return null;
-  }
-  return new Resend(apiKey);
-};
-
-const resend = getResendClient();
+import { supabase } from '@/lib/supabase';
+import { sendEmail } from '@/lib/sendgrid';
 
 // GET - Fetch all coaching bookings (admin only)
 export async function GET(request: NextRequest) {
   try {
-    const supabase = await createClient();
+
 
     // Check if user is authenticated
     const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -72,7 +60,7 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const supabase = await createClient();
+
 
     // Check if user is authenticated
     const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -135,8 +123,7 @@ export async function PATCH(request: NextRequest) {
 
     // Send email notification to customer based on status
     try {
-      if (resend) {
-        let emailSubject = '';
+      let emailSubject = '';
         let emailContent = '';
 
         const formatDate = (dateString: string) => {
@@ -249,14 +236,12 @@ export async function PATCH(request: NextRequest) {
         }
 
         if (emailSubject && emailContent) {
-          await resend.emails.send({
-            from: 'Ventaro AI <noreply@ventaroai.com>',
-            to: [booking.user_email],
+          await sendEmail({
+            to: booking.user_email,
             subject: emailSubject,
             html: emailContent
           });
         }
-      }
     } catch (emailError) {
       console.error('Error sending status update email:', emailError);
       // Don't fail the request if email fails

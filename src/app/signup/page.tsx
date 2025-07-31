@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'react-hot-toast';
 import { validatePassword } from '@/utils/validation';
+// import { sendWelcomeEmail } from '@/lib/sendgrid';
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
@@ -39,11 +40,14 @@ export default function SignupPage() {
       setIsLoading(true);
       const supabase = createClient();
       
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           emailRedirectTo: `${window.location.origin}/auth/callback?type=signup`,
+          data: {
+            email_confirm: false // Disable email verification
+          }
         },
       });
       
@@ -51,11 +55,21 @@ export default function SignupPage() {
         throw error;
       }
       
-      toast.success('Signup successful! Please check your email and click the confirmation link to verify your account.');
-      // Don't redirect immediately, let user check email first
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      // If signup is successful, send welcome email and redirect to login or dashboard
+      toast.success('Account created successfully! You can now make purchases.');
+      
+      // Send welcome email
+      // try {
+      //   await sendWelcomeEmail({ email });
+      //   console.log('Welcome email sent successfully');
+      // } catch (emailError) {
+      //   console.error('Failed to send welcome email:', emailError);
+      //   // Don't block the signup process if email fails
+      // }
+      
+      // Redirect to the page they were trying to access or to my-account
+      const redirectTo = searchParams?.get('redirect') ?? '/my-account';
+      router.push(redirectTo);
     } catch (error: any) {
       toast.error(error.message || 'Failed to sign up. Please try again.');
     } finally {

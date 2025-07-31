@@ -1,0 +1,106 @@
+/* Smoke Effect Animation */
+.smoke-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.7);
+  mix-blend-mode: color-burn;
+  border-radius: inherit;
+}
+
+.smoke-effect::before,
+.smoke-effect::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='800' fill='none'%3E%3Cfilter id='a' color-interpolation-filters='sRGB' filterUnits='userSpaceOnUse' height='800' width='1600' x='0' y='0'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur result='effect1_foregroundBlur_1_39' stdDeviation='125'/%3E%3C/filter%3E%3Cg filter='url(%23a)'%3E%3Ccircle cx='400' cy='400' fill='%23000000' r='200'/%3E%3Ccircle cx='1200' cy='400' fill='%23000000' r='200'/%3E%3Ccircle cx='800' cy='400' fill='%23000000' r='200'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation: smoke-drift 25s linear infinite;
+  opacity: 0.5;
+}
+
+.smoke-effect::after {
+  animation-duration: 35s;
+  animation-direction: reverse;
+  opacity: 0.4;
+  filter: blur(60px);
+  transform: scale(1.1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='800' fill='none'%3E%3Cfilter id='a' color-interpolation-filters='sRGB' filterUnits='userSpaceOnUse' height='800' width='1600' x='0' y='0'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeBlend in='SourceGraphic' in2='BackgroundImageFix' result='shape'/%3E%3CfeGaussianBlur result='effect1_foregroundBlur_1_39' stdDeviation='125'/%3E%3C/filter%3E%3Cg filter='url(%23a)'%3E%3Ccircle cx='400' cy='400' fill='%23000000' r='250'/%3E%3Ccircle cx='1200' cy='400' fill='%23000000' r='250'/%3E%3Ccircle cx='800' cy='400' fill='%23000000' r='250'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@keyframes smoke-drift {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: rotate(3deg) scale(1.05);
+    opacity: 0.45;
+  }
+  50% {
+    transform: rotate(0deg) scale(1.1);
+    opacity: 0.5;
+  }
+  75% {
+    transform: rotate(-3deg) scale(1.05);
+    opacity: 0.45;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.4;
+  }
+}
+
+/* 3D Pop-in Animation Enhancements */
+.pop-in-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Enhance text glow effects */
+.enhanced-glow {
+  text-shadow: 
+    0 0 2px rgba(255, 255, 255, 1),
+    0 0 4px rgba(255, 255, 255, 1),
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(96, 165, 250, 0.8);
+  animation: pulse-glow 3s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    text-shadow: 
+      0 0 2px rgba(255, 255, 255, 1),
+      0 0 4px rgba(255, 255, 255, 1),
+      0 0 8px rgba(255, 255, 255, 0.9),
+      0 0 12px rgba(96, 165, 250, 0.8);
+    filter: brightness(1.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 3px rgba(255, 255, 255, 1),
+      0 0 6px rgba(255, 255, 255, 1),
+      0 0 10px rgba(255, 255, 255, 1),
+      0 0 15px rgba(96, 165, 250, 0.9);
+    filter: brightness(1.4);
+  }
+  100% {
+    text-shadow: 
+      0 0 2px rgba(255, 255, 255, 1),
+      0 0 4px rgba(255, 255, 255, 1),
+      0 0 8px rgba(255, 255, 255, 0.9),
+      0 0 12px rgba(96, 165, 250, 0.8);
+    filter: brightness(1.2);
+  }
+}

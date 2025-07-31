@@ -1,30 +1,28 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { createClient } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase';
 import BuyNowButton from '@/components/BuyNowButton';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI Tools Mastery Guide & AI Prompts Arsenal 2025 - Make Money Online with AI Products',
-  description: 'Browse our collection of AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online in 2025. Discover proven strategies to make money with AI.',
-  keywords: 'AI tools, AI prompts, make money online, AI products 2025, make money with AI, ChatGPT prompts, AI business tools, digital products, AI coaching, artificial intelligence tools',
+  title: 'AI Business Solutions - From Starter Prompts to Business Coaching',
+  description: 'Browse our complete hierarchy of AI business solutions: AI Prompts Starter Pack, AI Business E-Book, and Complete Business Deployment Coaching.',
+  keywords: 'AI prompts, AI business, e-book, business coaching, online business, digital products, AI tools',
   openGraph: {
-    title: 'AI Tools Mastery Guide & AI Prompts Arsenal 2025 - Digital Products for Online Income',
-    description: 'Discover AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025.',
+    title: 'AI Business Solutions - From Starter Prompts to Business Coaching',
+    description: 'Discover our complete hierarchy of AI business solutions for every stage of your online business journey.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Tools Mastery Guide & AI Prompts Arsenal 2025',
-    description: 'Make money online with AI tools and prompts in 2025',
+    title: 'AI Business Solutions - From Starter to Coaching',
+    description: 'Complete hierarchy of AI business solutions for your online success',
   },
 };
 
 async function getProducts() {
   // Try to fetch from Supabase first
   try {
-    const supabase = await createClient();
-    
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -41,9 +39,21 @@ async function getProducts() {
   // Fallback to mock data if Supabase fetch fails or returns empty
   return [
     {
+      id: '2',
+      name: 'AI Prompts Starter Pack',
+      description: 'Your entry point to AI-powered business success. 30 ready-to-use prompts that jumpstart your online business journey with minimal learning curve and immediate implementation.',
+      price: 10.00,
+      originalPrice: 20.00,
+      image_url: '/images/products/ai-prompts-arsenal.svg',
+      category: 'tools',
+      is_active: true,
+      featured: true,
+      created_at: new Date().toISOString()
+    },
+    {
       id: '1',
-      name: 'AI Tools Mastery Guide 2025',
-      description: '30 powerful lessons to help you build a profitable online business using AI tools like ChatGPT, Gemini, Claude, and Trae/Cursor. Master the art of AI-powered entrepreneurship with step-by-step implementation guides.',
+      name: 'AI Business E-Book',
+      description: 'The essential knowledge resource containing half of what you need to build a successful online business. Comprehensive strategies, frameworks, and implementation guides for the self-starter.',
       price: 25.00,
       originalPrice: 50.00,
       image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -53,20 +63,9 @@ async function getProducts() {
       created_at: new Date().toISOString()
     },
     {
-      id: '2',
-      name: 'AI Prompts Arsenal 2025',
-      description: '30+ professional AI prompts across multiple business categories. Expertly crafted for content creation, marketing, SEO, business automation, e-commerce, and personal branding.',
-      price: 10.00,
-      image_url: '/images/products/ai-prompts-arsenal.svg',
-      category: 'tools',
-      is_active: true,
-      featured: false,
-      created_at: new Date().toISOString()
-    },
-    {
       id: '3',
-      name: 'AI Business Strategy Session 2025',
-      description: '60-minute live coaching session to understand your goals and learn step-by-step how to build, deploy, and launch your own store/website. Includes complete walkthrough from start to finish with detailed implementation report. 🔥 LAUNCH OFFER: $500 (reduced from $3000) until September 1st, 2025!',
+      name: 'Complete Business Deployment Coaching',
+      description: 'The ultimate solution for those who want all information required to deploy a custom-built site from start to finish. Own your front-end/back-end and edit everything on the fly with expert guidance.',
       price: 500.00,
       originalPrice: 3000.00,
       image_url: '/images/products/ai-business-strategy-session.svg',
@@ -85,9 +84,9 @@ export default async function ProductsPage() {
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-6xl">
-        <h1 className="text-3xl font-bold mb-8">AI Tools Mastery Guide & AI Prompts Arsenal 2025</h1>
+        <h1 className="text-3xl font-bold mb-8 text-black">AI Business Solutions for Every Stage</h1>
         <p className="text-lg text-gray-600 mb-8 max-w-3xl">
-          Discover our collection of AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025. Learn proven strategies to make money with AI.
+          Explore our complete hierarchy of AI business solutions designed for every stage of your online business journey. From entry-level AI Prompts to comprehensive coaching and custom web development services, we have the perfect solution for your needs.
         </p>
         
         {/* Filter and Sort Controls */}

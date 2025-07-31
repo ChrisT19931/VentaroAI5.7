@@ -97,6 +97,19 @@ vercel env add SUPABASE_SERVICE_ROLE_KEY
 vercel --prod
 ```
 
+## ✅ Verifying Your Configuration
+
+After setting up your environment variables, you can verify that they are correctly configured:
+
+1. Run the verification script:
+   ```bash
+   npm run verify-env
+   ```
+
+2. The script will check if all required variables are properly set and don't contain placeholder values
+
+3. For detailed information about the verification process, see [docs/VERIFY_ENV_GUIDE.md](./docs/VERIFY_ENV_GUIDE.md)
+
 ## 🚀 Step-by-Step Setup Process
 
 ### Step 1: Set Up Supabase

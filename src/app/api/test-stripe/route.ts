@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
+// Import Stripe type only, not the actual module
+import type { Stripe } from 'stripe';
+import { getStripeInstance } from '@/lib/stripe';
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,9 +22,7 @@ export async function GET(request: NextRequest) {
       secretKeyType = stripeSecretKey.startsWith('sk_live_') ? 'live' : 'test';
       
       try {
-        const stripe = new Stripe(stripeSecretKey, {
-          apiVersion: '2023-10-16',
-        });
+        const stripe = await getStripeInstance();
         
         // Try to make a simple API call that doesn't require config.retrieve
         // Get API version from the options we passed in
