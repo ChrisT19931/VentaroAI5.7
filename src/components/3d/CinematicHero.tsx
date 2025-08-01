@@ -533,10 +533,15 @@ function GlassmorphismOverlay() {
                   animation: 'purple-streak 10s ease-in-out infinite',
                   letterSpacing: '-0.025em'
                 }}>
-                BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
+                Build A Fully Operational Online Business Using AI Within 2 Hours With Ventaro AI
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90">
-            Build A Fully Operational Online Business Using AI Within 2 Hours With Ventaro AI.
+            100% AI-generated resources to help you launch profitable online businesses. 
+            <span className="text-white font-semibold"
+                  style={{
+                    textShadow: '0 0 15px rgba(96, 165, 250, 0.6), 0 0 30px rgba(139, 92, 246, 0.4)',
+                    WebkitTextStroke: '0.3px rgba(96, 165, 250, 0.2)'
+                  }}>Learn how we built this entire site with AI</span> and how you can do the same.
           </p>
           
           <div className="space-y-6">
