@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter, useParams } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import AddToCartButton from '@/components/AddToCartButton';
-import BuyNowButton from '@/components/BuyNowButton';
-import CountdownTimer from '@/components/CountdownTimer';
+import { supabase } from '../../../lib/supabase';
+import AddToCartButton from '../../../components/AddToCartButton';
+import BuyNowButton from '../../../components/BuyNowButton';
+import CountdownTimer from '../../../components/CountdownTimer';
 
 
 
@@ -112,22 +112,6 @@ const fallbackProducts = {
       language: 'English',
       compatibility: 'ChatGPT, Claude, Gemini, and other AI tools',
       downloadSize: '1.2 MB'
-    }
-  },
-      includes: [
-        'Comprehensive business-building guide',
-        'AI implementation strategies',
-        'Ready-to-use templates and frameworks',
-        'Business model analysis and selection tools',
-        'Revenue generation tactics and case studies',
-        'Implementation roadmaps and action plans'
-      ],
-      pages: 30,
-      format: 'PDF',
-      language: 'English',
-      level: 'Intermediate',
-      downloadSize: '2.5 MB',
-      readingTime: '45 minutes'
     }
   },
   '3': {

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
-import BuyNowButton from '@/components/BuyNowButton';
-import StarBackground from '@/components/3d/StarBackground';
+import { supabase } from '../../lib/supabase';
+import BuyNowButton from '../../components/BuyNowButton';
+import StarBackground from '../../components/3d/StarBackground';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
