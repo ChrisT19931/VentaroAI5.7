@@ -334,6 +334,86 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+            
+            {/* LIVE SUPPORT Plan - Promotional Contract */}
+            <div className="relative group bg-gradient-to-br from-red-900/95 to-orange-900/95 rounded-3xl shadow-2xl border border-red-400/40 backdrop-blur-sm overflow-hidden transform transition-all duration-700 hover:shadow-red-400/40 hover:shadow-2xl hover:-translate-y-4 hover:scale-105 shimmer-effect">
+              {/* Urgent floating particles */}
+              <div className="absolute top-4 right-4 w-10 h-10 bg-gradient-to-r from-red-400/40 to-orange-400/40 rounded-full blur-sm animate-pulse" style={{animationDelay: '0.3s'}}></div>
+              <div className="absolute bottom-8 left-8 w-8 h-8 bg-gradient-to-r from-orange-400/30 to-red-400/30 rounded-full blur-sm animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute top-1/3 left-1/5 w-6 h-6 bg-gradient-to-r from-yellow-400/25 to-red-400/25 rounded-full blur-sm animate-pulse" style={{animationDelay: '2s'}}></div>
+              
+              {/* Urgent animated border glow */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-red-400/30 via-orange-400/20 to-yellow-400/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              
+              {/* Urgent badge */}
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-red-500 to-orange-600 text-white text-xs font-black px-3 py-1 rounded-full shadow-lg animate-bounce group-hover:animate-pulse transition-all duration-300 group-hover:scale-110" style={{animationDuration: '1s'}}>
+                  🔥 LIVE SUPPORT
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-orange-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
+                </div>
+              </div>
+              
+              {/* Deadline badge */}
+              <div className="absolute top-4 right-4 z-20">
+                <div className="bg-gradient-to-r from-yellow-400 to-red-500 text-black text-xs font-black px-3 py-1 rounded-full shadow-lg animate-pulse" style={{animationDuration: '0.8s'}}>
+                  ⏰ ENDS SEPT 1st
+                </div>
+              </div>
+              
+              <div className="relative h-52 bg-gradient-to-br from-red-600 via-orange-600 to-red-800 flex items-center justify-center overflow-hidden group-hover:bg-gradient-to-br group-hover:from-red-500 group-hover:via-orange-500 group-hover:to-red-700 transition-all duration-500">
+                <div className="relative z-10 transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-700">
+                  <svg className="w-24 h-24 text-white drop-shadow-2xl group-hover:text-red-100 transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20,15.5C18.8,15.5 17.5,15.3 16.4,14.9C16.3,14.9 16.2,14.9 16.1,14.9C15.8,14.9 15.6,15 15.4,15.2L13.2,17.4C10.4,15.9 8,13.6 6.6,10.8L8.8,8.6C9.1,8.3 9.2,7.9 9,7.6C8.7,6.5 8.5,5.2 8.5,4C8.5,3.5 8,3 7.5,3H4C3.5,3 3,3.5 3,4C3,13.4 10.6,21 20,21C20.5,21 21,20.5 21,20V16.5C21,16 20.5,15.5 20,15.5M5,5H6.5C6.6,5.9 6.8,6.8 7,7.6L5.8,8.8C5.4,7.6 5.1,6.3 5,5M19,19C17.7,18.9 16.4,18.6 15.2,18.2L16.4,17C17.2,17.2 18.1,17.4 19,17.4V19Z"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-400/30 to-orange-400/30 rounded-full blur-2xl animate-pulse group-hover:bg-gradient-to-r group-hover:from-red-300/40 group-hover:to-orange-300/40 transition-all duration-500"></div>
+                  {/* Orbiting particles */}
+                  <div className="absolute -top-2 -right-2 w-1 h-1 bg-red-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.2s'}}></div>
+                  <div className="absolute -bottom-2 -left-2 w-1 h-1 bg-orange-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.4s'}}></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent group-hover:from-black/60 transition-all duration-500"></div>
+              </div>
+              
+              <div className="p-8">
+                <h3 className="text-3xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-red-200 to-orange-200 drop-shadow-lg group-hover:scale-105 transition-transform duration-500">
+                  Live Support Contract 2025
+                </h3>
+                <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
+                  🔥 Premium screenshare live support contract at promotional rates. Get direct access to expert guidance with real-time problem solving and implementation support.
+                </p>
+                
+                <div className="space-y-5 mb-8">
+                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                    <div className="w-4 h-4 bg-gradient-to-r from-red-400 to-orange-400 rounded-full shadow-lg group-hover:shadow-red-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🖥️ Live screenshare support sessions with expert guidance</span>
+                  </div>
+                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                    <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">⚡ Real-time problem solving and implementation support</span>
+                  </div>
+                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                    <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-red-400 rounded-full shadow-lg group-hover:shadow-yellow-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📋 Flexible hourly contract with no long-term commitment</span>
+                  </div>
+                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                    <div className="w-4 h-4 bg-gradient-to-r from-red-400 to-yellow-400 rounded-full shadow-lg group-hover:shadow-red-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">⏰ Limited time promotional pricing - ends September 1st</span>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-8 group-hover:scale-105 transition-transform duration-500">
+                  <div className="text-lg text-gray-400 line-through mb-1">Usually A$300/hour</div>
+                  <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 drop-shadow-2xl mb-2 animate-pulse">A$190</div>
+                  <div className="text-sm text-gray-300 font-medium">🔥 Per Hour Contract Rate</div>
+                  <div className="text-sm text-red-400 font-bold animate-pulse">⚡ 37% OFF - Contract Ends Sept 1st!</div>
+                </div>
+                
+                <Link href="/products/4" className="w-full block text-center py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 shadow-2xl bg-gradient-to-r from-red-600 via-orange-600 to-red-600 hover:from-red-500 hover:via-orange-500 hover:to-red-500 text-white border-2 border-red-400/50 hover:border-red-300/70 hover:shadow-red-400/30 relative overflow-hidden group/btn">
+                  <span className="relative z-10 group-hover/btn:animate-pulse">🔥 Get Live Support</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-orange-400 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                </Link>
+              </div>
+            </div>
           </div>
           
           <div className="text-center mt-16">
