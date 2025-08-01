@@ -256,18 +256,7 @@ const AnimatedLogo = () => {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <group ref={logoRef}>
-
-        {/* Glowing ring around logo */}
-        <mesh rotation={[0, 0, 0]}>
-          <torusGeometry args={[3, 0.05, 16, 100]} />
-          <meshStandardMaterial
-            color="#60a5fa"
-            emissive="#3b82f6"
-            emissiveIntensity={0.8}
-            transparent
-            opacity={0.6}
-          />
-        </mesh>
+        {/* Ring removed as requested */}
       </group>
     </Float>
   );
