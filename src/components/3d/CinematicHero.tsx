@@ -603,10 +603,7 @@ export default function CinematicHero() {
       {/* Enhanced fallback background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-900/20 to-black opacity-90"></div>
       <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/10 via-transparent to-pink-900/10"></div>
-      <div className="absolute inset-0" style={{
-        background: 'radial-gradient(circle at 30% 20%, rgba(96, 165, 250, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
-        animation: 'energyField 15s ease-in-out infinite'
-      }}></div>
+
       
       {/* 3D Canvas Background with error handling */}
       {!canvasError && (
