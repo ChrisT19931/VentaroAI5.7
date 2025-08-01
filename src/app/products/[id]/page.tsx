@@ -342,6 +342,52 @@ export default function ProductPage() {
     }
   `;
   
+  // Dynamic color configuration based on product category
+  const getProductColors = (productId: string, category?: string) => {
+    if (productId === '2' || category === 'tools') {
+      return {
+        primary: 'emerald',
+        secondary: 'green',
+        accent: 'emerald-400',
+        gradient: 'from-emerald-600 to-green-600',
+        lightGradient: 'from-emerald-500/10 via-green-500/10 to-emerald-500/10',
+        ambientColors: {
+          color1: 'bg-emerald-400/20',
+          color2: 'bg-green-400/20',
+          color3: 'bg-emerald-400/10'
+        }
+      };
+    } else if (productId === '1' || category === 'courses') {
+      return {
+        primary: 'blue',
+        secondary: 'purple',
+        accent: 'blue-400',
+        gradient: 'from-blue-600 to-purple-600',
+        lightGradient: 'from-blue-500/10 via-purple-500/10 to-blue-500/10',
+        ambientColors: {
+          color1: 'bg-blue-400/20',
+          color2: 'bg-purple-400/20',
+          color3: 'bg-blue-400/10'
+        }
+      };
+    } else {
+      return {
+        primary: 'purple',
+        secondary: 'pink',
+        accent: 'purple-400',
+        gradient: 'from-purple-600 to-pink-600',
+        lightGradient: 'from-purple-500/10 via-pink-500/10 to-purple-500/10',
+        ambientColors: {
+          color1: 'bg-purple-400/20',
+          color2: 'bg-pink-400/20',
+          color3: 'bg-purple-400/10'
+        }
+      };
+    }
+  };
+
+  const colors = getProductColors(product.id, product.category);
+
   return (
     <div className="bg-black min-h-screen py-12">
       <style dangerouslySetInnerHTML={{__html: animationStyles}} />
@@ -350,32 +396,22 @@ export default function ProductPage() {
           {/* Blurred Lesson Preview */}
           <div className="relative">
             {/* Ambient lighting effects */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-3xl blur-3xl animate-pulse"></div>
-            <div className="absolute top-4 left-4 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl animate-twinkle"></div>
-            <div className="absolute bottom-4 right-4 w-24 h-24 bg-purple-400/20 rounded-full blur-2xl animate-twinkle" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-emerald-400/10 rounded-full blur-3xl animate-twinkle" style={{animationDelay: '2s'}}></div>
+            <div className={`absolute inset-0 bg-gradient-to-br ${colors.lightGradient} rounded-3xl blur-3xl animate-pulse`}></div>
+            <div className={`absolute top-4 left-4 w-32 h-32 ${colors.ambientColors.color1} rounded-full blur-2xl animate-twinkle`}></div>
+            <div className={`absolute bottom-4 right-4 w-24 h-24 ${colors.ambientColors.color2} rounded-full blur-2xl animate-twinkle`} style={{animationDelay: '1s'}}></div>
+            <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 ${colors.ambientColors.color3} rounded-full blur-3xl animate-twinkle`} style={{animationDelay: '2s'}}></div>
             
             {/* Preview Container */}
             <div className="relative z-10 rounded-3xl bg-gradient-to-br from-gray-900/90 via-black/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 shadow-2xl overflow-hidden">
               {/* Preview Header */}
-              {product.id === '1' && (
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-center">
-                  <h3 className="text-white font-bold text-lg">📖 Inside Preview</h3>
-                  <p className="text-blue-100 text-sm">AI Business E-Book</p>
-                </div>
-              )}
-              {product.id === '2' && (
-                <div className="bg-gradient-to-r from-green-600 to-blue-600 p-4 text-center">
-                  <h3 className="text-white font-bold text-lg">🎯 Prompts Preview</h3>
-                  <p className="text-green-100 text-sm">AI Prompts Starter Pack</p>
-                </div>
-              )}
-              {product.id === '3' && (
-                <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-4 text-center">
-                  <h3 className="text-white font-bold text-lg">🎬 Program Preview</h3>
-                  <p className="text-gray-300 text-sm">Complete Business Deployment Coaching</p>
-                </div>
-              )}
+              <div className={`bg-gradient-to-r ${colors.gradient} p-4 text-center`}>
+                <h3 className="text-white font-bold text-lg">
+                  {product.id === '1' && '📖 Inside Preview'}
+                  {product.id === '2' && '🎯 Prompts Preview'}
+                  {product.id === '3' && '🎬 Program Preview'}
+                </h3>
+                <p className={`text-${colors.primary}-100 text-sm`}>{product.name}</p>
+              </div>
 
               
               {/* Blurred Content Preview */}
@@ -483,21 +519,11 @@ export default function ProductPage() {
                 {/* Unlock overlay */}
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
                    <div className="text-center">
-                     {product.id === '1' && (
-                       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                         🔓 Unlock All 30 Lessons
-                       </div>
-                     )}
-                     {product.id === '2' && (
-                       <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                         🔓 Unlock All 30 Prompts
-                       </div>
-                     )}
-                     {product.id === '3' && (
-                       <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                         🔓 Book Your Coaching Program
-                       </div>
-                     )}
+                     <div className={`bg-gradient-to-r ${colors.gradient} text-white px-6 py-3 rounded-full font-semibold shadow-lg`}>
+                       {product.id === '1' && '🔓 Unlock All 30 Lessons'}
+                       {product.id === '2' && '🔓 Unlock All 30 Prompts'}
+                       {product.id === '3' && '🔓 Book Your Coaching Program'}
+                     </div>
 
                      <p className="text-gray-300 text-sm mt-2">
                        {product.id === '1' ? 'Get instant access to the complete guide' : 
@@ -510,7 +536,7 @@ export default function ProductPage() {
               </div>
               
               {/* Interactive glow border */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${colors.lightGradient.replace('/10', '/20')} opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
             </div>
           </div>
 

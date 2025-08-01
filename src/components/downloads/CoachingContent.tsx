@@ -31,7 +31,7 @@ export default function CoachingContent({ hasAccess = false, isAdmin = false }: 
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
           <p className="text-white">Loading...</p>
         </div>
       </div>
@@ -57,20 +57,20 @@ export default function CoachingContent({ hasAccess = false, isAdmin = false }: 
             <div className="flex gap-4 justify-center">
               <Link 
                 href="/login" 
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Log In
               </Link>
               <Link 
                 href="/products/3" 
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Purchase
               </Link>
             </div>
             
             <div className="text-sm text-gray-400 mt-6">
-              <Link href="/my-account" className="text-blue-400 hover:text-blue-300">
+              <Link href="/my-account" className="text-purple-400 hover:text-purple-300">
                 ← Back to My Account
               </Link>
             </div>

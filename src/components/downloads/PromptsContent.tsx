@@ -46,7 +46,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto mb-4"></div>
           <p className="text-white">Loading...</p>
         </div>
       </div>
@@ -72,20 +72,20 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             <div className="flex gap-4 justify-center">
               <Link 
                 href="/login" 
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Log In
               </Link>
               <Link 
                 href="/products/2" 
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Purchase
               </Link>
             </div>
             
             <div className="text-sm text-gray-400 mt-6">
-              <Link href="/my-account" className="text-blue-400 hover:text-blue-300">
+              <Link href="/my-account" className="text-emerald-400 hover:text-emerald-300">
                 ← Back to My Account
               </Link>
             </div>
@@ -157,7 +157,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             
             <div className="space-y-6">
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">Customer Service Responses</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Customer Service Responses</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Generate professional customer service responses for common inquiries about [PRODUCT/SERVICE]. Include responses for: order status, refund requests, technical support, billing questions, and general complaints. Each response should be empathetic, solution-focused, and maintain brand voice. Tone: [FRIENDLY/PROFESSIONAL]."
@@ -167,7 +167,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
               </div>
 
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">Market Research Analysis</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Market Research Analysis</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Analyze the market for [PRODUCT/SERVICE] in [LOCATION/DEMOGRAPHIC]. Provide insights on: target audience demographics, competitor analysis, pricing strategies, market size, growth opportunities, and potential challenges. Include actionable recommendations for market entry or expansion."
@@ -177,7 +177,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
               </div>
 
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">Business Plan Generator</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Business Plan Generator</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Create a comprehensive business plan for [BUSINESS IDEA]. Include: executive summary, market analysis, target audience, competitive landscape, marketing strategy, operational plan, financial projections for 3 years, and risk assessment. Format as a professional document suitable for investors or loan applications."
@@ -196,7 +196,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             
             <div className="space-y-6">
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-purple-400 mb-3">Brand Story Creation</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Brand Story Creation</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Craft a compelling brand story for [COMPANY NAME] that operates in [INDUSTRY]. Include: the founder's journey, problem being solved, mission and values, unique approach, customer impact stories, and future vision. Make it emotional, authentic, and memorable. Length: 500-800 words."
@@ -412,7 +412,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             
             <div className="space-y-6">
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-pink-400 mb-3">LinkedIn Profile Optimization</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">LinkedIn Profile Optimization</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Optimize a LinkedIn profile for [PROFESSION/INDUSTRY]. Create: compelling headline, professional summary, experience descriptions with achievements, skills section optimization, and content strategy. Focus on attracting [TARGET AUDIENCE] and positioning as a thought leader in [EXPERTISE AREA]."
@@ -422,7 +422,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
               </div>
 
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-pink-400 mb-3">Networking Email Templates</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Networking Email Templates</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Create networking email templates for [INDUSTRY/PROFESSION]. Include: cold outreach to industry leaders, follow-up after events, collaboration proposals, mentorship requests, and thank you messages. Each template should be personalized, value-focused, and include clear next steps."
@@ -432,7 +432,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
               </div>
 
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-pink-400 mb-3">Thought Leadership Content</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Thought Leadership Content</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Develop thought leadership content strategy for [EXPERTISE AREA]. Create: industry trend analysis, opinion pieces on current events, case studies, how-to guides, and prediction articles. Include content calendar, distribution strategy, and engagement tactics to build authority and influence."
@@ -442,7 +442,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
               </div>
 
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-pink-400 mb-3">Speaking Engagement Pitch</h3>
+                <h3 className="text-lg font-semibold text-green-400 mb-3">Speaking Engagement Pitch</h3>
                 <div className="bg-gray-700 rounded p-4 mb-3">
                   <p className="text-gray-300 font-mono text-sm">
                     "Create a compelling speaker pitch for [TOPIC/EXPERTISE] targeting [EVENT TYPE/AUDIENCE]. Include: speaker bio, talk description, key takeaways for audience, unique angle/perspective, previous speaking experience, and testimonials. Make it easy for event organizers to say yes."
@@ -452,7 +452,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
               </div>
 
               <div className="bg-gray-800 rounded-lg p-6">
-                 <h3 className="text-lg font-semibold text-pink-400 mb-3">Personal Brand Story</h3>
+                 <h3 className="text-lg font-semibold text-green-400 mb-3">Personal Brand Story</h3>
                  <div className="bg-gray-700 rounded p-4 mb-3">
                    <p className="text-gray-300 font-mono text-sm">
                      "Craft a compelling personal brand story for [PROFESSIONAL BACKGROUND]. Include: origin story, key challenges overcome, unique skills/perspective, values and mission, notable achievements, and future vision. Make it authentic, memorable, and aligned with career goals."
@@ -462,7 +462,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
                </div>
 
                <div className="bg-gray-800 rounded-lg p-6">
-                 <h3 className="text-lg font-semibold text-pink-400 mb-3">Media Kit Creation</h3>
+                 <h3 className="text-lg font-semibold text-green-400 mb-3">Media Kit Creation</h3>
                  <div className="bg-gray-700 rounded p-4 mb-3">
                    <p className="text-gray-300 font-mono text-sm">
                      "Create a comprehensive media kit for [PERSONAL BRAND/BUSINESS]. Include: professional bio (short and long versions), high-resolution photos, brand colors and fonts, key statistics and achievements, press coverage, speaking topics, contact information, and brand guidelines. Format for easy sharing with media and partners."
@@ -481,7 +481,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
           <h2 className="text-2xl font-bold text-white mb-6">How to Use These Prompts</h2>
           <div className="space-y-4">
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</div>
+              <div className="bg-emerald-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</div>
               <div>
                 <h3 className="text-white font-semibold mb-2">Choose Your Category</h3>
                 <p className="text-gray-300">Select prompts based on your current project or business need.</p>
@@ -489,7 +489,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             </div>
             
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</div>
+              <div className="bg-emerald-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</div>
               <div>
                 <h3 className="text-white font-semibold mb-2">Customize for Your Brand</h3>
                 <p className="text-gray-300">Adapt the prompts with your specific brand voice and requirements.</p>
@@ -497,7 +497,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             </div>
             
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">3</div>
+              <div className="bg-emerald-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">3</div>
               <div>
                 <h3 className="text-white font-semibold mb-2">Generate & Refine</h3>
                 <p className="text-gray-300">Use with your favorite AI tool and refine the output as needed.</p>
@@ -517,7 +517,7 @@ export default function PromptsContent({ hasAccess = false, isAdmin = false }: P
             </Link>
             <Link 
               href="/downloads" 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
             >
               View All Downloads
             </Link>
