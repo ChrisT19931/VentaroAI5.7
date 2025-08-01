@@ -104,7 +104,7 @@ export default function DownloadsPage() {
     {
       id: '2', 
       name: 'AI Prompts Arsenal 2025',
-      description: '30 professional AI prompts to make money online in 2025.',
+      description: '30 professional AI prompts to build an online business with AI.',
       fileName: 'ai-prompts-collection.pdf',
       icon: '🔥',
       color: 'from-green-500 to-blue-500',

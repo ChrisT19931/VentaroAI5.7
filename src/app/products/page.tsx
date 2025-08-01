@@ -75,18 +75,7 @@ async function getProducts() {
       featured: false,
       created_at: new Date().toISOString()
     },
-    {
-      id: '4',
-      name: 'Live Support Contract',
-      description: 'Premium screenshare live support with real-time assistance. Get immediate help with implementation, troubleshooting, and optimization. Limited-time contract pricing available.',
-      price: 190.00,
-      originalPrice: 300.00,
-      image_url: '/images/products/live-support.svg',
-      category: 'services',
-      is_active: true,
-      featured: true,
-      created_at: new Date().toISOString()
-    },
+
 
   ];
 }
@@ -117,7 +106,7 @@ export default async function ProductsPage() {
         
         {/* Professional Three-Tier Layout */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {products.map((product: any, index: number) => {
               const cardConfigs = [
                 {
@@ -158,22 +147,9 @@ export default async function ProductsPage() {
                   tierColor: 'from-purple-500 to-purple-600',
                   scale: 'hover:scale-105',
                   popular: false
-                },
-                {
-                  bg: 'from-slate-900/95 via-orange-900/40 to-gray-900/95',
-                  accent: 'orange',
-                  accentHex: '#f97316',
-                  shadow: 'orange-500/30',
-                  border: 'orange-500/40',
-                  glow: 'orange-400/20',
-                  icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
-                  tier: 'LIVE SUPPORT',
-                  tierColor: 'from-orange-500 to-red-500',
-                  scale: 'hover:scale-110',
-                  popular: true
                 }
               ];
-              const config = cardConfigs[index % 4];
+              const config = cardConfigs[index % 3];
               const isPopular = config.popular;
               
               return (

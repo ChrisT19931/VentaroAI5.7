@@ -74,7 +74,7 @@ const fallbackProducts = {
   '2': {
     id: '2',
     name: 'AI Prompts Starter Pack',
-    description: 'Your entry point to AI-powered business success. 30 professionally crafted prompts to kickstart your online business journey with ready-to-use templates for content creation, marketing, customer service, and more.',
+    description: 'Your entry point to AI-powered business success. 30 professionally crafted prompts to build an online business with AI with ready-to-use templates for content creation, marketing, customer service, and more.',
     price: 10.00,
     originalPrice: 25.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
@@ -92,7 +92,7 @@ const fallbackProducts = {
       'Perfect starting point for your AI business journey'
     ],
     details: {
-      description: 'Begin your AI business journey with our carefully curated collection of 30 professional prompts designed to help you implement AI solutions immediately. Each prompt is tested and optimized for business results - simply copy, paste, and watch your productivity soar.',
+      description: 'Begin your AI business journey with our carefully curated collection of 30 professional prompts designed to build an online business with AI. Each prompt is tested and optimized for business results - simply copy, paste, and watch your productivity soar.',
       features: [
         'Content creation prompts for blogs, social media, and marketing',
         'Customer service automation templates',
@@ -371,9 +371,9 @@ export default function ProductPage() {
                 </div>
               )}
               {product.id === '3' && (
-                <div className="bg-gradient-to-r from-orange-600 to-red-600 p-4 text-center">
+                <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-4 text-center">
                   <h3 className="text-white font-bold text-lg">🎬 Program Preview</h3>
-                  <p className="text-orange-100 text-sm">Complete Business Deployment Coaching</p>
+                  <p className="text-gray-300 text-sm">Complete Business Deployment Coaching</p>
                 </div>
               )}
 
@@ -890,119 +890,83 @@ export default function ProductPage() {
                 {/* Session Overview */}
                 <div className="glass-panel rounded-lg p-6">
                   <h3 className="text-2xl font-semibold text-white mb-6 flex items-center gap-2 glow-text">
-                    <svg className="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
-                    🎯 Comprehensive Business Deployment Program
+                    🎯 Premium AI Business Strategy Session
                   </h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">Program Structure & Timeline</h4>
-                      <ul className="space-y-3 text-gray-300">
-                        <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 1</span>
-                          <span>Business Assessment & Strategy Planning</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 2</span>
-                          <span>Technical Setup & Infrastructure</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 3</span>
-                          <span>Development & Implementation</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Session 4</span>
-                          <span>Deployment & Launch Preparation</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-orange-400 font-bold text-sm bg-orange-400/20 px-2 py-1 rounded">Follow-up</span>
-                          <span>Post-Launch Support & Optimization</span>
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-4">What You'll Receive</h4>
-                      <ul className="space-y-2 text-gray-300">
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>Multiple screen-recorded coaching sessions</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>Comprehensive knowledge transfer</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>Custom implementation roadmap</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>Technical setup assistance</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>Deployment guidance & support</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>30 days of email support</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-orange-400 font-bold">✓</span>
-                          <span>Business growth strategy consultation</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Session Preview */}
-                <div className="glass-panel rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                    <span className="text-2xl">🎬</span>
-                    Program Preview & Deliverables
-                  </h3>
-                  <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-600 relative overflow-hidden">
-                    <div className="filter blur-sm select-none pointer-events-none">
-                      <h4 className="text-orange-400 font-bold mb-3">Sample Program Walkthrough:</h4>
-                      <div className="text-gray-300 text-sm space-y-3">
-                        <div className="bg-orange-900/20 p-3 rounded border-l-4 border-orange-400">
-                          <p><strong>"Let's start by understanding your business goals..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Comprehensive business assessment and strategy planning</p>
-                        </div>
-                        <div className="bg-blue-900/20 p-3 rounded border-l-4 border-blue-400">
-                          <p><strong>"Now I'll guide you through setting up your development environment..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Step-by-step technical infrastructure setup</p>
-                        </div>
-                        <div className="bg-green-900/20 p-3 rounded border-l-4 border-green-400">
-                          <p><strong>"Let's implement your business solution together..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Hands-on development and implementation guidance</p>
-                        </div>
-                        <div className="bg-purple-900/20 p-3 rounded border-l-4 border-purple-400">
-                          <p><strong>"Finally, we'll deploy your solution and prepare for launch..."</strong></p>
-                          <p className="text-xs mt-1 text-gray-400">• Complete deployment and launch preparation</p>
-                        </div>
-                        <div className="mt-4 p-3 bg-gray-700/30 rounded">
-                          <h5 className="font-semibold text-white mb-2">📋 Comprehensive Program Includes:</h5>
-                          <ul className="text-xs space-y-1">
-                            <li>• Personalized coaching and implementation support</li>
-                            <li>• Complete technical documentation</li>
-                            <li>• Business growth strategy roadmap</li>
-                            <li>• Performance optimization recommendations</li>
-                            <li>• Future enhancement planning</li>
-                          </ul>
-                        </div>
+                  {/* Session Structure */}
+                  <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-lg p-6 border border-blue-400/30 mb-8">
+                    <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                      <span className="text-blue-400">⏱️</span>
+                      60-Minute Session Breakdown
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-400/20">
+                        <h5 className="font-semibold text-blue-300 mb-2">First 15 Minutes</h5>
+                        <p className="text-sm text-gray-300">🎯 Understanding your goals and business ideas</p>
+                      </div>
+                      <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-400/20">
+                        <h5 className="font-semibold text-purple-300 mb-2">Next 30 Minutes</h5>
+                        <p className="text-sm text-gray-300">🖥️ Live demonstration with screen sharing</p>
+                      </div>
+                      <div className="bg-green-900/30 p-4 rounded-lg border border-green-400/20">
+                        <h5 className="font-semibold text-green-300 mb-2">Final 15 Minutes</h5>
+                        <p className="text-sm text-gray-300">❓ Q&A session and clarifications</p>
                       </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-6">
-                      <div className="text-center">
-                        <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                          🔓 Book Your Coaching Program
-                        </div>
-                        <p className="text-gray-300 text-sm mt-2">Get personalized guidance and implementation support</p>
+                  </div>
+                  
+                  <div className="space-y-6 mb-8">
+                    <div className="flex items-center space-x-4 transform transition-all duration-300">
+                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">📹 60-minute Google Meet live presentation with shared screen</span>
+                    </div>
+                    <div className="flex items-center space-x-4 transform transition-all duration-300">
+                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">📋 Detailed step-by-step report delivered after session</span>
+                    </div>
+                    <div className="flex items-center space-x-4 transform transition-all duration-300">
+                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">💼 Complete knowledge transfer for full business ownership</span>
+                    </div>
+                    <div className="flex items-center space-x-4 transform transition-all duration-300">
+                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">🌐 Custom website/business deployment from start to finish</span>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-lg p-6 border border-blue-400/30">
+                    <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                      <span className="text-blue-400">💎</span>
+                      Premium Investment Package
+                    </h4>
+                    <div className="text-center mb-6">
+                      <div className="text-lg text-gray-400 line-through mb-1">Was A$3,000</div>
+                      <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 drop-shadow-2xl mb-2">A$500</div>
+                      <div className="text-sm text-blue-300 font-medium">💎 Premium Investment - Limited Time</div>
+                      <div className="text-sm text-green-400 font-bold animate-pulse">🔥 83% OFF - Limited Time Offer!</div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                      <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-400/20">
+                        <h5 className="font-semibold text-blue-300 mb-2">Session Includes:</h5>
+                        <ul className="text-sm text-gray-300 space-y-1">
+                          <li>• Live screen-shared presentation</li>
+                          <li>• Real-time Q&A and consultation</li>
+                          <li>• Personalized business assessment</li>
+                          <li>• Custom strategy development</li>
+                        </ul>
+                      </div>
+                      <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-400/20">
+                        <h5 className="font-semibold text-purple-300 mb-2">Post-Session Benefits:</h5>
+                        <ul className="text-sm text-gray-300 space-y-1">
+                          <li>• Comprehensive written report</li>
+                          <li>• Step-by-step implementation guide</li>
+                          <li>• Business deployment roadmap</li>
+                          <li>• Ongoing support packages available</li>
+                        </ul>
                       </div>
                     </div>
                   </div>

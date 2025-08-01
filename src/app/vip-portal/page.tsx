@@ -121,7 +121,7 @@ export default function VIPPortal() {
     {
       id: '2',
       name: 'AI Prompts Arsenal 2025',
-      description: '30 professional AI prompts to make money online in 2025.',
+      description: '30 professional AI prompts to build an online business with AI.',
       fileName: 'ai-prompts-collection.pdf',
       purchaseDate: '2024-01-15',
       viewUrl: '/downloads/prompts'

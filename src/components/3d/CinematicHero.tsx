@@ -56,46 +56,21 @@ const tvEffectStyles = `
           100% { background-position: 0% 50%; }
         }
         
-        @keyframes purple-gold-streak {
+        @keyframes purple-streak {
           0% {
-            background-position: -400% 0;
-            filter: hue-rotate(0deg) brightness(1);
-            transform: skewX(0deg);
+            background-position: -100% 0, 0 0;
           }
-          15% {
-            background-position: -200% 0;
-            filter: hue-rotate(30deg) brightness(1.2);
-            transform: skewX(-2deg);
+          25% {
+            background-position: -50% 0, 0 0;
           }
-          30% {
-            background-position: 100% 0;
-            filter: hue-rotate(60deg) brightness(1.4);
-            transform: skewX(2deg);
-          }
-          45% {
-            background-position: -150% 0;
-            filter: hue-rotate(90deg) brightness(1.1);
-            transform: skewX(-1deg);
-          }
-          60% {
-            background-position: 250% 0;
-            filter: hue-rotate(120deg) brightness(1.3);
-            transform: skewX(1deg);
+          50% {
+            background-position: 50% 0, 0 0;
           }
           75% {
-            background-position: -50% 0;
-            filter: hue-rotate(150deg) brightness(1.2);
-            transform: skewX(-1.5deg);
-          }
-          90% {
-            background-position: 350% 0;
-            filter: hue-rotate(180deg) brightness(1.1);
-            transform: skewX(0.5deg);
+            background-position: 150% 0, 0 0;
           }
           100% {
-            background-position: 400% 0;
-            filter: hue-rotate(0deg) brightness(1);
-            transform: skewX(0deg);
+            background-position: 200% 0, 0 0;
           }
         }
   }
@@ -556,21 +531,20 @@ function GlassmorphismOverlay() {
             }}
           >
 
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight"
                 style={{
-                  textShadow: '0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(59, 130, 246, 0.4)',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  fontWeight: 600,
-                  letterSpacing: '0.01em',
+                  fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif',
+                  fontWeight: '700',
                   position: 'relative',
                   zIndex: 10,
-                  background: 'linear-gradient(90deg, transparent 0%, transparent 35%, rgba(147, 51, 234, 0.1) 40%, rgba(168, 85, 247, 0.3) 43%, rgba(234, 179, 8, 0.4) 47%, rgba(251, 191, 36, 0.5) 50%, rgba(234, 179, 8, 0.4) 53%, rgba(168, 85, 247, 0.3) 57%, rgba(147, 51, 234, 0.1) 60%, transparent 65%, transparent 100%), linear-gradient(90deg, #ffffff, #ffffff)',
+                  background: 'linear-gradient(90deg, transparent 0%, transparent 47%, rgba(147, 51, 234, 0.3) 48%, rgba(147, 51, 234, 0.8) 49%, rgba(147, 51, 234, 1) 50%, rgba(147, 51, 234, 0.8) 51%, rgba(147, 51, 234, 0.3) 52%, transparent 53%, transparent 100%), linear-gradient(90deg, #ffffff, #000000)',
                   backgroundSize: '300% 100%, 100% 100%',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  animation: 'purple-gold-streak 45s linear infinite'
+                  animation: 'purple-streak 10s ease-in-out infinite',
+                  letterSpacing: '-0.025em'
                 }}>
-              BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
+                BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90">
             This site was 100% built from scratch coded with AI, we can show you how to do it or do it for you.

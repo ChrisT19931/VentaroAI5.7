@@ -50,7 +50,7 @@ export default function MyAccountPage() {
         {
           id: '1',
           name: 'AI Tools Mastery Guide 2025',
-          description: '30-page guide with AI tools and AI prompts to make money online in 2025.',
+          description: '30-page guide for AI tools to make money online in 2025.',
           image_url: '/images/products/ai-tools-mastery-guide.svg',
           viewUrl: '/downloads/ebook',
           owned: false // Default to not owned
@@ -58,7 +58,7 @@ export default function MyAccountPage() {
         {
           id: '2', 
           name: 'AI Prompts Arsenal 2025',
-          description: '30 professional AI prompts to make money online in 2025.',
+          description: '30 professional AI prompts to build an online business with AI.',
           image_url: '/images/products/ai-prompts-arsenal.svg',
           viewUrl: '/downloads/prompts',
           owned: false // Default to not owned

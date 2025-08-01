@@ -157,6 +157,18 @@ export default function TermsOfServicePage() {
               These Terms and your use of our services shall be governed by and construed in accordance with the laws of the State of California, without giving effect to any choice or conflict of law provision or rule.
             </p>
 
+            <h2 className="text-2xl font-bold text-black mt-8 mb-4">Ongoing Support Services</h2>
+            <p className="mb-4 text-gray-800">
+              For customers who require additional assistance beyond our standard offerings, we provide optional ongoing support services:
+            </p>
+            <ul className="list-disc list-inside mb-4 text-gray-800 space-y-2">
+              <li><strong>Priority Email Support:</strong> $100/week for priority email assistance and guidance</li>
+              <li><strong>Live Screenshare Support:</strong> $300/hour for one-on-one screenshare sessions with direct implementation assistance</li>
+            </ul>
+            <p className="mb-4 text-gray-800">
+              These support services are entirely optional and separate from our core product offerings. All support services are subject to availability and must be arranged in advance.
+            </p>
+
             <h2 className="text-2xl font-bold text-black mt-8 mb-4">Changes to These Terms</h2>
             <p className="mb-4 text-gray-800">
               We may revise these Terms from time to time. The most current version will always be posted on our website. If a revision, in our sole discretion, is material, we will notify you via email through our subscription system or through our services. By continuing to access or use our services after those revisions become effective, you agree to be bound by the revised Terms.

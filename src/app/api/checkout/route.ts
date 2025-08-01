@@ -16,7 +16,7 @@ const mockProducts = [
   {
     id: '1',
     name: 'AI Tools Mastery Guide 2025',
-    description: '30-page guide with AI tools and AI prompts to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
+    description: '30-page guide for AI tools to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies to make money with AI.',
     price: 25.00,
     image_url: '/images/products/ai-tools-mastery-guide.svg',
     category: 'E-book',
@@ -27,7 +27,7 @@ const mockProducts = [
   {
     id: '2',
     name: 'AI Prompts Arsenal 2025',
-    description: '30 professional AI prompts to make money online in 2025. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
+    description: '30 professional AI prompts to build an online business with AI. Proven ChatGPT and Claude prompts for content creation, marketing automation, and AI-powered business growth.',
     price: 10.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
     category: 'AI Prompts',
