@@ -536,7 +536,7 @@ function GlassmorphismOverlay() {
                 BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90">
-            This site was 100% built from scratch coded with AI, we can teach you how to do it, or we can do it for you.
+            Build A Fully Operational Online Business Using AI Within 2 Hours With Ventaro AI.
           </p>
           
           <div className="space-y-6">

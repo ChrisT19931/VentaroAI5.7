@@ -55,11 +55,11 @@ export default function SimpleHero() {
             className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
           >
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent">
-              Build Your Own
+              BUILD A MONEY-MAKING
             </span>
             <br />
             <span className="text-white">
-              Full-Stack Platform
+              ONLINE BUSINESS USING AI, FAST!
             </span>
           </motion.h1>
           
@@ -70,7 +70,7 @@ export default function SimpleHero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto"
           >
-            Create scalable digital businesses with complete ownership, unlimited customization, and higher profit margins.
+            Build A Fully Operational Online Business Using AI Within 2 Hours With Ventaro AI.
           </motion.p>
           
           {/* CTA Button */}
