@@ -83,112 +83,148 @@ export default async function ProductsPage() {
   const products = await getProducts();
   
   return (
-    <div className="relative min-h-screen py-12 overflow-hidden">
-      {/* Star Background */}
-      {/* Choose your preferred background: */}
-      {/* Option 1: No background (clean black) */}
-      <StarBackground enabled={false} />
+    <div className="relative min-h-screen py-16 overflow-hidden bg-gradient-to-br from-slate-950 via-gray-950 to-black">
+      {/* Subtle background effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/3 rounded-full blur-3xl"></div>
+      </div>
       
-      {/* Option 2: Simple CSS stars */}
-      {/* <StarBackground simple={true} /> */}
-      
-      {/* Option 3: 3D stars (original) */}
-      {/* <StarBackground /> */}
-      
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/60 to-gray-900/80" />
-      
-      <div className="relative z-10 container mx-auto px-4 max-w-6xl">
-        <h1 className="text-3xl font-bold mb-8 text-white">AI Business Solutions for Every Stage</h1>
-        <p className="text-lg text-gray-200 mb-8 max-w-3xl">
-          Explore our complete hierarchy of AI business solutions designed for every stage of your online business journey. From entry-level AI Prompts to comprehensive coaching and custom web development services, we have the perfect solution for your needs.
-        </p>
-        
-        {/* Filter and Sort Controls */}
-        <div className="flex flex-col md:flex-row justify-between mb-8">
-          <div className="mb-4 md:mb-0">
-            <select 
-              className="input-field max-w-xs"
-              defaultValue="all"
-            >
-              <option value="all">All Categories</option>
-              <option value="tools">AI Tools</option>
-              <option value="templates">Templates</option>
-              <option value="courses">Courses</option>
-            </select>
-          </div>
-          <div>
-            <select 
-              className="input-field max-w-xs"
-              defaultValue="newest"
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
-          </div>
+      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-300 drop-shadow-2xl">
+            AI Business Solutions
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-4 font-light max-w-4xl mx-auto leading-relaxed">
+            Choose your path to AI-powered business success
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
         </div>
         
-        {/* Products Grid */}
+        {/* Professional Three-Tier Layout */}
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {products.map((product: any, index: number) => {
-              const cardColors = [
-                { bg: 'from-slate-900/90 to-gray-900/90', accent: 'emerald', shadow: 'emerald-500/10' },
-                { bg: 'from-slate-900/90 to-gray-900/90', accent: 'blue', shadow: 'blue-500/10' },
-                { bg: 'from-slate-900/80 to-gray-900/80', accent: 'purple', shadow: 'purple-500/10' }
+              const cardConfigs = [
+                {
+                  bg: 'from-slate-900/90 via-emerald-900/30 to-gray-900/90',
+                  accent: 'emerald',
+                  accentHex: '#10b981',
+                  shadow: 'emerald-500/25',
+                  border: 'emerald-500/30',
+                  glow: 'emerald-400/15',
+                  icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+                  tier: 'STARTER',
+                  tierColor: 'from-emerald-500 to-emerald-600',
+                  scale: 'hover:scale-105',
+                  popular: false
+                },
+                {
+                  bg: 'from-slate-900/95 via-blue-900/40 to-gray-900/95',
+                  accent: 'blue',
+                  accentHex: '#3b82f6',
+                  shadow: 'blue-500/30',
+                  border: 'blue-500/40',
+                  glow: 'blue-400/20',
+                  icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+                  tier: 'PROFESSIONAL',
+                  tierColor: 'from-blue-500 to-blue-600',
+                  scale: 'hover:scale-110',
+                  popular: true
+                },
+                {
+                  bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
+                  accent: 'purple',
+                  accentHex: '#8b5cf6',
+                  shadow: 'purple-500/30',
+                  border: 'purple-500/40',
+                  glow: 'purple-400/20',
+                  icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+                  tier: 'PREMIUM',
+                  tierColor: 'from-purple-500 to-purple-600',
+                  scale: 'hover:scale-105',
+                  popular: false
+                }
               ];
-              const colors = cardColors[index % 3];
+              const config = cardConfigs[index % 3];
+              const isPopular = config.popular;
               
               return (
-                <div key={product.id} className={`group relative bg-gradient-to-br ${colors.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${colors.shadow} transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 overflow-hidden border-2 border-slate-600/40`}>
-                  {product.featured && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <div className={`bg-gradient-to-r from-${colors.accent}-500 to-${colors.accent}-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse`} style={{animationDuration: '2s'}}>
-                        FEATURED
+                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${config.shadow} transition-all duration-700 transform hover:-translate-y-6 ${config.scale} overflow-hidden border-2 ${isPopular ? `border-${config.accent}-400/60` : `border-${config.border}`} ${isPopular ? 'ring-2 ring-blue-400/20' : ''}`}>
+                  {/* Professional glow effect */}
+                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-${config.accent}-500/10 via-transparent to-${config.accent}-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
+                  
+                  {/* Subtle floating elements */}
+                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                    <div className={`absolute top-6 right-6 w-2 h-2 bg-${config.accent}-400/40 rounded-full animate-pulse`} style={{animationDelay: '0.5s', animationDuration: '3s'}}></div>
+                    <div className={`absolute bottom-8 left-8 w-1.5 h-1.5 bg-${config.accent}-300/30 rounded-full animate-pulse`} style={{animationDelay: '1.5s', animationDuration: '4s'}}></div>
+                  </div>
+                  
+                  {/* Tier Badge */}
+                  <div className="absolute top-6 left-6 z-20">
+                    <div className={`bg-gradient-to-r ${config.tierColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg transition-all duration-500 group-hover:scale-110`}>
+                      {config.tier}
+                    </div>
+                  </div>
+                  
+                  {/* Popular Badge */}
+                  {isPopular && (
+                    <div className="absolute top-6 right-6 z-20">
+                      <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-2 rounded-full shadow-lg animate-pulse" style={{animationDuration: '2s'}}>
+                        MOST POPULAR
                       </div>
                     </div>
                   )}
-                  <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                    <div className="relative">
-                      <svg className={`w-20 h-20 text-${colors.accent}-400 opacity-60`} fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                      </svg>
-                      <div className={`absolute inset-0 bg-${colors.accent}-400/20 rounded-full blur-xl`}></div>
+                  
+                  {/* Hero Section */}
+                  <div className={`h-48 bg-gradient-to-br from-slate-900/50 to-gray-900/50 relative overflow-hidden flex items-center justify-center transition-all duration-700`}>
+                    <div className="relative transform group-hover:scale-110 transition-all duration-700">
+                      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${config.tierColor} flex items-center justify-center shadow-2xl group-hover:shadow-${config.accent}-500/50 transition-all duration-700`}>
+                        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d={config.icon}/>
+                        </svg>
+                      </div>
+                      <div className={`absolute inset-0 bg-${config.glow} rounded-2xl blur-xl group-hover:bg-${config.accent}-400/30 transition-all duration-700`}></div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   </div>
+                  
+                  {/* Content Section */}
                   <div className="p-8">
-                    <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
+                    <h3 className="text-2xl font-bold mb-4 text-white leading-tight">
                       {product.name}
                     </h3>
-                    <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
+                    <p className="text-gray-300 mb-8 leading-relaxed text-sm">
                       {product.description}
                     </p>
-                    <div className="text-center mb-6">
-                      {product.originalPrice ? (
-                        <div>
-                          <div className="flex items-center justify-center space-x-3 mb-2">
-                            <span className="text-3xl font-black text-white drop-shadow-lg">A${product.price.toFixed(2)}</span>
-                            <span className="text-xl text-gray-400 line-through font-bold">A${product.originalPrice.toFixed(2)}</span>
-                          </div>
-                          <div className="text-sm text-green-300 font-bold animate-pulse bg-green-500/20 px-3 py-1 rounded-full" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
-                        </div>
-                      ) : (
-                        <div>
-                          <div className="text-3xl font-black text-white drop-shadow-lg mb-2">A${product.price.toFixed(2)}</div>
-                          <div className="text-sm text-gray-300 font-medium">One-time payment</div>
-                        </div>
-                      )}
+                    
+                    {/* Pricing Section */}
+                    <div className="text-center mb-8">
+                      <div className="flex items-baseline justify-center space-x-2 mb-2">
+                        <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200">
+                          A${product.price.toFixed(2)}
+                        </span>
+                        {product.originalPrice && (
+                          <span className="text-lg text-gray-500 line-through">
+                            A${product.originalPrice.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-sm text-gray-400">One-time investment</div>
                     </div>
+                    
+                    {/* Action Buttons */}
                     <div className="space-y-3">
                       <a 
                         href={`/products/${product.id}`}
-                        className={`w-full block text-center py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white border border-gray-600/30 hover:shadow-gray-500/20`}
+                        className={`w-full block text-center py-4 rounded-xl font-semibold transition-all duration-500 hover:scale-105 shadow-lg bg-gradient-to-r ${config.tierColor} text-white hover:shadow-${config.accent}-500/30 hover:shadow-xl transform hover:-translate-y-1 relative overflow-hidden group/btn`}
                       >
-                        View Details
+                        <span className="relative z-10">View Details</span>
+                        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
                       </a>
+                      
                       <BuyNowButton 
                         product={{
                           id: product.id,
@@ -196,7 +232,7 @@ export default async function ProductsPage() {
                           price: product.price,
                           image_url: product.image_url
                         }} 
-                        className={`w-full block text-center py-4 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg bg-gradient-to-r from-${colors.accent}-600 to-${colors.accent}-700 hover:from-${colors.accent}-500 hover:to-${colors.accent}-600 text-white border border-${colors.accent}-500/30 hover:shadow-${colors.accent}-500/20`}
+                        className="w-full py-4 rounded-xl font-semibold transition-all duration-500 hover:scale-105 shadow-lg bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white hover:shadow-gray-500/20 hover:shadow-xl transform hover:-translate-y-1 relative overflow-hidden group/buy"
                       />
                     </div>
                   </div>

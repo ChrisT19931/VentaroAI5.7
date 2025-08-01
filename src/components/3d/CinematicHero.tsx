@@ -48,7 +48,56 @@ const tvEffectStyles = `
     25% { background-position: 100% 50%; }
     50% { background-position: 100% 100%; }
     75% { background-position: 0% 100%; }
-    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes gradient-shift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes purple-gold-streak {
+          0% {
+            background-position: -400% 0;
+            filter: hue-rotate(0deg) brightness(1);
+            transform: skewX(0deg);
+          }
+          15% {
+            background-position: -200% 0;
+            filter: hue-rotate(30deg) brightness(1.2);
+            transform: skewX(-2deg);
+          }
+          30% {
+            background-position: 100% 0;
+            filter: hue-rotate(60deg) brightness(1.4);
+            transform: skewX(2deg);
+          }
+          45% {
+            background-position: -150% 0;
+            filter: hue-rotate(90deg) brightness(1.1);
+            transform: skewX(-1deg);
+          }
+          60% {
+            background-position: 250% 0;
+            filter: hue-rotate(120deg) brightness(1.3);
+            transform: skewX(1deg);
+          }
+          75% {
+            background-position: -50% 0;
+            filter: hue-rotate(150deg) brightness(1.2);
+            transform: skewX(-1.5deg);
+          }
+          90% {
+            background-position: 350% 0;
+            filter: hue-rotate(180deg) brightness(1.1);
+            transform: skewX(0.5deg);
+          }
+          100% {
+            background-position: 400% 0;
+            filter: hue-rotate(0deg) brightness(1);
+            transform: skewX(0deg);
+          }
+        }
   }
 
   @keyframes matrixRain {
@@ -232,18 +281,7 @@ const AnimatedLogo = () => {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <group ref={logoRef}>
-        <Text
-          fontSize={1.5}
-          color="#ffffff"
-          anchorX="center"
-          anchorY="middle"
-          material-transparent
-          material-opacity={1}
-          material-emissive="#ffffff"
-          material-emissiveIntensity={0.5}
-        >
-          VENTARO AI
-        </Text>
+
         {/* Glowing ring around logo */}
         <mesh rotation={[0, 0, 0]}>
           <torusGeometry args={[3, 0.05, 16, 100]} />
@@ -517,30 +555,20 @@ function GlassmorphismOverlay() {
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
             }}
           >
-          <div className="mb-6">
-            <h2 className="text-lg md:text-2xl font-semibold mb-6 text-center relative"
+
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 leading-tight"
                 style={{
+                  textShadow: '0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(59, 130, 246, 0.4)',
                   fontFamily: 'Inter, system-ui, sans-serif',
                   fontWeight: 600,
-                  color: '#e5e7eb',
-                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
+                  letterSpacing: '0.01em',
                   position: 'relative',
-                  zIndex: 10
-                }}>
-              VENTARO AI
-            </h2>
-          </div>
-          <h1 className="text-2xl md:text-4xl font-bold text-white mb-8 leading-tight tracking-normal relative"
-              style={{
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  fontWeight: 700,
-                  color: '#ffffff',
-                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
-                  letterSpacing: '0.02em',
-                  position: 'relative',
-                  zIndex: 10
+                  zIndex: 10,
+                  background: 'linear-gradient(90deg, transparent 0%, transparent 35%, rgba(147, 51, 234, 0.1) 40%, rgba(168, 85, 247, 0.3) 43%, rgba(234, 179, 8, 0.4) 47%, rgba(251, 191, 36, 0.5) 50%, rgba(234, 179, 8, 0.4) 53%, rgba(168, 85, 247, 0.3) 57%, rgba(147, 51, 234, 0.1) 60%, transparent 65%, transparent 100%), linear-gradient(90deg, #ffffff, #ffffff)',
+                  backgroundSize: '300% 100%, 100% 100%',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  animation: 'purple-gold-streak 45s linear infinite'
                 }}>
               BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
           </h1>

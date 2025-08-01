@@ -71,7 +71,10 @@ export default function UpsellModal({
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Upgrade Your AI Arsenal!</h2>
           <p className="text-gray-300">Complete your collection with this perfect companion to your AI Prompts.</p>
-          <CountdownTimer variant="compact" className="mt-4" />
+          {/* Only show countdown timer for coaching product upsells */}
+          {upsellProduct.id === '3' && (
+            <CountdownTimer variant="compact" className="mt-4" />
+          )}
         </div>
 
         <div className="bg-gray-800/50 rounded-lg p-4 mb-6 border border-gray-700/50">

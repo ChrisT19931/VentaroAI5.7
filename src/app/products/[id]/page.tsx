@@ -1012,8 +1012,10 @@ export default function ProductPage() {
 
 
 
-            {/* Countdown Timer */}
-            <CountdownTimer variant="product" className="mb-6" />
+            {/* Countdown Timer - Only show for coaching product */}
+            {product?.id === '3' && (
+              <CountdownTimer variant="product" className="mb-6" />
+            )}
 
             {/* CTA Button */}
             <div className="glass-panel rounded-lg p-6 text-center">
