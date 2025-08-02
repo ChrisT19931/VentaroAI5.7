@@ -256,18 +256,7 @@ const AnimatedLogo = () => {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <group ref={logoRef}>
-
-        {/* Glowing ring around logo */}
-        <mesh rotation={[0, 0, 0]}>
-          <torusGeometry args={[3, 0.05, 16, 100]} />
-          <meshStandardMaterial
-            color="#60a5fa"
-            emissive="#3b82f6"
-            emissiveIntensity={0.8}
-            transparent
-            opacity={0.6}
-          />
-        </mesh>
+        {/* Ring has been removed */}
       </group>
     </Float>
   );
@@ -547,7 +536,7 @@ function GlassmorphismOverlay() {
                 BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90">
-            This site was 100% built from scratch coded with AI, we can show you how to do it or do it for you.
+            This site was 100% built from scratch coded with AI, we can teach you how to do it, or we can do it for you.
           </p>
           
           <div className="space-y-6">
