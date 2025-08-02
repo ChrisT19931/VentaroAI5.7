@@ -48,14 +48,10 @@ export default function EbookDownloadPage() {
           const data = await response.json();
           const userPurchases = data.purchases || [];
           
-          // Check if user has purchased this specific product (ebook, 1, or ai-tools-mastery-guide-2025)
+          // Check if user has purchased this specific product (ebook)
           // Note: The purchases table doesn't have a status field, so we just check for the product_id
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => (
-              purchase.product_id === 'ebook' || 
-              purchase.product_id === '1' || 
-              purchase.product_id === 'ai-tools-mastery-guide-2025'
-            )
+            (purchase: any) => purchase.product_id === 'ebook'
           );
           
           setHasAccess(hasProductAccess);

@@ -62,12 +62,14 @@ export default function DynamicDownloadPage() {
           
           // Check if user has purchased this specific product
           // Note: The purchases table doesn't have a status field, so we just check for the product_id
+          // Map product IDs to consistent internal product IDs
+          let expectedProductId = productIdString;
+          if (productIdString === '1') expectedProductId = 'ebook';
+          else if (productIdString === '2') expectedProductId = 'prompts';
+          else if (productIdString === '3') expectedProductId = 'coaching';
+          
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => purchase.product_id === productIdString ||
-              // Also check for slug-based product IDs
-              (productIdString === '1' && purchase.product_id === 'ai-tools-mastery-guide-2025') ||
-              (productIdString === '2' && purchase.product_id === 'ai-prompts-arsenal-2025') ||
-              (productIdString === '3' && purchase.product_id === 'ai-business-strategy-session-2025')
+            (purchase: any) => purchase.product_id === expectedProductId
           );
           
           setHasAccess(hasProductAccess);

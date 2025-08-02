@@ -88,15 +88,24 @@ export async function POST(request: NextRequest) {
           const purchasePromises = order.order_items.map(async (item: any) => {
             const product = item.products;
             if (product) {
+              // Map internal product IDs to access-friendly IDs
+              let mappedProductId = product.id;
+              if (product.name.toLowerCase().includes('prompt') || product.name.toLowerCase().includes('ai')) {
+                mappedProductId = 'prompts'; // This matches what the prompts page checks for
+              } else if (product.name.toLowerCase().includes('e-book') || product.name.toLowerCase().includes('ebook')) {
+                mappedProductId = 'ebook';
+              } else if (product.name.toLowerCase().includes('coaching')) {
+                mappedProductId = 'coaching';
+              }
+              
               const { error: purchaseError } = await supabase
                 .from('purchases')
                 .upsert({
                   user_id: order.user_id,
-                  product_id: product.id,
+                  product_id: mappedProductId,
                   product_name: product.name,
                   amount: item.price,
                   currency: 'USD',
-                  status: 'completed',
                   order_number: order.order_number || order.id,
                   payment_intent_id: session.payment_intent,
                   created_at: new Date().toISOString()
@@ -165,15 +174,24 @@ export async function POST(request: NextRequest) {
           const product = item.price.product;
           if (product) {
             try {
+              // Map Stripe product IDs to access-friendly IDs
+              let mappedProductId = product.id;
+              if (product.name.toLowerCase().includes('prompt') || product.name.toLowerCase().includes('ai')) {
+                mappedProductId = 'prompts'; // This matches what the prompts page checks for
+              } else if (product.name.toLowerCase().includes('e-book') || product.name.toLowerCase().includes('ebook')) {
+                mappedProductId = 'ebook';
+              } else if (product.name.toLowerCase().includes('coaching')) {
+                mappedProductId = 'coaching';
+              }
+              
               const { error: purchaseError } = await supabase
                 .from('purchases')
                 .upsert({
                   user_id: session.metadata?.user_id || null,
-                  product_id: product.id,
+                  product_id: mappedProductId,
                   product_name: product.name,
                   amount: (item.amount_total || 0) / 100,
                   currency: 'USD',
-                  status: 'completed',
                   order_number: orderDetails.id,
                   payment_intent_id: session.payment_intent,
                   customer_email: session.customer_details.email,
