@@ -61,6 +61,18 @@ const mockProducts = [
 
 export async function POST(request: NextRequest) {
   try {
+    // Check for authentication - block guest users
+    const authCookie = request.cookies.get('ventaro-auth');
+    const isAuthenticated = authCookie?.value === 'true';
+    
+    if (!isAuthenticated) {
+      console.log('Blocking checkout attempt from unauthenticated user');
+      return NextResponse.json(
+        { error: 'Authentication required. Please log in to make a purchase.' },
+        { status: 401 }
+      );
+    }
+
     // Validate Stripe environment variables
     const envValidation = validateStripeEnvironment();
     if (!envValidation.isValid) {
