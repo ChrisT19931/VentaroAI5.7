@@ -74,7 +74,7 @@ const fallbackProducts = {
   '2': {
     id: '2',
     name: 'AI Prompts Starter Pack',
-    description: 'Your entry point to AI-powered business success. 30x prompts to feed into ChatGPT providing step-by-step plans for every aspect to start, operate and scale an online business with comprehensive ecommerce setup, marketing strategies, and more.'
+    description: 'Your entry point to AI-powered business success. 30x prompts to feed into ChatGPT providing step-by-step plans for every aspect to start, operate and scale an online business with comprehensive ecommerce setup, marketing strategies, and more.',
     price: 10.00,
     originalPrice: 25.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
