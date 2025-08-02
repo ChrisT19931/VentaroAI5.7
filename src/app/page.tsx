@@ -601,7 +601,7 @@ export default function Home() {
                   </label>
                   <input 
                     type="tel" 
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="04XX XXX XXX"
                     className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
                   />
                 </div>
