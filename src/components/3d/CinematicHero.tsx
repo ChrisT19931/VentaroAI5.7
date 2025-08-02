@@ -526,7 +526,7 @@ function GlassmorphismOverlay() {
                   fontWeight: '700',
                   position: 'relative',
                   zIndex: 10,
-                  background: 'linear-gradient(90deg, transparent 0%, transparent 47%, rgba(147, 51, 234, 0.3) 48%, rgba(147, 51, 234, 0.8) 49%, rgba(147, 51, 234, 1) 50%, rgba(147, 51, 234, 0.8) 51%, rgba(147, 51, 234, 0.3) 52%, transparent 53%, transparent 100%), linear-gradient(90deg, #ffffff, #000000)',
+                  background: 'linear-gradient(90deg, transparent 0%, transparent 47%, rgba(147, 51, 234, 0.3) 48%, rgba(147, 51, 234, 0.8) 49%, rgba(147, 51, 234, 1) 50%, rgba(147, 51, 234, 0.8) 51%, rgba(147, 51, 234, 0.3) 52%, transparent 53%, transparent 100%), linear-gradient(90deg, #888888 0%, #888888 50%, #ffffff 50%, #ffffff 100%)',
                   backgroundSize: '300% 100%, 100% 100%',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',

@@ -340,8 +340,8 @@ export default function DownloadsPage() {
         <div className="mt-8 text-center">
           <p className="text-gray-400 text-sm">
             Need help? Contact us at{' '}
-            <a href="mailto:support@ventaroai.com" className="text-blue-400 hover:text-blue-300">
-              support@ventaroai.com
+            <a href="mailto:chris.t@ventarosales.com" className="text-blue-400 hover:text-blue-300">
+                  chris.t@ventarosales.com
             </a>
           </p>
         </div>

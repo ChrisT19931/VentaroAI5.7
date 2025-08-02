@@ -236,7 +236,7 @@ export default function DynamicDownloadPage() {
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-blue-400">•</span>
-                For technical support, contact support@ventaroai.com
+                For technical support, contact chris.t@ventarosales.com
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-blue-400">•</span>
