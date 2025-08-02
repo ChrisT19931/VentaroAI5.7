@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /clear-auth/
+Disallow: /email-manager/
+Disallow: /storage-manager/
+Disallow: /reset-password/
+Disallow: /forgot-password/
+
+# Disallow user-specific pages
+Disallow: /account/
+Disallow: /my-account/
+Disallow: /downloads/
+Disallow: /purchases/
+Disallow: /vip-portal/
+Disallow: /checkout/success/
+
+# Allow important pages
+Allow: /products/
+Allow: /contact/
+Allow: /about/
+Allow: /faq/
+Allow: /privacy/
+Allow: /terms/
+Allow: /login/
+Allow: /signup/
+Allow: /checkout/
+Allow: /cart/
+
+# Sitemap location
+Sitemap: https://your-domain.com/sitemap.xml

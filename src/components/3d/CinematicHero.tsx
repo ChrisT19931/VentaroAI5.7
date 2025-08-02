@@ -256,7 +256,7 @@ const AnimatedLogo = () => {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <group ref={logoRef}>
-        {/* Ring has been removed */}
+        {/* Ring removed as requested */}
       </group>
     </Float>
   );

@@ -105,7 +105,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
           <p className="text-xl text-gray-300">
             Master ChatGPT, Claude, Trae & More - Build Your Online Business
           </p>
-          <p className="text-lg text-blue-400 mt-2">30 Practical Lessons - 1 Page Each</p>
+          <p className="text-lg text-purple-400 mt-2">30 Practical Lessons - 1 Page Each</p>
         </div>
 
         {/* Download Button */}
@@ -113,7 +113,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
           <button
             onClick={handleDownload}
             disabled={isDownloading}
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors disabled:opacity-50 inline-flex items-center gap-2"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors disabled:opacity-50 inline-flex items-center gap-2"
           >
             {isDownloading ? (
               <>
@@ -141,7 +141,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
             <div className="space-y-6">
               {/* Lesson 1 */}
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">Lesson 1: ChatGPT Fundamentals for Business</h3>
+                <h3 className="text-lg font-semibold text-purple-400 mb-3">Lesson 1: ChatGPT Fundamentals for Business</h3>
                 <div className="space-y-4 text-gray-300">
                   <div>
                     <h4 className="font-semibold text-white mb-2">Getting Started:</h4>
@@ -152,7 +152,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
                       <li>Using custom instructions for consistent outputs</li>
                     </ul>
                   </div>
-                  <div className="p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg mb-4">
+                  <div className="p-4 bg-purple-900/20 border border-purple-500/30 rounded-lg mb-4">
                     <p className="text-gray-300 leading-relaxed">
                       To begin your AI business journey, start by signing up for ChatGPT Plus at chat.openai.com. The $20 monthly investment gives you priority access to GPT-4, OpenAI's most advanced model. GPT-4 excels at complex reasoning, creative content, and professional writing, while the free GPT-3.5 handles basic tasks adequately. When crafting prompts, follow the "CRS" formula: Context (who you're writing for), Request (specific deliverable), and Specifications (tone, length, format). For consistent results, set up custom instructions in your account settings with your preferred output format, writing style, and industry expertise. Practice by creating a simple prompt: "You are a social media expert. Create 10 engaging Facebook posts for a local bakery. Include emojis, hashtags, and calls to action." This simple prompt will generate ready-to-use content that local businesses would gladly pay $50-100 for, taking you just minutes to produce.
                     </p>
@@ -166,7 +166,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
 
               {/* Lesson 2 */}
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">Lesson 2: Advanced ChatGPT Prompting Techniques</h3>
+                <h3 className="text-lg font-semibold text-purple-400 mb-3">Lesson 2: Advanced ChatGPT Prompting Techniques</h3>
                 <div className="space-y-4 text-gray-300">
                   <div>
                     <h4 className="font-semibold text-white mb-2">Power Prompting Methods:</h4>
@@ -177,7 +177,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
                       <li>Temperature and parameter control</li>
                     </ul>
                   </div>
-                  <div className="p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg mb-4">
+                  <div className="p-4 bg-purple-900/20 border border-purple-500/30 rounded-lg mb-4">
                     <p className="text-gray-300 leading-relaxed">
                       Elevate your ChatGPT skills with advanced prompting techniques that dramatically improve output quality. Chain-of-thought prompting breaks complex tasks into sequential steps—ask ChatGPT to "think step by step" when tackling complicated problems like business strategy or financial analysis. Role-based prompting transforms ChatGPT into a specialized expert by beginning with "Act as a [profession]" such as "Act as a senior marketing strategist with 15 years of experience in the healthcare industry." This technique creates more authoritative, industry-specific content. Few-shot learning provides examples within your prompt: "Write email subject lines like these: [Example 1], [Example 2], [Example 3]. Now create 10 more in this style for a fitness business." This approach ensures consistent formatting and style. Finally, control output creativity by adjusting the temperature parameter—use lower settings (0.2-0.5) for factual, consistent responses, and higher settings (0.7-1.0) for creative, varied content. Master these techniques to create professional email marketing sequences that businesses will pay premium rates for, establishing yourself as an AI-powered marketing consultant.
                     </p>
@@ -191,7 +191,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
 
               {/* Lesson 3 */}
               <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">Lesson 3: ChatGPT for Content Creation Business</h3>
+                <h3 className="text-lg font-semibold text-purple-400 mb-3">Lesson 3: ChatGPT for Content Creation Business</h3>
                 <div className="space-y-4 text-gray-300">
                   <div>
                     <h4 className="font-semibold text-white mb-2">Content Services You Can Offer:</h4>

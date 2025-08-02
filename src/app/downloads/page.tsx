@@ -107,7 +107,7 @@ export default function DownloadsPage() {
       description: '30 professional AI prompts to build an online business with AI.',
       fileName: 'ai-prompts-collection.pdf',
       icon: '🔥',
-      color: 'from-green-500 to-blue-500',
+      color: 'from-emerald-500 to-green-500',
       viewUrl: '/downloads/prompts'
     },
     {
@@ -116,7 +116,7 @@ export default function DownloadsPage() {
       description: '60-minute live coaching session to build your online business.',
       fileName: null, // Coaching doesn't have a direct download
       icon: '🎯',
-      color: 'from-orange-500 to-red-500',
+      color: 'from-purple-500 to-pink-500',
       viewUrl: '/downloads/coaching'
     }
   ];
