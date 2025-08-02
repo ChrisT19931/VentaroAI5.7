@@ -2,17 +2,17 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - AI Tools & AI Prompts | Ventaro AI Digital Store 2025',
+  title: 'Terms of Service - AI Tools & AI Prompts | Ventaro AI',
   description: 'Read our terms of service for AI tools, AI prompts, and digital products to make money online with AI in 2025. Legal terms for our AI business solutions and coaching services.',
   keywords: 'terms of service, AI tools terms, AI prompts legal, make money online terms, AI business legal, digital products terms, AI coaching terms',
   openGraph: {
-    title: 'Terms of Service - Ventaro AI Digital Store 2025',
+    title: 'Terms of Service - Ventaro AI',
     description: 'Legal terms for AI tools, AI prompts, and digital products to make money online with AI.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Terms of Service - Ventaro AI Digital Store 2025',
+    title: 'Terms of Service - Ventaro AI',
     description: 'Legal terms for AI tools and prompts',
   },
 };

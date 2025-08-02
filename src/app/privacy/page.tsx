@@ -2,17 +2,17 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - AI Tools & AI Prompts | Ventaro AI Digital Store 2025',
+  title: 'Privacy Policy - AI Tools & AI Prompts | Ventaro AI',
   description: 'Read our privacy policy for AI tools, AI prompts, and digital products. Learn how we protect your data when you make money online with AI in 2025.',
   keywords: 'privacy policy, AI tools privacy, AI prompts privacy, make money online privacy, AI business privacy, digital products privacy, data protection',
   openGraph: {
-    title: 'Privacy Policy - Ventaro AI Digital Store 2025',
+    title: 'Privacy Policy - Ventaro AI',
     description: 'Privacy policy for AI tools, AI prompts, and digital products to make money online with AI.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Privacy Policy - Ventaro AI Digital Store 2025',
+    title: 'Privacy Policy - Ventaro AI',
     description: 'Privacy policy for AI tools and prompts',
   },
 };

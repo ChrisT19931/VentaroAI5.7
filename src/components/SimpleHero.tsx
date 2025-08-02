@@ -42,7 +42,7 @@ export default function SimpleHero() {
           >
             <div className="text-6xl md:text-8xl font-black text-white mb-4 tracking-wider">
               <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-clip-text text-transparent animate-pulse">
-                VENTARO AI
+                Ventaro AI
               </span>
             </div>
           </motion.div>

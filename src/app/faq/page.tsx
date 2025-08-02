@@ -6,8 +6,8 @@ export default function FAQPage() {
       title: 'General Questions',
       faqs: [
         {
-          question: 'What is Ventaro AI Digital Store?',
-          answer: 'Ventaro AI Digital Store is an online marketplace specializing in high-quality digital products created with or powered by artificial intelligence. We offer a curated selection of digital assets, tools, templates, and resources for creators, businesses, and developers.'
+          question: 'What is Ventaro AI?',
+      answer: 'Ventaro AI is an online marketplace specializing in high-quality digital products created with or powered by artificial intelligence. We offer a curated selection of digital assets, tools, templates, and resources for creators, businesses, and developers.'
         },
         {
           question: 'Do I need to create an account to make a purchase?',
