@@ -108,7 +108,7 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'Do you have any current promotions?',
-          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just A$10. These 30x prompts provide step-by-step plans for every aspect to start, operate and scale an online business including complete ecommerce setup, marketing strategies, and comprehensive business operations guidance.'
+          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just A$10. These 30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc).'
         },
         {
           question: 'What does the AI Business Strategy Session include?',

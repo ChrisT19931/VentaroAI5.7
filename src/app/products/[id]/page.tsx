@@ -74,7 +74,7 @@ const fallbackProducts = {
   '2': {
     id: '2',
     name: 'AI Prompts Starter Pack',
-    description: 'Your entry point to AI-powered business success. 30x prompts to feed into ChatGPT providing step-by-step plans for every aspect to start, operate and scale an online business with comprehensive ecommerce setup, marketing strategies, and more.',
+    description: 'Your entry point to AI-powered business success. 30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc).',
     price: 10.00,
     originalPrice: 25.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
@@ -84,15 +84,15 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      '30x prompts to feed into ChatGPT for step-by-step business plans',
-      'Complete ecommerce setup, ideas, requirements & marketing strategies',
-      'Every aspect to start, operate and scale an online business',
+      '30x prompts to feed into ChatGPT for comprehensive business planning',
+      'From setting up to ecommerce ideas, requirements & marketing strategies',
+      'Step-by-step plans for every aspect + more to grow your business',
       'Works with ChatGPT, Claude, and other AI tools',
       'Organized by business function for easy navigation',
       'Perfect starting point for your AI business journey'
     ],
     details: {
-      description: 'Begin your AI business journey with our carefully curated collection of 30x prompts designed to provide step-by-step plans for every aspect of building an online business with AI. Each prompt delivers comprehensive guidance for starting, operating and scaling your business - simply feed into ChatGPT and get detailed action plans.',
+      description: 'Begin your AI business journey with our carefully curated collection of 30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc). Simply feed into ChatGPT and get detailed action plans.',
       features: [
         'Complete ecommerce setup and requirements planning',
         'Marketing strategies and campaign development',
