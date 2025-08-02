@@ -49,10 +49,10 @@ export default function CoachingDownloadPage() {
           const data = await response.json();
           const userPurchases = data.purchases || [];
           
-          // Check if user has purchased this specific product (ID: 3 for coaching)
+          // Check if user has purchased this specific product (coaching)
           // Note: The purchases table doesn't have a status field, so we just check for the product_id
           const hasProductAccess = userPurchases.some(
-            (purchase: any) => purchase.product_id === '3' || purchase.product_id === 'ai-business-strategy-session-2025'
+            (purchase: any) => purchase.product_id === 'coaching'
           );
           
           setHasAccess(hasProductAccess);
