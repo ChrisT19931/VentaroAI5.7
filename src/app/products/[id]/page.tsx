@@ -74,7 +74,7 @@ const fallbackProducts = {
   '2': {
     id: '2',
     name: 'AI Prompts Starter Pack',
-    description: 'Your entry point to AI-powered business success. 30 professionally crafted prompts to build an online business with AI with ready-to-use templates for content creation, marketing, customer service, and more.',
+    description: 'Your entry point to AI-powered business success. 30x prompts to feed into ChatGPT providing step-by-step plans for every aspect to start, operate and scale an online business with comprehensive ecommerce setup, marketing strategies, and more.'
     price: 10.00,
     originalPrice: 25.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
@@ -84,21 +84,21 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      '30 proven prompts for immediate business implementation',
-      'Copy-paste ready for instant results',
+      '30x prompts to feed into ChatGPT for step-by-step business plans',
+      'Complete ecommerce setup, ideas, requirements & marketing strategies',
+      'Every aspect to start, operate and scale an online business',
       'Works with ChatGPT, Claude, and other AI tools',
       'Organized by business function for easy navigation',
-      'Simple instructions for maximum effectiveness',
       'Perfect starting point for your AI business journey'
     ],
     details: {
-      description: 'Begin your AI business journey with our carefully curated collection of 30 professional prompts designed to build an online business with AI. Each prompt is tested and optimized for business results - simply copy, paste, and watch your productivity soar.',
+      description: 'Begin your AI business journey with our carefully curated collection of 30x prompts designed to provide step-by-step plans for every aspect of building an online business with AI. Each prompt delivers comprehensive guidance for starting, operating and scaling your business - simply feed into ChatGPT and get detailed action plans.',
       features: [
-        'Content creation prompts for blogs, social media, and marketing',
-        'Customer service automation templates',
-        'Business planning and strategy prompts',
-        'E-commerce and product description generators',
-        'Personal branding and networking prompts'
+        'Complete ecommerce setup and requirements planning',
+        'Marketing strategies and campaign development',
+        'Business operations and scaling methodologies',
+        'Product sourcing and inventory management guidance',
+        'Customer acquisition and retention strategies'
       ],
       includes: [
         'PDF with all 30 categorized prompts',

@@ -152,20 +152,20 @@ export default function Home() {
                   AI Prompts Arsenal 2025
                 </h3>
                 <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  30 professional AI prompts to build an online business with AI. Proven ChatGPT and Claude prompts for business growth.
+                  30x prompts to feed into ChatGPT providing step-by-step plans for every aspect to start, operate and scale an online business. Complete ecommerce setup, marketing strategies, and business operations guidance.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">30 proven prompts for immediate business implementation</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">30x prompts to feed into ChatGPT for step-by-step business plans</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Content creation prompts for blogs, social media, and marketing</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete ecommerce setup, ideas, requirements & marketing strategies</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Business planning and strategy prompts</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Every aspect to start, operate and scale an online business</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
