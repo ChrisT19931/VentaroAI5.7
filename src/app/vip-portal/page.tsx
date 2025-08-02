@@ -397,7 +397,7 @@ export default function VIPPortal() {
                   📥 All Downloads
                 </Link>
                 <a 
-                  href="mailto:support@ventaroai.com" 
+                  href="mailto:chris.t@ventarosales.com" 
                   className="block w-full bg-gray-800 hover:bg-gray-700 text-white text-center py-2 rounded transition-colors"
                 >
                   📧 Contact Support

@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
                 </p>
                 
                 <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-                  <p style="color: #9ca3af; font-size: 14px;">Ventaro AI Digital Store</p>
+                  <p style="color: #9ca3af; font-size: 14px;">Ventaro AI</p>
                 </div>
               </div>
             </div>

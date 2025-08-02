@@ -526,17 +526,21 @@ function GlassmorphismOverlay() {
                   fontWeight: '700',
                   position: 'relative',
                   zIndex: 10,
-                  background: 'linear-gradient(90deg, transparent 0%, transparent 47%, rgba(147, 51, 234, 0.3) 48%, rgba(147, 51, 234, 0.8) 49%, rgba(147, 51, 234, 1) 50%, rgba(147, 51, 234, 0.8) 51%, rgba(147, 51, 234, 0.3) 52%, transparent 53%, transparent 100%), linear-gradient(90deg, #ffffff, #000000)',
+                  background: 'linear-gradient(90deg, transparent 0%, transparent 47%, rgba(147, 51, 234, 0.3) 48%, rgba(147, 51, 234, 0.8) 49%, rgba(147, 51, 234, 1) 50%, rgba(147, 51, 234, 0.8) 51%, rgba(147, 51, 234, 0.3) 52%, transparent 53%, transparent 100%), linear-gradient(90deg, #888888 0%, #888888 50%, #ffffff 50%, #ffffff 100%)',
                   backgroundSize: '300% 100%, 100% 100%',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   animation: 'purple-streak 10s ease-in-out infinite',
                   letterSpacing: '-0.025em'
                 }}>
-                BUILD A MONEY-MAKING ONLINE BUSINESS USING AI, FAST!
+                Build A Fully Operational Online Business Using AI Within 2 Hours With Ventaro AI
           </h1>
           <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto font-medium opacity-90">
-            This site was 100% built from scratch coded with AI, we can teach you how to do it, or we can do it for you.
+            <span className="text-white font-semibold"
+                  style={{
+                    textShadow: '0 0 15px rgba(96, 165, 250, 0.6), 0 0 30px rgba(139, 92, 246, 0.4)',
+                    WebkitTextStroke: '0.3px rgba(96, 165, 250, 0.2)'
+                  }}>We built this entire site with AI and we can teach you how to do the same or we can do it for you</span>
           </p>
           
           <div className="space-y-6">
@@ -603,10 +607,7 @@ export default function CinematicHero() {
       {/* Enhanced fallback background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-900/20 to-black opacity-90"></div>
       <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/10 via-transparent to-pink-900/10"></div>
-      <div className="absolute inset-0" style={{
-        background: 'radial-gradient(circle at 30% 20%, rgba(96, 165, 250, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
-        animation: 'energyField 15s ease-in-out infinite'
-      }}></div>
+
       
       {/* 3D Canvas Background with error handling */}
       {!canvasError && (

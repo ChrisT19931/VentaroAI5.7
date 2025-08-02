@@ -6,8 +6,8 @@ export default function FAQPage() {
       title: 'General Questions',
       faqs: [
         {
-          question: 'What is Ventaro AI Digital Store?',
-          answer: 'Ventaro AI Digital Store is an online marketplace specializing in high-quality digital products created with or powered by artificial intelligence. We offer a curated selection of digital assets, tools, templates, and resources for creators, businesses, and developers.'
+          question: 'What is Ventaro AI?',
+      answer: 'Ventaro AI is an online marketplace specializing in high-quality digital products created with or powered by artificial intelligence. We offer a curated selection of digital assets, tools, templates, and resources for creators, businesses, and developers.'
         },
         {
           question: 'Do I need to create an account to make a purchase?',
@@ -15,7 +15,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I contact customer support?',
-          answer: 'You can reach our customer support team through our Contact page or by emailing support@ventaroai.com. We typically respond within 24 hours during business days.'
+          answer: 'You can reach our customer support team through our Contact page or by emailing chris.t@ventarosales.com. We typically respond within 24 hours during business days.'
         }
       ]
     },
@@ -24,7 +24,7 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'What types of products do you offer?',
-          answer: 'We offer a wide range of AI-powered digital products including our AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions. All our products are carefully vetted for quality and usefulness.'
+          answer: 'We offer a wide range of AI-powered digital products including our AI Tools Mastery Guide 2025 (30 lessons covering LLMs, Replit/Claude, and Cursor/Trae for complete online business creation), AI Prompts Arsenal 2025, and AI Business Strategy Sessions. All our products are carefully vetted for quality and usefulness.'
         },
         {
           question: 'Are there any usage restrictions?',
@@ -45,7 +45,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I download my purchased digital products?',
-          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025), you will receive an email with instructions. You can also access your products via the accounts page at any time by logging into your account. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
+          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 with 30 comprehensive lessons and AI Prompts Arsenal 2025), you will receive an email with instructions. You can also access your products via the accounts page at any time by logging into your account. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
         },
         {
           question: 'How long do I have access to my purchased digital products?',
@@ -53,7 +53,7 @@ export default function FAQPage() {
         },
         {
           question: 'What is the download process for digital products?',
-          answer: 'Our digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025) are available for immediate download after purchase. Simply click the download link in your confirmation email or access them from your account dashboard. Files are typically provided in PDF format for guides and text format for prompts.'
+          answer: 'Our digital products (AI Tools Mastery Guide 2025 with 30 step-by-step lessons and AI Prompts Arsenal 2025) are available for immediate download after purchase. Simply click the download link in your confirmation email or access them from your account dashboard. Files are typically provided in PDF format for guides and text format for prompts.'
         },
         {
           question: 'Are my payment details secure?',
@@ -100,7 +100,7 @@ export default function FAQPage() {
       faqs: [
         {
           question: 'Do you have any current promotions?',
-          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just A$10. These 30 professional AI prompts are perfect for building an online business with AI, content creation, marketing automation, and AI-powered business growth.'
+          answer: 'Yes! We currently have our AI Prompts Arsenal 2025 on sale for just A$10. These 30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc).'
         },
         {
           question: 'What does the AI Business Strategy Session include?',
@@ -154,7 +154,7 @@ export default function FAQPage() {
               Contact Us
             </Link>
             <a 
-              href="mailto:support@ventaroai.com" 
+              href="mailto:chris.t@ventarosales.com" 
               className="btn-outline-white"
             >
               Email Support

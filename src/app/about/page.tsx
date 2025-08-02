@@ -3,17 +3,17 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Ventaro AI Digital Store 2025 - Learn How to Make Money Online with AI Tools & AI Prompts',
+  title: 'About Ventaro AI - Learn How to Make Money Online with AI Tools & AI Prompts',
   description: 'Discover how to make money online with AI tools and AI prompts in 2025. Learn our proven strategies to make money with AI through premium digital products, coaching, and AI business solutions.',
   keywords: 'about AI tools, AI prompts 2025, make money online with AI, AI business strategies, make money with AI, AI coaching, digital products, artificial intelligence business',
   openGraph: {
-    title: 'About Ventaro AI Digital Store 2025 - AI Tools & Prompts for Online Income',
+    title: 'About Ventaro AI - AI Tools & Prompts for Online Income',
     description: 'Learn how to make money online with AI tools and AI prompts. Discover our proven 2025 strategies for AI-powered business success.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Ventaro AI Digital Store 2025',
+    title: 'About Ventaro AI',
     description: 'Learn to make money online with AI tools and AI prompts in 2025',
   },
 };
@@ -36,7 +36,7 @@ export default function AboutPage() {
               />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight glow-text">
-              About <span className="text-gradient">Ventaro AI Digital Store 2025</span>
+              About <span className="text-gradient">Ventaro AI</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
               Your destination for AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to build an online business from scratch with artificial intelligence in 2025.
