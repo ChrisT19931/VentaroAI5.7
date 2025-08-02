@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
       try {
         const productQuery = supabase
           .from('products')
-          .select('id, name, price, image_url')
+          .select('id, name, price, image_url, category')
           .in('id', productIds);
         
         const { data, error } = await productQuery;
@@ -139,11 +139,11 @@ export async function POST(request: NextRequest) {
         throw new Error(`Product not found: ${item.id}`);
       }
       
-      // Determine download URL based on product type
+      // Determine download URL based on product category
       let download_url = null;
-      if (product.name.includes('E-book')) {
+      if (product.category === 'E-book') {
         download_url = '/downloads/ebook';
-      } else if (product.name.includes('AI Prompts')) {
+      } else if (product.category === 'AI Prompts') {
         download_url = '/downloads/prompts';
       }
       // Coaching calls don't have download URLs
