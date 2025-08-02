@@ -32,7 +32,7 @@ export default function FAQPage() {
         },
         {
           question: 'Do you offer customization services for your products?',
-          answer: 'We don&apos;t currently offer customization services for our standard products. However, our coaching calls provide personalized guidance tailored to your specific needs.'
+          answer: 'We dont currently offer customization services for our standard products. However, our coaching calls provide personalized guidance tailored to your specific needs.'
         }
       ]
     },
@@ -45,7 +45,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I download my purchased digital products?',
-          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025), you&apos;ll receive an email with download instructions. You can also access your downloads at any time by logging into your account and visiting the "My Downloads" section. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
+          answer: 'After completing your purchase of digital products (AI Tools Mastery Guide 2025 and AI Prompts Arsenal 2025), you will receive an email with instructions. You can also access your products via the accounts page at any time by logging into your account. For AI Business Strategy Sessions, we will be in touch to organize a suitable time.'
         },
         {
           question: 'How long do I have access to my purchased digital products?',
@@ -74,11 +74,7 @@ export default function FAQPage() {
         },
         {
           question: 'What if the product doesn\'t work as described?',
-          answer: 'If you encounter any issues with a product not functioning as described, please contact our support team. While we don&apos;t offer refunds, we&apos;ll work with you to resolve any technical issues or provide additional support.'
-        },
-        {
-          question: 'Where can I find your complete refund policy?',
-          answer: 'Our complete refund policy is available in the Terms & Conditions page under the Refund Policy section. All sales are final for digital products including e-books, prompts, and coaching services.'
+          answer: 'If you encounter any issues with a product not functioning as described, please contact our support team. While we dont offer refunds, we will work with you to resolve any technical issues or provide additional support.'
         }
       ]
     },
@@ -90,12 +86,8 @@ export default function FAQPage() {
           answer: 'We provide basic technical support to help you download and access your purchased products. For product-specific technical questions, we offer limited support as outlined in each product description.'
         },
         {
-          question: 'What if I lose my download files?',
-          answer: 'Don&apos;t worry! You can re-download your purchased products at any time by logging into your account and visiting the "My Downloads" section.'
-        },
-        {
           question: 'Do you offer product updates?',
-          answer: 'Yes, for products that receive updates, you&apos;ll have access to the latest versions at no additional cost. You&apos;ll be notified by email when significant updates are available.'
+          answer: 'Yes, for products that receive updates, you will have access to the latest versions at no additional cost. You may be notified by email when significant updates are available.'
         },
         {
           question: 'What are the system requirements for your products?',
@@ -112,7 +104,7 @@ export default function FAQPage() {
         },
         {
           question: 'What does the AI Business Strategy Session include?',
-          answer: 'Our AI Business Strategy Session includes a 60-minute personalized session with one of our AI experts, plus a comprehensive implementation report. For A$497, you get tailored advice, custom workflow optimization, and specific AI strategies for your business projects.'
+          answer: 'Our AI Business Strategy Session includes a 60-minute personalized session with one of our AI experts, plus a comprehensive implementation report. For $500 (until September 1st, 2025), you get tailored advice, custom workflow optimization, and specific AI strategies for your business projects.'
         }
       ]
     }

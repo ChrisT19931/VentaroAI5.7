@@ -46,7 +46,7 @@ export default function TermsOfServicePage() {
 
             <h2 className="text-2xl font-bold text-black mt-8 mb-4">Product Access & Payment</h2>
             <p className="mb-4 text-gray-800">
-              Access to our digital products is granted through secure payment processing via Stripe. Upon successful payment, you will receive immediate access to your purchased digital products. No account registration is required for product access.
+              Access to our digital products is granted through secure payment processing via Stripe. Upon successful payment, you will receive immediate access to your purchased digital products. Account registration IS required for purchases.
             </p>
             <p className="mb-4 text-gray-800">
               <strong className="text-black">Payment Authentication:</strong> We use Stripe's secure payment system to authenticate purchases and grant access to digital products. Your payment information is processed securely and we do not store any payment details on our servers.

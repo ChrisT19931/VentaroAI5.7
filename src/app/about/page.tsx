@@ -39,7 +39,7 @@ export default function AboutPage() {
               About <span className="text-gradient">Ventaro AI Digital Store 2025</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Your destination for AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to make money online with artificial intelligence in 2025.
+              Your destination for AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to build an online business from scratch with artificial intelligence in 2025.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/products" className="neon-button btn-lg">
@@ -253,10 +253,10 @@ export default function AboutPage() {
       <div className="py-16 bg-black">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="glass-card p-8 md:p-12 text-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-              Ready to Start Your <span className="text-gradient">AI Journey</span>?
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-500 mb-6">
+              Ready to Start Your <span className="text-gray-500">AI Journey</span>?
             </h2>
-            <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
               Join the AI revolution and learn the exact methods we use to create high-quality digital products with artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

@@ -5,6 +5,9 @@ import { getStripeInstance } from '@/lib/stripe';
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+// In-memory cache for processed webhook events (in production, use Redis or database)
+const processedEvents = new Set<string>();
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text();
@@ -28,19 +31,35 @@ export async function POST(request: NextRequest) {
 
     console.log('Received Stripe webhook event:', event.type);
 
-    // Handle the event
-    switch (event.type) {
-      case 'checkout.session.completed':
-        await handleCheckoutSessionCompleted(event.data.object);
-        break;
-      case 'payment_intent.succeeded':
-        await handlePaymentIntentSucceeded(event.data.object);
-        break;
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
+    // IDEMPOTENCY: Check if we've already processed this event
+    if (processedEvents.has(event.id)) {
+      console.log(`⚠️ Event ${event.id} already processed, returning success to prevent retries`);
+      return NextResponse.json({ received: true, status: 'already_processed' });
     }
 
-    return NextResponse.json({ received: true });
+    // Handle the event
+      switch (event.type) {
+        case 'checkout.session.completed':
+          await handleCheckoutSessionCompleted(event.data.object);
+          break;
+        case 'payment_intent.succeeded':
+          await handlePaymentIntentSucceeded(event.data.object);
+          break;
+        default:
+          console.log(`Unhandled event type: ${event.type}`);
+      }
+
+      // Mark event as processed after successful handling
+      processedEvents.add(event.id);
+      
+      // Clean up old events (keep only last 1000 to prevent memory leaks)
+      if (processedEvents.size > 1000) {
+        const eventsArray = Array.from(processedEvents);
+        processedEvents.clear();
+        eventsArray.slice(-500).forEach(id => processedEvents.add(id));
+      }
+
+      return NextResponse.json({ received: true, event_id: event.id });
   } catch (error: any) {
     console.error('Webhook error:', error);
     return NextResponse.json(
@@ -54,6 +73,18 @@ async function handleCheckoutSessionCompleted(session: any) {
   console.log('Processing checkout session completed:', session.id);
 
   try {
+    // DUPLICATE PREVENTION: Check if this session has already been processed
+    const { data: existingPurchases } = await supabase
+      .from('purchases')
+      .select('id')
+      .eq('session_id', session.id)
+      .limit(1);
+    
+    if (existingPurchases && existingPurchases.length > 0) {
+      console.log(`⚠️ Session ${session.id} already processed, skipping to prevent duplicates`);
+      return;
+    }
+
     // Get line items to see what was purchased
     const stripe = await getStripeInstance();
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
@@ -156,13 +187,20 @@ async function handleCheckoutSessionCompleted(session: any) {
 
       console.log('Creating purchase record:', purchaseData);
 
-      const { error: purchaseError } = await supabase
+      // ENHANCED DUPLICATE PREVENTION: Use insert with conflict handling
+      const { data: insertResult, error: purchaseError } = await supabase
         .from('purchases')
-        .upsert(purchaseData, {
-          onConflict: 'customer_email,product_id,session_id'
-        });
+        .insert(purchaseData)
+        .select('id');
 
       if (purchaseError) {
+        // Check if it's a duplicate key violation (PGRST09 or 23505)
+        if (purchaseError.code === 'PGRST09' || purchaseError.code === '23505' || 
+            purchaseError.message?.includes('duplicate') || 
+            purchaseError.message?.includes('unique constraint')) {
+          console.log(`ℹ️ Purchase already exists for ${product.name}, skipping duplicate`);
+          return; // Skip this duplicate, don't throw error
+        }
         console.error('Error creating purchase record:', purchaseError);
         throw purchaseError;
       }
