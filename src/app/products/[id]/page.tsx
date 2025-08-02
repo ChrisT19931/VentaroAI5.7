@@ -27,8 +27,8 @@ type Product = {
 const fallbackProducts = {
   '1': {
     id: '1',
-    name: 'AI Business E-Book',
-    description: 'The essential knowledge foundation for building your online business. This comprehensive guide provides half of everything you need to know to create, launch and grow a successful AI-powered business with detailed strategies and implementation plans.',
+    name: 'AI Tools Mastery Guide 2025',
+    description: 'Step by step how to create an online business in full with 30 lessons: 10x on LLMs (ChatGPT/Gemini/etc), 10x on Replit/Claude, 10x on Cursor/Trae - 90% of what you need to build an online business yourself.',
     price: 25.00,
     originalPrice: 50.00,
     image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -38,37 +38,37 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      'Comprehensive business-building knowledge foundation',
-      'Detailed AI implementation strategies for online success',
-      'Proven business models and revenue generation tactics',
-      'Step-by-step implementation guides with real examples',
-      'Essential frameworks for sustainable business growth',
-      'The perfect middle step in your business journey'
+      '10x lessons on LLMs: ChatGPT, Gemini & AI tools for business building',
+      '10x lessons on Replit & Claude for development and automation',
+      '10x lessons on Cursor & Trae AI for advanced coding and implementation',
+      'Complete step-by-step guide covering 90% of online business creation',
+      'Comprehensive 30-lesson structure for complete business mastery',
+      'Everything you need to build an online business yourself'
     ],
     details: {
-      description: 'Build a solid foundation for your online business with this comprehensive e-book that provides half of everything you need to know to succeed. From business planning to AI implementation, this guide covers the essential knowledge required to create and grow a profitable online venture.',
+      description: 'Master the complete process of building an online business with our comprehensive 30-lesson guide. This step-by-step course covers 90% of what you need to create, develop, and scale your online business using the most powerful AI tools available today.',
       features: [
-        'Business model selection and validation',
-        'AI tool integration for maximum efficiency',
-        'Marketing and customer acquisition strategies',
-        'Content creation and distribution frameworks',
-        'Revenue optimization techniques',
-        'Scalable business systems and processes'
+        '10 comprehensive lessons on LLMs (ChatGPT, Gemini, etc.) for business strategy',
+        '10 detailed lessons on Replit & Claude for development and automation',
+        '10 advanced lessons on Cursor & Trae AI for coding and implementation',
+        'Complete business creation methodology from start to finish',
+        'Real-world examples and practical implementation guides',
+        'Step-by-step tutorials for each AI tool and platform'
       ],
       includes: [
-        'Comprehensive business-building guide',
-        'AI implementation strategies',
-        'Ready-to-use templates and frameworks',
-        'Business model analysis and selection tools',
-        'Revenue generation tactics and case studies',
-        'Implementation roadmaps and action plans'
+        'Complete 30-lesson structured course',
+        'LLM mastery for business planning and strategy',
+        'Replit & Claude development tutorials',
+        'Cursor & Trae AI coding implementation guides',
+        'Business creation templates and frameworks',
+        'Practical exercises and real-world examples'
       ],
-      pages: 30,
-      format: 'PDF',
+      lessons: 30,
+      format: 'PDF Guide',
       language: 'English',
-      level: 'Intermediate',
-      downloadSize: '2.5 MB',
-      readingTime: '45 minutes'
+      level: 'Beginner to Advanced',
+      downloadSize: '3.2 MB',
+      completionTime: '2-3 weeks'
     }
   },
   '2': {

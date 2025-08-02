@@ -215,24 +215,24 @@ export default function Home() {
                   AI Tools Mastery Guide 2025
                 </h3>
                 <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  30-page guide for AI tools to make money online in 2025. Learn ChatGPT, Claude, Grok, Gemini, and proven strategies.
+                  Step by step how to create an online business in full with 30 lessons: 10x on LLMs (ChatGPT/Gemini/etc), 10x on Replit/Claude, 10x on Cursor/Trae - 90% of what you need to build an online business yourself.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Comprehensive business-building knowledge foundation</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">10x lessons on LLMs: ChatGPT, Gemini & AI tools for business building</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Detailed AI implementation strategies for online success</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">10x lessons on Replit & Claude for development and automation</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Proven business models and revenue generation tactics</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">10x lessons on Cursor & Trae AI for advanced coding and implementation</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides with real examples</span>
+                    <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete step-by-step guide covering 90% of online business creation</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">

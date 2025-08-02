@@ -54,7 +54,7 @@ async function getProducts() {
     {
       id: '1',
       name: 'AI Business E-Book',
-      description: 'The essential knowledge resource containing half of what you need to build a successful online business. Comprehensive strategies, frameworks, and implementation guides for the self-starter.',
+      description: 'The essential knowledge resource containing 90% of what you need to build a successful online business. Comprehensive strategies, frameworks, and implementation guides for the self-starter.',
       price: 25.00,
       originalPrice: 50.00,
       image_url: '/images/products/ai-tools-mastery-guide.svg',
