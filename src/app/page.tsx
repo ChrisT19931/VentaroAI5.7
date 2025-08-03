@@ -28,12 +28,20 @@ export default function Home() {
         
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="text-center mb-20">
-            <h2 className="text-6xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl">
-              Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">AI Success Plan</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Start your AI journey with our carefully crafted tiers. From beginner-friendly tools to advanced business strategies.
-            </p>
+
+            
+            {/* Pricing Section Header */}
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-full text-xs font-semibold text-purple-300 mb-4 border border-purple-500/30 shadow-lg shadow-purple-500/10">
+                🔥 LIMITED TIME: 70% OFF LAUNCH PRICING
+              </span>
+              <h3 className="text-4xl md:text-5xl font-black text-white mb-6 drop-shadow-2xl">
+                Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Success Path</span>
+              </h3>
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Start your AI transformation today. Each plan includes lifetime access, regular updates, and our 30-day money-back guarantee.
+              </p>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -47,6 +55,12 @@ export default function Home() {
                 100% { transform: translateX(100%); }
               }
               .card-glow { animation: glow-pulse 3s ease-in-out infinite; }
+              .glass-panel {
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+              }
               .shimmer-effect::before {
                 content: '';
                 position: absolute;
@@ -152,20 +166,20 @@ export default function Home() {
                   AI Prompts Arsenal 2025
                 </h3>
                 <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc).
+                  <span className="text-red-400 font-bold">⚠️</span> Missing out on learning AI business strategies before it's too late - while competitors gain unfair advantages.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">30x prompts to feed into ChatGPT for comprehensive business planning</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-emerald-400 font-bold">💡 Get This:</span> 30x proven AI prompts for instant business planning</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">From setting up to ecommerce ideas, requirements & marketing strategies</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Why Us?:</span> Start learning now for only A$10 vs A$3000+ business consultants</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step plans for every aspect + more to grow your business</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete ecommerce, marketing & scaling strategies included</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -173,7 +187,7 @@ export default function Home() {
                   <div className="text-sm text-gray-300 font-medium">One-time payment</div>
                 </div>
                 <Link href="/products/2" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-500 hover:scale-110 shadow-lg bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white border border-emerald-500/30 hover:shadow-emerald-500/40 hover:shadow-2xl transform hover:-translate-y-1 relative overflow-hidden group/btn">
-                  <span className="relative z-10 group-hover/btn:animate-pulse">Get Started</span>
+                  <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Start Learning Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-500 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
                 </Link>
@@ -215,24 +229,24 @@ export default function Home() {
                   AI Tools Mastery Guide 2025
                 </h3>
                 <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  Step by step how to create an online business in full with 30 lessons: 10x on LLMs (ChatGPT/Gemini/etc), 10x on Replit/Claude, 10x on Cursor/Trae - 90% of what you need to build an online business yourself.
+                  <span className="text-red-400 font-bold">⚠️</span> Staying behind while others master AI tools to build profitable businesses - missing the AI revolution window.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">10x lessons on LLMs: ChatGPT, Gemini & AI tools for business building</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-blue-400 font-bold">💡 Get This:</span> Master 30 AI tools with step-by-step lessons</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">10x lessons on Replit & Claude for development and automation</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Gemini, Replit, Claude, Cursor & Trae AI mastery</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">10x lessons on Cursor & Trae AI for advanced coding and implementation</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Why Us?:</span> Build businesses worth A$10,000+ for only A$25</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete step-by-step guide covering 90% of online business creation</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">90% of everything needed for online business success</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -243,7 +257,7 @@ export default function Home() {
                   <div className="text-sm text-green-300 font-bold animate-pulse bg-green-500/20 px-3 py-1 rounded-full" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
                 </div>
                 <Link href="/products/1" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-500 hover:scale-110 shadow-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white border border-blue-500/30 hover:shadow-blue-500/40 hover:shadow-2xl transform hover:-translate-y-1 relative overflow-hidden group/btn">
-                  <span className="relative z-10 group-hover/btn:animate-pulse">Get Advanced</span>
+                  <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Master AI Tools Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
                 </Link>
@@ -294,26 +308,26 @@ export default function Home() {
                   AI Business Strategy Session 2025
                 </h3>
                 <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
-                  Premium 60-minute Google Meet live presentation with shared screen overview, detailed step-by-step report, and ongoing support packages available. Learn how to make money online with AI tools and AI prompts from industry experts.
+                  <span className="text-red-400 font-bold">⚠️</span> Struggling alone without expert guidance - wasting months trying to figure out profitable AI business strategies.
                 </p>
                 
                 <div className="space-y-5 mb-8">
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📹 60-minute Google Meet live presentation with shared screen</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-blue-400 font-bold">💡 Get This:</span> 60-minute live expert session with step-by-step guidance</span>
                   </div>
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-4 h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full shadow-lg group-hover:shadow-indigo-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📋 Detailed step-by-step report with complete overview</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete business deployment from start to finish</span>
                   </div>
 
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">💼 Complete knowledge transfer for full business ownership</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Why Us?:</span> Save months of trial & error - get profitable fast</span>
                   </div>
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                     <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full shadow-lg group-hover:shadow-yellow-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🌐 Custom website/business deployment from start to finish</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">83% OFF - A$3,000 value for only A$500</span>
                   </div>
                 </div>
                 
@@ -325,7 +339,7 @@ export default function Home() {
                 </div>
                 
                 <Link href="/products/3" className="w-full block text-center py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 shadow-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-500 hover:via-pink-500 hover:to-indigo-500 text-white border-2 border-purple-400/50 hover:border-purple-300/70 hover:shadow-purple-400/30 relative overflow-hidden group/btn">
-                  <span className="relative z-10 group-hover/btn:animate-pulse">Go Premium</span>
+                  <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Book Expert Session Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
                 </Link>
@@ -359,7 +373,7 @@ export default function Home() {
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Ventaro</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Experience the pinnacle of digital with our high-quality AI-powered solutions.
+              Experience the pinnacle of digital with our high-quality AI-powered tools and strategies.
             </p>
           </div>
           
@@ -694,6 +708,120 @@ export default function Home() {
               </form>
               </div>
             </div>
+        </div>
+      </section>
+
+      {/* Web Generator Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-950 via-black to-gray-950 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-emerald-700/20 to-emerald-900/20 rounded-2xl rotate-12 animate-pulse" style={{animationDuration: '3s'}}></div>
+          <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-emerald-600/20 to-emerald-800/20 rounded-xl rotate-45 animate-pulse delay-1000" style={{animationDuration: '3s'}}></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-emerald-500/10 to-emerald-700/10 rounded-full animate-pulse delay-500" style={{animationDuration: '4s'}}></div>
+        </div>
+        
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1 bg-gradient-to-r from-emerald-900/50 to-green-900/50 rounded-full text-xs font-semibold text-emerald-300 mb-4 border border-emerald-500/30 shadow-lg shadow-emerald-500/10">
+              🚀 BUILD YOUR OWN WEBSITE
+            </span>
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-500 to-teal-500">AI Web Generator (Beta)</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+              Create stunning, professional websites in minutes with our powerful drag-and-drop editor. No coding required!
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            {/* Features List */}
+            <div className="space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Lightning Fast Creation</h3>
+                  <p className="text-gray-300">Build professional websites in minutes, not weeks. Our AI-powered tools do the heavy lifting.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Drag & Drop Editor</h3>
+                  <p className="text-gray-300">Intuitive visual editor with pre-built components. Simply drag, drop, and customize to your heart's content.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Mobile Responsive</h3>
+                  <p className="text-gray-300">Every website automatically adapts to all devices. Your site will look perfect on desktop, tablet, and mobile.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">Asset Management</h3>
+                  <p className="text-gray-300">Upload and manage images, videos, and other assets with our built-in media library.</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* CTA Card */}
+            <div className="relative">
+              <div className="glass-panel rounded-3xl p-8 border border-emerald-500/30 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:scale-105">
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-3xl font-bold text-white mb-4">Start Building Today</h3>
+                  <p className="text-gray-300 mb-8 leading-relaxed">
+                    Join thousands of creators who have already built amazing websites with our platform. No technical skills required!
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <Link href="/web-gen/projects" className="group relative inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-lg rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/30 overflow-hidden">
+                      <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      <span className="relative z-10 flex items-center">
+                        🚀 Launch Web Generator
+                        <svg className="ml-3 w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                    </Link>
+                    
+                    <p className="text-sm text-gray-400">
+                      ✨ Free to start • No credit card required
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-emerald-500/20 rounded-full animate-bounce" style={{animationDelay: '0s', animationDuration: '2s'}}></div>
+              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500/20 rounded-full animate-bounce" style={{animationDelay: '1s', animationDuration: '3s'}}></div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -25,7 +25,7 @@ export default function SuccessStoriesAndCaseStudies() {
         <ul className="list-disc ml-6 text-gray-200 space-y-2">
           <li><strong>Pattern Recognition:</strong> Identify common success factors across different AI implementations</li>
           <li><strong>Industry Adaptation:</strong> How to modify successful strategies for your specific market</li>
-          <li><strong>ROI Metrics:</strong> Understand what success looks like and how to measure it</li>
+          <li><strong>Why Us? Metrics:</strong> Understand what success looks like and how to measure it</li>
           <li><strong>Timeline Expectations:</strong> Realistic timeframes for seeing results from AI initiatives</li>
           <li><strong>Risk Mitigation:</strong> Learn from others' mistakes to avoid common pitfalls</li>
         </ul>

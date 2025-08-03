@@ -1,0 +1,112 @@
+/* Custom styles for GrapesJS editor */
+
+/* Editor container */
+.editor-container {
+  min-height: 600px;
+  background-color: #f8fafc;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Override GrapesJS default styles to match Ventaro theme */
+#gjs {
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Panel styles */
+.gjs-pn-panel {
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gjs-pn-views-container {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* Button styles */
+.gjs-pn-btn {
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.gjs-pn-btn:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.gjs-pn-btn.gjs-pn-active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Block styles */
+.gjs-block {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.gjs-block:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Category styles */
+.gjs-block-category {
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.gjs-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e293b;
+}
+
+/* Modal styles */
+.gjs-mdl-container {
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.gjs-mdl-header {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #3b82f6;
+}
+
+.gjs-mdl-btn-close {
+  color: white;
+}
+
+/* Color picker */
+.gjs-field-color-picker {
+  border-radius: 4px;
+}
+
+/* Tooltip */
+.gjs-tooltip {
+  background-color: #1e293b;
+  border-radius: 4px;
+}
+
+/* Device manager */
+.gjs-devices-c {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .editor-container {
+    min-height: 400px;
+  }
+  
+  .gjs-pn-panel {
+    padding: 5px;
+  }
+  
+  .gjs-block {
+    width: 45%;
+  }
+}
