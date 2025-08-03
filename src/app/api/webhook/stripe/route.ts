@@ -169,8 +169,7 @@ async function handleCheckoutSessionCompleted(session: any) {
         product_id: internalProductId,
         product_name: product.name,
         price: (item.amount_total || 0) / 100, // Convert from cents - using 'price' to match schema
-        customer_email: linkedUserEmail, // Use registered email if available, otherwise payment email
-        payment_email: customerEmail, // Store original payment email for reference
+        customer_email: customerEmail, // Always use payment email for consistency
         session_id: session.id, // Changed from stripe_session_id to match database schema
         download_url: '/my-account' // Set default download URL
       };
@@ -256,9 +255,8 @@ async function linkExistingPurchasesToUser(userId: string, registeredEmail: stri
       const { error: updateError } = await supabase
         .from('purchases')
         .update({ 
-          user_id: userId,
-          customer_email: registeredEmail, // Update to use registered email
-          payment_email: paymentEmail // Keep track of original payment email
+          user_id: userId
+          // Keep customer_email as is for consistency
         })
         .is('user_id', null)
         .or(`customer_email.eq.${registeredEmail},customer_email.eq.${paymentEmail}`);

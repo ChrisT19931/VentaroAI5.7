@@ -2,6 +2,8 @@
 
 A modern eCommerce platform built with Next.js 14, Stripe, and Supabase for selling digital products with secure download functionality.
 
+*Last updated: January 2025*
+
 ## ⚠️ CRITICAL: UI PRESERVATION RULE
 
 **HARD RULE: THE CURRENT UI MUST BE PRESERVED AT ALL TIMES**

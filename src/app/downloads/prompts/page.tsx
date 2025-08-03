@@ -1,23 +1,34 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useState, useEffect } from 'react';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { supabase } from '@/lib/supabaseClient';
+// Import the component directly as a fallback
+import PromptsContentStatic from '../../../components/downloads/PromptsContent';
 
-// Set dynamic params
 export const dynamicParams = true;
 
-const PromptsContentComponent = dynamic(() => import('@/components/downloads/PromptsContent'), {
-  ssr: false,
-  loading: () => (
-    <div className="min-h-screen bg-black flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-        <p className="text-white">Loading...</p>
+// Use a more explicit import path and add webpackChunkName with error handling
+const PromptsContentComponent = dynamic(
+  () => import(/* webpackChunkName: "prompts-content" */ '../../../components/downloads/PromptsContent')
+    .catch(err => {
+      console.error('Error loading PromptsContent:', err);
+      // Return the statically imported component as fallback
+      return Promise.resolve(PromptsContentStatic);
+    }),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-white">Loading...</p>
+        </div>
       </div>
-    </div>
-  )
-});
+    )
+  }
+);
 
 export default function PromptsDownloadPage() {
   const { user } = useSimpleAuth();

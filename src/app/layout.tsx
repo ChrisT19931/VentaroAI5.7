@@ -1,5 +1,6 @@
 import './globals.css'
 import '@/styles/cinematic.css'
+import '@/styles/advanced-web-builder.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'

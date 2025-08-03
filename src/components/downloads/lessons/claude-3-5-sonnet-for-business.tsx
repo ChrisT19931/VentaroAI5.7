@@ -35,7 +35,7 @@ export default function Claude35SonnetForBusiness() {
       <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-4 mb-6">
         <h3 className="text-lg font-semibold text-purple-300 mb-2">🤖 AI Expansion Prompt</h3>
         <div className="bg-gray-900/50 rounded p-3 text-sm text-gray-300 font-mono">
-          <p>"Create a comprehensive Claude 3.5 Sonnet implementation strategy for [MY BUSINESS TYPE]. Include specific use cases, workflow integration, ROI calculations, team training plans, and advanced prompting techniques for maximum business impact."</p>
+          <p>"Create a comprehensive Claude 3.5 Sonnet implementation strategy for [MY BUSINESS TYPE]. Include specific use cases, workflow integration, Why Us? calculations, team training plans, and advanced prompting techniques for maximum business impact."</p>
         </div>
         <p className="text-purple-200 text-sm mt-2">Tailor this prompt with your specific business context for detailed implementation guidance.</p>
       </div>
