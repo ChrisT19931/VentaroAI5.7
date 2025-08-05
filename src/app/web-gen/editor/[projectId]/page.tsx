@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import { WebGenProject, WebGenAsset } from '@/lib/web-gen-service';
 import 'grapesjs/dist/css/grapes.min.css';
+// Remove the problematic import
+// import 'grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css';
 import '@/app/web-gen/web-gen.css';
 
 export default function WebGenEditor({ params }: { params: { projectId: string } }) {
@@ -105,8 +107,9 @@ export default function WebGenEditor({ params }: { params: { projectId: string }
             upload: `/api/web-gen/assets?projectId=${project.id}`,
             uploadName: 'file',
             assets: [],
-            uploadText: 'Drop files here or click to upload',
-            addBtnText: 'Add Images',
+            // Remove unsupported properties
+            // uploadText: 'Drop files here or click to upload',
+            // addBtnText: 'Add Images',
             autoAdd: true,
             headers: {
               'X-Project-Id': project.id,
@@ -231,9 +234,9 @@ export default function WebGenEditor({ params }: { params: { projectId: string }
             styleBg.default,
           ],
           pluginsOpts: {
-            [blocksBasic.default]: {},
-            [presetWebpage.default]: {},
-            [styleBg.default]: {},
+            'grapesjs-blocks-basic': {},
+            'grapesjs-preset-webpage': {},
+            'grapesjs-style-bg': {},
           },
         });
 
@@ -258,11 +261,10 @@ export default function WebGenEditor({ params }: { params: { projectId: string }
               if (result.assets && result.assets.length > 0) {
                 const assetManager = editor.AssetManager;
                 assetManager.add(result.assets.map((asset: WebGenAsset) => ({
-                  src: asset.url,
-                  name: asset.filename,
+                  src: asset.file_path,
+                  name: asset.name,
                   type: 'image',
                   height: 'auto',
-                  width: 'auto',
                 })));
               }
             }
@@ -400,7 +402,9 @@ export default function WebGenEditor({ params }: { params: { projectId: string }
       // Add some text to indicate it's a thumbnail
       ctx.fillStyle = '#64748b';
       ctx.font = '20px Arial';
-      ctx.fillText(project.name, 20, 40);
+      if (project) {
+        ctx.fillText(project.name, 20, 40);
+      }
       
       // In a real implementation, you would render the actual website content
       // For now, we'll just return the canvas as a data URL
