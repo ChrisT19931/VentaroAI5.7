@@ -3,7 +3,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://ventaroai.com/</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- About Page -->
   <url>
     <loc>https://ventaroai.com/about</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -19,7 +19,7 @@
   <!-- Products Pages -->
   <url>
     <loc>https://ventaroai.com/products</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -27,7 +27,7 @@
   <!-- Contact Page -->
   <url>
     <loc>https://ventaroai.com/contact</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -35,7 +35,7 @@
   <!-- FAQ Page -->
   <url>
     <loc>https://ventaroai.com/faq</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -43,7 +43,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://ventaroai.com/privacy</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -51,7 +51,7 @@
   <!-- Terms of Service -->
   <url>
     <loc>https://ventaroai.com/terms</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -59,29 +59,44 @@
   <!-- User Account Pages (Public Access) -->
   <url>
     <loc>https://ventaroai.com/login</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   
   <url>
     <loc>https://ventaroai.com/signup</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   
   <url>
     <loc>https://ventaroai.com/forgot-password</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Account Management -->
+  <url>
+    <loc>https://ventaroai.com/my-account</loc>
+    <lastmod>2023-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://ventaroai.com/reset-password</loc>
+    <lastmod>2023-08-01</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <!-- Checkout Page -->
   <url>
     <loc>https://ventaroai.com/checkout</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -89,8 +104,40 @@
   <!-- Cart Page -->
   <url>
     <loc>https://ventaroai.com/cart</loc>
-    <lastmod>2025-01-01</lastmod>
+    <lastmod>2023-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
+  </url>
+  
+  <!-- Downloads Section -->
+  <url>
+    <loc>https://ventaroai.com/downloads</loc>
+    <lastmod>2023-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- VIP Portal -->
+  <url>
+    <loc>https://ventaroai.com/vip-portal</loc>
+    <lastmod>2023-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Web Generator -->
+  <url>
+    <loc>https://ventaroai.com/web-gen</loc>
+    <lastmod>2023-08-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Purchases -->
+  <url>
+    <loc>https://ventaroai.com/purchases</loc>
+    <lastmod>2023-07-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

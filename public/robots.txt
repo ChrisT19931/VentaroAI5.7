@@ -32,4 +32,4 @@ Allow: /checkout/
 Allow: /cart/
 
 # Sitemap location
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://ventaroai.com/sitemap.xml

@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
 import { WebGenProject, WebGenAsset } from '@/lib/web-gen-service';
 import 'grapesjs/dist/css/grapes.min.css';
-import 'grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css';
 import '@/app/web-gen/web-gen.css';
 
 export default function WebGenEditor({ params }: { params: { projectId: string } }) {
