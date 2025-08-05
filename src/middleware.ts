@@ -6,7 +6,6 @@ const protectedRoutes = [
   '/my-account',
   '/checkout',
   '/checkout/success',
-  '/web-gen',
 ];
 
 // Define admin-only routes

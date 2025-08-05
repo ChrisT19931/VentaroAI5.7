@@ -18,12 +18,10 @@ export default function EmailConfirmedPage() {
       setUser(user);
       setIsLoading(false);
       
-      // If user is already logged in, redirect to my account
-      if (user) {
-        setTimeout(() => {
-          router.push('/my-account');
-        }, 3000);
-      }
+      // Always redirect to login page after confirmation
+      setTimeout(() => {
+        router.push('/login?confirmed=true');
+      }, 3000);
     };
 
     checkUser();
@@ -64,11 +62,7 @@ export default function EmailConfirmedPage() {
           </h2>
           
           <p className="text-lg text-gray-600 mb-8">
-            {user ? (
-              <>Your email has been successfully verified. You will be redirected to your account in a few seconds.</>
-            ) : (
-              <>Your email has been successfully verified. You can now log in to your account.</>  
-            )}
+            Your email has been successfully verified. You will be redirected to the login page in a few seconds.
           </p>
           
           {!user && (

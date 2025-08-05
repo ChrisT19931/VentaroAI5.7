@@ -1,12 +1,76 @@
-'use client';
-
+'use client'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
+import { toast, Toaster } from 'react-hot-toast'
 import CinematicHero from '../components/3d/CinematicHero'
+import TypewriterText from '../components/TypewriterText'
 
 export default function Home() {
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    timeline: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleContactChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setContactForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactForm.name,
+          email: contactForm.email,
+          subject: `New Project Inquiry - ${contactForm.projectType}`,
+          message: `Phone: ${contactForm.phone}\nCompany: ${contactForm.company}\nProject Type: ${contactForm.projectType}\nBudget: ${contactForm.budget}\nTimeline: ${contactForm.timeline}\n\nMessage: ${contactForm.message}`,
+          recipient: 'chris.t@ventarosales.com'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      toast.success('Email sent! We\'ll get back to you soon.');
+      setContactForm({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        projectType: '',
+        budget: '',
+        timeline: '',
+        message: ''
+      });
+    } catch (error) {
+      toast.error('Failed to send email. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-black">
+      <Toaster position="bottom-center" toastOptions={{ duration: 3000 }} />
       {/* Hero Section */}
       <div className="relative">
         <CinematicHero />
@@ -163,23 +227,23 @@ export default function Home() {
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
-                  AI Prompts Arsenal 2025
+                  <TypewriterText text="30x AI Prompts Arsenal 2025" className="" />
                 </h3>
                 <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  <span className="text-red-400 font-bold">⚠️</span> Missing out on learning AI business strategies before it's too late - while competitors gain unfair advantages.
+                  <span className="text-blue-400 font-bold">🚀</span> Build your online business from scratch with 30 proven AI prompts - simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-emerald-400 font-bold">💡 Get This:</span> 30x proven AI prompts for instant business planning</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-emerald-400 font-bold">💡 Ready-to-Use:</span> 30 proven prompts for complete business setup</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Why Us?:</span> Start learning now for only A$10 vs A$3000+ business consultants</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Copy/Paste:</span> Direct into ChatGPT - no editing required</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete ecommerce, marketing & scaling strategies included</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Adjust to your goals and start working immediately</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -226,27 +290,27 @@ export default function Home() {
               </div>
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
-                  AI Tools Mastery Guide 2025
+                  <TypewriterText text="AI Tools Mastery Guide 2025" className="" />
                 </h3>
                 <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  <span className="text-red-400 font-bold">⚠️</span> Staying behind while others master AI tools to build profitable businesses - missing the AI revolution window.
+                  <span className="text-blue-400 font-bold">📚</span> Complete step-by-step guide to master 30 essential AI tools for building profitable online businesses from scratch.
                 </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-blue-400 font-bold">💡 Get This:</span> Master 30 AI tools with step-by-step lessons</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-blue-400 font-bold">📖 30 Lessons:</span> Complete AI tools mastery course</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Gemini, Replit, Claude, Cursor & Trae AI mastery</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Why Us?:</span> Build businesses worth A$10,000+ for only A$25</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Everything needed for online business success</span>
                   </div>
                   <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                     <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">90% of everything needed for online business success</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides</span>
                   </div>
                 </div>
                 <div className="text-center mb-6">
@@ -305,29 +369,32 @@ export default function Home() {
               
               <div className="p-8">
                 <h3 className="text-3xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-pink-200 drop-shadow-lg group-hover:scale-105 transition-transform duration-500">
-                  AI Business Strategy Session 2025
+                  <TypewriterText text="AI Business Strategy Session 2025" className="" />
                 </h3>
                 <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
-                  <span className="text-red-400 font-bold">⚠️</span> Struggling alone without expert guidance - wasting months trying to figure out profitable AI business strategies.
+                  <span className="text-purple-400 font-bold">🎯</span> Get personalized 1-on-1 expert guidance to launch your profitable AI business with proven strategies.
                 </p>
                 
-                <div className="space-y-5 mb-8">
+                <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-blue-400 font-bold">💡 Get This:</span> 60-minute live expert session with step-by-step guidance</span>
+                    <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📹 60-minute Google Meet session with screen sharing</span>
                   </div>
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full shadow-lg group-hover:shadow-indigo-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Complete business deployment from start to finish</span>
+                    <div className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg group-hover:shadow-green-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🚀 Full start-to-finish custom AI site deployment</span>
                   </div>
-
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Why Us?:</span> Save months of trial & error - get profitable fast</span>
+                    <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📋 Complete implementation report + all steps</span>
                   </div>
                   <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                    <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🤝 Ongoing support as you build your first business</span>
+                  </div>
+                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.5s'}}>
                     <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full shadow-lg group-hover:shadow-yellow-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">83% OFF - A$3,000 value for only A$500</span>
+                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">💎 83% OFF - A$3,000 value for only A$500</span>
                   </div>
                 </div>
                 
@@ -455,7 +522,7 @@ export default function Home() {
               </div>
               
               {/* Contact Form */}
-              <form className="space-y-6">
+              <form onSubmit={handleContactSubmit} className="space-y-6">
                 <div>
                   <label className="block text-white font-semibold mb-2 flex items-center">
                     <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
@@ -463,7 +530,11 @@ export default function Home() {
                   </label>
                   <input 
                     type="text" 
+                    name="fullName"
+                    value={contactForm.name}
+                    onChange={handleContactChange}
                     placeholder="Enter your full name"
+                    required
                     className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
                   />
                 </div>
@@ -475,7 +546,11 @@ export default function Home() {
                   </label>
                   <input 
                     type="email" 
+                    name="email"
+                    value={contactForm.email}
+                    onChange={handleContactChange}
                     placeholder="your.business@email.com"
+                    required
                     className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
                   />
                 </div>
@@ -487,7 +562,11 @@ export default function Home() {
                   </label>
                   <input 
                     type="tel" 
+                    name="phone"
+                    value={contactForm.phone}
+                    onChange={handleContactChange}
                     placeholder="04XX XXX XXX"
+                    required
                     className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
                   />
                 </div>
@@ -499,6 +578,9 @@ export default function Home() {
                   </label>
                   <input 
                     type="text" 
+                    name="company"
+                    value={contactForm.company}
+                    onChange={handleContactChange}
                     placeholder="Your company name"
                     className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-blue-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm"
                   />
@@ -509,7 +591,12 @@ export default function Home() {
                     <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                     Project Type *
                   </label>
-                  <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm">
+                  <select 
+                    name="projectType"
+                    value={contactForm.projectType}
+                    onChange={handleContactChange}
+                    required
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 hover:border-blue-300 backdrop-blur-sm">
                     <option value="">Select your project type</option>
                     <option value="business-website">Professional Business Website</option>
                     <option value="e-commerce">E-commerce Platform</option>
@@ -526,7 +613,12 @@ export default function Home() {
                     <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                     Investment Budget *
                   </label>
-                  <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
+                  <select 
+                    name="budget"
+                    value={contactForm.budget}
+                    onChange={handleContactChange}
+                    required
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
                     <option value="">Select your investment range</option>
                     <option value="1k-3k">$1,000 - $3,000</option>
                     <option value="3k-5k">$3,000 - $5,000</option>
@@ -542,7 +634,12 @@ export default function Home() {
                     <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                     Project Timeline *
                   </label>
-                  <select className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
+                  <select 
+                    name="timeline"
+                    value={contactForm.timeline}
+                    onChange={handleContactChange}
+                    required
+                    className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-purple-400/30 rounded-xl text-white focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-300 hover:border-purple-300 backdrop-blur-sm">
                     <option value="">When do you need this completed?</option>
                     <option value="asap">ASAP (1-2 weeks)</option>
                     <option value="1-month">Within 1 month</option>
@@ -559,19 +656,24 @@ export default function Home() {
                   </label>
                   <textarea 
                     rows={5} 
+                    name="message"
+                    value={contactForm.message}
+                    onChange={handleContactChange}
                     placeholder="Tell us about your project goals, target audience, key features you need, and what success looks like for your business. The more details you provide, the better we can tailor our proposal to exceed your expectations."
+                    required
                     className="w-full p-4 bg-gradient-to-r from-gray-900/80 to-gray-800/80 border border-pink-400/30 rounded-xl text-white focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all duration-300 hover:border-pink-300 backdrop-blur-sm"
                   ></textarea>
                 </div>
-                
-
                 
                 <div className="text-center">
                   <p className="text-gray-300 mb-6">
                     <span className="text-blue-400">🎯</span> Ready to transform your business? We are standing by to create your digital masterpiece.
                   </p>
-                  <button type="submit" className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30">
-                    🔥 GET MY FREE QUOTE
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                    {isSubmitting ? '⏳ Sending...' : '🔥 GET MY FREE QUOTE'}
                   </button>
                   <p className="text-xs text-gray-400 mt-4">
                     We respect your privacy and will never share your information.
@@ -583,119 +685,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Web Generator Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-950 via-black to-gray-950 relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-emerald-700/20 to-emerald-900/20 rounded-2xl rotate-12 animate-pulse" style={{animationDuration: '3s'}}></div>
-          <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-emerald-600/20 to-emerald-800/20 rounded-xl rotate-45 animate-pulse delay-1000" style={{animationDuration: '3s'}}></div>
-          <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-emerald-500/10 to-emerald-700/10 rounded-full animate-pulse delay-500" style={{animationDuration: '4s'}}></div>
-        </div>
-        
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1 bg-gradient-to-r from-emerald-900/50 to-green-900/50 rounded-full text-xs font-semibold text-emerald-300 mb-4 border border-emerald-500/30 shadow-lg shadow-emerald-500/10">
-              🚀 BUILD YOUR OWN WEBSITE
-            </span>
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-500 to-teal-500">AI Web Generator (Beta)</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-              Create stunning, professional websites in minutes with our powerful drag-and-drop editor. No coding required!
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            {/* Features List */}
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Lightning Fast Creation</h3>
-                  <p className="text-gray-300">Build professional websites in minutes, not weeks. Our AI-powered tools do the heavy lifting.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Drag & Drop Editor</h3>
-                  <p className="text-gray-300">Intuitive visual editor with pre-built components. Simply drag, drop, and customize to your heart's content.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Mobile Responsive</h3>
-                  <p className="text-gray-300">Every website automatically adapts to all devices. Your site will look perfect on desktop, tablet, and mobile.</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Asset Management</h3>
-                  <p className="text-gray-300">Upload and manage images, videos, and other assets with our built-in media library.</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* CTA Card */}
-            <div className="relative">
-              <div className="glass-panel rounded-3xl p-8 border border-emerald-500/30 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:scale-105">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4">Start Building Today</h3>
-                  <p className="text-gray-300 mb-8 leading-relaxed">
-                    Join thousands of creators who have already built amazing websites with our platform. No technical skills required!
-                  </p>
-                  
-                  <div className="space-y-4">
-                    <Link href="/web-gen/projects" className="group relative inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-lg rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/30 overflow-hidden">
-                      <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                      <span className="relative z-10 flex items-center">
-                        🚀 Launch Web Generator
-                        <svg className="ml-3 w-5 h-5 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </span>
-                    </Link>
-                    
-                    <p className="text-sm text-gray-400">
-                      ✨ Free to start • No credit card required
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-emerald-500/20 rounded-full animate-bounce" style={{animationDelay: '0s', animationDuration: '2s'}}></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500/20 rounded-full animate-bounce" style={{animationDelay: '1s', animationDuration: '3s'}}></div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Elite Benefits Section */}
       <section className="py-24 bg-black relative overflow-hidden">

@@ -28,10 +28,9 @@ async function getProducts() {
   return [
     {
       id: '2',
-      name: 'AI Prompts Starter Pack',
-      description: 'Your entry point to AI-powered business success. 30 ready-to-use prompts that jumpstart your online business journey with minimal learning curve and immediate implementation.',
+      name: '30x AI Prompts Arsenal 2025',
+      description: 'Build your online business from scratch with 30 proven AI prompts. Simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business - from setup to scaling.',
       price: 10.00,
-      originalPrice: 20.00,
       image_url: '/images/products/ai-prompts-arsenal.svg',
       category: 'tools',
       is_active: true,
@@ -40,8 +39,8 @@ async function getProducts() {
     },
     {
       id: '1',
-      name: 'AI Business E-Book',
-      description: 'The essential knowledge resource containing 90% of what you need to build a successful online business. Comprehensive strategies, frameworks, and implementation guides for the self-starter.',
+      name: 'AI Tools Mastery Guide 2025',
+      description: 'Complete step-by-step guide to master 30 essential AI tools for building profitable online businesses from scratch. Everything you need to leverage AI for maximum business success.',
       price: 25.00,
       originalPrice: 50.00,
       image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -52,8 +51,8 @@ async function getProducts() {
     },
     {
       id: '3',
-      name: 'Complete Business Deployment Coaching',
-      description: 'The ultimate solution for those who want all information required to deploy a custom-built site from start to finish. Own your front-end/back-end and edit everything on the fly with expert guidance.',
+      name: 'AI Business Strategy Session 2025',
+      description: 'Get personalized 1-on-1 expert guidance to build and deploy your complete online business. Learn everything you need for full technical independence and long-term success.',
       price: 500.00,
       originalPrice: 3000.00,
       image_url: '/images/products/ai-business-strategy-session.svg',
@@ -93,9 +92,7 @@ export default async function ProductsPage() {
             Choose your path to AI-powered business success
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full animate-pulse"></div>
-          <p className="text-red-400 font-bold mt-4 text-lg animate-pulse">
-            ⚠️ Cost of Inaction: Every day you wait, competitors gain unfair advantages with AI
-          </p>
+
         </div>
         
         {/* Enhanced Three-Tier Layout with Advanced Effects */}

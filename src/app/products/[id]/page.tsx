@@ -7,6 +7,7 @@ import { supabase } from '../../../lib/supabase';
 import AddToCartButton from '../../../components/AddToCartButton';
 import BuyNowButton from '../../../components/BuyNowButton';
 import CountdownTimer from '../../../components/CountdownTimer';
+import TypewriterText from '../../../components/TypewriterText';
 
 
 
@@ -28,7 +29,7 @@ const fallbackProducts = {
   '1': {
     id: '1',
     name: 'AI Tools Mastery Guide 2025',
-    description: 'Step by step how to create an online business in full with 30 lessons: 10x on LLMs (ChatGPT/Gemini/etc), 10x on Replit/Claude, 10x on Cursor/Trae - 90% of what you need to build an online business yourself.',
+    description: 'Complete step-by-step guide to master 30 essential AI tools for building profitable online businesses from scratch. Learn everything you need to create, develop, and scale your business using the most powerful AI platforms.',
     price: 25.00,
     originalPrice: 50.00,
     image_url: '/images/products/ai-tools-mastery-guide.svg',
@@ -38,15 +39,15 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      '10x lessons on LLMs: ChatGPT, Gemini & AI tools for business building',
-      '10x lessons on Replit & Claude for development and automation',
-      '10x lessons on Cursor & Trae AI for advanced coding and implementation',
-      'Complete step-by-step guide covering 90% of online business creation',
-      'Comprehensive 30-lesson structure for complete business mastery',
-      'Everything you need to build an online business yourself'
+      '30 Lessons: Master ChatGPT, Gemini, Replit, Claude, Cursor & Trae AI',
+      'Business Building: Complete strategies for online business creation',
+      'Development Tools: Learn coding, automation & implementation',
+      'Step-by-Step Implementation: Practical guides for each platform',
+      'Real Examples: Working templates and frameworks included',
+      'Self-Sufficient: Build your entire business independently'
     ],
     details: {
-      description: 'Master the complete process of building an online business with our comprehensive 30-lesson guide. This step-by-step course covers 90% of what you need to create, develop, and scale your online business using the most powerful AI tools available today.',
+      description: 'Transform yourself into an AI-powered entrepreneur with this comprehensive 30-lesson guide. Learn to leverage the most powerful AI tools available today to create, develop, and scale profitable online businesses from the ground up.',
       features: [
         '10 comprehensive lessons on LLMs (ChatGPT, Gemini, etc.) for business strategy',
         '10 detailed lessons on Replit & Claude for development and automation',
@@ -73,10 +74,9 @@ const fallbackProducts = {
   },
   '2': {
     id: '2',
-    name: 'AI Prompts Starter Pack',
-    description: 'Your entry point to AI-powered business success. 30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc).',
+    name: '30x AI Prompts Arsenal 2025',
+    description: 'Build your online business from scratch with 30 proven AI prompts. Simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business - from setup to scaling.',
     price: 10.00,
-    originalPrice: 25.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
     category: 'tools',
     is_active: true,
@@ -84,15 +84,15 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      '30x prompts to feed into ChatGPT for comprehensive business planning',
-      'From setting up to ecommerce ideas, requirements & marketing strategies',
-      'Step-by-step plans for every aspect + more to grow your business',
-      'Works with ChatGPT, Claude, and other AI tools',
-      'Organized by business function for easy navigation',
-      'Perfect starting point for your AI business journey'
+      'Ready-to-Use: 30 proven prompts for instant business planning',
+      'Copy/Paste: Direct into ChatGPT - no editing required',
+      'Complete Coverage: Setup, marketing, scaling & operations',
+      'Instant Results: Get detailed action plans immediately',
+      'Universal Compatibility: Works with all major AI platforms',
+      'Adjust to your goals and start working immediately'
     ],
     details: {
-      description: 'Begin your AI business journey with our carefully curated collection of 30x prompts to feed into ChatGPT to provide you with step by step plan for every aspect + more to start, operate and scale an online business (from setting up to ecomm ideas/requirements marketing / etc). Simply feed into ChatGPT and get detailed action plans.',
+      description: 'Transform your business ideas into reality with 30 carefully crafted AI prompts designed specifically for building profitable online businesses from scratch. Each prompt is ready to copy/paste into ChatGPT, giving you instant access to expert-level business strategies and step-by-step implementation plans.',
       features: [
         'Complete ecommerce setup and requirements planning',
         'Marketing strategies and campaign development',
@@ -117,7 +117,7 @@ const fallbackProducts = {
   '3': {
     id: '3',
     name: 'Complete Business Deployment Coaching',
-    description: 'The ultimate solution for entrepreneurs who want complete knowledge and guidance to deploy a custom-built website or online business from start to finish. Take full ownership of your front-end and back-end with the ability to edit and customize on the fly.',
+    description: 'Get personalized 1-on-1 expert guidance to build and deploy your complete online business. Learn everything you need for full technical independence and long-term success.',
     price: 500.00,
     image_url: '/images/products/ai-business-strategy-session.svg',
     category: 'services',
@@ -126,16 +126,16 @@ const fallbackProducts = {
     product_type: 'digital',
     created_at: new Date().toISOString(),
     benefits: [
-      'Complete knowledge transfer for full business ownership',
-      'Custom website/business deployment from start to finish',
-      'Front-end and back-end mastery for total control',
-      'Edit and customize your site on the fly without dependencies',
-      'Personalized coaching tailored to your specific business',
-      'Comprehensive implementation support and guidance',
-      'Long-term independence and self-sufficiency'
+      'Personalized 1-on-1 Expert Guidance: Tailored to your specific business',
+      'Complete Business Setup: From concept to live deployment',
+      'Technical Independence: Master front-end and back-end development',
+      'Live Implementation: Build your business during the sessions',
+      'Recorded Sessions: Keep everything for future reference',
+      'Ongoing Support: Email assistance after completion',
+      'Full Ownership: No dependencies, complete control of your business'
     ],
     details: {
-      description: 'Take complete control of your online business with our comprehensive coaching program. Learn everything you need to deploy, manage, and customize your own website or online store from start to finish. This personalized coaching experience provides all the knowledge and skills required for true business ownership and independence.',
+      description: 'Transform your business ideas into reality with personalized expert coaching. Get hands-on guidance to build, deploy, and manage your complete online business while learning the technical skills needed for long-term independence and success.',
       features: [
         'Personalized 1-on-1 coaching sessions',
         'Complete front-end and back-end development training',
@@ -543,7 +543,17 @@ export default function ProductPage() {
           {/* Product Details */}
           <div className="space-y-8">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-4 glow-text">{product.name}</h1>
+              <h1 className="text-4xl font-bold text-white mb-4 glow-text">
+                {product.id === '2' ? (
+                  <TypewriterText text={product.name} className="" />
+                ) : product.id === '1' ? (
+                  <TypewriterText text={product.name} className="" />
+                ) : product.id === '3' ? (
+                  <TypewriterText text={product.name} className="" />
+                ) : (
+                  product.name
+                )}
+              </h1>
               <p className="text-xl text-gray-300 mb-6">{product.description}</p>
               <div className="flex items-center gap-4 mb-8">
                 <span className="text-4xl font-bold text-white glow-text">A${product.price.toFixed(2)} AUD</span>
@@ -944,22 +954,22 @@ export default function ProductPage() {
                     </div>
                   </div>
                   
-                  <div className="space-y-6 mb-8">
+                  <div className="space-y-4 mb-8">
                     <div className="flex items-center space-x-4 transform transition-all duration-300">
                       <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
-                      <span className="text-sm text-gray-100 font-medium">📹 60-minute Google Meet live presentation with shared screen</span>
+                      <span className="text-sm text-gray-100 font-medium">📹 60-minute Google Meet session with screen sharing</span>
                     </div>
                     <div className="flex items-center space-x-4 transform transition-all duration-300">
-                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
-                      <span className="text-sm text-gray-100 font-medium">📋 Detailed step-by-step report delivered after session</span>
+                      <div className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">🚀 Full start-to-finish custom AI site deployment</span>
                     </div>
                     <div className="flex items-center space-x-4 transform transition-all duration-300">
-                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
-                      <span className="text-sm text-gray-100 font-medium">💼 Complete knowledge transfer for full business ownership</span>
+                      <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">📋 Complete implementation report + all steps</span>
                     </div>
                     <div className="flex items-center space-x-4 transform transition-all duration-300">
-                      <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg"></div>
-                      <span className="text-sm text-gray-100 font-medium">🌐 Custom website/business deployment from start to finish</span>
+                      <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full shadow-lg"></div>
+                      <span className="text-sm text-gray-100 font-medium">🤝 Ongoing support as you build your first business</span>
                     </div>
                   </div>
                   
@@ -977,21 +987,23 @@ export default function ProductPage() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                       <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-400/20">
-                        <h5 className="font-semibold text-blue-300 mb-2">Session Includes:</h5>
+                        <h5 className="font-semibold text-blue-300 mb-2">🚀 Complete AI Site Creation:</h5>
                         <ul className="text-sm text-gray-300 space-y-1">
-                          <li>• Live screen-shared presentation</li>
-                          <li>• Real-time Q&A and consultation</li>
-                          <li>• Personalized business assessment</li>
-                          <li>• Custom strategy development</li>
+                          <li>• Live custom website creation process</li>
+                          <li>• AI-powered features integration</li>
+                          <li>• Mobile-responsive design setup</li>
+                          <li>• SEO optimization and performance tuning</li>
+                          <li>• Full deployment during the session</li>
                         </ul>
                       </div>
                       <div className="bg-purple-900/30 p-4 rounded-lg border border-purple-400/20">
-                        <h5 className="font-semibold text-purple-300 mb-2">Post-Session Benefits:</h5>
+                        <h5 className="font-semibold text-purple-300 mb-2">📋 Complete Support Package:</h5>
                         <ul className="text-sm text-gray-300 space-y-1">
-                          <li>• Comprehensive written report</li>
-                          <li>• Step-by-step implementation guide</li>
+                          <li>• Detailed implementation report with all steps</li>
+                          <li>• All code and configuration files included</li>
                           <li>• Business deployment roadmap</li>
-                          <li>• Ongoing support packages available</li>
+                          <li>• Ongoing support as you build your business</li>
+                          <li>• Marketing and monetization strategies</li>
                         </ul>
                       </div>
                     </div>

@@ -38,12 +38,7 @@ export default function Navbar() {
               <Link href="/contact" className="px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
                 Contact
               </Link>
-              {user && (
-                <Link href="/web-gen" className="px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 flex items-center">
-                  <span className="mr-1">Web Gen</span>
-                  <span className="text-xs bg-blue-600 text-white px-1 rounded">Beta</span>
-                </Link>
-              )}
+
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
@@ -132,12 +127,7 @@ export default function Navbar() {
           <Link href="/contact" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             Contact
           </Link>
-          {user && (
-            <Link href="/web-gen" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 flex items-center">
-              <span className="mr-1">Web Gen</span>
-              <span className="text-xs bg-blue-600 text-white px-1 rounded">Beta</span>
-            </Link>
-          )}
+
           {user && (
             <Link href="/my-account" className="flex items-center px-4 py-3 rounded-xl text-base font-medium bg-blue-600/90 text-white hover:bg-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
