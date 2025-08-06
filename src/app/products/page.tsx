@@ -1,6 +1,5 @@
 import Image from 'next/image';
-'use client';
-
+import React from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import BuyNowButton from '@/components/BuyNowButton';
@@ -186,9 +185,17 @@ export default async function ProductsPage() {
               const isPopular = config.popular;
               
               return (
-                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${config.shadow} transition-all duration-700 transform hover:-translate-y-6 ${config.scale} overflow-hidden border-2 ${isPopular ? `border-${config.accent}-400/60 premium-glow premium-float` : `border-${config.border} card-glow`} ${isPopular ? 'ring-2 ring-blue-400/20' : ''} shimmer-effect`}>
+                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${config.shadow} transition-all duration-700 transform hover:-translate-y-6 ${config.scale} overflow-hidden border-2 ${isPopular ? `border-${config.accent}-400/60 premium-glow premium-float` : `border-${config.border} card-glow`} ${isPopular ? 'ring-2 ring-blue-400/20' : ''} shimmer-effect hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95`}>
                   {/* Enhanced glow effects */}
                   <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-${config.accent}-500/20 via-transparent to-${config.accent}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse`}></div>
+                  <div className={`absolute -inset-1 rounded-3xl bg-gradient-to-r from-${config.accent}-600/30 to-purple-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700`}></div>
+                  
+                  {/* Floating Particles Effect */}
+                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                    <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0s'}}></div>
+                    <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2s'}}></div>
+                  </div>
                   
                   {/* Enhanced floating elements */}
                   <div className="absolute inset-0 overflow-hidden rounded-3xl">
@@ -234,34 +241,160 @@ export default async function ProductsPage() {
                     <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
                       {product.name}
                     </h3>
-                    <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                      <span className="text-red-400 font-bold">⚠️</span> Missing out on learning AI business strategies before it's too late - while competitors gain unfair advantages.
-                    </p>
-                    <p className="text-gray-300 mb-8 leading-relaxed text-sm">
-                      {product.description}
+                    <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
+                      <span className={`text-${config.accent}-400 font-bold`}>📚</span> {product.description}
                     </p>
                     
-                    {/* Enhanced Pricing Section */}
-                    <div className="text-center mb-6">
-                      <div className="text-5xl font-black text-white drop-shadow-lg mb-2">A${product.price.toFixed(2)}</div>
-                      {product.originalPrice && (
-                        <div className="text-lg text-gray-500 line-through mb-1">
-                          A${product.originalPrice.toFixed(2)}
-                        </div>
+                    {/* Enhanced Value Propositions */}
+                    <div className="space-y-4 mb-8">
+                      {product.id === '1' && (
+                        <>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>📖 30 Lessons:</span> Complete AI tools mastery course</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Everything needed for online business success</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides</span>
+                          </div>
+                        </>
                       )}
-                      <div className="text-sm text-gray-300 font-medium">One-time payment</div>
+                      {product.id === '2' && (
+                        <>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>🎯 30 Prompts:</span> Ready-to-use AI business prompts</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Copy-paste templates for instant results</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">⚡ Speed:</span> 10x faster content creation</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Proven prompts used by successful entrepreneurs</span>
+                          </div>
+                        </>
+                      )}
+                      {product.id === '3' && (
+                        <>
+                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                            <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📹 60-minute Google Meet session with screen sharing</span>
+                          </div>
+                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                            <div className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg group-hover:shadow-green-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🚀 Full start-to-finish custom AI site deployment</span>
+                          </div>
+                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                            <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📋 Complete implementation report + all steps</span>
+                          </div>
+                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                            <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🤝 Ongoing support as you build your first business</span>
+                          </div>
+                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.5s'}}>
+                            <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full shadow-lg group-hover:shadow-yellow-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">💎 83% OFF - A$3,000 value for only A$500</span>
+                          </div>
+                        </>
+                      )}
                     </div>
                     
-                    {/* Enhanced Action Buttons */}
-                    <Link href={`/products/${product.id}`} className={`w-full block text-center py-4 rounded-xl font-bold transition-all duration-500 hover:scale-110 shadow-lg bg-gradient-to-r ${config.tierColor} hover:${config.tierColor.replace('to-', 'hover:to-').replace('from-', 'hover:from-').replace('-500', '-400').replace('-600', '-500')} text-white border border-${config.accent}-500/30 hover:shadow-${config.accent}-500/40 hover:shadow-2xl transform hover:-translate-y-1 relative overflow-hidden group/btn`}>
-                      <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Start Learning Now</span>
-                      <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-400 to-${config.accent}-500 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300`}></div>
-                      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
-                    </Link>
+                    {/* Enhanced Pricing Section */}
+                    <div className="text-center mb-8">
+                      <div className="relative">
+                        {/* Pricing Background Glow */}
+                        <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100`}></div>
+                        
+                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group-hover:border-gray-600/50 transition-all duration-500">
+                          <div className="flex items-center justify-center space-x-4 mb-4">
+                            <div className="text-center">
+                              <div className="flex items-baseline justify-center space-x-2">
+                                <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent group-hover:from-yellow-300 group-hover:to-white transition-all duration-500">
+                                  A${product.price.toFixed(2)}
+                                </span>
+                                {product.originalPrice && (
+                                  <span className="text-lg text-gray-500 line-through font-medium">
+                                    A${product.originalPrice.toFixed(2)}
+                                  </span>
+                                )}
+                              </div>
+                              {product.originalPrice && (
+                                <div className="mt-3">
+                                  <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500/20 to-pink-500/20 border border-red-400/30 rounded-full backdrop-blur-sm group-hover:from-red-500/30 group-hover:to-pink-500/30 group-hover:border-red-400/50 transition-all duration-300">
+                                    <span className="text-red-300 text-sm font-bold group-hover:text-red-200 transition-colors duration-300">
+                                      💥 Save A${(product.originalPrice - product.price).toFixed(2)} (83% OFF)
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          
+                          {/* Limited Time Offer */}
+                          {product.id === '3' && (
+                            <div className="mt-4 p-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-400/20 rounded-xl">
+                              <div className="flex items-center justify-center space-x-2">
+                                <span className="text-orange-300 text-xs font-bold animate-pulse">🔥 LIMITED TIME</span>
+                                <span className="text-gray-300 text-xs">- Only 5 spots available this month</span>
+                              </div>
+                            </div>
+                          )}
+                          
+                          <div className="text-sm text-gray-300 font-medium mt-3">One-time payment</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Action Buttons */
+                    <div className="space-y-4">
+                      <div className="relative group/button">
+                        {/* Button Glow Effect */}
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
+                        
+                        <Link href={`/products/${product.id}`} className={`relative w-full block text-center py-4 px-6 bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 overflow-hidden`}>
+                          <span className="relative z-10 flex items-center justify-center space-x-2">
+                            <span>🚀 Start Learning Now - A${product.price.toFixed(2)}</span>
+                          </span>
+                          <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-400 to-${config.accent}-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300`}></div>
+                          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        </Link>
+                      </div>
+                      
+                      {/* Trust Indicators */}
+                      <div className="flex items-center justify-center space-x-6 mt-6 pt-4 border-t border-gray-700/50">
+                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                          <span className="text-green-400">🔒</span>
+                          <span>Secure Payment</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                          <span className="text-blue-400">⚡</span>
+                          <span>Instant Access</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                          <span className="text-purple-400">💎</span>
+                          <span>Premium Quality</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
-            })}
+            });
+          })}
           </div>
         ) : (
           <div className="text-center py-12">
