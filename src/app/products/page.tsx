@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import BuyNowButton from '@/components/BuyNowButton';
@@ -7,23 +8,8 @@ import StarBackground from '@/components/3d/StarBackground';
 
 
 
-async function getProducts() {
-  // Try to fetch from Supabase first
-  try {
-    const { data, error } = await supabase
-      .from('products')
-      .select('*')
-      .eq('is_active', true)
-      .order('created_at', { ascending: false });
-    
-    if (!error && data && data.length > 0) {
-      return data;
-    }
-  } catch (e) {
-    console.error('Error connecting to Supabase:', e);
-  }
-  
-  // Fallback to mock data if Supabase fetch fails or returns empty
+function getProducts() {
+  // Fallback to mock data
   return [
     {
       id: '2',
@@ -65,8 +51,31 @@ async function getProducts() {
 
 
 
-export default async function ProductsPage() {
-  const products = await getProducts();
+export default function ProductsPage() {
+  const [products, setProducts] = useState<any[]>([]);
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('is_active', true)
+          .order('created_at', { ascending: false });
+        
+        if (!error && data && data.length > 0) {
+          setProducts(data);
+        } else {
+          setProducts(getProducts());
+        }
+      } catch (e) {
+        console.error('Error connecting to Supabase:', e);
+        setProducts(getProducts());
+      }
+    };
+    
+    fetchProducts();
+  }, []);
   
   return (
     <div className="relative min-h-screen py-16 overflow-hidden bg-gradient-to-br from-slate-950 via-gray-950 to-black">
@@ -359,7 +368,7 @@ export default async function ProductsPage() {
                       </div>
                     </div>
                     
-                    {/* Enhanced Action Buttons */
+                    {/* Enhanced Action Buttons */}
                     <div className="space-y-4">
                       <div className="relative group/button">
                         {/* Button Glow Effect */}
@@ -393,8 +402,8 @@ export default async function ProductsPage() {
                   </div>
                 </div>
               );
-            });
-          })}
+            })
+          }
           </div>
         ) : (
           <div className="text-center py-12">
