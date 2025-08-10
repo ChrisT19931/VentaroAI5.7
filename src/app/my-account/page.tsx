@@ -65,22 +65,23 @@ export default function MyAccountPage() {
         },
         {
           id: '4',
-          name: 'AI Web Creation + Support Package',
-          description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI. Includes 60-minute Google Meet/phone call consultation + unlimited email support for 1 month.',
+          name: 'AI Business Video Guide 2025',
+          description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI.',
           image_url: '/images/products/ai-business-video-guide.svg',
           viewUrl: '/downloads/video',
           owned: true, // Always show as owned for all users
           productId: 'ai-business-video-guide-2025'
         },
         {
-          id: '6',
-          name: 'AI Web Generation Service',
-          description: 'Custom AI-powered website generation with implementation and deployment.',
-          image_url: '/images/products/webgen.svg',
-          viewUrl: '/downloads/webgen',
-          owned: false, // Default to not owned
-          productId: 'webgen'
-        }
+          id: '5',
+          name: 'Support Package',
+          description: '60-minute Google Meet/phone call consultation + unlimited email support for 1 month.',
+          image_url: '/images/products/support-package.svg',
+          viewUrl: '/downloads/support',
+          owned: true, // Always show as owned for all users
+          productId: 'weekly-support-contract'
+        },
+
       ];
       
       // If user is admin (chris.t@ventarosales.com), set all products as owned
