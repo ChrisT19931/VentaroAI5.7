@@ -51,12 +51,19 @@ function validateSupabaseConfig() {
     throw new Error('Missing environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY. Please configure this in your Vercel environment variables.');
   }
   
-  // Check for placeholder values (only warn, don't throw errors)
-  if (supabaseUrl === 'https://supabase.co' || supabaseUrl.includes('placeholder')) {
-    console.warn('NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL.');
+  // Check for placeholder values and throw error to prevent invalid URL construction
+  if (supabaseUrl === 'https://placeholder.supabase.co' || supabaseUrl === 'https://supabase.co' || supabaseUrl.includes('placeholder')) {
+    throw new Error('NEXT_PUBLIC_SUPABASE_URL contains placeholder value. Please set your actual Supabase project URL in .env.local');
   }
   if (supabaseAnonKey.includes('EXAMPLE') || supabaseAnonKey.includes('placeholder')) {
-    console.warn('NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key.');
+    throw new Error('NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. Please set your actual Supabase anonymous key in .env.local');
+  }
+  
+  // Validate URL format
+  try {
+    new URL(supabaseUrl);
+  } catch (error) {
+    throw new Error(`Invalid NEXT_PUBLIC_SUPABASE_URL format: ${supabaseUrl}. Please provide a valid URL.`);
   }
 }
 
@@ -134,8 +141,38 @@ export const getSupabaseClient = () => {
   if (_supabaseClient) {
     return _supabaseClient;
   }
-  
-  // Only validate in browser environment
+
+  // Check for placeholder values and provide development fallback
+  const hasPlaceholderValues = !supabaseUrl || !supabaseAnonKey || 
+    supabaseUrl.includes('your-project-id') || 
+    supabaseUrl.includes('placeholder') || 
+    supabaseAnonKey.includes('your-supabase') || 
+    supabaseAnonKey.includes('placeholder');
+
+  if (hasPlaceholderValues) {
+    console.warn('⚠️  Supabase not configured - using mock client for development');
+    console.warn('📝 To fix: Update NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local');
+    
+    // Return a mock client that won't break the app
+    return {
+      auth: {
+        getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+        getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+        signInWithPassword: () => Promise.resolve({ data: { user: null, session: null }, error: { message: 'Supabase not configured' } }),
+        signUp: () => Promise.resolve({ data: { user: null, session: null }, error: { message: 'Supabase not configured' } }),
+        signOut: () => Promise.resolve({ error: null }),
+        onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } })
+      },
+      from: () => ({
+        select: () => Promise.resolve({ data: [], error: null }),
+        insert: () => Promise.resolve({ data: null, error: { message: 'Supabase not configured' } }),
+        update: () => Promise.resolve({ data: null, error: { message: 'Supabase not configured' } }),
+        delete: () => Promise.resolve({ data: null, error: { message: 'Supabase not configured' } })
+      })
+    } as any;
+  }
+
+  // Browser-side: validate config before creating client
   if (typeof window !== 'undefined') {
     try {
       validateSupabaseConfig();

@@ -545,7 +545,7 @@ function GlassmorphismOverlay() {
           
           <div className="space-y-6">
             <a 
-              href="#elite-custom-website-creation" 
+              href="#video-offer" 
               className="group relative inline-flex items-center justify-center px-12 py-5 text-lg font-black text-black bg-white rounded-2xl transition-all duration-500 transform hover:scale-110 hover:bg-gray-100 shadow-2xl overflow-hidden"
               style={{ 
                 minWidth: '280px',
@@ -556,7 +556,7 @@ function GlassmorphismOverlay() {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-white via-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
               <span className="relative z-10 flex items-center">
-                GET CUSTOM WEBSITE
+                LEARN NOW
                 <svg className="ml-4 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

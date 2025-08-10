@@ -90,25 +90,105 @@ export default function Home() {
           <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-purple-400/20 rounded-full animate-bounce" style={{animationDelay: '2s', animationDuration: '2.5s'}}></div>
         </div>
         
+        {/* Video Offer Section - Primary Offer */}
+        <section id="video-offer" className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20 animate-pulse">
+                🎯 #1 RECOMMENDED OFFER - LIMITED TIME
+              </span>
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
+                Learn How We Built This <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Entire Website</span> With AI
+              </h2>
+              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Get the complete step-by-step video guide + detailed report showing exactly how we created this professional website using AI in just 2 hours.
+              </p>
+            </div>
+            
+            <div className="max-w-3xl mx-auto">
+              <div className="glass-panel premium-glow p-10 rounded-3xl border-2 border-purple-500/30 shadow-2xl transform hover:scale-105 transition-all duration-500 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-blue-600/10 to-pink-600/10 rounded-3xl"></div>
+                <div className="relative z-10 text-center">
+                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mb-8 shadow-lg premium-icon-glow">
+                    <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-4xl font-black text-white mb-6">AI Website Creation Masterclass</h3>
+                  <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                    Complete behind-the-scenes video showing our exact process, tools, and prompts used to build this entire website with AI.
+                  </p>
+                  <div className="flex items-center justify-center mb-8">
+                    <span className="text-6xl font-black text-white">A$50</span>
+                    <span className="text-2xl text-gray-400 line-through ml-4">A$200</span>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
+                    <ul className="space-y-4 text-gray-300">
+                      <li className="flex items-center">
+                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        2+ Hour Complete Video Tutorial
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Detailed Step-by-Step Report
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        All AI Prompts & Tools Used
+                      </li>
+                    </ul>
+                    <ul className="space-y-4 text-gray-300">
+                      <li className="flex items-center">
+                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Screen Recording of Entire Process
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Instant Download Access
+                      </li>
+                      <li className="flex items-center">
+                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        30-Day Money Back Guarantee
+                      </li>
+                    </ul>
+                  </div>
+                  <a href="/checkout?product=ai-business-video-guide-2025" className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl">
+                    🚀 GET INSTANT ACCESS NOW
+                  </a>
+                  <p className="text-sm text-gray-400 mt-4">⚡ Instant access after payment • Secure checkout • 30-day guarantee</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <div className="text-center mb-20">
-
-            
-            {/* Pricing Section Header */}
+            {/* Additional Services Header */}
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-full text-xs font-semibold text-purple-300 mb-4 border border-purple-500/30 shadow-lg shadow-purple-500/10">
-                🔥 LIMITED TIME: 70% OFF LAUNCH PRICING
-              </span>
               <h3 className="text-4xl md:text-5xl font-black text-white mb-6 drop-shadow-2xl">
-                Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Success Path</span>
+                Additional <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Services & Resources</span>
               </h3>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Start your AI transformation today. Each plan includes lifetime access, regular updates, and our 30-day money-back guarantee.
+                Professional support and premium resources to accelerate your success.
               </p>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             <style jsx>{`
               @keyframes glow-pulse {
                 0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
@@ -200,218 +280,108 @@ export default function Home() {
                 50% { transform: scale(1.05); }
               }
             `}</style>
-            {/* LITE Plan */}
+            
+            {/* #2 Weekly Support Contract */}
+            <div className="group relative bg-gradient-to-br from-orange-900/80 to-red-900/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-orange-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-orange-700/30 shimmer-effect">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                  #2 OFFER
+                </div>
+              </div>
+              <div className="h-32 bg-gradient-to-br from-orange-900 to-red-900 relative overflow-hidden flex items-center justify-center">
+                <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 transition-all duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white">Weekly Support Contract</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed">60 minutes phone/Google Meet + unlimited email support every week.</p>
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white">A$300</div>
+                  <div className="text-xs text-gray-300">per week</div>
+                </div>
+                <a href="/checkout?product=weekly-support-contract-2025" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm">
+                  Get Support
+                </a>
+              </div>
+            </div>
+
+            {/* $10 Prompts - Credibility Offer */}
             <div className="group relative bg-gradient-to-br from-slate-900/80 to-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-slate-700/30 shimmer-effect">
-              {/* Animated border glow */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-transparent to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-              {/* Floating orbs */}
-              <div className="absolute top-4 right-4 w-3 h-3 bg-emerald-400/60 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
-              <div className="absolute bottom-6 left-6 w-2 h-2 bg-emerald-300/40 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
-                  LITE
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
+                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                  CREDIBILITY
                 </div>
               </div>
-              <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
-                <div className="relative transform group-hover:scale-110 transition-all duration-500">
-                  <svg className="w-20 h-20 text-emerald-400 opacity-60 group-hover:opacity-100 group-hover:text-emerald-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                  <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-xl group-hover:bg-emerald-400/40 group-hover:animate-pulse transition-all duration-500"></div>
-                  {/* Orbiting particles */}
-                  <div className="absolute -top-2 -right-2 w-1 h-1 bg-emerald-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.2s'}}></div>
-                  <div className="absolute -bottom-2 -left-2 w-1 h-1 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.4s'}}></div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                <svg className="w-16 h-16 text-emerald-400 opacity-60 group-hover:opacity-100 transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
               </div>
-              <div className="p-8">
-                <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
-                  <TypewriterText text="30x AI Prompts Arsenal 2025" className="" />
-                </h3>
-                <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  <span className="text-blue-400 font-bold">🚀</span> Build your online business from scratch with 30 proven AI prompts - simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business.
-                </p>
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-emerald-400 font-bold">💡 Ready-to-Use:</span> 30 proven prompts for complete business setup</span>
-                  </div>
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Copy/Paste:</span> Direct into ChatGPT - no editing required</span>
-                  </div>
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse shadow-lg group-hover:shadow-emerald-400/50 group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Adjust to your goals and start working immediately</span>
-                  </div>
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white">Full Access To Prompts</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed">30 proven AI prompts for building online businesses.</p>
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white">A$10</div>
+                  <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <div className="text-center mb-6">
-                  <div className="text-5xl font-black text-white drop-shadow-lg mb-2">A$10</div>
-                  <div className="text-sm text-gray-300 font-medium">One-time payment</div>
-                </div>
-                <Link href="/products/2" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-500 hover:scale-110 shadow-lg bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white border border-emerald-500/30 hover:shadow-emerald-500/40 hover:shadow-2xl transform hover:-translate-y-1 relative overflow-hidden group/btn">
-                  <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Start Learning Now</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-500 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                <Link href="/products/2" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-sm">
+                  Get Prompts
                 </Link>
               </div>
             </div>
-            
-            {/* ADVANCE Plan */}
-            <div className="group relative bg-gradient-to-br from-slate-900/90 to-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border-2 border-slate-600/40 shimmer-effect">
-              {/* Animated border glow */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-              {/* Floating orbs */}
-              <div className="absolute top-4 right-4 w-3 h-3 bg-blue-400/60 rounded-full animate-ping" style={{animationDelay: '0.7s'}}></div>
-              <div className="absolute bottom-6 left-6 w-2 h-2 bg-blue-300/40 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
+
+            {/* $25 Ebook - Credibility Offer */}
+            <div className="group relative bg-gradient-to-br from-slate-900/90 to-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-slate-600/40 shimmer-effect">
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
-                  ADVANCE
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                  CREDIBILITY
                 </div>
               </div>
-              <div className="absolute top-4 right-4 z-20">
-                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce" style={{animationDuration: '1s'}}>
-                  POPULAR
-                </div>
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
+                <svg className="w-16 h-16 text-blue-400 opacity-60 group-hover:opacity-100 transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
+                </svg>
               </div>
-              <div className="h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
-                <div className="relative transform group-hover:scale-110 transition-all duration-500">
-                  <svg className="w-20 h-20 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:text-blue-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
-                  </svg>
-                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl group-hover:bg-blue-400/40 group-hover:animate-pulse transition-all duration-500"></div>
-                  {/* Orbiting particles */}
-                  <div className="absolute -top-2 -right-2 w-1 h-1 bg-blue-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.2s'}}></div>
-                  <div className="absolute -bottom-2 -left-2 w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.4s'}}></div>
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white">Full Access To Ebook</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed">Complete AI tools mastery guide for online business.</p>
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white">A$25</div>
+                  <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
-                  <TypewriterText text="AI Tools Mastery Guide 2025" className="" />
-                </h3>
-                <p className="text-gray-200 mb-6 leading-relaxed text-base font-medium">
-                  <span className="text-blue-400 font-bold">📚</span> Complete step-by-step guide to master 30 essential AI tools for building profitable online businesses from scratch.
-                </p>
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-blue-400 font-bold">📖 30 Lessons:</span> Complete AI tools mastery course</span>
-                  </div>
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
-                  </div>
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Everything needed for online business success</span>
-                  </div>
-                  <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                    <div className="w-3 h-3 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides</span>
-                  </div>
-                </div>
-                <div className="text-center mb-6">
-                  <div className="flex items-center justify-center space-x-3 mb-2">
-                    <span className="text-5xl font-black text-white drop-shadow-lg">A$25</span>
-                    <span className="text-2xl text-gray-400 line-through font-bold">A$50</span>
-                  </div>
-                  <div className="text-sm text-green-300 font-bold animate-pulse bg-green-500/20 px-3 py-1 rounded-full" style={{animationDuration: '2s'}}>50% OFF Launch Price</div>
-                </div>
-                <Link href="/products/1" className="w-full block text-center py-4 rounded-xl font-bold transition-all duration-500 hover:scale-110 shadow-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white border border-blue-500/30 hover:shadow-blue-500/40 hover:shadow-2xl transform hover:-translate-y-1 relative overflow-hidden group/btn">
-                  <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Master AI Tools Now</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                <Link href="/products/1" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm">
+                  Get Ebook
                 </Link>
               </div>
             </div>
-            
-            {/* PRO Plan - Premium AI Business Strategy Session */}
-            <div className="relative group bg-gradient-to-br from-purple-900/95 to-indigo-900/95 rounded-3xl shadow-2xl border border-purple-400/40 backdrop-blur-sm overflow-hidden transform transition-all duration-700 hover:shadow-purple-400/40 hover:shadow-2xl hover:-translate-y-4 hover:scale-105 shimmer-effect">
-              {/* Premium floating particles */}
-              <div className="absolute top-4 right-4 w-10 h-10 bg-gradient-to-r from-purple-400/40 to-pink-400/40 rounded-full blur-sm animate-pulse" style={{animationDelay: '0.5s'}}></div>
-              <div className="absolute bottom-8 left-8 w-8 h-8 bg-gradient-to-r from-indigo-400/30 to-purple-400/30 rounded-full blur-sm animate-pulse" style={{animationDelay: '1.5s'}}></div>
-              <div className="absolute top-1/3 left-1/5 w-6 h-6 bg-gradient-to-r from-pink-400/25 to-purple-400/25 rounded-full blur-sm animate-pulse" style={{animationDelay: '3s'}}></div>
-              <div className="absolute top-2/3 right-1/4 w-5 h-5 bg-gradient-to-r from-purple-300/20 to-indigo-300/20 rounded-full blur-sm animate-pulse" style={{animationDelay: '4.5s'}}></div>
-              
-              {/* Premium animated border glow */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-400/30 via-pink-400/20 to-indigo-400/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              
-              {/* Premium badge */}
+
+            {/* Custom Websites - Premium Offer */}
+            <div className="group relative bg-gradient-to-br from-purple-900/90 to-pink-900/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border-2 border-purple-600/40 shimmer-effect premium-glow">
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-xs font-black px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
-                  ⭐ PREMIUM
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-400 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
+                <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg premium-float">
+                  PREMIUM
                 </div>
               </div>
-              
-              <div className="relative h-52 bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-800 flex items-center justify-center overflow-hidden group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:via-indigo-500 group-hover:to-purple-700 transition-all duration-500">
-                <div className="relative z-10 transform group-hover:scale-125 group-hover:rotate-6 transition-all duration-700">
-                  <svg className="w-24 h-24 text-white drop-shadow-2xl group-hover:text-purple-100 transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full blur-2xl animate-pulse group-hover:bg-gradient-to-r group-hover:from-purple-300/40 group-hover:to-pink-300/40 transition-all duration-500"></div>
-                  {/* Orbiting particles */}
-                  <div className="absolute -top-2 -right-2 w-1 h-1 bg-purple-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.2s'}}></div>
-                  <div className="absolute -bottom-2 -left-2 w-1 h-1 bg-pink-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300" style={{animationDelay: '0.4s'}}></div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent group-hover:from-black/60 transition-all duration-500"></div>
-                
-                {/* Premium background pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 left-4 w-2 h-2 bg-white rounded-full animate-ping"></div>
-                  <div className="absolute top-8 right-8 w-1 h-1 bg-white rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-                  <div className="absolute bottom-6 left-1/3 w-1.5 h-1.5 bg-white rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
-                </div>
+              <div className="h-32 bg-gradient-to-br from-purple-900 to-pink-900 relative overflow-hidden flex items-center justify-center">
+                <svg className="w-16 h-16 text-purple-400 opacity-60 group-hover:opacity-100 transition-all duration-500 premium-icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
+                </svg>
               </div>
-              
-              <div className="p-8">
-                <h3 className="text-3xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-pink-200 drop-shadow-lg group-hover:scale-105 transition-transform duration-500">
-                  <TypewriterText text="AI Business Strategy Session 2025" className="" />
-                </h3>
-                <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
-                  <span className="text-purple-400 font-bold">🎯</span> Get personalized 1-on-1 expert guidance to launch your profitable AI business with proven strategies.
-                </p>
-                
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📹 60-minute Google Meet session with screen sharing</span>
-                  </div>
-                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg group-hover:shadow-green-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🚀 Full start-to-finish custom AI site deployment</span>
-                  </div>
-                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📋 Complete implementation report + all steps</span>
-                  </div>
-                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🤝 Ongoing support as you build your first business</span>
-                  </div>
-                  <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.5s'}}>
-                    <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full shadow-lg group-hover:shadow-yellow-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                    <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">💎 83% OFF - A$3,000 value for only A$500</span>
-                  </div>
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white">Custom Websites</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed">Professional custom websites and online platforms.</p>
+                <div className="text-center mb-4">
+                  <div className="text-2xl font-black text-white">A$1,000</div>
+                  <div className="text-xs text-gray-300">to A$10,000</div>
                 </div>
-                
-                <div className="text-center mb-8 group-hover:scale-105 transition-transform duration-500">
-                  <div className="text-lg text-gray-400 line-through mb-1">Was A$3,000</div>
-                  <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 drop-shadow-2xl mb-2 animate-pulse">A$500</div>
-                  <div className="text-sm text-gray-300 font-medium">💎 Premium Investment - Limited Time</div>
-                  <div className="text-sm text-green-400 font-bold animate-pulse">🔥 83% OFF - Limited Time Offer!</div>
-                </div>
-                
-                <Link href="/products/3" className="w-full block text-center py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 shadow-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-500 hover:via-pink-500 hover:to-indigo-500 text-white border-2 border-purple-400/50 hover:border-purple-300/70 hover:shadow-purple-400/30 relative overflow-hidden group/btn">
-                  <span className="relative z-10 group-hover/btn:animate-pulse">🚀 Book Expert Session Now</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
-                </Link>
+                <a href="#elite-custom-website-creation" className="premium-button-glow w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm">
+                  Learn More
+                </a>
               </div>
             </div>
+
             
 
           </div>

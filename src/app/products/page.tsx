@@ -9,39 +9,61 @@ import StarBackground from '@/components/3d/StarBackground';
 
 
 function getProducts() {
-  // Fallback to mock data
+  // Fallback to mock data - Updated business model
   return [
     {
+      id: 'ai-business-video-guide-2025',
+      name: 'Learn How We Built This Entire Website With AI',
+      description: 'Watch over my shoulder as I build this exact website from scratch using AI. Get the complete step-by-step video guide plus all prompts, tools, and strategies used.',
+      price: 50.00,
+      image_url: '/images/products/ai-business-video-guide.svg',
+      category: 'video',
+      is_active: true,
+      featured: true,
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'weekly-support-contract',
+      name: 'Weekly Support Contract',
+      description: 'Get ongoing expert support with weekly 60-minute calls, unlimited email support, and priority access to new tools and strategies. Perfect for scaling your AI business.',
+      price: 300.00,
+      recurring: 'weekly',
+      image_url: '/images/products/weekly-support.svg',
+      category: 'support',
+      is_active: true,
+      featured: false,
+      created_at: new Date().toISOString()
+    },
+    {
       id: '2',
-      name: '30x AI Prompts Arsenal 2025',
-      description: 'Build your online business from scratch with 30 proven AI prompts. Simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business - from setup to scaling.',
+      name: 'Full Access To Prompts',
+      description: 'Build your online business from scratch with 30 proven AI prompts. Simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business.',
       price: 10.00,
       image_url: '/images/products/ai-prompts-arsenal.svg',
       category: 'tools',
       is_active: true,
-      featured: true,
+      featured: false,
       created_at: new Date().toISOString()
     },
     {
       id: '1',
-      name: 'AI Tools Mastery Guide 2025',
+      name: 'Full Access To Ebook',
       description: 'Complete step-by-step guide to master 30 essential AI tools for building profitable online businesses from scratch. Everything you need to leverage AI for maximum business success.',
       price: 25.00,
-      originalPrice: 50.00,
       image_url: '/images/products/ai-tools-mastery-guide.svg',
       category: 'courses',
       is_active: true,
-      featured: true,
+      featured: false,
       created_at: new Date().toISOString()
     },
     {
-      id: '3',
-      name: 'AI Business Strategy Session 2025',
-      description: 'Get personalized 1-on-1 expert guidance to build and deploy your complete online business. Learn everything you need for full technical independence and long-term success.',
-      price: 500.00,
-      originalPrice: 3000.00,
-      image_url: '/images/products/ai-business-strategy-session.svg',
-      category: 'services',
+      id: 'custom-websites',
+      name: 'Custom Websites',
+      description: 'Get a completely custom AI-powered website built specifically for your business. From simple landing pages to complex e-commerce solutions, we handle everything.',
+      price: 1000.00,
+      priceRange: 'A$1,000 - A$10,000',
+      image_url: '/images/products/custom-websites.svg',
+      category: 'custom',
       is_active: true,
       featured: false,
       created_at: new Date().toISOString()
@@ -256,23 +278,43 @@ export default function ProductsPage() {
                     
                     {/* Enhanced Value Propositions */}
                     <div className="space-y-4 mb-8">
-                      {product.id === '1' && (
+                      {product.id === 'ai-business-video-guide-2025' && (
                         <>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>📖 30 Lessons:</span> Complete AI tools mastery course</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>🎥 Video Guide:</span> Watch me build this exact website</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">All prompts, tools, and strategies included</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Everything needed for online business success</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Step-by-step implementation report</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Learn the exact process behind this website</span>
+                          </div>
+                        </>
+                      )}
+                      {product.id === 'weekly-support-contract' && (
+                        <>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>📞 Weekly Calls:</span> 60-minute expert sessions</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Unlimited email support between calls</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">🚀 Priority:</span> First access to new tools & strategies</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Perfect for scaling your AI business</span>
                           </div>
                         </>
                       )}
@@ -296,27 +338,43 @@ export default function ProductsPage() {
                           </div>
                         </>
                       )}
-                      {product.id === '3' && (
+                      {product.id === '1' && (
                         <>
-                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                            <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📹 60-minute Google Meet session with screen sharing</span>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>📖 30 Lessons:</span> Complete AI tools mastery course</span>
                           </div>
-                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                            <div className="w-4 h-4 bg-gradient-to-r from-green-400 to-blue-400 rounded-full shadow-lg group-hover:shadow-green-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🚀 Full start-to-finish custom AI site deployment</span>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
                           </div>
-                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                            <div className="w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">📋 Complete implementation report + all steps</span>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Everything needed for online business success</span>
                           </div>
-                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                            <div className="w-4 h-4 bg-gradient-to-r from-orange-400 to-red-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">🤝 Ongoing support as you build your first business</span>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides</span>
                           </div>
-                          <div className="flex items-center space-x-4 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.5s'}}>
-                            <div className="w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full shadow-lg group-hover:shadow-yellow-400/50 group-hover:animate-pulse group-hover:scale-110 transition-all duration-300"></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">💎 83% OFF - A$3,000 value for only A$500</span>
+                        </>
+                      )}
+                      {product.id === 'custom-websites' && (
+                        <>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>🎨 Custom Design:</span> Tailored to your business needs</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">From landing pages to e-commerce solutions</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">🚀 Full Service:</span> We handle everything for you</span>
+                          </div>
+                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">AI-powered and optimized for conversions</span>
                           </div>
                         </>
                       )}
