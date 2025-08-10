@@ -365,7 +365,7 @@ export async function POST(request: NextRequest) {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
+            success_url: `${origin}/my-account?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
             cancel_url: `${origin}/products`,
             metadata: {
               order_id: orderData.id,
@@ -405,7 +405,7 @@ export async function POST(request: NextRequest) {
           payment_method_types: ['card'],
           line_items: lineItems,
           mode: 'payment',
-          success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
+          success_url: `${origin}/my-account?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
           cancel_url: `${origin}/products`,
           metadata: {
             order_id: orderData.id,

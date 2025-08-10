@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Preview - Static Version</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+            --secondary-gradient: linear-gradient(to right, #9333ea, #d946ef);
+            --accent-gradient: linear-gradient(to right, #ef4444, #f97316);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 40px 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #000, #0f0f0f);
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #d1d5db;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .offer-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+        
+        .masterclass-card {
+            background: rgba(30, 30, 30, 0.6);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+        
+        .masterclass-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .masterclass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(236, 72, 153, 0.1));
+            z-index: -1;
+            border-radius: 24px;
+        }
+        
+        .masterclass-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+        
+        .masterclass-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .masterclass-description {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .price-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .current-price {
+            font-size: 3rem;
+            font-weight: 900;
+        }
+        
+        .original-price {
+            font-size: 1.5rem;
+            color: #9ca3af;
+            text-decoration: line-through;
+            margin-left: 15px;
+        }
+        
+        .value-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-bottom: 30px;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            color: #d1d5db;
+        }
+        
+        .feature-icon {
+            color: #4ade80;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: var(--secondary-gradient);
+            color: white;
+            font-weight: 900;
+            font-size: 1.25rem;
+            text-align: center;
+            border-radius: 16px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.5);
+            margin-bottom: 15px;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(168, 85, 247, 0.7);
+        }
+        
+        .disclaimer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            background: linear-gradient(to top, #000, #0f0f0f);
+            margin-top: 60px;
+        }
+        
+        .note {
+            background-color: #1f2937;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .note p {
+            margin: 0;
+            color: #d1d5db;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .masterclass-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .masterclass-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="offer-badge">🎯 INDUSTRY SHATTERING OFFER - BUILD PLATFORMS NOT JUST WEBSITES</div>
+            <h1 class="hero-title">Build Entire Platforms Not Just Websites With AI</h1>
+            <p class="hero-subtitle">Get the complete step-by-step video guide + detailed report showing how to create a fully operational online business from code within a few hours.</p>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="masterclass-card">
+                <div class="masterclass-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                
+                <h2 class="masterclass-title">AI Website Creation Masterclass</h2>
+                
+                <p class="masterclass-description">
+                    Complete behind-the-scenes video showing our exact process, tools, and prompts used to build this entire website with AI. With this knowledge, you can create not just a $10K website but an entire platform on par with Shopify, Wix, or Amazon.
+                </p>
+                
+                <div class="price-container">
+                    <span class="current-price">A$50</span>
+                </div>
+                
+                <div style="text-align: center;">
+                    <span class="value-badge">INDUSTRY SHATTERING VALUE</span>
+                </div>
+                
+                <div class="features-grid">
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            2+ Hour Complete Video Tutorial
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            Detailed Step-by-Step Report
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            All AI Prompts & Tools Used
+                        </li>
+                    </ul>
+                    
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            Screen Recording of Entire Process
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            Comprehensive Implementation Guide
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            Professional Business Templates
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span class="highlight">Platform-Building Techniques</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <a href="#" class="cta-button">BUILD YOUR PLATFORM FOR JUST $50</a>
+                
+                <p class="disclaimer">⚡ Instant access after payment • Secure checkout • Premium support</p>
+            </div>
+            
+            <div class="note">
+                <p><strong>Note:</strong> This is a static preview of the website. The actual site is running at <a href="http://localhost:3003" style="color: #60a5fa;">http://localhost:3003</a> but may not be accessible through the IDE's preview functionality. Please access the site directly in your browser.</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2024 Ventaro AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

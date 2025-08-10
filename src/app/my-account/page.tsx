@@ -64,36 +64,22 @@ export default function MyAccountPage() {
           owned: false // Default to not owned
         },
         {
-          id: '3',
-          name: 'AI Business Strategy Session 2025', 
-          description: '60-minute live coaching session to build your online business.',
-          image_url: '/images/products/ai-business-strategy-session.svg',
-          viewUrl: '/downloads/coaching',
-          owned: false // Default to not owned
-        },
-        {
           id: '4',
-          name: 'AI Business Video Guide 2025',
-          description: 'Comprehensive video guide for building an AI-powered online business.',
+          name: 'AI Web Creation + Support Package',
+          description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI. Includes 60-minute Google Meet/phone call consultation + unlimited email support for 1 month.',
           image_url: '/images/products/ai-business-video-guide.svg',
           viewUrl: '/downloads/video',
-          owned: false // Default to not owned
-        },
-        {
-          id: '5',
-          name: 'Weekly Support Contract 2025',
-          description: 'Ongoing weekly support for your AI business implementation.',
-          image_url: '/images/products/weekly-support-contract.svg',
-          viewUrl: '/downloads/support',
-          owned: false // Default to not owned
+          owned: true, // Always show as owned for all users
+          productId: 'ai-business-video-guide-2025'
         },
         {
           id: '6',
-          name: 'Custom Website Creation 2025',
-          description: 'Custom AI-powered website development for your business.',
-          image_url: '/images/products/custom-website-creation.svg',
-          viewUrl: '/downloads/custom',
-          owned: false // Default to not owned
+          name: 'AI Web Generation Service',
+          description: 'Custom AI-powered website generation with implementation and deployment.',
+          image_url: '/images/products/webgen.svg',
+          viewUrl: '/downloads/webgen',
+          owned: false, // Default to not owned
+          productId: 'webgen'
         }
       ];
       
@@ -122,6 +108,11 @@ export default function MyAccountPage() {
             
             // Mark products as owned based on user's purchases using the new utility function
             const productsWithOwnership = allProducts.map(product => {
+              // AI Web Creation + Support Package is always owned for all users
+              if (product.id === '4' && product.name === 'AI Web Creation + Support Package') {
+                return { ...product, owned: true };
+              }
+              
               const isOwned = userPurchases.some((purchase: Purchase) => {
                 const owns = checkProductOwnershipWithLogging(purchase, product.id, true);
                 return owns;
@@ -135,14 +126,32 @@ export default function MyAccountPage() {
             setLastRefresh(new Date());
           } else {
             console.error('Failed to fetch user purchases');
-            setOwnedProducts(allProducts); // Fallback to all products not owned
+            // Ensure AI Web Creation + Support Package is always owned
+            const fallbackProducts = allProducts.map(product => 
+              product.id === '4' && product.name === 'AI Web Creation + Support Package' 
+                ? { ...product, owned: true } 
+                : product
+            );
+            setOwnedProducts(fallbackProducts);
           }
         } catch (error) {
           console.error('Error fetching user purchases:', error);
-          setOwnedProducts(allProducts); // Fallback to all products not owned
+          // Ensure AI Web Creation + Support Package is always owned
+          const fallbackProducts = allProducts.map(product => 
+            product.id === '4' && product.name === 'AI Web Creation + Support Package' 
+              ? { ...product, owned: true } 
+              : product
+          );
+          setOwnedProducts(fallbackProducts);
         }
       } else {
-        setOwnedProducts(allProducts); // Fallback to all products not owned
+        // Ensure AI Web Creation + Support Package is always owned
+        const fallbackProducts = allProducts.map(product => 
+          product.id === '4' && product.name === 'AI Web Creation + Support Package' 
+            ? { ...product, owned: true } 
+            : product
+        );
+        setOwnedProducts(fallbackProducts);
       }
     } catch (error) {
       console.error('Error fetching products:', error);

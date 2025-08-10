@@ -540,7 +540,7 @@ function GlassmorphismOverlay() {
                   style={{
                     textShadow: '0 0 15px rgba(96, 165, 250, 0.6), 0 0 30px rgba(139, 92, 246, 0.4)',
                     WebkitTextStroke: '0.3px rgba(96, 165, 250, 0.2)'
-                  }}>We built this entire site with AI and we can teach you how to do the same or we can do it for you</span>
+                  }}>We built this entire site with AI and we can teach you how to do the same - no experience required!</span>
           </p>
           
           <div className="space-y-6">

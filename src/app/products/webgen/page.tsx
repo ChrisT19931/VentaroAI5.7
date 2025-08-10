@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function ProductDetailPage() {
+export default function WebGenRedirect() {
   const router = useRouter();
 
   useEffect(() => {

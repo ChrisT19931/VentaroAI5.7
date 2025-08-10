@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function ProductDetailPage() {
+export default function AIBusinessVideoGuideRedirect() {
   const router = useRouter();
 
   useEffect(() => {

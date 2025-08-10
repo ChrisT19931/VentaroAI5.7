@@ -13,25 +13,27 @@ function getProducts() {
   return [
     {
       id: 'ai-business-video-guide-2025',
-      name: 'Learn How We Built This Entire Website With AI',
-      description: 'Watch over my shoulder as I build this exact website from scratch using AI. Get the complete step-by-step video guide plus all prompts, tools, and strategies used.',
+      name: 'AI Web Creation Masterclass',
+      description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI. No experience required! Unlike building on sites such as Shopify/Wix, you get full control of both backend and frontend code & you can change your platform on-the-fly with prompts - giving you unlimited customization power.',
       price: 50.00,
       image_url: '/images/products/ai-business-video-guide.svg',
       category: 'video',
       is_active: true,
       featured: true,
+      productType: 'digital',
       created_at: new Date().toISOString()
     },
     {
       id: 'weekly-support-contract',
-      name: 'Weekly Support Contract',
-      description: 'Get ongoing expert support with weekly 60-minute calls, unlimited email support, and priority access to new tools and strategies. Perfect for scaling your AI business.',
-      price: 300.00,
-      recurring: 'weekly',
+      name: 'Support Package',
+      description: '60-minute Google Meet/phone call consultation + unlimited email support for 1 month. Perfect for scaling your AI business with expert guidance.',
+       price: 300.00,
+       recurring: false,
       image_url: '/images/products/weekly-support.svg',
       category: 'support',
       is_active: true,
       featured: false,
+      productType: 'digital',
       created_at: new Date().toISOString()
     },
     {
@@ -43,6 +45,7 @@ function getProducts() {
       category: 'tools',
       is_active: true,
       featured: false,
+      productType: 'digital',
       created_at: new Date().toISOString()
     },
     {
@@ -54,18 +57,7 @@ function getProducts() {
       category: 'courses',
       is_active: true,
       featured: false,
-      created_at: new Date().toISOString()
-    },
-    {
-      id: 'custom-websites',
-      name: 'Custom Websites',
-      description: 'Get a completely custom AI-powered website built specifically for your business. From simple landing pages to complex e-commerce solutions, we handle everything.',
-      price: 1000.00,
-      priceRange: 'A$1,000 - A$10,000',
-      image_url: '/images/products/custom-websites.svg',
-      category: 'custom',
-      is_active: true,
-      featured: false,
+      productType: 'digital',
       created_at: new Date().toISOString()
     }
   ];
@@ -169,10 +161,162 @@ export default function ProductsPage() {
           }
         `}</style>
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {products.map((product: any, index: number) => {
-              const cardConfigs = [
-                {
+          <div className="max-w-7xl mx-auto">
+            {/* Featured Product - AI Web Creation Masterclass */}
+            {products.filter(p => p.id === 'ai-business-video-guide-2025').map((product: any) => {
+              const config = {
+                bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
+                accent: 'purple',
+                accentHex: '#8b5cf6',
+                shadow: 'purple-500/30',
+                border: 'purple-500/40',
+                glow: 'purple-400/20',
+                icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+                tier: 'PROFESSIONAL',
+                tierColor: 'from-purple-600 to-pink-600',
+                scale: 'hover:scale-105',
+                popular: true
+              };
+              const isPopular = true;
+              
+              return (
+                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${config.shadow} transition-all duration-700 transform hover:-translate-y-6 ${config.scale} overflow-hidden border-2 border-${config.accent}-400/60 premium-glow premium-float ring-4 ring-purple-400/30 shimmer-effect hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95 mb-12`}>
+
+                  
+                  {/* Enhanced Floating Elements */}
+                  <div className="absolute top-6 right-6 z-10">
+                    <div className={`w-16 h-16 bg-gradient-to-br from-${config.accent}-400 to-${config.accent}-600 rounded-full flex items-center justify-center shadow-2xl shadow-${config.accent}-500/50 group-hover:shadow-${config.accent}-400/70 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12`}>
+                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d={config.icon} />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Enhanced Content */}
+                  <div className="relative z-10 p-8">
+                    {/* Enhanced Tier Badge */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r ${config.tierColor} rounded-full text-white text-sm font-bold shadow-lg group-hover:shadow-xl transition-all duration-300 border border-${config.accent}-300/30`}>
+                        <span className="mr-2">⭐</span>
+                        <span>{config.tier}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Title */}
+                    <h3 className="text-3xl font-black text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-300 transition-all duration-500 leading-tight">
+                      {product.name}
+                    </h3>
+                    
+                    {/* Enhanced Description */}
+                    <p className="text-gray-300 mb-8 leading-relaxed group-hover:text-gray-200 transition-colors duration-300 text-lg">
+                      {product.description}
+                    </p>
+                    
+                    {/* Enhanced Features */}
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
+                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Complete Video:</span> Step by step process revealed</span>
+                      </div>
+                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Full Blueprint with all tools & prompts</span>
+                      </div>
+                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">No Experience Required:</span> Perfect for beginners</span>
+                      </div>
+                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
+                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Screen recording of entire process</span>
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Pricing Section */}
+                    <div className="text-center mb-8">
+                      <div className="relative">
+                        <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100`}></div>
+                        
+                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group-hover:border-gray-600/50 transition-all duration-500">
+                          <div className="flex items-center justify-center space-x-4 mb-4">
+                            <div className="text-center">
+                              <div className="flex items-baseline justify-center space-x-2">
+                                <span className="text-5xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent group-hover:from-yellow-300 group-hover:to-white transition-all duration-500">
+                                  ${product.price.toFixed(2)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-sm text-gray-300 font-medium mt-3">One-time payment</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Action Button */}
+                    <div className="space-y-4">
+                      <div className="relative group/button">
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
+                        
+                        <BuyNowButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 text-xl`} />
+                      </div>
+                      
+                      {/* Trust Indicators */}
+                      <div className="flex items-center justify-center space-x-6 mt-6 pt-4 border-t border-gray-700/50">
+                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                          <span className="text-green-400">🔒</span>
+                          <span>Secure Payment</span>
+                        </div>
+
+                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                          <span className="text-purple-400">💎</span>
+                          <span>Premium Quality</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            
+            {/* Other Products Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {products.filter(p => p.id !== 'ai-business-video-guide-2025').map((product: any, index: number) => {
+              // Define card configurations for each product based on their ID
+              let config;
+              
+              if (product.id === 'ai-business-video-guide-2025') {
+                // Purple/Pink gradient for AI Web Creation (matching homepage)
+                config = {
+                  bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
+                  accent: 'purple',
+                  accentHex: '#8b5cf6',
+                  shadow: 'purple-500/30',
+                  border: 'purple-500/40',
+                  glow: 'purple-400/20',
+                  icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+                  tier: 'PROFESSIONAL',
+                  tierColor: 'from-purple-600 to-pink-600',
+                  scale: 'hover:scale-110',
+                  popular: true
+                };
+              } else if (product.id === 'weekly-support-contract') {
+                // Orange/Red gradient for Weekly Support Contract (matching homepage)
+                config = {
+                  bg: 'from-slate-900/90 via-orange-900/30 to-gray-900/90',
+                  accent: 'orange',
+                  accentHex: '#f97316',
+                  shadow: 'orange-500/25',
+                  border: 'orange-500/30',
+                  glow: 'orange-400/15',
+                  icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+                  tier: 'PREMIUM',
+                  tierColor: 'from-orange-500 to-red-600',
+                  scale: 'hover:scale-105',
+                  popular: false
+                };
+              } else if (product.id === '2') {
+                // Emerald/Green gradient for Prompts (matching homepage)
+                config = {
                   bg: 'from-slate-900/90 via-emerald-900/30 to-gray-900/90',
                   accent: 'emerald',
                   accentHex: '#10b981',
@@ -184,35 +328,68 @@ export default function ProductsPage() {
                   tierColor: 'from-emerald-500 to-emerald-600',
                   scale: 'hover:scale-105',
                   popular: false
-                },
-                {
-                  bg: 'from-slate-900/95 via-blue-900/40 to-gray-900/95',
-                  accent: 'blue',
-                  accentHex: '#3b82f6',
-                  shadow: 'blue-500/30',
-                  border: 'blue-500/40',
-                  glow: 'blue-400/20',
+                };
+              } else if (product.id === '1') {
+                // Blue/Purple gradient for Ebook (matching homepage)
+                config = {
+                  bg: 'from-slate-900/95 via-indigo-900/40 to-gray-900/95',
+                  accent: 'indigo',
+                  accentHex: '#6366f1',
+                  shadow: 'indigo-500/30',
+                  border: 'indigo-500/40',
+                  glow: 'indigo-400/20',
                   icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
                   tier: 'PROFESSIONAL',
-                  tierColor: 'from-blue-500 to-blue-600',
-                  scale: 'hover:scale-110',
-                  popular: true
-                },
-                {
-                  bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
-                  accent: 'purple',
-                  accentHex: '#8b5cf6',
-                  shadow: 'purple-500/30',
-                  border: 'purple-500/40',
-                  glow: 'purple-400/20',
-                  icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
-                  tier: 'PREMIUM',
-                  tierColor: 'from-purple-500 to-purple-600',
+                  tierColor: 'from-indigo-500 to-blue-600',
                   scale: 'hover:scale-105',
                   popular: false
-                }
-              ];
-              const config = cardConfigs[index % 3];
+                };
+
+              } else {
+                // Fallback configuration for any other products
+                const cardConfigs = [
+                  {
+                    bg: 'from-slate-900/90 via-emerald-900/30 to-gray-900/90',
+                    accent: 'emerald',
+                    accentHex: '#10b981',
+                    shadow: 'emerald-500/25',
+                    border: 'emerald-500/30',
+                    glow: 'emerald-400/15',
+                    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+                    tier: 'STARTER',
+                    tierColor: 'from-emerald-500 to-emerald-600',
+                    scale: 'hover:scale-105',
+                    popular: false
+                  },
+                  {
+                    bg: 'from-slate-900/95 via-blue-900/40 to-gray-900/95',
+                    accent: 'blue',
+                    accentHex: '#3b82f6',
+                    shadow: 'blue-500/30',
+                    border: 'blue-500/40',
+                    glow: 'blue-400/20',
+                    icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+                    tier: 'PROFESSIONAL',
+                    tierColor: 'from-blue-500 to-blue-600',
+                    scale: 'hover:scale-110',
+                    popular: true
+                  },
+                  {
+                    bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
+                    accent: 'purple',
+                    accentHex: '#8b5cf6',
+                    shadow: 'purple-500/30',
+                    border: 'purple-500/40',
+                    glow: 'purple-400/20',
+                    icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+                    tier: 'PREMIUM',
+                    tierColor: 'from-purple-500 to-purple-600',
+                    scale: 'hover:scale-105',
+                    popular: false
+                  }
+                ];
+                config = cardConfigs[index % 3];
+              }
               const isPopular = config.popular;
               
               return (
@@ -273,7 +450,7 @@ export default function ProductsPage() {
                       {product.name}
                     </h3>
                     <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
-                      <span className={`text-${config.accent}-400 font-bold`}>📚</span> {product.description}
+                      <span className={`text-${config.accent}-400 font-bold`}></span> {product.description}
                     </p>
                     
                     {/* Enhanced Value Propositions */}
@@ -282,7 +459,7 @@ export default function ProductsPage() {
                         <>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>🎥 Video Guide:</span> Watch me build this exact website</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Video Guide:</span> Create an online platform in 2 hours</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -290,11 +467,11 @@ export default function ProductsPage() {
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Step-by-step implementation report</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Value:</span> Step-by-step implementation report</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Learn the exact process behind this website</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Create platforms as good as Shopify/Wix</span>
                           </div>
                         </>
                       )}
@@ -302,15 +479,15 @@ export default function ProductsPage() {
                         <>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>📞 Weekly Calls:</span> 60-minute expert sessions</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Consultation:</span> 60-minute expert session</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Unlimited email support between calls</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Unlimited email support (1 month)</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">🚀 Priority:</span> First access to new tools & strategies</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Priority:</span> First access to new tools & strategies</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -322,7 +499,7 @@ export default function ProductsPage() {
                         <>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>🎯 30 Prompts:</span> Ready-to-use AI business prompts</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>30 Prompts:</span> Ready-to-use AI business prompts</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -330,7 +507,7 @@ export default function ProductsPage() {
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">⚡ Speed:</span> 10x faster content creation</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Speed:</span> 10x faster content creation</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -342,7 +519,7 @@ export default function ProductsPage() {
                         <>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>📖 30 Lessons:</span> Complete AI tools mastery course</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>30 Lessons:</span> Complete AI tools mastery course</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -350,7 +527,7 @@ export default function ProductsPage() {
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">💰 Value:</span> Everything needed for online business success</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Value:</span> Everything needed for online business success</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -358,25 +535,7 @@ export default function ProductsPage() {
                           </div>
                         </>
                       )}
-                      {product.id === 'custom-websites' && (
-                        <>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>🎨 Custom Design:</span> Tailored to your business needs</span>
-                          </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">From landing pages to e-commerce solutions</span>
-                          </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">🚀 Full Service:</span> We handle everything for you</span>
-                          </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">AI-powered and optimized for conversions</span>
-                          </div>
-                        </>
+
                       )}
                     </div>
                     
@@ -391,11 +550,11 @@ export default function ProductsPage() {
                             <div className="text-center">
                               <div className="flex items-baseline justify-center space-x-2">
                                 <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent group-hover:from-yellow-300 group-hover:to-white transition-all duration-500">
-                                  A${product.price.toFixed(2)}
+                                  {product.id === '3' ? '$50.00' : `$${product.price.toFixed(2)}`}
                                 </span>
-                                {product.originalPrice && (
+                                {product.originalPrice && product.id !== '3' && (
                                   <span className="text-lg text-gray-500 line-through font-medium">
-                                    A${product.originalPrice.toFixed(2)}
+                                    $${product.originalPrice.toFixed(2)}
                                   </span>
                                 )}
                               </div>
@@ -403,7 +562,7 @@ export default function ProductsPage() {
                                 <div className="mt-3">
                                   <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500/20 to-pink-500/20 border border-red-400/30 rounded-full backdrop-blur-sm group-hover:from-red-500/30 group-hover:to-pink-500/30 group-hover:border-red-400/50 transition-all duration-300">
                                     <span className="text-red-300 text-sm font-bold group-hover:text-red-200 transition-colors duration-300">
-                                      💥 Save A${(product.originalPrice - product.price).toFixed(2)} (83% OFF)
+                                      💥 Save $${(product.originalPrice - product.price).toFixed(2)} (83% OFF)
                                     </span>
                                   </div>
                                 </div>
@@ -432,13 +591,7 @@ export default function ProductsPage() {
                         {/* Button Glow Effect */}
                         <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
                         
-                        <Link href={`/products/${product.id}`} className={`relative w-full block text-center py-4 px-6 bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 overflow-hidden`}>
-                          <span className="relative z-10 flex items-center justify-center space-x-2">
-                            <span>🚀 Start Learning Now - A${product.price.toFixed(2)}</span>
-                          </span>
-                          <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-400 to-${config.accent}-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300`}></div>
-                          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                        </Link>
+                        <BuyNowButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40`} />
                       </div>
                       
                       {/* Trust Indicators */}
@@ -462,6 +615,7 @@ export default function ProductsPage() {
               );
             })
           }
+          </div>
           </div>
         ) : (
           <div className="text-center py-12">

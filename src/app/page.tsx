@@ -96,13 +96,13 @@ export default function Home() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20 animate-pulse">
-                🎯 #1 RECOMMENDED OFFER - LIMITED TIME
+                🎯 INDUSTRY SHATTERING OFFER - BUILD PLATFORMS NOT JUST WEBSITES
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
-                Learn How We Built This <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Entire Website</span> With AI
+                Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Entire Platforms</span> Not Just Websites With AI
               </h2>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Get the complete step-by-step video guide + detailed report showing exactly how we created this professional website using AI in just 2 hours.
+                Get the complete step-by-step video guide + detailed report showing how to create a fully operational online business from code within a few hours.
               </p>
             </div>
             
@@ -117,11 +117,15 @@ export default function Home() {
                   </div>
                   <h3 className="text-4xl font-black text-white mb-6">AI Website Creation Masterclass</h3>
                   <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                    Complete behind-the-scenes video showing our exact process, tools, and prompts used to build this entire website with AI.
+                    Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI. No experience required! Unlike building on sites such as Shopify/Wix, you get full control of both backend and frontend code & you can change your platform on-the-fly with prompts - giving you unlimited customization power.
                   </p>
-                  <div className="flex items-center justify-center mb-8">
+                  <div className="flex items-center justify-center mb-4">
                     <span className="text-6xl font-black text-white">A$50</span>
-                    <span className="text-2xl text-gray-400 line-through ml-4">A$200</span>
+                  </div>
+                  <div className="mb-8">
+                    <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600 to-orange-600 rounded-full text-sm font-bold text-white border border-red-500/50 shadow-lg shadow-red-500/20 animate-pulse">
+                      INDUSTRY SHATTERING VALUE
+                    </span>
                   </div>
                   <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
                     <ul className="space-y-4 text-gray-300">
@@ -129,7 +133,7 @@ export default function Home() {
                         <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        2+ Hour Complete Video Tutorial
+                        Complete Video Tutorial
                       </li>
                       <li className="flex items-center">
                         <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,7 +145,7 @@ export default function Home() {
                         <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        All AI Prompts & Tools Used
+                        Full Blueprint
                       </li>
                     </ul>
                     <ul className="space-y-4 text-gray-300">
@@ -157,18 +161,14 @@ export default function Home() {
                         </svg>
                         Comprehensive Implementation Guide
                       </li>
-                      <li className="flex items-center">
-                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Professional Business Templates
-                      </li>
+
+
                     </ul>
                   </div>
                   <a href="/checkout?product=ai-business-video-guide-2025" className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl">
-                    GET INSTANT ACCESS NOW
+                    BUILD YOUR PLATFORM FOR JUST $50
                   </a>
-                  <p className="text-sm text-gray-400 mt-4">⚡ Instant access after payment • Secure checkout • Premium support</p>
+                  <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
                 </div>
               </div>
             </div>
@@ -312,23 +312,23 @@ export default function Home() {
               </div>
               
               <div className="p-6">
-                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">Weekly Support Contract</h3>
-                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">60 minutes phone/Google Meet + unlimited email support every week.</p>
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">Support Package</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">60-minute Google Meet/phone call consultation + unlimited email support for 1 month.</p>
                 
                 <div className="space-y-3 mb-4">
                   <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                     <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Dedicated weekly support</span>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">60-minute consultation call</span>
                   </div>
                   <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                     <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Unlimited email access</span>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Unlimited email support (1 month)</span>
                   </div>
                 </div>
                 
                 <div className="text-center mb-4">
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A$300</div>
-                  <div className="text-xs text-gray-300">per week</div>
+                  <div className="text-xs text-gray-300">one-time payment</div>
                 </div>
                 <a href="/checkout?product=weekly-support-contract-2025" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30">
                   Get Support
@@ -868,47 +868,17 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-indigo-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-indigo-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-indigo-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Beat Content Saturation</h3>
-              <p className="text-gray-300 leading-relaxed">
-                AI-generated content is flooding the web. By 2026, standing out will be 10x harder than it is now. This is the last easy window.
-              </p>
-            </div>
+            {/* Beat Content Saturation section removed */}
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-amber-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-amber-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Brand Over Tech Advantage</h3>
-              <p className="text-gray-300 leading-relaxed">
-                As AI tools become commoditized, your brand and audience relationships become the real moat. Build these assets now.
-              </p>
-            </div>
+            {/* Brand Over Tech Advantage section removed */}
 
-            {/* Row 4 */}
+            {/* Row 4 - Intentionally left empty */}
 
 
             {/* Row 5 */}
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-pink-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Rare Value Proposition</h3>
-              <p className="text-gray-300 leading-relaxed">
-                $50 for what you're getting is a rare, defensible business model. Most competitors charge 10x more for less comprehensive resources.
-              </p>
-            </div>
+            {/* Rare Value Proposition section removed */}
 
-            {/* Row 6 */}
+            {/* Row 6 - Intentionally left empty */}
 
           </div>
         </div>
