@@ -535,8 +535,6 @@ export default function ProductsPage() {
                           </div>
                         </>
                       )}
-
-                      )}
                     </div>
                     
                     {/* Enhanced Pricing Section */}
