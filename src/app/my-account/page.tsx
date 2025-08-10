@@ -63,23 +63,23 @@ export default function MyAccountPage() {
           viewUrl: '/downloads/prompts',
           owned: false // Default to not owned
         },
-        {
+        {  
           id: '4',
-          name: 'AI Business Video Guide 2025',
+          name: 'AI Web Creation Masterclass',
           description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI.',
-          image_url: '/images/products/ai-business-video-guide.svg',
-          viewUrl: '/downloads/video',
+          image_url: '/images/products/ai-web-creation-masterclass.svg',
+          viewUrl: '/products/ai-web-creation-masterclass',
           owned: true, // Always show as owned for all users
-          productId: 'ai-business-video-guide-2025'
+          productId: 'ai-web-creation-masterclass'
         },
         {
           id: '5',
           name: 'Support Package',
           description: '60-minute Google Meet/phone call consultation + unlimited email support for 1 month.',
           image_url: '/images/products/support-package.svg',
-          viewUrl: '/downloads/support',
+          viewUrl: '/products/support-package',
           owned: true, // Always show as owned for all users
-          productId: 'weekly-support-contract'
+          productId: 'support-package'
         },
 
       ];
