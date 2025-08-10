@@ -8,6 +8,7 @@ import Footer from '@/components/Footer'
 import { CartProvider } from '@/context/CartContext'
 import { ToastProvider } from '@/context/ToastContext'
 import { SimpleAuthProvider } from '@/contexts/SimpleAuthContext'
+import PerformanceOptimizer from '@/components/PerformanceOptimizer'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -71,6 +72,7 @@ export default function RootLayout({
         <SimpleAuthProvider>
           <CartProvider>
             <ToastProvider>
+              <PerformanceOptimizer />
               <Navbar />
               <main>
                 {children}

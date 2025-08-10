@@ -160,6 +160,50 @@ const fallbackProducts = {
       followUp: 'Email support included',
       note: 'This package provides complete knowledge transfer for full business ownership and independence.'
     }
+  },
+  '4': {
+    id: '4',
+    name: 'AI Business Launch Kit',
+    description: 'Build your entire business in hours — not months. Own 100% of your tech stack with no middlemen or subscriptions. Change anything instantly with a simple prompt.',
+    price: 50.00,
+    image_url: '/images/products/ai-business-video-guide.svg',
+    category: 'video',
+    is_active: true,
+    featured: true,
+    product_type: 'digital',
+    created_at: new Date().toISOString(),
+    benefits: [
+      'Build your entire business in hours — not months',
+      'Own 100% of your tech stack. No middlemen, no subscriptions',
+      'Change anything instantly with a simple prompt',
+      'Learn a skill you can repeat for other niches or high-paying clients',
+      'Full 60-minute training + step-by-step PDF guide',
+      'Save thousands compared to agency pricing'
+    ],
+    details: {
+      description: 'For years, agencies and influencers have told you "AI businesses don\'t work." It\'s not because they\'re right — it\'s because they profit when you believe them. If you think it\'s too hard, you\'ll pay them $5K–$20K for something you could have built in hours. You\'ll get stuck renting a Shopify store forever. Paying fees. Never really owning your business. I\'m breaking that system.',
+      features: [
+        'Complete 60-minute video training',
+        'Step-by-step PDF implementation guide',
+        'Build your entire business in hours, not months',
+        'Own 100% of your tech stack with no middlemen',
+        'Instant modifications with simple prompts',
+        'Repeatable process for multiple niches or clients'
+      ],
+      includes: [
+        '60-minute comprehensive video training',
+        'Step-by-step PDF implementation guide',
+        'Complete business ownership strategy',
+        'Tech stack independence blueprint',
+        'Prompt templates for business modifications'
+      ],
+      duration: '60 minutes',
+      format: 'Video + PDF Guide',
+      language: 'English',
+      level: 'Beginner to Intermediate',
+      downloadSize: '250 MB',
+      note: 'Agencies charge thousands for this exact process. Get the full training for the cost of dinner.'
+    }
   }
 };
 
@@ -987,7 +1031,7 @@ export default function ProductPage() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                       <div className="bg-blue-900/30 p-4 rounded-lg border border-blue-400/20">
-                        <h5 className="font-semibold text-blue-300 mb-2">🚀 Complete AI Site Creation:</h5>
+                        <h5 className="font-semibold text-blue-300 mb-2">✨ Complete AI Site Creation:</h5>
                         <ul className="text-sm text-gray-300 space-y-1">
                           <li>• Live custom website creation process</li>
                           <li>• AI-powered features integration</li>

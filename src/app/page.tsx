@@ -155,20 +155,20 @@ export default function Home() {
                         <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        Instant Download Access
+                        Comprehensive Implementation Guide
                       </li>
                       <li className="flex items-center">
                         <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
-                        30-Day Money Back Guarantee
+                        Professional Business Templates
                       </li>
                     </ul>
                   </div>
                   <a href="/checkout?product=ai-business-video-guide-2025" className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl">
-                    🚀 GET INSTANT ACCESS NOW
+                    GET INSTANT ACCESS NOW
                   </a>
-                  <p className="text-sm text-gray-400 mt-4">⚡ Instant access after payment • Secure checkout • 30-day guarantee</p>
+                  <p className="text-sm text-gray-400 mt-4">⚡ Instant access after payment • Secure checkout • Premium support</p>
                 </div>
               </div>
             </div>
@@ -282,101 +282,220 @@ export default function Home() {
             `}</style>
             
             {/* #2 Weekly Support Contract */}
-            <div className="group relative bg-gradient-to-br from-orange-900/80 to-red-900/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-orange-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-orange-700/30 shimmer-effect">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-orange-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-orange-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-orange-500/40 card-glow shimmer-effect hover:border-orange-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+              {/* Enhanced glow effects */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-orange-600/30 to-red-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
+              
+              {/* Floating Particles Effect */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0s'}}></div>
+                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-orange-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1s'}}></div>
+                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-red-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2s'}}></div>
+              </div>
+              
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
-                  #2 OFFER
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
+                  PROFESSIONAL
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
-              <div className="h-32 bg-gradient-to-br from-orange-900 to-red-900 relative overflow-hidden flex items-center justify-center">
-                <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 transition-all duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 group-hover:text-orange-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-xl group-hover:bg-orange-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
+              
               <div className="p-6">
-                <h3 className="text-xl font-black mb-3 text-white">Weekly Support Contract</h3>
-                <p className="text-gray-200 mb-4 text-sm leading-relaxed">60 minutes phone/Google Meet + unlimited email support every week.</p>
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">Weekly Support Contract</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">60 minutes phone/Google Meet + unlimited email support every week.</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Dedicated weekly support</span>
+                  </div>
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Unlimited email access</span>
+                  </div>
+                </div>
+                
                 <div className="text-center mb-4">
-                  <div className="text-3xl font-black text-white">A$300</div>
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A$300</div>
                   <div className="text-xs text-gray-300">per week</div>
                 </div>
-                <a href="/checkout?product=weekly-support-contract-2025" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm">
+                <a href="/checkout?product=weekly-support-contract-2025" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30">
                   Get Support
                 </a>
               </div>
             </div>
 
             {/* $10 Prompts - Credibility Offer */}
-            <div className="group relative bg-gradient-to-br from-slate-900/80 to-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-slate-700/30 shimmer-effect">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-emerald-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-emerald-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-emerald-500/40 card-glow shimmer-effect hover:border-emerald-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+              {/* Enhanced glow effects */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-transparent to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-600/30 to-green-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
+              
+              {/* Floating Particles Effect */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.3s'}}></div>
+                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-emerald-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.3s'}}></div>
+                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-green-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.3s'}}></div>
+              </div>
+              
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                  CREDIBILITY
+                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
+                  STARTER
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
-              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                <svg className="w-16 h-16 text-emerald-400 opacity-60 group-hover:opacity-100 transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-emerald-400 opacity-60 group-hover:opacity-100 group-hover:text-emerald-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-xl group-hover:bg-emerald-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
+              
               <div className="p-6">
-                <h3 className="text-xl font-black mb-3 text-white">Full Access To Prompts</h3>
-                <p className="text-gray-200 mb-4 text-sm leading-relaxed">30 proven AI prompts for building online businesses.</p>
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">Full Access To Prompts</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">30 proven AI prompts for building online businesses.</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">DIY website building</span>
+                  </div>
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Learn to build yourself</span>
+                  </div>
+                </div>
+                
                 <div className="text-center mb-4">
-                  <div className="text-3xl font-black text-white">A$10</div>
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-green-400 transition-all duration-500">A$10</div>
                   <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <Link href="/products/2" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-sm">
+                <Link href="/products/2" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-emerald-500/30">
                   Get Prompts
                 </Link>
               </div>
             </div>
 
             {/* $25 Ebook - Credibility Offer */}
-            <div className="group relative bg-gradient-to-br from-slate-900/90 to-gray-900/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-slate-600/40 shimmer-effect">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-blue-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-blue-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-blue-500/40 card-glow shimmer-effect hover:border-blue-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+              {/* Enhanced glow effects */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600/30 to-purple-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
+              
+              {/* Floating Particles Effect */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.7s'}}></div>
+                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.7s'}}></div>
+                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.7s'}}></div>
+              </div>
+              
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                  CREDIBILITY
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
+                  STARTER
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
-              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center">
-                <svg className="w-16 h-16 text-blue-400 opacity-60 group-hover:opacity-100 transition-all duration-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
-                </svg>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:text-blue-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl group-hover:bg-blue-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
+              
               <div className="p-6">
-                <h3 className="text-xl font-black mb-3 text-white">Full Access To Ebook</h3>
-                <p className="text-gray-200 mb-4 text-sm leading-relaxed">Complete AI tools mastery guide for online business.</p>
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">Full Access To Ebook</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">Complete AI tools mastery guide for online business.</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                    <div className="w-2 h-2 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">DIY business building</span>
+                  </div>
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                    <div className="w-2 h-2 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Learn AI tools yourself</span>
+                  </div>
+                </div>
+                
                 <div className="text-center mb-4">
-                  <div className="text-3xl font-black text-white">A$25</div>
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-500">A$25</div>
                   <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <Link href="/products/1" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm">
+                <Link href="/products/1" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/30">
                   Get Ebook
                 </Link>
               </div>
             </div>
 
             {/* Custom Websites - Premium Offer */}
-            <div className="group relative bg-gradient-to-br from-purple-900/90 to-pink-900/90 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border-2 border-purple-600/40 shimmer-effect premium-glow">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-purple-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-purple-500/40 card-glow shimmer-effect premium-glow hover:border-purple-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+              {/* Enhanced glow effects */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-transparent to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600/30 to-pink-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
+              
+              {/* Floating Particles Effect */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.9s'}}></div>
+                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.9s'}}></div>
+                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-pink-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.9s'}}></div>
+              </div>
+              
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg premium-float">
+                <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110 premium-float" style={{animationDuration: '2s'}}>
                   PREMIUM
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
-              <div className="h-32 bg-gradient-to-br from-purple-900 to-pink-900 relative overflow-hidden flex items-center justify-center">
-                <svg className="w-16 h-16 text-purple-400 opacity-60 group-hover:opacity-100 transition-all duration-500 premium-icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
-                </svg>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:text-purple-300 transition-all duration-500 group-hover:drop-shadow-lg premium-icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-xl group-hover:bg-purple-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
+              
               <div className="p-6">
-                <h3 className="text-xl font-black mb-3 text-white">Custom Websites</h3>
-                <p className="text-gray-200 mb-4 text-sm leading-relaxed">Professional custom websites and online platforms.</p>
-                <div className="text-center mb-4">
-                  <div className="text-2xl font-black text-white">A$1,000</div>
-                  <div className="text-xs text-gray-300">to A$10,000</div>
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">Custom Websites</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">We build professional custom websites and online platforms for you. Higher pricing reflects our time, expertise, and effort.</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                    <div className="w-2 h-2 bg-purple-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Professional development</span>
+                  </div>
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                    <div className="w-2 h-2 bg-purple-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">We build it for you</span>
+                  </div>
                 </div>
-                <a href="#elite-custom-website-creation" className="premium-button-glow w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm">
+                
+                <div className="text-center mb-4">
+                  <div className="text-2xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-500">A$1,000</div>
+                  <div className="text-xs text-gray-300">to A$10,000 based on complexity</div>
+                </div>
+                <a href="#elite-custom-website-creation" className="premium-button-glow w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-purple-500/30">
                   Learn More
                 </a>
               </div>
@@ -429,9 +548,9 @@ export default function Home() {
             <div className="glass-panel rounded-3xl p-8 border border-purple-500/30 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
               {/* Header Content */}
               <div className="text-center mb-8">
-                <h3 className="text-3xl font-bold text-white mb-4 glow-text">Ready to Dominate Your Market?</h3>
+                <h3 className="text-3xl font-bold text-white mb-4 glow-text">We Build Your Custom Website</h3>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  Get a FREE QUOTE and discover how we can transform your business with a high-converting custom website that drives real results.
+                  Get a FREE QUOTE for our professional website development service. We build it for you, saving you time and ensuring professional quality. Pricing reflects our expertise and effort invested in your project.
                 </p>
                 
                 <div className="flex flex-wrap justify-center gap-6 mb-8">
@@ -672,16 +791,28 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Row 1 */}
+            {/* Row 1 - DIY and Custom Solutions First */}
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
               <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Instant Digital Delivery</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">DIY Business Building</h3>
               <p className="text-gray-300 leading-relaxed">
-                Get immediate access to your purchased products with our seamless, lightning-fast delivery system.
+                Our affordable $50 resources give you everything you need to build your own AI-powered business from scratch.
+              </p>
+            </div>
+            
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-purple-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Custom Website Creation</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Let us build your professional custom website with our expert team, from simple landing pages to complex e-commerce solutions.
               </p>
             </div>
             
@@ -696,9 +827,22 @@ export default function Home() {
                 All our products feature high-quality, professional content created with the latest AI technologies.
               </p>
             </div>
-            
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-purple-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/30">
+
+            {/* Row 2 - Digital Delivery Benefits */}
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-orange-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-orange-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Instant Digital Delivery</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Get immediate access to your purchased products with our seamless, lightning-fast delivery system.
+              </p>
+            </div>
+
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-cyan-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
@@ -709,9 +853,8 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Row 2 */}
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-orange-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-orange-500/30">
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-emerald-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
@@ -722,8 +865,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-cyan-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/30">
+            {/* Row 3 - Strategic Advantages */}
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-rose-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-rose-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-rose-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -734,21 +878,8 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-emerald-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Lower Costs Now</h3>
-              <p className="text-gray-300 leading-relaxed">
-                As demand for AI tools grows, pricing for APIs, ad platforms, and AI infrastructure will rise. Getting in now means cheaper growth.
-              </p>
-            </div>
-
-            {/* Row 3 */}
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-rose-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-rose-500 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-rose-500/30">
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-indigo-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-indigo-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-indigo-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -759,20 +890,21 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-indigo-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-indigo-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-indigo-500/30">
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-amber-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-amber-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white glow-text">Brand Over Tech Advantage</h3>
               <p className="text-gray-300 leading-relaxed">
-                Right now, results still impress. By 2026, everyone will have similar AI tools and only brands with early traction will matter.
+                As AI tools become commoditized, your brand and audience relationships become the real moat. Build these assets now.
               </p>
             </div>
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-amber-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-amber-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-amber-500/30">
+            {/* Row 4 */}
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-teal-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-teal-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -781,6 +913,32 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-4 text-white glow-text">Novelty Window Closing</h3>
               <p className="text-gray-300 leading-relaxed">
                 Audiences are still wowed by AI-powered sites. In a few years, it'll be the norm. The novelty window is closing fast.
+              </p>
+            </div>
+
+            {/* Row 5 */}
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-pink-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Rare Value Proposition</h3>
+              <p className="text-gray-300 leading-relaxed">
+                $50 for what you're getting is a rare, defensible business model. Most competitors charge 10x more for less comprehensive resources.
+              </p>
+            </div>
+
+            {/* Row 6 */}
+            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Anti-Gatekeeping Approach</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Pessimism works as gatekeeping for influencers and agencies. We're breaking down barriers by making powerful AI tools accessible to everyone.
               </p>
             </div>
           </div>

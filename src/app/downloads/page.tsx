@@ -118,6 +118,24 @@ export default function DownloadsPage() {
       icon: '🎯',
       color: 'from-purple-500 to-pink-500',
       viewUrl: '/downloads/coaching'
+    },
+    {
+      id: '4',
+      name: 'AI Business Launch Kit',
+      description: 'Build your entire business in hours — not months with this 60-minute video training.',
+      fileName: null, // Video doesn't have a direct download
+      icon: '🎬',
+      color: 'from-purple-500 to-blue-500',
+      viewUrl: '/downloads/video'
+    },
+    {
+      id: '6',
+      name: 'Custom Website Creation',
+      description: 'Professional custom website development service tailored to your business needs.',
+      fileName: null, // Custom site doesn't have a direct download
+      icon: '💻',
+      color: 'from-indigo-500 to-purple-500',
+      viewUrl: '/downloads/custom'
     }
   ];
 
