@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { supabase } from '@/lib/supabase';
+import { Purchase } from '@/types/purchase';
 import { getStripeInstance } from '@/lib/stripe';
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -106,7 +107,7 @@ async function handleCheckoutSessionCompleted(session: any) {
     if (!userId) {
       // Step 1: Try to find existing user by payment email
       const { data: users } = await supabase.auth.admin.listUsers();
-      let existingUser = users?.users?.find(user => user.email === customerEmail);
+      let existingUser = users?.users?.find((user: { email: string }) => user.email === customerEmail);
       
       if (existingUser) {
         userId = existingUser.id;
@@ -265,7 +266,7 @@ async function linkExistingPurchasesToUser(userId: string, registeredEmail: stri
         console.error('Error linking existing purchases:', updateError);
       } else {
         console.log(`✅ Successfully linked ${unlinkPurchases.length} existing purchase(s) to user ${userId}`);
-        unlinkPurchases.forEach(purchase => {
+        unlinkPurchases.forEach((purchase: Purchase) => {
           console.log(`   - ${purchase.product_name} (${purchase.customer_email})`);
         });
       }

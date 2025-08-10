@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { sendEmail } from '@/lib/sendgrid';
+import { Booking } from '@/types/booking';
 
 export async function POST(request: NextRequest) {
   try {
@@ -234,7 +235,7 @@ export async function GET(request: NextRequest) {
     ];
 
     // Filter out booked slots
-    const bookedTimes = (error || !bookings) ? [] : bookings.map(booking => booking.scheduled_time);
+    const bookedTimes = (error || !bookings) ? [] : bookings.map((booking: Booking) => booking.scheduled_time);
     const freeSlots = availableSlots.filter(slot => !bookedTimes.includes(slot));
 
     return NextResponse.json({

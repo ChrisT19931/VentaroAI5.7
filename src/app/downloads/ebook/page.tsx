@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '@/lib/supabase';
 // Import the component directly as a fallback
 import EbookContentStatic from '../../../components/downloads/EbookContent';
 

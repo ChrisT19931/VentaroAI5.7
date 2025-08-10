@@ -1,7 +1,7 @@
 'use client';
 
 import { supabase } from '@/lib/supabase';
-import { User } from '@supabase/supabase-js';
+import { User, Session } from '@supabase/supabase-js';
 
 // Supabase authentication helper with real authentication
 export class SimpleAuth {
@@ -44,7 +44,7 @@ export class SimpleAuth {
       }
       
       // Listen for auth changes
-      supabase.auth.onAuthStateChange((event, session) => {
+      supabase.auth.onAuthStateChange((event: string, session: Session | null) => {
         console.log('SimpleAuth: Auth state changed:', event, session ? `User: ${session.user?.email}` : 'No session');
         if (session?.user) {
           this.setUser(session.user);
