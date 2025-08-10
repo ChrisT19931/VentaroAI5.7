@@ -853,17 +853,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-emerald-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">AI Arbitrage Peak Window</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Right now, AI gives unfair advantages in lead gen, content, marketing, and automation. By 2026, everyone will be using the same tools and margins shrink.
-              </p>
-            </div>
+
 
             {/* Row 3 - Strategic Advantages */}
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-rose-500/30">
@@ -903,18 +893,7 @@ export default function Home() {
             </div>
 
             {/* Row 4 */}
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-teal-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-teal-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Novelty Window Closing</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Audiences are still wowed by AI-powered sites. In a few years, it'll be the norm. The novelty window is closing fast.
-              </p>
-            </div>
+
 
             {/* Row 5 */}
             <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-pink-500/30">
@@ -930,17 +909,7 @@ export default function Home() {
             </div>
 
             {/* Row 6 */}
-            <div className="group text-center p-8 glass-panel rounded-3xl shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 hover:scale-102 border border-blue-500/30">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white glow-text">Anti-Gatekeeping Approach</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Pessimism works as gatekeeping for influencers and agencies. We're breaking down barriers by making powerful AI tools accessible to everyone.
-              </p>
-            </div>
+
           </div>
         </div>
       </section>

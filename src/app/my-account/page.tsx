@@ -70,6 +70,30 @@ export default function MyAccountPage() {
           image_url: '/images/products/ai-business-strategy-session.svg',
           viewUrl: '/downloads/coaching',
           owned: false // Default to not owned
+        },
+        {
+          id: '4',
+          name: 'AI Business Video Guide 2025',
+          description: 'Comprehensive video guide for building an AI-powered online business.',
+          image_url: '/images/products/ai-business-video-guide.svg',
+          viewUrl: '/downloads/video',
+          owned: false // Default to not owned
+        },
+        {
+          id: '5',
+          name: 'Weekly Support Contract 2025',
+          description: 'Ongoing weekly support for your AI business implementation.',
+          image_url: '/images/products/weekly-support-contract.svg',
+          viewUrl: '/downloads/support',
+          owned: false // Default to not owned
+        },
+        {
+          id: '6',
+          name: 'Custom Website Creation 2025',
+          description: 'Custom AI-powered website development for your business.',
+          image_url: '/images/products/custom-website-creation.svg',
+          viewUrl: '/downloads/custom',
+          owned: false // Default to not owned
         }
       ];
       

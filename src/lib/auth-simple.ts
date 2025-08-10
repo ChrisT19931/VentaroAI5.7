@@ -93,7 +93,13 @@ export class SimpleAuth {
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
-        password
+        password,
+        options: {
+          emailConfirm: false, // Explicitly disable email confirmation
+          data: {
+            email_confirm: false // Disable email verification in user metadata
+          }
+        }
       });
       
       if (error) {
@@ -101,7 +107,8 @@ export class SimpleAuth {
       }
       
       if (data.user) {
-        // Note: User might need to confirm email before being fully authenticated
+        // User is fully authenticated without email confirmation
+        this.setUser(data.user);
         return { success: true };
       }
       

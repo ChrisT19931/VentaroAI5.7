@@ -47,7 +47,8 @@ export default function SignupPage() {
           emailRedirectTo: `${window.location.origin}/auth/callback?type=signup`,
           data: {
             email_confirm: false // Disable email verification
-          }
+          },
+          emailConfirm: false // Explicitly disable email confirmation
         },
       });
       
