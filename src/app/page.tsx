@@ -175,7 +175,7 @@ export default function Home() {
                     }}
                     className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl"
                   >
-                    BUILD YOUR PLATFORM FOR JUST $50
+                    Learn Now for Just $50
                   </DirectCheckoutButton>
                   <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
                 </div>
