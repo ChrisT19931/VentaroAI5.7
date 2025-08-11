@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { simpleAuth } from '@/lib/auth-simple';
 import { toast } from 'react-hot-toast';
 import { validatePassword } from '@/utils/validation';
 // import { sendWelcomeEmail } from '@/lib/sendgrid';
@@ -38,25 +39,16 @@ export default function SignupPage() {
     
     try {
       setIsLoading(true);
-      const supabase = createClient();
       
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback?type=signup`,
-          data: {
-            email_confirm: false // Disable email verification
-          }
-        },
-      });
+      // Use SimpleAuth for automatic login after signup
+      const result = await simpleAuth.signUp(email, password);
       
-      if (error) {
-        throw error;
+      if (!result.success) {
+        throw new Error(result.error || 'Signup failed');
       }
       
-      // If signup is successful, send welcome email and redirect to login or dashboard
-      toast.success('Account created successfully! You can now make purchases.');
+      // User is now automatically logged in
+      toast.success('Account created successfully! You are now logged in.');
       
       // Send welcome email
       // try {
