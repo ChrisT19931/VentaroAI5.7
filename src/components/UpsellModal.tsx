@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import Image from 'next/image';
 import Modal from '@/components/ui/Modal';
 import { useCart } from '@/context/CartContext';
@@ -21,7 +21,7 @@ interface UpsellModalProps {
   };
 }
 
-export default function UpsellModal({
+function UpsellModal({
   isOpen,
   onClose,
   triggerProductId,
@@ -32,7 +32,7 @@ export default function UpsellModal({
   const [isAdding, setIsAdding] = React.useState(false);
   const alreadyInCart = isInCart(upsellProductId);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     if (alreadyInCart) {
       onClose();
       return;
@@ -52,7 +52,7 @@ export default function UpsellModal({
       setIsAdding(false);
       onClose();
     }, 800);
-  };
+  }, [addItem, alreadyInCart, onClose, upsellProduct, upsellProductId]);
 
   return (
     <Modal
@@ -153,3 +153,14 @@ export default function UpsellModal({
     </Modal>
   );
 }
+
+export default memo(UpsellModal, (prevProps, nextProps) => {
+  // Only re-render if these props change
+  return (
+    prevProps.isOpen === nextProps.isOpen &&
+    prevProps.triggerProductId === nextProps.triggerProductId &&
+    prevProps.upsellProductId === nextProps.upsellProductId &&
+    prevProps.upsellProduct.id === nextProps.upsellProduct.id &&
+    prevProps.upsellProduct.price === nextProps.upsellProduct.price
+  );
+});

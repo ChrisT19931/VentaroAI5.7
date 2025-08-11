@@ -1,4 +1,5 @@
 import ProductCard from '@/components/ProductCard';
+import { memo, useMemo } from 'react';
 
 type Product = {
   id: string;
@@ -18,7 +19,7 @@ type ProductGridProps = {
   columns?: 2 | 3 | 4;
 };
 
-export default function ProductGrid({
+function ProductGrid({
   products,
   showAddToCart = true,
   emptyMessage = 'No products found',
@@ -33,7 +34,7 @@ export default function ProductGrid({
     );
   }
 
-  const getGridColumns = () => {
+  const gridColumns = useMemo(() => {
     switch (columns) {
       case 2:
         return 'grid-cols-1 sm:grid-cols-2';
@@ -44,10 +45,10 @@ export default function ProductGrid({
       default:
         return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
     }
-  };
+  }, [columns]);
 
   return (
-    <div className={`grid ${getGridColumns()} gap-6 ${className}`}>
+    <div className={`grid ${gridColumns} gap-6 ${className}`}>
       {products.map((product) => (
         <ProductCard
           key={product.id}
@@ -64,3 +65,19 @@ export default function ProductGrid({
     </div>
   );
 }
+
+export default memo(ProductGrid, (prevProps, nextProps) => {
+  // Only re-render if these props change
+  if (prevProps.products.length !== nextProps.products.length) return false;
+  if (prevProps.showAddToCart !== nextProps.showAddToCart) return false;
+  if (prevProps.columns !== nextProps.columns) return false;
+  if (prevProps.className !== nextProps.className) return false;
+  
+  // Check if products have changed
+  for (let i = 0; i < prevProps.products.length; i++) {
+    if (prevProps.products[i].id !== nextProps.products[i].id) return false;
+    if (prevProps.products[i].price !== nextProps.products[i].price) return false;
+  }
+  
+  return true;
+});

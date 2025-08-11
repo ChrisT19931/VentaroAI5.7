@@ -4,8 +4,7 @@ export const PRODUCTS = {
   video: 'ai-web-creation-masterclass',
   support: 'support-package',
   prompts: 'ai-prompts-arsenal-2025',
-  ebook: 'ai-tools-mastery-guide-2025',
-  custom: 'webgen'
+  ebook: 'ai-tools-mastery-guide-2025'
 };
 
 // Legacy product mappings for backward compatibility
@@ -17,7 +16,7 @@ export const LEGACY_PRODUCTS = {
   'weekly-support-contract-2025': 'support',
   'weekly-support-contract': 'support',
   'support-package': 'support',
-  'custom-website-creation-2025': 'custom'
+
 };
 
 // Maps database product_id values to frontend product IDs
@@ -25,8 +24,7 @@ export const PRODUCT_MAPPINGS = {
   'ebook': '1',
   'prompts': '2', 
   'video': '3',
-  'support': '5',
-  'custom': 'webgen'
+  'support': '5'
 } as const;
 
 // Maps legacy product names to frontend product IDs
@@ -39,8 +37,7 @@ export const LEGACY_PRODUCT_MAPPINGS = {
   'weekly-support-contract-2025': '5',
   'weekly-support-contract': '5',
   'support-package': '5',
-  'custom-website-creation-2025': 'webgen',
-  'webgen': 'webgen'
+
 } as const;
 
 // Type definitions for the mappings

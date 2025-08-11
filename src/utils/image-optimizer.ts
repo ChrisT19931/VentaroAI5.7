@@ -27,6 +27,13 @@ export function optimizePageImages() {
       img.decoding = 'async';
     }
     
+    // Set size attributes if natural dimensions are available to prevent layout shifts
+    if (img.naturalWidth && img.naturalHeight && 
+        !img.hasAttribute('width') && !img.hasAttribute('height')) {
+      img.width = img.naturalWidth;
+      img.height = img.naturalHeight;
+    }
+    
     // Add error handling
     if (!img.hasAttribute('onerror')) {
       img.onerror = () => {
@@ -44,6 +51,9 @@ export function optimizePageImages() {
   
   // Process all images on the page
   document.querySelectorAll('img').forEach(applyImageOptimizations);
+  
+  // Optimize background images
+  optimizeBackgroundImages();
   
   // Set up observer for dynamically added images
   const observer = new MutationObserver((mutations) => {
@@ -70,9 +80,13 @@ export function optimizePageImages() {
     subtree: true
   });
   
+  // Set up a periodic check for new background images
+  const bgInterval = setInterval(optimizeBackgroundImages, 3000);
+  
   return () => {
-    // Cleanup function to disconnect observer
+    // Cleanup function to disconnect observer and clear interval
     observer.disconnect();
+    clearInterval(bgInterval);
   };
 }
 
@@ -84,10 +98,57 @@ export function preloadCriticalImages(imagePaths: string[]) {
   if (typeof window === 'undefined') return;
   
   imagePaths.forEach(path => {
+    // Skip if already preloaded
+    if (document.querySelector(`link[rel="preload"][href="${path}"]`)) return;
+    
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
     link.href = path;
+    link.fetchPriority = 'high'; // Add high priority for critical images
     document.head.appendChild(link);
+  });
+}
+
+/**
+ * Optimizes background images by converting them to actual img elements when possible
+ * This helps with lazy loading and better resource management
+ */
+export function optimizeBackgroundImages() {
+  if (typeof window === 'undefined') return;
+  
+  // Find elements with background images
+  const elements = document.querySelectorAll('[data-bg-image], [style*="background-image"]');
+  
+  elements.forEach(el => {
+    // Skip already processed elements
+    if (el.hasAttribute('data-bg-optimized')) return;
+    
+    let bgUrl = el.getAttribute('data-bg-image');
+    
+    // Extract URL from inline style if not using data attribute
+    if (!bgUrl) {
+      const style = window.getComputedStyle(el);
+      const bgImage = style.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        // Extract URL from url('...') format
+        const match = bgImage.match(/url\(['"]?([^'")]+)['"]?\)/);
+        if (match && match[1]) {
+          bgUrl = match[1];
+        }
+      }
+    }
+    
+    if (bgUrl) {
+      // Mark as processed
+      el.setAttribute('data-bg-optimized', 'true');
+      
+      // For elements where we can't replace the background, at least preload the image
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.as = 'image';
+      preloadLink.href = bgUrl;
+      document.head.appendChild(preloadLink);
+    }
   });
 }

@@ -1,11 +1,15 @@
-import Image from 'next/image';
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+
 import { supabase } from '@/lib/supabase';
 import BuyNowButton from '@/components/BuyNowButton';
 import StarBackground from '@/components/3d/StarBackground';
+import dynamic from 'next/dynamic';
 
+// Performance optimization: Use React.memo for components that don't need frequent re-renders
+const MemoizedBuyNowButton = React.memo(BuyNowButton);
 
 
 function getProducts() {
@@ -65,41 +69,55 @@ function getProducts() {
 
 
 
-export default function ProductsPage() {
+// Performance optimization: Memoize the ProductsPage component
+const ProductsPage = React.memo(function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('products')
-          .select('*')
-          .eq('is_active', true)
-          .order('created_at', { ascending: false });
-        
-        if (!error && data && data.length > 0) {
-          setProducts(data);
-        } else {
-          setProducts(getProducts());
-        }
-      } catch (e) {
-        console.error('Error connecting to Supabase:', e);
+  // Performance optimization: Use useCallback for the fetch function
+  const fetchProducts = useCallback(async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false });
+      
+      if (!error && data && data.length > 0) {
+        setProducts(data);
+      } else {
+        // Performance optimization: Use memoized mock products
         setProducts(getProducts());
       }
-    };
-    
-    fetchProducts();
+    } catch (e) {
+      console.error('Error connecting to Supabase:', e);
+      setProducts(getProducts());
+    }
   }, []);
+  
+  useEffect(() => {
+    fetchProducts();
+    
+    // Performance optimization: Add cleanup function
+    return () => {
+      // Cleanup any potential memory leaks
+      setProducts([]);
+    };
+  }, [fetchProducts]);
+  
+  // Performance optimization: Memoize background effects
+  const BackgroundEffects = useMemo(() => (
+    <div className="absolute inset-0">
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}}></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '6s'}}></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-3xl animate-pulse" style={{animationDuration: '8s'}}></div>
+      <StarBackground />
+    </div>
+  ), []);
   
   return (
     <div className="relative min-h-screen py-16 overflow-hidden bg-gradient-to-br from-slate-950 via-gray-950 to-black">
-      {/* Enhanced background effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '6s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-3xl animate-pulse" style={{animationDuration: '8s'}}></div>
-        <StarBackground />
-      </div>
+      {/* Enhanced background effects - memoized */}
+      {BackgroundEffects}
       
       <div className="relative z-10 container mx-auto px-6 max-w-7xl">
         {/* Enhanced Header Section */}
@@ -624,4 +642,6 @@ export default function ProductsPage() {
       </div>
     </div>
   );
-}
+});
+
+export default ProductsPage;

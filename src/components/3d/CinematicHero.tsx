@@ -1,12 +1,23 @@
 'use client';
 
-import React, { useRef, useMemo, useEffect, useState } from 'react';
+import React, { useRef, useMemo, useEffect, useState, Suspense, lazy } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Text, Float, Environment, Sparkles, OrbitControls } from '@react-three/drei';
+import { Text, Float, Sparkles, OrbitControls } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import * as THREE from 'three';
 import '@/styles/cinematic.css';
+
+// Performance optimization: Use React.memo for components that don't need frequent re-renders
+const MemoizedFloat = React.memo(Float);
+// Enhanced MemoizedSparkles with custom comparison function for better performance
+const MemoizedSparkles = React.memo(Sparkles, (prevProps, nextProps) => {
+  // Only re-render if essential props change
+  return prevProps.count === nextProps.count && 
+         prevProps.size === nextProps.size && 
+         prevProps.color === nextProps.color;
+});
 
 // Enhanced CSS animations for cinematic effects
 const tvEffectStyles = `
@@ -171,13 +182,15 @@ const tvEffectStyles = `
 
 // Removed three-nebula import to fix runtime errors
 
-// Floating particles component
-function FloatingParticles() {
+// Floating particles component - optimized with fewer particles and frame skipping
+const FloatingParticles = React.memo(function FloatingParticles() {
   const particlesRef = useRef<THREE.Points>(null);
+  const frameCount = useRef(0);
   
   const particles = useMemo(() => {
-    const positions = new Float32Array(1000 * 3);
-    for (let i = 0; i < 1000; i++) {
+    // Reduced from 1000 to 400 particles for better performance
+    const positions = new Float32Array(400 * 3);
+    for (let i = 0; i < 400; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 20;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
@@ -186,9 +199,13 @@ function FloatingParticles() {
   }, []);
 
   useFrame((state) => {
+    // Performance optimization: Only update every 2 frames
+    frameCount.current += 1;
+    if (frameCount.current % 2 !== 0) return;
+    
     if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.05;
-      particlesRef.current.rotation.x = state.clock.elapsedTime * 0.02;
+      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.03; // Reduced rotation speed
+      particlesRef.current.rotation.x = state.clock.elapsedTime * 0.01; // Reduced rotation speed
     }
   });
 
@@ -209,7 +226,7 @@ function FloatingParticles() {
       />
     </points>
   );
-}
+})
 
 // Removed BlackHole component as requested
 
@@ -262,15 +279,16 @@ const AnimatedLogo = () => {
   );
 };
 
-// Simplified particle system to replace three-nebula
-function SimpleParticleSystem() {
+// Simplified particle system to replace three-nebula - optimized with frame skipping
+const SimpleParticleSystem = React.memo(function SimpleParticleSystem() {
   const particlesRef = useRef<THREE.Points>(null);
+  const frameCount = useRef(0);
   
   const particles = useMemo(() => {
-    const positions = new Float32Array(500 * 3);
-    const colors = new Float32Array(500 * 3);
+    const positions = new Float32Array(350 * 3); // Reduced from 500 to 350 particles
+    const colors = new Float32Array(350 * 3);
     
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 350; i++) {
       // Random spherical distribution
       const radius = 20 + Math.random() * 30;
       const theta = Math.random() * Math.PI * 2;
@@ -290,10 +308,14 @@ function SimpleParticleSystem() {
   }, []);
 
   useFrame((state) => {
+    // Performance optimization: Only update every 3 frames
+    frameCount.current += 1;
+    if (frameCount.current % 3 !== 0) return;
+    
     if (particlesRef.current) {
       const time = state.clock.elapsedTime;
-      particlesRef.current.rotation.y = time * 0.02;
-      particlesRef.current.rotation.x = Math.sin(time * 0.1) * 0.1;
+      particlesRef.current.rotation.y = time * 0.01; // Reduced rotation speed
+      particlesRef.current.rotation.x = Math.sin(time * 0.05) * 0.05; // Reduced movement
     }
   });
 
@@ -319,24 +341,25 @@ function SimpleParticleSystem() {
       />
     </points>
   );
-}
+})
 
-// Enhanced background stars with realistic complex movement
-function BackgroundStars() {
+// Optimized background stars with better performance
+const BackgroundStars = React.memo(function BackgroundStars() {
   const starsRef = useRef<THREE.Points>(null);
+  const frameCount = useRef(0);
   const starData = useRef<{
     originalPositions: Float32Array;
-    velocities: Float32Array;
     phases: Float32Array;
   } | null>(null);
   
   const starField = useMemo(() => {
-    const positions = new Float32Array(3000 * 3);
-    const colors = new Float32Array(3000 * 3);
-    const velocities = new Float32Array(3000 * 3);
-    const phases = new Float32Array(3000);
+    // Reduced number of stars for better performance
+    const starCount = 2000;
+    const positions = new Float32Array(starCount * 3);
+    const colors = new Float32Array(starCount * 3);
+    const phases = new Float32Array(starCount);
     
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < starCount; i++) {
       // Random spherical distribution
       const r = Math.random() * 400 + 100;
       const theta = Math.acos(2 * Math.random() - 1);
@@ -345,11 +368,6 @@ function BackgroundStars() {
       positions[i * 3] = r * Math.sin(theta) * Math.cos(phi);
       positions[i * 3 + 1] = r * Math.sin(theta) * Math.sin(phi);
       positions[i * 3 + 2] = r * Math.cos(theta);
-      
-      // Random velocities for natural movement
-      velocities[i * 3] = (Math.random() - 0.5) * 0.01;
-      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.01;
-      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.005;
       
       // Random phase for twinkling
       phases[i] = Math.random() * Math.PI * 2;
@@ -378,41 +396,51 @@ function BackgroundStars() {
     
     starData.current = {
       originalPositions: positions.slice(),
-      velocities,
       phases
     };
      
-     return { positions, colors };
+    return { positions, colors };
   }, []);
   
   useFrame((state) => {
     if (starsRef.current && starData.current) {
       const time = state.clock.elapsedTime;
-      const positions = starsRef.current.geometry.attributes.position.array as Float32Array;
-      const { originalPositions, velocities, phases } = starData.current;
       
-      // Random twinkling movement only - no drift
-      for (let i = 0; i < 3000; i++) {
-        const i3 = i * 3;
-        const baseX = originalPositions[i3];
-        const baseY = originalPositions[i3 + 1];
-        const baseZ = originalPositions[i3 + 2];
+      // Performance optimization: Only update positions every 2 frames
+      frameCount.current += 1;
+      if (frameCount.current % 2 === 0) {
+        const positions = starsRef.current.geometry.attributes.position.array as Float32Array;
+        const { originalPositions, phases } = starData.current;
         
-        // Only twinkling movement - stars stay in place
-        const twinkleX = Math.sin(time * 0.5 + phases[i]) * 0.3;
-        const twinkleY = Math.cos(time * 0.7 + phases[i]) * 0.3;
-        const twinkleZ = Math.sin(time * 0.3 + phases[i]) * 0.15;
+        // Only update a subset of stars each frame for better performance
+        const updateCount = 500; // Update 500 stars per frame
+        const startIndex = (Math.floor(time) % 4) * updateCount;
+        const endIndex = Math.min(startIndex + updateCount, originalPositions.length / 3);
         
-        positions[i3] = baseX + twinkleX;
-        positions[i3 + 1] = baseY + twinkleY;
-        positions[i3 + 2] = baseZ + twinkleZ;
+        for (let i = startIndex; i < endIndex; i++) {
+          const i3 = i * 3;
+          const baseX = originalPositions[i3];
+          const baseY = originalPositions[i3 + 1];
+          const baseZ = originalPositions[i3 + 2];
+          
+          // Only twinkling movement - stars stay in place
+          const twinkleX = Math.sin(time * 0.5 + phases[i]) * 0.3;
+          const twinkleY = Math.cos(time * 0.7 + phases[i]) * 0.3;
+          const twinkleZ = Math.sin(time * 0.3 + phases[i]) * 0.15;
+          
+          positions[i3] = baseX + twinkleX;
+          positions[i3 + 1] = baseY + twinkleY;
+          positions[i3 + 2] = baseZ + twinkleZ;
+        }
+        
+        starsRef.current.geometry.attributes.position.needsUpdate = true;
       }
       
-      starsRef.current.geometry.attributes.position.needsUpdate = true;
-      
-      // Gentle overall rotation
+      // Gentle overall rotation - simplified
       starsRef.current.rotation.y = time * 0.001;
-      starsRef.current.rotation.z = Math.sin(time * 0.02) * 0.01;
+      if (frameCount.current % 3 === 0) {
+        starsRef.current.rotation.z = Math.sin(time * 0.02) * 0.01;
+      }
     }
   });
   
@@ -438,15 +466,19 @@ function BackgroundStars() {
       />
     </points>
   );
-}
+})
   
 
 
-// Main 3D scene with space atmosphere
-function Scene() {
+// Main 3D scene with space atmosphere - optimized for performance
+const Scene = React.memo(function Scene() {
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+  const frameCount = useRef(0);
   
   useFrame((state) => {
+    // Performance optimization: Increment frame counter
+    frameCount.current += 1;
+    
     // Smooth camera movement for professional cinematic effect
     if (state.camera) {
       const time = state.clock.elapsedTime;
@@ -467,14 +499,17 @@ function Scene() {
         state.camera.position.y = smoothY;
         state.camera.position.z = zPosition;
       } else {
-        // After intro phase: gentle orbital movement
-        state.camera.position.x = Math.sin(time * 0.1) * 2;
-        state.camera.position.y = Math.cos(time * 0.15) * 1;
-        state.camera.position.z = 12 + Math.sin(time * 0.2) * 0.5;
-        state.camera.rotation.z = 0; // Reset rotation
+        // Performance optimization: Only update camera position every other frame after intro
+        if (frameCount.current % 2 === 0) {
+          // After intro phase: gentle orbital movement
+          state.camera.position.x = Math.sin(time * 0.1) * 2;
+          state.camera.position.y = Math.cos(time * 0.15) * 1;
+          state.camera.position.z = 12 + Math.sin(time * 0.2) * 0.5;
+          state.camera.rotation.z = 0; // Reset rotation
+          
+          state.camera.lookAt(0, 0, 0);
+        }
       }
-      
-      state.camera.lookAt(0, 0, 0);
     }
   });
 
@@ -483,26 +518,26 @@ function Scene() {
       {/* Deep space background */}
       <color attach="background" args={['#000011']} />
       
-      {/* Space lighting */}
+      {/* Space lighting - optimized */}
       <ambientLight intensity={0.1} />
       <directionalLight
         position={[10, 10, 5]}
         intensity={1.5}
         color="#60a5fa"
-        castShadow
+        castShadow={false} // Disable shadow casting for performance
       />
       <pointLight position={[-10, -10, -10]} color="#8b5cf6" intensity={0.8} />
       <pointLight position={[15, 5, 10]} color="#ec4899" intensity={0.6} />
       
-      {/* Space elements */}
+      {/* Space elements - using memoized components */}
       <BackgroundStars />
       <AnimatedLogo />
       <FloatingParticles />
-      <Sparkles count={200} scale={15} size={3} speed={0.6} color="#60a5fa" />
-      <Sparkles count={150} scale={20} size={2} speed={0.3} color="#8b5cf6" />
+      <MemoizedSparkles count={150} scale={15} size={3} speed={0.6} color="#60a5fa" />
+      <MemoizedSparkles count={100} scale={20} size={2} speed={0.3} color="#8b5cf6" />
     </>
   );
-}
+})
 
 // Elite Glassmorphism UI overlay with professional typography
 function GlassmorphismOverlay() {
@@ -587,8 +622,8 @@ function GlassmorphismOverlay() {
   );
 }
 
-// Main cinematic hero component
-export default function CinematicHero() {
+// Main cinematic hero component - optimized for performance
+const CinematicHero = React.memo(function CinematicHero() {
   const [canvasError, setCanvasError] = useState(false);
 
   // Inject TV effect animation styles
@@ -601,6 +636,25 @@ export default function CinematicHero() {
       document.head.removeChild(styleElement);
     };
   }, []);
+  
+  // Performance optimization: Memoize Canvas configuration
+  const canvasConfig = useMemo(() => ({
+    camera: { position: [0, 0, 12] as [number, number, number], fov: 60 },
+    className: "absolute inset-0",
+    gl: { 
+      antialias: true, 
+      alpha: true, 
+      powerPreference: "high-performance",
+      preserveDrawingBuffer: false,
+      // Disable depth testing for transparent objects when not needed
+      depth: true,
+      // Disable stencil buffer for performance
+      stencil: false
+    },
+    dpr: [1, 2] as [number, number],
+    performance: { min: 0.5 },
+    onError: () => setCanvasError(true)
+  }), []);
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black cinematic-hero">
@@ -609,24 +663,13 @@ export default function CinematicHero() {
       <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/10 via-transparent to-pink-900/10"></div>
 
       
-      {/* 3D Canvas Background with error handling */}
+      {/* 3D Canvas Background with error handling and Suspense for code splitting */}
       {!canvasError && (
-        <Canvas
-          camera={{ position: [0, 0, 12], fov: 60 }}
-          className="absolute inset-0"
-          gl={{ 
-            antialias: true, 
-            alpha: true, 
-            powerPreference: "high-performance",
-            preserveDrawingBuffer: false
-          }}
-          dpr={[1, 2]}
-          performance={{ min: 0.5 }}
-          onError={() => setCanvasError(true)}
-        >
-          <Scene />
-          <Environment preset="night" background={false} />
-        </Canvas>
+        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950 to-black"></div>}>
+          <Canvas {...canvasConfig}>
+            <Scene />
+          </Canvas>
+        </Suspense>
       )}
       
       {/* Glassmorphism UI Overlay */}
@@ -638,4 +681,6 @@ export default function CinematicHero() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60 pointer-events-none"></div>
     </div>
   );
-}
+});
+
+export default CinematicHero;

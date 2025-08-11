@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/utils/format';
-import { useState } from 'react';
+import { useState, memo, useCallback } from 'react';
 import UpsellModal from '@/components/UpsellModal';
 
 type ProductCardProps = {
@@ -19,7 +19,7 @@ type ProductCardProps = {
   className?: string;
 };
 
-export default function ProductCard({
+function ProductCard({
   id,
   name,
   price,
@@ -46,7 +46,7 @@ export default function ProductCard({
 
   const productUrl = slug ? `/products/${slug}` : `/products/${id}`;
   
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     if (alreadyInCart) return;
     
     setIsAdding(true);
@@ -70,11 +70,11 @@ export default function ProductCard({
         }
       }
     }, 800); // Reduced from 1500ms to 800ms for faster feedback
-  };
+  }, [addItem, alreadyInCart, ebookUpsellProduct.id, id, isInCart, name, image_url, price]);
   
-  const handleCloseUpsellModal = () => {
+  const handleCloseUpsellModal = useCallback(() => {
     setShowUpsellModal(false);
-  };
+  }, []);
 
   return (
     <div className={`glass-panel rounded-lg overflow-hidden transition-all duration-200 hover:shadow-xl ${className}`}>
@@ -146,3 +146,15 @@ export default function ProductCard({
     </div>
   );
 }
+
+export default memo(ProductCard, (prevProps, nextProps) => {
+  // Only re-render if these props change
+  return (
+    prevProps.id === nextProps.id &&
+    prevProps.name === nextProps.name &&
+    prevProps.price === nextProps.price &&
+    prevProps.image_url === nextProps.image_url &&
+    prevProps.showAddToCart === nextProps.showAddToCart &&
+    prevProps.className === nextProps.className
+  );
+});

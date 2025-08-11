@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { Float, Text, Box, Sphere, Environment, useTexture, Plane, RoundedBox } from '@react-three/drei';
+import { Float, Text, Box, Sphere, useTexture, Plane, RoundedBox } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
 
@@ -512,7 +512,6 @@ export default function Product3D({ product, onAddToCart }: Product3DProps) {
         <StudioLighting />
         <ProductCard3D product={product} isHovered={isHovered} />
         <ProductParticles />
-        <Environment preset="studio" background={false} />
         
         {/* Ground plane for shadows */}
         <mesh receiveShadow position={[0, -3, 0]} rotation={[-Math.PI / 2, 0, 0]}>

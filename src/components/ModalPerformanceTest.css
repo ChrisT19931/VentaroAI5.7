@@ -1,0 +1,238 @@
+.modal-performance-test {
+  padding: 24px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.test-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 16px;
+  background-color: #e9ecef;
+  border-radius: 6px;
+}
+
+@media (min-width: 768px) {
+  .test-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.test-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 576px) {
+  .test-control-group {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.test-control-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.run-test-button {
+  padding: 10px 16px;
+  background-color: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.run-test-button:hover {
+  background-color: #3a5ce5;
+}
+
+.test-results {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+@media (min-width: 768px) {
+  .result-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.result-item {
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #4a6cf7;
+}
+
+.result-item h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #343a40;
+}
+
+.result-item p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.device-info {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #6c757d;
+}
+
+.device-info p {
+  margin: 4px 0;
+}
+
+.standard-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Performance test grid for modal content */
+.performance-test-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .performance-test-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.performance-test-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+}
+
+.performance-test-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #4a6cf7;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.performance-test-content {
+  flex: 1;
+}
+
+.performance-test-content h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.performance-test-content p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.performance-test-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.performance-test-button {
+  padding: 4px 8px;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .modal-performance-test {
+    background-color: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .test-controls {
+    background-color: #1a202c;
+  }
+  
+  .test-results {
+    background-color: #2d3748;
+  }
+  
+  .result-item {
+    background-color: #1a202c;
+    border-left-color: #4a6cf7;
+  }
+  
+  .result-item h4 {
+    color: #e2e8f0;
+  }
+  
+  .device-info {
+    background-color: #1a202c;
+    border-left-color: #a0aec0;
+  }
+  
+  .performance-test-item {
+    background-color: #1a202c;
+    border-color: #4a5568;
+  }
+  
+  .performance-test-button {
+    background-color: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .run-test-button {
+    transition: none;
+  }
+}
