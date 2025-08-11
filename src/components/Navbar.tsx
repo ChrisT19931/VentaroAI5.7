@@ -38,10 +38,6 @@ export default function Navbar() {
               <Link href="/contact" className="px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
                 Contact
               </Link>
-
-              <Link href="/modal-demo" className="px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
-                Modal Demo
-              </Link>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
@@ -129,10 +125,6 @@ export default function Navbar() {
           </Link>
           <Link href="/contact" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
             Contact
-          </Link>
-
-          <Link href="/modal-demo" className="block px-4 py-3 rounded-xl text-base font-medium text-white/90 hover:text-white hover:bg-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
-            Modal Demo
           </Link>
 
           {user && (
