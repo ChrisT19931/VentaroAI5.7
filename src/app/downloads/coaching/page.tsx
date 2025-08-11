@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 
 // Set dynamic params
 export const dynamicParams = true;
@@ -20,7 +20,8 @@ const CoachingContentComponent = dynamic(() => import('@/components/downloads/Co
 });
 
 export default function CoachingDownloadPage() {
-  const { user } = useSimpleAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
   
   // Check if user is admin
   const isAdmin = user?.email === 'chris.t@ventarosales.com';

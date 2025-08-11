@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 export default function VIPPortal() {
-  const { user } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +17,9 @@ export default function VIPPortal() {
   const [showWelcome, setShowWelcome] = useState(true);
 
   useEffect(() => {
-    if (!user) {
+    if (status === 'loading') return;
+    
+    if (status === 'unauthenticated') {
       router.push('/login?redirect=/vip-portal');
       return;
     }
@@ -31,7 +34,7 @@ export default function VIPPortal() {
     }
     
     setIsLoading(false);
-  }, [user, router, searchParams]);
+  }, [status, user, router, searchParams]);
 
   const handleDownload = (fileName: string, displayName: string) => {
     if (!hasAccess) {

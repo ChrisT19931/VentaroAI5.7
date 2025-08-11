@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession, signOut } from 'next-auth/react';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
@@ -11,7 +11,10 @@ import Spinner from '@/components/ui/Spinner';
 import ProtectedDownload from '@/components/ProtectedDownload';
 
 export default function AccountPage() {
-  const { user, isLoading: loading, signOut, isAuthenticated } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const isAuthenticated = status === 'authenticated';
+  const loading = status === 'loading';
   const router = useRouter();
   const [orders, setOrders] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -169,7 +172,7 @@ export default function AccountPage() {
 
   const handleSignOut = async () => {
     try {
-      await signOut();
+      await signOut({ redirect: false });
       router.push('/');
       toast.success('You have been signed out');
     } catch (error) {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 interface EbookContentProps {
@@ -12,7 +12,8 @@ interface EbookContentProps {
 }
 
 export default function EbookContent({ hasAccess = false, isAdmin = false }: EbookContentProps) {
-  const { user } = useSimpleAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);

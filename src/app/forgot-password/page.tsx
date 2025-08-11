@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/client';
 import { toast } from 'react-hot-toast';
 
 export default function ForgotPasswordPage() {
@@ -21,14 +20,19 @@ export default function ForgotPasswordPage() {
     
     try {
       setIsLoading(true);
-      const supabase = createClient();
       
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
+      // Call API to send password reset email
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
       });
       
-      if (error) {
-        throw error;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send reset email');
       }
       
       setIsSubmitted(true);

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 interface TimeSlot {
@@ -14,7 +14,8 @@ interface CoachingCalendarProps {
 }
 
 export default function CoachingCalendar({ onBookingComplete }: CoachingCalendarProps) {
-  const { user } = useSimpleAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);

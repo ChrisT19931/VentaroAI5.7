@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { supabase } from '@/lib/supabase';
 // Import the component directly as a fallback
 import EbookContentStatic from '../../../components/downloads/EbookContent';
@@ -31,7 +31,8 @@ const EbookContentComponent = dynamic(
 );
 
 export default function EbookDownloadPage() {
-  const { user } = useSimpleAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
   // Check if user is admin
   const isAdmin = user?.email === 'chris.t@ventarosales.com';
   

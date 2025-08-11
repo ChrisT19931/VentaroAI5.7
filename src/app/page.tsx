@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
 import CinematicHero from '../components/3d/CinematicHero'
 import TypewriterText from '../components/TypewriterText'
-import DirectCheckoutButton from '../components/DirectCheckoutButton'
+import UnifiedCheckoutButton from '../components/UnifiedCheckoutButton'
 
 export default function Home() {
   const [contactForm, setContactForm] = useState({
@@ -92,7 +92,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20 animate-pulse">
+              <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20">
                 🎯 SPECIAL OFFER - ONLY $50 - BUILD PLATFORMS NOT JUST WEBSITES
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
@@ -104,10 +104,10 @@ export default function Home() {
             </div>
             
             <div className="max-w-3xl mx-auto">
-              <div className="glass-panel premium-glow p-10 rounded-3xl border-2 border-purple-500/30 shadow-2xl transform hover:scale-105 transition-all duration-500 relative overflow-hidden">
+              <div className="glass-panel p-10 rounded-3xl border-2 border-purple-500/30 shadow-lg transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-blue-600/10 to-pink-600/10 rounded-3xl"></div>
                 <div className="relative z-10 text-center">
-                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mb-8 shadow-lg premium-icon-glow">
+                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mb-8 shadow-lg">
                     <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -120,7 +120,7 @@ export default function Home() {
                     <span className="text-6xl font-black text-white">A$50</span>
                   </div>
                   <div className="mb-8">
-                    <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600 to-orange-600 rounded-full text-sm font-bold text-white border border-red-500/50 shadow-lg shadow-red-500/20 animate-pulse">
+                    <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600 to-orange-600 rounded-full text-sm font-bold text-white border border-red-500/50 shadow-lg shadow-red-500/20">
                       INDUSTRY SHATTERING VALUE
                     </span>
                   </div>
@@ -162,7 +162,7 @@ export default function Home() {
 
                     </ul>
                   </div>
-                  <DirectCheckoutButton 
+                  <UnifiedCheckoutButton 
                     product={{
                       id: 'ai-business-video-guide-2025',
                       name: 'AI Business Video Guide',
@@ -170,9 +170,10 @@ export default function Home() {
                       productType: 'digital'
                     }}
                     className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl"
+                    variant="direct"
                   >
                     Learn Now for Just $50
-                  </DirectCheckoutButton>
+                  </UnifiedCheckoutButton>
                   <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
                 </div>
               </div>
@@ -195,114 +196,33 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             <style jsx>{`
-              @keyframes glow-pulse {
-                0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
-                50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.3); }
-              }
-              @keyframes shimmer {
-                0% { transform: translateX(-100%); }
-                100% { transform: translateX(100%); }
-              }
-              .card-glow { animation: glow-pulse 3s ease-in-out infinite; }
               .glass-panel {
                 background: rgba(15, 23, 42, 0.6);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-              }
-              .shimmer-effect::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-                animation: shimmer 2s infinite;
-                z-index: 1;
-              }
-              
-              .premium-glow {
-                animation: premium-glow 3s ease-in-out infinite;
-              }
-              
-              @keyframes premium-glow {
-                0%, 100% { 
-                  box-shadow: 0 0 30px rgba(147, 51, 234, 0.3), 0 0 60px rgba(147, 51, 234, 0.1);
-                }
-                50% { 
-                  box-shadow: 0 0 50px rgba(147, 51, 234, 0.5), 0 0 100px rgba(147, 51, 234, 0.2);
-                }
-              }
-              
-              .premium-float {
-                animation: premium-float 4s ease-in-out infinite;
-              }
-              
-              @keyframes premium-float {
-                0%, 100% { transform: translateY(0px) scale(1); }
-                25% { transform: translateY(-10px) scale(1.1); }
-                50% { transform: translateY(-5px) scale(1.05); }
-                75% { transform: translateY(-15px) scale(1.15); }
-              }
-              
-              .premium-border-glow {
-                animation: premium-border-glow 2s ease-in-out infinite;
-              }
-              
-              @keyframes premium-border-glow {
-                0%, 100% { opacity: 0; }
-                50% { opacity: 1; }
-              }
-              
-              .premium-icon-glow {
-                filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
               }
               
               .premium-button-glow {
                 position: relative;
               }
               
-              .premium-button-glow::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                border-radius: inherit;
-                background: linear-gradient(45deg, #8b5cf6, #ec4899, #6366f1);
-                opacity: 0;
-                transition: opacity 0.3s;
-                z-index: -1;
-                filter: blur(10px);
-              }
-              
-              .premium-button-glow:hover::before {
-                opacity: 0.7;
-                animation: premium-button-pulse 1s ease-in-out infinite;
-              }
-              
-              @keyframes premium-button-pulse {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.05); }
+              .premium-button-glow:hover {
+                box-shadow: 0 4px 20px rgba(147, 51, 234, 0.3);
               }
             `}</style>
             
             {/* #2 Weekly Support Contract */}
-            <div className="group relative bg-gradient-to-br from-slate-900/95 via-orange-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-orange-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-orange-500/40 card-glow shimmer-effect hover:border-orange-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-orange-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-orange-500/40 hover:border-orange-500/60">
               {/* Enhanced glow effects */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-orange-600/30 to-red-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
               
-              {/* Floating Particles Effect */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0s'}}></div>
-                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-orange-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1s'}}></div>
-                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-red-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2s'}}></div>
-              </div>
+
               
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
                   PROFESSIONAL
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
               
@@ -311,7 +231,7 @@ export default function Home() {
                   <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 group-hover:text-orange-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-xl group-hover:bg-orange-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-xl group-hover:bg-orange-400/40 transition-all duration-300"></div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
@@ -322,11 +242,11 @@ export default function Home() {
                 
                 <div className="space-y-3 mb-4">
                   <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 transition-all duration-300"></div>
                     <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">60-minute consultation call</span>
                   </div>
                   <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 group-hover:animate-pulse transition-all duration-300"></div>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 transition-all duration-300"></div>
                     <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Unlimited email support (1 month)</span>
                   </div>
                 </div>
@@ -335,7 +255,7 @@ export default function Home() {
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A$300</div>
                   <div className="text-xs text-gray-300">one-time payment</div>
                 </div>
-                <DirectCheckoutButton 
+                <UnifiedCheckoutButton 
                   product={{
                     id: 'weekly-support-contract-2025',
                     name: 'Support Package',
@@ -343,29 +263,21 @@ export default function Home() {
                     productType: 'digital'
                   }}
                   className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30"
+                  variant="direct"
                 >
                   Get Support
-                </DirectCheckoutButton>
+                </UnifiedCheckoutButton>
               </div>
             </div>
 
             {/* $10 Prompts - Credibility Offer */}
-            <div className="group relative bg-gradient-to-br from-slate-900/95 via-emerald-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-emerald-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-emerald-500/40 card-glow shimmer-effect hover:border-emerald-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-emerald-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-emerald-500/40 hover:border-emerald-500/60">
               {/* Enhanced glow effects */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-transparent to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-600/30 to-green-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
-              
-              {/* Floating Particles Effect */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.3s'}}></div>
-                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-emerald-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.3s'}}></div>
-                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-green-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.3s'}}></div>
-              </div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-transparent to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
+                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
                   STARTER
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
               
@@ -374,7 +286,7 @@ export default function Home() {
                   <svg className="w-16 h-16 text-emerald-400 opacity-60 group-hover:opacity-100 group-hover:text-emerald-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                   </svg>
-                  <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-xl group-hover:bg-emerald-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-xl group-hover:bg-emerald-400/40 transition-all duration-300"></div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
@@ -398,7 +310,7 @@ export default function Home() {
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-green-400 transition-all duration-500">A$10</div>
                   <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <DirectCheckoutButton 
+                <UnifiedCheckoutButton 
                   product={{
                     id: 'ai-prompts-arsenal-2025',
                     name: 'Full Access To Prompts',
@@ -406,29 +318,21 @@ export default function Home() {
                     productType: 'digital'
                   }}
                   className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-emerald-500/30"
+                  variant="direct"
                 >
                   Get Prompts
-                </DirectCheckoutButton>
+                </UnifiedCheckoutButton>
               </div>
             </div>
 
             {/* $25 Ebook - Credibility Offer */}
-            <div className="group relative bg-gradient-to-br from-slate-900/95 via-blue-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-blue-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-blue-500/40 card-glow shimmer-effect hover:border-blue-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-blue-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-blue-500/40 hover:border-blue-500/60">
               {/* Enhanced glow effects */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600/30 to-purple-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
-              
-              {/* Floating Particles Effect */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.7s'}}></div>
-                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.7s'}}></div>
-                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.7s'}}></div>
-              </div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110" style={{animationDuration: '2s'}}>
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
                   STARTER
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
               
@@ -437,7 +341,7 @@ export default function Home() {
                   <svg className="w-16 h-16 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:text-blue-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
                   </svg>
-                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl group-hover:bg-blue-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl group-hover:bg-blue-400/40 transition-all duration-300"></div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
@@ -461,7 +365,7 @@ export default function Home() {
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-500">A$25</div>
                   <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <DirectCheckoutButton 
+                <UnifiedCheckoutButton 
                   product={{
                     id: 'ai-tools-mastery-guide-2025',
                     name: 'Full Access To Ebook',
@@ -469,105 +373,31 @@ export default function Home() {
                     productType: 'digital'
                   }}
                   className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/30"
+                  variant="direct"
                 >
                   Get Ebook
-                </DirectCheckoutButton>
+                </UnifiedCheckoutButton>
               </div>
             </div>
 
-            {/* AI Business Strategy Session - Coaching */}
-            <div className="group relative bg-gradient-to-br from-slate-900/95 via-orange-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-orange-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-orange-500/40 card-glow shimmer-effect premium-glow hover:border-orange-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
-              {/* Enhanced glow effects */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-orange-600/30 to-red-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
-              
-              {/* Floating Particles Effect */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.9s'}}></div>
-                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-orange-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.9s'}}></div>
-                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-red-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.9s'}}></div>
-              </div>
-              
-              <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110 premium-float" style={{animationDuration: '2s'}}>
-                  COACHING
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
-                </div>
-              </div>
-              
-              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
-                <div className="relative transform group-hover:scale-110 transition-all duration-500">
-                  <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 group-hover:text-orange-300 transition-all duration-500 group-hover:drop-shadow-lg premium-icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-xl group-hover:bg-orange-400/40 group-hover:animate-pulse transition-all duration-500"></div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">AI Business Strategy</h3>
-                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">60-minute 1-on-1 coaching session to build your AI-powered business. Get personalized strategies and implementation guidance.</p>
-                
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                    <span className="text-xs text-gray-300">1-on-1 live session</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                    <span className="text-xs text-gray-300">Personalized strategy</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                    <span className="text-xs text-gray-300">Implementation report</span>
-                  </div>
-                </div>
-                
-                <div className="text-center mb-4">
-                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A$497</div>
-                  <div className="text-xs text-gray-300">one-time</div>
-                </div>
-                <DirectCheckoutButton 
-                  product={{
-                    id: 'ai-business-strategy-session-2025',
-                    name: 'AI Business Strategy Session',
-                    price: 497,
-                    productType: 'digital'
-                  }}
-                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30"
-                >
-                  Book Session
-                </DirectCheckoutButton>
-              </div>
-            </div>
 
             {/* Custom Websites - Premium Offer */}
-            <div className="group relative bg-gradient-to-br from-slate-900/95 via-purple-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-purple-500/40 card-glow shimmer-effect premium-glow hover:border-purple-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-purple-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-purple-500/40 hover:border-purple-500/60">
               {/* Enhanced glow effects */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-transparent to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
-              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600/30 to-pink-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
-              
-              {/* Floating Particles Effect */}
-              <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.9s'}}></div>
-                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.9s'}}></div>
-                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-pink-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.9s'}}></div>
-              </div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-transparent to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
               <div className="absolute top-4 left-4 z-20">
-                <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110 premium-float" style={{animationDuration: '2s'}}>
+                <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
                   PREMIUM
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
                 </div>
               </div>
               
               <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
                 <div className="relative transform group-hover:scale-110 transition-all duration-500">
-                  <svg className="w-16 h-16 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:text-purple-300 transition-all duration-500 group-hover:drop-shadow-lg premium-icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-16 h-16 text-purple-400 opacity-60 group-hover:opacity-100 group-hover:text-purple-300 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
                   </svg>
-                  <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-xl group-hover:bg-purple-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                  <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-xl group-hover:bg-purple-400/40 transition-all duration-300"></div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
               </div>
@@ -622,8 +452,8 @@ export default function Home() {
         {/* Premium Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-purple-900/10"></div>
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-        <div className="absolute top-20 right-20 w-32 h-32 border border-purple-500/20 rotate-45 animate-pulse" style={{animationDuration: '3s'}}></div>
-        <div className="absolute bottom-20 left-20 w-24 h-24 border border-blue-500/20 rotate-12 animate-pulse" style={{animationDuration: '4s'}}></div>
+        <div className="absolute top-20 right-20 w-32 h-32 border border-purple-500/20 rotate-45 opacity-50"></div>
+              <div className="absolute bottom-20 left-20 w-24 h-24 border border-blue-500/20 rotate-12 opacity-50"></div>
         
         <div className="container mx-auto px-6 max-w-7xl relative z-10">
           {/* Elite Header Section */}
@@ -984,8 +814,8 @@ export default function Home() {
       <section className="py-24 bg-gradient-to-br from-black via-gray-900 to-slate-800 text-white relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 right-20 w-32 h-32 border border-white/20 rotate-45 animate-pulse" style={{animationDuration: '2s'}}></div>
-          <div className="absolute bottom-20 left-20 w-24 h-24 border border-white/30 rotate-12 animate-pulse delay-500" style={{animationDuration: '2s'}}></div>
+          <div className="absolute top-20 right-20 w-32 h-32 border border-white/20 rotate-45 opacity-50"></div>
+              <div className="absolute bottom-20 left-20 w-24 h-24 border border-white/30 rotate-12 opacity-50"></div>
         </div>
         
         <div className="container mx-auto px-6 max-w-7xl text-center relative z-10">

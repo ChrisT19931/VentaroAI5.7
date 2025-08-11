@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 interface PromptsContentProps {
@@ -12,7 +12,8 @@ interface PromptsContentProps {
 }
 
 export default function PromptsContent({ hasAccess = false, isAdmin = false }: PromptsContentProps) {
-  const { user } = useSimpleAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);

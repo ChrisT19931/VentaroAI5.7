@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import Spinner from '@/components/ui/Spinner';
 
 interface Purchase {
@@ -16,7 +16,10 @@ interface Purchase {
 }
 
 export default function PurchasesPage() {
-  const { user, isAuthenticated, isLoading: authLoading } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const isAuthenticated = status === 'authenticated';
+  const authLoading = status === 'loading';
   const router = useRouter();
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [isLoading, setIsLoading] = useState(true);

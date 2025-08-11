@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { supabase } from '@/lib/supabase';
 // Import the component directly as a fallback
 import PromptsContentStatic from '../../../components/downloads/PromptsContent';
@@ -31,7 +31,8 @@ const PromptsContentComponent = dynamic(
 );
 
 export default function PromptsDownloadPage() {
-  const { user } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
   
   // Check if user is admin
   const isAdmin = user?.email === 'chris.t@ventarosales.com';

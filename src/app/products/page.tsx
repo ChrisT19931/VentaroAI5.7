@@ -4,12 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { supabase } from '@/lib/supabase';
-import BuyNowButton from '@/components/BuyNowButton';
+import UnifiedCheckoutButton from '@/components/UnifiedCheckoutButton';
 import StarBackground from '@/components/3d/StarBackground';
 import dynamic from 'next/dynamic';
 
 // Performance optimization: Use React.memo for components that don't need frequent re-renders
-const MemoizedBuyNowButton = React.memo(BuyNowButton);
+const MemoizedUnifiedCheckoutButton = React.memo(UnifiedCheckoutButton);
 
 
 function getProducts() {
@@ -274,7 +274,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                       <div className="relative group/button">
                         <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
                         
-                        <BuyNowButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 text-xl`} />
+                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 text-xl`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}
@@ -606,7 +606,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                         {/* Button Glow Effect */}
                         <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
                         
-                        <BuyNowButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40`} />
+                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}

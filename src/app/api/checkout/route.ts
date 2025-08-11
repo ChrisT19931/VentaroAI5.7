@@ -1,26 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStripeInstance } from '@/lib/stripe';
-// Import Stripe type only, not the actual module
 import type { Stripe } from 'stripe';
-
-// Get Stripe secret key for debugging
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 import { supabase } from '@/lib/supabase';
-import { sendEmail, sendOrderConfirmationEmail } from '@/lib/sendgrid';
-import { validateStripeEnvironment } from '@/lib/env-validation';
-import { v4 as uuidv4 } from 'uuid';
+import { env } from '@/lib/env';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth';
+import { PRODUCT_MAPPINGS, LEGACY_PRODUCT_MAPPINGS } from '@/config/products';
 import { optimizedDatabaseQuery, optimizedApiCall } from '@/lib/system-optimizer';
+import { v4 as uuidv4 } from 'uuid';
 
-// Mock products for when database is not available
 // Product ID mapping for compatibility
 const productIdMapping: Record<string, string> = {
-  'ai-tools-mastery-guide-2025': '1',
-  'ai-prompts-arsenal-2025': '2',
-  'ai-business-strategy-session-2025': '3',
-  'ai-business-video-guide-2025': '4',
-  'weekly-support-contract': '5',
-  'coaching': '3',
-  'test': 'test'
+  ...PRODUCT_MAPPINGS,
+  ...LEGACY_PRODUCT_MAPPINGS
 };
 
 const mockProducts = [
@@ -42,17 +34,6 @@ const mockProducts = [
     price: 10.00,
     image_url: '/images/products/ai-prompts-arsenal.svg',
     category: 'AI Prompts',
-    featured: true,
-    is_active: true,
-    created_at: new Date().toISOString()
-  },
-  {
-    id: '3',
-    name: 'AI Business Strategy Session 2025',
-    description: '60-minute coaching session to learn how to make money online with AI tools and AI prompts. Get personalized strategies to build profitable AI-powered businesses in 2025.',
-    price: 497.00,
-    image_url: '/images/products/ai-business-strategy-session.svg',
-    category: 'Coaching',
     featured: true,
     is_active: true,
     created_at: new Date().toISOString()
@@ -99,22 +80,20 @@ function normalizeProductId(productId: string): string {
 
 export async function POST(request: NextRequest) {
   try {
-    // Check for authentication - block guest users
-    const authCookie = request.cookies.get('ventaro-auth');
-    const isAuthenticated = authCookie?.value === 'true';
+    // Check for authentication using NextAuth session
+    const session = await getServerSession(authOptions);
     
-    if (!isAuthenticated) {
+    if (!session || !session.user) {
       console.log('Blocking checkout attempt from unauthenticated user');
       return NextResponse.json(
         { error: 'Authentication required. Please log in to make a purchase.' },
         { status: 401 }
       );
     }
-
+    
     // Validate Stripe environment variables
-    const envValidation = validateStripeEnvironment();
-    if (!envValidation.isValid) {
-      console.error('Stripe environment validation failed:', envValidation.errors);
+    if (!env.STRIPE_SECRET_KEY || !process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
+      console.error('Missing Stripe configuration');
       return NextResponse.json(
         { error: 'Payment system configuration error' },
         { status: 500 }
@@ -234,6 +213,10 @@ export async function POST(request: NextRequest) {
           product_data: {
             name: product.name,
             images: imageUrls,
+            metadata: {
+              product_id: product.id,
+              download_url: product.download_url || null
+            }
           },
           unit_amount: Math.round(product.price * 100), // Convert to cents
         },
@@ -390,32 +373,33 @@ export async function POST(request: NextRequest) {
     const origin = process.env.NEXT_PUBLIC_SITE_URL || request.headers.get('origin') || 'http://localhost:3001';
     console.log('Creating Stripe checkout session with origin:', origin);
     
-    console.log('Stripe secret key status:', stripeSecretKey ? 'Key exists' : 'Key is missing');
-    if (stripeSecretKey) {
-      console.log('Stripe secret key first 8 chars:', stripeSecretKey.substring(0, 8));
-    }
-    console.log('Line items for checkout:', JSON.stringify(lineItems));
+    // Get user information from session
+    const userId = session.user.id;
+    const userEmail = session.user.email;
     
-    let session: any;
+    console.log(`Creating checkout session for user: ${userId}, email: ${userEmail}`);
+    
+    let stripeSession: any;
     try {
-      session = await optimizedApiCall(async () => {
+      stripeSession = await optimizedApiCall(async () => {
         try {
           const stripe = await getStripeInstance();
           return await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: `${origin}/my-account?session_id={CHECKOUT_SESSION_ID}&order_id=${orderData.id}&guest=true`,
+            success_url: `${origin}/my-account?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/products`,
+            customer_email: userEmail,
+            client_reference_id: userId,
             metadata: {
-              order_id: orderData.id,
-              user_id: guestId,
-              is_guest: 'true',
-              currency: 'aud',
+              userId: userId,
+              userEmail: userEmail,
+              products: JSON.stringify(cartItems.map((item: any) => item.id)),
             },
             allow_promotion_codes: true,
             billing_address_collection: 'auto',
-            currency: 'aud',
+            currency: 'usd',
             custom_text: {
               submit: {
                 message: 'Complete your purchase'
@@ -441,7 +425,7 @@ export async function POST(request: NextRequest) {
       // Direct Stripe call as fallback
       try {
         const stripe = await getStripeInstance();
-        session = await stripe.checkout.sessions.create({
+        stripeSession = await stripe.checkout.sessions.create({
           payment_method_types: ['card'],
           line_items: lineItems,
           mode: 'payment',
@@ -475,7 +459,7 @@ export async function POST(request: NextRequest) {
         });
         // Fallback to mock session if Stripe fails completely
         console.log('Using mock checkout session due to Stripe error');
-        session = {
+        stripeSession = {
           url: 'https://example.com/mock-checkout',
           id: 'mock_session_id'
         };
@@ -485,13 +469,13 @@ export async function POST(request: NextRequest) {
     // No email sending - instant access via Stripe payment completion
     
     console.log('Stripe session created:', { 
-      url: session.url ? 'URL exists' : 'URL is missing', 
-      id: session.id ? 'ID exists' : 'ID is missing' 
+      url: stripeSession.url ? 'URL exists' : 'URL is missing', 
+      id: stripeSession.id ? 'ID exists' : 'ID is missing' 
     });
     
     return NextResponse.json({ 
-      url: session.url,
-      sessionId: session.id 
+      url: stripeSession.url,
+      sessionId: stripeSession.id 
     });
   } catch (error: any) {
     console.error('Checkout error:', error);

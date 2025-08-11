@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { signOut } from 'next-auth/react';
 
 export default function ClearAuthPage() {
   const router = useRouter();
@@ -10,17 +10,16 @@ export default function ClearAuthPage() {
   useEffect(() => {
     const clearAuth = async () => {
       try {
-        // Clear Supabase session
-        const supabase = createClient();
-        await supabase.auth.signOut();
+        // Sign out from NextAuth
+        await signOut({ redirect: false });
         
-        // Clear all auth-related cookies
+        // Clear any additional cookies that might be lingering
         const cookiesToClear = [
           'ventaro-auth',
           'ventaro-store-auth-token',
-          'sb-bamqdxclctzwyplecoxt-auth-token',
-          'sb-bamqdxclctzwyplecoxt-auth-token.0',
-          'sb-bamqdxclctzwyplecoxt-auth-token.1'
+          'next-auth.session-token',
+          'next-auth.callback-url',
+          'next-auth.csrf-token'
         ];
         
         cookiesToClear.forEach(cookieName => {

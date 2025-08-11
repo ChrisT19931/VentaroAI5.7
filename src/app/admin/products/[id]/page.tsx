@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { supabase } from '@/lib/supabase';
 
 type Product = {
@@ -20,7 +20,9 @@ type Product = {
 export default function ProductForm({ params }: { params: { id: string } }) {
   const { id } = params;
   const isNewProduct = id === 'new';
-  const { user, isLoading: authLoading } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const authLoading = status === 'loading';
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);

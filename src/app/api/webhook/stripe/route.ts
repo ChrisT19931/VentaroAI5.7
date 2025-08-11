@@ -1,13 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { supabase } from '@/lib/supabase';
-import { Purchase } from '@/types/purchase';
 import { getStripeInstance } from '@/lib/stripe';
+import { env } from '@/lib/env';
+import { sendOrderConfirmationEmail, sendAccessGrantedEmail } from '@/lib/email';
+import fs from 'fs';
+import path from 'path';
 
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+// Get webhook secret from environment variables
+const endpointSecret = env.STRIPE_WEBHOOK_SECRET;
 
-// In-memory cache for processed webhook events (in production, use Redis or database)
-const processedEvents = new Set<string>();
+// Function to log webhook events during development
+function logWebhookEvent(event: any) {
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      const logDir = path.join(process.cwd(), 'logs');
+      if (!fs.existsSync(logDir)) {
+        fs.mkdirSync(logDir, { recursive: true });
+      }
+      
+      const logFile = path.join(logDir, 'stripe-webhook.log');
+      const logData = `${new Date().toISOString()} - ${event.type} - ${event.id}\n${JSON.stringify(event.data.object, null, 2)}\n\n`;
+      
+      fs.appendFileSync(logFile, logData);
+    } catch (error) {
+      console.error('Error logging webhook event:', error);
+    }
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,302 +50,210 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
 
-    console.log('Received Stripe webhook event:', event.type);
+    console.log('Received Stripe webhook event:', event.type, event.id);
+    logWebhookEvent(event);
 
-    // IDEMPOTENCY: Check if we've already processed this event
-    if (processedEvents.has(event.id)) {
-      console.log(`⚠️ Event ${event.id} already processed, returning success to prevent retries`);
+    // Check if we've already processed this event
+    const { data: existingEvent, error: lookupError } = await supabase
+      .from('webhook_events')
+      .select('id')
+      .eq('event_id', event.id)
+      .single();
+
+    if (lookupError && lookupError.code !== 'PGRST116') { // PGRST116 is "not found"
+      console.error('Error checking for existing event:', lookupError);
+    }
+
+    if (existingEvent) {
+      console.log(`Event ${event.id} already processed, skipping`);
       return NextResponse.json({ received: true, status: 'already_processed' });
     }
 
+    // Record this event to prevent duplicate processing
+    const { error: insertError } = await supabase
+      .from('webhook_events')
+      .insert({
+        event_id: event.id,
+        event_type: event.type,
+        processed_at: new Date().toISOString(),
+      });
+
+    if (insertError) {
+      console.error('Error recording webhook event:', insertError);
+      // Continue processing anyway, worst case we might process twice
+    }
+
     // Handle the event
-      switch (event.type) {
-        case 'checkout.session.completed':
-          await handleCheckoutSessionCompleted(event.data.object);
-          break;
-        case 'payment_intent.succeeded':
-          await handlePaymentIntentSucceeded(event.data.object);
-          break;
-        default:
-          console.log(`Unhandled event type: ${event.type}`);
-      }
+    switch (event.type) {
+      case 'checkout.session.completed':
+        await handleCheckoutSessionCompleted(event.data.object);
+        break;
+      case 'payment_intent.succeeded':
+        await handlePaymentIntentSucceeded(event.data.object);
+        break;
+      default:
+        console.log(`Unhandled event type: ${event.type}`);
+    }
 
-      // Mark event as processed after successful handling
-      processedEvents.add(event.id);
-      
-      // Clean up old events (keep only last 1000 to prevent memory leaks)
-      if (processedEvents.size > 1000) {
-        const eventsArray = Array.from(processedEvents);
-        processedEvents.clear();
-        eventsArray.slice(-500).forEach(id => processedEvents.add(id));
-      }
-
-      return NextResponse.json({ received: true, event_id: event.id });
-  } catch (error: any) {
-    console.error('Webhook error:', error);
-    return NextResponse.json(
-      { error: 'Webhook handler failed' },
-      { status: 500 }
-    );
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    console.error('Error processing webhook:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
 async function handleCheckoutSessionCompleted(session: any) {
-  console.log('Processing checkout session completed:', session.id);
-
   try {
-    // DUPLICATE PREVENTION: Check if this session has already been processed
-    const { data: existingPurchases } = await supabase
-      .from('purchases')
-      .select('id')
-      .eq('session_id', session.id)
-      .limit(1);
+    console.log('Processing checkout.session.completed event');
     
-    if (existingPurchases && existingPurchases.length > 0) {
-      console.log(`⚠️ Session ${session.id} already processed, skipping to prevent duplicates`);
-      return;
-    }
-
-    // Get line items to see what was purchased
-    const stripe = await getStripeInstance();
-    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-      expand: ['data.price.product']
-    });
-
+    const customerId = session.customer;
     const customerEmail = session.customer_details?.email;
+    const userId = session.client_reference_id;
+    const lineItems = session.line_items?.data || [];
+    
     if (!customerEmail) {
       console.error('No customer email found in session');
       return;
     }
-
-    console.log(`Creating purchase records for ${customerEmail}`);
-
-    // Enhanced user linking: prioritize registered users over payment email
-    let userId = session.metadata?.user_id;
-    let linkedUserEmail = customerEmail; // Default to payment email
     
-    if (!userId) {
-      // Step 1: Try to find existing user by payment email
-      const { data: users } = await supabase.auth.admin.listUsers();
-      let existingUser = users?.users?.find((user: { email: string }) => user.email === customerEmail);
-      
-      if (existingUser) {
-        userId = existingUser.id;
-        linkedUserEmail = existingUser.email;
-        console.log(`✅ Found registered user by payment email: ${userId} (${linkedUserEmail})`);
-      } else {
-        // Step 2: Check if there are any existing purchases with this payment email
-        // that might be linked to a different registered user
-        const { data: existingPurchases } = await supabase
-          .from('purchases')
-          .select('user_id, customer_email')
-          .eq('customer_email', customerEmail)
-          .not('user_id', 'is', null)
-          .limit(1);
-        
-        if (existingPurchases && existingPurchases.length > 0) {
-          // Found existing purchase with this email linked to a user
-          const linkedUserId = existingPurchases[0].user_id;
-          const { data: linkedUserData } = await supabase.auth.admin.getUserById(linkedUserId);
-          
-          if (linkedUserData.user) {
-            userId = linkedUserId;
-            linkedUserEmail = linkedUserData.user.email || customerEmail;
-            console.log(`✅ Found existing user link via previous purchase: ${userId} (${linkedUserEmail})`);
-          }
-        } else {
-          console.log(`ℹ️  No registered user found for payment email: ${customerEmail}`);
-          console.log('   Purchase will be created with payment email only');
-          console.log('   User can claim this purchase by registering with this email');
-        }
-      }
-    } else {
-      // User ID provided in metadata, get their registered email
-      const { data: userData } = await supabase.auth.admin.getUserById(userId);
-      if (userData.user) {
-        linkedUserEmail = userData.user.email || customerEmail;
-        console.log(`✅ Using registered user from metadata: ${userId} (${linkedUserEmail})`);
-      }
+    // If no line items in the session, fetch them from Stripe
+    let items = lineItems;
+    if (items.length === 0) {
+      const stripe = await getStripeInstance();
+      const lineItemsResponse = await stripe.checkout.sessions.listLineItems(session.id);
+      items = lineItemsResponse.data;
     }
-
-    // Create purchase records for each item
-    const purchasePromises = lineItems.data.map(async (item: any) => {
-      const product = item.price.product;
-      if (!product) return;
-
-      // Map Stripe product to our internal product IDs
-      let internalProductId = product.id;
-      const productName = product.name.toLowerCase();
+    
+    // Process each purchased item
+    for (const item of items) {
+      const priceId = item.price?.id;
+      if (!priceId) continue;
       
-      if (productName.includes('ebook') || productName.includes('e-book') || productName.includes('mastery guide')) {
-        internalProductId = 'ebook';
-      } else if (productName.includes('prompt') || productName.includes('ai prompt')) {
-        internalProductId = 'prompts';
-      } else if (productName.includes('coaching') || productName.includes('strategy session')) {
-        internalProductId = 'coaching';
-      }
-
-      const purchaseData = {
-        user_id: userId,
-        product_id: internalProductId,
-        product_name: product.name,
-        price: (item.amount_total || 0) / 100, // Convert from cents - using 'price' to match schema
-        customer_email: customerEmail, // Always use payment email for consistency
-        session_id: session.id, // Changed from stripe_session_id to match database schema
-        download_url: '/my-account' // Set default download URL
-      };
+      // Get product details from Stripe
+      const stripe = await getStripeInstance();
+      const price = await stripe.prices.retrieve(priceId);
+      const productId = price.product as string;
+      const product = await stripe.products.retrieve(productId);
       
-      // Log the linking decision for debugging
-      if (userId) {
-        console.log(`🔗 Linking purchase to registered user: ${userId}`);
-        console.log(`   Registered email: ${linkedUserEmail}`);
-        console.log(`   Payment email: ${customerEmail}`);
-      } else {
-        console.log(`📧 Creating unlinked purchase for email: ${customerEmail}`);
-        console.log('   This purchase can be claimed when user registers with this email');
-      }
-
-      console.log('Creating purchase record:', purchaseData);
-
-      // ENHANCED DUPLICATE PREVENTION: Use insert with conflict handling
-      const { data: insertResult, error: purchaseError } = await supabase
+      // Create purchase record
+      const { data: purchase, error } = await supabase
         .from('purchases')
-        .insert(purchaseData)
-        .select('id');
-
-      if (purchaseError) {
-        // Check if it's a duplicate key violation (PGRST09 or 23505)
-        if (purchaseError.code === 'PGRST09' || purchaseError.code === '23505' || 
-            purchaseError.message?.includes('duplicate') || 
-            purchaseError.message?.includes('unique constraint')) {
-          console.log(`ℹ️ Purchase already exists for ${product.name}, skipping duplicate`);
-          return; // Skip this duplicate, don't throw error
-        }
-        console.error('Error creating purchase record:', purchaseError);
-        throw purchaseError;
+        .insert({
+          user_id: userId,
+          customer_email: customerEmail,
+          product_id: productId,
+          price_id: priceId,
+          amount: price.unit_amount ? price.unit_amount / 100 : 0,
+          currency: price.currency,
+          status: 'active',
+          stripe_session_id: session.id,
+          stripe_customer_id: customerId,
+          created_at: new Date().toISOString(),
+        })
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Error creating purchase record:', error);
+        continue;
       }
-
-      console.log(`✅ Purchase record created for ${product.name}`);
-    });
-
-    await Promise.all(purchasePromises);
-    console.log('✅ All purchase records created successfully');
-    
-    // Auto-link any existing unlinked purchases if user was found
-    if (userId && linkedUserEmail !== customerEmail) {
-      await linkExistingPurchasesToUser(userId, linkedUserEmail, customerEmail);
+      
+      console.log(`Created purchase record for ${customerEmail}, product ${productId}`);
+      
+      // Send confirmation email
+      await sendOrderConfirmationEmail({
+        email: customerEmail,
+        orderDetails: {
+          productName: product.name,
+          price: price.unit_amount ? price.unit_amount / 100 : 0,
+          orderId: purchase.id,
+        },
+      });
+      
+      // Send access granted email
+      await sendAccessGrantedEmail({
+        email: customerEmail,
+        productName: product.name,
+        accessLink: `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`,
+      });
     }
-
-    // Send confirmation email with download links
-    await sendPurchaseConfirmationEmail(customerEmail, lineItems.data, session);
-
   } catch (error) {
-    console.error('Error handling checkout session completed:', error);
-    throw error;
+    console.error('Error handling checkout.session.completed:', error);
   }
 }
 
 async function handlePaymentIntentSucceeded(paymentIntent: any) {
-  console.log('Processing payment intent succeeded:', paymentIntent.id);
-  
-  // Additional logic for payment intent if needed
-  // This is mainly for backup/verification purposes
-}
-
-// Helper function to link existing unlinked purchases to a registered user
-async function linkExistingPurchasesToUser(userId: string, registeredEmail: string, paymentEmail: string) {
   try {
-    console.log(`🔄 Checking for existing unlinked purchases to link to user ${userId}...`);
+    console.log('Processing payment_intent.succeeded event');
     
-    // Find unlinked purchases with either the registered email or payment email
-    const { data: unlinkPurchases, error: fetchError } = await supabase
+    // Check if this payment intent is already associated with a purchase
+    const { data: existingPurchase, error: lookupError } = await supabase
       .from('purchases')
-      .select('*')
-      .is('user_id', null)
-      .or(`customer_email.eq.${registeredEmail},customer_email.eq.${paymentEmail}`);
+      .select('id')
+      .eq('stripe_payment_intent_id', paymentIntent.id)
+      .single();
     
-    if (fetchError) {
-      console.error('Error fetching unlinked purchases:', fetchError);
+    if (!lookupError && existingPurchase) {
+      console.log(`Payment intent ${paymentIntent.id} already processed, skipping`);
       return;
     }
     
-    if (unlinkPurchases && unlinkPurchases.length > 0) {
-      console.log(`📦 Found ${unlinkPurchases.length} unlinked purchase(s) to link`);
-      
-      // Update all unlinked purchases to link them to the user
-      const { error: updateError } = await supabase
-        .from('purchases')
-        .update({ 
-          user_id: userId
-          // Keep customer_email as is for consistency
-        })
-        .is('user_id', null)
-        .or(`customer_email.eq.${registeredEmail},customer_email.eq.${paymentEmail}`);
-      
-      if (updateError) {
-        console.error('Error linking existing purchases:', updateError);
-      } else {
-        console.log(`✅ Successfully linked ${unlinkPurchases.length} existing purchase(s) to user ${userId}`);
-        unlinkPurchases.forEach((purchase: Purchase) => {
-          console.log(`   - ${purchase.product_name} (${purchase.customer_email})`);
-        });
-      }
-    } else {
-      console.log('ℹ️  No existing unlinked purchases found to link');
+    // If the payment intent has metadata with user and product info, create a purchase
+    const metadata = paymentIntent.metadata || {};
+    const userId = metadata.userId;
+    const productId = metadata.productId;
+    const customerEmail = paymentIntent.receipt_email || metadata.customerEmail;
+    
+    if (!userId || !productId || !customerEmail) {
+      console.log('Missing required metadata in payment intent, skipping');
+      return;
     }
-  } catch (error) {
-    console.error('Error in linkExistingPurchasesToUser:', error);
-  }
-}
-
-// Helper function to send confirmation email
-async function sendPurchaseConfirmationEmail(email: string, items: any[], session: any) {
-  try {
-    // Import the sendOrderConfirmationEmail function
-    const { sendOrderConfirmationEmail } = await import('@/lib/sendgrid');
     
-    // Format order items for the email
-    const orderItems = items.map(item => ({
-      name: item.price.product.name,
-      price: (item.amount_total || 0) / 100,
-      id: item.price.product.id
-    }));
+    // Create purchase record
+    const { data: purchase, error } = await supabase
+      .from('purchases')
+      .insert({
+        user_id: userId,
+        customer_email: customerEmail,
+        product_id: productId,
+        amount: paymentIntent.amount ? paymentIntent.amount / 100 : 0,
+        currency: paymentIntent.currency,
+        status: 'active',
+        stripe_payment_intent_id: paymentIntent.id,
+        stripe_customer_id: paymentIntent.customer,
+        created_at: new Date().toISOString(),
+      })
+      .select()
+      .single();
     
-    // Generate download links for digital products
-    const downloadLinks = orderItems.map(item => {
-      let slug = '';
-      const productName = item.name.toLowerCase();
-      
-      if (productName.includes('ebook') || productName.includes('e-book') || productName.includes('mastery guide')) {
-        slug = 'ebook';
-      } else if (productName.includes('prompt') || productName.includes('ai prompt')) {
-        slug = 'prompts';
-      } else if (productName.includes('coaching') || productName.includes('strategy session')) {
-        slug = 'coaching';
-      }
-      
-      return {
-        productName: item.name,
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'}/my-account`
-      };
-    });
+    if (error) {
+      console.error('Error creating purchase record from payment intent:', error);
+      return;
+    }
     
-    // Calculate total
-    const total = items.reduce((sum, item) => sum + (item.amount_total || 0) / 100, 0);
+    console.log(`Created purchase record for ${customerEmail}, product ${productId} from payment intent`);
     
-    // Send the confirmation email
+    // Get product details from Stripe
+    const stripe = await getStripeInstance();
+    const product = await stripe.products.retrieve(productId);
+    
+    // Send confirmation email
     await sendOrderConfirmationEmail({
-      email,
-      orderNumber: session.id,
-      orderItems,
-      total,
-      downloadLinks,
-      isGuest: !session.metadata?.user_id
+      email: customerEmail,
+      orderDetails: {
+        productName: product.name,
+        price: paymentIntent.amount ? paymentIntent.amount / 100 : 0,
+        orderId: purchase.id,
+      },
     });
     
-    console.log(`✅ Confirmation email sent to ${email}`);
+    // Send access granted email
+    await sendAccessGrantedEmail({
+      email: customerEmail,
+      productName: product.name,
+      accessLink: `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`,
+    });
   } catch (error) {
-    console.error('Error sending confirmation email:', error);
-    // Don't throw the error to prevent webhook failure
+    console.error('Error handling payment_intent.succeeded:', error);
   }
 }

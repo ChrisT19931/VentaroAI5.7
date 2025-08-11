@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
@@ -21,7 +21,8 @@ interface Booking {
 }
 
 export default function CoachingBookingsAdmin() {
-  const { user } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
   const router = useRouter();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,12 +32,14 @@ export default function CoachingBookingsAdmin() {
   const [meetingLink, setMeetingLink] = useState('');
 
   useEffect(() => {
-    if (!user) {
+    if (status === 'loading') return;
+    
+    if (status === 'unauthenticated') {
       router.push('/login');
       return;
     }
     fetchBookings();
-  }, [user, router]);
+  }, [status, user, router]);
 
   const fetchBookings = async () => {
     try {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
-import { simpleAuth } from '@/lib/auth-simple';
+import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { validatePassword } from '@/utils/validation';
 // import { sendWelcomeEmail } from '@/lib/sendgrid';
@@ -40,14 +40,31 @@ export default function SignupPage() {
     try {
       setIsLoading(true);
       
-      // Use SimpleAuth for automatic login after signup
-      const result = await simpleAuth.signUp(email, password);
+      // Register user via API endpoint
+      const signupResponse = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
       
-      if (!result.success) {
-        throw new Error(result.error || 'Signup failed');
+      if (!signupResponse.ok) {
+        const data = await signupResponse.json();
+        throw new Error(data.error || 'Signup failed');
       }
       
-      // User is now automatically logged in
+      // Now sign in the user with NextAuth
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+      
+      if (result?.error) {
+        throw new Error(result.error || 'Login after signup failed');
+      }
+      
       toast.success('Account created successfully! You are now logged in.');
       
       // Send welcome email

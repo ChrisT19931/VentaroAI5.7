@@ -5,10 +5,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { CartProvider } from '@/context/CartContext'
-import { ToastProvider } from '@/context/ToastContext'
-import { SimpleAuthProvider } from '@/contexts/SimpleAuthContext'
-import PerformanceOptimizer from '@/components/PerformanceOptimizer'
+import Providers from '@/components/Providers'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -69,18 +66,13 @@ export default function RootLayout({
         <meta name="google-site-verification" content="zXt_s8PvYsJRPZuS-Lxvv9r1sLkVqbaYfbPl2l64-B4" />
       </head>
       <body className={`${inter.variable} font-sans`}>
-        <SimpleAuthProvider>
-          <CartProvider>
-            <ToastProvider>
-              <PerformanceOptimizer />
-              <Navbar />
-              <main>
-                {children}
-              </main>
-              <Footer />
-            </ToastProvider>
-          </CartProvider>
-        </SimpleAuthProvider>
+        <Providers>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   )

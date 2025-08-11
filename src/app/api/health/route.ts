@@ -5,7 +5,20 @@ import { checkSendGridHealth, getEmailStats } from '@/lib/sendgrid';
 import { getSystemHealth, getOptimizationStatus } from '@/lib/system-optimizer';
 import { performanceMonitor } from '@/lib/performance-monitor';
 
+/**
+ * Health check endpoint
+ * Returns a simple { ok: true } response for basic health checks
+ * or detailed health information for comprehensive monitoring
+ */
 export async function GET(request: NextRequest) {
+  // Check if this is a basic health check
+  const isBasicCheck = request.nextUrl.searchParams.get('mode') === 'basic';
+  
+  if (isBasicCheck) {
+    return NextResponse.json({ ok: true });
+  }
+  
+  // Detailed health check for monitoring and diagnostics
   const startTime = Date.now();
   
   try {

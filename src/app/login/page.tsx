@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { simpleAuth } from '@/lib/auth-simple';
+import { signIn } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 
 export default function LoginPage() {
@@ -58,20 +58,22 @@ export default function LoginPage() {
         // Handle login
         console.log('Attempting login with email:', email);
         
-        const result = await simpleAuth.signIn(email, password);
+        const result = await signIn('credentials', {
+          email,
+          password,
+          redirect: false
+        });
         
-        if (!result.success) {
+        if (result?.error) {
           throw new Error(result.error || 'Login failed');
         }
         
         console.log('Login successful, redirecting to My Account');
         toast.success('Login successful!');
         
-        // Longer delay to ensure cookie is properly set and processed
-        // This helps prevent flashing issues during navigation
-        setTimeout(() => {
-          router.push('/my-account');
-        }, 500);
+        // Redirect to My Account or callback URL
+        const callbackUrl = searchParams?.get('callbackUrl') || '/my-account';
+        router.push(callbackUrl);
       }
     } catch (error: any) {
       toast.error(error.message || 'Failed to login. Please try again.');

@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
+import { PRODUCT_MAPPINGS, LEGACY_PRODUCT_MAPPINGS } from '@/config/products';
 
 // Define protected routes that require authentication
 const protectedRoutes = [
   '/my-account',
   '/checkout',
   '/checkout/success',
+  '/downloads',
+  '/vip-portal',
 ];
 
 // Define admin-only routes
@@ -13,67 +17,99 @@ const adminRoutes = [
   '/admin',
 ];
 
+// Define routes that require specific product entitlements
+const productProtectedRoutes: Record<string, string[]> = {
+  '/downloads/ebook': ['ebook', '1'],
+  '/downloads/prompts': ['prompts', '2'],
+  '/downloads/video': ['video', '4'],
+  '/vip-portal': ['support', '5'],
+};
+
 export async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  console.log('Simple middleware executing for path:', path);
-
-  // Check for simple auth cookie
-  const authCookie = req.cookies.get('ventaro-auth');
-  const isAuthenticated = authCookie?.value === 'true';
+  console.log('Middleware executing for path:', path);
   
-  // Log all cookies for debugging
-  const allCookies = Object.fromEntries(req.cookies.getAll().map(c => [c.name, c.value]));
-  console.log('All cookies:', allCookies);
-  console.log('Auth cookie present:', isAuthenticated);
-  console.log('Auth cookie details:', authCookie ? JSON.stringify(authCookie) : 'null');
+  // Skip middleware for API routes and static files
+  if (
+    path.startsWith('/api') ||
+    path.startsWith('/_next') ||
+    path.startsWith('/static') ||
+    path.startsWith('/images') ||
+    path.includes('.') // Static files like favicon.ico
+  ) {
+    return NextResponse.next();
+  }
   
-  // Add a longer delay to ensure cookie processing is complete
-  // This can help prevent flashing issues during authentication checks
-  await new Promise(resolve => setTimeout(resolve, 100));
+  // Get the user's session token from NextAuth
+  const token = await getToken({ 
+    req, 
+    secret: process.env.NEXTAUTH_SECRET 
+  });
   
-  // Check for Supabase auth cookies - but don't rely on them for authentication
-  // This is just for debugging purposes
-  const supabaseAccessToken = req.cookies.get('sb-access-token');
-  const supabaseRefreshToken = req.cookies.get('sb-refresh-token');
-  console.log('Supabase cookies present:', !!supabaseAccessToken, !!supabaseRefreshToken);
+  const isAuthenticated = !!token;
+  console.log('User authenticated:', isAuthenticated);
   
-  // We'll only use the ventaro-auth cookie for authentication decisions
-  // This simplifies the auth flow and prevents flashing issues
-
   // Handle protected routes
   if (protectedRoutes.some(route => path.startsWith(route))) {
     if (!isAuthenticated) {
       console.log('Redirecting from protected route to login:', path);
       const redirectUrl = new URL('/login', req.url);
+      redirectUrl.searchParams.set('callbackUrl', path);
       return NextResponse.redirect(redirectUrl);
     } else {
       console.log('User accessing protected route:', path);
+      
+      // Check for product-specific protection
+      for (const [protectedPath, requiredProducts] of Object.entries(productProtectedRoutes)) {
+        if (path === protectedPath || path.startsWith(`${protectedPath}/`)) {
+          // Check if user has the required entitlement
+          const userEntitlements = token.entitlements as string[] || [];
+          const hasAccess = requiredProducts.some(product => userEntitlements.includes(product));
+          
+          if (!hasAccess) {
+            console.log('User lacks required entitlement for:', path);
+            // Redirect to products page if user doesn't have access
+            return NextResponse.redirect(new URL('/products', req.url));
+          }
+        }
+      }
     }
   }
 
-  // Allow all authenticated users to access admin routes
-if (adminRoutes.some(route => path.startsWith(route))) {
-  if (!isAuthenticated) {
-    console.log('Redirecting from admin route to login:', path);
-    const redirectUrl = new URL('/login', req.url);
-    return NextResponse.redirect(redirectUrl);
+  // Handle admin routes - check for admin role in token
+  if (adminRoutes.some(route => path.startsWith(route))) {
+    if (!isAuthenticated) {
+      console.log('Redirecting from admin route to login:', path);
+      const redirectUrl = new URL('/login', req.url);
+      redirectUrl.searchParams.set('callbackUrl', path);
+      return NextResponse.redirect(redirectUrl);
+    }
+    
+    // Check if user has admin role
+    const userRoles = token.roles as string[] || [];
+    if (!userRoles.includes('admin')) {
+      console.log('User lacks admin role, redirecting to home');
+      return NextResponse.redirect(new URL('/', req.url));
+    }
+    
+    console.log('Admin user accessing admin route:', path);
   }
-  console.log('User accessing admin route:', path);
-}
 
-  // Allow access to clear-auth route regardless of authentication status
-  if (path === '/clear-auth') {
-    console.log('Allowing access to clear-auth route');
+  // Allow access to public routes regardless of authentication status
+  if (path === '/login' || path === '/register' || path === '/clear-auth') {
+    console.log('Allowing access to public route:', path);
     return NextResponse.next();
   }
-
-  // Handle login/signup routes when user is already logged in
-  if ((path === '/login' || path === '/signup') && isAuthenticated) {
-    console.log('User already logged in, redirecting from', path, 'to /my-account');
-    return NextResponse.redirect(new URL('/my-account', req.url));
+  
+  // Add user info to headers for use in the application
+  const response = NextResponse.next();
+  if (isAuthenticated && token) {
+    response.headers.set('x-user-id', token.sub as string);
+    response.headers.set('x-user-email', token.email as string);
+    response.headers.set('x-user-authenticated', 'true');
   }
-
-  return NextResponse.next();
+  
+  return response;
 }
 
 // Configure the middleware to run on specific paths

@@ -4,12 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession, signOut } from 'next-auth/react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { items } = useCart();
-  const { user } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user || null;
 
   return (
     <nav className="glass-panel backdrop-blur-md z-50 sticky top-0">

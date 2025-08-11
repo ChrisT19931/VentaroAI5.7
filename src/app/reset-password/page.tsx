@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/client';
 import { toast } from 'react-hot-toast';
 import { validatePassword } from '@/utils/validation';
+import { signIn } from 'next-auth/react';
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState('');
@@ -16,18 +16,13 @@ export default function ResetPasswordPage() {
   // Using react-hot-toast directly
 
   useEffect(() => {
-    // Check if we have a hash in the URL (from the password reset email)
-    const checkUser = async () => {
-      const supabase = createClient();
-      const { data } = await supabase.auth.getUser();
-      
-      // If no user and no hash, redirect to login
-      if (!data.user && !window.location.hash) {
-        router.push('/login');
-      }
-    };
+    // Check if we have a token in the URL (from the password reset email)
+    const token = new URLSearchParams(window.location.search).get('token');
     
-    checkUser();
+    // If no token, redirect to login
+    if (!token) {
+      router.push('/login');
+    }
   }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,14 +46,29 @@ export default function ResetPasswordPage() {
     
     try {
       setIsLoading(true);
-      const supabase = createClient();
       
-      const { error } = await supabase.auth.updateUser({
-        password,
+      // Get token from URL
+      const token = new URLSearchParams(window.location.search).get('token');
+      
+      if (!token) {
+        throw new Error('Reset token is missing');
+      }
+      
+      // Call API to reset password
+      const response = await fetch('/api/auth/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          token,
+          password 
+        }),
       });
       
-      if (error) {
-        throw error;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to reset password');
       }
       
       setIsSuccess(true);

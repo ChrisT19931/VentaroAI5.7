@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
 
 export default function DownloadsPage() {
-  const { user } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,9 @@ export default function DownloadsPage() {
   const [downloadingItems, setDownloadingItems] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    if (!user) {
+    if (status === 'loading') return;
+    
+    if (status === 'unauthenticated') {
       router.push('/login?redirect=/downloads');
       return;
     }

@@ -3,14 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import DownloadPrompts from '@/components/downloads/DownloadPrompts';
 import DownloadEbook from '@/components/downloads/DownloadEbook';
 import DownloadCoaching from '@/components/downloads/DownloadCoaching';
 
 export default function DynamicDownloadPage() {
-  const { user } = useSimpleAuth();
+  const { data: session } = useSession();
+  const user = session?.user;
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();

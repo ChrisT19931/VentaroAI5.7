@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useSimpleAuth } from '@/contexts/SimpleAuthContext';
+import { useSession } from 'next-auth/react';
 import { supabase } from '@/lib/supabase';
 import Spinner from '@/components/ui/Spinner';
 
@@ -46,7 +46,9 @@ const FALLBACK_PRODUCTS: Product[] = [
 ];
 
 export default function PurchaseForm() {
-  const { user, isAuthenticated } = useSimpleAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const isAuthenticated = status === 'authenticated';
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
