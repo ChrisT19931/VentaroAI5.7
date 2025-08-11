@@ -81,14 +81,10 @@ export default function Home() {
       <section className="py-24 bg-gradient-to-br from-gray-950 via-black to-gray-950 relative overflow-hidden z-10">
         {/* Professional Dark Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-950/90 via-black to-gray-950/90"></div>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-slate-700/20 to-slate-900/20 rounded-2xl rotate-12 animate-pulse" style={{animationDuration: '3s'}}></div>
-          <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-slate-600/20 to-slate-800/20 rounded-xl rotate-45 animate-pulse delay-1000" style={{animationDuration: '3s'}}></div>
-          <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-slate-500/10 to-slate-700/10 rounded-full animate-pulse delay-500" style={{animationDuration: '4s'}}></div>
-          {/* Floating particles */}
-          <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-emerald-400/30 rounded-full animate-bounce" style={{animationDelay: '0s', animationDuration: '2s'}}></div>
-          <div className="absolute top-3/4 left-1/2 w-1 h-1 bg-blue-400/40 rounded-full animate-bounce" style={{animationDelay: '1s', animationDuration: '3s'}}></div>
-          <div className="absolute top-1/2 right-1/3 w-3 h-3 bg-purple-400/20 rounded-full animate-bounce" style={{animationDelay: '2s', animationDuration: '2.5s'}}></div>
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-slate-700/10 to-slate-900/10 rounded-2xl rotate-12"></div>
+          <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-slate-600/10 to-slate-800/10 rounded-xl rotate-45"></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-slate-500/5 to-slate-700/5 rounded-full"></div>
         </div>
         
         {/* Video Offer Section - Primary Offer */}
@@ -388,13 +384,13 @@ export default function Home() {
                 <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">30 proven AI prompts for building online businesses.</p>
                 
                 <div className="space-y-3 mb-4">
-                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">DIY website building</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">DIY website building</span>
                   </div>
-                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full shadow-lg group-hover:shadow-emerald-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Learn to build yourself</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Learn to build yourself</span>
                   </div>
                 </div>
                 
@@ -451,13 +447,13 @@ export default function Home() {
                 <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">Complete AI tools mastery guide for online business.</p>
                 
                 <div className="space-y-3 mb-4">
-                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-2 h-2 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">DIY business building</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">DIY business building</span>
                   </div>
-                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-2 h-2 bg-blue-400 rounded-full shadow-lg group-hover:shadow-blue-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Learn AI tools yourself</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Learn AI tools yourself</span>
                   </div>
                 </div>
                 
@@ -475,6 +471,73 @@ export default function Home() {
                   className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/30"
                 >
                   Get Ebook
+                </DirectCheckoutButton>
+              </div>
+            </div>
+
+            {/* AI Business Strategy Session - Coaching */}
+            <div className="group relative bg-gradient-to-br from-slate-900/95 via-orange-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-orange-500/30 transition-all duration-700 transform hover:-translate-y-6 hover:scale-110 overflow-hidden border-2 border-orange-500/40 card-glow shimmer-effect premium-glow hover:border-orange-500/60 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95">
+              {/* Enhanced glow effects */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-red-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"></div>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-orange-600/30 to-red-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700"></div>
+              
+              {/* Floating Particles Effect */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0.9s'}}></div>
+                <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-orange-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1.9s'}}></div>
+                <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-red-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2.9s'}}></div>
+              </div>
+              
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110 premium-float" style={{animationDuration: '2s'}}>
+                  COACHING
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-0 group-hover:opacity-50 animate-ping"></div>
+                </div>
+              </div>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 group-hover:text-orange-300 transition-all duration-500 group-hover:drop-shadow-lg premium-icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-xl group-hover:bg-orange-400/40 group-hover:animate-pulse transition-all duration-500"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">AI Business Strategy</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">60-minute 1-on-1 coaching session to build your AI-powered business. Get personalized strategies and implementation guidance.</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">1-on-1 live session</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Personalized strategy</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Implementation report</span>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A$497</div>
+                  <div className="text-xs text-gray-300">one-time</div>
+                </div>
+                <DirectCheckoutButton 
+                  product={{
+                    id: 'ai-business-strategy-session-2025',
+                    name: 'AI Business Strategy Session',
+                    price: 497,
+                    productType: 'digital'
+                  }}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30"
+                >
+                  Book Session
                 </DirectCheckoutButton>
               </div>
             </div>
@@ -514,13 +577,13 @@ export default function Home() {
                 <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">We build professional custom websites and online platforms for you. Higher pricing reflects our time, expertise, and effort.</p>
                 
                 <div className="space-y-3 mb-4">
-                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                    <div className="w-2 h-2 bg-purple-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Professional development</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Professional development</span>
                   </div>
-                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                    <div className="w-2 h-2 bg-purple-400 rounded-full shadow-lg group-hover:shadow-purple-400/50 group-hover:animate-pulse transition-all duration-300"></div>
-                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">We build it for you</span>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">We build it for you</span>
                   </div>
                 </div>
                 
@@ -652,7 +715,7 @@ export default function Home() {
                   </label>
                   <input 
                     type="text" 
-                    name="fullName"
+                    name="name"
                     value={contactForm.name}
                     onChange={handleContactChange}
                     placeholder="Enter your full name"

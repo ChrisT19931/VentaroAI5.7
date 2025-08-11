@@ -104,13 +104,12 @@ const ProductsPage = React.memo(function ProductsPage() {
     };
   }, [fetchProducts]);
   
-  // Performance optimization: Memoize background effects
+  // Performance optimization: Simplified background effects
   const BackgroundEffects = useMemo(() => (
     <div className="absolute inset-0">
-      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}}></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '6s'}}></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-3xl animate-pulse" style={{animationDuration: '8s'}}></div>
-      <StarBackground />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-2xl opacity-50"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-2xl opacity-50"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-blue-500/3 to-purple-500/3 rounded-full blur-2xl opacity-50"></div>
     </div>
   ), []);
   
@@ -232,21 +231,21 @@ const ProductsPage = React.memo(function ProductsPage() {
                     
                     {/* Enhanced Features */}
                     <div className="space-y-4 mb-8">
-                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Complete Video:</span> Step by step process revealed</span>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                        <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>Complete Video:</span> Step by step process revealed</span>
                       </div>
-                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Full Blueprint with all tools & prompts</span>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                        <span className="text-sm text-gray-100 font-medium">Full Blueprint with all tools & prompts</span>
                       </div>
-                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">No Experience Required:</span> Perfect for beginners</span>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                        <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">No Experience Required:</span> Perfect for beginners</span>
                       </div>
-                      <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                        <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Screen recording of entire process</span>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                        <span className="text-sm text-gray-100 font-medium">Screen recording of entire process</span>
                       </div>
                     </div>
                     
@@ -495,61 +494,61 @@ const ProductsPage = React.memo(function ProductsPage() {
                       )}
                       {product.id === 'weekly-support-contract' && (
                         <>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Premium:</span> Expert implementation guidance</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>Premium:</span> Expert implementation guidance</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Priority email support (1 month)</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">Priority email support (1 month)</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Priority:</span> First access to new tools & strategies</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Priority:</span> First access to new tools & strategies</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Ideal companion to the AI Website Masterclass</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">Ideal companion to the AI Website Masterclass</span>
                           </div>
                         </>
                       )}
                       {product.id === '2' && (
                         <>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>30 Prompts:</span> Ready-to-use AI business prompts</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>30 Prompts:</span> Ready-to-use AI business prompts</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Copy-paste templates for instant results</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">Copy-paste templates for instant results</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Speed:</span> 10x faster content creation</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Speed:</span> 10x faster content creation</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Proven prompts used by successful entrepreneurs</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">Proven prompts used by successful entrepreneurs</span>
                           </div>
                         </>
                       )}
                       {product.id === '1' && (
                         <>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>30 Lessons:</span> Complete AI tools mastery course</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>30 Lessons:</span> Complete AI tools mastery course</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Value:</span> Everything needed for online business success</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Value:</span> Everything needed for online business success</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Step-by-step implementation guides</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">Step-by-step implementation guides</span>
                           </div>
                         </>
                       )}

@@ -12,6 +12,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { optimizedDatabaseQuery, optimizedApiCall } from '@/lib/system-optimizer';
 
 // Mock products for when database is not available
+// Product ID mapping for compatibility
+const productIdMapping: Record<string, string> = {
+  'ai-tools-mastery-guide-2025': '1',
+  'ai-prompts-arsenal-2025': '2',
+  'ai-business-strategy-session-2025': '3',
+  'ai-business-video-guide-2025': '4',
+  'weekly-support-contract': '5',
+  'coaching': '3',
+  'test': 'test'
+};
+
 const mockProducts = [
   {
     id: '1',
@@ -47,6 +58,28 @@ const mockProducts = [
     created_at: new Date().toISOString()
   },
   {
+    id: '4',
+    name: 'AI Web Creation Masterclass',
+    description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI.',
+    price: 50.00,
+    image_url: '/images/products/ai-business-video-guide.svg',
+    category: 'Video',
+    featured: true,
+    is_active: true,
+    created_at: new Date().toISOString()
+  },
+  {
+    id: '5',
+    name: 'Support Package',
+    description: 'Premium email support for 1 month with expert guidance on implementing your AI website. Perfect for scaling your AI business with professional assistance.',
+    price: 300.00,
+    image_url: '/images/products/weekly-support.svg',
+    category: 'Support',
+    featured: false,
+    is_active: true,
+    created_at: new Date().toISOString()
+  },
+  {
     id: 'test',
     name: 'Test Product',
     description: 'Test product for development',
@@ -58,6 +91,11 @@ const mockProducts = [
     created_at: new Date().toISOString()
   }
 ];
+
+// Helper function to normalize product ID
+function normalizeProductId(productId: string): string {
+  return productIdMapping[productId] || productId;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -99,7 +137,8 @@ export async function POST(request: NextRequest) {
     const cartItems = items; // For compatibility with the rest of the code
 
     // Fetch product details from database with optimization
-    const productIds = cartItems.map((item: any) => item.id);
+    // Normalize product IDs to handle both old and new ID formats
+    const productIds = cartItems.map((item: any) => normalizeProductId(item.id));
     
     const productsData = await optimizedDatabaseQuery(async () => {
       try {
@@ -145,7 +184,8 @@ export async function POST(request: NextRequest) {
 
     // Create product metadata and line items for Stripe checkout
     const productMetadata = cartItems.map((item: any) => {
-      const product = productsData.find((p: any) => p.id === item.id);
+      const normalizedId = normalizeProductId(item.id);
+      const product = productsData.find((p: any) => p.id === normalizedId);
       
       if (!product) {
         throw new Error(`Product not found: ${item.id}`);
