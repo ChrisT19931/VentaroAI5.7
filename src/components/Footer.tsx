@@ -147,7 +147,7 @@ export default function Footer() {
               {[
                 { name: 'AI Tools Mastery Guide 2025', href: '/products/1' },
                 { name: 'AI Prompts Arsenal 2025', href: '/products/2' },
-                { name: 'AI Business Strategy Session 2025', href: '/products/3' },
+                { name: 'AI Web Creation Masterclass', href: '/products/ai-web-creation-masterclass' },
                 { name: 'All Products', href: '/products' },
               ].map((link) => (
                 <li key={link.name}>

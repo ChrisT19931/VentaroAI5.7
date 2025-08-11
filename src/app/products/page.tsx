@@ -26,7 +26,7 @@ function getProducts() {
     {
       id: 'weekly-support-contract',
       name: 'Support Package',
-      description: '60-minute Google Meet/phone call consultation + unlimited email support for 1 month. Perfect for scaling your AI business with expert guidance.',
+      description: 'Premium email support for 1 month with expert guidance on implementing your AI website. Perfect for scaling your AI business with professional assistance.',
        price: 300.00,
        recurring: false,
       image_url: '/images/products/weekly-support.svg',
@@ -479,11 +479,11 @@ export default function ProductsPage() {
                         <>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Consultation:</span> 60-minute expert session</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Premium:</span> Expert implementation guidance</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Unlimited email support (1 month)</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Priority email support (1 month)</span>
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
@@ -491,7 +491,7 @@ export default function ProductsPage() {
                           </div>
                           <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
                             <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Perfect for scaling your AI business</span>
+                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Ideal companion to the AI Website Masterclass</span>
                           </div>
                         </>
                       )}

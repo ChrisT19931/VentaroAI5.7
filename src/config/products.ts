@@ -1,8 +1,8 @@
 // Product configuration for centralized mapping management
 
 export const PRODUCTS = {
-  video: 'ai-business-video-guide-2025',
-  support: 'weekly-support-contract',
+  video: 'ai-web-creation-masterclass',
+  support: 'support-package',
   prompts: 'ai-prompts-arsenal-2025',
   ebook: 'ai-tools-mastery-guide-2025',
   custom: 'webgen'
@@ -13,7 +13,10 @@ export const LEGACY_PRODUCTS = {
   'ai-prompts-arsenal-2025': 'prompts',
   'ai-tools-mastery-guide-2025': 'ebook',
   'ai-business-strategy-session-2025': 'video', // Redirect old coaching to new video offer
+  'ai-business-video-guide-2025': 'video', // Redirect old video to new masterclass
   'weekly-support-contract-2025': 'support',
+  'weekly-support-contract': 'support',
+  'support-package': 'support',
   'custom-website-creation-2025': 'custom'
 };
 
@@ -21,9 +24,8 @@ export const LEGACY_PRODUCTS = {
 export const PRODUCT_MAPPINGS = {
   'ebook': '1',
   'prompts': '2', 
-  'coaching': '3',
-  'video': 'ai-business-video-guide-2025',
-  'support': 'weekly-support-contract',
+  'video': '3',
+  'support': '5',
   'custom': 'webgen'
 } as const;
 
@@ -31,10 +33,12 @@ export const PRODUCT_MAPPINGS = {
 export const LEGACY_PRODUCT_MAPPINGS = {
   'ai-prompts-arsenal-2025': '2',
   'ai-tools-mastery-guide-2025': '1',
-  'ai-business-strategy-session-2025': 'ai-business-video-guide-2025',
-  'ai-business-video-guide-2025': 'ai-business-video-guide-2025',
-  'weekly-support-contract-2025': 'weekly-support-contract',
-  'weekly-support-contract': 'weekly-support-contract',
+  'ai-business-strategy-session-2025': '3',
+  'ai-business-video-guide-2025': '3',
+  'ai-web-creation-masterclass': '3',
+  'weekly-support-contract-2025': '5',
+  'weekly-support-contract': '5',
+  'support-package': '5',
   'custom-website-creation-2025': 'webgen',
   'webgen': 'webgen'
 } as const;

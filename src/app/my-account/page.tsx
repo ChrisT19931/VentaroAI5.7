@@ -64,21 +64,21 @@ export default function MyAccountPage() {
           owned: false // Default to not owned
         },
         {  
-          id: '4',
+          id: '3',
           name: 'AI Web Creation Masterclass',
           description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI.',
           image_url: '/images/products/ai-web-creation-masterclass.svg',
           viewUrl: '/products/ai-web-creation-masterclass',
-          owned: true, // Always show as owned for all users
+          owned: false, // Default to not owned
           productId: 'ai-web-creation-masterclass'
         },
         {
           id: '5',
           name: 'Support Package',
-          description: '60-minute Google Meet/phone call consultation + unlimited email support for 1 month.',
+          description: 'Premium email support for 1 month with expert guidance on implementing your AI website.',
           image_url: '/images/products/support-package.svg',
           viewUrl: '/products/support-package',
-          owned: true, // Always show as owned for all users
+          owned: false, // Default to not owned
           productId: 'support-package'
         },
 
@@ -107,13 +107,8 @@ export default function MyAccountPage() {
             
             console.log('User purchases found:', userPurchases);
             
-            // Mark products as owned based on user's purchases using the new utility function
+            // Mark products as owned based on user's purchases using the utility function
             const productsWithOwnership = allProducts.map(product => {
-              // AI Web Creation + Support Package is always owned for all users
-              if (product.id === '4' && product.name === 'AI Web Creation + Support Package') {
-                return { ...product, owned: true };
-              }
-              
               const isOwned = userPurchases.some((purchase: Purchase) => {
                 const owns = checkProductOwnershipWithLogging(purchase, product.id, true);
                 return owns;
@@ -127,32 +122,15 @@ export default function MyAccountPage() {
             setLastRefresh(new Date());
           } else {
             console.error('Failed to fetch user purchases');
-            // Ensure AI Web Creation + Support Package is always owned
-            const fallbackProducts = allProducts.map(product => 
-              product.id === '4' && product.name === 'AI Web Creation + Support Package' 
-                ? { ...product, owned: true } 
-                : product
-            );
-            setOwnedProducts(fallbackProducts);
+            setOwnedProducts(allProducts);
           }
         } catch (error) {
           console.error('Error fetching user purchases:', error);
-          // Ensure AI Web Creation + Support Package is always owned
-          const fallbackProducts = allProducts.map(product => 
-            product.id === '4' && product.name === 'AI Web Creation + Support Package' 
-              ? { ...product, owned: true } 
-              : product
-          );
-          setOwnedProducts(fallbackProducts);
+          setOwnedProducts(allProducts);
         }
       } else {
-        // Ensure AI Web Creation + Support Package is always owned
-        const fallbackProducts = allProducts.map(product => 
-          product.id === '4' && product.name === 'AI Web Creation + Support Package' 
-            ? { ...product, owned: true } 
-            : product
-        );
-        setOwnedProducts(fallbackProducts);
+        // Default to all products locked if no user is found
+        setOwnedProducts(allProducts);
       }
     } catch (error) {
       console.error('Error fetching products:', error);

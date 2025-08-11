@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
 import CinematicHero from '../components/3d/CinematicHero'
 import TypewriterText from '../components/TypewriterText'
+import DirectCheckoutButton from '../components/DirectCheckoutButton'
 
 export default function Home() {
   const [contactForm, setContactForm] = useState({
@@ -96,7 +97,7 @@ export default function Home() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20 animate-pulse">
-                🎯 INDUSTRY SHATTERING OFFER - BUILD PLATFORMS NOT JUST WEBSITES
+                🎯 SPECIAL OFFER - ONLY $50 - BUILD PLATFORMS NOT JUST WEBSITES
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
                 Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Entire Platforms</span> Not Just Websites With AI
@@ -165,9 +166,17 @@ export default function Home() {
 
                     </ul>
                   </div>
-                  <a href="/checkout?product=ai-business-video-guide-2025" className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl">
+                  <DirectCheckoutButton 
+                    product={{
+                      id: 'ai-business-video-guide-2025',
+                      name: 'AI Business Video Guide',
+                      price: 50,
+                      productType: 'digital'
+                    }}
+                    className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl"
+                  >
                     BUILD YOUR PLATFORM FOR JUST $50
-                  </a>
+                  </DirectCheckoutButton>
                   <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
                 </div>
               </div>
@@ -330,9 +339,17 @@ export default function Home() {
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A$300</div>
                   <div className="text-xs text-gray-300">one-time payment</div>
                 </div>
-                <a href="/checkout?product=weekly-support-contract-2025" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30">
+                <DirectCheckoutButton 
+                  product={{
+                    id: 'weekly-support-contract-2025',
+                    name: 'Support Package',
+                    price: 300,
+                    productType: 'digital'
+                  }}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30"
+                >
                   Get Support
-                </a>
+                </DirectCheckoutButton>
               </div>
             </div>
 
@@ -385,9 +402,17 @@ export default function Home() {
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-green-400 transition-all duration-500">A$10</div>
                   <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <Link href="/products/2" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-emerald-500/30">
+                <DirectCheckoutButton 
+                  product={{
+                    id: 'ai-prompts-arsenal-2025',
+                    name: 'Full Access To Prompts',
+                    price: 10,
+                    productType: 'digital'
+                  }}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-emerald-500/30"
+                >
                   Get Prompts
-                </Link>
+                </DirectCheckoutButton>
               </div>
             </div>
 
@@ -440,9 +465,17 @@ export default function Home() {
                   <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-500">A$25</div>
                   <div className="text-xs text-gray-300">one-time</div>
                 </div>
-                <Link href="/products/1" className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/30">
+                <DirectCheckoutButton 
+                  product={{
+                    id: 'ai-tools-mastery-guide-2025',
+                    name: 'Full Access To Ebook',
+                    price: 25,
+                    productType: 'digital'
+                  }}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/30"
+                >
                   Get Ebook
-                </Link>
+                </DirectCheckoutButton>
               </div>
             </div>
 

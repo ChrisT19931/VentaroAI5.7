@@ -177,12 +177,12 @@ export default function AboutPage() {
                   className="object-contain" 
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-4 glow-text">AI Business Strategy Session 2025</h3>
+              <h3 className="text-xl font-bold text-white mb-4 glow-text">AI Website Creation Masterclass</h3>
               <p className="text-gray-300 mb-6">
-                Personalized 60-minute strategy sessions to accelerate your AI business journey. Get expert guidance and an implementation report tailored to your specific goals and challenges.
+                Complete step-by-step video showing our process to create a fully operational online business from start-to-finish within 2 hours. Get full control of both backend and frontend code with unlimited customization power.
               </p>
-              <Link href="/products/3" className="neon-button text-sm inline-block">
-                Book Strategy Session →
+              <Link href="/products/ai-business-video-guide-2025" className="neon-button text-sm inline-block">
+                Get Masterclass →
               </Link>
             </div>
           </div>
@@ -263,8 +263,8 @@ export default function AboutPage() {
               <Link href="/products" className="btn-primary btn-lg">
                 Explore Products
               </Link>
-              <Link href="/products/3" className="btn-outline btn-lg">
-                Get Coaching
+              <Link href="/products/ai-business-video-guide-2025" className="btn-outline btn-lg">
+                Get AI Website Masterclass
               </Link>
             </div>
             <div className="mt-8 text-gray-500 text-sm">
