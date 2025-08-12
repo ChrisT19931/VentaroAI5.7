@@ -4,15 +4,17 @@ import { getSupabaseAdmin } from '@/lib/supabase';
 import { redirect } from 'next/navigation';
 
 export async function getServerSideData() {
-  const session = await getServerSession(authOptions);
-  
-  if (!session || !session.user) {
-    redirect('/login');
-  }
+  try {
+    const session = await getServerSession(authOptions);
+    
+    if (!session || !session.user) {
+      console.error('No valid session found, redirecting to login');
+      redirect('/signin');
+    }
 
-  const user = session.user;
-  const userId = user.id;
-  const adminClient = getSupabaseAdmin();
+    const user = session.user;
+    const userId = user.id;
+    const adminClient = getSupabaseAdmin();
   
   try {
     // Fetch user orders with product details
@@ -102,7 +104,15 @@ export async function getServerSideData() {
     return {
       orders: [],
       isAdmin: false,
-      user,
+      user: null,
+    };
+  }
+  } catch (error) {
+    console.error('Error in session handling:', error);
+    return {
+      orders: [],
+      isAdmin: false,
+      user: null,
     };
   }
 }

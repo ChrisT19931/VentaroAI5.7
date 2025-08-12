@@ -21,7 +21,7 @@ export default function OrdersAdmin() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        router.push('/login?redirect=/admin/orders');
+        router.push('/signin?callbackUrl=/admin/orders');
         return;
       }
       

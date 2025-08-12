@@ -41,19 +41,28 @@ export async function middleware(req: NextRequest) {
   }
   
   // Get the user's session token from NextAuth
-  const token = await getToken({ 
-    req, 
-    secret: process.env.NEXTAUTH_SECRET 
-  });
+  let token = null;
+  let isAuthenticated = false;
   
-  const isAuthenticated = !!token;
-  console.log('User authenticated:', isAuthenticated);
+  try {
+    token = await getToken({ 
+      req, 
+      secret: process.env.NEXTAUTH_SECRET 
+    });
+    
+    isAuthenticated = !!token;
+    console.log('User authenticated:', isAuthenticated);
+  } catch (error) {
+    console.error('Error getting token in middleware:', error);
+    // Continue as unauthenticated if there's an error
+    console.log('Authentication error, treating as unauthenticated');
+  }
   
   // Handle protected routes
   if (protectedRoutes.some(route => path.startsWith(route))) {
     if (!isAuthenticated) {
-      console.log('Redirecting from protected route to login:', path);
-      const redirectUrl = new URL('/login', req.url);
+      console.log('Redirecting from protected route to signin:', path);
+      const redirectUrl = new URL('/signin', req.url);
       redirectUrl.searchParams.set('callbackUrl', path);
       return NextResponse.redirect(redirectUrl);
     } else {
@@ -79,8 +88,8 @@ export async function middleware(req: NextRequest) {
   // Handle admin routes - check for admin role in token
   if (adminRoutes.some(route => path.startsWith(route))) {
     if (!isAuthenticated) {
-      console.log('Redirecting from admin route to login:', path);
-      const redirectUrl = new URL('/login', req.url);
+      console.log('Redirecting from admin route to signin:', path);
+      const redirectUrl = new URL('/signin', req.url);
       redirectUrl.searchParams.set('callbackUrl', path);
       return NextResponse.redirect(redirectUrl);
     }
@@ -96,7 +105,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // Allow access to public routes regardless of authentication status
-  if (path === '/login' || path === '/register' || path === '/clear-auth') {
+  if (path === '/signin' || path === '/register' || path === '/clear-auth') {
     console.log('Allowing access to public route:', path);
     return NextResponse.next();
   }

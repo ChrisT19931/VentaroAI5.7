@@ -32,12 +32,12 @@ export default function ClearAuthPage() {
         
         // Wait a moment then redirect to login
         setTimeout(() => {
-          router.push('/login');
+          router.push('/signin');
         }, 1000);
         
       } catch (error) {
         console.error('Error clearing auth:', error);
-        router.push('/login');
+        router.push('/signin');
       }
     };
     

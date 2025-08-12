@@ -72,7 +72,7 @@ export default function EbookContent({ hasAccess = false, isAdmin = false }: Ebo
             
             <div className="flex gap-4 justify-center">
               <Link 
-                href="/login" 
+                href="/signin" 
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Log In

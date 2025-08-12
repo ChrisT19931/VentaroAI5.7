@@ -31,7 +31,7 @@ export default function PurchasesPage() {
     // Redirect if not authenticated
     if (!authLoading && !isAuthenticated) {
       console.log('User not authenticated, redirecting to login');
-      router.push('/login');
+      router.push('/signin');
       return;
     }
 

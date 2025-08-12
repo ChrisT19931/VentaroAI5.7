@@ -37,9 +37,9 @@ export default function UnifiedCheckoutButton({
   const handleCheckout = async () => {
     // Single authentication check for all variants
     if (!isAuthenticated || !user) {
-      toast.error('Please sign up or log in to make a purchase');
+      toast.error('Please sign in to make a purchase');
       const currentPath = window.location.pathname;
-      router.push(`/signup?redirect=${encodeURIComponent(currentPath)}`);
+      router.push(`/signin?callbackUrl=${encodeURIComponent(currentPath)}`);
       return;
     }
 

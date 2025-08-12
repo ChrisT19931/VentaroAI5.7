@@ -46,7 +46,7 @@ export default function ProductForm({ params }: { params: { id: string } }) {
   useEffect(() => {
     // Redirect if not authenticated
     if (!authLoading && !user) {
-      router.push('/login?redirect=/admin');
+      router.push('/signin?callbackUrl=/admin');
       return;
     }
 

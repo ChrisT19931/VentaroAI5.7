@@ -21,7 +21,7 @@ export default function UsersAdmin() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        router.push('/login?redirect=/admin/users');
+        router.push('/signin?callbackUrl=/admin/users');
         return;
       }
       

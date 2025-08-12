@@ -103,9 +103,9 @@ export async function middleware(req: NextRequest) {
   // Handle protected routes
   if (protectedRoutes.some(route => path.startsWith(route))) {
     if (!activeSession) {
-      console.log('Redirecting from protected route to login:', path);
-      // Redirect to login if trying to access protected route without session
-      const redirectUrl = new URL('/login', req.url);
+      console.log('Redirecting from protected route to signin:', path);
+      // Redirect to signin if trying to access protected route without session
+      const redirectUrl = new URL('/signin', req.url);
       return NextResponse.redirect(redirectUrl);
     } else {
       console.log('User accessing protected route:', path, 'User:', activeSession.user.email);
@@ -115,9 +115,9 @@ export async function middleware(req: NextRequest) {
   // Handle admin routes
   if (adminRoutes.some(route => path.startsWith(route))) {
     if (!activeSession) {
-      console.log('Redirecting from admin route to login:', path);
-      // Redirect to login if no session
-      const redirectUrl = new URL('/login', req.url);
+      console.log('Redirecting from admin route to signin:', path);
+      // Redirect to signin if no session
+      const redirectUrl = new URL('/signin', req.url);
       return NextResponse.redirect(redirectUrl);
     }
     
@@ -134,9 +134,9 @@ export async function middleware(req: NextRequest) {
   // Handle product routes that require purchase verification
   if (productRoutes.some(route => path.startsWith(route))) {
     if (!activeSession) {
-      console.log('Redirecting from product route to login:', path);
-      // Redirect to login if no session
-      const redirectUrl = new URL('/login', req.url);
+      console.log('Redirecting from product route to signin:', path);
+      // Redirect to signin if no session
+      const redirectUrl = new URL('/signin', req.url);
       return NextResponse.redirect(redirectUrl);
     }
     
@@ -153,7 +153,7 @@ export async function middleware(req: NextRequest) {
   }
   
   // Handle login/signup routes when user is already logged in
-  if ((path === '/login' || path === '/signup') && activeSession) {
+  if ((path === '/signin' || path === '/signup') && activeSession) {
     // Always redirect to my-account page for authenticated users
     console.log('Middleware: User already logged in, redirecting from', path, 'to /my-account');
     console.log('Middleware: Session user:', activeSession.user.email);

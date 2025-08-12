@@ -49,7 +49,7 @@ export default function AccountClient({ initialOrders, initialIsAdmin, user }: A
           
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6 border border-gray-700">
             <h2 className="text-xl font-semibold text-white mb-4">Account Information</h2>
-            <p className="text-gray-300"><span className="text-gray-400">Email:</span> {user?.email}</p>
+            <p className="text-gray-300"><span className="text-gray-400">Email:</span> {user?.email || 'Loading...'}</p>
             <p className="text-gray-300 mt-2"><span className="text-gray-400">Member since:</span> {user && 'created_at' in user && user.created_at ? formatDate(user.created_at as string) : 'N/A'}</p>
           </div>
         </div>

@@ -20,7 +20,7 @@ export default function AdminDashboard() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        router.push('/login?redirect=/admin');
+        router.push('/signin?callbackUrl=/admin');
         return;
       }
       

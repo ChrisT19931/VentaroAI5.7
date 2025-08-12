@@ -57,7 +57,7 @@ export default function CoachingContent({ hasAccess = false, isAdmin = false }: 
             
             <div className="flex gap-4 justify-center">
               <Link 
-                href="/login" 
+                href="/signin" 
                 className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Log In

@@ -71,7 +71,7 @@ export default function MyAccountPage() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push('/login');
+      router.push('/signin');
       return;
     }
 

@@ -61,8 +61,8 @@ export default function Navbar() {
               )}
             </Link>
             {!user && (
-              <Link href="/login" className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
-                Login
+              <Link href="/signin" className="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20">
+                Sign In
               </Link>
             )}
           </div>
@@ -137,8 +137,8 @@ export default function Navbar() {
             </Link>
           )}
           {!user && (
-            <Link href="/login" className="block px-4 py-3 rounded-xl text-base font-medium bg-blue-600/90 text-white hover:bg-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 text-center">
-              Login
+            <Link href="/signin" className="block px-4 py-3 rounded-xl text-base font-medium bg-blue-600/90 text-white hover:bg-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 text-center">
+              Sign In
             </Link>
           )}
         </div>

@@ -38,7 +38,7 @@ export default function DynamicDownloadPage() {
     
     // Check if user is authenticated
     if (!user) {
-      router.push('/login');
+      router.push('/signin');
       return;
     }
     
@@ -190,7 +190,7 @@ export default function DynamicDownloadPage() {
             
             <div className="flex gap-4 justify-center">
               <Link 
-                href="/login" 
+                href="/signin" 
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Log In

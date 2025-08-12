@@ -20,7 +20,7 @@ export default function VIPPortal() {
     if (status === 'loading') return;
     
     if (status === 'unauthenticated') {
-      router.push('/login?redirect=/vip-portal');
+      router.push('/signin?callbackUrl=/vip-portal');
       return;
     }
 
@@ -100,7 +100,7 @@ export default function VIPPortal() {
                 Browse Products
               </Link>
               <Link 
-                href="/login" 
+                href="/signin" 
                 className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Sign In

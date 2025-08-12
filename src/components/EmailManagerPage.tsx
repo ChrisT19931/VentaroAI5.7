@@ -18,7 +18,7 @@ export default function EmailManagerPage() {
 
   useEffect(() => {
     if (!loading && !user && isClient) {
-      router.push('/login?redirect=/email-manager');
+      router.push('/signin?callbackUrl=/email-manager');
     }
   }, [user, loading, router, isClient]);
 

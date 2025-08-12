@@ -22,7 +22,7 @@ export default function ProductsAdmin() {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        router.push('/login?redirect=/admin/products');
+        router.push('/signin?callbackUrl=/admin/products');
         return;
       }
       

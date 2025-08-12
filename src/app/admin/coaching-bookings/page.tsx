@@ -35,7 +35,7 @@ export default function CoachingBookingsAdmin() {
     if (status === 'loading') return;
     
     if (status === 'unauthenticated') {
-      router.push('/login');
+      router.push('/signin');
       return;
     }
     fetchBookings();

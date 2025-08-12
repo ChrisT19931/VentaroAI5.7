@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     // Create Supabase client
 
 
-    // Sign up the user
+    // Sign up the user with auto-confirmation (no email verification)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
