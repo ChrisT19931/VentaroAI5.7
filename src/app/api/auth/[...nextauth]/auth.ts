@@ -13,6 +13,7 @@ declare module 'next-auth' {
       name?: string;
       entitlements: string[];
       roles?: string[];
+      created_at?: string;
     };
   }
 
@@ -22,6 +23,7 @@ declare module 'next-auth' {
     name?: string;
     entitlements?: string[];
     roles?: string[];
+    created_at?: string;
   }
 }
 
@@ -32,6 +34,7 @@ declare module 'next-auth/jwt' {
     name?: string;
     entitlements: string[];
     roles?: string[];
+    created_at?: string;
   }
 }
 
@@ -84,6 +87,13 @@ export const authOptions: NextAuthOptions = {
           // Extract product IDs as entitlements and user role
           const entitlements = purchases?.map((purchase: { product_id: string }) => purchase.product_id) || [];
           const roles = profile?.user_role ? [profile.user_role] : [];
+          
+          // Get created_at from user metadata or from Supabase created_at
+          let created_at = data.user.created_at;
+          // If backend uses createdAt (camelCase), map it to created_at
+          if (data.user.user_metadata?.createdAt && !created_at) {
+            created_at = data.user.user_metadata.createdAt;
+          }
 
           return {
             id: data.user.id,
@@ -91,6 +101,7 @@ export const authOptions: NextAuthOptions = {
             name: data.user.user_metadata?.name || '',
             entitlements,
             roles,
+            created_at: created_at,
           };
         } catch (error) {
           console.error('Auth error:', error);
@@ -107,6 +118,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email;
         token.entitlements = user.entitlements || [];
         token.roles = user.roles || [];
+        token.created_at = user.created_at;
       }
       return token;
     },
@@ -117,6 +129,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email as string;
         session.user.entitlements = token.entitlements as string[] || [];
         session.user.roles = token.roles as string[] || [];
+        session.user.created_at = token.created_at as string;
       }
       return session;
     },
