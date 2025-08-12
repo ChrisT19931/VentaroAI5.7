@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
 
+// Force update for Vercel deployment
+
 export default async function DownloadsPage() {
   const session = await getServerSession(authOptions);
   

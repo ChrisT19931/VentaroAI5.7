@@ -1,5 +1,6 @@
 'use client';
 
+// Force update for Vercel deployment
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
