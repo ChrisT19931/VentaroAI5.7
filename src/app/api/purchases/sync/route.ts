@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { getStripeInstance } from '@/lib/stripe';
+import Stripe from 'stripe';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,7 +19,9 @@ export async function GET(request: NextRequest) {
 
     // Retrieve the Stripe session
     const stripe = await getStripeInstance();
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ['line_items.data.price']
+    });
 
     if (!session) {
       return NextResponse.json(
@@ -42,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     // Get line items from the session
     const lineItemsResponse = await stripe.checkout.sessions.listLineItems(sessionId);
-    const items = lineItemsResponse.data || [];
+    const items: Stripe.LineItem[] = lineItemsResponse.data || [];
 
     if (items.length === 0) {
       return NextResponse.json(
@@ -52,8 +55,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Process each purchased item
-    const purchasePromises = items.map(async (item) => {
-      const priceId = item.price?.id;
+    const purchasePromises = items.map(async (item: Stripe.LineItem) => {
+      const priceId = typeof item.price === 'string' ? item.price : item.price?.id;
       if (!priceId) return null;
 
       // Get product details from Stripe
