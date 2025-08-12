@@ -88,7 +88,7 @@ export default function PurchaseForm() {
   }, [fetchProducts]);
 
   const handlePurchase = async (product: Product) => {
-    if (!isAuthenticated || !user) {
+    if (!isAuthenticated || !user || !user.email) {
       setMessage('Please log in to make a purchase');
       setMessageType('error');
       return;

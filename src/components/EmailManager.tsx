@@ -88,9 +88,10 @@ export default function EmailManager({ className = '' }: EmailManagerProps) {
     
     try {
       const attachments = await getUserEmailAttachments(user.id);
-      setUserAttachments(attachments);
+      setUserAttachments(attachments || []);
     } catch (err: any) {
       console.error('Failed to load user attachments:', err.message);
+      setUserAttachments([]);
     }
   };
 
@@ -113,7 +114,7 @@ export default function EmailManager({ className = '' }: EmailManagerProps) {
       const attachmentUrls: string[] = [];
       if (attachments.length > 0 && user?.id) {
         for (const file of attachments) {
-          const url = await uploadEmailAttachment(file, user.id, emailData.timestamp);
+          const url = await uploadEmailAttachment(file, user.id, emailData.timestamp || new Date().toISOString());
           attachmentUrls.push(url);
         }
       }

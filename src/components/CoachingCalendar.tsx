@@ -58,7 +58,7 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
   };
 
   const handleBooking = async () => {
-    if (!user) {
+    if (!user || !user.id || !user.email) {
       toast.error('Please log in to book a session');
       return;
     }

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
+import { getUserIdOrNull } from '@/lib/safe-user';
 
 export default function DownloadsPage() {
   const { data: session, status } = useSession();
@@ -13,6 +14,7 @@ export default function DownloadsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
+  const [purchases, setPurchases] = useState<any[]>([]);
   const [hasAccess, setHasAccess] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [downloadingItems, setDownloadingItems] = useState<Set<string>>(new Set());
@@ -36,19 +38,20 @@ export default function DownloadsPage() {
     
     // For non-admin users, verify purchases
     const fetchUserPurchases = async () => {
-      // Return early if user is not defined
-      if (!user || !user.id) {
+      const userId = getUserIdOrNull(user);
+      if (!userId) {
         setHasAccess(false);
         setIsLoading(false);
         return;
       }
       
       try {
-        const response = await fetch(`/api/purchases/confirm?userId=${user.id}`);
+        const response = await fetch(`/api/purchases/confirm?userId=${encodeURIComponent(userId)}`);
         
         if (response.ok) {
           const data = await response.json();
           const userPurchases = data.purchases || [];
+          setPurchases(userPurchases);
           
           // Check if user has any purchases (not checking status since the purchases table doesn't have a status field)
           const hasCompletedPurchase = userPurchases.length > 0;
@@ -67,7 +70,7 @@ export default function DownloadsPage() {
     };
     
     fetchUserPurchases();
-  }, [user, router, searchParams]);
+  }, [user?.id, router, searchParams]);
 
   const handleDownload = async (fileName: string, displayName: string, productId: string) => {
     if (!hasAccess) {

@@ -41,13 +41,13 @@ const StorageManagerComponent: React.FC = () => {
   });
 
   const [profileForm, setProfileForm] = useState<UserProfile>({
-    userId: user?.id || '',
+    userId: '',
     displayName: '',
     bio: ''
   });
 
   const [settingsForm, setSettingsForm] = useState<UserSettings>({
-    userId: user?.id || '',
+    userId: '',
     theme: 'light',
     notifications: true,
     language: 'en'
@@ -60,14 +60,18 @@ const StorageManagerComponent: React.FC = () => {
   });
 
   useEffect(() => {
-    if (user) {
+    if (user?.id) {
       loadStorageStats();
+      setProfileForm(prev => ({ ...prev, userId: user.id }));
+      setSettingsForm(prev => ({ ...prev, userId: user.id }));
     }
-  }, [user]);
+  }, [user?.id]);
 
   const loadStorageStats = async () => {
+    if (!user?.id) return;
+    
     try {
-      const stats = await StorageManager.router.getStorageStats(user?.id);
+      const stats = await StorageManager.router.getStorageStats(user.id);
       setStorageStats(stats);
     } catch (error) {
       console.error('Failed to load storage stats:', error);
@@ -89,7 +93,7 @@ const StorageManagerComponent: React.FC = () => {
 
   // Email operations
   const handleEmailUpload = async () => {
-    if (!user) return;
+    if (!user?.id) return;
     setLoading(true);
     try {
       const result = await StorageManager.emails.uploadEmailLog(emailForm, user.id);

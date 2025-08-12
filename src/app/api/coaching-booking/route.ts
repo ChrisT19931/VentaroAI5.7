@@ -18,9 +18,37 @@ export async function POST(request: NextRequest) {
     } = body;
 
     // Validate required fields
-    if (!userId || !userEmail || !selectedDate || !selectedTime || !timezone) {
+    if (!userId || typeof userId !== 'string' || userId.trim().length === 0) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Missing or invalid userId' },
+        { status: 400 }
+      );
+    }
+
+    if (!userEmail || typeof userEmail !== 'string' || userEmail.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Missing or invalid userEmail' },
+        { status: 400 }
+      );
+    }
+
+    if (!selectedDate || typeof selectedDate !== 'string' || selectedDate.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Missing or invalid selectedDate' },
+        { status: 400 }
+      );
+    }
+
+    if (!selectedTime || typeof selectedTime !== 'string' || selectedTime.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Missing or invalid selectedTime' },
+        { status: 400 }
+      );
+    }
+
+    if (!timezone || typeof timezone !== 'string' || timezone.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Missing or invalid timezone' },
         { status: 400 }
       );
     }

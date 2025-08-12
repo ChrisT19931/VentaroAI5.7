@@ -101,6 +101,22 @@ export async function GET(request: NextRequest) {
 
     console.log('GET /api/purchases/confirm - Parameters:', { userId, email });
 
+    // Validate userId if provided
+    if (userId && (typeof userId !== 'string' || userId.trim().length === 0)) {
+      return NextResponse.json(
+        { error: 'Invalid userId parameter' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email if provided
+    if (email && (typeof email !== 'string' || email.trim().length === 0)) {
+      return NextResponse.json(
+        { error: 'Invalid email parameter' },
+        { status: 400 }
+      );
+    }
+
     if (!userId && !email) {
       return NextResponse.json(
         { error: 'User ID or email is required' },
