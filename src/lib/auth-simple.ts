@@ -95,7 +95,6 @@ export class SimpleAuth {
         email,
         password,
         options: {
-          emailConfirm: false, // Explicitly disable email confirmation
           data: {
             email_confirm: false // Disable email verification in user metadata
           }

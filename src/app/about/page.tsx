@@ -41,10 +41,7 @@ export default function AboutPage() {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
               Your destination for AI Tools Mastery Guide 2025, AI Prompts Arsenal 2025, and AI Business Strategy Sessions to build an online business from scratch with artificial intelligence in 2025.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products" className="neon-button btn-lg">
-                Explore AI Products
-              </Link>
+            <div className="flex justify-center">
               <Link href="/products/1" className="neon-button btn-lg">
                 Learn Our Methods
               </Link>

@@ -104,12 +104,11 @@ const ProductsPage = React.memo(function ProductsPage() {
     };
   }, [fetchProducts]);
   
-  // Performance optimization: Simplified background effects
+  // Performance optimization: Minimal background effects
   const BackgroundEffects = useMemo(() => (
     <div className="absolute inset-0">
-      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-2xl opacity-50"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-2xl opacity-50"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-blue-500/3 to-purple-500/3 rounded-full blur-2xl opacity-50"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-xl opacity-30"></div>
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-xl opacity-30"></div>
     </div>
   ), []);
   
@@ -137,50 +136,30 @@ const ProductsPage = React.memo(function ProductsPage() {
         {/* Enhanced Three-Tier Layout with Advanced Effects */}
         <style jsx>{`
           @keyframes glow-pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.3); }
-          }
-          @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
           }
           @keyframes premium-glow {
             0%, 100% { 
-              box-shadow: 0 0 30px rgba(147, 51, 234, 0.3), 0 0 60px rgba(147, 51, 234, 0.1);
+              box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
             }
             50% { 
-              box-shadow: 0 0 50px rgba(147, 51, 234, 0.5), 0 0 100px rgba(147, 51, 234, 0.2);
+              box-shadow: 0 0 25px rgba(147, 51, 234, 0.3);
             }
-          }
-          @keyframes premium-float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            25% { transform: translateY(-10px) scale(1.02); }
-            50% { transform: translateY(-5px) scale(1.01); }
-            75% { transform: translateY(-15px) scale(1.03); }
           }
           .card-glow { animation: glow-pulse 3s ease-in-out infinite; }
           .premium-glow { animation: premium-glow 3s ease-in-out infinite; }
-          .premium-float { animation: premium-float 4s ease-in-out infinite; }
+          .premium-float { transform: translateY(0); }
           .shimmer-effect {
             position: relative;
             overflow: hidden;
           }
-          .shimmer-effect::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shimmer 2s infinite;
-            z-index: 1;
-          }
         `}</style>
         {products.length > 0 ? (
           <div className="max-w-7xl mx-auto">
-            {/* Featured Product - AI Web Creation Masterclass */}
+            {/* Featured Product */}
             {products.filter(p => p.id === 'ai-business-video-guide-2025').map((product: any) => {
+              // Define card configurations for the featured product
               const config = {
                 bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
                 accent: 'purple',
@@ -197,7 +176,7 @@ const ProductsPage = React.memo(function ProductsPage() {
               const isPopular = true;
               
               return (
-                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${config.shadow} transition-all duration-700 transform hover:-translate-y-6 ${config.scale} overflow-hidden border-2 border-${config.accent}-400/60 premium-glow premium-float ring-4 ring-purple-400/30 shimmer-effect hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95 mb-12`}>
+                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-md rounded-3xl shadow-xl hover:shadow-${config.shadow} transition-all duration-300 transform hover:-translate-y-2 ${config.scale} overflow-hidden border-2 border-${config.accent}-400/60 premium-glow premium-float hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95 mb-12`}>
 
                   
                   {/* Enhanced Floating Elements */}
@@ -272,9 +251,9 @@ const ProductsPage = React.memo(function ProductsPage() {
                     {/* Enhanced Action Button */}
                     <div className="space-y-4">
                       <div className="relative group/button">
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
                         
-                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 text-xl`} variant="buy-now" />
+                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 text-xl`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}
@@ -295,7 +274,7 @@ const ProductsPage = React.memo(function ProductsPage() {
               );
             })}
             
-            {/* Other Products Grid */}
+            {/* Other Products Grid - Simplified Effects */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {products.filter(p => p.id !== 'ai-business-video-guide-2025').map((product: any, index: number) => {
               // Define card configurations for each product based on their ID
@@ -410,17 +389,9 @@ const ProductsPage = React.memo(function ProductsPage() {
               const isPopular = config.popular;
               
               return (
-                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-${config.shadow} transition-all duration-700 transform hover:-translate-y-6 ${config.scale} overflow-hidden border-2 ${isPopular ? `border-${config.accent}-400/60 premium-glow premium-float` : `border-${config.border} card-glow`} ${isPopular ? 'ring-2 ring-blue-400/20' : ''} shimmer-effect hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95`}>
-                  {/* Enhanced glow effects */}
-                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-${config.accent}-500/20 via-transparent to-${config.accent}-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse`}></div>
-                  <div className={`absolute -inset-1 rounded-3xl bg-gradient-to-r from-${config.accent}-600/30 to-purple-600/30 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-700`}></div>
-                  
-                  {/* Floating Particles Effect */}
-                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                    <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '0s'}}></div>
-                    <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/30 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '1s'}}></div>
-                    <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{animationDelay: '2s'}}></div>
-                  </div>
+                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-md rounded-3xl shadow-xl hover:shadow-${config.shadow} transition-all duration-300 transform hover:-translate-y-2 ${config.scale} overflow-hidden border-2 ${isPopular ? `border-${config.accent}-400/60 premium-glow premium-float` : `border-${config.border} card-glow`} hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95`}>
+                  {/* Simplified glow effect */}
+                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-${config.accent}-500/10 via-transparent to-${config.accent}-500/10 opacity-0 group-hover:opacity-70 transition-opacity duration-300`}></div>
                   
                   {/* Enhanced floating elements */}
                   <div className="absolute inset-0 overflow-hidden rounded-3xl">
@@ -474,21 +445,21 @@ const ProductsPage = React.memo(function ProductsPage() {
                     <div className="space-y-4 mb-8">
                       {product.id === 'ai-business-video-guide-2025' && (
                         <>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 group-hover:animate-pulse transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className={`text-${config.accent}-400 font-bold`}>Video Guide:</span> Create an online platform in 2 hours</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>Video Guide:</span> Create an online platform in 2 hours</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">All prompts, tools, and strategies included</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">All prompts, tools, and strategies included</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.3s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full animate-pulse shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300"><span className="text-yellow-400 font-bold">Value:</span> Step-by-step implementation report</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Value:</span> Step-by-step implementation report</span>
                           </div>
-                          <div className="flex items-center space-x-3 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.4s'}}>
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full shadow-lg group-hover:shadow-${config.accent}-400/50 transition-all duration-300`}></div>
-                            <span className="text-sm text-gray-100 font-medium group-hover:text-white transition-colors duration-300">Create platforms as good as Shopify/Wix</span>
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                            <span className="text-sm text-gray-100 font-medium">Create platforms as good as Shopify/Wix</span>
                           </div>
                         </>
                       )}
@@ -557,14 +528,14 @@ const ProductsPage = React.memo(function ProductsPage() {
                     {/* Enhanced Pricing Section */}
                     <div className="text-center mb-8">
                       <div className="relative">
-                        {/* Pricing Background Glow */}
-                        <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100`}></div>
+                        {/* Pricing Background - Simplified */}
+                        <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-500/10 to-purple-500/10 rounded-2xl blur-md opacity-0 group-hover:opacity-70 transition-all duration-300`}></div>
                         
-                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group-hover:border-gray-600/50 transition-all duration-500">
+                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group-hover:border-gray-600/50 transition-all duration-300">
                           <div className="flex items-center justify-center space-x-4 mb-4">
                             <div className="text-center">
                               <div className="flex items-baseline justify-center space-x-2">
-                                <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent group-hover:from-yellow-300 group-hover:to-white transition-all duration-500">
+                                <span className="text-4xl font-bold text-white">
                                   {product.id === '3' ? '$50.00' : `$${product.price.toFixed(2)}`}
                                 </span>
                                 {product.originalPrice && product.id !== '3' && (
@@ -603,10 +574,10 @@ const ProductsPage = React.memo(function ProductsPage() {
                     {/* Enhanced Action Buttons */}
                     <div className="space-y-4">
                       <div className="relative group/button">
-                        {/* Button Glow Effect */}
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur opacity-0 group-hover/button:opacity-75 transition-all duration-500`}></div>
+                        {/* Button Glow Effect - Simplified */}
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
                         
-                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-${config.accent}-500/40 group-hover:shadow-xl group-hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40`} variant="buy-now" />
+                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}

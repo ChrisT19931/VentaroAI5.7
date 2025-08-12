@@ -54,8 +54,14 @@ export default function CheckoutSuccessPage() {
         throw new Error(data.error || 'Failed to verify payment');
       }
 
+      // Sync purchases to ensure they're properly recorded
+      await fetch(`/api/purchases/sync?session_id=${sessionId}`);
+      
       setOrderDetails(data.order);
       setDownloadLinks(data.downloadLinks || []);
+      
+      // Refresh router to update UI with new purchases
+      router.refresh();
       
     } catch (error: any) {
       console.error('Error verifying payment:', error);

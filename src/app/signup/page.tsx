@@ -63,16 +63,9 @@ export default function SignupPage() {
       });
       
       // The code below won't execute due to the redirect above
-      toast.success('Account created successfully! You are now logged in.');
+      // toast.success('Account created successfully! You are now logged in.');
       
-      // Send welcome email
-      // try {
-      //   await sendWelcomeEmail({ email });
-      //   console.log('Welcome email sent successfully');
-      // } catch (emailError) {
-      //   console.error('Failed to send welcome email:', emailError);
-      //   // Don't block the signup process if email fails
-      // }
+      // No need for manual redirect as signIn with redirect:true handles it
     } catch (error: any) {
       toast.error(error.message || 'Failed to sign up. Please try again.');
     } finally {
