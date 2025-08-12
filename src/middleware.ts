@@ -72,7 +72,7 @@ export async function middleware(req: NextRequest) {
       for (const [protectedPath, requiredProducts] of Object.entries(productProtectedRoutes)) {
         if (path === protectedPath || path.startsWith(`${protectedPath}/`)) {
           // Check if user has the required entitlement
-          const userEntitlements = token.entitlements as string[] || [];
+          const userEntitlements = token?.entitlements as string[] || [];
           const hasAccess = requiredProducts.some(product => userEntitlements.includes(product));
           
           if (!hasAccess) {
@@ -95,7 +95,7 @@ export async function middleware(req: NextRequest) {
     }
     
     // Check if user has admin role
-    const userRoles = token.roles as string[] || [];
+    const userRoles = token?.roles as string[] || [];
     if (!userRoles.includes('admin')) {
       console.log('User lacks admin role, redirecting to home');
       return NextResponse.redirect(new URL('/', req.url));
