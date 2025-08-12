@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
           name: name || email.split('@')[0],
           email_confirm: false, // Disable email verification
         },
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'}/account`,
       },
     });
 

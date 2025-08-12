@@ -14,10 +14,7 @@ export default function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const confirmed = searchParams?.get('confirmed');
   // Using react-hot-toast directly
-
-  // Removed email confirmation logic since email verification is disabled
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,11 +66,11 @@ export default function LoginPage() {
         }
         
         console.log('Login successful, redirecting to My Account');
-        toast.success('Login successful!');
         
         // Redirect to My Account or callback URL
-        const callbackUrl = searchParams?.get('callbackUrl') || '/my-account';
+        const callbackUrl = searchParams?.get('callbackUrl') || '/account';
         router.push(callbackUrl);
+        router.refresh(); // Force refresh to ensure session is updated in UI
       }
     } catch (error: any) {
       toast.error(error.message || 'Failed to login. Please try again.');

@@ -54,17 +54,15 @@ export default function SignupPage() {
         throw new Error(data.error || 'Signup failed');
       }
       
-      // Now sign in the user with NextAuth
-      const result = await signIn('credentials', {
+      // Now sign in the user with NextAuth and redirect to account page
+      await signIn('credentials', {
         email,
         password,
-        redirect: false,
+        redirect: true,
+        callbackUrl: '/account'
       });
       
-      if (result?.error) {
-        throw new Error(result.error || 'Login after signup failed');
-      }
-      
+      // The code below won't execute due to the redirect above
       toast.success('Account created successfully! You are now logged in.');
       
       // Send welcome email
@@ -75,10 +73,6 @@ export default function SignupPage() {
       //   console.error('Failed to send welcome email:', emailError);
       //   // Don't block the signup process if email fails
       // }
-      
-      // Redirect to the page they were trying to access or to my-account
-      const redirectTo = searchParams?.get('redirect') ?? '/my-account';
-      router.push(redirectTo);
     } catch (error: any) {
       toast.error(error.message || 'Failed to sign up. Please try again.');
     } finally {
