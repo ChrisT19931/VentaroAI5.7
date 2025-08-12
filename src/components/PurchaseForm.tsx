@@ -110,7 +110,7 @@ export default function PurchaseForm() {
           price: product.price,
           productType: product.type,
           customerEmail: user.email,
-          customerName: user.user_metadata?.name || user.email,
+          customerName: user.name || user.email,
         }),
       });
 

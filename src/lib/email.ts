@@ -78,24 +78,34 @@ async function sendEmailInternal(options: EmailOptions) {
     throw new Error('SendGrid not initialized');
   }
   
+  // For template emails, don't include content
+  if (options.templateId) {
+    const templateMsg = {
+      to: options.to,
+      from: env.EMAIL_FROM,
+      subject: options.subject,
+      templateId: options.templateId,
+      dynamicTemplateData: options.dynamicTemplateData,
+      attachments: options.attachments,
+    };
+    
+    // Use type assertion to satisfy TypeScript
+    await sgMail.send(templateMsg as any);
+    return;
+  }
+  
+  // For regular emails, include content
   const msg = {
     to: options.to,
     from: env.EMAIL_FROM,
     subject: options.subject,
+    attachments: options.attachments,
     text: options.text,
     html: options.html,
-    templateId: options.templateId,
-    dynamicTemplateData: options.dynamicTemplateData,
-    attachments: options.attachments,
-    content: options.html || options.text ? [
-      {
-        type: options.html ? 'text/html' : 'text/plain',
-        value: options.html || options.text || '',
-      },
-    ] : undefined,
   };
   
-  await sgMail.send(msg);
+  // Use type assertion to satisfy TypeScript
+  await sgMail.send(msg as any);
 }
 
 // Main function to send email with retry logic

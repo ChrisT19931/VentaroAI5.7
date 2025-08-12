@@ -36,6 +36,13 @@ export default function DownloadsPage() {
     
     // For non-admin users, verify purchases
     const fetchUserPurchases = async () => {
+      // Return early if user is not defined
+      if (!user || !user.id) {
+        setHasAccess(false);
+        setIsLoading(false);
+        return;
+      }
+      
       try {
         const response = await fetch(`/api/purchases/confirm?userId=${user.id}`);
         
@@ -311,7 +318,7 @@ export default function DownloadsPage() {
                   </div>
                   
                   <button
-                    onClick={() => handleDownload(product.fileName, product.name, product.id)}
+                    onClick={() => handleDownload(product.fileName || '', product.name, product.id)}
                     disabled={isDownloading}
                     className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
                   >
