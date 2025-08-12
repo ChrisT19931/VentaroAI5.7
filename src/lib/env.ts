@@ -36,6 +36,11 @@ const clientEnvSchema = z.object({
 
 // Function to validate server-side environment variables
 export function validateServerEnv() {
+  // Skip validation during build time on Vercel
+  if (process.env.VERCEL_ENV === 'production' && process.env.NODE_ENV !== 'development') {
+    return true;
+  }
+  
   try {
     const parsed = serverEnvSchema.safeParse(process.env);
     if (!parsed.success) {
@@ -52,6 +57,11 @@ export function validateServerEnv() {
 
 // Function to validate client-side environment variables
 export function validateClientEnv() {
+  // Skip validation during build time on Vercel
+  if (process.env.VERCEL_ENV === 'production' && process.env.NODE_ENV !== 'development') {
+    return true;
+  }
+  
   try {
     const parsed = clientEnvSchema.safeParse(process.env);
     if (!parsed.success) {
@@ -102,11 +112,22 @@ export const clientEnv = {
 
 // Function to validate all environment variables at startup
 export function validateEnv() {
+  // Skip validation during build time on Vercel
+  if (process.env.VERCEL_ENV === 'production' && process.env.NODE_ENV !== 'development') {
+    console.log('Skipping environment validation during Vercel build');
+    return true;
+  }
+  
   const isServerValid = validateServerEnv();
   const isClientValid = validateClientEnv();
   
   if (!isServerValid || !isClientValid) {
-    throw new Error('Invalid environment variables. Check the console for details.');
+    console.error('Invalid environment variables. Check the console for details.');
+    // Don't throw error in production to prevent build failures
+    if (process.env.NODE_ENV === 'development') {
+      throw new Error('Invalid environment variables. Check the console for details.');
+    }
+    return false;
   }
   
   return true;

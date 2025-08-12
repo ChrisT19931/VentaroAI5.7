@@ -28,19 +28,45 @@ To successfully deploy this application to Vercel, you need to configure the fol
 - `NEXT_PUBLIC_BASE_URL`: Your production domain (e.g., https://yourdomain.com)
 - `NEXT_PUBLIC_SITE_URL`: Same as above
 
+### NextAuth Configuration (Required)
+- `NEXTAUTH_SECRET`: Secret key for NextAuth.js (required for authentication)
+- `NEXTAUTH_URL`: Your site URL (defaults to NEXT_PUBLIC_SITE_URL if not set)
+
 ### Optional Configuration
 - `DATABASE_URL`: If using external database (PostgreSQL connection string)
-- `NEXTAUTH_SECRET`: For NextAuth.js (if implemented)
 - `GOOGLE_ANALYTICS_ID`: For Google Analytics tracking
 - `SENTRY_DSN`: For error tracking with Sentry
 
 ## Setting Up Environment Variables in Vercel
 
+### Generate NextAuth Secret
+
+Run the following command to generate a secure random string for NextAuth:
+
+```bash
+node scripts/generate-nextauth-secret.js
+```
+
+Copy the generated secret for use in the next step.
+
+### Verify Environment Variables
+
+Run the verification script to ensure all required environment variables are properly configured:
+
+```bash
+node scripts/verify-vercel-env.js
+```
+
+Address any missing or placeholder variables before proceeding.
+
+### Add Variables to Vercel
+
 1. Go to your Vercel dashboard
 2. Select your project
 3. Navigate to Settings > Environment Variables
 4. Add all the required variables listed above
-5. Deploy your project
+5. Make sure to apply these variables to Production, Preview, and Development environments
+6. Deploy your project
 
 ## Build Optimization
 
@@ -88,10 +114,30 @@ npm run build
 vercel --prod
 ```
 
+## Post-Deployment Configuration
+
+### 1. Set Up Stripe Webhooks
+
+1. In your Stripe dashboard, go to **Developers** > **Webhooks**
+2. Add a new endpoint with your production URL + `/api/webhook/stripe`
+3. Select the following events:
+   - `checkout.session.completed`
+   - `customer.subscription.created`
+   - `customer.subscription.updated`
+   - `customer.subscription.deleted`
+4. Copy the webhook signing secret and update your `STRIPE_WEBHOOK_SECRET` in Vercel
+
+### 2. Update Supabase Authentication Settings
+
+1. In your Supabase dashboard, go to **Authentication** > **URL Configuration**
+2. Update the Site URL to match your production URL
+3. Add redirect URLs for authentication callbacks
+
 ## Post-Deployment Verification
 
 After deployment, verify:
 - All pages load correctly
+- Authentication works (login/signup)
 - Stripe checkout works
 - Email notifications function
 - Supabase connections are working

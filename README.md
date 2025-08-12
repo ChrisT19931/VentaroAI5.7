@@ -19,12 +19,16 @@ Tools to enforce this rule:
 
 **If you're seeing "Invalid API key" errors**, you need to configure your environment variables properly:
 
-1. **For Vercel Deployment**: Follow the [**VERCEL_SETUP_GUIDE.md**](./VERCEL_SETUP_GUIDE.md) for step-by-step instructions
+1. **For Vercel Deployment**: Follow the [**VERCEL_DEPLOYMENT_GUIDE.md**](./VERCEL_DEPLOYMENT_GUIDE.md) for step-by-step instructions
 2. **For Local Development**: Copy `.env.local.example` to `.env.local` and fill in your actual credentials
+
+**Vercel Deployment Helper Scripts:**
+- Generate NextAuth Secret: `node scripts/generate-nextauth-secret.js`
+- Verify Environment Variables: `node scripts/verify-vercel-env.js`
 
 **Quick Fix for Authentication Issues:**
 - Replace placeholder values in your environment variables with real Supabase credentials
-- Ensure all required variables are set in your Vercel dashboard
+- Ensure all required variables are set in your Vercel dashboard (including NEXTAUTH_SECRET)
 - Redeploy your application after updating environment variables
 
 📋 **Need Help?** See the [Troubleshooting](#-troubleshooting) section below.

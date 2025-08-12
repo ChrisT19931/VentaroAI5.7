@@ -16,7 +16,9 @@
     "deploy-check": "npm run check-config && npm run verify-env && npm run build",
     "verify-ui": "./verify-ui-integrity.sh",
     "restore-ui": "./restore-ui.sh",
-    "precommit": "npm run verify-ui"
+    "precommit": "npm run verify-ui",
+    "prepare-vercel": "node scripts/verify-vercel-env.js",
+    "generate-nextauth-secret": "node scripts/generate-nextauth-secret.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.57.0",
