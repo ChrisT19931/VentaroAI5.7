@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
 import ProtectedDownload from '@/components/ProtectedDownload';
+import { formatDate } from '@/lib/date';
 
 export default function AccountPage() {
   const { data: session, status } = useSession();
@@ -181,14 +182,7 @@ export default function AccountPage() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
+  // Using the formatDate function from lib/date.ts
 
   if (loading || isLoading) {
     return (
@@ -220,7 +214,7 @@ export default function AccountPage() {
           <div className="bg-gray-800/50 rounded-lg p-6 mb-6 border border-gray-700">
             <h2 className="text-xl font-semibold text-white mb-4">Account Information</h2>
             <p className="text-gray-300"><span className="text-gray-400">Email:</span> {user?.email}</p>
-            <p className="text-gray-300 mt-2"><span className="text-gray-400">Member since:</span> {user?.created_at ? formatDate(user.created_at) : 'N/A'}</p>
+            <p className="text-gray-300 mt-2"><span className="text-gray-400">Member since:</span> {user && 'created_at' in user && user.created_at ? formatDate(user.created_at as string) : 'N/A'}</p>
           </div>
         </div>
 
