@@ -1,10 +1,9 @@
 import NextAuth, { NextAuthOptions, User, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { env } from '@/lib/env';
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
-import bcrypt from 'bcryptjs';
+import { db, User as DatabaseUser } from '@/lib/database';
+import { PRODUCT_MAPPINGS, LEGACY_PRODUCT_MAPPINGS } from '@/config/products';
 
-// Define types for NextAuth session and user
+// Extend NextAuth types
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -12,7 +11,7 @@ declare module 'next-auth' {
       email: string;
       name?: string;
       entitlements: string[];
-      roles?: string[];
+      roles: string[];
       created_at?: string;
     };
   }
@@ -33,9 +32,42 @@ declare module 'next-auth/jwt' {
     email: string;
     name?: string;
     entitlements: string[];
-    roles?: string[];
+    roles: string[];
     created_at?: string;
   }
+}
+
+// Product ID mapping for entitlements
+const FRONT_IDS_BY_CODE: Record<string, string> = {
+  '1': 'ai-tools-mastery-guide-2025',
+  '2': 'ai-prompts-arsenal-2025', 
+  '4': 'ai-business-video-guide-2025',
+  '5': 'weekly-support-contract-2025',
+};
+
+const FRIENDLY_TO_CODE: Record<string, string> = {
+  ebook: PRODUCT_MAPPINGS.ebook,
+  prompts: PRODUCT_MAPPINGS.prompts,
+  video: PRODUCT_MAPPINGS.video,
+  support: PRODUCT_MAPPINGS.support,
+};
+
+function mapPurchasesToEntitlements(purchases: any[]): string[] {
+  const entitlements = new Set<string>();
+  
+  for (const purchase of purchases) {
+    const productId = purchase.product_id;
+    
+    // Add the raw product ID
+    entitlements.add(productId);
+    
+    // Map to front-end ID if available
+    if (FRONT_IDS_BY_CODE[productId]) {
+      entitlements.add(FRONT_IDS_BY_CODE[productId]);
+    }
+  }
+  
+  return Array.from(entitlements);
 }
 
 export const authOptions: NextAuthOptions = {
@@ -46,134 +78,112 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-
       async authorize(credentials) {
+        console.log('🔐 Starting authentication for:', credentials?.email);
+        
         if (!credentials?.email || !credentials?.password) {
+          console.error('❌ Missing email or password');
           return null;
         }
-
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-        if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('placeholder')) {
-          // Development mode - allow test users
-          console.warn('⚠️ Supabase not configured - using development authentication');
-          
-          // Allow test credentials in development
-          if (credentials.email === 'admin@ventaro.ai' && credentials.password === 'admin123') {
-            return {
-              id: 'dev_admin',
-              email: 'admin@ventaro.ai',
-              name: 'Admin User',
-              entitlements: ['1', '2', '4', '5'], // All products
-              roles: ['admin'],
-              created_at: new Date().toISOString(),
-            };
-          }
-          
-          if (credentials.email === 'test@example.com' && credentials.password === 'test123') {
-            return {
-              id: 'dev_user',
-              email: 'test@example.com',
-              name: 'Test User',
-              entitlements: ['1'], // Only first product
-              roles: ['user'],
-              created_at: new Date().toISOString(),
-            };
-          }
-          
-          return null;
-        }
-
-        const supabase = createSupabaseClient(supabaseUrl, supabaseAnonKey);
 
         try {
-          // Authenticate against profiles table
-          const { data: user, error } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('email', credentials.email)
-            .single();
-
-          if (error || !user) {
-            console.error('User not found:', error?.message || 'No user');
+          // Find user in database
+          const user = await db.findUserByEmail(credentials.email);
+          if (!user) {
+            console.error('❌ User not found:', credentials.email);
             return null;
           }
 
           // Verify password
-          if (user.password_hash) {
-            const isValidPassword = await bcrypt.compare(credentials.password, user.password_hash);
-            if (!isValidPassword) {
-              console.error('Invalid password');
-              return null;
-            }
-          } else {
-            // Fallback: if no password hash, reject
-            console.error('No password hash found for user');
+          if (!user.password_hash) {
+            console.error('❌ No password hash found for user');
             return null;
           }
 
-          // Try to fetch user's purchases/entitlements (non-blocking)
-          let entitlements: string[] = [];
-          try {
-            const { data: purchases } = await supabase
-              .from('purchases')
-              .select('product_id')
-              .eq('user_id', user.id);
-            entitlements = purchases?.map((p: { product_id: string }) => p.product_id) || [];
-          } catch (purchasesError: any) {
-            console.warn('Non-blocking: error fetching purchases:', purchasesError?.message);
+          const isValidPassword = await db.verifyPassword(credentials.password, user.password_hash);
+          if (!isValidPassword) {
+            console.error('❌ Invalid password for user:', credentials.email);
+            return null;
           }
 
-          // Set roles based on user_role field
-          const roles = user.user_role ? [user.user_role] : ['user'];
+          console.log('✅ Password verified for user:', credentials.email);
 
-          return {
+          // Get user purchases for entitlements
+          let entitlements: string[] = [];
+          try {
+            const purchases = await db.getUserPurchases(user.id);
+            entitlements = mapPurchasesToEntitlements(purchases);
+            console.log('✅ Found entitlements for user:', entitlements);
+          } catch (error) {
+            console.warn('⚠️ Error fetching purchases (non-blocking):', error);
+          }
+
+          // Set user roles
+          const roles = [user.user_role || 'user'];
+          
+          const authUser = {
             id: user.id,
-            email: user.email || '',
-            name: user.name || '',
+            email: user.email,
+            name: user.name || user.email.split('@')[0],
             entitlements,
             roles,
             created_at: user.created_at,
           };
+
+          console.log('✅ Authentication successful for:', credentials.email, 'with roles:', roles);
+          return authUser;
+
         } catch (error) {
-          console.error('Auth error:', error);
+          console.error('❌ Authentication error:', error);
           return null;
         }
       }
     }),
   ],
+  
   callbacks: {
     async jwt({ token, user }) {
-      // Include user entitlements and roles in the JWT token
+      // Persist user data in JWT token
       if (user) {
-        token.id = (user as any).id;
-        token.email = (user as any).email;
-        token.entitlements = (user as any).entitlements || [];
-        token.roles = (user as any).roles || [];
-        token.created_at = (user as any).created_at;
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.entitlements = user.entitlements || [];
+        token.roles = user.roles || ['user'];
+        token.created_at = user.created_at;
       }
       return token;
     },
+    
     async session({ session, token }) {
-      // Include user entitlements and roles in the session
+      // Send properties to the client
       if (token) {
-        (session.user as any).id = token.id as string;
-        (session.user as any).email = token.email as string;
-        (session.user as any).entitlements = (token.entitlements as string[]) || [];
-        (session.user as any).roles = (token.roles as string[]) || [];
-        (session.user as any).created_at = token.created_at as string;
+        session.user.id = token.id;
+        session.user.email = token.email;
+        session.user.name = token.name;
+        session.user.entitlements = token.entitlements || [];
+        session.user.roles = token.roles || ['user'];
+        session.user.created_at = token.created_at;
       }
       return session;
     },
   },
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
+  
   pages: {
     signIn: '/signin',
     error: '/signin',
   },
-  secret: env.NEXTAUTH_SECRET,
+  
+  session: {
+    strategy: 'jwt',
+    maxAge: 24 * 60 * 60, // 24 hours
+  },
+  
+  jwt: {
+    maxAge: 24 * 60 * 60, // 24 hours
+  },
+  
+  debug: process.env.NODE_ENV === 'development',
+  
+  secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-development',
 };
