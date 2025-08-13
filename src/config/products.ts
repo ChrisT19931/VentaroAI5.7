@@ -23,7 +23,7 @@ export const LEGACY_PRODUCTS = {
 export const PRODUCT_MAPPINGS = {
   'ebook': '1',
   'prompts': '2', 
-  'video': '3',
+  'video': '4',
   'support': '5'
 } as const;
 
@@ -31,9 +31,9 @@ export const PRODUCT_MAPPINGS = {
 export const LEGACY_PRODUCT_MAPPINGS = {
   'ai-prompts-arsenal-2025': '2',
   'ai-tools-mastery-guide-2025': '1',
-  'ai-business-strategy-session-2025': '3',
-  'ai-business-video-guide-2025': '3',
-  'ai-web-creation-masterclass': '3',
+  'ai-business-strategy-session-2025': '4',
+  'ai-business-video-guide-2025': '4',
+  'ai-web-creation-masterclass': '4',
   'weekly-support-contract-2025': '5',
   'weekly-support-contract': '5',
   'support-package': '5',
