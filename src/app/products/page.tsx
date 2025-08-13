@@ -586,10 +586,12 @@ const ProductsPage = React.memo(function ProductsPage() {
                           <span className="text-green-400">🔒</span>
                           <span>Secure Payment</span>
                         </div>
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
-                          <span className="text-blue-400">⚡</span>
-                          <span>Instant Access</span>
-                        </div>
+                        {product.id !== 'weekly-support-contract' && (
+                          <div className="flex items-center space-x-2 text-xs text-gray-400">
+                            <span className="text-blue-400">⚡</span>
+                            <span>Instant Access</span>
+                          </div>
+                        )}
                         <div className="flex items-center space-x-2 text-xs text-gray-400">
                           <span className="text-purple-400">💎</span>
                           <span>Premium Quality</span>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { UnifiedCheckoutButton } from '@/components/UnifiedCheckoutButton';
 
 export default function AIWebCreationMasterclassPage() {
   const [user, setUser] = useState<any>(null);
@@ -64,12 +65,30 @@ export default function AIWebCreationMasterclassPage() {
           <p className="text-gray-300 mb-6">
             You need to purchase the AI Web Creation Masterclass to access this content.
           </p>
-          <button
-            onClick={() => router.push('/products')}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
-          >
-            View Products
-          </button>
+          <div className="space-y-4">
+            <div>
+              {/* Direct checkout for AI Web Creation Masterclass */}
+              {/* Using product id that maps to video (4) via LEGACY_PRODUCT_MAPPINGS */}
+              <UnifiedCheckoutButton
+                product={{
+                  id: 'ai-web-creation-masterclass',
+                  name: 'AI Web Creation Masterclass',
+                  price: 50,
+                  productType: 'digital'
+                }}
+                className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-300 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-base"
+                variant="direct"
+              >
+                Buy Now – A$50
+              </UnifiedCheckoutButton>
+            </div>
+            <button
+              onClick={() => router.push('/products')}
+              className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors w-full"
+            >
+              View All Products
+            </button>
+          </div>
         </div>
       </div>
     );

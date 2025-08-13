@@ -171,22 +171,22 @@ export default function MyAccountPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 mb-8 border border-gray-700">
+        <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl p-8 mb-8 border border-gray-700 shadow-lg">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">My Account</h1>
+              <h1 className="text-3xl font-extrabold text-white mb-2 tracking-tight">My Account</h1>
               <p className="text-gray-300">{user?.email}</p>
               {user?.email === 'chris.t@ventarosales.com' && (
-                <span className="inline-block mt-2 bg-purple-600 text-white px-3 py-1 rounded-full text-sm">
+                <span className="inline-block mt-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
                   Admin Access
                 </span>
               )}
             </div>
             <button 
               onClick={() => signOut({ callbackUrl: '/' })}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+              className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl transition-colors font-semibold"
             >
               Sign Out
             </button>
@@ -194,37 +194,31 @@ export default function MyAccountPage() {
         </div>
 
         {/* Products Grid */}
-        <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700">
+        <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl p-8 border border-gray-700 shadow-lg">
           <h2 className="text-2xl font-bold text-white mb-6">My Products</h2>
-          
           <div className="grid gap-6">
             {AVAILABLE_PRODUCTS.map((product) => {
               const owned = isProductOwned(product.id);
               const isAdmin = user?.email === 'chris.t@ventarosales.com';
-              
+              const badge = (owned || isAdmin) ? (
+                <span className="bg-green-600/90 text-white px-2.5 py-0.5 rounded-full text-xs font-semibold">{isAdmin ? 'Admin' : 'Owned'}</span>
+              ) : (
+                <span className="bg-gray-600/80 text-white px-2.5 py-0.5 rounded-full text-xs font-semibold">Locked</span>
+              );
               return (
-                <div key={product.id} className="bg-gray-700/50 rounded-lg p-6 border border-gray-600">
+                <div key={product.id} className="bg-gray-900/40 rounded-xl p-6 border border-gray-700/70">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-xl font-semibold text-white">{product.name}</h3>
-                        {(owned || isAdmin) ? (
-                          <span className="bg-green-600 text-white px-2 py-1 rounded text-sm">
-                            {isAdmin ? 'Admin' : 'Owned'}
-                          </span>
-                        ) : (
-                          <span className="bg-gray-600 text-white px-2 py-1 rounded text-sm">
-                            Locked
-                          </span>
-                        )}
+                        {badge}
                       </div>
                       <p className="text-gray-300 mb-4">{product.description}</p>
-                      
                       <div className="flex gap-3">
                         {(owned || isAdmin) ? (
                           <Link 
                             href={product.view_url}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl transition-colors font-semibold"
                           >
                             Access Content
                           </Link>
@@ -245,7 +239,7 @@ export default function MyAccountPage() {
                              </UnifiedCheckoutButton>
                             <Link 
                               href={`/products/${product.id}`}
-                              className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
+                              className="bg-gray-700 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl transition-colors font-semibold"
                             >
                               View Details
                             </Link>
