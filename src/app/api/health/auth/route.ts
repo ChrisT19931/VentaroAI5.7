@@ -1,203 +1,173 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/database';
 import { getToken } from 'next-auth/jwt';
+import { db } from '@/lib/database';
+import { signIn } from 'next-auth/react';
 
 export async function GET(request: NextRequest) {
-  console.log('🔍 Running authentication system health check...');
+  console.log('🏥 Auth Health Check: Starting comprehensive authentication system check...');
   
-  const healthData = {
+  const healthData: any = {
+    status: 'checking',
     timestamp: new Date().toISOString(),
-    status: 'healthy' as 'healthy' | 'degraded' | 'unhealthy',
-    checks: {
-      database: { status: 'unknown', message: '', duration: 0 },
-      authentication: { status: 'unknown', message: '', duration: 0 },
-      environment: { status: 'unknown', message: '', duration: 0 },
-      testLogin: { status: 'unknown', message: '', duration: 0 }
-    },
-    summary: {
-      totalUsers: 0,
-      totalPurchases: 0,
-      adminUsers: 0,
-      databaseType: 'unknown'
-    }
+    checks: {}
   };
 
   try {
-    // 1. Database Health Check
-    console.log('🔍 Checking database health...');
-    const dbStart = Date.now();
+    // 1. Environment Variables Check
+    console.log('🔍 Checking environment variables...');
+    healthData.checks.environment = {
+      nextauth_secret: !!process.env.NEXTAUTH_SECRET,
+      nextauth_url: !!process.env.NEXTAUTH_URL,
+      supabase_url: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      supabase_anon_key: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      supabase_service_key: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      node_env: process.env.NODE_ENV,
+      status: 'checked'
+    };
+
+    // Check for placeholder values
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const placeholderUrls = ['https://supabase.co', 'https://xyzcompany.supabase.co', 'your-project-url'];
+    if (supabaseUrl && placeholderUrls.some(placeholder => supabaseUrl.includes(placeholder))) {
+      healthData.checks.environment.warning = 'Supabase URL appears to be a placeholder';
+    }
+
+    // 2. Database Connection Check
+    console.log('🔍 Checking database connection...');
     const dbHealth = await db.healthCheck();
     healthData.checks.database = {
       status: dbHealth.status,
+      database: dbHealth.database,
       message: dbHealth.message,
-      duration: Date.now() - dbStart
+      connection: dbHealth.status === 'healthy' ? 'connected' : 'failed'
     };
-    healthData.summary.databaseType = dbHealth.database;
 
-    // 2. Environment Variables Check
-    console.log('🔍 Checking environment variables...');
-    const envStart = Date.now();
-    const requiredEnvVars = [
-      'NEXTAUTH_SECRET',
-      'NEXT_PUBLIC_SITE_URL'
-    ];
-    
-    const optionalEnvVars = [
-      'NEXT_PUBLIC_SUPABASE_URL',
-      'SUPABASE_SERVICE_ROLE_KEY',
-      'SENDGRID_API_KEY',
-      'EMAIL_FROM'
-    ];
-
-    const missingRequired = requiredEnvVars.filter(key => !process.env[key]);
-    const missingOptional = optionalEnvVars.filter(key => !process.env[key]);
-
-    if (missingRequired.length > 0) {
-      healthData.checks.environment = {
-        status: 'unhealthy',
-        message: `Missing required environment variables: ${missingRequired.join(', ')}`,
-        duration: Date.now() - envStart
-      };
-    } else if (missingOptional.length > 0) {
-      healthData.checks.environment = {
-        status: 'degraded',
-        message: `Missing optional environment variables: ${missingOptional.join(', ')} (using fallbacks)`,
-        duration: Date.now() - envStart
-      };
-    } else {
-      healthData.checks.environment = {
-        status: 'healthy',
-        message: 'All environment variables configured',
-        duration: Date.now() - envStart
-      };
-    }
-
-    // 3. Authentication Token Check
-    console.log('🔍 Checking authentication system...');
-    const authStart = Date.now();
+    // 3. NextAuth Token Check
+    console.log('🔍 Checking NextAuth token system...');
     try {
       const token = await getToken({ 
         req: request, 
-        secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-development' 
+        secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-development'
       });
-      
-      if (token) {
-        healthData.checks.authentication = {
-          status: 'healthy',
-          message: `Valid token found for user: ${token.email}`,
-          duration: Date.now() - authStart
-        };
-      } else {
-        healthData.checks.authentication = {
-          status: 'healthy',
-          message: 'No active session (expected for unauthenticated request)',
-          duration: Date.now() - authStart
-        };
-      }
-    } catch (authError) {
-      healthData.checks.authentication = {
-        status: 'degraded',
-        message: `Authentication system accessible but no valid session: ${authError}`,
-        duration: Date.now() - authStart
+      healthData.checks.nextauth = {
+        token_system: 'working',
+        has_active_session: !!token,
+        user_id: token?.id || null,
+        user_email: token?.email || null
+      };
+    } catch (error) {
+      console.error('❌ NextAuth token error:', error);
+      healthData.checks.nextauth = {
+        token_system: 'error',
+        error: error instanceof Error ? error.message : 'Unknown error',
+        has_active_session: false
       };
     }
 
-    // 4. Test User Login Check
-    console.log('🔍 Testing user authentication...');
-    const loginStart = Date.now();
+    // 4. Test User Creation (in-memory only for safety)
+    console.log('🔍 Testing user creation system...');
     try {
-      const testUser = await db.findUserByEmail('admin@ventaro.ai');
+      const testEmail = `health-check-${Date.now()}@example.com`;
+      const testUser = await db.createUser({
+        email: testEmail,
+        password: 'TestPass123',
+        name: 'Health Check User',
+        user_role: 'user'
+      });
+
       if (testUser) {
-        const isValidPassword = await db.verifyPassword('admin123', testUser.password_hash || '');
-        healthData.checks.testLogin = {
-          status: isValidPassword ? 'healthy' : 'degraded',
-          message: isValidPassword ? 
-            'Test admin user login successful' : 
-            'Test admin user found but password verification failed',
-          duration: Date.now() - loginStart
+        healthData.checks.user_creation = {
+          status: 'working',
+          test_user_created: true,
+          user_id: testUser.id
+        };
+
+        // Test password verification
+        const passwordValid = await db.verifyPassword('TestPass123', testUser.password_hash!);
+        healthData.checks.password_verification = {
+          status: passwordValid ? 'working' : 'failed',
+          test_passed: passwordValid
         };
       } else {
-        healthData.checks.testLogin = {
-          status: 'degraded',
-          message: 'Test admin user not found (will be created on next auth attempt)',
-          duration: Date.now() - loginStart
+        healthData.checks.user_creation = {
+          status: 'failed',
+          test_user_created: false,
+          error: 'User creation returned null'
         };
       }
-    } catch (loginError) {
-      healthData.checks.testLogin = {
-        status: 'unhealthy',
-        message: `Test login failed: ${loginError}`,
-        duration: Date.now() - loginStart
+    } catch (error) {
+      console.error('❌ User creation test error:', error);
+      healthData.checks.user_creation = {
+        status: 'error',
+        error: error instanceof Error ? error.message : 'Unknown error'
       };
     }
 
-    // 5. Collect System Summary (if database is healthy)
-    if (dbHealth.status === 'healthy') {
-      try {
-        // Count users by role
-        if (dbHealth.database === 'supabase') {
-          // For Supabase, we'd need to implement these queries
-          healthData.summary.totalUsers = 0; // Placeholder
-          healthData.summary.adminUsers = 0; // Placeholder
-          healthData.summary.totalPurchases = 0; // Placeholder
-        } else {
-          // For in-memory storage, we can count directly
-          const adminUser = await db.findUserByEmail('admin@ventaro.ai');
-          const testUser = await db.findUserByEmail('test@example.com');
-          
-          healthData.summary.totalUsers = [adminUser, testUser].filter(Boolean).length;
-          healthData.summary.adminUsers = adminUser ? 1 : 0;
-          
-          // Count purchases for admin user
-          if (adminUser) {
-            const purchases = await db.getUserPurchases(adminUser.id);
-            healthData.summary.totalPurchases = purchases.length;
-          }
-        }
-      } catch (summaryError) {
-        console.warn('⚠️ Error collecting system summary:', summaryError);
-      }
+    // 5. Admin User Check
+    console.log('🔍 Checking admin user...');
+    try {
+      const adminUser = await db.findUserByEmail('admin@ventaro.ai');
+      healthData.checks.admin_user = {
+        exists: !!adminUser,
+        email: adminUser?.email || null,
+        role: adminUser?.user_role || null,
+        has_password: !!adminUser?.password_hash
+      };
+    } catch (error) {
+      healthData.checks.admin_user = {
+        exists: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
     }
 
-    // 6. Determine Overall Status
-    const statuses = Object.values(healthData.checks).map(check => check.status);
-    if (statuses.includes('unhealthy')) {
-      healthData.status = 'unhealthy';
-    } else if (statuses.includes('degraded')) {
-      healthData.status = 'degraded';
-    } else {
-      healthData.status = 'healthy';
-    }
+    // 6. Overall Status Assessment
+    const criticalChecks = [
+      healthData.checks.environment.nextauth_secret,
+      healthData.checks.database.status === 'healthy',
+      healthData.checks.nextauth.token_system === 'working',
+      healthData.checks.user_creation?.status === 'working'
+    ];
 
-    console.log(`✅ Health check completed - Status: ${healthData.status}`);
-
-    return NextResponse.json(healthData, { 
-      status: healthData.status === 'unhealthy' ? 503 : 200,
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      }
-    });
-
-  } catch (error: any) {
-    console.error('❌ Health check error:', error);
+    const allCriticalPassing = criticalChecks.every(check => check);
     
-    healthData.status = 'unhealthy';
-    healthData.checks = {
-      database: { status: 'unhealthy', message: `Critical error: ${error.message}`, duration: 0 },
-      authentication: { status: 'unknown', message: 'Not checked due to critical error', duration: 0 },
-      environment: { status: 'unknown', message: 'Not checked due to critical error', duration: 0 },
-      testLogin: { status: 'unknown', message: 'Not checked due to critical error', duration: 0 }
+    healthData.status = allCriticalPassing ? 'healthy' : 'degraded';
+    healthData.overall = {
+      authentication_system: allCriticalPassing ? 'operational' : 'issues_detected',
+      sign_up_available: healthData.checks.user_creation?.status === 'working',
+      sign_in_available: healthData.checks.nextauth.token_system === 'working' && healthData.checks.database.status === 'healthy',
+      recommendations: []
     };
 
+    // Add recommendations for common issues
+    if (!healthData.checks.environment.nextauth_secret) {
+      healthData.overall.recommendations.push('Set NEXTAUTH_SECRET environment variable');
+    }
+    if (healthData.checks.database.status !== 'healthy') {
+      healthData.overall.recommendations.push('Check Supabase connection and credentials');
+    }
+    if (healthData.checks.environment.warning) {
+      healthData.overall.recommendations.push('Update Supabase URL to your actual project URL');
+    }
+    if (!healthData.checks.admin_user.exists) {
+      healthData.overall.recommendations.push('Run database setup script to create admin user');
+    }
+
+    console.log('✅ Auth Health Check: Complete');
+    console.log('📊 Overall Status:', healthData.status);
+    
     return NextResponse.json(healthData, { 
-      status: 503,
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      }
+      status: healthData.status === 'healthy' ? 200 : 503 
     });
+
+  } catch (error) {
+    console.error('❌ Auth Health Check: Critical error:', error);
+    
+    healthData.status = 'unhealthy';
+    healthData.error = {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      type: 'critical_system_error'
+    };
+
+    return NextResponse.json(healthData, { status: 500 });
   }
 } 

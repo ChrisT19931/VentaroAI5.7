@@ -77,7 +77,7 @@ export default function SignInPage() {
         redirect: false, // Handle redirect manually for better error handling
       });
 
-      console.log('🔐 NextAuth signIn result:', result);
+      console.log('🔐 NextAuth signIn result:', { ok: result?.ok, error: result?.error, status: result?.status, url: result?.url });
 
       if (result?.error) {
         console.error('❌ Sign in failed:', result.error);
@@ -88,9 +88,19 @@ export default function SignInPage() {
         if (result.error === 'CredentialsSignin') {
           errorMessage = 'Invalid email or password. Please check your credentials.';
         } else if (result.error === 'Configuration') {
-          errorMessage = 'Authentication system error. Please try again later.';
+          errorMessage = 'Authentication system error. Please contact support.';
         } else if (result.error === 'AccessDenied') {
           errorMessage = 'Access denied. Please contact support.';
+        } else if (result.error === 'CallbackRouteError') {
+          errorMessage = 'Authentication error. Please try again.';
+        } else if (result.error.includes('Email and password are required')) {
+          errorMessage = 'Please enter both email and password.';
+        } else if (result.error.includes('Invalid email or password')) {
+          errorMessage = 'Invalid email or password. Please check your credentials.';
+        } else if (result.error.includes('Account configuration error')) {
+          errorMessage = 'Account setup issue. Please contact support.';
+        } else {
+          errorMessage = `Authentication failed: ${result.error}`;
         }
         
         setErrors({ general: errorMessage });

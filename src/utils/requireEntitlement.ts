@@ -39,7 +39,7 @@ export async function requireEntitlement(
   }
   
   // Check if the user has the required entitlement
-  const hasEntitlement = session.user.entitlements.includes(productId);
+  const hasEntitlement = session.user.entitlements?.includes(productId) || false;
   
   // If not entitled, redirect to paywall
   if (!hasEntitlement) {

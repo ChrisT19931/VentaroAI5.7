@@ -10,8 +10,8 @@ declare module 'next-auth' {
       id: string;
       email: string;
       name?: string;
-      entitlements: string[];
-      roles: string[];
+      entitlements?: string[];
+      roles?: string[];
       created_at?: string;
     };
   }
@@ -31,8 +31,8 @@ declare module 'next-auth/jwt' {
     id: string;
     email: string;
     name?: string;
-    entitlements: string[];
-    roles: string[];
+    entitlements?: string[];
+    roles?: string[];
     created_at?: string;
   }
 }
@@ -79,63 +79,64 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('🔐 Starting authentication for:', credentials?.email);
+        console.log('🔐 NextAuth: Starting authentication for:', credentials?.email);
         
         if (!credentials?.email || !credentials?.password) {
-          console.error('❌ Missing email or password');
-          return null;
+          console.error('❌ NextAuth: Missing email or password');
+          throw new Error('Email and password are required');
         }
 
         try {
           // Find user in database
           const user = await db.findUserByEmail(credentials.email);
           if (!user) {
-            console.error('❌ User not found:', credentials.email);
-            return null;
+            console.error('❌ NextAuth: User not found:', credentials.email);
+            throw new Error('Invalid email or password');
           }
 
           // Verify password
           if (!user.password_hash) {
-            console.error('❌ No password hash found for user');
-            return null;
+            console.error('❌ NextAuth: No password hash found for user');
+            throw new Error('Account configuration error');
           }
 
           const isValidPassword = await db.verifyPassword(credentials.password, user.password_hash);
           if (!isValidPassword) {
-            console.error('❌ Invalid password for user:', credentials.email);
-            return null;
+            console.error('❌ NextAuth: Invalid password for user:', credentials.email);
+            throw new Error('Invalid email or password');
           }
 
-          console.log('✅ Password verified for user:', credentials.email);
+          console.log('✅ NextAuth: Password verified for user:', credentials.email);
 
           // Get user purchases for entitlements
           let entitlements: string[] = [];
+          let roles: string[] = [user.user_role || 'user'];
+          
           try {
             const purchases = await db.getUserPurchases(user.id);
             entitlements = mapPurchasesToEntitlements(purchases);
-            console.log('✅ Found entitlements for user:', entitlements);
+            console.log('✅ NextAuth: User entitlements loaded:', entitlements);
           } catch (error) {
-            console.warn('⚠️ Error fetching purchases (non-blocking):', error);
+            console.error('⚠️ NextAuth: Error loading user purchases:', error);
+            // Continue without purchases - user can still log in
           }
 
-          // Set user roles
-          const roles = [user.user_role || 'user'];
-          
-          const authUser = {
+          const authUser: User = {
             id: user.id,
             email: user.email,
-            name: user.name || user.email.split('@')[0],
+            name: user.name,
             entitlements,
             roles,
             created_at: user.created_at,
           };
 
-          console.log('✅ Authentication successful for:', credentials.email, 'with roles:', roles);
+          console.log('✅ NextAuth: Authentication successful for:', user.email);
           return authUser;
 
         } catch (error) {
-          console.error('❌ Authentication error:', error);
-          return null;
+          console.error('❌ NextAuth: Authentication error:', error);
+          // Re-throw with user-friendly message
+          throw new Error(error instanceof Error ? error.message : 'Authentication failed');
         }
       }
     }),
@@ -143,6 +144,8 @@ export const authOptions: NextAuthOptions = {
   
   callbacks: {
     async jwt({ token, user }) {
+      console.log('🔐 NextAuth: JWT callback - user:', !!user, 'token:', !!token);
+      
       // Persist user data in JWT token
       if (user) {
         token.id = user.id;
@@ -151,19 +154,23 @@ export const authOptions: NextAuthOptions = {
         token.entitlements = user.entitlements || [];
         token.roles = user.roles || ['user'];
         token.created_at = user.created_at;
+        console.log('✅ NextAuth: JWT token populated for:', user.email);
       }
       return token;
     },
     
     async session({ session, token }) {
+      console.log('🔐 NextAuth: Session callback - token:', !!token);
+      
       // Send properties to the client
-      if (token) {
+      if (token && session.user) {
         session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name;
         session.user.entitlements = token.entitlements || [];
         session.user.roles = token.roles || ['user'];
         session.user.created_at = token.created_at;
+        console.log('✅ NextAuth: Session populated for:', token.email);
       }
       return session;
     },
@@ -186,4 +193,20 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === 'development',
   
   secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-development',
+  
+  // Add error handling
+  events: {
+    async signIn(message) {
+      console.log('✅ NextAuth: User signed in:', message.user.email);
+    },
+    async signOut(message) {
+      console.log('👋 NextAuth: User signed out');
+    },
+    async createUser(message) {
+      console.log('👤 NextAuth: User created:', message.user.email);
+    },
+    async session(message) {
+      console.log('🔄 NextAuth: Session accessed for:', message.session.user?.email);
+    },
+  },
 };
