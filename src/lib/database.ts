@@ -301,6 +301,181 @@ class DatabaseManager {
     }
   }
 
+  // Booking management methods
+  async createBooking(bookingData: {
+    user_id: string;
+    name: string;
+    email: string;
+    phone?: string;
+    business_stage: string;
+    main_challenge: string;
+    goals: string;
+    preferred_date_time: string;
+    additional_notes?: string;
+  }): Promise<any> {
+    if (this.isSupabaseConfigured && this.supabase) {
+      try {
+        const { data, error } = await this.supabase
+          .from('coaching_bookings')
+          .insert({
+            ...bookingData,
+            status: 'pending',
+            created_at: new Date().toISOString()
+          })
+          .select()
+          .single();
+
+        if (error) {
+          console.error('Database error creating booking:', error);
+          return null;
+        }
+
+        return data;
+      } catch (error) {
+        console.error('Database error creating booking:', error);
+        return null;
+      }
+    } else {
+      // In-memory fallback
+      const booking = {
+        id: `booking_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        ...bookingData,
+        status: 'pending',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+      
+      console.log('📅 Created in-memory booking:', booking);
+      return booking;
+    }
+  }
+
+  async getUserBookings(userId: string): Promise<any[]> {
+    if (this.isSupabaseConfigured && this.supabase) {
+      try {
+        const { data, error } = await this.supabase
+          .from('coaching_bookings')
+          .select('*')
+          .eq('user_id', userId)
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Database error getting user bookings:', error);
+          return [];
+        }
+
+        return data || [];
+      } catch (error) {
+        console.error('Database error getting user bookings:', error);
+        return [];
+      }
+    } else {
+      // In-memory fallback
+      return [];
+    }
+  }
+
+  async getRecentBookings(email: string, hoursBack: number = 24): Promise<any[]> {
+    if (this.isSupabaseConfigured && this.supabase) {
+      try {
+        const cutoffDate = new Date();
+        cutoffDate.setHours(cutoffDate.getHours() - hoursBack);
+
+        const { data, error } = await this.supabase
+          .from('coaching_bookings')
+          .select('*')
+          .eq('email', email)
+          .gte('created_at', cutoffDate.toISOString());
+
+        if (error) {
+          console.error('Database error getting recent bookings:', error);
+          return [];
+        }
+
+        return data || [];
+      } catch (error) {
+        console.error('Database error getting recent bookings:', error);
+        return [];
+      }
+    } else {
+      // In-memory fallback
+      return [];
+    }
+  }
+
+  // Admin management methods
+  async getAllUsers(): Promise<User[]> {
+    if (this.isSupabaseConfigured && this.supabase) {
+      try {
+        const { data, error } = await this.supabase
+          .from('profiles')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Database error getting all users:', error);
+          return [];
+        }
+
+        return data || [];
+      } catch (error) {
+        console.error('Database error getting all users:', error);
+        return [];
+      }
+    } else {
+      // In-memory fallback
+      return inMemoryUsers;
+    }
+  }
+
+  async getAllPurchases(): Promise<Purchase[]> {
+    if (this.isSupabaseConfigured && this.supabase) {
+      try {
+        const { data, error } = await this.supabase
+          .from('purchases')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Database error getting all purchases:', error);
+          return [];
+        }
+
+        return data || [];
+      } catch (error) {
+        console.error('Database error getting all purchases:', error);
+        return [];
+      }
+    } else {
+      // In-memory fallback
+      return inMemoryPurchases;
+    }
+  }
+
+  async getAllBookings(): Promise<any[]> {
+    if (this.isSupabaseConfigured && this.supabase) {
+      try {
+        const { data, error } = await this.supabase
+          .from('coaching_bookings')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Database error getting all bookings:', error);
+          return [];
+        }
+
+        return data || [];
+      } catch (error) {
+        console.error('Database error getting all bookings:', error);
+        return [];
+      }
+    } else {
+      // In-memory fallback
+      return [];
+    }
+  }
+
   // Database setup and health check
   async ensureTablesExist(): Promise<boolean> {
     if (!this.isSupabaseConfigured) {
