@@ -238,7 +238,7 @@ export default function MyAccountPage() {
                                  image_url: product.image_url,
                                  productType: product.productType
                                }}
-                               className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
+                               className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold text-lg transition-colors"
                                variant="buy-now"
                              >
                                Purchase A${product.price}

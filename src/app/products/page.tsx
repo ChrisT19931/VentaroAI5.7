@@ -253,7 +253,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                       <div className="relative group/button">
                         <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
                         
-                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40 text-xl`} variant="buy-now" />
+                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/30 hover:border-${config.accent}-300/50 text-2xl py-4 md:py-5`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}
@@ -577,7 +577,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                         {/* Button Glow Effect - Simplified */}
                         <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
                         
-                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/20 hover:border-${config.accent}-300/40`} variant="buy-now" />
+                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/30 hover:border-${config.accent}-300/50 text-xl md:text-2xl py-4`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}
