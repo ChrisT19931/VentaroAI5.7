@@ -151,5 +151,4 @@ export const authOptions: NextAuthOptions = {
     error: '/signin',
   },
   secret: env.NEXTAUTH_SECRET,
-  trustHost: true,
 };
