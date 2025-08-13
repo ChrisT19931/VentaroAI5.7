@@ -4,6 +4,13 @@
 
 import { detectDeviceCapabilities } from './performance-optimizer';
 
+// Keep a reference to the native fetch to avoid recursion when overriding
+let nativeFetchRef: typeof fetch | null = null;
+
+export function getNativeFetch(): typeof fetch {
+  return nativeFetchRef || fetch;
+}
+
 /**
  * Configuration options for network optimization
  */
@@ -166,7 +173,7 @@ class NetworkCache {
       } catch (e) {
         // Fallback for objects that can't be stringified
         return Object.keys(data).reduce((size, key) => {
-          return size + key.length * 2 + this.estimateSize(data[key]);
+          return size + key.length * 2 + this.estimateSize((data as any)[key]);
         }, 0);
       }
     }
@@ -187,7 +194,7 @@ class NetworkCache {
     });
     
     // Remove oldest items until we have enough space
-    for (const [key, item] of items) {
+    for (const [key] of items) {
       if (this.totalSize + requiredSize <= this.maxSize) break;
       
       this.remove(key);
@@ -251,8 +258,9 @@ export async function optimizedFetch<T>(
   }
   
   try {
-    // Perform the fetch
-    const response = await fetch(url, options);
+    // Perform the fetch using native fetch to avoid recursion
+    const baseFetch = getNativeFetch();
+    const response = await baseFetch(url, options);
     
     if (!response.ok) {
       throw new Error(`Network error: ${response.status} ${response.statusText}`);
@@ -333,6 +341,9 @@ export function optimizeNetwork(isLowPerformance: boolean = false, config: Netwo
   // Override fetch with optimized version
   if (mergedConfig.useCache || mergedConfig.connectionAware || mergedConfig.useCompression) {
     const originalFetch = window.fetch;
+
+    // Store native fetch for use inside optimizedFetch
+    nativeFetchRef = originalFetch;
     
     window.fetch = async function(input: URL | RequestInfo, init?: RequestInit): Promise<Response> {
       try {
@@ -347,6 +358,7 @@ export function optimizeNetwork(isLowPerformance: boolean = false, config: Netwo
           const skipOptimization = 
             url.includes('/api/analytics') || // Skip analytics
             url.includes('/socket.io') ||    // Skip websockets
+            url.includes('/api/auth') ||     // Skip NextAuth endpoints (sessions, signin, etc.)
             url.endsWith('.mp4') ||         // Skip video
             url.endsWith('.mp3');           // Skip audio
           
@@ -358,7 +370,7 @@ export function optimizeNetwork(isLowPerformance: boolean = false, config: Netwo
               useCache: mergedConfig.useCache,
               cacheTtl: mergedConfig.cacheTtl,
               cacheKey
-            }) as Promise<any>;
+            }) as unknown as Promise<Response>;
           }
         }
       } catch (error) {
@@ -366,7 +378,7 @@ export function optimizeNetwork(isLowPerformance: boolean = false, config: Netwo
       }
       
       // Fall back to original fetch
-      return originalFetch.call(window, input, init);
+      return originalFetch.call(window, input as any, init);
     };
     
     // Add cleanup function

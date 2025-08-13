@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { uploadEmailLog, uploadEmailAttachment, EmailLog } from '@/utils/email-storage';
-import { createClient } from '@/lib/supabase/client';
+import { getToken } from 'next-auth/jwt';
 
 export async function POST(request: NextRequest) {
   try {
-    // Get the current user
-    const supabase = createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-    
-    if (authError || !user) {
+    // Get the current user from NextAuth token
+    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
         { status: 401 }
       );
     }
+    const user = { id: token.sub as string } as { id: string };
 
     const formData = await request.formData();
     

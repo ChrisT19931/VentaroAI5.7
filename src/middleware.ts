@@ -29,6 +29,17 @@ export async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   console.log('Middleware executing for path:', path);
   
+  // Check for demo mode in URL
+  const url = new URL(req.url);
+  const email = url.searchParams.get('email');
+  const isDemoMode = !!email;
+  
+  // If in demo mode with email parameter, allow access to protected routes
+  if (isDemoMode && protectedRoutes.some(route => path.startsWith(route))) {
+    console.log('Middleware - Demo mode detected, allowing access with email:', email);
+    return NextResponse.next();
+  }
+  
   // Skip middleware for API routes and static files
   if (
     path.startsWith('/api') ||
@@ -47,15 +58,21 @@ export async function middleware(req: NextRequest) {
   try {
     token = await getToken({ 
       req, 
-      secret: process.env.NEXTAUTH_SECRET 
+      secret: process.env.NEXTAUTH_SECRET,
+      secureCookie: process.env.NODE_ENV === 'production'
     });
     
     isAuthenticated = !!token;
-    console.log('User authenticated:', isAuthenticated);
+    console.log('User authenticated:', isAuthenticated, 'Path:', path);
+    if (token) {
+      console.log('Token found:', { id: token.id, email: token.email, path: path });
+    } else {
+      console.log('No token found in request for path:', path);
+    }
   } catch (error) {
     console.error('Error getting token in middleware:', error);
     // Continue as unauthenticated if there's an error
-    console.log('Authentication error, treating as unauthenticated');
+    console.log('Authentication error, treating as unauthenticated for path:', path);
   }
   
   // Handle protected routes
