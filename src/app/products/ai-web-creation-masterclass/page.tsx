@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { UnifiedCheckoutButton } from '@/components/UnifiedCheckoutButton';
+import UnifiedCheckoutButton from '@/components/UnifiedCheckoutButton';
 
 export default function AIWebCreationMasterclassPage() {
   const [user, setUser] = useState<any>(null);
