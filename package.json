@@ -28,10 +28,11 @@
     "@stripe/stripe-js": "^2.2.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.52.1",
+    "@types/bcryptjs": "^2.4.6",
     "@types/three": "^0.160.0",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.5",
     "framer-motion": "^12.23.11",
-
     "lucide-react": "^0.536.0",
     "mongodb": "^6.18.0",
     "next": "^14.2.30",

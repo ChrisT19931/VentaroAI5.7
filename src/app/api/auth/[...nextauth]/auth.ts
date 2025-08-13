@@ -1,7 +1,8 @@
-import { NextAuthOptions } from 'next-auth';
+import NextAuth, { NextAuthOptions, User, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { env } from '@/lib/env';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import bcrypt from 'bcryptjs';
 
 // Define types for NextAuth session and user
 declare module 'next-auth' {
@@ -43,32 +44,72 @@ export const authOptions: NextAuthOptions = {
       name: 'credentials',
       credentials: {
         email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' }
+        password: { label: 'Password', type: 'password' },
       },
+
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-        if (!supabaseUrl || !supabaseAnonKey) {
-          console.error('Supabase environment variables are missing');
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+        if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('placeholder')) {
+          // Development mode - allow test users
+          console.warn('⚠️ Supabase not configured - using development authentication');
+          
+          // Allow test credentials in development
+          if (credentials.email === 'admin@ventaro.ai' && credentials.password === 'admin123') {
+            return {
+              id: 'dev_admin',
+              email: 'admin@ventaro.ai',
+              name: 'Admin User',
+              entitlements: ['1', '2', '4', '5'], // All products
+              roles: ['admin'],
+              created_at: new Date().toISOString(),
+            };
+          }
+          
+          if (credentials.email === 'test@example.com' && credentials.password === 'test123') {
+            return {
+              id: 'dev_user',
+              email: 'test@example.com',
+              name: 'Test User',
+              entitlements: ['1'], // Only first product
+              roles: ['user'],
+              created_at: new Date().toISOString(),
+            };
+          }
+          
           return null;
         }
 
-        // Create a fresh server-side client per request to avoid any global overrides
         const supabase = createSupabaseClient(supabaseUrl, supabaseAnonKey);
 
         try {
-          // Authenticate with Supabase
-          const { data, error } = await supabase.auth.signInWithPassword({
-            email: credentials.email,
-            password: credentials.password,
-          });
+          // Authenticate against profiles table
+          const { data: user, error } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('email', credentials.email)
+            .single();
 
-          if (error || !data.user) {
-            console.error('Authentication error:', error?.message || 'No user');
+          if (error || !user) {
+            console.error('User not found:', error?.message || 'No user');
+            return null;
+          }
+
+          // Verify password
+          if (user.password_hash) {
+            const isValidPassword = await bcrypt.compare(credentials.password, user.password_hash);
+            if (!isValidPassword) {
+              console.error('Invalid password');
+              return null;
+            }
+          } else {
+            // Fallback: if no password hash, reject
+            console.error('No password hash found for user');
             return null;
           }
 
@@ -78,45 +119,29 @@ export const authOptions: NextAuthOptions = {
             const { data: purchases } = await supabase
               .from('purchases')
               .select('product_id')
-              .eq('user_id', data.user.id);
+              .eq('user_id', user.id);
             entitlements = purchases?.map((p: { product_id: string }) => p.product_id) || [];
           } catch (purchasesError: any) {
             console.warn('Non-blocking: error fetching purchases:', purchasesError?.message);
           }
 
-          // Try to fetch user role (non-blocking)
-          let roles: string[] = [];
-          try {
-            const { data: profile } = await supabase
-              .from('profiles')
-              .select('user_role')
-              .eq('id', data.user.id)
-              .single();
-            roles = profile?.user_role ? [profile.user_role] : [];
-          } catch (profileError: any) {
-            console.warn('Non-blocking: error fetching user role:', profileError?.message);
-          }
-
-          // Get created_at from user
-          let created_at = (data.user as any).created_at;
-          if ((data.user as any).user_metadata?.createdAt && !created_at) {
-            created_at = (data.user as any).user_metadata.createdAt;
-          }
+          // Set roles based on user_role field
+          const roles = user.user_role ? [user.user_role] : ['user'];
 
           return {
-            id: data.user.id,
-            email: data.user.email || '',
-            name: (data.user as any).user_metadata?.name || '',
+            id: user.id,
+            email: user.email || '',
+            name: user.name || '',
             entitlements,
             roles,
-            created_at,
+            created_at: user.created_at,
           };
         } catch (error) {
           console.error('Auth error:', error);
           return null;
         }
       }
-    })
+    }),
   ],
   callbacks: {
     async jwt({ token, user }) {
