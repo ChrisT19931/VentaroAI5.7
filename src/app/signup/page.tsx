@@ -345,29 +345,6 @@ export default function SignupPage() {
           </div>
         </div>
 
-        {/* Benefits */}
-        <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
-          <h3 className="text-white font-semibold mb-4 text-center">🚀 What you'll get:</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
-            <li className="flex items-center">
-              <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
-              Access to premium AI tools and resources
-            </li>
-            <li className="flex items-center">
-              <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
-              Professional AI prompts and guides
-            </li>
-            <li className="flex items-center">
-              <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
-              Exclusive content and updates
-            </li>
-            <li className="flex items-center">
-              <CheckCircle className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
-              Priority customer support
-            </li>
-          </ul>
-        </div>
-
         {/* Footer */}
         <div className="text-center">
           <p className="text-gray-400 text-sm">
