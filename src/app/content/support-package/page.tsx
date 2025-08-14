@@ -107,143 +107,22 @@ export default function SupportPackageContent() {
             </p>
           </div>
 
-          {/* Support Status */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="bg-green-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">Active Support</h3>
-                <p className="text-gray-300">Your support package is active</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">Response Time</h3>
-                <p className="text-gray-300">Within 24 hours</p>
-              </div>
-              
-              <div className="text-center">
-                <div className="bg-purple-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">Expert Team</h3>
-                <p className="text-gray-300">AI specialists available</p>
-              </div>
-            </div>
+          {/* Book Consultation */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 text-center">
+            <Calendar className="w-16 h-16 text-green-400 mx-auto mb-6" />
+            <h2 className="text-3xl font-bold text-white mb-4">Book Your Consultation</h2>
+            <p className="text-gray-300 mb-6 text-lg">
+              Schedule a personalized 1-on-1 consultation to discuss your AI implementation needs and get expert guidance.
+            </p>
+            <Link
+              href="/products/support-package"
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg transition-colors inline-block text-lg"
+            >
+              📅 Schedule Consultation Call
+            </Link>
           </div>
 
-          {/* Quick Actions */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8">
-              <Mail className="w-12 h-12 text-blue-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Email Support</h3>
-              <p className="text-gray-300 mb-6">
-                Get expert help with your AI projects via email. Our team responds within 24 hours.
-              </p>
-              <Link
-                href="/contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full block text-center"
-              >
-                📧 Send Support Email
-              </Link>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8">
-              <Calendar className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Schedule Consultation</h3>
-              <p className="text-gray-300 mb-6">
-                Book a 1-on-1 consultation call to discuss your specific needs and get personalized advice.
-              </p>
-              <Link
-                href="/products/support-package"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full block text-center"
-              >
-                📅 Book Consultation
-              </Link>
-            </div>
-          </div>
 
-          {/* How to Get Support */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-6">📞 How to Get Support</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-800/50 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-white mb-3">Email Support</h4>
-                <p className="text-gray-300 mb-4">Send us your questions via the contact form and we'll respond within 24 hours with detailed guidance.</p>
-                <Link
-                  href="/contact"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors inline-block"
-                >
-                  Contact Support
-                </Link>
-              </div>
-              
-              <div className="bg-gray-800/50 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-white mb-3">Book Consultation</h4>
-                <p className="text-gray-300 mb-4">Schedule a personalized consultation to discuss your specific AI implementation needs.</p>
-                <Link
-                  href="/products/support-package"
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors inline-block"
-                >
-                  Schedule Call
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* What's Included */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-6">✨ What's Included in Your Package</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-4">Direct Support</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Priority email support (24h response)
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    1-on-1 consultation calls
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Custom AI implementation guidance
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Troubleshooting assistance
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-4">Exclusive Resources</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Private community access
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Exclusive video tutorials
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Advanced AI prompts and templates
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Monthly group Q&A sessions
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
 
           {/* Contact Information */}
           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 text-center">

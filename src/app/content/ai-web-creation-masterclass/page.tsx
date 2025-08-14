@@ -29,7 +29,7 @@ export default function AIWebCreationMasterclassContent() {
 
       try {
         // Check if user is admin
-        if (session.user.roles?.includes('admin')) {
+        if (session.user.roles?.includes('admin') || session.user.email === 'chris.t@ventarosales.com') {
           setHasAccess(true);
           setLoading(false);
           return;
@@ -37,9 +37,7 @@ export default function AIWebCreationMasterclassContent() {
 
         // Check if user has purchased the product
         const userProducts = session.user.entitlements || [];
-        const hasProduct = userProducts.includes('4') || 
-                          userProducts.includes('ai-business-video-guide-2025') || 
-                          userProducts.includes('ai-web-creation-masterclass') ||
+        const hasProduct = userProducts.includes('ai-web-creation-masterclass') ||
                           userProducts.includes('video') ||
                           userProducts.includes('masterclass');
 
@@ -124,95 +122,24 @@ export default function AIWebCreationMasterclassContent() {
               </div>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4">📚 Course Modules</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Module 1: AI Tools Setup & Configuration
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Module 2: Frontend Development with AI
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Module 3: Backend Integration & APIs
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Module 4: Database Setup & Management
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Module 5: Deployment & Going Live
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
-                    Module 6: Monetization Strategies
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4">⚡ Key Features</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    No coding experience required
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    Build a complete website in 2 hours
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    Full source code included
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    AI prompts for customization
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    Lifetime access to updates
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-400 mr-3">•</span>
-                    Community support access
-                  </li>
-                </ul>
-              </div>
+            <div className="text-center">
+              <p className="text-gray-300 text-lg mb-4">
+                Learn how to build AI-powered websites step by step with our comprehensive video masterclass.
+              </p>
+              <p className="text-gray-400">
+                Video content will be uploaded soon. You'll receive an email notification when it's available.
+              </p>
             </div>
           </div>
 
           {/* Resources Section */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="grid md:grid-cols-1 gap-6 mb-8">
             <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
               <Download className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">Source Code</h3>
-              <p className="text-gray-300 mb-4">Complete project files and templates</p>
-              <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-                Download Files
-              </button>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
-              <BookOpen className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">AI Prompts</h3>
-              <p className="text-gray-300 mb-4">Ready-to-use prompts for customization</p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-                View Prompts
-              </button>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
-              <Play className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-white mb-2">Bonus Content</h3>
-              <p className="text-gray-300 mb-4">Extra tutorials and case studies</p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-                Watch Bonus
+              <h3 className="text-lg font-bold text-white mb-2">Course Resources</h3>
+              <p className="text-gray-300 mb-4">Downloadable resources and materials will be available once the video content is uploaded</p>
+              <button className="bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg cursor-not-allowed" disabled>
+                Coming Soon
               </button>
             </div>
           </div>

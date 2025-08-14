@@ -14,9 +14,14 @@ export interface User {
 export interface Purchase {
   id: string;
   user_id: string;
+  customer_email: string;
   product_id: string;
+  price_id: string;
   amount: number;
-  status: 'completed' | 'pending' | 'failed';
+  currency: string;
+  status: 'active' | 'completed' | 'pending' | 'failed';
+  stripe_session_id: string;
+  stripe_customer_id: string;
   stripe_payment_intent_id: string;
   created_at: string;
 }
@@ -37,36 +42,56 @@ const inMemoryPurchases: Purchase[] = [
   {
     id: 'admin-purchase-1',
     user_id: 'admin-user-id',
+    customer_email: 'chris.t@ventarosales.com',
     product_id: '1',
+    price_id: 'price_admin_test_1',
     amount: 2500,
+    currency: 'usd',
     status: 'completed',
+    stripe_session_id: 'cs_admin_test_1',
+    stripe_customer_id: 'cus_admin_test',
     stripe_payment_intent_id: 'admin_access',
     created_at: new Date().toISOString()
   },
   {
     id: 'admin-purchase-2',
     user_id: 'admin-user-id',
+    customer_email: 'chris.t@ventarosales.com',
     product_id: '2',
+    price_id: 'price_admin_test_2',
     amount: 1000,
+    currency: 'usd',
     status: 'completed',
+    stripe_session_id: 'cs_admin_test_2',
+    stripe_customer_id: 'cus_admin_test',
     stripe_payment_intent_id: 'admin_access',
     created_at: new Date().toISOString()
   },
   {
     id: 'admin-purchase-3',
     user_id: 'admin-user-id',
+    customer_email: 'chris.t@ventarosales.com',
     product_id: '4',
+    price_id: 'price_admin_test_4',
     amount: 49700,
+    currency: 'usd',
     status: 'completed',
+    stripe_session_id: 'cs_admin_test_4',
+    stripe_customer_id: 'cus_admin_test',
     stripe_payment_intent_id: 'admin_access',
     created_at: new Date().toISOString()
   },
   {
     id: 'admin-purchase-4',
     user_id: 'admin-user-id',
+    customer_email: 'chris.t@ventarosales.com',
     product_id: '5',
+    price_id: 'price_admin_test_5',
     amount: 0,
+    currency: 'usd',
     status: 'completed',
+    stripe_session_id: 'cs_admin_test_5',
+    stripe_customer_id: 'cus_admin_test',
     stripe_payment_intent_id: 'admin_access',
     created_at: new Date().toISOString()
   }
@@ -239,16 +264,30 @@ class BulletproofAuth {
 
   // BULLETPROOF PURCHASE CREATION
   async createPurchase(purchaseData: {
-    user_id: string;
+    user_id?: string;
+    customer_email?: string;
     product_id: string;
+    price_id?: string;
     amount: number;
-    status: 'completed' | 'pending' | 'failed';
-    stripe_payment_intent_id: string;
+    currency?: string;
+    status?: 'active' | 'completed' | 'pending' | 'failed';
+    stripe_session_id?: string;
+    stripe_customer_id?: string;
+    stripe_payment_intent_id?: string;
   }): Promise<Purchase | null> {
     try {
       const newPurchase: Purchase = {
         id: `purchase_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        ...purchaseData,
+        user_id: purchaseData.user_id || '',
+        customer_email: purchaseData.customer_email || '',
+        product_id: purchaseData.product_id,
+        price_id: purchaseData.price_id || '',
+        amount: purchaseData.amount,
+        currency: purchaseData.currency || 'usd',
+        status: purchaseData.status || 'completed',
+        stripe_session_id: purchaseData.stripe_session_id || '',
+        stripe_customer_id: purchaseData.stripe_customer_id || '',
+        stripe_payment_intent_id: purchaseData.stripe_payment_intent_id || '',
         created_at: new Date().toISOString()
       };
 

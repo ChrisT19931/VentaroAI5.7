@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
               <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
               
               <p style="font-size: 14px; color: #666; text-align: center; margin: 0;">
-                Need help? Contact us at <a href="mailto:support@ventaroai.com" style="color: #007bff;">support@ventaroai.com</a>
+                Need help? Contact us at <a href="mailto:chris.t@ventarosales.com" style="color: #007bff;">chris.t@ventarosales.com</a>
                 <br>
                 <span style="font-size: 12px;">Ventaro AI - Pioneering the future of digital products with AI</span>
               </p>
@@ -134,7 +134,7 @@ Your account has been successfully created. You can now access all our AI tools 
 
 Visit your account: ${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'}/my-account
 
-Need help? Contact us at support@ventaroai.com
+        Need help? Contact us at chris.t@ventarosales.com
 
 Best regards,
 The Ventaro AI Team`

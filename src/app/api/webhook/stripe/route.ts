@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { supabase } from '@/lib/supabase';
+import { bulletproofAuth } from '@/lib/auth-bulletproof';
 import { getStripeInstance } from '@/lib/stripe';
 import { env } from '@/lib/env';
 import { sendOrderConfirmationEmail, sendAccessGrantedEmail } from '@/lib/email';
@@ -135,26 +136,21 @@ async function handleCheckoutSessionCompleted(session: any) {
       const productId = price.product as string;
       const product = await stripe.products.retrieve(productId);
       
-      // Create purchase record
-      const { data: purchase, error } = await supabase
-        .from('purchases')
-        .insert({
-          user_id: userId,
-          customer_email: customerEmail,
-          product_id: productId,
-          price_id: priceId,
-          amount: price.unit_amount ? price.unit_amount / 100 : 0,
-          currency: price.currency,
-          status: 'active',
-          stripe_session_id: session.id,
-          stripe_customer_id: customerId,
-          created_at: new Date().toISOString(),
-        })
-        .select()
-        .single();
+      // Create purchase record using bulletproof auth system
+      const purchase = await bulletproofAuth.createPurchase({
+        user_id: userId,
+        customer_email: customerEmail,
+        product_id: productId,
+        price_id: priceId,
+        amount: price.unit_amount ? price.unit_amount / 100 : 0,
+        currency: price.currency,
+        status: 'active',
+        stripe_session_id: session.id,
+        stripe_customer_id: customerId,
+      });
       
-      if (error) {
-        console.error('Error creating purchase record:', error);
+      if (!purchase) {
+        console.error('Error creating purchase record via bulletproof auth');
         continue;
       }
       

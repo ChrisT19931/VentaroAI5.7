@@ -112,9 +112,12 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-4xl font-black text-white mb-6">AI Website Creation Masterclass</h3>
+                  <h3 className="text-4xl font-black text-white mb-6">🎯 AI Website Creation Masterclass</h3>
                   <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                    Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI. No experience required! Unlike building on sites such as Shopify/Wix, you get full control of both backend and frontend code & you can change your platform on-the-fly with prompts - giving you unlimited customization power.
+                    <strong className="text-white">2 Hours from Zero to Live</strong> — Watch me create a complete platform from scratch, in real time.<br/>
+                    <strong className="text-white">No Experience Needed</strong> — You just follow along.<br/>
+                    <strong className="text-white">Full Backend & Frontend Ownership</strong> — Keep the code forever, change anything you want.<br/>
+                    <strong className="text-white">No SaaS Lock-In</strong> — Unlike Shopify or Wix, you own it. No monthly fees.
                   </p>
                   <div className="flex items-center justify-center mb-4">
                     <span className="text-6xl font-black text-white">A$50</span>
@@ -124,56 +127,73 @@ export default function Home() {
                       INDUSTRY SHATTERING VALUE
                     </span>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-6 mb-10 text-left">
-                    <ul className="space-y-4 text-gray-300">
-                      <li className="flex items-center">
-                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Complete Video Tutorial
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Detailed Step-by-Step Report
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Full Blueprint
-                      </li>
-                    </ul>
-                    <ul className="space-y-4 text-gray-300">
-                      <li className="flex items-center">
-                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Screen Recording of Entire Process
-                      </li>
-                      <li className="flex items-center">
-                        <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Comprehensive Implementation Guide
-                      </li>
+                  {/* What You Get for $50 */}
+                  <div className="bg-gray-800/40 rounded-2xl p-8 mb-8 border border-purple-500/30">
+                    <h4 className="text-2xl font-bold text-white mb-6 text-center">What You Get for $50</h4>
+                    <div className="grid md:grid-cols-2 gap-6 text-left">
+                      <ul className="space-y-4 text-gray-300">
+                        <li className="flex items-start">
+                          <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <div>
+                            <strong className="text-green-400">Step-by-Step Video Walkthrough</strong><br/>
+                            <span className="text-sm">Watch the entire build process</span>
+                          </div>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-6 h-6 text-blue-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <div>
+                            <strong className="text-blue-400">Complete Tool List</strong><br/>
+                            <span className="text-sm">Everything you need, all AI-powered</span>
+                          </div>
+                        </li>
+                      </ul>
+                      <ul className="space-y-4 text-gray-300">
+                        <li className="flex items-start">
+                          <svg className="w-6 h-6 text-yellow-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <div>
+                            <strong className="text-yellow-400">Implementation Blueprint</strong><br/>
+                            <span className="text-sm">The exact prompts, workflow, and structure I use</span>
+                          </div>
+                        </li>
+                        <li className="flex items-start">
+                          <svg className="w-6 h-6 text-purple-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <div>
+                            <strong className="text-purple-400">Screen Recording</strong><br/>
+                            <span className="text-sm">So you can replicate it whenever you want</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
-
-                    </ul>
+                  {/* The $50 vs $5K Gap */}
+                  <div className="bg-gradient-to-r from-red-900/30 to-green-900/30 rounded-2xl p-6 mb-10 border border-green-500/30">
+                    <h4 className="text-xl font-bold text-white mb-4 text-center">The $50 vs $5K Gap</h4>
+                    <div className="space-y-2 text-center">
+                      <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
+                      <div className="text-red-300">Build on SaaS? <span className="font-bold text-red-400">$50/month forever</span> + no code control</div>
+                      <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own the skills + product for life</div>
+                    </div>
                   </div>
                   <UnifiedCheckoutButton 
                     product={{
                       id: 'ai-business-video-guide-2025',
-                      name: 'AI Business Video Guide',
+                      name: 'AI Web Creation Masterclass',
                       price: 50,
                       productType: 'digital'
                     }}
-                    className="premium-button-glow w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black py-6 px-12 rounded-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-xl"
+                    buttonText="🚀 Start Building Now — Get Instant Access for $50"
+                    className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
                     variant="direct"
-                  >
-                    Learn Now for Just $50
-                  </UnifiedCheckoutButton>
+                  />
                   <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
                 </div>
               </div>

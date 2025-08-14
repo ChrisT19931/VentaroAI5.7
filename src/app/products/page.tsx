@@ -17,15 +17,17 @@ function getProducts() {
   return [
     {
       id: 'ai-business-video-guide-2025',
-      name: 'AI Web Creation Masterclass',
-      description: 'Complete step by step video showing our process to create a fully operational online business from start-to-finish within 2 hours, including all tools and steps required to build a fully operational online business with AI. No experience required! Unlike building on sites such as Shopify/Wix, you get full control of both backend and frontend code & you can change your platform on-the-fly with prompts - giving you unlimited customization power.',
+      name: '🎯 AI Web Creation Masterclass',
+      description: '2 Hours from Zero to Live — Watch me create a complete platform from scratch, in real time. No Experience Needed — You just follow along. Full Backend & Frontend Ownership — Keep the code forever, change anything you want. Unlimited Customization — Update your platform anytime with simple AI prompts. No SaaS Lock-In — Unlike Shopify or Wix, you own it. No monthly fees.',
       price: 50.00,
       image_url: '/images/products/ai-business-video-guide.svg',
       category: 'video',
       is_active: true,
       featured: true,
       productType: 'digital',
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
+      highlight: true,
+      badge: 'MOST POPULAR'
     },
     {
       id: 'weekly-support-contract',
@@ -208,23 +210,36 @@ const ProductsPage = React.memo(function ProductsPage() {
                       {product.description}
                     </p>
                     
-                    {/* Enhanced Features */}
-                    <div className="space-y-4 mb-8">
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                        <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>Complete Video:</span> Step by step process revealed</span>
+                    {/* What You Get for $50 */}
+                    <div className="bg-gray-800/30 rounded-xl p-6 mb-8 border border-purple-500/20">
+                      <h4 className="text-xl font-bold text-white mb-4 text-center">What You Get for $50</h4>
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                          <span className="text-sm text-gray-100 font-medium"><span className="text-green-400 font-bold">Step-by-Step Video Walkthrough</span> — Watch the entire build process</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                          <span className="text-sm text-gray-100 font-medium"><span className="text-blue-400 font-bold">Complete Tool List</span> — Everything you need, all AI-powered</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                          <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Implementation Blueprint</span> — The exact prompts, workflow, and structure I use</span>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
+                          <span className="text-sm text-gray-100 font-medium"><span className="text-purple-400 font-bold">Screen Recording</span> — So you can replicate it whenever you want</span>
+                        </div>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                        <span className="text-sm text-gray-100 font-medium">Full Blueprint with all tools & prompts</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                        <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">No Experience Required:</span> Perfect for beginners</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                        <span className="text-sm text-gray-100 font-medium">Screen recording of entire process</span>
+                    </div>
+
+                    {/* The $50 vs $5K Gap */}
+                    <div className="bg-gradient-to-r from-red-900/20 to-green-900/20 rounded-xl p-6 mb-8 border border-green-500/20">
+                      <h4 className="text-xl font-bold text-white mb-4 text-center">The $50 vs $5K Gap</h4>
+                      <div className="space-y-2 text-center">
+                        <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
+                        <div className="text-red-300">Build on SaaS? <span className="font-bold text-red-400">$50/month forever</span> + no code control</div>
+                        <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own the skills + product for life</div>
                       </div>
                     </div>
                     
@@ -253,7 +268,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                       <div className="relative group/button">
                         <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
                         
-                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/30 hover:border-${config.accent}-300/50 text-2xl py-4 md:py-5`} variant="buy-now" />
+                        <UnifiedCheckoutButton product={product} buttonText="🚀 Start Building Now — Get Instant Access for $50" className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/30 hover:border-${config.accent}-300/50 text-lg py-4 md:py-5`} variant="buy-now" />
                       </div>
                       
                       {/* Trust Indicators */}
