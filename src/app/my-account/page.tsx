@@ -229,7 +229,7 @@ export default function MyAccountPage() {
                         <div className="bg-gradient-to-r from-red-900/30 to-green-900/30 rounded-lg p-4 mb-6 border border-green-500/30">
                           <div className="text-center space-y-1 text-sm">
                             <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
-                            <div className="text-red-300">Build on SaaS? <span className="font-bold text-red-400">$50/month forever</span></div>
+            
                             <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own forever</div>
                           </div>
                         </div>

@@ -238,7 +238,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                       <h4 className="text-xl font-bold text-white mb-4 text-center">The $50 vs $5K Gap</h4>
                       <div className="space-y-2 text-center">
                         <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
-                        <div className="text-red-300">Build on SaaS? <span className="font-bold text-red-400">$50/month forever</span> + no code control</div>
+        
                         <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own the skills + product for life</div>
                       </div>
                     </div>
