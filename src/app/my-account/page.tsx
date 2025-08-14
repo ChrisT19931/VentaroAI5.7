@@ -123,21 +123,21 @@ export default function MyAccountPage() {
               setOwnedProducts(data.products || []);
             } else {
               console.error('Failed to fetch owned products');
-              // For demo purposes, give some default products
-              setOwnedProducts(['ai-business-video-guide-2025']);
+              // No products for regular users unless purchased
+              setOwnedProducts([]);
             }
           } catch (error) {
             console.error('Error fetching user products:', error);
-            // For demo purposes, give some default products
-            setOwnedProducts(['ai-business-video-guide-2025']);
+            // No products for regular users unless purchased
+            setOwnedProducts([]);
           }
         }
         
         setIsLoading(false);
       } catch (error) {
         console.error('Error in product fetching flow:', error);
-        // For demo purposes, give some default products
-        setOwnedProducts(['ai-business-video-guide-2025']);
+        // No products for regular users unless purchased
+        setOwnedProducts([]);
         setIsLoading(false);
       }
     };

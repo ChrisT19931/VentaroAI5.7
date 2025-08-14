@@ -29,7 +29,7 @@ export default function SupportPackageContent() {
 
       try {
         // Check if user is admin
-        if (session.user.roles?.includes('admin')) {
+        if (session.user.roles?.includes('admin') || session.user.email === 'chris.t@ventarosales.com') {
           setHasAccess(true);
           setLoading(false);
           return;
@@ -37,7 +37,7 @@ export default function SupportPackageContent() {
 
         // Check if user has purchased the product
         const userProducts = session.user.entitlements || [];
-        const hasProduct = userProducts.includes('3') || 
+        const hasProduct = userProducts.includes('support-package') || 
                           userProducts.includes('weekly-support-contract-2025') || 
                           userProducts.includes('support');
 
@@ -144,9 +144,12 @@ export default function SupportPackageContent() {
               <p className="text-gray-300 mb-6">
                 Get expert help with your AI projects via email. Our team responds within 24 hours.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full">
+              <Link
+                href="/contact"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full block text-center"
+              >
                 📧 Send Support Email
-              </button>
+              </Link>
             </div>
             
             <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8">
@@ -164,32 +167,30 @@ export default function SupportPackageContent() {
             </div>
           </div>
 
-          {/* Support Resources */}
+          {/* How to Get Support */}
           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-6">📚 Support Resources</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="text-2xl font-bold text-white mb-6">📞 How to Get Support</h2>
+            <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gray-800/50 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-white mb-3">Getting Started Guide</h4>
-                <p className="text-gray-300 mb-4">Step-by-step guide to get the most out of your AI tools</p>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors">
-                  View Guide
-                </button>
+                <h4 className="text-lg font-semibold text-white mb-3">Email Support</h4>
+                <p className="text-gray-300 mb-4">Send us your questions via the contact form and we'll respond within 24 hours with detailed guidance.</p>
+                <Link
+                  href="/contact"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors inline-block"
+                >
+                  Contact Support
+                </Link>
               </div>
               
               <div className="bg-gray-800/50 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-white mb-3">Video Tutorials</h4>
-                <p className="text-gray-300 mb-4">Exclusive video content for support package members</p>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors">
-                  Watch Videos
-                </button>
-              </div>
-              
-              <div className="bg-gray-800/50 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-white mb-3">Community Access</h4>
-                <p className="text-gray-300 mb-4">Join our exclusive community of AI entrepreneurs</p>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded transition-colors">
-                  Join Community
-                </button>
+                <h4 className="text-lg font-semibold text-white mb-3">Book Consultation</h4>
+                <p className="text-gray-300 mb-4">Schedule a personalized consultation to discuss your specific AI implementation needs.</p>
+                <Link
+                  href="/products/support-package"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors inline-block"
+                >
+                  Schedule Call
+                </Link>
               </div>
             </div>
           </div>
