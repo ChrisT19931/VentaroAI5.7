@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { MessageCircle, Clock, CheckCircle, Lock, Mail, Calendar, Users } from 'lucide-react';
 import Link from 'next/link';
+import ConsultationCalendar from '@/components/ConsultationCalendar';
 
 export default function SupportPackageContent() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -54,12 +55,12 @@ export default function SupportPackageContent() {
     checkAccess();
   }, [session, status, router]);
 
-  if (loading || status === 'loading') {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-pink-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-white text-lg">Loading support portal...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white">Loading support package...</p>
         </div>
       </div>
     );
@@ -68,25 +69,24 @@ export default function SupportPackageContent() {
   if (!hasAccess) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-pink-900 flex items-center justify-center">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md mx-auto text-center">
-          <Lock className="w-16 h-16 text-red-400 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-white mb-4">🔒 Access Restricted</h1>
+        <div className="text-center max-w-md mx-auto px-4">
+          <Lock className="w-16 h-16 text-gray-400 mx-auto mb-6" />
+          <h1 className="text-3xl font-bold text-white mb-4">Premium Support Package</h1>
           <p className="text-gray-300 mb-6">
-            You need to purchase the Premium Support Package to access this content.
+            This content is available to Support Package customers only.
           </p>
           <div className="space-y-4">
-            <Link
-              href="/products"
-              className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-300 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-base"
+            <Link 
+              href="/products/support-package" 
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors inline-block"
             >
-              Purchase Access - A$300
+              Get Support Package
             </Link>
-            <Link
-              href="/my-account"
-              className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors w-full block text-center"
-            >
-              Back to My Account
-            </Link>
+            <div className="text-sm text-gray-400">
+              <Link href="/my-account" className="text-blue-400 hover:text-blue-300">
+                ← Back to My Account
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -107,22 +107,10 @@ export default function SupportPackageContent() {
             </p>
           </div>
 
-          {/* Book Consultation */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 text-center">
-            <Calendar className="w-16 h-16 text-green-400 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-white mb-4">Book Your Consultation</h2>
-            <p className="text-gray-300 mb-6 text-lg">
-              Schedule a personalized 1-on-1 consultation to discuss your AI implementation needs and get expert guidance.
-            </p>
-            <Link
-              href="/contact"
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg transition-colors inline-block text-lg"
-            >
-              📅 Schedule Consultation Call
-            </Link>
+          {/* Book Consultation Calendar */}
+          <div className="mb-8">
+            <ConsultationCalendar />
           </div>
-
-
 
           {/* Contact Information */}
           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 text-center">
@@ -138,25 +126,32 @@ export default function SupportPackageContent() {
               >
                 📧 Email Support Team
               </a>
-              <p className="text-sm text-gray-400">
-                Response time: Within 24 hours | Priority support included
-              </p>
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* Support Features */}
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
+              <Clock className="w-12 h-12 text-green-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Priority Response</h3>
+              <p className="text-gray-300">Get responses within 24 hours on business days</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
+              <Users className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Expert Guidance</h3>
+              <p className="text-gray-300">Direct access to AI implementation specialists</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
+              <CheckCircle className="w-12 h-12 text-purple-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-white mb-2">Custom Solutions</h3>
+              <p className="text-gray-300">Tailored advice for your specific business needs</p>
+            </div>
+          </div>
+
+          {/* Back Link */}
           <div className="text-center">
-            <Link
-              href="/my-account"
-              className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors mr-4"
-            >
+            <Link href="/my-account" className="text-blue-400 hover:text-blue-300 transition-colors">
               ← Back to My Account
-            </Link>
-            <Link
-              href="/content"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors"
-            >
-              View All Content
             </Link>
           </div>
         </div>
