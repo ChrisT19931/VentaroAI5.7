@@ -8,11 +8,11 @@ const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 // Clean up old rate limit entries
 const cleanupRateLimit = () => {
   const now = Date.now();
-  for (const [key, value] of rateLimitStore.entries()) {
+  rateLimitStore.forEach((value, key) => {
     if (now > value.resetTime) {
       rateLimitStore.delete(key);
     }
-  }
+  });
 };
 
 // Check rate limit (3 submissions per day per email)
