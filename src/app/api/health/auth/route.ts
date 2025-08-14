@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
     // 5. Admin User Check
     console.log('🔍 Checking admin user...');
     try {
-      const adminUser = await db.findUserByEmail('admin@ventaro.ai');
+      const adminUser = await db.findUserByEmail('chris.t@ventarosales.com');
       healthData.checks.admin_user = {
         exists: !!adminUser,
         email: adminUser?.email || null,

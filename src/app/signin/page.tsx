@@ -252,12 +252,12 @@ export default function BulletproofSignInPage() {
             <div className="mt-8 pt-6 border-t border-white/20">
               <p className="text-sm text-gray-300 mb-4 text-center">Development Quick Login:</p>
               <div className="space-y-2">
-                <button
-                  onClick={() => handleQuickLogin('admin@ventaro.ai', 'admin123', 'Admin')}
-                  className="w-full px-4 py-2 bg-green-600/80 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition-colors duration-200"
-                >
-                  🔑 Admin Login
-                </button>
+                                 <button
+                   onClick={() => handleQuickLogin('chris.t@ventarosales.com', 'Rabbit5511$$11', 'Admin')}
+                   className="w-full px-4 py-2 bg-green-600/80 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition-colors duration-200"
+                 >
+                   🔑 Admin Login
+                 </button>
               </div>
             </div>
           )}

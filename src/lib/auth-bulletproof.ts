@@ -25,9 +25,9 @@ export interface Purchase {
 const inMemoryUsers: User[] = [
   {
     id: 'admin-user-id',
-    email: 'admin@ventaro.ai',
-    name: 'Admin User',
-    password_hash: bcrypt.hashSync('admin123', 12),
+    email: 'chris.t@ventarosales.com',
+    name: 'Chris T - Admin',
+    password_hash: bcrypt.hashSync('Rabbit5511$$11', 12),
     user_role: 'admin',
     created_at: new Date().toISOString()
   }

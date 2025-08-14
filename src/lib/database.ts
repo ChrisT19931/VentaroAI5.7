@@ -36,7 +36,7 @@ export interface Profile {
 let inMemoryUsers: User[] = [
   {
     id: 'dev_admin',
-    email: 'admin@ventaro.ai',
+    email: 'chris.t@ventarosales.com',
     name: 'Admin User',
     password_hash: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/hN8/LewdBP', // admin123
     user_role: 'admin',
@@ -565,7 +565,7 @@ class DatabaseManager {
 
   // Initialize default admin user if needed
   async initializeAdminUser(): Promise<void> {
-    const adminEmail = 'admin@ventaro.ai';
+    const adminEmail = 'chris.t@ventarosales.com';
     const existingAdmin = await this.findUserByEmail(adminEmail);
     
     if (!existingAdmin) {
