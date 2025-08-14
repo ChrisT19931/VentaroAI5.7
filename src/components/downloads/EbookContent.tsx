@@ -5,6 +5,12 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { Download, ChevronDown, ChevronRight, DollarSign, Target, Zap, BookOpen } from 'lucide-react';
 
+// Props interface for the component
+interface EbookContentProps {
+  hasAccess: boolean;
+  isAdmin: boolean;
+}
+
 // Define the detailed lesson structure
 const AI_LESSONS = [
   // SECTION 1: ChatGPT, Gemini & Grok Business Mastery (Lessons 1-10)
@@ -191,7 +197,7 @@ const AI_LESSONS = [
   // Add more lessons following this detailed format...
 ];
 
-export default function EbookContent() {
+export default function EbookContent({ hasAccess, isAdmin }: EbookContentProps) {
   const { data: session, status } = useSession();
   const [isDownloading, setIsDownloading] = useState(false);
   const [expandedLessons, setExpandedLessons] = useState<number[]>([]);
@@ -249,6 +255,32 @@ export default function EbookContent() {
               className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
             >
               Sign In
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!hasAccess && !isAdmin) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-6">🔒</div>
+          <h1 className="text-3xl font-bold text-white mb-4">Purchase Required</h1>
+          <p className="text-gray-300 mb-8">You need to purchase the AI Tools Mastery Guide to access this content.</p>
+          <div className="space-x-4">
+            <Link 
+              href="/products" 
+              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              View Products
+            </Link>
+            <Link 
+              href="/my-account" 
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              My Account
             </Link>
           </div>
         </div>

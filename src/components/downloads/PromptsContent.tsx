@@ -254,7 +254,13 @@ const AI_PROMPTS_ARSENAL = [
   }
 ];
 
-export default function PromptsContent() {
+// Props interface for the component
+interface PromptsContentProps {
+  hasAccess: boolean;
+  isAdmin: boolean;
+}
+
+export default function PromptsContent({ hasAccess, isAdmin }: PromptsContentProps) {
   const { data: session } = useSession();
   const [expandedPrompts, setExpandedPrompts] = useState<Set<number>>(new Set());
   const [copiedPrompt, setCopiedPrompt] = useState<number | null>(null);
@@ -281,6 +287,52 @@ export default function PromptsContent() {
   };
 
   const categories = Array.from(new Set(AI_PROMPTS_ARSENAL.map(prompt => prompt.category)));
+
+  if (!session) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-6">🔒</div>
+          <h1 className="text-3xl font-bold text-white mb-4">Access Required</h1>
+          <p className="text-gray-300 mb-8">Please sign in to access the AI Prompts Arsenal.</p>
+          <div className="space-x-4">
+            <Link 
+              href="/signin" 
+              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              Sign In
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!hasAccess && !isAdmin) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-6">🔒</div>
+          <h1 className="text-3xl font-bold text-white mb-4">Purchase Required</h1>
+          <p className="text-gray-300 mb-8">You need to purchase the AI Prompts Arsenal to access this content.</p>
+          <div className="space-x-4">
+            <Link 
+              href="/products" 
+              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              View Products
+            </Link>
+            <Link 
+              href="/my-account" 
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              My Account
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-green-900">

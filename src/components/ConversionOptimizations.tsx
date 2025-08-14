@@ -196,7 +196,12 @@ export function SocialProof({ recentPurchases = [] }: SocialProofProps) {
     return () => clearInterval(timer);
   }, [recentPurchases.length]);
 
-  const defaultPurchases = [];
+  const defaultPurchases: Array<{
+    name: string;
+    product: string;
+    timeAgo: string;
+    location?: string;
+  }> = [];
 
     const purchases = recentPurchases.length > 0 ? recentPurchases : defaultPurchases;
 
