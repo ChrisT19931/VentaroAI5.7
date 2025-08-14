@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { analytics } from '@/lib/analytics';
 
 type Product = {
   id: string;
@@ -35,6 +36,9 @@ export default function UnifiedCheckoutButton({
   const router = useRouter();
 
   const handleCheckout = async () => {
+    // Track purchase intent
+    analytics.trackPurchaseIntent(product.id, product.name, product.price);
+    
     // Single authentication check for all variants
     if (!isAuthenticated || !user) {
       toast.error('Please sign in to make a purchase');
@@ -43,6 +47,8 @@ export default function UnifiedCheckoutButton({
       return;
     }
 
+    // Track checkout start
+    analytics.trackCheckoutStart(product.id, product.name, product.price);
     setIsLoading(true);
     
     try {
@@ -73,6 +79,14 @@ export default function UnifiedCheckoutButton({
       }
 
       if (data.url) {
+        // Track successful checkout redirect
+        analytics.track('checkout_redirect', {
+          product_id: product.id,
+          product_name: product.name,
+          price: product.price,
+          checkout_url: data.url
+        });
+        
         // Direct redirect to Stripe Checkout - single flow
         console.log('Redirecting to checkout URL:', data.url);
         window.location.href = data.url;

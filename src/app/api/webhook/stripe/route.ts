@@ -166,11 +166,15 @@ async function handleCheckoutSessionCompleted(session: any) {
         },
       });
       
-      // Send access granted email
+      // Send access granted email with upsell link for masterclass
+      const accessLink = productId === 'ai-business-video-guide-2025' 
+        ? `${process.env.NEXT_PUBLIC_SITE_URL}/upsell/masterclass-success?session_id=${session.id}`
+        : `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`;
+        
       await sendAccessGrantedEmail({
         email: customerEmail,
         productName: product.name,
-        accessLink: `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`,
+        accessLink,
       });
     }
   } catch (error) {
