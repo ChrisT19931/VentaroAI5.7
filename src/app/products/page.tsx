@@ -11,14 +11,13 @@ import dynamic from 'next/dynamic';
 // Performance optimization: Use React.memo for components that don't need frequent re-renders
 const MemoizedUnifiedCheckoutButton = React.memo(UnifiedCheckoutButton);
 
-
 function getProducts() {
   // Fallback to mock data - Updated business model
   return [
     {
       id: 'ai-business-video-guide-2025',
       name: '🎯 AI Web Creation Masterclass',
-      description: '2 Hours from Zero to Live — Watch me create a complete platform from scratch, in real time. No Experience Needed — You just follow along. Full Backend & Frontend Ownership — Keep the code forever, change anything you want. Unlimited Customization — Update your platform anytime with simple AI prompts. No SaaS Lock-In — Unlike Shopify or Wix, you own it. No monthly fees.',
+      description: '2 Hours from Zero to Live — Watch me create a complete platform from scratch, in real time. No Experience Needed — You just follow along. Keep Your Code Forever — Build it yourself, own it completely, change anything you want. No SaaS Lock-In — Unlike Shopify or Wix, you build and own your platform. AI-Powered Changes — Tell AI agents what to modify and watch your platform transform instantly.',
       price: 50.00,
       image_url: '/images/products/ai-business-video-guide.svg',
       category: 'video',
@@ -30,9 +29,9 @@ function getProducts() {
       badge: 'MOST POPULAR'
     },
     {
-      id: 'weekly-support-contract',
+      id: 'weekly-support-contract-2025',
       name: 'Support Package',
-      description: 'Premium email support for 1 month with expert guidance on implementing your AI website. Perfect for scaling your AI business with professional assistance.',
+      description: '60-minute Google Meet/phone call consultation + unlimited email support for 1 month.',
        price: 300.00,
        recurring: false,
       image_url: '/images/products/weekly-support.svg',
@@ -43,33 +42,32 @@ function getProducts() {
       created_at: new Date().toISOString()
     },
     {
-      id: '2',
-      name: 'Full Access To Prompts',
-      description: 'Build your online business from scratch with 30 proven AI prompts. Simply copy/paste into ChatGPT and get step-by-step plans for every aspect of your business.',
+      id: 'ai-prompts-arsenal-2025',
+      name: '30x AI Prompts Arsenal',
+      description: '30 proven AI prompts for building online businesses.',
       price: 10.00,
-      image_url: '/images/products/ai-prompts-arsenal.svg',
-      category: 'tools',
+      image_url: '/images/products/ai-prompts.svg',
+      category: 'prompts',
       is_active: true,
       featured: false,
       productType: 'digital',
       created_at: new Date().toISOString()
     },
     {
-      id: '1',
-      name: 'Full Access To Ebook',
-      description: 'Complete step-by-step guide to master 30 essential AI tools for building profitable online businesses from scratch. Everything you need to leverage AI for maximum business success.',
+      id: 'ai-tools-mastery-guide-2025',
+      name: 'AI Tools Mastery Guide',
+      description: '30 detailed lessons on ChatGPT, Claude, Cursor, and more AI tools for business building.',
       price: 25.00,
-      image_url: '/images/products/ai-tools-mastery-guide.svg',
-      category: 'courses',
+      image_url: '/images/products/ai-tools-guide.svg',
+      category: 'ebook',
       is_active: true,
       featured: false,
+
       productType: 'digital',
       created_at: new Date().toISOString()
     }
   ];
 }
-
-
 
 // Performance optimization: Memoize the ProductsPage component
 const ProductsPage = React.memo(function ProductsPage() {
@@ -115,517 +113,293 @@ const ProductsPage = React.memo(function ProductsPage() {
   ), []);
   
   return (
-    <div className="relative min-h-screen py-16 overflow-hidden bg-gradient-to-br from-slate-950 via-gray-950 to-black">
-      {/* Enhanced background effects - memoized */}
+    <div className="min-h-screen bg-black relative overflow-hidden">
       {BackgroundEffects}
+      <StarBackground />
       
-      <div className="relative z-10 container mx-auto px-6 max-w-7xl">
-        {/* Enhanced Header Section */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-full text-xs font-semibold text-purple-300 mb-4 border border-purple-500/30 shadow-lg shadow-purple-500/10 animate-pulse">
-            🔥 LIMITED TIME: 83% OFF LAUNCH PRICING
-          </span>
-          <h1 className="text-5xl md:text-6xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-400 to-purple-500 drop-shadow-2xl">
-            AI Business Solutions
+      <div className="container mx-auto px-6 py-20 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <h1 className="text-5xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Products</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-4 font-light max-w-4xl mx-auto leading-relaxed">
-            Choose your path to AI-powered business success
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Professional AI tools and resources to build your online business empire.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full animate-pulse"></div>
-
         </div>
-        
-        {/* Enhanced Three-Tier Layout with Advanced Effects */}
-        <style jsx>{`
-          @keyframes glow-pulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
-          }
-          @keyframes premium-glow {
-            0%, 100% { 
-              box-shadow: 0 0 15px rgba(147, 51, 234, 0.2);
-            }
-            50% { 
-              box-shadow: 0 0 25px rgba(147, 51, 234, 0.3);
-            }
-          }
-          .card-glow { animation: glow-pulse 3s ease-in-out infinite; }
-          .premium-glow { animation: premium-glow 3s ease-in-out infinite; }
-          .premium-float { transform: translateY(0); }
-          .shimmer-effect {
-            position: relative;
-            overflow: hidden;
-          }
-        `}</style>
-        {products.length > 0 ? (
-          <div className="max-w-7xl mx-auto">
-            {/* Featured Product */}
-            {products.filter(p => p.id === 'ai-business-video-guide-2025').map((product: any) => {
-              // Define card configurations for the featured product
-              const config = {
-                bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
-                accent: 'purple',
-                accentHex: '#8b5cf6',
-                shadow: 'purple-500/30',
-                border: 'purple-500/40',
-                glow: 'purple-400/20',
-                icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
-                tier: 'PROFESSIONAL',
-                tierColor: 'from-purple-600 to-pink-600',
-                scale: 'hover:scale-105',
-                popular: true
-              };
-              const isPopular = true;
-              
-              return (
-                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-md rounded-3xl shadow-xl hover:shadow-${config.shadow} transition-all duration-300 transform hover:-translate-y-2 ${config.scale} overflow-hidden border-2 border-${config.accent}-400/60 premium-glow premium-float hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95 mb-12`}>
 
-                  
-                  {/* Enhanced Floating Elements */}
-                  <div className="absolute top-6 right-6 z-10">
-                    <div className={`w-16 h-16 bg-gradient-to-br from-${config.accent}-400 to-${config.accent}-600 rounded-full flex items-center justify-center shadow-2xl shadow-${config.accent}-500/50 group-hover:shadow-${config.accent}-400/70 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12`}>
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d={config.icon} />
-                      </svg>
-                    </div>
+        {/* Products Grid - Same Style as Homepage */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <style jsx>{`
+            .glass-panel {
+              background: rgba(15, 23, 42, 0.6);
+              backdrop-filter: blur(8px);
+              -webkit-backdrop-filter: blur(8px);
+              box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            }
+            
+            .premium-button-glow {
+              position: relative;
+            }
+            
+            .premium-button-glow:hover {
+              box-shadow: 0 4px 20px rgba(147, 51, 234, 0.3);
+            }
+          `}</style>
+
+          {/* AI Web Creation Masterclass - Featured */}
+          {products.filter(p => p.id === 'ai-business-video-guide-2025').map((product) => (
+            <div key={product.id} className="md:col-span-2 lg:col-span-4">
+              <div className="group relative bg-gradient-to-br from-slate-900/95 via-blue-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-blue-500/40 hover:border-blue-500/60">
+                {/* Enhanced glow effects */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="absolute top-4 left-4 z-20">
+                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
+                    MOST POPULAR
                   </div>
-                  
-                  {/* Enhanced Content */}
-                  <div className="relative z-10 p-8">
-                    {/* Enhanced Tier Badge */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className={`inline-flex items-center px-4 py-2 bg-gradient-to-r ${config.tierColor} rounded-full text-white text-sm font-bold shadow-lg group-hover:shadow-xl transition-all duration-300 border border-${config.accent}-300/30`}>
-                        <span className="mr-2">⭐</span>
-                        <span>{config.tier}</span>
-                      </div>
-                    </div>
+                </div>
+                
+                <div className="p-8 md:p-12">
+                  <div className="text-center mb-8">
+                    <h3 className="text-3xl md:text-4xl font-black mb-4 text-white drop-shadow-lg">{product.name}</h3>
+                    <p className="text-gray-200 mb-6 text-lg leading-relaxed group-hover:text-white transition-colors duration-500">{product.description}</p>
                     
-                    {/* Enhanced Title */}
-                    <h3 className="text-3xl font-black text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-300 transition-all duration-500 leading-tight">
-                      {product.name}
-                    </h3>
-                    
-                    {/* Enhanced Description */}
-                    <p className="text-gray-300 mb-8 leading-relaxed group-hover:text-gray-200 transition-colors duration-300 text-lg">
-                      {product.description}
-                    </p>
-                    
-                    {/* What You Get for $50 */}
-                    <div className="bg-gray-800/30 rounded-xl p-6 mb-8 border border-purple-500/20">
-                      <h4 className="text-xl font-bold text-white mb-4 text-center">What You Get for $50</h4>
-                      <div className="space-y-3">
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                          <span className="text-sm text-gray-100 font-medium"><span className="text-green-400 font-bold">Step-by-Step Video Walkthrough</span> — Watch the entire build process</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                          <span className="text-sm text-gray-100 font-medium"><span className="text-blue-400 font-bold">Complete Tool List</span> — Everything you need, all AI-powered</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                          <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Implementation Blueprint</span> — The exact prompts, workflow, and structure I use</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                          <span className="text-sm text-gray-100 font-medium"><span className="text-purple-400 font-bold">Screen Recording</span> — So you can replicate it whenever you want</span>
-                        </div>
+                    {/* What You Get Section */}
+                    <div className="bg-gray-800/40 rounded-2xl p-8 mb-8 border border-purple-500/30">
+                      <h4 className="text-2xl font-bold text-white mb-6 text-center">What You Get for $50</h4>
+                      <div className="grid md:grid-cols-2 gap-6 text-left">
+                        <ul className="space-y-4 text-gray-300">
+                          <li className="flex items-start">
+                            <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                              <strong className="text-green-400">Step-by-Step Video Walkthrough</strong><br/>
+                              <span className="text-sm">Watch the entire build process</span>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <svg className="w-6 h-6 text-blue-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                              <strong className="text-blue-400">Complete Tool List</strong><br/>
+                              <span className="text-sm">Everything you need, all AI-powered</span>
+                            </div>
+                          </li>
+                        </ul>
+                        <ul className="space-y-4 text-gray-300">
+                          <li className="flex items-start">
+                            <svg className="w-6 h-6 text-yellow-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                              <strong className="text-yellow-400">Implementation Blueprint</strong><br/>
+                              <span className="text-sm">The exact prompts, workflow, and structure I use</span>
+                            </div>
+                          </li>
+                          <li className="flex items-start">
+                            <svg className="w-6 h-6 text-purple-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <div>
+                              <strong className="text-purple-400">Screen Recording</strong><br/>
+                              <span className="text-sm">So you can replicate it whenever you want</span>
+                            </div>
+                          </li>
+                        </ul>
                       </div>
                     </div>
 
                     {/* The $50 vs $5K Gap */}
-                    <div className="bg-gradient-to-r from-red-900/20 to-green-900/20 rounded-xl p-6 mb-8 border border-green-500/20">
+                    <div className="bg-gradient-to-r from-red-900/30 to-green-900/30 rounded-2xl p-6 mb-10 border border-green-500/30">
                       <h4 className="text-xl font-bold text-white mb-4 text-center">The $50 vs $5K Gap</h4>
                       <div className="space-y-2 text-center">
                         <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
-        
                         <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own the skills + product for life</div>
                       </div>
                     </div>
-                    
-                    {/* Enhanced Pricing Section */}
-                    <div className="text-center mb-8">
-                      <div className="relative">
-                        <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100`}></div>
-                        
-                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group-hover:border-gray-600/50 transition-all duration-500">
-                          <div className="flex items-center justify-center space-x-4 mb-4">
-                            <div className="text-center">
-                              <div className="flex items-baseline justify-center space-x-2">
-                                <span className="text-5xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent group-hover:from-yellow-300 group-hover:to-white transition-all duration-500">
-                                  ${product.price.toFixed(2)}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-sm text-gray-300 font-medium mt-3">One-time payment</div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Enhanced Action Button */}
-                    <div className="space-y-4">
-                      <div className="relative group/button">
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
-                        
-                        <UnifiedCheckoutButton product={product} buttonText="🚀 Start Building Now — Get Instant Access for $50" className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/30 hover:border-${config.accent}-300/50 text-lg py-4 md:py-5`} variant="buy-now" />
-                      </div>
-                      
-                      {/* Trust Indicators */}
-                      <div className="flex items-center justify-center space-x-6 mt-6 pt-4 border-t border-gray-700/50">
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
-                          <span className="text-green-400">🔒</span>
-                          <span>Secure Payment</span>
-                        </div>
 
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
-                          <span className="text-purple-400">💎</span>
-                          <span>Premium Quality</span>
-                        </div>
-                      </div>
+                    <div className="text-center mb-6">
+                      <div className="text-5xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-500">A${product.price}</div>
+                      <div className="text-sm text-gray-300">one-time payment</div>
                     </div>
+                    
+                    <UnifiedCheckoutButton 
+                      product={product}
+                      buttonText="🚀 Start Building Now — Get Instant Access for $50"
+                      className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
+                      variant="direct"
+                    />
+                    
+                    <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
                   </div>
                 </div>
-              );
-            })}
-            
-            {/* Other Products Grid - Simplified Effects */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {products.filter(p => p.id !== 'ai-business-video-guide-2025').map((product: any, index: number) => {
-              // Define card configurations for each product based on their ID
-              let config;
-              
-              if (product.id === 'ai-business-video-guide-2025') {
-                // Purple/Pink gradient for AI Web Creation (matching homepage)
-                config = {
-                  bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
-                  accent: 'purple',
-                  accentHex: '#8b5cf6',
-                  shadow: 'purple-500/30',
-                  border: 'purple-500/40',
-                  glow: 'purple-400/20',
-                  icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
-                  tier: 'PROFESSIONAL',
-                  tierColor: 'from-purple-600 to-pink-600',
-                  scale: 'hover:scale-110',
-                  popular: true
-                };
-              } else if (product.id === 'weekly-support-contract') {
-                // Orange/Red gradient for Weekly Support Contract (matching homepage)
-                config = {
-                  bg: 'from-slate-900/90 via-orange-900/30 to-gray-900/90',
-                  accent: 'orange',
-                  accentHex: '#f97316',
-                  shadow: 'orange-500/25',
-                  border: 'orange-500/30',
-                  glow: 'orange-400/15',
-                  icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-                  tier: 'PREMIUM',
-                  tierColor: 'from-orange-500 to-red-600',
-                  scale: 'hover:scale-105',
-                  popular: false
-                };
-              } else if (product.id === '2') {
-                // Emerald/Green gradient for Prompts (matching homepage)
-                config = {
-                  bg: 'from-slate-900/90 via-emerald-900/30 to-gray-900/90',
-                  accent: 'emerald',
-                  accentHex: '#10b981',
-                  shadow: 'emerald-500/25',
-                  border: 'emerald-500/30',
-                  glow: 'emerald-400/15',
-                  icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-                  tier: 'STARTER',
-                  tierColor: 'from-emerald-500 to-emerald-600',
-                  scale: 'hover:scale-105',
-                  popular: false
-                };
-              } else if (product.id === '1') {
-                // Blue/Purple gradient for Ebook (matching homepage)
-                config = {
-                  bg: 'from-slate-900/95 via-indigo-900/40 to-gray-900/95',
-                  accent: 'indigo',
-                  accentHex: '#6366f1',
-                  shadow: 'indigo-500/30',
-                  border: 'indigo-500/40',
-                  glow: 'indigo-400/20',
-                  icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
-                  tier: 'PROFESSIONAL',
-                  tierColor: 'from-indigo-500 to-blue-600',
-                  scale: 'hover:scale-105',
-                  popular: false
-                };
+              </div>
+            </div>
+          ))}
 
-              } else {
-                // Fallback configuration for any other products
-                const cardConfigs = [
-                  {
-                    bg: 'from-slate-900/90 via-emerald-900/30 to-gray-900/90',
-                    accent: 'emerald',
-                    accentHex: '#10b981',
-                    shadow: 'emerald-500/25',
-                    border: 'emerald-500/30',
-                    glow: 'emerald-400/15',
-                    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-                    tier: 'STARTER',
-                    tierColor: 'from-emerald-500 to-emerald-600',
-                    scale: 'hover:scale-105',
-                    popular: false
-                  },
-                  {
-                    bg: 'from-slate-900/95 via-blue-900/40 to-gray-900/95',
-                    accent: 'blue',
-                    accentHex: '#3b82f6',
-                    shadow: 'blue-500/30',
-                    border: 'blue-500/40',
-                    glow: 'blue-400/20',
-                    icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
-                    tier: 'PROFESSIONAL',
-                    tierColor: 'from-blue-500 to-blue-600',
-                    scale: 'hover:scale-110',
-                    popular: true
-                  },
-                  {
-                    bg: 'from-slate-900/95 via-purple-900/40 to-gray-900/95',
-                    accent: 'purple',
-                    accentHex: '#8b5cf6',
-                    shadow: 'purple-500/30',
-                    border: 'purple-500/40',
-                    glow: 'purple-400/20',
-                    icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
-                    tier: 'PREMIUM',
-                    tierColor: 'from-purple-500 to-purple-600',
-                    scale: 'hover:scale-105',
-                    popular: false
-                  }
-                ];
-                config = cardConfigs[index % 3];
-              }
-              const isPopular = config.popular;
+          {/* Support Package */}
+          {products.filter(p => p.id === 'weekly-support-contract-2025').map((product) => (
+            <div key={product.id} className="group relative bg-gradient-to-br from-slate-900/95 via-orange-900/40 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-orange-500/40 hover:border-orange-500/60">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-orange-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
-              return (
-                <div key={product.id} className={`group relative bg-gradient-to-br ${config.bg} backdrop-blur-md rounded-3xl shadow-xl hover:shadow-${config.shadow} transition-all duration-300 transform hover:-translate-y-2 ${config.scale} overflow-hidden border-2 ${isPopular ? `border-${config.accent}-400/60 premium-glow premium-float` : `border-${config.border} card-glow`} hover:border-${config.accent}-500/40 hover:bg-gradient-to-br hover:from-slate-800/95 hover:to-gray-800/95`}>
-                  {/* Simplified glow effect */}
-                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r from-${config.accent}-500/10 via-transparent to-${config.accent}-500/10 opacity-0 group-hover:opacity-70 transition-opacity duration-300`}></div>
-                  
-                  {/* Enhanced floating elements */}
-                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
-                    <div className={`absolute top-4 right-4 w-3 h-3 bg-${config.accent}-400/60 rounded-full animate-ping`} style={{animationDelay: '0.5s'}}></div>
-                    <div className={`absolute bottom-6 left-6 w-2 h-2 bg-${config.accent}-300/40 rounded-full animate-pulse`} style={{animationDelay: '1s'}}></div>
-                    <div className={`absolute top-1/2 right-8 w-1 h-1 bg-${config.accent}-200/60 rounded-full animate-ping`} style={{animationDelay: '1.5s'}}></div>
-                    <div className={`absolute bottom-1/3 left-4 w-1.5 h-1.5 bg-${config.accent}-400/30 rounded-full animate-pulse`} style={{animationDelay: '2s'}}></div>
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
+                  PROFESSIONAL
+                </div>
+              </div>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-orange-400 opacity-60 group-hover:opacity-100 group-hover:text-orange-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-orange-400/20 rounded-full blur-xl group-hover:bg-orange-400/40 transition-all duration-300"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">{product.name}</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">{product.description}</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.1s'}}>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">60-minute consultation call</span>
                   </div>
-                  
-                  {/* Enhanced Tier Badge */}
-                  <div className="absolute top-4 left-4 z-20">
-                    <div className={`bg-gradient-to-r ${config.tierColor} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse group-hover:animate-bounce transition-all duration-300 group-hover:scale-110`} style={{animationDuration: '2s'}}>
-                      {config.tier}
-                      <div className={`absolute inset-0 bg-gradient-to-r ${config.tierColor.replace('to-', 'to-').replace('from-', 'from-').replace('-500', '-400').replace('-600', '-500')} rounded-full opacity-0 group-hover:opacity-50 animate-ping`}></div>
-                    </div>
-                  </div>
-                  
-                  {/* Enhanced Popular Badge */}
-                  {isPopular && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce" style={{animationDuration: '1s'}}>
-                        POPULAR
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Enhanced Hero Section */}
-                  <div className={`h-48 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500`}>
-                    <div className="relative transform group-hover:scale-110 transition-all duration-500">
-                      <svg className={`w-20 h-20 text-${config.accent}-400 opacity-60 group-hover:opacity-100 group-hover:text-${config.accent}-300 transition-all duration-500 group-hover:drop-shadow-lg`} fill="currentColor" viewBox="0 0 24 24">
-                        <path d={config.icon}/>
-                      </svg>
-                      <div className={`absolute inset-0 bg-${config.accent}-400/20 rounded-full blur-xl group-hover:bg-${config.accent}-400/40 group-hover:animate-pulse transition-all duration-500`}></div>
-                      {/* Orbiting particles */}
-                      <div className={`absolute -top-2 -right-2 w-1 h-1 bg-${config.accent}-300 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300`} style={{animationDelay: '0.2s'}}></div>
-                      <div className={`absolute -bottom-2 -left-2 w-1 h-1 bg-${config.accent}-400 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-all duration-300`} style={{animationDelay: '0.4s'}}></div>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
-                  </div>
-                  
-                  {/* Content Section */}
-                  <div className="p-8">
-                    <h3 className="text-3xl font-black mb-3 text-white drop-shadow-lg">
-                      {product.name}
-                    </h3>
-                    <p className="text-gray-100 mb-8 leading-relaxed text-base font-medium group-hover:text-white transition-colors duration-500">
-                      <span className={`text-${config.accent}-400 font-bold`}></span> {product.description}
-                    </p>
-                    
-                    {/* Enhanced Value Propositions */}
-                    <div className="space-y-4 mb-8">
-                      {product.id === 'ai-business-video-guide-2025' && (
-                        <>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>Video Guide:</span> Create an online platform in 2 hours</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">All prompts, tools, and strategies included</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Value:</span> Step-by-step implementation report</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">Create platforms as good as Shopify/Wix</span>
-                          </div>
-                        </>
-                      )}
-                      {product.id === 'weekly-support-contract' && (
-                        <>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>Premium:</span> Expert implementation guidance</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">Priority email support (1 month)</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Priority:</span> First access to new tools & strategies</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">Ideal companion to the AI Website Masterclass</span>
-                          </div>
-                        </>
-                      )}
-                      {product.id === '2' && (
-                        <>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>30 Prompts:</span> Ready-to-use AI business prompts</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">Copy-paste templates for instant results</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Speed:</span> 10x faster content creation</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">Proven prompts used by successful entrepreneurs</span>
-                          </div>
-                        </>
-                      )}
-                      {product.id === '1' && (
-                        <>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className={`text-${config.accent}-400 font-bold`}>30 Lessons:</span> Complete AI tools mastery course</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">ChatGPT, Claude, Replit, Cursor & Trae AI included</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium"><span className="text-yellow-400 font-bold">Value:</span> Everything needed for online business success</span>
-                          </div>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 bg-${config.accent}-400 rounded-full`}></div>
-                            <span className="text-sm text-gray-100 font-medium">Step-by-step implementation guides</span>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    
-                    {/* Enhanced Pricing Section */}
-                    <div className="text-center mb-8">
-                      <div className="relative">
-                        {/* Pricing Background - Simplified */}
-                        <div className={`absolute inset-0 bg-gradient-to-r from-${config.accent}-500/10 to-purple-500/10 rounded-2xl blur-md opacity-0 group-hover:opacity-70 transition-all duration-300`}></div>
-                        
-                        <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group-hover:border-gray-600/50 transition-all duration-300">
-                          <div className="flex items-center justify-center space-x-4 mb-4">
-                            <div className="text-center">
-                              <div className="flex items-baseline justify-center space-x-2">
-                                <span className="text-4xl font-bold text-white">
-                                  {product.id === '3' ? '$50.00' : `$${product.price.toFixed(2)}`}
-                                </span>
-                                {product.originalPrice && product.id !== '3' && (
-                                  <span className="text-lg text-gray-500 line-through font-medium">
-                                    $${product.originalPrice.toFixed(2)}
-                                  </span>
-                                )}
-                              </div>
-                              {product.originalPrice && (
-                                <div className="mt-3">
-                                  <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500/20 to-pink-500/20 border border-red-400/30 rounded-full backdrop-blur-sm group-hover:from-red-500/30 group-hover:to-pink-500/30 group-hover:border-red-400/50 transition-all duration-300">
-                                    <span className="text-red-300 text-sm font-bold group-hover:text-red-200 transition-colors duration-300">
-                                      💥 Save $${(product.originalPrice - product.price).toFixed(2)} (83% OFF)
-                                    </span>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          
-                          {/* Limited Time Offer */}
-                          {product.id === '3' && (
-                            <div className="mt-4 p-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-400/20 rounded-xl">
-                              <div className="flex items-center justify-center space-x-2">
-                                <span className="text-orange-300 text-xs font-bold animate-pulse">🔥 LIMITED TIME</span>
-                                <span className="text-gray-300 text-xs">- Only 5 spots available this month</span>
-                              </div>
-                            </div>
-                          )}
-                          
-                          <div className="text-sm text-gray-300 font-medium mt-3">One-time payment</div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Enhanced Action Buttons */}
-                    <div className="space-y-4">
-                      <div className="relative group/button">
-                        {/* Button Glow Effect - Simplified */}
-                        <div className={`absolute -inset-1 bg-gradient-to-r from-${config.accent}-500 to-purple-500 rounded-xl blur-sm opacity-0 group-hover/button:opacity-50 transition-all duration-300`}></div>
-                        
-                        <UnifiedCheckoutButton product={product} className={`relative w-full bg-gradient-to-r ${config.tierColor} hover:from-${config.accent}-400 hover:to-${config.accent}-500 text-white font-extrabold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:shadow-${config.accent}-500/30 border border-${config.accent}-400/30 hover:border-${config.accent}-300/50 text-xl md:text-2xl py-4`} variant="buy-now" />
-                      </div>
-                      
-                      {/* Trust Indicators */}
-                      <div className="flex items-center justify-center space-x-6 mt-6 pt-4 border-t border-gray-700/50">
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
-                          <span className="text-green-400">🔒</span>
-                          <span>Secure Payment</span>
-                        </div>
-                        {product.id !== 'weekly-support-contract' && (
-                          <div className="flex items-center space-x-2 text-xs text-gray-400">
-                            <span className="text-blue-400">⚡</span>
-                            <span>Instant Access</span>
-                          </div>
-                        )}
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
-                          <span className="text-purple-400">💎</span>
-                          <span>Premium Quality</span>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flex items-center space-x-2 transform group-hover:translate-x-2 transition-all duration-300" style={{transitionDelay: '0.2s'}}>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-lg group-hover:shadow-orange-400/50 transition-all duration-300"></div>
+                    <span className="text-xs text-gray-300 group-hover:text-white transition-colors duration-300">Unlimited email support (1 month)</span>
                   </div>
                 </div>
-              );
-            })
-          }
-          </div>
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <h3 className="text-xl font-medium text-white">No products found</h3>
-            <p className="text-gray-200 mt-2">Try adjusting your filters or check back later.</p>
-          </div>
-        )}
+                
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-400 group-hover:to-red-400 transition-all duration-500">A${product.price}</div>
+                  <div className="text-xs text-gray-300">one-time payment</div>
+                </div>
+                <UnifiedCheckoutButton 
+                  product={product}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/30"
+                  variant="direct"
+                >
+                  Get Support
+                </UnifiedCheckoutButton>
+              </div>
+            </div>
+          ))}
+
+          {/* 30x AI Prompts Arsenal */}
+          {products.filter(p => p.id === 'ai-prompts-arsenal-2025').map((product) => (
+            <div key={product.id} className="group relative bg-gradient-to-br from-slate-900/95 via-emerald-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-emerald-500/40 hover:border-emerald-500/60">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-transparent to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
+                  STARTER
+                </div>
+              </div>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-emerald-400 opacity-60 group-hover:opacity-100 group-hover:text-emerald-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                  <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-xl group-hover:bg-emerald-400/40 transition-all duration-300"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">{product.name}</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">{product.description}</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Revenue-generating prompts</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Business-focused only</span>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-green-400 transition-all duration-500">A${product.price}</div>
+                  <div className="text-xs text-gray-300">one-time</div>
+                </div>
+                <UnifiedCheckoutButton 
+                  product={product}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-emerald-500/30"
+                  variant="direct"
+                >
+                  Get Prompts
+                </UnifiedCheckoutButton>
+              </div>
+            </div>
+          ))}
+
+          {/* AI Tools Mastery Guide */}
+          {products.filter(p => p.id === 'ai-tools-mastery-guide-2025').map((product) => (
+            <div key={product.id} className="group relative bg-gradient-to-br from-slate-900/95 via-blue-900/30 to-gray-900/95 backdrop-blur-xl rounded-3xl shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border-2 border-blue-500/40 hover:border-blue-500/60">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="absolute top-4 left-4 z-20">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
+                  EDUCATION
+                </div>
+              </div>
+              
+              <div className="h-32 bg-gradient-to-br from-slate-900 to-gray-900 relative overflow-hidden flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-slate-800 group-hover:to-gray-800 transition-all duration-500">
+                <div className="relative transform group-hover:scale-110 transition-all duration-500">
+                  <svg className="w-16 h-16 text-blue-400 opacity-60 group-hover:opacity-100 group-hover:text-blue-300 transition-all duration-500 group-hover:drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-xl group-hover:bg-blue-400/40 transition-all duration-300"></div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/50 transition-all duration-500"></div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-black mb-3 text-white drop-shadow-lg">{product.name}</h3>
+                <p className="text-gray-200 mb-4 text-sm leading-relaxed group-hover:text-white transition-colors duration-500">{product.description}</p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">30 detailed lessons</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                    <span className="text-xs text-gray-300">Business applications</span>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-4">
+                  <div className="text-3xl font-black text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-500">A${product.price}</div>
+                  <div className="text-xs text-gray-300">one-time</div>
+                </div>
+                <UnifiedCheckoutButton 
+                  product={product}
+                  className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-500 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white text-sm transform group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-blue-500/30"
+                  variant="direct"
+                >
+                  Get Ebook
+                </UnifiedCheckoutButton>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Back to Home */}
+        <div className="text-center mt-16">
+          <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors text-lg">
+            ← Back to Home
+          </Link>
+        </div>
       </div>
     </div>
   );
