@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
   console.log('📧 CONTACT FORM: Processing submission...');
   
   try {
-    const { name, email, subject, message } = await request.json();
+    const { name, email, subject, message, product } = await request.json();
 
     // Validate input
     if (!name || !email || !subject || !message) {
@@ -111,6 +111,12 @@ export async function POST(request: NextRequest) {
                 <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Subject:</td>
                 <td style="padding: 10px; border-bottom: 1px solid #eee;">${subject}</td>
               </tr>
+              ${product ? `
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Product Reference:</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee;">${product}</td>
+              </tr>
+              ` : ''}
               <tr>
                 <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Submitted:</td>
                 <td style="padding: 10px; border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td>

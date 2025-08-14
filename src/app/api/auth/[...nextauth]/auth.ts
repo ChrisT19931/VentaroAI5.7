@@ -156,6 +156,24 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    
+    async redirect({ url, baseUrl }) {
+      console.log('🔄 BULLETPROOF AUTH: Redirect callback - url:', url, 'baseUrl:', baseUrl);
+      
+      // If user is signing in, redirect to my-account page
+      if (url.startsWith(baseUrl)) {
+        // If it's a callback URL, check if it's a sign-in
+        if (url.includes('/api/auth/callback') || url.includes('/signin') || url.includes('/signup')) {
+          console.log('✅ BULLETPROOF AUTH: Redirecting to /my-account after login');
+          return `${baseUrl}/my-account`;
+        }
+        return url;
+      }
+      
+      // Default redirect to my-account for successful authentication
+      console.log('✅ BULLETPROOF AUTH: Default redirect to /my-account');
+      return `${baseUrl}/my-account`;
+    },
   },
   
   pages: {

@@ -28,7 +28,7 @@ const AVAILABLE_PRODUCTS: Product[] = [
     name: 'AI Web Creation Masterclass',
     description: 'Complete step-by-step video guide to creating AI-powered websites',
     image_url: '/images/products/ai-business-video-guide.svg',
-    view_url: '/downloads/ai-business-video-guide-2025',
+    view_url: '/content/ai-web-creation-masterclass',
     price: 50,
     productType: 'digital'
   },
@@ -37,7 +37,7 @@ const AVAILABLE_PRODUCTS: Product[] = [
     name: 'Premium Support Package',
     description: 'One month of premium email support for your AI projects',
     image_url: '/images/products/weekly-support.svg',
-    view_url: '/downloads/weekly-support-contract-2025',
+    view_url: '/content/support-package',
     price: 300,
     productType: 'digital'
   },
@@ -46,7 +46,7 @@ const AVAILABLE_PRODUCTS: Product[] = [
     name: 'AI Prompts Arsenal',
     description: '30 proven AI prompts for building online businesses',
     image_url: '/images/products/ai-prompts-arsenal.svg',
-    view_url: '/downloads/ai-prompts-arsenal-2025',
+    view_url: '/content/ai-prompts-arsenal',
     price: 10,
     productType: 'digital'
   },
@@ -55,7 +55,7 @@ const AVAILABLE_PRODUCTS: Product[] = [
     name: 'AI Tools Mastery Guide',
     description: 'Complete guide to mastering AI tools for business',
     image_url: '/images/products/ai-tools-mastery-guide.svg',
-    view_url: '/downloads/ai-tools-mastery-guide-2025',
+    view_url: '/content/ai-tools-mastery-guide',
     price: 25,
     productType: 'digital'
   }
@@ -115,12 +115,6 @@ export default function MyAccountPage() {
           // Admin gets access to all products
           setOwnedProducts(AVAILABLE_PRODUCTS.map(p => p.id));
         } else {
-          // For demo purposes, give test users some products
-          if (user?.email === 'christroiano1993@gmail.com' || user?.email === 'christroiano1993@hotmail.com') {
-            setOwnedProducts(['ai-business-video-guide-2025', 'ai-prompts-arsenal-2025']);
-            return;
-          }
-          
           // For regular users, fetch from API
           try {
             const response = await fetch('/api/user/products');

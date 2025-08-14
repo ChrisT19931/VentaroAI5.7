@@ -73,20 +73,20 @@ export async function POST(request: NextRequest) {
                 <li><strong>Weekly AI Insights:</strong> Latest trends and breakthrough technologies</li>
                 <li><strong>Exclusive Tools:</strong> Early access to new AI products and features</li>
                 <li><strong>Success Stories:</strong> Real case studies from our community</li>
-                <li><strong>Free Resources:</strong> Prompts, templates, and guides</li>
                 <li><strong>Expert Tips:</strong> Practical advice from AI specialists</li>
+                <li><strong>Product Updates:</strong> First to know about new releases and offers</li>
               </ul>
             </div>
             
             <div style="background: #ecfdf5; padding: 25px; border-radius: 10px; margin: 25px 0; border-left: 5px solid #10b981;">
-              <h3 style="margin-top: 0; color: #047857; font-size: 18px;">🎁 Your Welcome Gift</h3>
+              <h3 style="margin-top: 0; color: #047857; font-size: 18px;">🚀 Get Started</h3>
               <p style="color: #047857; margin-bottom: 15px;">
-                As a welcome gift, here are some immediate resources to get you started:
+                Ready to transform your business with AI? Explore our premium products and services:
               </p>
               <div style="text-align: center;">
                 <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventaroai.com'}/products" 
                    style="background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; margin: 5px;">
-                  🚀 Explore AI Tools
+                  🛍️ View Our Products
                 </a>
               </div>
             </div>
@@ -125,11 +125,11 @@ What to Expect:
 - Weekly AI Insights: Latest trends and breakthrough technologies
 - Exclusive Tools: Early access to new AI products and features
 - Success Stories: Real case studies from our community
-- Free Resources: Prompts, templates, and guides
 - Expert Tips: Practical advice from AI specialists
+- Product Updates: First to know about new releases and offers
 
-Your Welcome Gift:
-Explore our AI tools immediately: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventaroai.com'}/products
+Get Started:
+Ready to transform your business with AI? Explore our premium products: ${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventaroai.com'}/products
 
 Pro Tip: Add chris.t@ventarosales.com to your contacts to ensure our emails reach your inbox!
 
