@@ -1,40 +1,36 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { signIn, getSession, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
-import { Eye, EyeOff, LogIn, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
 
-export default function SignInPage() {
+export default function BulletproofSignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
-  const [authStatus, setAuthStatus] = useState<'checking' | 'unauthenticated' | 'authenticated'>('checking');
   
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams?.get('callbackUrl') || '/my-account';
   const { data: session, status } = useSession();
+  
+  const callbackUrl = searchParams?.get('callbackUrl') || '/my-account';
 
-  // Check authentication status
+  // BULLETPROOF AUTHENTICATION CHECK
   useEffect(() => {
-    if (status === 'loading') {
-      setAuthStatus('checking');
-    } else if (status === 'authenticated' && session) {
-      setAuthStatus('authenticated');
-      console.log('✅ User already authenticated, redirecting...');
+    console.log('🔐 BULLETPROOF SIGNIN: Session status:', status);
+    
+    if (status === 'authenticated' && session?.user) {
+      console.log('✅ BULLETPROOF SIGNIN: User already authenticated, redirecting...');
       toast.success('Already signed in!');
-      router.push(callbackUrl);
-    } else {
-      setAuthStatus('unauthenticated');
+      window.location.href = callbackUrl;
     }
-  }, [status, session, callbackUrl, router]);
+  }, [status, session, callbackUrl]);
 
-  // Validate form inputs
+  // BULLETPROOF FORM VALIDATION
   const validateForm = () => {
     const newErrors: { email?: string; password?: string } = {};
     
@@ -54,53 +50,49 @@ export default function SignInPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
+  // BULLETPROOF SIGN IN HANDLER
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
     
-    console.log('🔐 Starting sign in process for:', email);
+    console.log('🚀 BULLETPROOF SIGNIN: Starting sign in process for:', email);
     
     if (!validateForm()) {
-      console.error('❌ Form validation failed');
+      console.error('❌ BULLETPROOF SIGNIN: Form validation failed');
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
-      console.log('🔐 Calling NextAuth signIn...');
+      console.log('🔐 BULLETPROOF SIGNIN: Attempting NextAuth sign in...');
       
       const result = await signIn('credentials', {
         email: email.trim(),
         password,
-        redirect: false, // Handle redirect manually for better error handling
+        redirect: false,
       });
 
-      console.log('🔐 NextAuth signIn result:', { ok: result?.ok, error: result?.error, status: result?.status, url: result?.url });
+      console.log('🔐 BULLETPROOF SIGNIN: NextAuth result:', { 
+        ok: result?.ok, 
+        error: result?.error, 
+        status: result?.status, 
+        url: result?.url 
+      });
 
       if (result?.error) {
-        console.error('❌ Sign in failed:', result.error);
+        console.error('❌ BULLETPROOF SIGNIN: Authentication failed:', result.error);
         
-        // Map NextAuth errors to user-friendly messages
         let errorMessage = 'Invalid email or password. Please try again.';
         
-        if (result.error === 'CredentialsSignin') {
+        if (result.error.includes('Invalid email or password')) {
           errorMessage = 'Invalid email or password. Please check your credentials.';
-        } else if (result.error === 'Configuration') {
-          errorMessage = 'Authentication system error. Please contact support.';
-        } else if (result.error === 'AccessDenied') {
-          errorMessage = 'Access denied. Please contact support.';
-        } else if (result.error === 'CallbackRouteError') {
-          errorMessage = 'Authentication error. Please try again.';
         } else if (result.error.includes('Email and password are required')) {
           errorMessage = 'Please enter both email and password.';
-        } else if (result.error.includes('Invalid email or password')) {
-          errorMessage = 'Invalid email or password. Please check your credentials.';
-        } else if (result.error.includes('Account configuration error')) {
-          errorMessage = 'Account setup issue. Please contact support.';
+        } else if (result.error.includes('Authentication failed')) {
+          errorMessage = 'Authentication system error. Please try again.';
         } else {
-          errorMessage = `Authentication failed: ${result.error}`;
+          errorMessage = `Sign in failed: ${result.error}`;
         }
         
         setErrors({ general: errorMessage });
@@ -109,29 +101,20 @@ export default function SignInPage() {
       }
 
       if (result?.ok) {
-        console.log('✅ Sign in successful, verifying session...');
+        console.log('✅ BULLETPROOF SIGNIN: Authentication successful!');
+        toast.success('Welcome back!');
         
-        // Verify the session was created
-        const session = await getSession();
-        if (session?.user) {
-          console.log('✅ Session verified for user:', session.user.email);
-          toast.success(`Welcome back, ${session.user.name || session.user.email}!`);
-          
-          // Force a full page reload to ensure all auth state is updated
-          window.location.href = callbackUrl;
-        } else {
-          console.error('❌ Session verification failed');
-          setErrors({ general: 'Sign in successful but session verification failed. Please try again.' });
-          toast.error('Session error. Please try signing in again.');
-        }
+        // Force immediate redirect
+        console.log('🔄 BULLETPROOF SIGNIN: Redirecting to:', callbackUrl);
+        window.location.href = callbackUrl;
       } else {
-        console.error('❌ Sign in failed - no success flag');
+        console.error('❌ BULLETPROOF SIGNIN: Unexpected result');
         setErrors({ general: 'Sign in failed. Please try again.' });
         toast.error('Sign in failed. Please try again.');
       }
 
     } catch (error: any) {
-      console.error('❌ Sign in error:', error);
+      console.error('❌ BULLETPROOF SIGNIN: Exception during sign in:', error);
       const errorMessage = error.message || 'An unexpected error occurred. Please try again.';
       setErrors({ general: errorMessage });
       toast.error(errorMessage);
@@ -140,96 +123,54 @@ export default function SignInPage() {
     }
   };
 
-  // Quick login for development/testing
+  // BULLETPROOF QUICK LOGIN FOR TESTING
   const handleQuickLogin = async (testEmail: string, testPassword: string, userName: string) => {
-    console.log('🔐 Quick login for:', testEmail);
+    console.log('🔐 BULLETPROOF SIGNIN: Quick login for:', testEmail);
     setEmail(testEmail);
     setPassword(testPassword);
     
     // Small delay to show the form update
-    setTimeout(() => {
-      const form = document.querySelector('form') as HTMLFormElement;
-      if (form) {
-        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-      }
+    setTimeout(async () => {
+      const mockEvent = { preventDefault: () => {} } as React.FormEvent;
+      await handleSignIn(mockEvent);
     }, 100);
   };
 
-  // Show loading state while checking authentication
-  if (authStatus === 'checking') {
+  // Show loading only during actual sign in process
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-white text-lg">Checking authentication...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Don't render the form if already authenticated
-  if (authStatus === 'authenticated') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center">
-        <div className="text-center">
-          <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-          <p className="text-white text-lg">Already signed in! Redirecting...</p>
+          <p className="text-white text-lg">Signing you in...</p>
+          <p className="text-white/60 text-sm mt-2">Please wait a moment</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        {/* Header */}
         <div className="text-center">
-          <div className="mx-auto h-16 w-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mb-6">
-            <LogIn className="h-8 w-8 text-white" />
-          </div>
-          <h2 className="text-4xl font-extrabold text-white mb-2">Welcome Back</h2>
-          <p className="text-gray-300 text-lg">Sign in to access your Ventaro AI account</p>
+          <h2 className="mt-6 text-3xl font-extrabold text-white">
+            Welcome Back
+          </h2>
+          <p className="mt-2 text-sm text-gray-300">
+            Sign in to your Ventaro AI account
+          </p>
         </div>
 
-        {/* Development Quick Login */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="bg-blue-900/30 border border-blue-500/30 rounded-xl p-4 mb-6">
-            <h3 className="text-blue-300 font-semibold mb-3 text-sm">🚀 Quick Login (Development)</h3>
-            <div className="space-y-2">
-              <button
-                type="button"
-                onClick={() => handleQuickLogin('admin@ventaro.ai', 'admin123', 'Admin')}
-                className="w-full text-left px-3 py-2 bg-blue-800/50 hover:bg-blue-700/50 rounded-lg text-blue-200 text-sm transition-colors"
-                disabled={isLoading}
-              >
-                👑 Admin: admin@ventaro.ai
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickLogin('test@example.com', 'test123', 'Test User')}
-                className="w-full text-left px-3 py-2 bg-blue-800/50 hover:bg-blue-700/50 rounded-lg text-blue-200 text-sm transition-colors"
-                disabled={isLoading}
-              >
-                👤 User: test@example.com
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Sign In Form */}
-        <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-700/50">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* General Error */}
+        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-2xl p-8 border border-white/20">
+          <form className="space-y-6" onSubmit={handleSignIn}>
             {errors.general && (
-              <div className="bg-red-900/30 border border-red-500/30 rounded-xl p-4 flex items-center space-x-3">
-                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <p className="text-red-300 text-sm">{errors.general}</p>
+              <div className="bg-red-500/20 border border-red-500/50 text-red-100 px-4 py-3 rounded-lg">
+                {errors.general}
               </div>
             )}
 
-            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
                 Email Address
               </label>
               <input
@@ -239,26 +180,17 @@ export default function SignInPage() {
                 autoComplete="email"
                 required
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (errors.email) setErrors(prev => ({ ...prev, email: undefined }));
-                }}
-                className={`w-full px-4 py-3 bg-gray-700/50 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                  errors.email 
-                    ? 'border-red-500 focus:ring-red-500/50' 
-                    : 'border-gray-600 focus:ring-purple-500/50 focus:border-purple-500'
-                }`}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 placeholder="Enter your email"
-                disabled={isLoading}
               />
               {errors.email && (
-                <p className="mt-2 text-sm text-red-400">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-300">{errors.email}</p>
               )}
             </div>
 
-            {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -269,81 +201,84 @@ export default function SignInPage() {
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    if (errors.password) setErrors(prev => ({ ...prev, password: undefined }));
-                  }}
-                  className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                    errors.password 
-                      ? 'border-red-500 focus:ring-red-500/50' 
-                      : 'border-gray-600 focus:ring-purple-500/50 focus:border-purple-500'
-                  }`}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   placeholder="Enter your password"
-                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
-                  disabled={isLoading}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white transition-colors duration-200"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? (
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                    </svg>
+                  ) : (
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  )}
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-2 text-sm text-red-400">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-300">{errors.password}</p>
               )}
             </div>
 
-            {/* Forgot Password Link */}
-            <div className="text-right">
-              <Link 
-                href="/forgot-password" 
-                className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+            <div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                Forgot your password?
-              </Link>
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Signing In...
+                  </>
+                ) : (
+                  'Sign In'
+                )}
+              </button>
             </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:cursor-not-allowed text-lg"
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                  Signing In...
-                </div>
-              ) : (
-                <div className="flex items-center justify-center">
-                  <LogIn className="w-5 h-5 mr-2" />
-                  Sign In
-                </div>
-              )}
-            </button>
           </form>
 
-          {/* Sign Up Link */}
-          <div className="mt-8 text-center">
-            <p className="text-gray-300">
+          {process.env.NODE_ENV === 'development' && (
+            <div className="mt-8 pt-6 border-t border-white/20">
+              <p className="text-sm text-gray-300 mb-4 text-center">Development Quick Login:</p>
+              <div className="space-y-2">
+                <button
+                  onClick={() => handleQuickLogin('admin@ventaro.ai', 'admin123', 'Admin')}
+                  className="w-full px-4 py-2 bg-green-600/80 hover:bg-green-600 text-white rounded-lg text-sm font-medium transition-colors duration-200"
+                >
+                  🔑 Admin Login
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-300">
               Don't have an account?{' '}
-              <Link 
-                href="/signup" 
-                className="font-semibold text-purple-400 hover:text-purple-300 transition-colors"
-              >
-                Sign up for free
+              <Link href="/signup" className="font-medium text-blue-400 hover:text-blue-300 transition-colors duration-200">
+                Sign up here
               </Link>
             </p>
           </div>
-        </div>
 
-        {/* Footer */}
-        <div className="text-center">
-          <p className="text-gray-400 text-sm">
-            Need help? <Link href="/contact" className="text-purple-400 hover:text-purple-300">Contact Support</Link>
-          </p>
+          <div className="mt-4 text-center">
+            <Link 
+              href="/forgot-password" 
+              className="text-sm text-gray-400 hover:text-gray-300 transition-colors duration-200"
+            >
+              Forgot your password?
+            </Link>
+          </div>
         </div>
       </div>
     </div>
