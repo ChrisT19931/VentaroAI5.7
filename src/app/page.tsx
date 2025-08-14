@@ -153,8 +153,9 @@ export default function Home() {
                   <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                     <strong className="text-white">2 Hours from Zero to Live</strong> — Watch me create a complete platform from scratch, in real time.<br/>
                     <strong className="text-white">No Experience Needed</strong> — You just follow along.<br/>
-                    <strong className="text-white">Full Backend & Frontend Ownership</strong> — Keep the code forever, change anything you want.<br/>
-                    <strong className="text-white">No SaaS Lock-In</strong> — Unlike Shopify or Wix, you own it. No monthly fees.
+                    <strong className="text-white">Keep Your Code Forever</strong> — Build it yourself, own it completely, change anything you want.<br/>
+                    <strong className="text-white">No SaaS Lock-In</strong> — Unlike Shopify or Wix, you build and own your platform.<br/>
+                    <strong className="text-white">AI-Powered Changes</strong> — Tell AI agents what to modify and watch your platform transform instantly.
                   </p>
                   <div className="flex items-center justify-center mb-4">
                     <span className="text-6xl font-black text-white">A$50</span>
@@ -230,11 +231,6 @@ export default function Home() {
                   {/* Social Proof */}
                   <div className="mt-8">
                     <SocialProof />
-                  </div>
-                  
-                  {/* Scarcity */}
-                  <div className="mt-6">
-                    <ScarcityIndicator stock={4} />
                   </div>
                   
                   <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
@@ -508,20 +504,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 to-black">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              What Our Students Say
-            </h2>
-            <p className="text-gray-300 text-lg">
-              Join hundreds of successful entrepreneurs who transformed their businesses
-            </p>
-          </div>
-          <TestimonialCarousel testimonials={testimonials} />
-        </div>
-      </section>
+
 
       {/* Elite Custom Website Creation */}
       <section id="elite-custom-website-creation" className="py-24 bg-black relative overflow-hidden">
@@ -919,7 +902,6 @@ export default function Home() {
     {/* Exit Intent Popup */}
     <ExitIntentPopup 
       product={masterclassProduct}
-      discount={25}
       onClose={() => setShowExitIntent(false)}
     />
     

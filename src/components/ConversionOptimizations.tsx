@@ -12,11 +12,10 @@ interface ExitIntentPopupProps {
     price: number;
     productType: 'digital' | 'physical';
   };
-  discount?: number;
   onClose?: () => void;
 }
 
-export function ExitIntentPopup({ product, discount = 20, onClose }: ExitIntentPopupProps) {
+export function ExitIntentPopup({ product, onClose }: ExitIntentPopupProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasShown, setHasShown] = useState(false);
 
@@ -28,8 +27,7 @@ export function ExitIntentPopup({ product, discount = 20, onClose }: ExitIntentP
         setIsVisible(true);
         setHasShown(true);
         analytics.track('exit_intent_popup_shown', {
-          product_id: product.id,
-          discount: discount
+          product_id: product.id
         });
       }
     };
@@ -40,8 +38,7 @@ export function ExitIntentPopup({ product, discount = 20, onClose }: ExitIntentP
         setIsVisible(true);
         setHasShown(true);
         analytics.track('time_based_popup_shown', {
-          product_id: product.id,
-          discount: discount
+          product_id: product.id
         });
       }
     }, 60000);
@@ -52,7 +49,7 @@ export function ExitIntentPopup({ product, discount = 20, onClose }: ExitIntentP
       document.removeEventListener('mouseleave', handleMouseLeave);
       clearTimeout(timer);
     };
-  }, [hasShown, product.id, discount]);
+  }, [hasShown, product.id]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -61,8 +58,6 @@ export function ExitIntentPopup({ product, discount = 20, onClose }: ExitIntentP
     });
     onClose?.();
   };
-
-  const discountedPrice = product.price * (1 - discount / 100);
 
   if (!isVisible) return null;
 
@@ -77,40 +72,50 @@ export function ExitIntentPopup({ product, discount = 20, onClose }: ExitIntentP
         </button>
 
         <div className="text-center">
-          <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <Zap className="w-8 h-8 text-white" />
           </div>
           
-          <h2 className="text-2xl font-bold text-white mb-2">Wait! Don't Leave Empty-Handed</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Don't Miss Out!</h2>
           <p className="text-gray-300 mb-6">
-            Get <span className="text-yellow-400 font-bold">{discount}% OFF</span> your first purchase - limited time only!
+            Transform your business with AI-powered web creation. Get the complete system that builds professional websites in minutes.
           </p>
 
           <div className="bg-gray-800/50 rounded-xl p-4 mb-6">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="text-gray-400 line-through">A${product.price}</div>
-                <div className="text-2xl font-bold text-green-400">A${discountedPrice.toFixed(2)}</div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm text-gray-400">You Save</div>
-                <div className="text-lg font-bold text-yellow-400">A${(product.price - discountedPrice).toFixed(2)}</div>
-              </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-400 mb-2">A${product.price}</div>
+              <div className="text-sm text-gray-400">Complete AI Web Creation System</div>
+            </div>
+          </div>
+
+          <div className="space-y-3 mb-6 text-left">
+            <div className="flex items-center text-green-300">
+              <Zap className="w-4 h-4 mr-2" />
+              <span className="text-sm">Step-by-step video tutorials</span>
+            </div>
+            <div className="flex items-center text-green-300">
+              <Zap className="w-4 h-4 mr-2" />
+              <span className="text-sm">AI prompts & templates included</span>
+            </div>
+            <div className="flex items-center text-green-300">
+              <Zap className="w-4 h-4 mr-2" />
+              <span className="text-sm">Full deployment guidance</span>
+            </div>
+            <div className="flex items-center text-green-300">
+              <Zap className="w-4 h-4 mr-2" />
+              <span className="text-sm">Keep your code forever</span>
             </div>
           </div>
 
           <UnifiedCheckoutButton
-            product={{
-              ...product,
-              price: discountedPrice
-            }}
-            buttonText={`🎯 Get ${discount}% OFF Now - A$${discountedPrice.toFixed(2)}`}
-            className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl mb-4"
+            product={product}
+            buttonText={`🚀 Get Started Now - A$${product.price}`}
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl mb-4"
             variant="direct"
           />
 
           <p className="text-xs text-gray-400">
-            This exclusive discount expires when you leave this page
+            ⚡ Instant access • 30-day money-back guarantee
           </p>
         </div>
       </div>
@@ -176,10 +181,9 @@ interface SocialProofProps {
     timeAgo: string;
     location?: string;
   }>;
-  totalCustomers?: number;
 }
 
-export function SocialProof({ recentPurchases = [], totalCustomers = 247 }: SocialProofProps) {
+export function SocialProof({ recentPurchases = [] }: SocialProofProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -219,12 +223,8 @@ export function SocialProof({ recentPurchases = [], totalCustomers = 247 }: Soci
         </div>
       </div>
 
-      {/* Customer Count */}
-      <div className="flex items-center justify-center space-x-4 text-gray-400 text-sm">
-        <div className="flex items-center">
-          <Users className="w-4 h-4 mr-2" />
-          <span>{totalCustomers}+ happy customers</span>
-        </div>
+      {/* Rating Only */}
+      <div className="flex items-center justify-center text-gray-400 text-sm">
         <div className="flex items-center">
           <div className="flex -space-x-1">
             {[1,2,3,4,5].map(i => (
@@ -238,27 +238,8 @@ export function SocialProof({ recentPurchases = [], totalCustomers = 247 }: Soci
   );
 }
 
-interface ScarcityIndicatorProps {
-  stock?: number;
-  threshold?: number;
-}
-
-export function ScarcityIndicator({ stock = 7, threshold = 10 }: ScarcityIndicatorProps) {
-  if (stock > threshold) return null;
-
-  const urgencyLevel = stock <= 3 ? 'high' : stock <= 6 ? 'medium' : 'low';
-  const colors = {
-    high: 'text-red-400 border-red-500 bg-red-600/20',
-    medium: 'text-orange-400 border-orange-500 bg-orange-600/20',
-    low: 'text-yellow-400 border-yellow-500 bg-yellow-600/20'
-  };
-
-  return (
-    <div className={`border rounded-lg p-3 text-center ${colors[urgencyLevel]}`}>
-      <div className="font-bold">⚠️ Only {stock} spots left!</div>
-      <div className="text-sm opacity-80">Limited availability - secure your spot now</div>
-    </div>
-  );
+export function ScarcityIndicator() {
+  return null;
 }
 
 interface TestimonialCarouselProps {
@@ -272,66 +253,6 @@ interface TestimonialCarouselProps {
 }
 
 export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
-
-  if (testimonials.length === 0) return null;
-
-  const testimonial = testimonials[currentIndex];
-
-  return (
-    <div className="bg-gray-800/40 rounded-xl p-6 border border-gray-700/50">
-      <div className="flex items-center mb-4">
-        <div className="flex">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={`w-5 h-5 ${
-                i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-600'
-              }`}
-            />
-          ))}
-        </div>
-        <span className="ml-2 text-gray-400 text-sm">({testimonial.rating}/5)</span>
-      </div>
-      
-      <blockquote className="text-gray-300 mb-4 italic">
-        "{testimonial.text}"
-      </blockquote>
-      
-      <div className="flex items-center">
-        {testimonial.image && (
-          <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
-            {testimonial.name.charAt(0)}
-          </div>
-        )}
-        <div>
-          <div className="font-semibold text-white">{testimonial.name}</div>
-          {testimonial.title && (
-            <div className="text-gray-400 text-sm">{testimonial.title}</div>
-          )}
-        </div>
-      </div>
-      
-      {/* Dots indicator */}
-      <div className="flex justify-center mt-4 space-x-2">
-        {testimonials.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentIndex ? 'bg-purple-500' : 'bg-gray-600'
-            }`}
-            onClick={() => setCurrentIndex(index)}
-          />
-        ))}
-      </div>
-    </div>
-  );
+  // Return null to remove testimonials section
+  return null;
 } 

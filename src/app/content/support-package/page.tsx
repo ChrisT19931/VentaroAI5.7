@@ -115,7 +115,7 @@ export default function SupportPackageContent() {
               Schedule a personalized 1-on-1 consultation to discuss your AI implementation needs and get expert guidance.
             </p>
             <Link
-              href="/products/support-package"
+              href="/contact"
               className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg transition-colors inline-block text-lg"
             >
               📅 Schedule Consultation Call

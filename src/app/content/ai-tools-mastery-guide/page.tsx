@@ -6,247 +6,252 @@ import { useRouter } from 'next/navigation';
 import { BookOpen, Lock, CheckCircle, Star, Zap } from 'lucide-react';
 import Link from 'next/link';
 
-// 30 AI Tools Mastery Lessons
+// 30 AI Tools Mastery Lessons - Structured for Online Business Building
 const AI_LESSONS = [
+  // SECTION 1: ChatGPT, Gemini & Grok Fundamentals (Lessons 1-10)
   {
     id: 1,
-    title: "ChatGPT Fundamentals",
-    category: "Basics",
-    content: "Master the basics of ChatGPT including prompt engineering, conversation flow, and getting the best results. Learn how to structure prompts for maximum effectiveness and avoid common mistakes that lead to poor outputs.",
-    keyPoints: ["Prompt structure", "Context setting", "Response optimization", "Common pitfalls to avoid"],
-    practicalTip: "Always provide context and be specific with your requests for better results."
+    title: "ChatGPT Business Foundations",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Master ChatGPT for business idea generation, market research, and content creation. Learn the fundamental prompt structures that generate profitable business concepts and validate market opportunities.",
+    keyPoints: ["Business idea generation", "Market validation prompts", "Content strategy", "Competitive analysis"],
+    practicalTip: "Use role-based prompts like 'Act as a business consultant' for more professional outputs."
   },
   {
     id: 2,
-    title: "Claude AI Advanced Techniques",
-    category: "Advanced",
-    content: "Discover Claude's unique capabilities including document analysis, coding assistance, and creative writing. Learn how Claude differs from ChatGPT and when to use each tool for maximum productivity.",
-    keyPoints: ["Document processing", "Code generation", "Creative tasks", "Comparative advantages"],
-    practicalTip: "Use Claude for longer documents and complex reasoning tasks."
+    title: "Gemini for Real-Time Market Intelligence",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Leverage Gemini's real-time capabilities to track market trends, analyze competitors, and identify emerging opportunities in your niche before others do.",
+    keyPoints: ["Real-time trend analysis", "Competitor monitoring", "Opportunity identification", "Market timing"],
+    practicalTip: "Ask Gemini to compare current trends vs historical data for better insights."
   },
   {
     id: 3,
-    title: "Google Bard for Research",
-    category: "Research",
-    content: "Leverage Google Bard's real-time internet access for current information, fact-checking, and market research. Master techniques for getting accurate, up-to-date information for business decisions.",
-    keyPoints: ["Real-time data", "Fact verification", "Market insights", "Current trends"],
-    practicalTip: "Always verify important information from multiple sources."
+    title: "Grok for Social Media Intelligence",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Use Grok's X/Twitter integration to understand viral content patterns, track social sentiment, and create content that resonates with your target audience.",
+    keyPoints: ["Viral content analysis", "Social sentiment tracking", "Audience insights", "Content optimization"],
+    practicalTip: "Use Grok to analyze successful posts in your niche and identify winning patterns."
   },
   {
     id: 4,
-    title: "Midjourney Image Creation",
-    category: "Visual",
-    content: "Create stunning visuals with Midjourney for marketing, social media, and business presentations. Learn prompt crafting for specific styles, compositions, and commercial-quality images.",
-    keyPoints: ["Prompt crafting", "Style parameters", "Commercial use", "Quality optimization"],
-    practicalTip: "Use aspect ratios and style parameters to get exactly what you need."
+    title: "Advanced Prompt Engineering for Business",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Master advanced prompting techniques across all three platforms to generate high-converting sales copy, marketing campaigns, and business strategies.",
+    keyPoints: ["Sales copy generation", "Marketing campaigns", "Business strategy", "Conversion optimization"],
+    practicalTip: "Chain prompts together - use output from one as input for the next for complex tasks."
   },
   {
     id: 5,
-    title: "DALL-E 3 for Business Graphics",
-    category: "Visual",
-    content: "Master DALL-E 3 for creating professional graphics, logos, and marketing materials. Understand licensing, commercial use rights, and integration with business workflows.",
-    keyPoints: ["Business graphics", "Logo design", "Marketing visuals", "Commercial rights"],
-    practicalTip: "Be specific about colors, styles, and branding elements in your prompts."
+    title: "Content Creation Workflows",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Build efficient content creation systems using all three AI tools to produce blogs, social media posts, email campaigns, and video scripts at scale.",
+    keyPoints: ["Content calendars", "Multi-platform content", "Email sequences", "Video scripts"],
+    practicalTip: "Create content templates that work across all platforms for consistency."
   },
   {
     id: 6,
-    title: "Stable Diffusion Customization",
-    category: "Visual",
-    content: "Set up and customize Stable Diffusion for your specific needs. Learn about models, LoRAs, and advanced settings for consistent, high-quality image generation.",
-    keyPoints: ["Model selection", "Custom training", "Advanced settings", "Batch processing"],
-    practicalTip: "Experiment with different models to find what works best for your use case."
+    title: "Customer Research & Persona Development",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Use AI to research your ideal customers, create detailed buyer personas, and understand pain points that your business can solve profitably.",
+    keyPoints: ["Customer research", "Buyer personas", "Pain point analysis", "Solution mapping"],
+    practicalTip: "Use specific demographic and psychographic details in your research prompts."
   },
   {
     id: 7,
-    title: "Canva AI Magic Design",
-    category: "Design",
-    content: "Combine Canva's design tools with AI features for rapid content creation. Master Magic Design, background removal, and AI-powered layout suggestions.",
-    keyPoints: ["Magic Design", "AI backgrounds", "Layout automation", "Brand consistency"],
-    practicalTip: "Use brand kits to maintain consistency across all AI-generated designs."
+    title: "Product Development with AI",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Leverage AI to brainstorm digital products, validate concepts, create product roadmaps, and develop unique selling propositions that stand out.",
+    keyPoints: ["Product brainstorming", "Concept validation", "USP development", "Feature planning"],
+    practicalTip: "Test multiple product concepts with AI before investing time in development."
   },
   {
     id: 8,
-    title: "Notion AI for Productivity",
-    category: "Productivity",
-    content: "Integrate Notion AI into your workflow for content creation, data analysis, and project management. Learn to automate routine tasks and enhance team collaboration.",
-    keyPoints: ["Content automation", "Data insights", "Team collaboration", "Workflow optimization"],
-    practicalTip: "Create templates with AI prompts for consistent content generation."
+    title: "Marketing Strategy Development",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Create comprehensive marketing strategies using AI to identify the best channels, messaging, and tactics for your specific business and audience.",
+    keyPoints: ["Channel selection", "Message crafting", "Campaign planning", "Budget allocation"],
+    practicalTip: "Ask AI to create multiple strategy variations and test different approaches."
   },
   {
     id: 9,
-    title: "Grammarly Business Writing",
-    category: "Writing",
-    content: "Enhance your business communication with Grammarly's AI features. Master tone detection, clarity suggestions, and professional writing optimization.",
-    keyPoints: ["Professional tone", "Clarity improvement", "Grammar perfection", "Style consistency"],
-    practicalTip: "Set specific goals for each document type to get targeted suggestions."
+    title: "Sales Funnel Optimization",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Design and optimize sales funnels using AI to improve conversion rates, reduce customer acquisition costs, and maximize lifetime value.",
+    keyPoints: ["Funnel design", "Conversion optimization", "A/B testing ideas", "Customer journey mapping"],
+    practicalTip: "Use AI to analyze each funnel step and identify specific improvement opportunities."
   },
   {
     id: 10,
-    title: "Copy.ai for Marketing",
-    category: "Marketing",
-    content: "Generate high-converting marketing copy with Copy.ai. Learn templates for ads, emails, product descriptions, and social media content that drives results.",
-    keyPoints: ["Ad copy", "Email marketing", "Product descriptions", "Social content"],
-    practicalTip: "Always customize AI-generated copy to match your brand voice."
+    title: "Business Automation Strategies",
+    category: "ChatGPT/Gemini/Grok",
+    content: "Learn how to use AI tools to automate repetitive business tasks, create systems, and scale your operations without hiring additional staff.",
+    keyPoints: ["Task automation", "System creation", "Workflow optimization", "Scaling strategies"],
+    practicalTip: "Start with one automated process and gradually expand to avoid overwhelming yourself."
   },
+
+  // SECTION 2: Claude & Replit for Development (Lessons 11-20)
   {
     id: 11,
-    title: "Jasper AI Content Strategy",
-    category: "Content",
-    content: "Develop comprehensive content strategies using Jasper AI. Master long-form content creation, SEO optimization, and brand voice consistency.",
-    keyPoints: ["Content planning", "SEO integration", "Brand voice", "Long-form writing"],
-    practicalTip: "Use the brand voice feature to maintain consistency across all content."
+    title: "Claude for Business Logic Design",
+    category: "Claude/Replit",
+    content: "Use Claude's advanced reasoning to design complex business logic, create detailed project specifications, and plan technical implementations for your online business.",
+    keyPoints: ["Business logic design", "Technical specifications", "Implementation planning", "Architecture decisions"],
+    practicalTip: "Feed Claude your business requirements and ask for multiple implementation approaches."
   },
   {
     id: 12,
-    title: "Writesonic Sales Copy",
-    category: "Sales",
-    content: "Create persuasive sales copy that converts with Writesonic. Learn frameworks for landing pages, sales letters, and product launches that drive revenue.",
-    keyPoints: ["Sales frameworks", "Landing pages", "Product launches", "Conversion optimization"],
-    practicalTip: "Test multiple variations of AI-generated copy to find what converts best."
+    title: "Replit Environment Setup",
+    category: "Claude/Replit",
+    content: "Master Replit's development environment to quickly prototype business applications, test ideas, and deploy functional prototypes without local setup.",
+    keyPoints: ["Environment configuration", "Quick prototyping", "Deployment basics", "Collaboration features"],
+    practicalTip: "Use Replit templates to jumpstart common business application types."
   },
   {
     id: 13,
-    title: "Synthesia Video Creation",
-    category: "Video",
-    content: "Produce professional videos without cameras using Synthesia. Master avatar selection, script writing, and video customization for business presentations.",
-    keyPoints: ["Avatar selection", "Script optimization", "Video customization", "Professional presentation"],
-    practicalTip: "Keep scripts conversational and break up long content into shorter segments."
+    title: "Claude + Replit: Database Design",
+    category: "Claude/Replit",
+    content: "Combine Claude's planning capabilities with Replit's execution to design and implement databases that support your business operations and scale with growth.",
+    keyPoints: ["Database schema design", "Relationship modeling", "Performance optimization", "Scalability planning"],
+    practicalTip: "Ask Claude to explain database decisions in business terms, not just technical ones."
   },
   {
     id: 14,
-    title: "Murf AI Voiceovers",
-    category: "Audio",
-    content: "Create professional voiceovers for videos, podcasts, and presentations using Murf AI. Learn voice selection, pacing, and emotional tone control.",
-    keyPoints: ["Voice selection", "Pacing control", "Emotional tone", "Audio quality"],
-    practicalTip: "Add pauses and emphasis markers to make voiceovers sound more natural."
+    title: "User Authentication Systems",
+    category: "Claude/Replit",
+    content: "Build secure user authentication and authorization systems using Claude for security planning and Replit for rapid implementation and testing.",
+    keyPoints: ["Security architecture", "User management", "Permission systems", "Data protection"],
+    practicalTip: "Always implement security from the start - it's harder to add later."
   },
   {
     id: 15,
-    title: "Descript Audio Editing",
-    category: "Audio",
-    content: "Edit audio and video content like text with Descript's AI features. Master transcription, filler word removal, and voice cloning for content creation.",
-    keyPoints: ["Text-based editing", "Filler removal", "Voice cloning", "Transcription accuracy"],
-    practicalTip: "Use the overdub feature sparingly to maintain authenticity."
+    title: "Payment Integration Mastery",
+    category: "Claude/Replit",
+    content: "Integrate payment systems like Stripe using Claude for planning and Replit for testing, ensuring your business can accept payments securely and efficiently.",
+    keyPoints: ["Payment gateway setup", "Transaction security", "Subscription handling", "Refund automation"],
+    practicalTip: "Test payment flows thoroughly in sandbox mode before going live."
   },
   {
     id: 16,
-    title: "Loom AI Summaries",
-    category: "Communication",
-    content: "Enhance video communication with Loom's AI features. Learn to create automatic summaries, action items, and searchable video libraries.",
-    keyPoints: ["Video summaries", "Action items", "Search functionality", "Team communication"],
-    practicalTip: "Enable AI summaries for all important meetings and presentations."
+    title: "API Development for Business",
+    category: "Claude/Replit",
+    content: "Create APIs that support your business operations, integrate with third-party services, and enable future expansion of your platform.",
+    keyPoints: ["RESTful API design", "Third-party integrations", "Documentation", "Version management"],
+    practicalTip: "Design APIs with future growth in mind - think about what you might need later."
   },
   {
     id: 17,
-    title: "Zapier AI Automation",
-    category: "Automation",
-    content: "Automate workflows with Zapier's AI capabilities. Connect different apps and services to create intelligent automation that saves time and reduces errors.",
-    keyPoints: ["Workflow automation", "App integration", "Error reduction", "Time savings"],
-    practicalTip: "Start with simple automations and gradually build more complex workflows."
+    title: "Email System Implementation",
+    category: "Claude/Replit",
+    content: "Build comprehensive email systems for user notifications, marketing campaigns, and automated sequences using Claude for strategy and Replit for execution.",
+    keyPoints: ["Email automation", "Template systems", "Delivery optimization", "Analytics tracking"],
+    practicalTip: "Set up email tracking from day one to understand what resonates with your audience."
   },
   {
     id: 18,
-    title: "Make.com AI Scenarios",
-    category: "Automation",
-    content: "Build complex automation scenarios with Make.com's visual workflow builder. Master conditional logic, data transformation, and multi-step processes.",
-    keyPoints: ["Visual workflows", "Conditional logic", "Data transformation", "Complex scenarios"],
-    practicalTip: "Test scenarios with sample data before deploying to production."
+    title: "Admin Dashboard Creation",
+    category: "Claude/Replit",
+    content: "Develop powerful admin interfaces that give you complete control over your business operations, user management, and performance monitoring.",
+    keyPoints: ["Dashboard design", "User management", "Analytics display", "System monitoring"],
+    practicalTip: "Build admin features incrementally based on your actual management needs."
   },
   {
     id: 19,
-    title: "Calendly AI Scheduling",
-    category: "Productivity",
-    content: "Optimize meeting scheduling with Calendly's AI features. Learn smart scheduling, automatic time zone detection, and intelligent meeting preparation.",
-    keyPoints: ["Smart scheduling", "Time zone handling", "Meeting prep", "Calendar optimization"],
-    practicalTip: "Use routing forms to automatically direct different types of meetings."
+    title: "Performance Optimization",
+    category: "Claude/Replit",
+    content: "Optimize your applications for speed, reliability, and scalability using Claude for analysis and Replit for testing performance improvements.",
+    keyPoints: ["Speed optimization", "Resource management", "Caching strategies", "Monitoring setup"],
+    practicalTip: "Measure performance before and after optimizations to validate improvements."
   },
   {
     id: 20,
-    title: "HubSpot AI Sales Tools",
-    category: "Sales",
-    content: "Leverage HubSpot's AI for sales automation, lead scoring, and customer insights. Master predictive analytics and automated follow-up sequences.",
-    keyPoints: ["Lead scoring", "Sales automation", "Predictive analytics", "Customer insights"],
-    practicalTip: "Regularly review and adjust AI recommendations based on actual results."
+    title: "Deployment & Scaling Strategies",
+    category: "Claude/Replit",
+    content: "Learn deployment best practices and scaling strategies to handle growth, ensure uptime, and maintain performance as your business expands.",
+    keyPoints: ["Deployment automation", "Scaling strategies", "Monitoring systems", "Backup procedures"],
+    practicalTip: "Plan for scale early - it's easier to build scalable systems than to retrofit them."
   },
+
+  // SECTION 3: Cursor & Trae for Advanced Development (Lessons 21-30)
   {
     id: 21,
-    title: "Salesforce Einstein AI",
-    category: "CRM",
-    content: "Implement Salesforce Einstein for intelligent customer relationship management. Learn opportunity scoring, next best actions, and automated insights.",
-    keyPoints: ["Opportunity scoring", "Next best actions", "Automated insights", "CRM optimization"],
-    practicalTip: "Train the AI with high-quality historical data for better predictions."
+    title: "Cursor IDE Mastery for Business Development",
+    category: "Cursor/Trae",
+    content: "Master Cursor's AI-powered IDE to accelerate business application development with intelligent code completion, refactoring, and debugging assistance.",
+    keyPoints: ["AI-powered coding", "Intelligent completion", "Code refactoring", "Debug assistance"],
+    practicalTip: "Use detailed prompts in Cursor - the more context you provide, the better the AI assistance."
   },
   {
     id: 22,
-    title: "Monday.com AI Project Management",
-    category: "Project Management",
-    content: "Enhance project management with Monday.com's AI features. Master automated status updates, risk prediction, and resource optimization.",
-    keyPoints: ["Status automation", "Risk prediction", "Resource optimization", "Team coordination"],
-    practicalTip: "Set up automated notifications to keep everyone informed of project changes."
+    title: "Trae Integration for Project Management",
+    category: "Cursor/Trae",
+    content: "Integrate Trae's project management capabilities with Cursor to streamline development workflows, track progress, and manage complex business projects.",
+    keyPoints: ["Project workflow", "Progress tracking", "Task management", "Team coordination"],
+    practicalTip: "Read what Trae is doing before it executes - you can stop unwanted changes and learn coding patterns."
   },
   {
     id: 23,
-    title: "Asana Intelligence",
-    category: "Project Management",
-    content: "Use Asana's AI capabilities to improve team productivity and project outcomes. Learn goal tracking, workload balancing, and intelligent recommendations.",
-    keyPoints: ["Goal tracking", "Workload balancing", "Smart recommendations", "Team productivity"],
-    practicalTip: "Use Asana Intelligence to identify bottlenecks before they become problems."
+    title: "Advanced Prompt Engineering for Development",
+    category: "Cursor/Trae",
+    content: "Master advanced prompting techniques specifically for development tasks. Learn how detailed, context-rich prompts lead to better code generation and fewer bugs.",
+    keyPoints: ["Development-specific prompts", "Context provision", "Code quality control", "Bug prevention"],
+    practicalTip: "The more detailed your prompts, the better the output - include requirements, constraints, and examples."
   },
   {
     id: 24,
-    title: "Slack AI Workflow Builder",
-    category: "Communication",
-    content: "Automate team communication with Slack's AI-powered workflows. Create intelligent bots, automated responses, and smart notifications.",
-    keyPoints: ["Workflow automation", "Intelligent bots", "Automated responses", "Smart notifications"],
-    practicalTip: "Start with simple workflows and gradually add more sophisticated logic."
+    title: "Real-time Code Collaboration",
+    category: "Cursor/Trae",
+    content: "Use Cursor and Trae together for real-time code collaboration, review processes, and maintaining code quality across team members and AI assistants.",
+    keyPoints: ["Code collaboration", "Review processes", "Quality assurance", "Team workflows"],
+    practicalTip: "Always review AI-generated code before committing - learn from the patterns to improve your skills."
   },
   {
     id: 25,
-    title: "Microsoft Copilot Integration",
-    category: "Productivity",
-    content: "Integrate Microsoft Copilot across Office 365 applications. Master AI assistance in Word, Excel, PowerPoint, and Outlook for maximum productivity.",
-    keyPoints: ["Office integration", "Document creation", "Data analysis", "Email management"],
-    practicalTip: "Use Copilot to draft initial content, then refine and personalize the output."
+    title: "Complex Feature Development",
+    category: "Cursor/Trae",
+    content: "Tackle complex business features using the combined power of Cursor and Trae, breaking down large requirements into manageable, AI-assisted development tasks.",
+    keyPoints: ["Feature breakdown", "Complex implementations", "Integration planning", "Testing strategies"],
+    practicalTip: "Break complex features into smaller, specific tasks that AI can handle more effectively."
   },
   {
     id: 26,
-    title: "Google Workspace AI",
-    category: "Productivity",
-    content: "Leverage AI features across Google Workspace applications. Learn smart compose, data insights, and automated meeting summaries.",
-    keyPoints: ["Smart compose", "Data insights", "Meeting summaries", "Collaboration enhancement"],
-    practicalTip: "Enable AI features gradually to help your team adapt to new workflows."
+    title: "Code Quality & Testing Automation",
+    category: "Cursor/Trae",
+    content: "Implement automated testing, code quality checks, and continuous integration using AI assistance to ensure your business applications remain reliable and maintainable.",
+    keyPoints: ["Automated testing", "Quality assurance", "CI/CD pipelines", "Code maintenance"],
+    practicalTip: "Set up quality checks early - it's much harder to add them to existing codebases."
   },
   {
     id: 27,
-    title: "Shopify AI for E-commerce",
-    category: "E-commerce",
-    content: "Optimize your online store with Shopify's AI tools. Master product recommendations, inventory management, and customer behavior analysis.",
-    keyPoints: ["Product recommendations", "Inventory optimization", "Customer analysis", "Sales forecasting"],
-    practicalTip: "Use AI insights to optimize your product mix and pricing strategy."
+    title: "Advanced Database Operations",
+    category: "Cursor/Trae",
+    content: "Handle complex database operations, migrations, and optimizations using AI assistance to ensure your business data remains secure, fast, and accessible.",
+    keyPoints: ["Database migrations", "Query optimization", "Data security", "Performance tuning"],
+    practicalTip: "Always backup your database before running AI-generated migration scripts."
   },
   {
     id: 28,
-    title: "Mailchimp AI Marketing",
-    category: "Marketing",
-    content: "Enhance email marketing with Mailchimp's AI features. Learn send time optimization, content suggestions, and audience segmentation.",
-    keyPoints: ["Send time optimization", "Content suggestions", "Audience segmentation", "Campaign performance"],
-    practicalTip: "Let AI optimize send times, but always test subject lines manually."
+    title: "Security Implementation & Auditing",
+    category: "Cursor/Trae",
+    content: "Use AI tools to implement robust security measures, conduct security audits, and protect your business applications from common vulnerabilities.",
+    keyPoints: ["Security implementation", "Vulnerability scanning", "Audit procedures", "Protection strategies"],
+    practicalTip: "Security is ongoing - regularly audit your applications as they grow and change."
   },
   {
     id: 29,
-    title: "Buffer AI Social Media",
-    category: "Social Media",
-    content: "Automate social media management with Buffer's AI tools. Master content scheduling, hashtag suggestions, and performance optimization.",
-    keyPoints: ["Content scheduling", "Hashtag optimization", "Performance analysis", "Audience engagement"],
-    practicalTip: "Use AI suggestions as a starting point, but maintain your authentic brand voice."
+    title: "Advanced Deployment & DevOps",
+    category: "Cursor/Trae",
+    content: "Master advanced deployment strategies, DevOps practices, and infrastructure management using AI assistance to ensure reliable, scalable business operations.",
+    keyPoints: ["Advanced deployment", "DevOps automation", "Infrastructure management", "Monitoring systems"],
+    practicalTip: "Document your deployment processes - you'll need to reference them when scaling or troubleshooting."
   },
   {
     id: 30,
-    title: "AI Tools Integration Strategy",
-    category: "Strategy",
-    content: "Develop a comprehensive AI tools integration strategy for your business. Learn to evaluate tools, plan implementation, and measure ROI across your AI toolkit.",
-    keyPoints: ["Tool evaluation", "Implementation planning", "ROI measurement", "Strategic integration"],
-    practicalTip: "Start with one tool at a time and master it before adding more to your stack."
+    title: "Business Platform Scaling & Optimization",
+    category: "Cursor/Trae",
+    content: "Scale your business platform using advanced AI assistance, optimization techniques, and architectural improvements to handle growth and maintain performance.",
+    keyPoints: ["Platform scaling", "Architecture optimization", "Performance monitoring", "Growth planning"],
+    practicalTip: "Plan for 10x growth - build systems that can scale beyond your current needs."
   }
 ];
 
@@ -448,6 +453,99 @@ export default function AIToolsMasteryGuideContent() {
                 <li>• Measure ROI for each tool implemented</li>
               </ul>
             </div>
+          </div>
+
+          {/* Bonus Troubleshooting Section */}
+          <div className="bg-gradient-to-br from-red-900/20 to-orange-900/20 rounded-2xl p-8 mb-12 border border-red-500/30">
+            <h2 className="text-3xl font-bold text-white mb-6 text-center">🎁 BONUS: Advanced Troubleshooting Guide</h2>
+            <p className="text-gray-300 text-center mb-8">
+              3 Critical Issues & Solutions for Each Platform - Advanced techniques most people never learn
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* ChatGPT/Gemini/Grok Issues */}
+              <div className="bg-gray-800/40 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-white mb-4">ChatGPT/Gemini/Grok Issues</h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Context Loss in Long Conversations</div>
+                    <div className="text-gray-300">Solution: Break conversations into focused sessions, use system prompts, create conversation templates for complex tasks.</div>
+                  </div>
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Inconsistent Output Quality</div>
+                    <div className="text-gray-300">Solution: Use temperature settings, create prompt libraries, implement output validation checks.</div>
+                  </div>
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Rate Limiting & API Errors</div>
+                    <div className="text-gray-300">Solution: Implement retry logic, use exponential backoff, create fallback systems between platforms.</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Claude/Replit Issues */}
+              <div className="bg-gray-800/40 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-white mb-4">Claude/Replit Issues</h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Project Corruption & Lost Work</div>
+                    <div className="text-gray-300">Solution: Regular Git commits, automated backups, version control best practices, project forking strategies.</div>
+                  </div>
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Environment Limitations & Timeouts</div>
+                    <div className="text-gray-300">Solution: Resource optimization, process management, splitting large tasks, using external services.</div>
+                  </div>
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Deployment Failures & Configuration</div>
+                    <div className="text-gray-300">Solution: Environment variables management, dependency handling, staging environments, rollback procedures.</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cursor/Trae Issues */}
+              <div className="bg-gray-800/40 rounded-xl p-6">
+                <h3 className="text-xl font-bold text-white mb-4">Cursor/Trae Issues</h3>
+                <div className="space-y-4 text-sm">
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: AI Making Unwanted Code Changes</div>
+                    <div className="text-gray-300">Solution: Granular permissions, change review workflows, backup strategies, incremental commits.</div>
+                  </div>
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Project State Corruption</div>
+                    <div className="text-gray-300">Solution: Clean project resets, dependency management, environment isolation, fresh start procedures.</div>
+                  </div>
+                  <div>
+                    <div className="text-red-400 font-semibold">Issue: Performance Degradation & Memory</div>
+                    <div className="text-gray-300">Solution: Resource monitoring, cleanup procedures, optimization techniques, system maintenance.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-yellow-600/20 border border-yellow-500/50 rounded-lg p-6 mt-8">
+              <h4 className="text-lg font-bold text-yellow-300 mb-3">🔧 Pro Recovery Techniques</h4>
+              <div className="text-gray-300 space-y-2 text-sm">
+                <div><strong>Fresh Start Protocol:</strong> How to cleanly reset any project when things go wrong</div>
+                <div><strong>Backup Everything:</strong> Automated backup strategies that save hours of rework</div>
+                <div><strong>Version Control Mastery:</strong> Git workflows that prevent data loss and enable easy rollbacks</div>
+                <div><strong>Environment Management:</strong> Keeping development environments clean and reproducible</div>
+                <div><strong>Dependency Hell Solutions:</strong> Resolving conflicts and managing package versions</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-gray-400 mb-6">
+              Ready to master AI web creation with full deployment guidance?
+            </p>
+            <Link
+              href="/products/ai-web-creation-masterclass"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white font-bold py-6 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-lg mb-4"
+            >
+              🚀 Get AI Web Creation Masterclass - A$50
+            </Link>
+            <p className="text-sm text-gray-400">
+              Complete step-by-step video course including deployment, scaling, and advanced techniques
+            </p>
           </div>
         </div>
       </div>
