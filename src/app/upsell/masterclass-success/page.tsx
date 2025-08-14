@@ -213,19 +213,7 @@ export default function MasterclassSuccessUpsell() {
                 </div>
               </div>
 
-              {/* Social Proof */}
-              <div className="mt-8 text-center">
-                <div className="flex items-center justify-center mb-4">
-                  <div className="flex -space-x-2">
-                    {[1,2,3,4,5].map(i => (
-                      <div key={i} className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-sm">
-                        {String.fromCharCode(64 + i)}
-                      </div>
-                    ))}
-                  </div>
-                  <span className="ml-4 text-gray-300">Join 247+ successful AI entrepreneurs</span>
-                </div>
-              </div>
+
             </div>
           </div>
 

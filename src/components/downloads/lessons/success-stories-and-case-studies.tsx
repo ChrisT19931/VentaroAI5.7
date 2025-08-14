@@ -40,10 +40,10 @@ export default function SuccessStoriesAndCaseStudies() {
         <p className="text-purple-200 text-sm mt-2">Copy this prompt and customize the bracketed sections for personalized insights.</p>
       </div>
 
-      {/* Case Study */}
+      {/* Implementation Guide */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-white mb-2">📊 Case Study</h2>
-        <p className="text-gray-200">Tech startup founder Mike increased his company's valuation by 300% in 18 months by implementing AI across customer service, marketing, and product development, following patterns from successful SaaS companies.</p>
+        <h2 className="text-xl font-semibold text-white mb-2">📊 Implementation Guide</h2>
+        <p className="text-gray-200">Focus on analyzing documented patterns from established companies in your industry. Use the prompts above to research verified business strategies and adapt proven methodologies to your specific context and goals.</p>
       </div>
 
       {/* Navigation */}

@@ -196,15 +196,14 @@ export function SocialProof({ recentPurchases = [] }: SocialProofProps) {
     return () => clearInterval(timer);
   }, [recentPurchases.length]);
 
-  const defaultPurchases = [
-    { name: 'Sarah M.', product: 'AI Web Creation Masterclass', timeAgo: '2 minutes ago', location: 'Sydney' },
-    { name: 'James L.', product: 'Complete AI Bundle', timeAgo: '5 minutes ago', location: 'Melbourne' },
-    { name: 'Emma K.', product: 'AI Prompts Arsenal', timeAgo: '8 minutes ago', location: 'Brisbane' },
-    { name: 'David R.', product: 'AI Web Creation Masterclass', timeAgo: '12 minutes ago', location: 'Perth' },
-    { name: 'Lisa T.', product: 'Support Package', timeAgo: '15 minutes ago', location: 'Adelaide' }
-  ];
+  const defaultPurchases = [];
 
-  const purchases = recentPurchases.length > 0 ? recentPurchases : defaultPurchases;
+    const purchases = recentPurchases.length > 0 ? recentPurchases : defaultPurchases;
+
+  // Don't show anything if no real purchases
+  if (purchases.length === 0) {
+    return null;
+  }
 
   return (
     <div className="space-y-4">
@@ -223,17 +222,7 @@ export function SocialProof({ recentPurchases = [] }: SocialProofProps) {
         </div>
       </div>
 
-      {/* Rating Only */}
-      <div className="flex items-center justify-center text-gray-400 text-sm">
-        <div className="flex items-center">
-          <div className="flex -space-x-1">
-            {[1,2,3,4,5].map(i => (
-              <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-            ))}
-          </div>
-          <span className="ml-2">4.9/5 rating</span>
-        </div>
-      </div>
+ 
     </div>
   );
 }

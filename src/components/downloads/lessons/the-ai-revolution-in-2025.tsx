@@ -43,7 +43,7 @@ export default function TheAIRevolutionIn2025() {
       {/* Case Study */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-white mb-2">📊 Case Study</h2>
-        <p className="text-gray-200">Meet John, a marketing manager who went from $30K to $120K annually by mastering AI tools in just 8 months. He started with ChatGPT for content creation, then learned Midjourney for visuals, and finally automated his entire workflow with AI agents.</p>
+        <p className="text-gray-200">Many professionals are successfully transitioning to AI-enhanced careers by starting with foundational tools like ChatGPT for content creation, expanding to visual tools for design work, and gradually implementing workflow automation to increase productivity and value delivery.</p>
       </div>
 
       {/* Navigation */}

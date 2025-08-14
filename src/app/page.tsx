@@ -35,26 +35,7 @@ export default function Home() {
     productType: 'digital' as const
   };
 
-  const testimonials = [
-    {
-      name: 'Sarah Mitchell',
-      text: 'This masterclass completely changed how I approach web development. Built my first AI-powered site in just 3 hours!',
-      rating: 5,
-      title: 'Freelance Developer'
-    },
-    {
-      name: 'James Wilson',
-      text: 'The step-by-step approach is brilliant. No coding background needed - I went from zero to having a professional website.',
-      rating: 5,
-      title: 'Small Business Owner'
-    },
-    {
-      name: 'Emma Chen',
-      text: 'Worth every penny. The techniques taught here would cost thousands if you hired a developer. Highly recommended!',
-      rating: 5,
-      title: 'Marketing Consultant'
-    }
-  ];
+
 
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
