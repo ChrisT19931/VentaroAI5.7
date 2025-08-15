@@ -169,6 +169,12 @@ async function handleAutoUnlockFromSuccess(body: any) {
         }
 
         // Map Stripe product to internal product ID
+        // Check if product is deleted or doesn't have a name
+        if (!('name' in product) || !product.name) {
+          console.warn('Product is deleted or missing name, skipping:', product.id);
+          continue;
+        }
+        
         const productName = product.name;
         let mappedProductId = 'unknown';
         
@@ -186,7 +192,7 @@ async function handleAutoUnlockFromSuccess(body: any) {
         }
 
         const purchaseData = {
-          user_id: userId || null,
+          user_id: userId || undefined,
           customer_email: customerEmail,
           product_id: mappedProductId,
           product_name: productName,
@@ -195,7 +201,7 @@ async function handleAutoUnlockFromSuccess(body: any) {
           currency: price.currency,
           status: 'active' as const,
           stripe_session_id: session_id,
-          stripe_customer_id: session.customer,
+          stripe_customer_id: typeof session.customer === 'string' ? session.customer : undefined,
           stripe_product_id: typeof product === 'string' ? product : product.id,
           created_at: new Date().toISOString()
         };
