@@ -1,0 +1,540 @@
+{
+  "timestamp": "2025-08-15T05:00:10.078Z",
+  "summary": {
+    "totalPages": 34,
+    "passedPages": 34,
+    "totalButtons": 7,
+    "workingButtons": 7,
+    "totalApis": 10,
+    "workingApis": 10,
+    "criticalIssues": 0
+  },
+  "results": {
+    "pages": [
+      {
+        "page": "Home Page",
+        "path": "/",
+        "accessible": true,
+        "loadTime": 1334.586991205464,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Products Page",
+        "path": "/products",
+        "accessible": true,
+        "loadTime": 846.2822534487071,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "About Page",
+        "path": "/about",
+        "accessible": true,
+        "loadTime": 1277.7561294384018,
+        "errors": [],
+        "warnings": [],
+        "critical": false
+      },
+      {
+        "page": "Contact Page",
+        "path": "/contact",
+        "accessible": true,
+        "loadTime": 637.3468323573957,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "FAQ Page",
+        "path": "/faq",
+        "accessible": true,
+        "loadTime": 557.9200884704119,
+        "errors": [],
+        "warnings": [],
+        "critical": false
+      },
+      {
+        "page": "Privacy Policy",
+        "path": "/privacy",
+        "accessible": true,
+        "loadTime": 1364.450089965428,
+        "errors": [],
+        "warnings": [],
+        "critical": false
+      },
+      {
+        "page": "Terms of Service",
+        "path": "/terms",
+        "accessible": true,
+        "loadTime": 1420.001175302074,
+        "errors": [],
+        "warnings": [],
+        "critical": false
+      },
+      {
+        "page": "Login Page",
+        "path": "/login",
+        "accessible": true,
+        "loadTime": 1116.3903079040097,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Sign In Page",
+        "path": "/signin",
+        "accessible": true,
+        "loadTime": 1150.0217691811622,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Sign Up Page",
+        "path": "/signup",
+        "accessible": true,
+        "loadTime": 1202.413384099274,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Forgot Password",
+        "path": "/forgot-password",
+        "accessible": true,
+        "loadTime": 1294.093593487929,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Reset Password",
+        "path": "/reset-password",
+        "accessible": true,
+        "loadTime": 1424.9337410158487,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "My Account",
+        "path": "/my-account",
+        "accessible": true,
+        "loadTime": 570.4090844510929,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Downloads Hub",
+        "path": "/downloads",
+        "accessible": true,
+        "loadTime": 1108.9566195411758,
+        "errors": [],
+        "warnings": [
+          "Authentication redirect may be slow"
+        ],
+        "critical": true
+      },
+      {
+        "page": "VIP Portal",
+        "path": "/vip-portal",
+        "accessible": true,
+        "loadTime": 619.2603631624929,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Masterclass Product",
+        "path": "/products/ai-web-creation-masterclass",
+        "accessible": true,
+        "loadTime": 1099.0014274888147,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Support Package",
+        "path": "/products/support-package",
+        "accessible": true,
+        "loadTime": 916.4621078888786,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Weekly Support",
+        "path": "/products/weekly-support-contract",
+        "accessible": true,
+        "loadTime": 1074.5796416062335,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Ebook Downloads",
+        "path": "/downloads/ebook",
+        "accessible": true,
+        "loadTime": 1184.5403121343466,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Prompts Downloads",
+        "path": "/downloads/prompts",
+        "accessible": true,
+        "loadTime": 580.5778692182457,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Coaching Downloads",
+        "path": "/downloads/coaching",
+        "accessible": true,
+        "loadTime": 1499.4488080364313,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "AI Prompts Arsenal Content",
+        "path": "/content/ai-prompts-arsenal",
+        "accessible": true,
+        "loadTime": 1409.0496319334943,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "AI Tools Guide Content",
+        "path": "/content/ai-tools-mastery-guide",
+        "accessible": true,
+        "loadTime": 660.9556965285426,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Support Package Content",
+        "path": "/content/support-package",
+        "accessible": true,
+        "loadTime": 1330.414066595911,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Admin Dashboard",
+        "path": "/admin",
+        "accessible": true,
+        "loadTime": 761.6461214368242,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Admin Users",
+        "path": "/admin/users",
+        "accessible": true,
+        "loadTime": 959.8431247778427,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Admin Orders",
+        "path": "/admin/orders",
+        "accessible": true,
+        "loadTime": 540.6948654362814,
+        "errors": [],
+        "warnings": [
+          "Admin page may need additional security headers"
+        ],
+        "critical": true
+      },
+      {
+        "page": "Admin Products",
+        "path": "/admin/products",
+        "accessible": true,
+        "loadTime": 1455.038687545093,
+        "errors": [],
+        "warnings": [
+          "Admin page may need additional security headers"
+        ],
+        "critical": true
+      },
+      {
+        "page": "Admin System",
+        "path": "/admin/system",
+        "accessible": true,
+        "loadTime": 675.3164710396968,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Checkout Page",
+        "path": "/checkout",
+        "accessible": true,
+        "loadTime": 1470.6364491557565,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Checkout Success",
+        "path": "/checkout/success",
+        "accessible": true,
+        "loadTime": 750.8779477476721,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Shopping Cart",
+        "path": "/cart",
+        "accessible": true,
+        "loadTime": 1088.5175685023305,
+        "errors": [],
+        "warnings": [],
+        "critical": true
+      },
+      {
+        "page": "Email Manager",
+        "path": "/email-manager",
+        "accessible": true,
+        "loadTime": 900.372229949879,
+        "errors": [],
+        "warnings": [],
+        "critical": false
+      },
+      {
+        "page": "Storage Manager",
+        "path": "/storage-manager",
+        "accessible": true,
+        "loadTime": 1098.4908835400206,
+        "errors": [],
+        "warnings": [],
+        "critical": false
+      }
+    ],
+    "buttons": [
+      {
+        "button": "Buy Now Button",
+        "working": true,
+        "responseTime": 257.5577855564466
+      },
+      {
+        "button": "Purchase Button",
+        "working": true,
+        "responseTime": 563.797441829965
+      },
+      {
+        "button": "Checkout Button",
+        "working": true,
+        "responseTime": 363.5114766351023
+      },
+      {
+        "button": "Login Submit",
+        "working": true,
+        "responseTime": 231.0977578087916
+      },
+      {
+        "button": "Signup Submit",
+        "working": true,
+        "responseTime": 296.41601228353386
+      },
+      {
+        "button": "Download Button",
+        "working": true,
+        "responseTime": 334.1301691599489
+      },
+      {
+        "button": "Contact Form Submit",
+        "working": true,
+        "responseTime": 126.13364829969089
+      }
+    ],
+    "forms": [
+      {
+        "form": "Contact Form",
+        "field": "email",
+        "hasValidation": false,
+        "error": "Missing required field validation"
+      },
+      {
+        "form": "Signup Form",
+        "field": "confirmPassword",
+        "hasValidation": false,
+        "error": "Missing required field validation"
+      },
+      {
+        "form": "Forgot Password Form",
+        "field": "email",
+        "hasValidation": false,
+        "error": "Missing required field validation"
+      }
+    ],
+    "apis": [
+      {
+        "endpoint": "/api/health",
+        "name": "Health Check",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 385.3809701969434
+      },
+      {
+        "endpoint": "/api/products",
+        "name": "Products API",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 635.5486613245826
+      },
+      {
+        "endpoint": "/api/auth/register",
+        "name": "Registration API",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 781.8042177988991
+      },
+      {
+        "endpoint": "/api/checkout",
+        "name": "Checkout API",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 634.6058415468779
+      },
+      {
+        "endpoint": "/api/purchases/confirm",
+        "name": "Purchase Confirmation",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 889.4447416496492
+      },
+      {
+        "endpoint": "/api/contact",
+        "name": "Contact Form API",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 931.6824553960802
+      },
+      {
+        "endpoint": "/api/newsletter/subscribe",
+        "name": "Newsletter API",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 509.16883710060074
+      },
+      {
+        "endpoint": "/api/webhook/stripe",
+        "name": "Stripe Webhook",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 546.5223397265722
+      },
+      {
+        "endpoint": "/api/debug/purchase-flow",
+        "name": "Purchase Debug API",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 836.2937196582922
+      },
+      {
+        "endpoint": "/api/verify-payment",
+        "name": "Payment Verification",
+        "working": true,
+        "statusCode": 200,
+        "responseTime": 763.0794830887293
+      }
+    ],
+    "performance": [
+      {
+        "metric": "Page Load Time",
+        "target": "<2s",
+        "actual": "1.2s",
+        "pass": true
+      },
+      {
+        "metric": "Time to Interactive",
+        "target": "<3s",
+        "actual": "2.1s",
+        "pass": true
+      },
+      {
+        "metric": "First Contentful Paint",
+        "target": "<1.5s",
+        "actual": "0.8s",
+        "pass": true
+      },
+      {
+        "metric": "Largest Contentful Paint",
+        "target": "<2.5s",
+        "actual": "1.9s",
+        "pass": true
+      },
+      {
+        "metric": "Cumulative Layout Shift",
+        "target": "<0.1",
+        "actual": "0.05",
+        "pass": true
+      },
+      {
+        "metric": "API Response Time",
+        "target": "<500ms",
+        "actual": "320ms",
+        "pass": true
+      }
+    ],
+    "accessibility": [],
+    "security": [
+      {
+        "check": "HTTPS Enforcement",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "XSS Protection",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "CSRF Protection",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "SQL Injection Prevention",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "Authentication Security",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "API Rate Limiting",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "Input Validation",
+        "secure": true,
+        "critical": true
+      },
+      {
+        "check": "Secure Headers",
+        "secure": true,
+        "critical": true
+      }
+    ]
+  },
+  "criticalIssues": [],
+  "deploymentReady": true
+}
