@@ -138,7 +138,7 @@ async function handleManualUnlock(body: any) {
       product_name: productName || `Manual unlock for ${productId}`,
       amount: amount || 0,
       currency: 'usd',
-      status: 'active',
+      status: 'active' as const,
       stripe_session_id: `manual_unlock_${Date.now()}`,
       created_at: new Date().toISOString()
     };
@@ -345,7 +345,7 @@ async function handleSimulatePurchase(body: any) {
       product_name: productName,
       amount: amount || 10.00,
       currency: 'usd',
-      status: 'active',
+              status: 'active' as const,
       stripe_session_id: mockSession.id,
       stripe_customer_id: mockSession.customer,
       stripe_product_id: mockProduct.id

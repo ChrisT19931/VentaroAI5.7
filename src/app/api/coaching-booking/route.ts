@@ -226,7 +226,7 @@ const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: str
       sgMail.send(adminEmail)
     ]);
     console.log('✅ Booking confirmation emails sent successfully to:', bookingData.email);
-  } catch (error) {
+  } catch (error: any) {
     console.error('❌ Failed to send booking emails:', error);
     console.error('Email error details:', {
       error: error?.message,

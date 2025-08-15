@@ -176,11 +176,17 @@ async function sendNotificationEmails(customerEmail: string, productName: string
       name: 'Order Confirmation',
       fn: () => sendOrderConfirmationEmail({
         email: customerEmail,
-        orderDetails: {
+        orderNumber: purchase.id || `ORDER_${Date.now()}`,
+        orderItems: [{
+          name: productName,
+          price: purchase.amount || 0
+        }],
+        total: purchase.amount || 0,
+        downloadLinks: [{
           productName,
-          price: purchase.amount || 0,
-          orderId: purchase.id,
-        },
+          url: accessLink
+        }],
+        isGuest: false
       })
     },
     {
@@ -188,7 +194,7 @@ async function sendNotificationEmails(customerEmail: string, productName: string
       fn: () => sendAccessGrantedEmail({
         email: customerEmail,
         productName,
-        accessLink,
+        accessUrl: accessLink,
       })
     }
   ];
@@ -387,7 +393,7 @@ async function handleCheckoutSessionCompleted(session: any) {
           price_id: priceId,
           amount: price.unit_amount ? price.unit_amount / 100 : 0,
           currency: price.currency,
-          status: 'active',
+          status: 'active' as const,
           stripe_session_id: session.id,
           stripe_customer_id: customerId,
           stripe_product_id: stripeProductId
@@ -500,7 +506,7 @@ async function handlePaymentIntentSucceeded(paymentIntent: any) {
       product_name: product.name,
       amount: paymentIntent.amount ? paymentIntent.amount / 100 : 0,
       currency: paymentIntent.currency,
-      status: 'active',
+                status: 'active' as const,
       stripe_payment_intent_id: paymentIntent.id,
       stripe_customer_id: paymentIntent.customer,
       stripe_product_id: stripeProductId

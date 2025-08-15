@@ -372,3 +372,81 @@ export const sendWelcomeEmail = async ({
     html,
   });
 };
+
+/**
+ * Send an access granted email to users who have purchased a product
+ * @param email The user's email address
+ * @param productName The name of the product they gained access to
+ * @param accessUrl The URL where they can access the product
+ * @returns Promise with the result of the email sending operation
+ */
+export const sendAccessGrantedEmail = async ({
+  email,
+  productName,
+  accessUrl,
+  firstName = '',
+}: {
+  email: string;
+  productName: string;
+  accessUrl: string;
+  firstName?: string;
+}) => {
+  const greeting = firstName ? `Hi ${firstName},` : 'Hi there,';
+  
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <div style="background-color: #0070f3; padding: 20px; color: white; text-align: center;">
+        <h1 style="margin: 0;">Access Granted!</h1>
+      </div>
+      <div style="padding: 20px; border: 1px solid #eee; border-top: none;">
+        <p>${greeting}</p>
+        <p>Great news! You now have access to <strong>${productName}</strong>.</p>
+        
+        <div style="margin: 30px 0; text-align: center;">
+          <a href="${accessUrl}" 
+             style="background-color: #0070f3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">
+            Access Your Product
+          </a>
+        </div>
+        
+        <p>You can access this product anytime through your account dashboard at <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventarosales.com'}/my-account" style="color: #0070f3; text-decoration: none;">My Account</a>.</p>
+        
+        <p>If you have any questions or need assistance, please don't hesitate to contact our support team at <a href="mailto:chris.t@ventarosales.com" style="color: #0070f3; text-decoration: none;">chris.t@ventarosales.com</a>.</p>
+        
+        <p>Enjoy your new product!</p>
+        
+        <p>Best regards,<br>The Ventaro Team</p>
+        
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #666; font-size: 12px;">
+          <p>© ${new Date().getFullYear()} Ventaro Digital Store. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const text = `
+    Access Granted!
+    
+    ${greeting}
+    
+    Great news! You now have access to ${productName}.
+    
+    Access your product: ${accessUrl}
+    
+    You can access this product anytime through your account dashboard at ${process.env.NEXT_PUBLIC_SITE_URL || 'https://ventarosales.com'}/my-account.
+    
+    If you have any questions or need assistance, please don't hesitate to contact our support team at chris.t@ventarosales.com.
+    
+    Enjoy your new product!
+    
+    Best regards,
+    The Ventaro Team
+  `;
+
+  return sendEmail({
+    to: email,
+    subject: `Access Granted: ${productName}`,
+    text,
+    html,
+  });
+};

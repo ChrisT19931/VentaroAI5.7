@@ -145,7 +145,7 @@ export async function GET(request: NextRequest) {
       results.push({
         name: 'Bulletproof Auth System',
         status: healthCheck.status === 'healthy' ? 'success' : 'warning',
-        message: healthCheck.message || `Status: ${healthCheck.status}`,
+        message: `Status: ${healthCheck.status}, Database: ${healthCheck.database}, Users: ${healthCheck.users}, Purchases: ${healthCheck.purchases}`,
         data: healthCheck
       });
     } catch (error: any) {
@@ -280,7 +280,7 @@ async function createTestPurchase(data: any) {
       product_name: data.productName || 'AI Prompts Arsenal 2025',
       amount: data.amount || 10.00,
       currency: 'usd',
-      status: 'active',
+      status: 'active' as const,
       stripe_session_id: `test_${Date.now()}`,
       created_at: new Date().toISOString()
     };
@@ -345,7 +345,7 @@ async function simulateStripeWebhook(data: any) {
       product_id: mappedProductId,
       amount: data.amount || 10.00,
       currency: 'usd',
-      status: 'active',
+              status: 'active' as const,
       stripe_session_id: mockSession.id,
       stripe_customer_id: mockSession.customer
     });
