@@ -133,14 +133,33 @@ async function handleCheckoutSessionCompleted(session: any) {
       // Get product details from Stripe
       const stripe = await getStripeInstance();
       const price = await stripe.prices.retrieve(priceId);
-      const productId = price.product as string;
-      const product = await stripe.products.retrieve(productId);
+      const stripeProductId = price.product as string;
+      const product = await stripe.products.retrieve(stripeProductId);
       
-      // Create purchase record using bulletproof auth system
+      // CRITICAL: Map Stripe product ID to internal access system ID
+      let mappedProductId = stripeProductId;
+      
+      // Map based on product name/metadata to our internal access system
+      const productName = product.name.toLowerCase();
+      if (productName.includes('prompt') || productName.includes('ai prompts')) {
+        mappedProductId = 'prompts'; // This matches what the prompts page checks for
+      } else if (productName.includes('e-book') || productName.includes('ebook') || productName.includes('mastery guide')) {
+        mappedProductId = 'ebook'; // This matches what the ebook page checks for  
+      } else if (productName.includes('coaching') || productName.includes('session')) {
+        mappedProductId = 'coaching'; // This matches what the coaching page checks for
+      } else if (productName.includes('masterclass') || productName.includes('video')) {
+        mappedProductId = 'video'; // This matches what the video page checks for
+      } else if (productName.includes('support')) {
+        mappedProductId = 'support'; // This matches what the support page checks for
+      }
+      
+      console.log(`Mapping Stripe product ${stripeProductId} (${product.name}) to internal ID: ${mappedProductId}`);
+      
+      // Create purchase record using bulletproof auth system with mapped product ID
       const purchase = await bulletproofAuth.createPurchase({
         user_id: userId,
         customer_email: customerEmail,
-        product_id: productId,
+        product_id: mappedProductId, // Use mapped ID for access control
         price_id: priceId,
         amount: price.unit_amount ? price.unit_amount / 100 : 0,
         currency: price.currency,
@@ -154,7 +173,7 @@ async function handleCheckoutSessionCompleted(session: any) {
         continue;
       }
       
-      console.log(`Created purchase record for ${customerEmail}, product ${productId}`);
+      console.log(`✅ CRITICAL: Purchase unlocked for ${customerEmail}, product ${mappedProductId} (was ${stripeProductId})`);
       
       // Send confirmation email
       await sendOrderConfirmationEmail({
@@ -167,7 +186,7 @@ async function handleCheckoutSessionCompleted(session: any) {
       });
       
       // Send access granted email with upsell link for masterclass
-      const accessLink = productId === 'ai-business-video-guide-2025' 
+      const accessLink = mappedProductId === 'video' 
         ? `${process.env.NEXT_PUBLIC_SITE_URL}/upsell/masterclass-success?session_id=${session.id}`
         : `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`;
         
@@ -201,21 +220,44 @@ async function handlePaymentIntentSucceeded(paymentIntent: any) {
     // If the payment intent has metadata with user and product info, create a purchase
     const metadata = paymentIntent.metadata || {};
     const userId = metadata.userId;
-    const productId = metadata.productId;
+    const stripeProductId = metadata.productId;
     const customerEmail = paymentIntent.receipt_email || metadata.customerEmail;
     
-    if (!userId || !productId || !customerEmail) {
+    if (!userId || !stripeProductId || !customerEmail) {
       console.log('Missing required metadata in payment intent, skipping');
       return;
     }
     
-    // Create purchase record
+    // Get product details from Stripe for mapping
+    const stripe = await getStripeInstance();
+    const product = await stripe.products.retrieve(stripeProductId);
+    
+    // CRITICAL: Map Stripe product ID to internal access system ID
+    let mappedProductId = stripeProductId;
+    
+    // Map based on product name/metadata to our internal access system
+    const productName = product.name.toLowerCase();
+    if (productName.includes('prompt') || productName.includes('ai prompts')) {
+      mappedProductId = 'prompts'; // This matches what the prompts page checks for
+    } else if (productName.includes('e-book') || productName.includes('ebook') || productName.includes('mastery guide')) {
+      mappedProductId = 'ebook'; // This matches what the ebook page checks for  
+    } else if (productName.includes('coaching') || productName.includes('session')) {
+      mappedProductId = 'coaching'; // This matches what the coaching page checks for
+    } else if (productName.includes('masterclass') || productName.includes('video')) {
+      mappedProductId = 'video'; // This matches what the video page checks for
+    } else if (productName.includes('support')) {
+      mappedProductId = 'support'; // This matches what the support page checks for
+    }
+    
+    console.log(`Mapping Stripe product ${stripeProductId} (${product.name}) to internal ID: ${mappedProductId}`);
+    
+    // Create purchase record with mapped product ID
     const { data: purchase, error } = await supabase
       .from('purchases')
       .insert({
         user_id: userId,
         customer_email: customerEmail,
-        product_id: productId,
+        product_id: mappedProductId, // Use mapped ID for access control
         amount: paymentIntent.amount ? paymentIntent.amount / 100 : 0,
         currency: paymentIntent.currency,
         status: 'active',
@@ -231,11 +273,7 @@ async function handlePaymentIntentSucceeded(paymentIntent: any) {
       return;
     }
     
-    console.log(`Created purchase record for ${customerEmail}, product ${productId} from payment intent`);
-    
-    // Get product details from Stripe
-    const stripe = await getStripeInstance();
-    const product = await stripe.products.retrieve(productId);
+    console.log(`✅ CRITICAL: Purchase unlocked for ${customerEmail}, product ${mappedProductId} (was ${stripeProductId}) from payment intent`);
     
     // Send confirmation email
     await sendOrderConfirmationEmail({

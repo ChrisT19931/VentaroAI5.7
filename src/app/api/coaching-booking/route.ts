@@ -4,8 +4,12 @@ import { db } from '@/lib/database';
 import sgMail from '@sendgrid/mail';
 
 // Initialize SendGrid
+const isEmailConfigured = !!process.env.SENDGRID_API_KEY && !!process.env.EMAIL_FROM;
 if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  console.log('✅ SendGrid configured for coaching booking emails');
+} else {
+  console.warn('⚠️ SendGrid API key not configured - coaching booking emails will be logged only');
 }
 
 interface BookingData {
@@ -200,16 +204,38 @@ const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: str
     `
   };
 
+  if (!isEmailConfigured) {
+    console.log('📧 Email not configured - logging booking details instead:');
+    console.log('Customer email would be sent to:', bookingData.email);
+    console.log('Admin email would be sent to:', process.env.EMAIL_FROM || 'chris.t@ventarosales.com');
+    console.log('Booking details:', {
+      name: bookingData.name,
+      email: bookingData.email,
+      phone: bookingData.phone,
+      preferred_date_time: bookingData.preferred_date_time,
+      business_stage: bookingData.business_stage,
+      main_challenge: bookingData.main_challenge,
+      goals: bookingData.goals
+    });
+    return; // Don't try to send emails if not configured
+  }
+
   try {
     await Promise.all([
       sgMail.send(customerEmail),
       sgMail.send(adminEmail)
     ]);
-    console.log('✅ Booking confirmation emails sent successfully');
+    console.log('✅ Booking confirmation emails sent successfully to:', bookingData.email);
   } catch (error) {
     console.error('❌ Failed to send booking emails:', error);
+    console.error('Email error details:', {
+      error: error?.message,
+      code: error?.code,
+      response: error?.response?.body
+    });
+    throw error; // Re-throw to handle in calling function
   }
-};
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -272,11 +298,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send confirmation emails
-    await sendBookingConfirmationEmail({
-      ...bookingData,
-      id: booking.id
-    });
+    // Send confirmation emails (don't let email failure block booking)
+    try {
+      await sendBookingConfirmationEmail({
+        ...bookingData,
+        id: booking.id
+      });
+      console.log(`✅ Confirmation emails sent for booking ${booking.id}`);
+    } catch (emailError) {
+      console.error(`❌ Failed to send confirmation emails for booking ${booking.id}:`, emailError);
+      // Don't fail the booking if email fails - booking is still valid
+    }
 
     // Log successful booking
     console.log(`📅 New coaching booking created: ${booking.id} for ${bookingData.email}`);
