@@ -90,7 +90,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action } = body;
 
-    // Only allow admin users to perform POST actions
+    // Allow auto-unlock from success page without admin auth
+    if (action === 'auto_unlock_from_success') {
+      return await handleAutoUnlockFromSuccess(body);
+    }
+
+    // Only allow admin users to perform other POST actions
     if (!session?.user?.email || session.user.email !== 'chris.t@ventarosales.com') {
       return NextResponse.json({
         error: 'Unauthorized - Admin access required'
@@ -109,7 +114,7 @@ export async function POST(request: NextRequest) {
       default:
         return NextResponse.json({
           error: 'Invalid action',
-          availableActions: ['manual_unlock', 'fix_user_purchases', 'simulate_purchase', 'verify_access']
+          availableActions: ['manual_unlock', 'fix_user_purchases', 'simulate_purchase', 'verify_access', 'auto_unlock_from_success']
         }, { status: 400 });
     }
 
@@ -117,6 +122,151 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       error: 'POST action failed',
       message: error.message
+    }, { status: 500 });
+  }
+}
+
+async function handleAutoUnlockFromSuccess(body: any) {
+  const { session_id, force_unlock } = body;
+
+  if (!session_id) {
+    return NextResponse.json({
+      error: 'Session ID is required for auto unlock'
+    }, { status: 400 });
+  }
+
+  try {
+    // Get Stripe session details
+    const stripe = await import('stripe').then(m => new m.default(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: '2023-10-16',
+    }));
+
+    const session = await stripe.checkout.sessions.retrieve(session_id, {
+      expand: ['line_items', 'line_items.data.price.product']
+    });
+
+    if (!session.customer_details?.email) {
+      return NextResponse.json({
+        error: 'No customer email found in session'
+      }, { status: 400 });
+    }
+
+    const customerEmail = session.customer_details.email;
+    const userId = session.client_reference_id;
+    const lineItems = session.line_items?.data || [];
+
+    let unlockedProducts: any[] = [];
+    let errors: any[] = [];
+
+    // Process each purchased item
+    for (const item of lineItems) {
+      try {
+        const price = item.price;
+        const product = price?.product;
+        
+        if (!price || !product || typeof product === 'string') {
+          continue;
+        }
+
+        // Map Stripe product to internal product ID
+        const productName = product.name;
+        let mappedProductId = 'unknown';
+        
+        const name = productName.toLowerCase();
+        if (name.includes('prompt') || name.includes('ai prompts') || name.includes('arsenal')) {
+          mappedProductId = 'prompts';
+        } else if (name.includes('e-book') || name.includes('ebook') || name.includes('mastery guide') || name.includes('tools guide')) {
+          mappedProductId = 'ebook';
+        } else if (name.includes('coaching') || name.includes('session') || name.includes('consultation')) {
+          mappedProductId = 'coaching';
+        } else if (name.includes('masterclass') || name.includes('video') || name.includes('web creation')) {
+          mappedProductId = 'video';
+        } else if (name.includes('support') || name.includes('package')) {
+          mappedProductId = 'support';
+        }
+
+        const purchaseData = {
+          user_id: userId || null,
+          customer_email: customerEmail,
+          product_id: mappedProductId,
+          product_name: productName,
+          price_id: price.id,
+          amount: price.unit_amount ? price.unit_amount / 100 : 0,
+          currency: price.currency,
+          status: 'active' as const,
+          stripe_session_id: session_id,
+          stripe_customer_id: session.customer,
+          stripe_product_id: typeof product === 'string' ? product : product.id,
+          created_at: new Date().toISOString()
+        };
+
+        // Try to create purchase record
+        let purchase = null;
+        try {
+          purchase = await bulletproofAuth.createPurchase(purchaseData);
+        } catch (error: any) {
+          console.log('Bulletproof auth failed, trying direct Supabase:', error.message);
+        }
+
+        // Fallback to direct Supabase
+        if (!purchase) {
+          try {
+            const { data, error } = await supabase
+              .from('purchases')
+              .insert([{
+                ...purchaseData,
+                id: `auto_unlock_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+              }])
+              .select()
+              .single();
+
+            if (error) {
+              console.error('Direct Supabase creation failed:', error);
+            } else {
+              purchase = data;
+            }
+          } catch (supabaseError) {
+            console.error('Supabase fallback failed:', supabaseError);
+          }
+        }
+
+        if (purchase) {
+          unlockedProducts.push({
+            product_id: mappedProductId,
+            product_name: productName,
+            purchase_id: purchase.id,
+            amount: purchaseData.amount
+          });
+        } else {
+          errors.push({
+            product_name: productName,
+            error: 'Failed to create purchase record'
+          });
+        }
+
+      } catch (itemError: any) {
+        errors.push({
+          product_name: item.description || 'Unknown Product',
+          error: itemError.message
+        });
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: `Auto unlock completed for ${customerEmail}`,
+      unlocked_products: unlockedProducts,
+      errors: errors.length > 0 ? errors : null,
+      session_id: session_id,
+      customer_email: customerEmail,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error: any) {
+    return NextResponse.json({
+      error: 'Auto unlock failed',
+      message: error.message,
+      session_id: session_id
     }, { status: 500 });
   }
 }
