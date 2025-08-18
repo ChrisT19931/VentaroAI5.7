@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { db } from '@/lib/database';
-import sgMail from '@sendgrid/mail';
+import { sendEmail } from '@/lib/sendgrid';
 
-// Initialize SendGrid
+// Check if email is configured
 const isEmailConfigured = !!process.env.SENDGRID_API_KEY && !!process.env.EMAIL_FROM;
-if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  console.log('✅ SendGrid configured for coaching booking emails');
-} else {
-  console.warn('⚠️ SendGrid API key not configured - coaching booking emails will be logged only');
-}
+console.log('📧 COACHING BOOKING: Email configuration check:', { 
+  hasApiKey: !!process.env.SENDGRID_API_KEY,
+  hasEmailFrom: !!process.env.EMAIL_FROM,
+  isConfigured: isEmailConfigured
+});
 
 interface BookingData {
   name: string;
@@ -71,10 +70,7 @@ const validateBookingData = (data: any): { isValid: boolean; errors: string[] } 
 };
 
 const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: string }) => {
-  if (!process.env.SENDGRID_API_KEY || !process.env.EMAIL_FROM) {
-    console.warn('SendGrid not configured, skipping email');
-    return;
-  }
+  console.log('📧 COACHING BOOKING: Sending confirmation emails...');
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString('en-AU', {
@@ -96,26 +92,100 @@ const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: str
     'scaling-business': 'Scaling Business'
   };
 
-  // Email to customer
-  const customerEmail = {
+  // Send email to admin (SAME AS CONTACT FORM)
+  const adminEmailResult = await sendEmail({
+    to: 'chris.t@ventarosales.com',
+    subject: `🔔 New Coaching Booking: ${bookingData.name}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #2d3748;">🎯 New AI Business Coaching Session Booking</h2>
+        
+        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin: 20px 0;">
+          <h3 style="color: #4c51bf;">📋 Contact Information</h3>
+          <p><strong>Name:</strong> ${bookingData.name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${bookingData.email}">${bookingData.email}</a></p>
+          ${bookingData.phone ? `<p><strong>Phone:</strong> <a href="tel:${bookingData.phone}">${bookingData.phone}</a></p>` : ''}
+          <p><strong>Business Stage:</strong> ${businessStageLabels[bookingData.business_stage] || bookingData.business_stage}</p>
+          <p><strong>Preferred Date:</strong> ${formatDate(bookingData.preferred_date_time)}</p>
+          <p><strong>Booking ID:</strong> ${bookingData.id}</p>
+        </div>
+
+        <div style="background: #edf2f7; border-radius: 8px; padding: 20px; margin: 20px 0;">
+          <h3 style="color: #e53e3e;">🎯 Main Challenge</h3>
+          <p>${bookingData.main_challenge}</p>
+        </div>
+
+        <div style="background: #e6fffa; border-radius: 8px; padding: 20px; margin: 20px 0;">
+          <h3 style="color: #38a169;">🚀 Goals</h3>
+          <p>${bookingData.goals}</p>
+        </div>
+
+        ${bookingData.additional_notes ? `
+          <div style="background: #fef5e7; border-radius: 8px; padding: 20px; margin: 20px 0;">
+            <h3 style="color: #d69e2e;">📝 Additional Notes</h3>
+            <p>${bookingData.additional_notes}</p>
+          </div>
+        ` : ''}
+
+        <div style="margin-top: 30px; padding: 15px; background: #4c51bf; color: white; border-radius: 8px; text-align: center;">
+          <p style="margin: 0; color: white; font-size: 16px;"><strong>🎯 ACTION REQUIRED</strong></p>
+          <p style="margin: 5px 0 0 0; color: white; font-size: 14px;">
+            <a href="mailto:${bookingData.email}?subject=Re: Your AI Business Coaching Session - Let's Schedule!" 
+               style="color: white; text-decoration: underline;">📧 Reply to Customer</a>
+          </p>
+        </div>
+      </div>
+    `,
+    text: `New AI Business Coaching Session Booking
+
+Contact Information:
+- Name: ${bookingData.name}
+- Email: ${bookingData.email}
+${bookingData.phone ? `- Phone: ${bookingData.phone}` : ''}
+- Business Stage: ${businessStageLabels[bookingData.business_stage] || bookingData.business_stage}
+- Preferred Date: ${formatDate(bookingData.preferred_date_time)}
+- Booking ID: ${bookingData.id}
+
+Main Challenge:
+${bookingData.main_challenge}
+
+Goals:
+${bookingData.goals}
+
+${bookingData.additional_notes ? `Additional Notes:\n${bookingData.additional_notes}` : ''}
+
+Reply to: ${bookingData.email}`
+  });
+
+  // Send auto-reply to customer (SAME AS CONTACT FORM)
+  const customerEmailResult = await sendEmail({
     to: bookingData.email,
-    from: process.env.EMAIL_FROM,
-    subject: '🎯 Your AI Business Coaching Session is Booked!',
+    subject: '🎯 Your AI Business Coaching Session Request Received!',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px;">
         <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
           <div style="text-align: center; margin-bottom: 30px;">
             <h1 style="color: #4c51bf; margin: 0; font-size: 28px;">🚀 Ventaro AI</h1>
-            <h2 style="color: #2d3748; margin: 10px 0; font-size: 24px;">Coaching Session Confirmed!</h2>
+            <h2 style="color: #2d3748; margin: 10px 0; font-size: 24px;">Coaching Session Request Received!</h2>
           </div>
 
           <div style="background: #f7fafc; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
-            <h3 style="color: #2d3748; margin-top: 0;">📅 Session Details</h3>
+            <h3 style="color: #2d3748; margin-top: 0;">📅 Your Request Details</h3>
             <p style="margin: 8px 0;"><strong>Name:</strong> ${bookingData.name}</p>
             <p style="margin: 8px 0;"><strong>Email:</strong> ${bookingData.email}</p>
-            ${bookingData.phone ? `<p style="margin: 8px 0;"><strong>Phone:</strong> ${bookingData.phone}</p>` : ''}
             <p style="margin: 8px 0;"><strong>Preferred Date & Time:</strong> ${formatDate(bookingData.preferred_date_time)}</p>
             <p style="margin: 8px 0;"><strong>Business Stage:</strong> ${businessStageLabels[bookingData.business_stage] || bookingData.business_stage}</p>
+            <p style="margin: 8px 0;"><strong>Reference ID:</strong> ${bookingData.id}</p>
+          </div>
+
+          <div style="background: #e6fffa; border-left: 4px solid #38b2ac; padding: 20px; margin-bottom: 25px;">
+            <h3 style="color: #2d3748; margin-top: 0;">✅ What Happens Next?</h3>
+            <ul style="color: #2d3748; line-height: 1.6;">
+              <li><strong>Within 2 hours:</strong> We'll review your request and confirm availability</li>
+              <li><strong>Within 24 hours:</strong> You'll receive a calendar invite with the meeting link</li>
+              <li><strong>Before the session:</strong> We'll send a prep questionnaire to maximize our time</li>
+              <li><strong>During the session:</strong> 60 minutes of focused AI business strategy</li>
+            </ul>
           </div>
 
           <div style="background: #edf2f7; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
@@ -130,116 +200,59 @@ const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: str
             ` : ''}
           </div>
 
-          <div style="background: #e6fffa; border-left: 4px solid #38b2ac; padding: 20px; margin-bottom: 25px;">
-            <h3 style="color: #2d3748; margin-top: 0;">✅ What Happens Next?</h3>
-            <ul style="color: #2d3748; line-height: 1.6;">
-              <li>We'll review your submission and confirm your session within 24 hours</li>
-              <li>You'll receive a calendar invite with the meeting link</li>
-              <li>We'll send you a pre-session questionnaire to maximize our time together</li>
-              <li>Come prepared with specific questions about your AI business goals</li>
-            </ul>
-          </div>
-
           <div style="text-align: center; margin-top: 30px;">
             <p style="color: #718096; font-size: 14px;">
               Questions? Reply to this email or contact us at 
-              <a href="mailto:${process.env.EMAIL_FROM}" style="color: #4c51bf;">${process.env.EMAIL_FROM}</a>
+              <a href="mailto:chris.t@ventarosales.com" style="color: #4c51bf;">chris.t@ventarosales.com</a>
             </p>
           </div>
 
           <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
             <p style="color: #a0aec0; font-size: 12px;">
-              Booking ID: ${bookingData.id}<br>
-              © 2024 Ventaro AI. All rights reserved.
+              © 2025 Ventaro AI. All rights reserved.<br>
+              We're excited to help accelerate your AI business success!
             </p>
           </div>
         </div>
       </div>
-    `
+    `,
+    text: `AI Business Coaching Session Request Received!
+
+Hi ${bookingData.name},
+
+Thank you for your coaching session request! We've received your booking and our team will review it within 2 hours.
+
+Your Request Details:
+- Name: ${bookingData.name}
+- Email: ${bookingData.email}
+- Preferred Date: ${formatDate(bookingData.preferred_date_time)}
+- Business Stage: ${businessStageLabels[bookingData.business_stage] || bookingData.business_stage}
+- Reference ID: ${bookingData.id}
+
+What Happens Next:
+• Within 2 hours: We'll review and confirm availability
+• Within 24 hours: You'll receive a calendar invite
+• Before session: Prep questionnaire to maximize our time
+• During session: 60 minutes of focused AI business strategy
+
+Your Goals & Challenges:
+Main Challenge: ${bookingData.main_challenge}
+Goals: ${bookingData.goals}
+${bookingData.additional_notes ? `Additional Notes: ${bookingData.additional_notes}` : ''}
+
+Questions? Contact: chris.t@ventarosales.com
+
+Best regards,
+The Ventaro AI Team`
+  });
+
+  console.log(`📧 COACHING BOOKING: Admin email ${adminEmailResult.success ? 'sent' : 'failed'}`);
+  console.log(`📧 COACHING BOOKING: Customer email ${customerEmailResult.success ? 'sent' : 'failed'}`);
+
+  return {
+    adminSent: adminEmailResult.success,
+    customerSent: customerEmailResult.success
   };
-
-  // Email to admin
-  const adminEmail = {
-    to: process.env.ADMIN_EMAIL || process.env.EMAIL_FROM,
-    from: process.env.EMAIL_FROM,
-    subject: `🔔 New Coaching Booking: ${bookingData.name}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #2d3748;">New Coaching Session Booking</h2>
-        
-        <div style="background: #f7fafc; border-radius: 8px; padding: 20px; margin: 20px 0;">
-          <h3>Contact Information</h3>
-          <p><strong>Name:</strong> ${bookingData.name}</p>
-          <p><strong>Email:</strong> <a href="mailto:${bookingData.email}">${bookingData.email}</a></p>
-          ${bookingData.phone ? `<p><strong>Phone:</strong> <a href="tel:${bookingData.phone}">${bookingData.phone}</a></p>` : ''}
-          <p><strong>Business Stage:</strong> ${businessStageLabels[bookingData.business_stage]}</p>
-          <p><strong>Preferred Date:</strong> ${formatDate(bookingData.preferred_date_time)}</p>
-        </div>
-
-        <div style="background: #edf2f7; border-radius: 8px; padding: 20px; margin: 20px 0;">
-          <h3>Main Challenge</h3>
-          <p>${bookingData.main_challenge}</p>
-        </div>
-
-        <div style="background: #e6fffa; border-radius: 8px; padding: 20px; margin: 20px 0;">
-          <h3>Goals</h3>
-          <p>${bookingData.goals}</p>
-        </div>
-
-        ${bookingData.additional_notes ? `
-          <div style="background: #fef5e7; border-radius: 8px; padding: 20px; margin: 20px 0;">
-            <h3>Additional Notes</h3>
-            <p>${bookingData.additional_notes}</p>
-          </div>
-        ` : ''}
-
-        <div style="margin-top: 30px; padding: 15px; background: #4c51bf; color: white; border-radius: 8px; text-align: center;">
-          <p style="margin: 0; color: white;"><strong>Booking ID:</strong> ${bookingData.id}</p>
-          <p style="margin: 5px 0 0 0; color: white; font-size: 14px;">
-            <a href="mailto:${bookingData.email}?subject=Re: Your AI Business Coaching Session" 
-               style="color: white; text-decoration: underline;">Reply to Customer</a>
-          </p>
-        </div>
-      </div>
-    `
-  };
-
-  if (!isEmailConfigured) {
-    console.log('📧 Email not configured - logging booking details instead:');
-    console.log('✅ BOOKING CONFIRMATION EMAIL (SIMULATED)');
-    console.log('==========================================');
-    console.log('📨 Customer email would be sent to:', bookingData.email);
-    console.log('📨 Admin email would be sent to:', process.env.EMAIL_FROM || 'chris.t@ventarosales.com');
-    console.log('📋 Booking Details:');
-    console.log('   - ID:', bookingData.id);
-    console.log('   - Name:', bookingData.name);
-    console.log('   - Email:', bookingData.email);
-    console.log('   - Phone:', bookingData.phone || 'Not provided');
-    console.log('   - Preferred Date/Time:', formatDate(bookingData.preferred_date_time));
-    console.log('   - Business Stage:', businessStageLabels[bookingData.business_stage] || bookingData.business_stage);
-    console.log('   - Main Challenge:', bookingData.main_challenge);
-    console.log('   - Goals:', bookingData.goals);
-    console.log('   - Additional Notes:', bookingData.additional_notes || 'None');
-    console.log('==========================================');
-    console.log('🔧 To enable real emails, configure SENDGRID_API_KEY and EMAIL_FROM in .env.local');
-    return; // Don't try to send emails if not configured
-  }
-
-  try {
-    await Promise.all([
-      sgMail.send(customerEmail),
-      sgMail.send(adminEmail)
-    ]);
-    console.log('✅ Booking confirmation emails sent successfully to:', bookingData.email);
-  } catch (error: any) {
-    console.error('❌ Failed to send booking emails:', error);
-    console.error('Email error details:', {
-      error: error?.message,
-      code: error?.code,
-      response: error?.response?.body
-    });
-    throw error; // Re-throw to handle in calling function
-  }
 }
 
 export async function POST(request: NextRequest) {
@@ -303,32 +316,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send confirmation emails (don't let email failure block booking)
-    try {
-      await sendBookingConfirmationEmail({
-        ...bookingData,
-        id: booking.id
-      });
-      console.log(`✅ Confirmation emails sent for booking ${booking.id}`);
-    } catch (emailError) {
-      console.error(`❌ Failed to send confirmation emails for booking ${booking.id}:`, emailError);
-      // Don't fail the booking if email fails - booking is still valid
-    }
+    // Send confirmation emails (SAME AS CONTACT FORM)
+    const emailResults = await sendBookingConfirmationEmail({
+      ...bookingData,
+      id: booking.id
+    });
 
     // Log successful booking
     console.log(`📅 New coaching booking created: ${booking.id} for ${bookingData.email}`);
 
     return NextResponse.json({
       success: true,
-      message: isEmailConfigured 
-        ? 'Coaching session booked successfully! Check your email for confirmation.'
-        : 'Coaching session booked successfully! Email notifications are currently in development mode - check server logs for booking details.',
+      message: 'Thank you for your coaching session request! We\'ll contact you within 24 hours to confirm your session.',
       booking: {
         id: booking.id,
         status: booking.status,
         created_at: booking.created_at
       },
-      emailStatus: isEmailConfigured ? 'sent' : 'simulated'
+      emailsSent: {
+        admin: emailResults.adminSent,
+        customer: emailResults.customerSent
+      }
     }, { status: 201 });
 
   } catch (error) {

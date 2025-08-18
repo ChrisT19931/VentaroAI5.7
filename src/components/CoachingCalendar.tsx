@@ -117,7 +117,7 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
       const data = await response.json();
       
       if (data.success) {
-        if (data.emailStatus === 'sent') {
+        if (data.emailsSent?.admin && data.emailsSent?.customer) {
           toast.success('🔥 Booking request submitted! Check your email for confirmation.');
         } else {
           toast.success('🔥 Booking request submitted successfully! You will be contacted within 24 hours.');
