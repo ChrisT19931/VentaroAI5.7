@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendEmail } from '@/lib/sendgrid';
+import { sendEmailWithValidation } from '@/lib/sendgrid';
 
 // Rate limiting storage (in production, use Redis or database)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
@@ -99,8 +99,16 @@ export async function POST(request: NextRequest) {
     const hour12 = hour % 12 || 12;
     const formattedTime = `${hour12}:${minutes} ${ampm}`;
 
+    // Validate email configuration
+    if (!process.env.SENDGRID_API_KEY || !process.env.EMAIL_FROM) {
+      return NextResponse.json(
+        { success: false, error: 'Email service not configured. Please set SENDGRID_API_KEY and EMAIL_FROM.' },
+        { status: 500 }
+      );
+    }
+
     // Send admin notification email
-    const adminEmailResult = await sendEmail({
+    const adminEmailResult = await sendEmailWithValidation({
       to: process.env.ADMIN_EMAIL || 'chris.t@ventarosales.com',
       subject: `🚀 New AI Business Consultation Booking - ${userName}`,
       html: `
@@ -190,7 +198,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Send customer confirmation email
-    const customerEmailResult = await sendEmail({
+    const customerEmailResult = await sendEmailWithValidation({
       to: userEmail,
       subject: `✅ Your AI Business Consultation is Confirmed - ${formattedDate}`,
       html: `
@@ -289,17 +297,20 @@ export async function POST(request: NextRequest) {
     console.log('📧 CONSULTATION BOOKING: Admin email result:', adminEmailResult.success ? 'Success' : 'Failed');
     console.log('📧 CONSULTATION BOOKING: Customer email result:', customerEmailResult.success ? 'Success' : 'Failed');
 
+    if (!adminEmailResult.success || !customerEmailResult.success) {
+      return NextResponse.json(
+        { success: false, error: 'Failed to send confirmation emails. Please try again later.' },
+        { status: 502 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Consultation booked successfully',
       bookingId,
       scheduledDate: formattedDate,
       scheduledTime: formattedTime,
-      timezone,
-      emailsSent: {
-        admin: adminEmailResult.success,
-        customer: customerEmailResult.success
-      }
+      timezone
     });
 
   } catch (error) {

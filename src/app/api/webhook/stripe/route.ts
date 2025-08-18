@@ -431,10 +431,19 @@ async function handleCheckoutSessionCompleted(session: any) {
           });
         }
 
-        // Send notification emails
-        const accessLink = mappedProductId === 'video' 
-          ? `${process.env.NEXT_PUBLIC_SITE_URL}/upsell/masterclass-success?session_id=${session.id}`
-          : `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`;
+        // Send notification emails with magic access fallback
+        let accessLink = `${process.env.NEXT_PUBLIC_SITE_URL}/my-account`;
+        try {
+          if (!userId && customerEmail) {
+            const { createMagicToken } = await import('@/lib/magic-link');
+            const token = createMagicToken({ sessionId: session.id, orderId: (session as any).metadata?.order_id, email: customerEmail });
+            accessLink = `${process.env.NEXT_PUBLIC_SITE_URL}/api/magic-access?token=${encodeURIComponent(token)}`;
+          } else if (mappedProductId === 'video') {
+            accessLink = `${process.env.NEXT_PUBLIC_SITE_URL}/upsell/masterclass-success?session_id=${session.id}`;
+          }
+        } catch (e) {
+          // Fallback to my-account
+        }
 
         await sendNotificationEmails(customerEmail, product.name, purchaseData, accessLink);
 
