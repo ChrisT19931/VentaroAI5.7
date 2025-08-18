@@ -16,7 +16,7 @@ export default function TheAIRevolutionIn2025() {
       {/* Brief */}
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-white mb-3">📋 Brief</h2>
-        <p className="text-gray-300">The AI revolution isn't coming—it's here. 2025 represents the tipping point where AI literacy becomes as essential as computer literacy was in the 1990s. This lesson explores the massive economic shift and how to position yourself at the forefront.</p>
+        <p className="text-gray-300">The AI revolution isn't coming. It's here. 2025 represents the tipping point where AI literacy becomes as essential as computer literacy was in the 1990s. This lesson explores the massive economic shift and how to position yourself at the forefront.</p>
       </div>
 
       {/* Key Points to Apply in 2025 */}

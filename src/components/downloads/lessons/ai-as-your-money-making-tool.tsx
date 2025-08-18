@@ -30,7 +30,7 @@ export default function AIAsYourMoneyMakingTool() {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold text-white mb-4">📋 Executive Summary</h2>
         <div className="bg-gray-800/50 rounded-lg p-6">
-          <p className="text-gray-300 mb-4">AI isn't just a productivity tool—it's a revenue multiplier that's creating millionaires in 2025. This lesson reveals the complete blueprint for transforming AI capabilities into consistent, scalable income streams.</p>
+          <p className="text-gray-300 mb-4">AI isn't just a productivity tool. It's a revenue multiplier that's creating millionaires in 2025. This lesson reveals the complete blueprint for transforming AI capabilities into consistent, scalable income streams.</p>
           
           <p className="text-gray-300 mb-4">We'll cover everything from service-based models earning $5K-50K/month to product creation strategies generating passive income. You'll learn the exact frameworks used by successful AI entrepreneurs who've built 6-figure businesses in less than 12 months.</p>
           
@@ -46,7 +46,7 @@ export default function AIAsYourMoneyMakingTool() {
         <div className="space-y-6">
           <div className="bg-gray-800/50 rounded-lg p-6">
             <h3 className="text-xl font-semibold text-white mb-3">1. Value Creation Over Tool Usage</h3>
-            <p className="text-gray-300 mb-3">The biggest mistake beginners make is focusing on the AI tools instead of the value they create. Your clients don't care if you use ChatGPT, Claude, or carrier pigeons—they care about results.</p>
+                         <p className="text-gray-300 mb-3">The biggest mistake beginners make is focusing on the AI tools instead of the value they create. Your clients don't care if you use ChatGPT, Claude, or carrier pigeons. They care about results.</p>
             
             <div className="bg-red-900/20 border border-red-500/30 rounded p-4 mb-3">
               <h4 className="text-red-300 font-semibold mb-2">❌ Wrong Approach:</h4>
@@ -61,7 +61,7 @@ export default function AIAsYourMoneyMakingTool() {
 
           <div className="bg-gray-800/50 rounded-lg p-6">
             <h3 className="text-xl font-semibold text-white mb-3">2. Speed as a Competitive Advantage</h3>
-            <p className="text-gray-300 mb-3">AI's superpower isn't just quality—it's speed. While competitors take weeks, you deliver in days. This speed advantage allows you to:</p>
+                         <p className="text-gray-300 mb-3">AI's superpower isn't just quality. It's speed. While competitors take weeks, you deliver in days. This speed advantage allows you to:</p>
             <ul className="list-disc ml-6 text-gray-200 space-y-2">
               <li>Charge premium prices for fast delivery</li>
               <li>Take on more clients without burning out</li>

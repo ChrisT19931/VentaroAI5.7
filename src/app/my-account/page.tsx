@@ -27,7 +27,7 @@ const AVAILABLE_PRODUCTS: Product[] = [
   {
     id: 'ai-business-video-guide-2025',
     name: '🎯 AI Web Creation Masterclass',
-    description: '2 Hours from Zero to Live — Watch me create a complete platform from scratch. No Experience Needed — Own the code forever, no monthly fees!',
+    description: '2 Hours from Zero to Live • Watch me create a complete platform from scratch. No Experience Needed • Own the code forever, no monthly fees!',
     image_url: '/images/products/ai-business-video-guide.svg',
     view_url: '/content/ai-web-creation-masterclass',
     price: 50,
@@ -230,7 +230,7 @@ export default function MyAccountPage() {
                           <div className="text-center space-y-1 text-sm">
                             <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
             
-                            <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own forever</div>
+                            <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> • own forever</div>
                           </div>
                         </div>
                       )}
@@ -257,7 +257,7 @@ export default function MyAccountPage() {
                                  image_url: product.image_url,
                                  productType: product.productType
                                }}
-                               buttonText={isFeatured ? "🚀 Start Building Now — Get Instant Access for $50" : undefined}
+                               buttonText={isFeatured ? "🚀 Start Building Now • Get Instant Access for $50" : undefined}
                                className={`transition-colors font-semibold ${
                                  isFeatured 
                                    ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-8 py-4 rounded-xl text-lg shadow-lg'

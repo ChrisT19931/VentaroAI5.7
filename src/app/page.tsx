@@ -132,11 +132,11 @@ export default function Home() {
                   </div>
                   <h3 className="text-4xl font-black text-white mb-6">🎯 AI Website Creation Masterclass</h3>
                   <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                    <strong className="text-white">2 Hours from Zero to Live</strong> — Watch me create a complete platform from scratch, in real time.<br/>
-                    <strong className="text-white">No Experience Needed</strong> — You just follow along.<br/>
-                    <strong className="text-white">Keep Your Code Forever</strong> — Build it yourself, own it completely, change anything you want.<br/>
-                    <strong className="text-white">No SaaS Lock-In</strong> — Unlike Shopify or Wix, you build and own your platform.<br/>
-                    <strong className="text-white">AI-Powered Changes</strong> — Tell AI agents what to modify and watch your platform transform instantly.
+                                    <strong className="text-white">2 Hours from Zero to Live</strong> • Watch me create a complete platform from scratch, in real time.<br/>
+                <strong className="text-white">No Experience Needed</strong> • You just follow along.<br/>
+                <strong className="text-white">Keep Your Code Forever</strong> • Build it yourself, own it completely, change anything you want.<br/>
+                <strong className="text-white">No SaaS Lock-In</strong> • Unlike Shopify or Wix, you build and own your platform.<br/>
+                <strong className="text-white">AI-Powered Changes</strong> • Tell AI agents what to modify and watch your platform transform instantly.
                   </p>
                   <div className="flex items-center justify-center mb-4">
                     <span className="text-6xl font-black text-white">A$50</span>
@@ -199,12 +199,12 @@ export default function Home() {
                     <div className="space-y-2 text-center">
                       <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
       
-                      <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own the skills + product for life</div>
+                      <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> • own the skills + product for life</div>
                     </div>
                   </div>
                   <UnifiedCheckoutButton 
                     product={masterclassProduct}
-                    buttonText="🚀 Start Building Now — Get Instant Access for $50"
+                    buttonText="🚀 Start Building Now • Get Instant Access for $50"
                     className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
                     variant="direct"
                   />

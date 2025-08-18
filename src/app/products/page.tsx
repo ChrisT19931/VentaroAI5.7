@@ -17,7 +17,7 @@ function getProducts() {
     {
       id: 'ai-business-video-guide-2025',
       name: '🎯 AI Web Creation Masterclass',
-      description: '2 Hours from Zero to Live — Watch me create a complete platform from scratch, in real time. No Experience Needed — You just follow along. Keep Your Code Forever — Build it yourself, own it completely, change anything you want. No SaaS Lock-In — Unlike Shopify or Wix, you build and own your platform. AI-Powered Changes — Tell AI agents what to modify and watch your platform transform instantly.',
+      description: '2 Hours from Zero to Live • Watch me create a complete platform from scratch, in real time. No Experience Needed • You just follow along. Keep Your Code Forever • Build it yourself, own it completely, change anything you want. No SaaS Lock-In • Unlike Shopify or Wix, you build and own your platform. AI-Powered Changes • Tell AI agents what to modify and watch your platform transform instantly.',
       price: 50.00,
       image_url: '/images/products/ai-business-video-guide.svg',
       category: 'video',
@@ -217,7 +217,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                       <h4 className="text-xl font-bold text-white mb-4 text-center">The $50 vs $5K Gap</h4>
                       <div className="space-y-2 text-center">
                         <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
-                        <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> — own the skills + product for life</div>
+                        <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> • own the skills + product for life</div>
                       </div>
                     </div>
 
@@ -228,7 +228,7 @@ const ProductsPage = React.memo(function ProductsPage() {
                     
                     <UnifiedCheckoutButton 
                       product={product}
-                      buttonText="🚀 Start Building Now — Get Instant Access for $50"
+                      buttonText="🚀 Start Building Now • Get Instant Access for $50"
                       className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
                       variant="direct"
                     />
