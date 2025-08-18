@@ -23,6 +23,10 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
   const [submitting, setSubmitting] = useState(false);
   const [notes, setNotes] = useState('');
   const [userName, setUserName] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+  const [businessStage, setBusinessStage] = useState('');
+  const [mainChallenge, setMainChallenge] = useState('');
+  const [goals, setGoals] = useState('');
   const [timezone, setTimezone] = useState('');
 
   // Get user's timezone
@@ -73,35 +77,61 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
       return;
     }
 
+    if (!businessStage) {
+      toast.error('Please select your business stage');
+      return;
+    }
+
+    if (!mainChallenge.trim()) {
+      toast.error('Please describe your main challenge');
+      return;
+    }
+
+    if (!goals.trim()) {
+      toast.error('Please describe your goals');
+      return;
+    }
+
     setSubmitting(true);
     try {
+      // Create the preferred_date_time in the format the API expects
+      const preferredDateTime = `${selectedDate}T${selectedTime}:00`;
+      
       const response = await fetch('/api/coaching-booking', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: user.id,
-          userEmail: user.email,
-          userName: userName.trim(),
-          selectedDate,
-          selectedTime,
-          timezone,
-          sessionType: 'AI Business Strategy Session',
-          notes: notes.trim()
+          name: userName.trim(),
+          email: user.email,
+          phone: userPhone.trim() || undefined,
+          business_stage: businessStage,
+          main_challenge: mainChallenge.trim(),
+          goals: goals.trim(),
+          preferred_date_time: preferredDateTime,
+          additional_notes: notes.trim() || undefined
         })
       });
 
       const data = await response.json();
       
       if (data.success) {
-        toast.success('🔥 Booking request submitted! Check your email for confirmation.');
+        if (data.emailStatus === 'sent') {
+          toast.success('🔥 Booking request submitted! Check your email for confirmation.');
+        } else {
+          toast.success('🔥 Booking request submitted successfully! You will be contacted within 24 hours.');
+        }
         
         // Reset form
         setSelectedDate('');
         setSelectedTime('');
         setNotes('');
         setUserName('');
+        setUserPhone('');
+        setBusinessStage('');
+        setMainChallenge('');
+        setGoals('');
         
         // Call callback if provided
         if (onBookingComplete) {
@@ -163,6 +193,67 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
           onChange={(e) => setUserName(e.target.value)}
           placeholder="Enter your full name"
           className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Phone Number (Optional) */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Phone Number (Optional)
+        </label>
+        <input
+          type="tel"
+          value={userPhone}
+          onChange={(e) => setUserPhone(e.target.value)}
+          placeholder="Enter your phone number"
+          className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Business Stage */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Business Stage *
+        </label>
+        <select
+          value={businessStage}
+          onChange={(e) => setBusinessStage(e.target.value)}
+          className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        >
+          <option value="">Select your business stage...</option>
+          <option value="idea-stage">Idea Stage</option>
+          <option value="startup">Startup</option>
+          <option value="growing-business">Growing Business</option>
+          <option value="established-business">Established Business</option>
+          <option value="scaling-business">Scaling Business</option>
+        </select>
+      </div>
+
+      {/* Main Challenge */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Main Challenge *
+        </label>
+        <textarea
+          value={mainChallenge}
+          onChange={(e) => setMainChallenge(e.target.value)}
+          placeholder="Describe your main business challenge that you'd like help with..."
+          rows={3}
+          className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+        />
+      </div>
+
+      {/* Goals */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Goals *
+        </label>
+        <textarea
+          value={goals}
+          onChange={(e) => setGoals(e.target.value)}
+          placeholder="What specific outcomes are you looking to achieve from this session?"
+          rows={3}
+          className="w-full px-4 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
         />
       </div>
 
@@ -253,7 +344,7 @@ export default function CoachingCalendar({ onBookingComplete }: CoachingCalendar
       {/* Submit Button */}
       <button
         onClick={handleBooking}
-        disabled={!selectedDate || !selectedTime || !userName.trim() || submitting}
+        disabled={!selectedDate || !selectedTime || !userName.trim() || !businessStage || !mainChallenge.trim() || !goals.trim() || submitting}
         className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
       >
         {submitting ? (

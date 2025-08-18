@@ -194,7 +194,7 @@ const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: str
         ` : ''}
 
         <div style="margin-top: 30px; padding: 15px; background: #4c51bf; color: white; border-radius: 8px; text-align: center;">
-          <p style="margin: 0; color: white;">Booking ID: ${bookingData.id}</p>
+          <p style="margin: 0; color: white;"><strong>Booking ID:</strong> ${bookingData.id}</p>
           <p style="margin: 5px 0 0 0; color: white; font-size: 14px;">
             <a href="mailto:${bookingData.email}?subject=Re: Your AI Business Coaching Session" 
                style="color: white; text-decoration: underline;">Reply to Customer</a>
@@ -206,17 +206,22 @@ const sendBookingConfirmationEmail = async (bookingData: BookingData & { id: str
 
   if (!isEmailConfigured) {
     console.log('📧 Email not configured - logging booking details instead:');
-    console.log('Customer email would be sent to:', bookingData.email);
-    console.log('Admin email would be sent to:', process.env.EMAIL_FROM || 'chris.t@ventarosales.com');
-    console.log('Booking details:', {
-      name: bookingData.name,
-      email: bookingData.email,
-      phone: bookingData.phone,
-      preferred_date_time: bookingData.preferred_date_time,
-      business_stage: bookingData.business_stage,
-      main_challenge: bookingData.main_challenge,
-      goals: bookingData.goals
-    });
+    console.log('✅ BOOKING CONFIRMATION EMAIL (SIMULATED)');
+    console.log('==========================================');
+    console.log('📨 Customer email would be sent to:', bookingData.email);
+    console.log('📨 Admin email would be sent to:', process.env.EMAIL_FROM || 'chris.t@ventarosales.com');
+    console.log('📋 Booking Details:');
+    console.log('   - ID:', bookingData.id);
+    console.log('   - Name:', bookingData.name);
+    console.log('   - Email:', bookingData.email);
+    console.log('   - Phone:', bookingData.phone || 'Not provided');
+    console.log('   - Preferred Date/Time:', formatDate(bookingData.preferred_date_time));
+    console.log('   - Business Stage:', businessStageLabels[bookingData.business_stage] || bookingData.business_stage);
+    console.log('   - Main Challenge:', bookingData.main_challenge);
+    console.log('   - Goals:', bookingData.goals);
+    console.log('   - Additional Notes:', bookingData.additional_notes || 'None');
+    console.log('==========================================');
+    console.log('🔧 To enable real emails, configure SENDGRID_API_KEY and EMAIL_FROM in .env.local');
     return; // Don't try to send emails if not configured
   }
 
@@ -315,12 +320,15 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Coaching session booked successfully! Check your email for confirmation.',
+      message: isEmailConfigured 
+        ? 'Coaching session booked successfully! Check your email for confirmation.'
+        : 'Coaching session booked successfully! Email notifications are currently in development mode - check server logs for booking details.',
       booking: {
         id: booking.id,
         status: booking.status,
         created_at: booking.created_at
-      }
+      },
+      emailStatus: isEmailConfigured ? 'sent' : 'simulated'
     }, { status: 201 });
 
   } catch (error) {
