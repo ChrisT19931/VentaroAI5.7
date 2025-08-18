@@ -64,19 +64,19 @@ export default function Claude35SonnetForBusiness() {
                 <h3 className="text-blue-300 font-semibold mb-2">📊 Performance Comparison</h3>
                 <div className="space-y-2">
                   <div className="bg-black/30 rounded p-2">
-                    <p className="text-blue-200 text-sm"><strong>Complex Reasoning:</strong> Claude > GPT-4 > GPT-3.5</p>
+                    <p className="text-blue-200 text-sm"><strong>Complex Reasoning:</strong> Claude &gt; GPT-4 &gt; GPT-3.5</p>
                   </div>
                   <div className="bg-black/30 rounded p-2">
-                    <p className="text-blue-200 text-sm"><strong>Creative Writing:</strong> Claude ≈ GPT-4 > GPT-3.5</p>
+                    <p className="text-blue-200 text-sm"><strong>Creative Writing:</strong> Claude ≈ GPT-4 &gt; GPT-3.5</p>
                   </div>
                   <div className="bg-black/30 rounded p-2">
-                    <p className="text-blue-200 text-sm"><strong>Code Generation:</strong> GPT-4 > Claude > GPT-3.5</p>
+                    <p className="text-blue-200 text-sm"><strong>Code Generation:</strong> GPT-4 &gt; Claude &gt; GPT-3.5</p>
                   </div>
                   <div className="bg-black/30 rounded p-2">
-                    <p className="text-blue-200 text-sm"><strong>Speed:</strong> GPT-3.5 > Claude > GPT-4</p>
+                    <p className="text-blue-200 text-sm"><strong>Speed:</strong> GPT-3.5 &gt; Claude &gt; GPT-4</p>
                   </div>
                   <div className="bg-black/30 rounded p-2">
-                    <p className="text-blue-200 text-sm"><strong>Cost Efficiency:</strong> GPT-3.5 > Claude > GPT-4</p>
+                    <p className="text-blue-200 text-sm"><strong>Cost Efficiency:</strong> GPT-3.5 &gt; Claude &gt; GPT-4</p>
                   </div>
                 </div>
               </div>

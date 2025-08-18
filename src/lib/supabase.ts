@@ -146,8 +146,10 @@ export const getSupabaseClient = () => {
   const hasPlaceholderValues = !supabaseUrl || !supabaseAnonKey || 
     supabaseUrl.includes('your-project-id') || 
     supabaseUrl.includes('placeholder') || 
+    supabaseUrl.includes('your_supabase_project_url') ||
     supabaseAnonKey.includes('your-supabase') || 
-    supabaseAnonKey.includes('placeholder');
+    supabaseAnonKey.includes('placeholder') ||
+    supabaseAnonKey.includes('your_supabase_anon_key');
 
   if (hasPlaceholderValues) {
     console.warn('⚠️  Supabase not configured - using mock client for development');
@@ -186,15 +188,15 @@ export const getSupabaseClient = () => {
     }
   }
   
-  // Server-side: only create client if env vars are available
-  if (supabaseUrl && supabaseAnonKey) {
+  // Server-side: only create client if env vars are available and not placeholders
+  if (supabaseUrl && supabaseAnonKey && !hasPlaceholderValues) {
     _supabaseClient = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, supabaseConfig);
     return _supabaseClient;
   }
   
-  // During build time, return a mock client to prevent build failures
-  if (process.env.VERCEL_BUILD === 'true' || process.env.NODE_ENV === 'production') {
-    console.warn('Supabase client not configured during build - using mock client');
+  // During build time or when placeholders are present, return a mock client to prevent build failures
+  if (process.env.VERCEL_BUILD === 'true' || process.env.NODE_ENV === 'production' || hasPlaceholderValues) {
+    console.warn('Supabase client not configured during build/server - using mock client');
     return createSupabaseClient<Database>('https://placeholder.supabase.co', 'placeholder-key', supabaseConfig);
   }
   

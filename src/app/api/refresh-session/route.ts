@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/auth';
 import { bulletproofAuth } from '@/lib/auth-bulletproof';
+import { Purchase } from '@/lib/auth-bulletproof';
 
 // Product ID mapping for entitlements (same as in auth.ts)
 const PRODUCT_ENTITLEMENT_MAP: Record<string, string[]> = {
@@ -16,7 +17,7 @@ const PRODUCT_ENTITLEMENT_MAP: Record<string, string[]> = {
   'coaching': ['coaching', 'session']
 };
 
-function mapPurchasesToEntitlements(purchases: any[]): string[] {
+function mapPurchasesToEntitlements(purchases: Purchase[]): string[] {
   const entitlements = new Set<string>();
   
   for (const purchase of purchases) {
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
     console.log(`🔄 REFRESH SESSION: Refreshing for user ${userId} (${userEmail})`);
 
     // Get fresh purchases from database
-    let purchases = [];
+    let purchases: Purchase[] = [];
     try {
       purchases = await bulletproofAuth.getUserPurchases(userId);
       console.log(`✅ REFRESH SESSION: Found ${purchases.length} purchases for user`);
