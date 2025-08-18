@@ -421,6 +421,16 @@ async function handleCheckoutSessionCompleted(session: any) {
           processingTime: Date.now() - itemStartTime
         });
 
+        // CRITICAL: Also create purchase record by email for users who might not have userId
+        if (!userId && customerEmail) {
+          logPurchaseEvent('INFO', 'Creating additional purchase record by email for fallback access');
+          await createPurchaseRecord({
+            ...purchaseData,
+            user_id: '', // Empty user_id but keep email
+            customer_email: customerEmail
+          });
+        }
+
         // Send notification emails
         const accessLink = mappedProductId === 'video' 
           ? `${process.env.NEXT_PUBLIC_SITE_URL}/upsell/masterclass-success?session_id=${session.id}`

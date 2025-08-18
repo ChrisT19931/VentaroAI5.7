@@ -262,6 +262,37 @@ class BulletproofAuth {
     }
   }
 
+  // BULLETPROOF PURCHASE RETRIEVAL BY EMAIL (FALLBACK)
+  async getUserPurchasesByEmail(email: string): Promise<Purchase[]> {
+    try {
+      // Try Supabase first
+      if (this.useSupabase) {
+        try {
+          const { data, error } = await this.supabase
+            .from('purchases')
+            .select('*')
+            .eq('customer_email', email);
+
+          if (!error && data) {
+            console.log(`✅ BulletproofAuth: Found ${data.length} purchases by email in Supabase for ${email}`);
+            return data;
+          }
+        } catch (supabaseError) {
+          console.warn(`⚠️ BulletproofAuth: Supabase purchase lookup by email failed, using in-memory`);
+        }
+      }
+
+      // Fallback to in-memory
+      const purchases = inMemoryPurchases.filter(p => p.customer_email.toLowerCase() === email.toLowerCase());
+      console.log(`✅ BulletproofAuth: Found ${purchases.length} purchases by email in-memory for ${email}`);
+      return purchases;
+      
+    } catch (error) {
+      console.error(`❌ BulletproofAuth: Purchase lookup by email failed for ${email}:`, error);
+      return [];
+    }
+  }
+
   // BULLETPROOF PURCHASE CREATION
   async createPurchase(purchaseData: {
     user_id?: string;
@@ -276,9 +307,23 @@ class BulletproofAuth {
     stripe_payment_intent_id?: string;
   }): Promise<Purchase | null> {
     try {
+      // CRITICAL: If no user_id but we have email, try to find the user
+      let finalUserId = purchaseData.user_id || '';
+      
+      if (!finalUserId && purchaseData.customer_email) {
+        console.log(`🔍 BulletproofAuth: No user_id provided, looking up user by email: ${purchaseData.customer_email}`);
+        const user = await this.findUser(purchaseData.customer_email);
+        if (user) {
+          finalUserId = user.id;
+          console.log(`✅ BulletproofAuth: Found user by email: ${user.id} (${user.email})`);
+        } else {
+          console.log(`⚠️ BulletproofAuth: No user found for email: ${purchaseData.customer_email} - creating purchase with email only`);
+        }
+      }
+
       const newPurchase: Purchase = {
         id: `purchase_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        user_id: purchaseData.user_id || '',
+        user_id: finalUserId,
         customer_email: purchaseData.customer_email || '',
         product_id: purchaseData.product_id,
         price_id: purchaseData.price_id || '',

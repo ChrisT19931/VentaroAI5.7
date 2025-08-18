@@ -97,8 +97,29 @@ export default function CheckoutSuccessPage() {
       // Step 4: Sync purchases to ensure they're properly recorded
       await fetch(`/api/purchases/sync?session_id=${sessionId}`);
       
+      // Step 5: CRITICAL - Force refresh user session to get new entitlements
+      try {
+        const refreshResponse = await fetch('/api/refresh-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        if (refreshResponse.ok) {
+          const refreshData = await refreshResponse.json();
+          console.log('✅ Session refreshed after purchase:', refreshData);
+          toast.success('🎉 Access granted! Your session has been updated.');
+        }
+      } catch (refreshError) {
+        console.warn('⚠️ Failed to refresh session, but purchase was processed:', refreshError);
+      }
+      
       // Refresh router to update UI with new purchases
       router.refresh();
+      
+      // Force a hard refresh to ensure all components get the updated session
+      setTimeout(() => {
+        window.location.href = '/my-account';
+      }, 2000);
       
     } catch (error: any) {
       console.error('Error verifying payment:', error);

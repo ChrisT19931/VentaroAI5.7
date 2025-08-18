@@ -149,9 +149,20 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name;
-        session.user.entitlements = token.entitlements || [];
         session.user.roles = token.roles || ['user'];
         session.user.created_at = token.created_at;
+        
+        // CRITICAL: Always refresh entitlements from database to ensure immediate access after purchase
+        try {
+          const purchases = await bulletproofAuth.getUserPurchases(token.id);
+          const freshEntitlements = mapPurchasesToEntitlements(purchases);
+          session.user.entitlements = freshEntitlements;
+          console.log('✅ BULLETPROOF AUTH: Fresh entitlements loaded for:', token.email, freshEntitlements);
+        } catch (error) {
+          console.warn('⚠️ BULLETPROOF AUTH: Failed to refresh entitlements, using cached:', error);
+          session.user.entitlements = token.entitlements || [];
+        }
+        
         console.log('✅ BULLETPROOF AUTH: Session populated for:', token.email);
       }
       return session;
