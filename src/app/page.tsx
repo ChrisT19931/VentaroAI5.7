@@ -32,7 +32,9 @@ export default function Home() {
     id: 'ai-business-video-guide-2025',
     name: 'AI Web Creation Masterclass',
     price: 50,
-    productType: 'digital' as const
+    productType: 'digital' as const,
+    isPreOrder: true,
+    comingSoon: true
   };
 
 
@@ -110,8 +112,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20">
-                🎯 SPECIAL OFFER - ONLY $50 - BUILD PLATFORMS NOT JUST WEBSITES
+              <span className="inline-block px-6 py-2 bg-gradient-to-r from-orange-600/80 to-yellow-600/80 rounded-full text-sm font-bold text-white mb-6 border border-orange-500/50 shadow-lg shadow-orange-500/20">
+                📅 PRE-ORDER NOW - ONLY $50 - COMING SOON!
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
                 Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Entire Platforms</span> Not Just Websites With AI
@@ -142,9 +144,20 @@ export default function Home() {
                     <span className="text-6xl font-black text-white">A$50</span>
                   </div>
                   <div className="mb-8">
-                    <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600 to-orange-600 rounded-full text-sm font-bold text-white border border-red-500/50 shadow-lg shadow-red-500/20">
-                      INDUSTRY SHATTERING VALUE
+                    <span className="inline-block px-6 py-2 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-full text-sm font-bold text-white border border-orange-500/50 shadow-lg shadow-orange-500/20">
+                      PRE-ORDER BENEFITS
                     </span>
+                  </div>
+                  
+                  {/* Pre-Order Benefits */}
+                  <div className="bg-gradient-to-r from-orange-900/30 to-yellow-900/30 rounded-2xl p-6 mb-8 border border-orange-500/30">
+                    <h4 className="text-xl font-bold text-white mb-4 text-center">🎯 Pre-Order Benefits</h4>
+                    <div className="space-y-2 text-center text-orange-200">
+                      <div>✅ <strong>Early Access</strong> - Get the video as soon as it's ready</div>
+                      <div>✅ <strong>Bonus Materials</strong> - Extra prompts and templates</div>
+                      <div>✅ <strong>Priority Support</strong> - First in line for help</div>
+                      <div>✅ <strong>Lock in $50 Price</strong> - Price increases after launch</div>
+                    </div>
                   </div>
                   {/* What You Get for $50 */}
                   <div className="bg-gray-800/40 rounded-2xl p-8 mb-8 border border-purple-500/30">
@@ -204,8 +217,8 @@ export default function Home() {
                   </div>
                   <UnifiedCheckoutButton 
                     product={masterclassProduct}
-                    buttonText="🚀 Start Building Now • Get Instant Access for $50"
-                    className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
+                    buttonText="📅 Pre-Order Now • Coming Soon for A$50"
+                    className="premium-button-glow w-full bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-black py-6 px-12 rounded-2xl hover:from-orange-500 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
                     variant="direct"
                   />
                   

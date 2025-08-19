@@ -11,7 +11,11 @@ export default function SupportPackageForm({ userEmail, userName }: SupportPacka
   const [formData, setFormData] = useState({
     subject: '',
     description: '',
-    priority: 'medium' as 'low' | 'medium' | 'high'
+    priority: 'medium' as 'low' | 'medium' | 'high' | 'urgent',
+    preferredDate: '',
+    preferredTime: '',
+    contactMethod: 'email',
+    phoneNumber: ''
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -31,14 +35,21 @@ export default function SupportPackageForm({ userEmail, userName }: SupportPacka
         body: JSON.stringify({
           ...formData,
           userEmail,
-          userName,
-          contactMethod: 'email'
+          userName
         }),
       });
 
       if (response.ok) {
         setSubmitted(true);
-        setFormData({ subject: '', description: '', priority: 'medium' });
+        setFormData({
+          subject: '',
+          description: '',
+          priority: 'medium' as 'low' | 'medium' | 'high' | 'urgent',
+          preferredDate: '',
+          preferredTime: '',
+          contactMethod: 'email',
+          phoneNumber: ''
+        });
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Failed to submit support request');
@@ -106,7 +117,73 @@ export default function SupportPackageForm({ userEmail, userName }: SupportPacka
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
+            <option value="urgent">Urgent</option>
           </select>
+        </div>
+      </div>
+      
+      {/* Preferred Contact Method */}
+      <div>
+        <label htmlFor="contactMethod" className="block text-sm font-medium text-gray-300 mb-2">
+          Preferred Contact Method
+        </label>
+        <select
+          id="contactMethod"
+          value={formData.contactMethod}
+          onChange={(e) => setFormData({ ...formData, contactMethod: e.target.value })}
+          className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+        >
+          <option value="email">Email</option>
+          <option value="google-meet">Google Meet</option>
+          <option value="phone">Phone Call</option>
+        </select>
+      </div>
+      
+      {/* Phone Number (conditional) */}
+      {(formData.contactMethod === 'phone' || formData.contactMethod === 'google-meet') && (
+        <div>
+          <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-300 mb-2">
+            Phone Number {formData.contactMethod === 'phone' ? '*' : '(optional)'}
+          </label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+            required={formData.contactMethod === 'phone'}
+            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            placeholder="Your phone number"
+          />
+        </div>
+      )}
+      
+      {/* Preferred Date and Time */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="preferredDate" className="block text-sm font-medium text-gray-300 mb-2">
+            Preferred Date
+          </label>
+          <input
+            type="date"
+            id="preferredDate"
+            value={formData.preferredDate}
+            onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+            min={new Date().toISOString().split('T')[0]}
+            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          />
+        </div>
+        
+        <div>
+          <label htmlFor="preferredTime" className="block text-sm font-medium text-gray-300 mb-2">
+            Preferred Time
+          </label>
+          <input
+            type="time"
+            id="preferredTime"
+            value={formData.preferredTime}
+            onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          />
         </div>
       </div>
       
@@ -127,7 +204,7 @@ export default function SupportPackageForm({ userEmail, userName }: SupportPacka
       
       <button
         type="submit"
-        disabled={submitting || !formData.subject.trim() || !formData.description.trim()}
+        disabled={submitting || !formData.subject.trim() || !formData.description.trim() || (formData.contactMethod === 'phone' && !formData.phoneNumber.trim())}
         className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed"
       >
         {submitting ? (
