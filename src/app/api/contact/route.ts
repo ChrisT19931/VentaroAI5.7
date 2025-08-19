@@ -235,16 +235,29 @@ The Ventaro AI Team
 Need immediate assistance? Contact: chris.t@ventarosales.com`
     });
 
-    console.log(`📧 CONTACT FORM: Admin email ${adminEmailResult.success ? 'sent' : 'failed'}`);
-    console.log(`📧 CONTACT FORM: Customer email ${customerEmailResult.success ? 'sent' : 'failed'}`);
+    console.log('Admin email result:', adminEmailResult);
+    const adminEmailSent = adminEmailResult.success;
+
+    console.log('Customer email result:', customerEmailResult);
+    const customerEmailSent = customerEmailResult.success;
+
+    console.log(`📧 CONTACT FORM: Admin email ${adminEmailSent ? 'sent' : 'failed'}`);
+    console.log(`📧 CONTACT FORM: Customer email ${customerEmailSent ? 'sent' : 'failed'}`);
 
     return NextResponse.json({
       success: true,
-      message: 'Thank you for your message! We\'ll get back to you within 24 hours.',
+      message: adminEmailSent && customerEmailSent 
+        ? 'Message sent successfully! We\'ll get back to you within 24 hours.'
+        : adminEmailSent 
+        ? 'Message sent successfully! We\'ll get back to you within 24 hours.'
+        : customerEmailSent
+        ? 'Message sent successfully! We\'ll get back to you within 24 hours.'
+        : 'Message received successfully! Email notifications are currently unavailable, but we\'ll get back to you within 24 hours.',
       remaining: remaining - 1,
-      emailsSent: {
-        admin: adminEmailResult.success,
-        customer: customerEmailResult.success
+      emailStatus: {
+        adminEmailSent,
+        customerEmailSent,
+        emailConfigured: !!(process.env.SENDGRID_API_KEY && process.env.SENDGRID_API_KEY !== 'SG.placeholder_api_key_replace_with_real_key')
       }
     });
 

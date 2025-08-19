@@ -26,7 +26,9 @@ function getProducts() {
       productType: 'digital',
       created_at: new Date().toISOString(),
       highlight: true,
-      badge: 'MOST POPULAR'
+      badge: 'PRE-ORDER',
+      isPreOrder: true,
+      comingSoon: true
     },
     {
       id: 'weekly-support-contract-2025',
@@ -154,8 +156,8 @@ const ProductsPage = React.memo(function ProductsPage() {
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 <div className="absolute top-4 left-4 z-20">
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
-                    MOST POPULAR
+                  <div className="bg-gradient-to-r from-orange-500 to-yellow-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg transition-all duration-300">
+                    PRE-ORDER
                   </div>
                 </div>
                 
@@ -225,14 +227,23 @@ const ProductsPage = React.memo(function ProductsPage() {
                       <div className="text-sm text-gray-300">one-time payment</div>
                     </div>
                     
-                    <UnifiedCheckoutButton 
-                      product={product}
-                      buttonText="🚀 Start Building Now • Get Instant Access for $50"
-                      className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
-                      variant="direct"
-                    />
+                    {product.isPreOrder ? (
+                      <UnifiedCheckoutButton 
+                        product={product}
+                        buttonText="📅 Pre-Order Now • Coming Soon for $50"
+                        className="premium-button-glow w-full bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-black py-6 px-12 rounded-2xl hover:from-orange-500 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
+                        variant="direct"
+                      />
+                    ) : (
+                      <UnifiedCheckoutButton 
+                        product={product}
+                        buttonText="🚀 Start Building Now • Get Instant Access for $50"
+                        className="premium-button-glow w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black py-6 px-12 rounded-2xl hover:from-green-500 hover:to-emerald-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
+                        variant="direct"
+                      />
+                    )}
                     
-                    <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
+                    <p className="text-sm text-gray-400 mt-4">{product.isPreOrder ? '📅 Pre-order now • Video available soon' : '⚡ Secure checkout • Premium support'}</p>
                   </div>
                 </div>
               </div>

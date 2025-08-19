@@ -101,22 +101,28 @@ export default function AIWebCreationMasterclassPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md mx-auto text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">🔒 Purchase Required</h1>
+          <h1 className="text-2xl font-bold text-white mb-4">📅 Coming Soon - Pre-Order Now!</h1>
           <p className="text-gray-300 mb-6">
-            You need to purchase the AI Web Creation Masterclass to access this content.
+            The AI Web Creation Masterclass is coming soon! Pre-order now to secure your spot and get instant access when it's released.
           </p>
+          <div className="bg-orange-500/20 border border-orange-500/50 rounded-lg p-4 mb-6">
+            <p className="text-orange-200 text-sm">
+              🎯 Pre-order benefits: Early access, bonus materials, and priority support!
+            </p>
+          </div>
           <div className="space-y-4">
             <UnifiedCheckoutButton
               product={{
                 id: 'ai-business-video-guide-2025',
                 name: 'AI Web Creation Masterclass',
                 price: 50,
-                productType: 'digital'
+                productType: 'digital',
+                isPreOrder: true
               }}
-              className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-300 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-base"
+              className="w-full block text-center py-3 rounded-xl font-bold transition-all duration-300 bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-500 hover:to-yellow-500 text-white text-base"
               variant="direct"
             >
-              Buy Now – A$50
+              📅 Pre-Order Now – A$50
             </UnifiedCheckoutButton>
             <button
               onClick={() => router.push('/products')}

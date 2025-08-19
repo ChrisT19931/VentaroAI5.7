@@ -12,6 +12,8 @@ type Product = {
   price: number;
   image_url?: string | null;
   productType?: 'digital' | 'physical';
+  isPreOrder?: boolean;
+  comingSoon?: boolean;
 };
 
 interface UnifiedCheckoutButtonProps {

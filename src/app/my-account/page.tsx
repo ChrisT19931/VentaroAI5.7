@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import UnifiedCheckoutButton from '@/components/UnifiedCheckoutButton';
+import SupportPackageForm from '@/components/SupportPackageForm';
 
 // Helper function to check if user owns a product
 function checkOwnership(userProducts: string[], productId: string): boolean {
@@ -21,6 +22,8 @@ interface Product {
   price: number;
   productType: 'digital' | 'physical';
   featured?: boolean;
+  isPreOrder?: boolean;
+  comingSoon?: boolean;
 }
 
 const AVAILABLE_PRODUCTS: Product[] = [
@@ -32,7 +35,9 @@ const AVAILABLE_PRODUCTS: Product[] = [
     view_url: '/content/ai-web-creation-masterclass',
     price: 50,
     productType: 'digital',
-    featured: true
+    featured: true,
+    isPreOrder: true,
+    comingSoon: true
   },
   {
     id: 'weekly-support-contract-2025',
@@ -189,6 +194,14 @@ export default function MyAccountPage() {
           </div>
         </div>
 
+        {/* Support Package Quick Form - Only show if user owns support package */}
+        {(isProductOwned('weekly-support-contract-2025') || user?.email === 'chris.t@ventarosales.com') && (
+          <div className="bg-gradient-to-br from-orange-900/60 to-red-900/60 backdrop-blur-md rounded-2xl p-8 mb-8 border border-orange-500/50 shadow-lg">
+            <h2 className="text-2xl font-bold text-white mb-6">🛠️ Quick Support Request</h2>
+            <SupportPackageForm userEmail={user?.email || ''} userName={(user && 'name' in user ? user.name : user?.email) || ''} />
+          </div>
+        )}
+
         {/* Products Grid */}
         <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl p-8 border border-gray-700 shadow-lg">
           <h2 className="text-2xl font-bold text-white mb-6">My Products</h2>
@@ -211,8 +224,8 @@ export default function MyAccountPage() {
                 <div key={product.id} className={cardClasses}>
                   {isFeatured && (
                     <>
-                      <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        🔥 MOST POPULAR
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        📅 PRE-ORDER
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-xl"></div>
                     </>
@@ -257,7 +270,7 @@ export default function MyAccountPage() {
                                  image_url: product.image_url,
                                  productType: product.productType
                                }}
-                               buttonText={isFeatured ? "🚀 Start Building Now • Get Instant Access for $50" : undefined}
+                               buttonText={isFeatured ? (product.isPreOrder ? "📅 Pre-Order Now • Coming Soon for $50" : "🚀 Start Building Now • Get Instant Access for $50") : undefined}
                                className={`transition-colors font-semibold ${
                                  isFeatured 
                                    ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-8 py-4 rounded-xl text-lg shadow-lg'

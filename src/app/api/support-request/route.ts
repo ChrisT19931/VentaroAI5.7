@@ -171,15 +171,21 @@ export async function POST(request: NextRequest) {
       html: adminEmailContent
     };
 
-    if (process.env.SENDGRID_API_KEY) {
+    let adminEmailSent = false;
+    if (process.env.SENDGRID_API_KEY && process.env.SENDGRID_API_KEY !== 'SG.placeholder_api_key_replace_with_real_key') {
       try {
         await sgMail.send(adminMsg);
         console.log('✅ Admin notification email sent successfully');
+        adminEmailSent = true;
       } catch (error) {
         console.error('❌ Failed to send admin notification email:', error);
+        console.error('Error details:', error);
       }
     } else {
-      console.log('📧 Would send admin email:', adminMsg.subject);
+      console.log('📧 SendGrid not configured - Admin email would be sent:', adminMsg.subject);
+      console.log('📧 Admin email content saved to console for debugging');
+      console.log('📧 To:', adminMsg.to);
+      console.log('📧 Subject:', adminMsg.subject);
     }
 
     // Enhanced client confirmation email
@@ -268,21 +274,38 @@ export async function POST(request: NextRequest) {
       html: clientConfirmationContent
     };
 
-    if (process.env.SENDGRID_API_KEY) {
+    let clientEmailSent = false;
+    if (process.env.SENDGRID_API_KEY && process.env.SENDGRID_API_KEY !== 'SG.placeholder_api_key_replace_with_real_key') {
       try {
         await sgMail.send(clientMsg);
         console.log('✅ Client confirmation email sent successfully');
+        clientEmailSent = true;
       } catch (error) {
         console.error('❌ Failed to send client confirmation email:', error);
+        console.error('Error details:', error);
       }
     } else {
-      console.log('📧 Would send client email:', clientMsg.subject);
+      console.log('📧 SendGrid not configured - Client email would be sent:', clientMsg.subject);
+      console.log('📧 Client email content saved to console for debugging');
+      console.log('📧 To:', clientMsg.to);
+      console.log('📧 Subject:', clientMsg.subject);
     }
 
     return NextResponse.json(
       {
         success: true,
-        message: 'Support request submitted successfully. You will receive a confirmation email shortly.'
+        message: adminEmailSent && clientEmailSent 
+          ? 'Support request submitted successfully. You will receive a confirmation email shortly.'
+          : adminEmailSent 
+          ? 'Support request submitted successfully. Admin has been notified, but confirmation email could not be sent.'
+          : clientEmailSent
+          ? 'Support request submitted successfully. You will receive a confirmation email shortly.'
+          : 'Support request submitted successfully. Email notifications are currently unavailable, but your request has been logged.',
+        emailStatus: {
+          adminEmailSent,
+          clientEmailSent,
+          emailConfigured: !!(process.env.SENDGRID_API_KEY && process.env.SENDGRID_API_KEY !== 'SG.placeholder_api_key_replace_with_real_key')
+        }
       },
       { status: 200 }
     );
