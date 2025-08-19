@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { MessageCircle, Clock, CheckCircle, Lock, Mail, Calendar, Users } from 'lucide-react';
 import Link from 'next/link';
-import ConsultationCalendar from '@/components/ConsultationCalendar';
+import WebDesignInquiryForm from '@/components/WebDesignInquiryForm';
 
 export default function SupportPackageContent() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -100,51 +100,34 @@ export default function SupportPackageContent() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              🎯 Premium Support Package
+              🎯 Premium Web Design Services
             </h1>
             <p className="text-xl text-gray-300">
-              Expert guidance and priority support for your AI projects
+              Get a custom quote for your web design and development project
             </p>
           </div>
 
-          {/* Book Consultation Calendar */}
+          {/* Web Design Inquiry Form */}
           <div className="mb-8">
-            <ConsultationCalendar />
+            <WebDesignInquiryForm />
           </div>
 
-          {/* Contact Information */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 text-center">
-            <MessageCircle className="w-16 h-16 text-blue-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-4">Need Immediate Help?</h2>
-            <p className="text-gray-300 mb-6">
-              Contact our support team directly for urgent matters or specific questions
-            </p>
-            <div className="space-y-4">
-              <a
-                href="mailto:chris.t@ventarosales.com?subject=Support Request - Premium Package"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors inline-block"
-              >
-                📧 Email Support Team
-              </a>
-            </div>
-          </div>
-
-          {/* Support Features */}
+          {/* Web Design Features */}
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
               <Clock className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Priority Response</h3>
-              <p className="text-gray-300">Get responses within 24 hours on business days</p>
+              <h3 className="text-xl font-bold text-white mb-2">Fast Turnaround</h3>
+              <p className="text-gray-300">Get your quote within 24 hours and project delivery in 1-2 weeks</p>
             </div>
             <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
               <Users className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Expert Guidance</h3>
-              <p className="text-gray-300">Direct access to AI implementation specialists</p>
+              <h3 className="text-xl font-bold text-white mb-2">Expert Development</h3>
+              <p className="text-gray-300">Professional web design and development with modern technologies</p>
             </div>
             <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
               <CheckCircle className="w-12 h-12 text-purple-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-2">Custom Solutions</h3>
-              <p className="text-gray-300">Tailored advice for your specific business needs</p>
+              <p className="text-gray-300">Tailored websites and platforms built specifically for your business</p>
             </div>
           </div>
 
@@ -158,4 +141,4 @@ export default function SupportPackageContent() {
       </div>
     </div>
   );
-} 
+}
