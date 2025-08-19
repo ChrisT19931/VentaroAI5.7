@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-dark">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative container mx-auto px-4 py-16 md:py-24">
           <div className="text-center max-w-4xl mx-auto">
             <div className="mb-8">
@@ -52,7 +52,7 @@ export default function AboutPage() {
       </div>
 
       {/* Our Story Section */}
-      <div className="py-16 bg-black">
+      <div className="py-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 glow-text">
@@ -114,7 +114,7 @@ export default function AboutPage() {
       </div>
 
       {/* What We Offer Section */}
-      <div className="py-16 bg-black">
+      <div className="py-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 glow-text">
@@ -187,7 +187,7 @@ export default function AboutPage() {
       </div>
 
       {/* AI Tools Section */}
-      <div className="py-16 bg-black">
+      <div className="py-16">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 glow-text">
@@ -247,7 +247,7 @@ export default function AboutPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="py-16 bg-black">
+      <div className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="glass-card p-8 md:p-12 text-center">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-500 mb-6">

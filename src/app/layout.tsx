@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Providers from '@/components/Providers'
+import StarBackground from '@/components/3d/StarBackground'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -66,9 +67,10 @@ export default function RootLayout({
         <meta name="google-site-verification" content="zXt_s8PvYsJRPZuS-Lxvv9r1sLkVqbaYfbPl2l64-B4" />
       </head>
       <body className={`${inter.variable} font-sans`}>
+        <StarBackground enabled={true} simple={false} />
         <Providers>
           <Navbar />
-          <main>
+          <main className="relative z-10">
             {children}
           </main>
           <Footer />

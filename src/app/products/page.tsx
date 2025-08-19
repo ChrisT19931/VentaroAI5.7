@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { supabase } from '@/lib/supabase';
 import UnifiedCheckoutButton from '@/components/UnifiedCheckoutButton';
-import StarBackground from '@/components/3d/StarBackground';
+
 import dynamic from 'next/dynamic';
 
 // Performance optimization: Use React.memo for components that don't need frequent re-renders
@@ -113,9 +113,8 @@ const ProductsPage = React.memo(function ProductsPage() {
   ), []);
   
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       {BackgroundEffects}
-      <StarBackground />
       
       <div className="container mx-auto px-6 py-20 relative z-10">
         {/* Header */}

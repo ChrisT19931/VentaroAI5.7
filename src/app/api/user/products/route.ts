@@ -3,7 +3,7 @@ import { getToken } from 'next-auth/jwt';
 import { db } from '@/lib/database';
 import { PRODUCT_MAPPINGS, LEGACY_PRODUCT_MAPPINGS } from '@/config/products';
 
-// Map numeric/short codes to front-end product IDs used in My Account
+// Maps database product_id values to frontend product IDs
 const FRONT_IDS_BY_CODE: Record<string, string> = {
   '1': 'ai-tools-mastery-guide-2025',
   '2': 'ai-prompts-arsenal-2025',
@@ -11,12 +11,18 @@ const FRONT_IDS_BY_CODE: Record<string, string> = {
   '5': 'weekly-support-contract-2025',
 };
 
-// Map friendly keys to codes first, then to front-end IDs
+// Maps friendly keys to database codes
 const FRIENDLY_TO_CODE: Record<string, string> = {
   ebook: PRODUCT_MAPPINGS.ebook,
   prompts: PRODUCT_MAPPINGS.prompts,
   video: PRODUCT_MAPPINGS.video,
   support: PRODUCT_MAPPINGS.support,
+};
+
+// Additional mapping for any product IDs that might come in different formats
+const ADDITIONAL_MAPPINGS: Record<string, string> = {
+  'ai-web-creation-masterclass': 'ai-business-video-guide-2025',
+  'support-package': 'weekly-support-contract-2025',
 };
 
 export async function GET(request: NextRequest) {
@@ -43,36 +49,55 @@ export async function GET(request: NextRequest) {
       const productId = purchase.product_id;
       console.log('Processing product ID:', productId);
       
-      // Add the raw product ID
-      ownedFrontIds.add(productId);
+      let mappedProductId = productId;
       
-      // Case 1: already a front-end ID (check against known IDs)
-      if (Object.values(FRONT_IDS_BY_CODE).includes(productId)) {
-        ownedFrontIds.add(productId);
-        continue;
-      }
-
-      // Case 2: numeric/short code like '1','2','4','5'
+      // Case 1: Direct numeric/short code mapping (e.g., '1' -> 'ai-tools-mastery-guide-2025')
       if (FRONT_IDS_BY_CODE[productId]) {
-        ownedFrontIds.add(FRONT_IDS_BY_CODE[productId]);
+        mappedProductId = FRONT_IDS_BY_CODE[productId];
+        ownedFrontIds.add(mappedProductId);
+        console.log(`✅ Mapped code '${productId}' to '${mappedProductId}'`);
         continue;
       }
 
-      // Case 3: friendly key like 'ebook'|'prompts'|'video'|'support'
+      // Case 2: Additional mappings (e.g., 'ai-web-creation-masterclass' -> 'ai-business-video-guide-2025')
+      if (ADDITIONAL_MAPPINGS[productId]) {
+        mappedProductId = ADDITIONAL_MAPPINGS[productId];
+        ownedFrontIds.add(mappedProductId);
+        console.log(`✅ Mapped additional '${productId}' to '${mappedProductId}'`);
+        continue;
+      }
+
+      // Case 3: Already a frontend ID (check against known frontend IDs)
+      const frontendIds = Object.values(FRONT_IDS_BY_CODE);
+      if (frontendIds.includes(productId)) {
+        ownedFrontIds.add(productId);
+        console.log(`✅ Direct frontend ID: '${productId}'`);
+        continue;
+      }
+
+      // Case 4: Friendly key mapping (e.g., 'ebook' -> '1' -> 'ai-tools-mastery-guide-2025')
       if (FRIENDLY_TO_CODE[productId]) {
         const code = FRIENDLY_TO_CODE[productId];
         if (FRONT_IDS_BY_CODE[code]) {
-          ownedFrontIds.add(FRONT_IDS_BY_CODE[code]);
+          mappedProductId = FRONT_IDS_BY_CODE[code];
+          ownedFrontIds.add(mappedProductId);
+          console.log(`✅ Mapped friendly key '${productId}' -> '${code}' -> '${mappedProductId}'`);
         }
         continue;
       }
 
-      // Case 4: legacy product name (e.g., 'ai-prompts-arsenal-2025')
+      // Case 5: Legacy product name mapping
       const legacyCode = LEGACY_PRODUCT_MAPPINGS[productId as keyof typeof LEGACY_PRODUCT_MAPPINGS];
       if (legacyCode && FRONT_IDS_BY_CODE[legacyCode]) {
-        ownedFrontIds.add(FRONT_IDS_BY_CODE[legacyCode]);
+        mappedProductId = FRONT_IDS_BY_CODE[legacyCode];
+        ownedFrontIds.add(mappedProductId);
+        console.log(`✅ Mapped legacy '${productId}' -> '${legacyCode}' -> '${mappedProductId}'`);
         continue;
       }
+
+      // Case 6: Fallback - add the raw product ID in case it's already correct
+      ownedFrontIds.add(productId);
+      console.log(`⚠️ No mapping found for '${productId}', using as-is`);
     }
 
     const ownedProducts = Array.from(ownedFrontIds);
@@ -95,4 +120,4 @@ export async function GET(request: NextRequest) {
       details: error.message 
     }, { status: 500 });
   }
-} 
+}

@@ -88,7 +88,7 @@ export default function Home() {
 
   return (
     <>
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen">
       <Toaster position="bottom-center" toastOptions={{ duration: 3000 }} />
       {/* Hero Section */}
       <div className="relative">
@@ -96,9 +96,9 @@ export default function Home() {
       </div>
 
       {/* Pricing Tiers Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-950 via-black to-gray-950 relative overflow-hidden z-10">
+      <section className="py-24 relative overflow-hidden z-10">
         {/* Professional Dark Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950/90 via-black to-gray-950/90"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-slate-700/10 to-slate-900/10 rounded-2xl rotate-12"></div>
           <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-br from-slate-600/10 to-slate-800/10 rounded-xl rotate-45"></div>
@@ -107,7 +107,7 @@ export default function Home() {
         
         {/* Video Offer Section - Primary Offer */}
         <section id="video-offer" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <span className="inline-block px-6 py-2 bg-gradient-to-r from-red-600/80 to-orange-600/80 rounded-full text-sm font-bold text-white mb-6 border border-red-500/50 shadow-lg shadow-red-500/20">

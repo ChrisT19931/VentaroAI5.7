@@ -333,20 +333,20 @@ export default function EbookContent({ hasAccess, isAdmin }: EbookContentProps) 
         <div className="space-y-8">
           {/* Section Headers */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gradient-to-br from-blue-900/50 to-purple-900/50 rounded-xl p-6 border border-blue-500/30">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-600">
               <h3 className="text-xl font-bold text-white mb-2">💬 Section 1: Chat AI Mastery</h3>
               <p className="text-gray-300 text-sm">ChatGPT, Gemini & Grok</p>
-              <p className="text-green-400 font-semibold mt-2">Lessons 1-10 • $500-3K/month</p>
+              <p className="text-cyan-400 font-semibold mt-2">Lessons 1-10 • $500-3K/month</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl p-6 border border-purple-500/30">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-600">
               <h3 className="text-xl font-bold text-white mb-2">🏗️ Section 2: Development AI</h3>
               <p className="text-gray-300 text-sm">Claude & Replit</p>
-              <p className="text-green-400 font-semibold mt-2">Lessons 11-20 • $1K-8K/month</p>
+              <p className="text-cyan-400 font-semibold mt-2">Lessons 11-20 • $1K-8K/month</p>
             </div>
-            <div className="bg-gradient-to-br from-pink-900/50 to-red-900/50 rounded-xl p-6 border border-pink-500/30">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-600">
               <h3 className="text-xl font-bold text-white mb-2">⚡ Section 3: Advanced Coding</h3>
               <p className="text-gray-300 text-sm">Cursor & Trae</p>
-              <p className="text-green-400 font-semibold mt-2">Lessons 21-30 • $2K-20K/month</p>
+              <p className="text-cyan-400 font-semibold mt-2">Lessons 21-30 • $2K-20K/month</p>
             </div>
           </div>
 
@@ -366,14 +366,15 @@ export default function EbookContent({ hasAccess, isAdmin }: EbookContentProps) 
                         Lesson {lesson.id}: {lesson.title}
                       </h3>
                       <p className="text-gray-400 text-sm mb-2">{lesson.overview}</p>
+                      <p className="text-cyan-400 text-xs font-medium">Click to expand full lesson content ↓</p>
                       <div className="flex items-center gap-4 text-xs">
-                        <span className="bg-green-600/20 text-green-400 px-2 py-1 rounded">
+                        <span className="bg-cyan-600/20 text-cyan-400 px-2 py-1 rounded">
                           {lesson.estimatedRevenue}
                         </span>
-                        <span className="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">
+                        <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded">
                           {lesson.difficulty}
                         </span>
-                        <span className="bg-purple-600/20 text-purple-400 px-2 py-1 rounded">
+                        <span className="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">
                           {lesson.timeToImplement}
                         </span>
                       </div>
@@ -428,16 +429,16 @@ export default function EbookContent({ hasAccess, isAdmin }: EbookContentProps) 
 
                     {/* Business Model */}
                     {lesson.detailedContent.businessModel && (
-                      <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6">
-                        <h4 className="text-lg font-semibold text-green-400 mb-4">💰 Business Model Overview</h4>
+                      <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-6">
+                        <h4 className="text-lg font-semibold text-cyan-400 mb-4">💰 Business Model Overview</h4>
                         <div className="grid md:grid-cols-2 gap-4 text-sm">
                           <div>
                             <p><strong className="text-white">Startup Costs:</strong> <span className="text-gray-300">{lesson.detailedContent.businessModel.startupCosts}</span></p>
                             <p><strong className="text-white">Time to First Sale:</strong> <span className="text-gray-300">{lesson.detailedContent.businessModel.timeToFirstSale}</span></p>
-                            <p><strong className="text-white">Monthly Revenue:</strong> <span className="text-green-400">{lesson.detailedContent.businessModel.monthlyRevenue}</span></p>
+                            <p><strong className="text-white">Monthly Revenue:</strong> <span className="text-cyan-400">{lesson.detailedContent.businessModel.monthlyRevenue}</span></p>
                           </div>
                           <div>
-                            <p><strong className="text-white">Scaling Potential:</strong> <span className="text-green-400">{lesson.detailedContent.businessModel.scalingPotential}</span></p>
+                            <p><strong className="text-white">Scaling Potential:</strong> <span className="text-cyan-400">{lesson.detailedContent.businessModel.scalingPotential}</span></p>
                             <p><strong className="text-white">Target Customers:</strong> <span className="text-gray-300">{lesson.detailedContent.businessModel.targetCustomers}</span></p>
                           </div>
                         </div>
@@ -446,12 +447,12 @@ export default function EbookContent({ hasAccess, isAdmin }: EbookContentProps) 
 
                     {/* Action Steps */}
                     {lesson.detailedContent.actionSteps && (
-                      <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-6">
-                        <h4 className="text-lg font-semibold text-blue-400 mb-4">🎯 Implementation Checklist</h4>
+                      <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6">
+                        <h4 className="text-lg font-semibold text-white mb-4">🎯 Implementation Checklist</h4>
                         <ul className="space-y-2">
                           {lesson.detailedContent.actionSteps.map((step, index) => (
                             <li key={index} className="flex items-start gap-2 text-gray-300">
-                              <span className="text-blue-400 mt-1">•</span>
+                              <span className="text-cyan-400 mt-1">•</span>
                               <span>{step}</span>
                             </li>
                           ))}
