@@ -7318,5 +7318,138 @@
     "sessionId": "session_1755595516957_glk6cce4v",
     "page": "/",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "time_on_page",
+    "properties": {
+      "duration": 181,
+      "page": "/",
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/contact",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:28:17.618Z"
+    },
+    "timestamp": "2025-08-19T09:28:17.618Z",
+    "sessionId": "session_1755595516957_glk6cce4v",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "time_on_page",
+    "properties": {
+      "duration": 313,
+      "page": "/",
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/contact",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:30:30.036Z"
+    },
+    "timestamp": "2025-08-19T09:30:30.036Z",
+    "sessionId": "session_1755595516957_glk6cce4v",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "time_on_page",
+    "properties": {
+      "duration": 313,
+      "page": "/",
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/contact",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:30:30.047Z"
+    },
+    "timestamp": "2025-08-19T09:30:30.047Z",
+    "sessionId": "session_1755595516957_glk6cce4v",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "page_view",
+    "properties": {
+      "page": "/",
+      "title": "AI-Powered Digital Products - Transform Your Business with AI Tools",
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:30:30.500Z"
+    },
+    "timestamp": "2025-08-19T09:30:30.500Z",
+    "sessionId": "session_1755595830500_6ks63y9on",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "homepage_loaded",
+    "properties": {
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:30:30.570Z"
+    },
+    "timestamp": "2025-08-19T09:30:30.570Z",
+    "sessionId": "session_1755595830500_6ks63y9on",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "homepage_loaded",
+    "properties": {
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:30:30.579Z"
+    },
+    "timestamp": "2025-08-19T09:30:30.579Z",
+    "sessionId": "session_1755595830500_6ks63y9on",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "performance",
+    "properties": {
+      "page_load_time": 1146.199999988079,
+      "dom_content_loaded": 225.29999995231628,
+      "first_paint": 0,
+      "largest_contentful_paint": 0,
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:30:32.618Z"
+    },
+    "timestamp": "2025-08-19T09:30:32.618Z",
+    "sessionId": "session_1755595830500_6ks63y9on",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "time_on_page",
+    "properties": {
+      "duration": 30,
+      "page": "/",
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:31:00.618Z"
+    },
+    "timestamp": "2025-08-19T09:31:00.618Z",
+    "sessionId": "session_1755595830500_6ks63y9on",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
+  },
+  {
+    "event": "time_on_page",
+    "properties": {
+      "duration": 45,
+      "page": "/",
+      "url": "http://localhost:3003/",
+      "referrer": "http://localhost:3003/",
+      "viewport": "1568x913",
+      "timestamp": "2025-08-19T09:31:15.222Z"
+    },
+    "timestamp": "2025-08-19T09:31:15.222Z",
+    "sessionId": "session_1755595830500_6ks63y9on",
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.100.3 Chrome/132.0.6834.210 Electron/34.5.1 Safari/537.36"
   }
 ]

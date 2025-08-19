@@ -6,6 +6,7 @@ import { toast, Toaster } from 'react-hot-toast'
 import CinematicHero from '../components/3d/CinematicHero'
 import TypewriterText from '../components/TypewriterText'
 import UnifiedCheckoutButton from '../components/UnifiedCheckoutButton'
+import WebDesignInquiryForm from '../components/WebDesignInquiryForm'
 import { ExitIntentPopup, SocialProof, ScarcityIndicator, TestimonialCarousel } from '../components/ConversionOptimizations'
 import { analytics } from '../lib/analytics'
 
@@ -107,129 +108,27 @@ export default function Home() {
           <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-gradient-to-br from-slate-500/5 to-slate-700/5 rounded-full"></div>
         </div>
         
-        {/* Video Offer Section - Primary Offer */}
-        <section id="video-offer" className="py-24 relative overflow-hidden">
+        {/* Web Design Inquiry Section - Primary Offer */}
+        <section id="web-design-inquiry" className="py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="container mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <span className="inline-block px-6 py-2 bg-gradient-to-r from-orange-600/80 to-yellow-600/80 rounded-full text-sm font-bold text-white mb-6 border border-orange-500/50 shadow-lg shadow-orange-500/20">
-                📅 PRE-ORDER NOW - ONLY $50 - COMING SOON!
+              <span className="inline-block px-6 py-2 bg-gradient-to-r from-blue-600/80 to-purple-600/80 rounded-full text-sm font-bold text-white mb-6 border border-blue-500/50 shadow-lg shadow-blue-500/20">
+                🚀 CUSTOM WEB DESIGN & PLATFORMS
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 drop-shadow-2xl">
-                Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Entire Platforms</span> Not Just Websites With AI
+                Get Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Custom Quote</span> for Web Design
               </h2>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Get the complete step-by-step video guide + detailed report showing how to create a fully operational online business from code within a few hours.
+                Tell us about your project and get a detailed quote for your custom website, e-commerce platform, or web application.
               </p>
             </div>
             
-            <div className="max-w-3xl mx-auto">
-              <div className="glass-panel p-10 rounded-3xl border-2 border-purple-500/30 shadow-lg transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-blue-600/10 to-pink-600/10 rounded-3xl"></div>
-                <div className="relative z-10 text-center">
-                  <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full mb-8 shadow-lg">
-                    <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-4xl font-black text-white mb-6">🎯 AI Website Creation Masterclass</h3>
-                  <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                                    <strong className="text-white">2 Hours from Zero to Live</strong> • Watch me create a complete platform from scratch, in real time.<br/>
-                <strong className="text-white">No Experience Needed</strong> • You just follow along.<br/>
-                <strong className="text-white">Keep Your Code Forever</strong> • Build it yourself, own it completely, change anything you want.<br/>
-                <strong className="text-white">No SaaS Lock-In</strong> • Unlike Shopify or Wix, you build and own your platform.<br/>
-                <strong className="text-white">AI-Powered Changes</strong> • Tell AI agents what to modify and watch your platform transform instantly.
-                  </p>
-                  <div className="flex items-center justify-center mb-4">
-                    <span className="text-6xl font-black text-white">A$50</span>
-                  </div>
-                  <div className="mb-8">
-                    <span className="inline-block px-6 py-2 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-full text-sm font-bold text-white border border-orange-500/50 shadow-lg shadow-orange-500/20">
-                      PRE-ORDER BENEFITS
-                    </span>
-                  </div>
-                  
-                  {/* Pre-Order Benefits */}
-                  <div className="bg-gradient-to-r from-orange-900/30 to-yellow-900/30 rounded-2xl p-6 mb-8 border border-orange-500/30">
-                    <h4 className="text-xl font-bold text-white mb-4 text-center">🎯 Pre-Order Benefits</h4>
-                    <div className="space-y-2 text-center text-orange-200">
-                      <div>✅ <strong>Early Access</strong> - Get the video as soon as it's ready</div>
-                      <div>✅ <strong>Bonus Materials</strong> - Extra prompts and templates</div>
-                      <div>✅ <strong>Priority Support</strong> - First in line for help</div>
-                      <div>✅ <strong>Lock in $50 Price</strong> - Price increases after launch</div>
-                    </div>
-                  </div>
-                  {/* What You Get for $50 */}
-                  <div className="bg-gray-800/40 rounded-2xl p-8 mb-8 border border-purple-500/30">
-                    <h4 className="text-2xl font-bold text-white mb-6 text-center">What You Get for $50</h4>
-                    <div className="grid md:grid-cols-2 gap-6 text-left">
-                      <ul className="space-y-4 text-gray-300">
-                        <li className="flex items-start">
-                          <svg className="w-6 h-6 text-green-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <strong className="text-green-400">Step-by-Step Video Walkthrough</strong><br/>
-                            <span className="text-sm">Watch the entire build process</span>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <svg className="w-6 h-6 text-blue-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <strong className="text-blue-400">Complete Tool List</strong><br/>
-                            <span className="text-sm">Everything you need, all AI-powered</span>
-                          </div>
-                        </li>
-                      </ul>
-                      <ul className="space-y-4 text-gray-300">
-                        <li className="flex items-start">
-                          <svg className="w-6 h-6 text-yellow-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <strong className="text-yellow-400">Implementation Blueprint</strong><br/>
-                            <span className="text-sm">The exact prompts, workflow, and structure I use</span>
-                          </div>
-                        </li>
-                        <li className="flex items-start">
-                          <svg className="w-6 h-6 text-purple-400 mr-4 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <strong className="text-purple-400">Screen Recording</strong><br/>
-                            <span className="text-sm">So you can replicate it whenever you want</span>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* The $50 vs $5K Gap */}
-                  <div className="bg-gradient-to-r from-red-900/30 to-green-900/30 rounded-2xl p-6 mb-10 border border-green-500/30">
-                    <h4 className="text-xl font-bold text-white mb-4 text-center">The $50 vs $5K Gap</h4>
-                    <div className="space-y-2 text-center">
-                      <div className="text-red-300">Hire a dev team? <span className="font-bold text-red-400">$5K–$50K</span></div>
-      
-                      <div className="text-green-300">Learn my method? <span className="font-bold text-green-400">$50 once</span> • own the skills + product for life</div>
-                    </div>
-                  </div>
-                  <UnifiedCheckoutButton 
-                    product={masterclassProduct}
-                    buttonText="📅 Pre-Order Now • Coming Soon for A$50"
-                    className="premium-button-glow w-full bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-black py-6 px-12 rounded-2xl hover:from-orange-500 hover:to-yellow-500 transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block text-center text-lg"
-                    variant="direct"
-                  />
-                  
-                  {/* Social Proof */}
-                  <div className="mt-8">
-                    <SocialProof />
-                  </div>
-                  
-                  <p className="text-sm text-gray-400 mt-4">⚡ Secure checkout • Premium support</p>
-                </div>
-              </div>
+            <WebDesignInquiryForm />
+            
+            {/* Social Proof */}
+            <div className="mt-16">
+              <SocialProof />
             </div>
           </div>
         </section>
